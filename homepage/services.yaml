@@ -1,0 +1,92 @@
+---
+# Abbey Root Homepage
+
+- Infrastructure:
+    - Proxmox:
+        href: https://192.168.1.55:8006
+        description: Hypervisor
+
+    - Portainer:
+        href: https://192.168.1.86:9443
+        description: Docker Management
+        server: local-docker
+        container: portainer
+
+    - Homepage:
+        href: http://192.168.1.86:3000
+        description: Lab Dashboard
+        server: local-docker
+        container: homepage
+
+    - Nginx Proxy Manager:
+        href: http://192.168.1.86:81
+        description: Reverse Proxy
+        server: local-docker
+        container: nginx-proxy-manager
+
+
+- Monitoring:
+    - Uptime Kuma:
+        href: http://192.168.1.86:3001
+        description: Service Monitoring
+        server: local-docker
+        container: uptime-kuma
+
+- AI:
+    - Open WebUI:
+        href: http://192.168.1.87:3000
+        description: Local AI Interface
+
+    - Ollama:
+        href: http://192.168.1.87:11434
+        description: RTX 4060 AI Server
+
+    - Portainer Agent:
+        href: http://192.168.1.87:9001
+        description: AI Worker Docker Agent
+
+- Automation:
+    - rocky-ansible01:
+        description: Ansible Host
+
+
+- Servers:
+    - ubuntu-dev01:
+        description: Control Plane
+
+    - ai-worker01:
+        description: RTX 4060 AI Server
+
+    - rocky-ansible01:
+        description: Automation Host
+
+
+- Development:
+    - GitHub:
+        href: https://github.com
+        description: Repositories
+
+    - BradCooke.com:
+        href: https://bradcooke.com
+        description: Website
+
+    - ChatGPT:
+        href: https://chatgpt.com
+        description: AI Assistant
+
+
+- Future Services:
+    - Grafana:
+        description: Metrics
+
+    - Prometheus:
+        description: Monitoring
+
+    - Watchtower:
+        description: Docker Updates
+
+    - Immich:
+        description: Photos
+
+    - n8n:
+        description: Automation

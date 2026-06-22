@@ -1,0 +1,16 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/docker/
+
+# my-docker:
+#   host: 127.0.0.1
+#   port: 2375
+
+# my-docker:
+#   socket: /var/run/docker.sock
+#
+local-docker:
+  socket: /var/run/docker.sock
+
+ai-worker01:
+  host: ssh://bcooke@192.168.1.87
