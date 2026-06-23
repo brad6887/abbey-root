@@ -1,0 +1,29 @@
+---
+- name: Install common tools on Debian/Ubuntu
+  ansible.builtin.apt:
+    name:
+      - git
+      - vim
+      - curl
+      - wget
+      - tree
+      - htop
+      - tmux
+    state: present
+    update_cache: true
+  when: ansible_os_family == "Debian"
+
+- name: Install common tools on Rocky/RHEL
+  ansible.builtin.dnf:
+    name:
+      - git
+      - vim
+      - curl
+      - wget
+      - tree
+      - htop
+      - tmux
+      - bash-completion
+      - bind-utils
+    state: present
+  when: ansible_os_family == "RedHat"
