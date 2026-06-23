@@ -1,0 +1,20 @@
+---
+- name: Check docker command
+  ansible.builtin.command: docker --version
+  register: docker_version
+  changed_when: false
+
+- name: Show docker version
+  ansible.builtin.debug:
+    msg: "{{ inventory_hostname }}: {{ docker_version.stdout }}"
+
+- name: Check docker service status
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+  check_mode: true
+  register: docker_service_check
+
+- name: Show docker service status
+  ansible.builtin.debug:
+    msg: "{{ inventory_hostname }}: Docker service is available"

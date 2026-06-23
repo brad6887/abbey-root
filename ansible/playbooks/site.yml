@@ -5,3 +5,9 @@
 
   roles:
     - common
+
+- name: Verify Docker hosts
+  hosts: infrastructure:ai
+  become: true
+  roles:
+    - docker
