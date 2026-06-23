@@ -1,0 +1,3 @@
+---
+host_group_role: Infrastructure
+docker_host: true

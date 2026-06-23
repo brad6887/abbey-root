@@ -1,0 +1,4 @@
+---
+host_group_role: AI
+docker_host: true
+ai_node: true

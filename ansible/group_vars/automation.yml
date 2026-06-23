@@ -1,0 +1,4 @@
+---
+host_group_role: Automation
+ansible_control_node: true
+docker_host: false
