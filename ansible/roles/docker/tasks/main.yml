@@ -18,3 +18,12 @@
 - name: Show docker service status
   ansible.builtin.debug:
     msg: "{{ inventory_hostname }}: Docker service is available"
+
+- name: List running Docker containers
+  ansible.builtin.command: docker ps --format "{{ '{{' }}.Names{{ '}}' }}"
+  register: docker_running_containers
+  changed_when: false
+
+- name: Show running Docker containers
+  ansible.builtin.debug:
+    msg: "{{ inventory_hostname }} running containers: {{ docker_running_containers.stdout_lines }}"
