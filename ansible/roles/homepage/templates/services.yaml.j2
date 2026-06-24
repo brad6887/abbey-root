@@ -26,3 +26,12 @@
 {% endfor %}
 
 {% endfor %}
+
+- Servers:
+{% for host in groups['all'] | sort %}
+{% if hostvars[host].homepage_show_server | default(false) %}
+    - {{ host }}:
+        description: {{ hostvars[host].host_description | default('Lab server') }}
+        ping: {{ hostvars[host].primary_ip | default(hostvars[host].ansible_host | default(host)) }}
+{% endif %}
+{% endfor %}

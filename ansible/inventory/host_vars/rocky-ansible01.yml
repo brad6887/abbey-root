@@ -5,3 +5,4 @@ server_purpose:
   - Ansible Control Node
   - Git Repository
   - Automation
+homepage_show_server: true

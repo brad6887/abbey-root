@@ -61,17 +61,6 @@ homepage_services:
         icon: rocky-linux.png
         ping: 192.168.1.88
 
-  - group: Servers
-    services:
-      - name: ubuntu-dev01
-        description: Control Plane
-
-      - name: ai-worker01
-        description: RTX 4060 AI Server
-
-      - name: rocky-ansible01
-        description: Automation Host
-
   - group: Development
     services:
       - name: GitHub
@@ -102,3 +91,4 @@ homepage_services:
 
       - name: n8n
         description: Automation
+homepage_show_server: true
