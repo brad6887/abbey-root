@@ -1,0 +1,5 @@
+---
+- name: Record issue banner update
+  ansible.builtin.shell: |
+    echo "$(date): /etc/issue updated by Ansible on {{ inventory_hostname }}" >> /tmp/ansible-handler.log
+  changed_when: false

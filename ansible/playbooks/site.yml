@@ -6,6 +6,8 @@
   roles:
     - common
     - motd
+    - issue
+
 - name: Verify Docker hosts
   hosts: infrastructure:ai
   become: true
