@@ -21,3 +21,9 @@
   become: true
   roles:
     - homepage
+
+- name: Manage labtest container
+  hosts: ubuntu-dev01
+  become: true
+  roles:
+    - labtest

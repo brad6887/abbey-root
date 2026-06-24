@@ -153,3 +153,13 @@ homepage_container:
     - "/var/run/docker.sock:/var/run/docker.sock:ro"
   environment:
     HOMEPAGE_ALLOWED_HOSTS: "192.168.1.86:3000,home.abbeyroot.local,test"
+
+labtest_compose_dir: /home/bcooke/docker/nginx-labtest
+
+labtest_container:
+  service_name: nginx-labtest
+  container_name: nginx-labtest
+  image: nginx:alpine
+  restart_policy: unless-stopped
+  ports:
+    - "8088:80"

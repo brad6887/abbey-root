@@ -1,0 +1,5 @@
+---
+- name: Redeploy labtest
+  ansible.builtin.command:
+    cmd: docker compose up -d
+    chdir: "{{ labtest_compose_dir }}"

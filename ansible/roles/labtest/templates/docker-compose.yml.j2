@@ -1,0 +1,12 @@
+---
+# Managed by Ansible - Abbey Root
+
+services:
+  {{ labtest_container.service_name }}:
+    image: {{ labtest_container.image }}
+    container_name: {{ labtest_container.container_name }}
+    restart: {{ labtest_container.restart_policy }}
+    ports:
+{% for port in labtest_container.ports %}
+      - "{{ port }}"
+{% endfor %}

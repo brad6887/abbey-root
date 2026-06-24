@@ -1,0 +1,17 @@
+---
+- name: Create labtest compose directory
+  ansible.builtin.file:
+    path: "{{ labtest_compose_dir }}"
+    state: directory
+    owner: bcooke
+    group: bcooke
+    mode: '0755'
+
+- name: Deploy labtest Docker Compose file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ labtest_compose_dir }}/docker-compose.yml"
+    owner: bcooke
+    group: bcooke
+    mode: '0644'
+  notify: Redeploy labtest
