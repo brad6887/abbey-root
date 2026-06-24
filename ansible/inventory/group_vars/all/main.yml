@@ -2,4 +2,6 @@
 lab_name: Abbey Root
 timezone: America/Chicago
 admin_user: bcooke
-
+lab_timezone: America/Chicago
+time_sync_package: chrony
+time_sync_service: chronyd

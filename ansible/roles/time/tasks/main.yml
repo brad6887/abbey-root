@@ -1,0 +1,24 @@
+---
+- name: Set system timezone
+  ansible.builtin.command:
+    cmd: "timedatectl set-timezone {{ lab_timezone }}"
+  changed_when: false
+
+- name: Install chrony
+  ansible.builtin.package:
+    name: chrony
+    state: present
+
+- name: Enable and start chrony on RedHat/Rocky
+  ansible.builtin.service:
+    name: chronyd
+    state: started
+    enabled: true
+  when: ansible_os_family == "RedHat"
+
+- name: Enable and start chrony on Ubuntu/Debian
+  ansible.builtin.service:
+    name: chrony
+    state: started
+    enabled: true
+  when: ansible_os_family == "Debian"

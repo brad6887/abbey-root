@@ -5,8 +5,10 @@
 
   roles:
     - common
+    - time
     - motd
     - issue
+    
 
 - name: Verify Docker hosts
   hosts: infrastructure:ai
