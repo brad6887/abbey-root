@@ -1,0 +1,12 @@
+---
+# Managed by Ansible - Abbey Root
+
+{% for bookmark_group in homepage_bookmarks %}
+- {{ bookmark_group.group }}:
+{% for link in bookmark_group.links %}
+    - {{ link.name }}:
+        - abbr: {{ link.abbr }}
+          href: {{ link.href }}
+{% endfor %}
+
+{% endfor %}

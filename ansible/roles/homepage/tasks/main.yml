@@ -25,3 +25,21 @@
     group: bcooke
     mode: '0644'
   notify: Restart homepage container
+
+- name: Deploy Homepage widgets configuration
+  ansible.builtin.template:
+    src: widgets.yaml.j2
+    dest: "{{ homepage_config_dir }}/widgets.yaml"
+    owner: bcooke
+    group: bcooke
+    mode: '0644'
+  notify: Restart homepage container
+
+- name: Deploy Homepage bookmarks configuration
+  ansible.builtin.template:
+    src: bookmarks.yaml.j2
+    dest: "{{ homepage_config_dir }}/bookmarks.yaml"
+    owner: bcooke
+    group: bcooke
+    mode: '0644'
+  notify: Restart homepage container

@@ -102,3 +102,39 @@ homepage_settings:
   providers:
     openweathermap: openweathermapapikey
     weatherapi: weatherapiapikey
+
+homepage_widgets:
+  resources:
+    cpu: true
+    memory: true
+    disk: /
+  search:
+    provider: duckduckgo
+    target: _blank
+
+homepage_bookmarks:
+  - group: Development
+    links:
+      - name: GitHub
+        abbr: GH
+        href: https://github.com
+
+      - name: BradCooke.com
+        abbr: BC
+        href: https://bradcooke.com
+
+      - name: ChatGPT
+        abbr: AI
+        href: https://chatgpt.com
+
+  - group: Social
+    links:
+      - name: Reddit
+        abbr: RE
+        href: https://reddit.com
+
+  - group: Entertainment
+    links:
+      - name: YouTube
+        abbr: YT
+        href: https://youtube.com

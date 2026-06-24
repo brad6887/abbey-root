@@ -1,0 +1,11 @@
+---
+# Managed by Ansible - Abbey Root
+
+- resources:
+    cpu: {{ homepage_widgets.resources.cpu | lower }}
+    memory: {{ homepage_widgets.resources.memory | lower }}
+    disk: {{ homepage_widgets.resources.disk }}
+
+- search:
+    provider: {{ homepage_widgets.search.provider }}
+    target: {{ homepage_widgets.search.target }}
