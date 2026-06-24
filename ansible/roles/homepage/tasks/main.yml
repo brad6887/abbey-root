@@ -43,3 +43,12 @@
     group: bcooke
     mode: '0644'
   notify: Restart homepage container
+
+- name: Deploy Homepage Docker Compose file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ homepage_compose_dir }}/docker-compose.yml"
+    owner: bcooke
+    group: bcooke
+    mode: '0644'
+  notify: Redeploy Homepage

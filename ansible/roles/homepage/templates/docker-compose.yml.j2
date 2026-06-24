@@ -1,0 +1,26 @@
+---
+# Managed by Ansible - Abbey Root
+
+services:
+  {{ homepage_container.service_name }}:
+    image: {{ homepage_container.image }}
+    container_name: {{ homepage_container.container_name }}
+    restart: {{ homepage_container.restart_policy }}
+{% if homepage_container.ports is defined %}
+    ports:
+{% for port in homepage_container.ports %}
+      - "{{ port }}"
+{% endfor %}
+{% endif %}
+{% if homepage_container.volumes is defined %}
+    volumes:
+{% for volume in homepage_container.volumes %}
+      - "{{ volume }}"
+{% endfor %}
+{% endif %}
+{% if homepage_container.environment is defined %}
+    environment:
+{% for key, value in homepage_container.environment.items() %}
+      {{ key }}: "{{ value }}"
+{% endfor %}
+{% endif %}
