@@ -93,3 +93,7 @@ homepage_services:
       - name: n8n
         description: Automation
 homepage_show_server: true
+
+homepage_docker_servers:
+  - name: local-docker
+    socket: /var/run/docker.sock

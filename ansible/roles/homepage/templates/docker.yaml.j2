@@ -1,0 +1,13 @@
+---
+# Managed by Ansible - Abbey Root
+
+{% for docker_server in homepage_docker_servers %}
+{{ docker_server.name }}:
+{% if docker_server.socket is defined %}
+  socket: {{ docker_server.socket }}
+{% endif %}
+{% if docker_server.host is defined %}
+  host: {{ docker_server.host }}
+{% endif %}
+
+{% endfor %}
