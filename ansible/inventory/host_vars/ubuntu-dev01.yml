@@ -32,6 +32,14 @@ homepage_services:
         description: Reverse Proxy
         server: local-docker
         container: nginx-proxy-manager
+  - group: Lab Tests
+    services:
+      - name: Nginx Lab Test
+        href: http://192.168.1.86:8088
+        description: Ansible-managed test container
+        icon: nginx.png
+        server: local-docker
+        container: nginx-labtest
 
   - group: Monitoring
     services:
@@ -163,3 +171,4 @@ labtest_container:
   restart_policy: unless-stopped
   ports:
     - "8088:80"
+
