@@ -1,13 +1,29 @@
-Welcome to {{ inventory_hostname }}
+============================================================
+ Abbey Root Lab
+============================================================
 
-Groups:
-{% for group in group_names %}
-- {{ group }}
+Host:        {{ inventory_hostname }}
+Description: {{ host_description | default('Not defined yet') }}
+
+Purpose:
+{% for purpose in server_purpose | default(['Not defined yet']) %}
+  - {{ purpose }}
 {% endfor %}
 
-OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
-Kernel: {{ ansible_kernel }}
-IP Address: {{ ansible_default_ipv4.address | default('unknown') }}
+System:
+  OS:        {{ ansible_distribution }} {{ ansible_distribution_version }}
+  Kernel:    {{ ansible_kernel }}
+  IP:        {{ primary_ip | default(ansible_default_ipv4.address | default('unknown')) }}
+  Uptime:    {{ ansible_uptime_seconds | int // 86400 }} days
 
-Managed by Ansible.
-Abbey Root lab.
+Ansible:
+  Managed:   Yes
+  Groups:
+{% for group in group_names %}
+    - {{ group }}
+{% endfor %}
+
+Reminder:
+  Rebuild rather than repair.
+  Automate what is repeated.
+============================================================

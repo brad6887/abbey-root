@@ -1,3 +1,7 @@
 ---
 host_description: Ansible control node
 primary_ip: 192.168.1.88
+server_purpose:
+  - Ansible Control Node
+  - Git Repository
+  - Automation

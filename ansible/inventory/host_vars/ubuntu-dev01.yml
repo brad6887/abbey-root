@@ -1,3 +1,6 @@
 ---
 host_description: Infrastructure and Docker services
 primary_ip: 192.168.1.86
+server_purpose:
+  - Infrastructure services
+  - Docker host
