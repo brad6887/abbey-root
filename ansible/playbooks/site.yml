@@ -13,3 +13,9 @@
   become: true
   roles:
     - docker
+
+- name: Manage Homepage
+  hosts: ubuntu-dev01
+  become: true
+  roles:
+    - homepage

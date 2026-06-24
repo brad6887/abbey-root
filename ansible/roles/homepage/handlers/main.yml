@@ -1,0 +1,5 @@
+---
+- name: Restart homepage container
+  ansible.builtin.command:
+    cmd: docker restart homepage
+  changed_when: true

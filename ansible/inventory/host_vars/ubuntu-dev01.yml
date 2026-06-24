@@ -4,3 +4,101 @@ primary_ip: 192.168.1.86
 server_purpose:
   - Infrastructure services
   - Docker host
+
+homepage_config_dir: /home/bcooke/docker/homepage/config
+
+homepage_services:
+  - group: Infrastructure
+    services:
+      - name: Proxmox
+        href: https://192.168.1.55:8006
+        description: Hypervisor
+
+      - name: Portainer
+        href: https://192.168.1.86:9443
+        description: Docker Management
+        server: local-docker
+        container: portainer
+
+      - name: Homepage
+        href: http://192.168.1.86:3000
+        description: Lab Dashboard
+        server: local-docker
+        container: homepage
+
+      - name: Nginx Proxy Manager
+        href: http://192.168.1.86:81
+        description: Reverse Proxy
+        server: local-docker
+        container: nginx-proxy-manager
+
+  - group: Monitoring
+    services:
+      - name: Uptime Kuma
+        href: http://192.168.1.86:3001
+        description: Service Monitoring
+        server: local-docker
+        container: uptime-kuma
+
+  - group: AI
+    services:
+      - name: Open WebUI
+        href: http://192.168.1.87:3000
+        description: Local AI Interface
+
+      - name: Ollama
+        href: http://192.168.1.87:11434
+        description: RTX 4060 AI Server
+
+      - name: Portainer Agent
+        href: http://192.168.1.87:9001
+        description: AI Worker Docker Agent
+
+  - group: Automation
+    services:
+      - name: Rocky Ansible
+        description: Ansible Control Node - 192.168.1.88
+        icon: rocky-linux.png
+        ping: 192.168.1.88
+
+  - group: Servers
+    services:
+      - name: ubuntu-dev01
+        description: Control Plane
+
+      - name: ai-worker01
+        description: RTX 4060 AI Server
+
+      - name: rocky-ansible01
+        description: Automation Host
+
+  - group: Development
+    services:
+      - name: GitHub
+        href: https://github.com
+        description: Repositories
+
+      - name: BradCooke.com
+        href: https://bradcooke.com
+        description: Website
+
+      - name: ChatGPT
+        href: https://chatgpt.com
+        description: AI Assistant
+
+  - group: Future Services
+    services:
+      - name: Grafana
+        description: Metrics
+
+      - name: Prometheus
+        description: Monitoring
+
+      - name: Watchtower
+        description: Docker Updates
+
+      - name: Immich
+        description: Photos
+
+      - name: n8n
+        description: Automation
