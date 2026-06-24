@@ -16,3 +16,12 @@
     group: bcooke
     mode: '0644'
   notify: Restart homepage container
+
+- name: Deploy Homepage settings configuration
+  ansible.builtin.template:
+    src: settings.yaml.j2
+    dest: "{{ homepage_config_dir }}/settings.yaml"
+    owner: bcooke
+    group: bcooke
+    mode: '0644'
+  notify: Restart homepage container

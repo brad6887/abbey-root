@@ -97,3 +97,8 @@ homepage_show_server: true
 homepage_docker_servers:
   - name: local-docker
     socket: /var/run/docker.sock
+
+homepage_settings:
+  providers:
+    openweathermap: openweathermapapikey
+    weatherapi: weatherapiapikey

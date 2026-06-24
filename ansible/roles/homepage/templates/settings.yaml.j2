@@ -1,0 +1,7 @@
+---
+# Managed by Ansible - Abbey Root
+
+providers:
+{% for provider, api_key in homepage_settings.providers.items() %}
+  {{ provider }}: {{ api_key }}
+{% endfor %}
