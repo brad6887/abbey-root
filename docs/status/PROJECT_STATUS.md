@@ -51,3 +51,50 @@ Models
 - Grafana
 - Prometheus
 - BradCooke.com rebuild
+
+
+## Current Status (2026-06-25)
+
+### Documentation
+
+Documentation is now generated automatically from Ansible inventory and host metadata.
+
+Generated documents include:
+
+- Architecture
+- Servers
+- Services
+- Containers
+- Network
+- Inventory
+- Automation
+
+### Metadata
+
+Host variables have become the authoritative source for:
+
+- Homepage configuration
+- Generated documentation
+- Service inventory
+- Server inventory
+
+### Automation
+
+Each Ansible role now contains a README describing its purpose.
+
+Each playbook has accompanying documentation used to generate the automation guide.
+
+### Homepage
+
+Homepage configuration is generated from host metadata rather than being maintained manually.
+
+### Documentation Philosophy
+
+Abbey Root now follows a "single source of truth" model.
+
+Information is defined once and consumed by:
+
+- Homepage
+- Generated documentation
+- Future automation
+
