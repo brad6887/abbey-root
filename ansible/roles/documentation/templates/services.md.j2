@@ -1,0 +1,20 @@
+# Abbey Root Services
+
+Generated automatically by Ansible.
+
+{% for host in groups['all'] | sort %}
+{% if hostvars[host].homepage_services is defined %}
+## {{ host }}
+
+{% for group in hostvars[host].homepage_services %}
+### {{ group.group }}
+
+| Service | URL | Description | Container |
+|---------|-----|-------------|-----------|
+{% for service in group.services %}
+| {{ service.name }} | {{ service.href | default('N/A') }} | {{ service.description | default('') }} | {{ service.container | default('N/A') }} |
+{% endfor %}
+
+{% endfor %}
+{% endif %}
+{% endfor %}

@@ -9,3 +9,8 @@
   template:
     src: servers.md.j2
     dest: "{{ playbook_dir }}/../../docs/generated/servers.md"
+
+- name: Generate services documentation
+  template:
+    src: services.md.j2
+    dest: "{{ playbook_dir }}/../../docs/generated/services.md"

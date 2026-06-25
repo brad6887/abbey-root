@@ -8,6 +8,7 @@ This documentation is split into two areas:
 ## Generated Documentation
 
 - [Servers](generated/servers.md)
+- [Services](generated/services.md)
 
 ## Guides
 
