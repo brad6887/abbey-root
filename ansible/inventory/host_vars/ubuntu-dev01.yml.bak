@@ -51,6 +51,27 @@ homepage_services:
         server: local-docker
         container: uptime-kuma
 
+  - group: AI
+    services:
+      - name: Open WebUI
+        href: http://192.168.1.87:3000
+        description: Local AI Interface
+
+      - name: Ollama
+        href: http://192.168.1.87:11434
+        description: RTX 4060 AI Server
+
+      - name: Portainer Agent
+        href: http://192.168.1.87:9001
+        description: AI Worker Docker Agent
+
+  - group: Automation
+    services:
+      - name: Rocky Ansible
+        description: Ansible Control Node - 192.168.1.88
+        icon: rocky-linux.png
+        ping: 192.168.1.88
+
   - group: Development
     services:
       - name: GitHub

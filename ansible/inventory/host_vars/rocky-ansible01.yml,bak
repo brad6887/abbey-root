@@ -8,11 +8,3 @@ server_purpose:
   - Automation
 docker_host: false
 homepage_show_server: true
-
-homepage_services:
-  - group: Automation
-    services:
-      - name: Rocky Ansible
-        description: Ansible Control Node
-        icon: rocky-linux.png
-        ping: 192.168.1.88

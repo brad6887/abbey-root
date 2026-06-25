@@ -2,6 +2,24 @@
 
 Generated automatically by Ansible.
 
+## ai-worker01
+
+### AI
+
+| Service | URL | Description | Container |
+|---------|-----|-------------|-----------|
+| Open WebUI | http://192.168.1.87:3000 | Local AI Interface | N/A |
+| Ollama | http://192.168.1.87:11434 | RTX 4060 AI Server | N/A |
+| Portainer Agent | http://192.168.1.87:9001 | AI Worker Docker Agent | N/A |
+
+## rocky-ansible01
+
+### Automation
+
+| Service | URL | Description | Container |
+|---------|-----|-------------|-----------|
+| Rocky Ansible | N/A | Ansible Control Node | N/A |
+
 ## ubuntu-dev01
 
 ### Infrastructure
@@ -24,20 +42,6 @@ Generated automatically by Ansible.
 | Service | URL | Description | Container |
 |---------|-----|-------------|-----------|
 | Uptime Kuma | http://192.168.1.86:3001 | Service Monitoring | uptime-kuma |
-
-### AI
-
-| Service | URL | Description | Container |
-|---------|-----|-------------|-----------|
-| Open WebUI | http://192.168.1.87:3000 | Local AI Interface | N/A |
-| Ollama | http://192.168.1.87:11434 | RTX 4060 AI Server | N/A |
-| Portainer Agent | http://192.168.1.87:9001 | AI Worker Docker Agent | N/A |
-
-### Automation
-
-| Service | URL | Description | Container |
-|---------|-----|-------------|-----------|
-| Rocky Ansible | N/A | Ansible Control Node - 192.168.1.88 | N/A |
 
 ### Development
 

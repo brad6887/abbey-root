@@ -7,3 +7,17 @@ server_purpose:
   - Docker host
 docker_host: true
 homepage_show_server: true
+
+homepage_services:
+
+  - group: AI
+    services:
+      - name: Open WebUI
+        href: http://192.168.1.87:3000
+        description: Local AI Interface
+      - name: Ollama
+        href: http://192.168.1.87:11434
+        description: RTX 4060 AI Server
+      - name: Portainer Agent
+        href: http://192.168.1.87:9001
+        description: AI Worker Docker Agent

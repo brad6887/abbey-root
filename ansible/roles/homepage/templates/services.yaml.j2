@@ -1,7 +1,9 @@
 ---
 # Managed by Ansible - Abbey Root
 
-{% for service_group in homepage_services %}
+{% for host in groups['all'] | sort %}
+{% if hostvars[host].homepage_services is defined %}
+{% for service_group in hostvars[host].homepage_services %}
 - {{ service_group.group }}:
 {% for service in service_group.services %}
     - {{ service.name }}:
@@ -25,6 +27,8 @@
 {% endif %}
 {% endfor %}
 
+{% endfor %}
+{% endif %}
 {% endfor %}
 
 - Servers:
