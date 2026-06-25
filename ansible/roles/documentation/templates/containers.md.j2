@@ -1,0 +1,17 @@
+# Abbey Root Containers
+
+Generated automatically by Ansible.
+
+| Host | Container | Service | Port / URL |
+|------|-----------|---------|------------|
+{% for host in groups['all'] | sort %}
+{% if hostvars[host].homepage_services is defined %}
+{% for group in hostvars[host].homepage_services %}
+{% for service in group.services %}
+{% if service.container is defined %}
+| {{ host }} | {{ service.container }} | {{ service.name }} | {{ service.href | default('N/A') }} |
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% endfor %}

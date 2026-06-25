@@ -36,3 +36,8 @@
   template:
     src: network.md.j2
     dest: "{{ playbook_dir }}/../../docs/generated/network.md"
+
+- name: Generate container documentation
+  template:
+    src: containers.md.j2
+    dest: "{{ playbook_dir }}/../../docs/generated/containers.md"

@@ -11,6 +11,7 @@ This documentation is split into two areas:
 - [Services](generated/services.md)
 - [Inventory](generated/inventory.md)
 - [Network](generated/network.md)
+- [Containers](generated/containers.md)
 
 ## Guides
 
