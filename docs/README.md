@@ -13,3 +13,6 @@ This documentation is split into two areas:
 ## Guides
 
 Coming soon.
+
+To regenerate documentation:
+./scripts/ansible-docs.sh
