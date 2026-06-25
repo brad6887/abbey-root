@@ -41,3 +41,8 @@
   template:
     src: containers.md.j2
     dest: "{{ playbook_dir }}/../../docs/generated/containers.md"
+
+- name: Generate architecture documentation
+  template:
+    src: architecture.md.j2
+    dest: "{{ playbook_dir }}/../../docs/generated/architecture.md"

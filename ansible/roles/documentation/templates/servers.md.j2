@@ -2,8 +2,20 @@
 
 Generated automatically by Ansible.
 
-| Host | IP Address | Description | Purpose | Docker Host | Homepage |
-|------|------------|-------------|---------|-------------|----------|
+| Host | IP Address | Groups | Description | Purpose | Docker | Homepage | Services |
+|------|------------|--------|-------------|---------|--------|----------|----------|
 {% for host in groups['all'] | sort %}
-| {{ host }} | {{ hostvars[host].primary_ip | default('Unknown') }} | {{ hostvars[host].host_description | default('Unknown') }} | {{ hostvars[host].server_purpose | default([]) | join(', ') }} | {{ hostvars[host].docker_host | default(false) }} | {{ hostvars[host].homepage_show_server | default(false) }} |
+{% set host_groups = [] %}
+{% for group_name, group_hosts in groups.items() %}
+{% if group_name not in ['all', 'ungrouped'] and host in group_hosts %}
+{% set _ = host_groups.append(group_name) %}
+{% endif %}
+{% endfor %}
+{% set service_count = 0 %}
+{% if hostvars[host].homepage_services is defined %}
+{% for service_group in hostvars[host].homepage_services %}
+{% set service_count = service_count + (service_group.services | length) %}
+{% endfor %}
+{% endif %}
+| {{ host }} | {{ hostvars[host].primary_ip | default(hostvars[host].ansible_host | default('Unknown')) }} | {{ host_groups | join(', ') }} | {{ hostvars[host].host_description | default('Unknown') }} | {{ hostvars[host].server_purpose | default([]) | join(', ') }} | {% if hostvars[host].docker_host | default(false) %}Yes{% else %}No{% endif %} | {% if hostvars[host].homepage_show_server | default(false) %}Yes{% else %}No{% endif %} | {{ service_count }} |
 {% endfor %}
