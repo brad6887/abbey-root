@@ -1,21 +1,26 @@
 # Abbey Root Documentation
 
-This documentation is split into two areas:
+Abbey Root is a self-documenting home Linux lab managed with Git, Ansible, Docker, and generated documentation.
 
-- `generated/` - automatically generated from Ansible inventory and variables
-- `guides/` - hand-written notes, procedures, and lessons learned
-
-## Generated Documentation
-
+## Infrastructure
 - [Servers](generated/servers.md)
-- [Services](generated/services.md)
-- [Inventory](generated/inventory.md)
 - [Network](generated/network.md)
+- [Inventory](generated/inventory.md)
+
+## Applications
+- [Services](generated/services.md)
 - [Containers](generated/containers.md)
 
+## Automation
+
+- [Automation](generated/automation.md)
+
 ## Guides
+- [Environment Overview](guides/environment-overview.md)
 
-Coming soon.
+## Status
+- [Project Status](status/PROJECT_STATUS.md)
 
-To regenerate documentation:
+## Regenerate Documentation
+Run from the repository root:
 ./scripts/ansible-docs.sh
