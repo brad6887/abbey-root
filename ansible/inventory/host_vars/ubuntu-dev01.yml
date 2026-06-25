@@ -65,7 +65,7 @@ homepage_services:
         href: https://chatgpt.com
         description: AI Assistant
 
-  - group: Future Services
+  - group: Planned Services
     services:
       - name: Grafana
         description: Metrics

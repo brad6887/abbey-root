@@ -2,21 +2,32 @@
 
 Generated automatically by Ansible.
 
-## Platform Overview
+## Lab Summary
 
-| Component | Description |
-|----------|-------------|
-| Hypervisor | Proxmox |
-| Automation Controller | rocky-ansible01 |
-| Source Control | Git / GitHub |
-| Configuration Management | Ansible |
-| Documentation | Generated from inventory and host variables |
+| Item | Count |
+|------|------:|
+| Hosts | 3 |
+| Docker Hosts | 2 |
+| Homepage Servers | 3 |
+| Inventory Groups | 3 |
 
 ---
 
-## Infrastructure
+## Platform Overview
 
-# ai-worker01
+| Component | Description |
+|-----------|-------------|
+| Hypervisor | Proxmox |
+| Source Control | Git / GitHub |
+| Configuration Management | Ansible |
+| Documentation | Generated from inventory and host variables |
+| Managed Hosts | 3 |
+
+---
+
+## Hosts
+
+### ai-worker01
 
 **Description**
 
@@ -31,13 +42,20 @@ AI experimentation and Docker services
 - AI experimentation
 - Docker host
 
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | Yes |
+| Homepage Visible | Yes |
+
 **Inventory Groups**
 
 - ai
 
 **Services Provided**
 
-### AI
+#### AI
 
 - Open WebUI
 - Ollama
@@ -46,7 +64,7 @@ AI experimentation and Docker services
 
 ---
 
-# rocky-ansible01
+### rocky-ansible01
 
 **Description**
 
@@ -62,20 +80,27 @@ Ansible control node
 - Git Repository
 - Automation
 
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | No |
+| Homepage Visible | Yes |
+
 **Inventory Groups**
 
 - automation
 
 **Services Provided**
 
-### Automation
+#### Automation
 
 - Rocky Ansible
 
 
 ---
 
-# ubuntu-dev01
+### ubuntu-dev01
 
 **Description**
 
@@ -90,34 +115,41 @@ Infrastructure and Docker services
 - Infrastructure services
 - Docker host
 
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | Yes |
+| Homepage Visible | Yes |
+
 **Inventory Groups**
 
 - infrastructure
 
 **Services Provided**
 
-### Infrastructure
+#### Infrastructure
 
 - Proxmox
 - Portainer
 - Homepage
 - Nginx Proxy Manager
 
-### Lab Tests
+#### Lab Tests
 
 - Nginx Lab Test
 
-### Monitoring
+#### Monitoring
 
 - Uptime Kuma
 
-### Development
+#### Development
 
 - GitHub
 - BradCooke.com
 - ChatGPT
 
-### Future Services
+#### Planned Services
 
 - Grafana
 - Prometheus
@@ -129,7 +161,7 @@ Infrastructure and Docker services
 ---
 
 
-## Architecture Principles
+## Design Principles
 
 Abbey Root follows these design principles:
 

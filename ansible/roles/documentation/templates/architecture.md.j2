@@ -2,22 +2,33 @@
 
 Generated automatically by Ansible.
 
-## Platform Overview
+## Lab Summary
 
-| Component | Description |
-|----------|-------------|
-| Hypervisor | Proxmox |
-| Automation Controller | rocky-ansible01 |
-| Source Control | Git / GitHub |
-| Configuration Management | Ansible |
-| Documentation | Generated from inventory and host variables |
+| Item | Count |
+|------|------:|
+| Hosts | {{ groups['all'] | length }} |
+| Docker Hosts | {{ groups['all'] | map('extract', hostvars) | selectattr('docker_host', 'defined') | selectattr('docker_host') | list | length }} |
+| Homepage Servers | {{ groups['all'] | map('extract', hostvars) | selectattr('homepage_show_server', 'defined') | selectattr('homepage_show_server') | list | length }} |
+| Inventory Groups | {{ groups.keys() | reject('equalto','all') | reject('equalto','ungrouped') | list | length }} |
 
 ---
 
-## Infrastructure
+## Platform Overview
+
+| Component | Description |
+|-----------|-------------|
+| Hypervisor | Proxmox |
+| Source Control | Git / GitHub |
+| Configuration Management | Ansible |
+| Documentation | Generated from inventory and host variables |
+| Managed Hosts | {{ groups['all'] | length }} |
+
+---
+
+## Hosts
 
 {% for host in groups['all'] | sort %}
-# {{ host }}
+### {{ host }}
 
 **Description**
 
@@ -33,6 +44,13 @@ Generated automatically by Ansible.
 - {{ purpose }}
 {% endfor %}
 
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | {% if hostvars[host].docker_host | default(false) %}Yes{% else %}No{% endif %} |
+| Homepage Visible | {% if hostvars[host].homepage_show_server | default(false) %}Yes{% else %}No{% endif %} |
+
 **Inventory Groups**
 
 {% for group_name, members in groups.items() %}
@@ -45,7 +63,7 @@ Generated automatically by Ansible.
 **Services Provided**
 
 {% for service_group in hostvars[host].homepage_services %}
-### {{ service_group.group }}
+#### {{ service_group.group }}
 
 {% for service in service_group.services %}
 - {{ service.name }}
@@ -58,7 +76,7 @@ Generated automatically by Ansible.
 
 {% endfor %}
 
-## Architecture Principles
+## Design Principles
 
 Abbey Root follows these design principles:
 
