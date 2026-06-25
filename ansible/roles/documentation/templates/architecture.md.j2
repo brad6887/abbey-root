@@ -2,17 +2,69 @@
 
 Generated automatically by Ansible.
 
-## Overview
+## Platform Overview
 
-                  Proxmox
-                     |
-     --------------------------------
-     |              |               |
-ubuntu-dev01   ai-worker01   rocky-ansible01
-     |              |               |
-   Docker         Docker          Ansible
-     |              |               |
- Homepage       Open WebUI        Git
- Portainer      Ollama            Playbooks
- Uptime Kuma    Portainer Agent   Documentation
- Nginx Proxy
+| Component | Description |
+|----------|-------------|
+| Hypervisor | Proxmox |
+| Automation Controller | rocky-ansible01 |
+| Source Control | Git / GitHub |
+| Configuration Management | Ansible |
+| Documentation | Generated from inventory and host variables |
+
+---
+
+## Infrastructure
+
+{% for host in groups['all'] | sort %}
+# {{ host }}
+
+**Description**
+
+{{ hostvars[host].host_description | default('Not documented') }}
+
+**IP Address**
+
+{{ hostvars[host].primary_ip | default(hostvars[host].ansible_host | default('Unknown')) }}
+
+**Purpose**
+
+{% for purpose in hostvars[host].server_purpose | default([]) %}
+- {{ purpose }}
+{% endfor %}
+
+**Inventory Groups**
+
+{% for group_name, members in groups.items() %}
+{% if group_name not in ['all', 'ungrouped'] and host in members %}
+- {{ group_name }}
+{% endif %}
+{% endfor %}
+
+{% if hostvars[host].homepage_services is defined %}
+**Services Provided**
+
+{% for service_group in hostvars[host].homepage_services %}
+### {{ service_group.group }}
+
+{% for service in service_group.services %}
+- {{ service.name }}
+{% endfor %}
+
+{% endfor %}
+{% endif %}
+
+---
+
+{% endfor %}
+
+## Architecture Principles
+
+Abbey Root follows these design principles:
+
+- Inventory is the source of truth.
+- Each server owns its own metadata.
+- Homepage is generated from host metadata.
+- Documentation is generated from the same metadata.
+- Configuration is managed with Ansible.
+- Infrastructure is maintained as code.
