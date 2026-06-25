@@ -4,8 +4,14 @@ Generated automatically by Ansible.
 
 ## Playbooks
 
+| Playbook | Description |
+|----------|-------------|
 {% for playbook in query('fileglob', playbook_dir + '/*.yml') | sort %}
-- {{ playbook | basename }}
+{% set playbook_name = playbook | basename %}
+{% set playbook_base = playbook_name | replace('.yml', '') %}
+{% set playbook_doc = playbook_dir + '/docs/' + playbook_base + '.md' %}
+{% set playbook_doc_exists = lookup('fileglob', playbook_doc, wantlist=True) | length > 0 %}
+| {{ playbook_name }} | {% if playbook_doc_exists %}{{ lookup('file', playbook_doc).split('\n')[2] | default('') }}{% else %}No documentation found{% endif %} |
 {% endfor %}
 
 ## Roles

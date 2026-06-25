@@ -4,12 +4,14 @@ Generated automatically by Ansible.
 
 ## Playbooks
 
-- common.yml
-- docker.yml
-- docs.yml
-- facts.yml
-- site.yml
-- update.yml
+| Playbook | Description |
+|----------|-------------|
+| common.yml | Applies common baseline configuration to managed hosts. |
+| docker.yml | Installs and configures Docker on Docker-capable hosts. |
+| docs.yml | Generates Abbey Root project documentation. |
+| facts.yml | Gathers and displays Ansible facts from managed hosts. |
+| site.yml | Runs the main Abbey Root configuration and deployment workflow. |
+| update.yml | Applies package updates to managed hosts. |
 
 ## Roles
 
