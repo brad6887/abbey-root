@@ -10,6 +10,10 @@ Generated automatically by Ansible.
 
 ## Roles
 
+| Role | Description |
+|------|-------------|
 {% for role in ansible_roles.files | sort(attribute='path') %}
-- {{ role.path | basename }}
+{% set readme_path = role.path + '/README.md' %}
+{% set readme_exists = lookup('fileglob', readme_path, wantlist=True) | length > 0 %}
+| {{ role.path | basename }} | {% if readme_exists %}{{ lookup('file', readme_path).split('\n')[2] | default('') }}{% else %}No README found{% endif %} |
 {% endfor %}
