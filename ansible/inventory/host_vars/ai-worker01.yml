@@ -5,4 +5,5 @@ homepage_icon: nvidia.png
 server_purpose:
   - AI experimentation
   - Docker host
+docker_host: true
 homepage_show_server: true

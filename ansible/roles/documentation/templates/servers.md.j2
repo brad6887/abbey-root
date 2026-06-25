@@ -1,0 +1,9 @@
+# Abbey Root Server Inventory
+
+Generated automatically by Ansible.
+
+| Host | IP Address | Description | Purpose | Docker Host | Homepage |
+|------|------------|-------------|---------|-------------|----------|
+{% for host in groups['all'] | sort %}
+| {{ host }} | {{ hostvars[host].primary_ip | default('Unknown') }} | {{ hostvars[host].host_description | default('Unknown') }} | {{ hostvars[host].server_purpose | default([]) | join(', ') }} | {{ hostvars[host].docker_host | default(false) }} | {{ hostvars[host].homepage_show_server | default(false) }} |
+{% endfor %}

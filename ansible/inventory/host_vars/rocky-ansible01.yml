@@ -6,4 +6,5 @@ server_purpose:
   - Ansible Control Node
   - Git Repository
   - Automation
+docker_host: false
 homepage_show_server: true

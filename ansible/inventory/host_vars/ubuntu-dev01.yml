@@ -5,6 +5,8 @@ homepage_icon: docker.png
 server_purpose:
   - Infrastructure services
   - Docker host
+homepage_show_server: true
+docker_host: true
 
 homepage_config_dir: /home/bcooke/docker/homepage/config
 
@@ -100,7 +102,6 @@ homepage_services:
 
       - name: n8n
         description: Automation
-homepage_show_server: true
 
 homepage_docker_servers:
   - name: local-docker

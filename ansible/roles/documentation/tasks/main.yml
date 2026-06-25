@@ -1,0 +1,11 @@
+---
+- name: Ensure generated documentation directory exists
+  file:
+    path: "{{ playbook_dir }}/../../docs/generated"
+    state: directory
+    mode: '0755'
+
+- name: Generate server documentation
+  template:
+    src: servers.md.j2
+    dest: "{{ playbook_dir }}/../../docs/generated/servers.md"
