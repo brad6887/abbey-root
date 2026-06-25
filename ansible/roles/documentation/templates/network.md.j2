@@ -1,0 +1,9 @@
+# Abbey Root Network
+
+Generated automatically by Ansible.
+
+| Host | IP Address | Description | Purpose |
+|------|------------|-------------|---------|
+{% for host in groups['all'] | sort %}
+| {{ host }} | {{ hostvars[host].primary_ip | default(hostvars[host].ansible_host | default('Unknown')) }} | {{ hostvars[host].host_description | default('Unknown') }} | {{ hostvars[host].server_purpose | default([]) | join(', ') }} |
+{% endfor %}

@@ -10,6 +10,7 @@ This documentation is split into two areas:
 - [Servers](generated/servers.md)
 - [Services](generated/services.md)
 - [Inventory](generated/inventory.md)
+- [Network](generated/network.md)
 
 ## Guides
 

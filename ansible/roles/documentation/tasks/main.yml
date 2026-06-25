@@ -31,3 +31,8 @@
   template:
     src: automation.md.j2
     dest: "{{ playbook_dir }}/../../docs/generated/automation.md"
+
+- name: Generate network documentation
+  template:
+    src: network.md.j2
+    dest: "{{ playbook_dir }}/../../docs/generated/network.md"
