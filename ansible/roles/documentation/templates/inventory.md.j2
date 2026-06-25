@@ -1,0 +1,22 @@
+# Abbey Root Ansible Inventory
+
+Generated automatically by Ansible.
+
+## Inventory Groups
+
+{% for group_name in groups.keys() | sort %}
+{% if group_name not in ['all', 'ungrouped'] %}
+### {{ group_name }}
+
+{% for host in groups[group_name] | sort %}
+- {{ host }}
+{% endfor %}
+
+{% endif %}
+{% endfor %}
+
+## All Hosts
+
+{% for host in groups['all'] | sort %}
+- {{ host }}
+{% endfor %}

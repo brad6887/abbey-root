@@ -14,3 +14,20 @@
   template:
     src: services.md.j2
     dest: "{{ playbook_dir }}/../../docs/generated/services.md"
+
+- name: Generate inventory documentation
+  template:
+    src: inventory.md.j2
+    dest: "{{ playbook_dir }}/../../docs/generated/inventory.md"
+
+- name: Find Ansible roles
+  find:
+    paths: "{{ playbook_dir }}/../roles"
+    file_type: directory
+    depth: 1
+  register: ansible_roles
+
+- name: Generate automation documentation
+  template:
+    src: automation.md.j2
+    dest: "{{ playbook_dir }}/../../docs/generated/automation.md"

@@ -1,0 +1,15 @@
+# Abbey Root Automation
+
+Generated automatically by Ansible.
+
+## Playbooks
+
+{% for playbook in query('fileglob', playbook_dir + '/*.yml') | sort %}
+- {{ playbook | basename }}
+{% endfor %}
+
+## Roles
+
+{% for role in ansible_roles.files | sort(attribute='path') %}
+- {{ role.path | basename }}
+{% endfor %}
