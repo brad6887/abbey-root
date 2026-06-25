@@ -51,7 +51,7 @@ Generated automatically by Ansible.
 | BradCooke.com | https://bradcooke.com | Website | N/A |
 | ChatGPT | https://chatgpt.com | AI Assistant | N/A |
 
-### Future Services
+### Planned Services
 
 | Service | URL | Description | Container |
 |---------|-----|-------------|-----------|
