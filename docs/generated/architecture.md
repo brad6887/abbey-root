@@ -8,7 +8,7 @@ Generated automatically by Ansible.
 |------|------:|
 | Hosts | 3 |
 | Docker Hosts | 2 |
-| Homepage Servers | 3 |
+| Homepage Servers | 2 |
 | Inventory Groups | 3 |
 
 ---
@@ -104,7 +104,7 @@ Ansible control node
 
 **Description**
 
-Infrastructure and Docker services
+Not documented
 
 **IP Address**
 
@@ -112,15 +112,13 @@ Infrastructure and Docker services
 
 **Purpose**
 
-- Infrastructure services
-- Docker host
 
 **Capabilities**
 
 | Capability | Value |
 |------------|-------|
 | Docker Host | Yes |
-| Homepage Visible | Yes |
+| Homepage Visible | No |
 
 **Inventory Groups**
 

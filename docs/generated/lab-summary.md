@@ -12,7 +12,7 @@
 |------|------:|
 | Hosts | 3 |
 | Docker Hosts | 2 |
-| Homepage Hosts | 3 |
+| Homepage Hosts | 2 |
 
 
 | Homepage Services | 18 |
@@ -25,7 +25,7 @@
 |------|------------|-------------|
 | ai-worker01 | 192.168.1.87 | AI experimentation and Docker services |
 | rocky-ansible01 | 192.168.1.88 | Ansible control node |
-| ubuntu-dev01 | 192.168.1.86 | Infrastructure and Docker services |
+| ubuntu-dev01 | 192.168.1.86 | Unknown |
 
 ---
 

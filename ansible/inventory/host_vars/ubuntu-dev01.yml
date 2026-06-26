@@ -1,44 +1,39 @@
 ---
-host_description: Infrastructure and Docker services
-primary_ip: 192.168.1.86
-homepage_icon: docker.png
-server_purpose:
-  - Infrastructure services
-  - Docker host
-homepage_show_server: true
-docker_host: true
-
-homepage_config_dir: /home/bcooke/docker/homepage/config
-
 homepage_services:
   - group: Infrastructure
     services:
       - name: Proxmox
         href: https://192.168.1.55:8006
         description: Hypervisor
+        status: active
 
       - name: Portainer
         href: https://192.168.1.86:9443
         description: Docker Management
+        status: active
         server: local-docker
         container: portainer
 
       - name: Homepage
         href: http://192.168.1.86:3000
         description: Lab Dashboard
+        status: active
         server: local-docker
         container: homepage
 
       - name: Nginx Proxy Manager
         href: http://192.168.1.86:81
         description: Reverse Proxy
+        status: active
         server: local-docker
         container: nginx-proxy-manager
+
   - group: Lab Tests
     services:
       - name: Nginx Lab Test
         href: http://192.168.1.86:8088
         description: Ansible-managed test container
+        status: active
         icon: nginx.png
         server: local-docker
         container: nginx-labtest
@@ -48,6 +43,7 @@ homepage_services:
       - name: Uptime Kuma
         href: http://192.168.1.86:3001
         description: Service Monitoring
+        status: active
         server: local-docker
         container: uptime-kuma
 
@@ -56,99 +52,36 @@ homepage_services:
       - name: GitHub
         href: https://github.com
         description: Repositories
+        status: active
 
       - name: BradCooke.com
         href: https://bradcooke.com
         description: Website
+        status: active
 
       - name: ChatGPT
         href: https://chatgpt.com
         description: AI Assistant
+        status: active
 
   - group: Planned Services
     services:
       - name: Grafana
         description: Metrics
+        status: planned
 
       - name: Prometheus
         description: Monitoring
+        status: planned
 
       - name: Watchtower
         description: Docker Updates
+        status: planned
 
       - name: Immich
         description: Photos
+        status: planned
 
       - name: n8n
         description: Automation
-
-homepage_docker_servers:
-  - name: local-docker
-    socket: /var/run/docker.sock
-
-homepage_settings:
-  providers:
-    openweathermap: openweathermapapikey
-    weatherapi: weatherapiapikey
-
-homepage_widgets:
-  resources:
-    cpu: true
-    memory: true
-    disk: /
-  search:
-    provider: duckduckgo
-    target: _blank
-
-homepage_bookmarks:
-  - group: Development
-    links:
-      - name: GitHub
-        abbr: GH
-        href: https://github.com
-
-      - name: BradCooke.com
-        abbr: BC
-        href: https://bradcooke.com
-
-      - name: ChatGPT
-        abbr: AI
-        href: https://chatgpt.com
-
-  - group: Social
-    links:
-      - name: Reddit
-        abbr: RE
-        href: https://reddit.com
-
-  - group: Entertainment
-    links:
-      - name: YouTube
-        abbr: YT
-        href: https://youtube.com
-
-homepage_compose_dir: /home/bcooke/docker/homepage
-
-homepage_container:
-  service_name: homepage
-  container_name: homepage
-  image: ghcr.io/gethomepage/homepage:latest
-  restart_policy: unless-stopped
-  ports:
-    - "3000:3000"
-  volumes:
-    - "/home/bcooke/docker/homepage/config:/app/config"
-    - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  environment:
-    HOMEPAGE_ALLOWED_HOSTS: "192.168.1.86:3000,home.abbeyroot.local,test"
-
-labtest_compose_dir: /home/bcooke/docker/nginx-labtest
-
-labtest_container:
-  service_name: nginx-labtest
-  container_name: nginx-labtest
-  image: nginx:alpine
-  restart_policy: unless-stopped
-  ports:
-    - "8088:80"
-
+        status: planned

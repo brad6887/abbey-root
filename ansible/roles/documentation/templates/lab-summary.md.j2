@@ -11,8 +11,20 @@
 | Item | Count |
 |------|------:|
 | Hosts | {{ groups['all'] | length }} |
-| Docker Hosts | {{ groups['all'] | map('extract', hostvars, 'docker_host') | select('equalto', true) | list | length }} |
-| Homepage Hosts | {{ groups['all'] | map('extract', hostvars, 'homepage_show_server') | select('equalto', true) | list | length }} |
+{% set docker_host_count = namespace(value=0) %}
+{% for host in groups['all'] %}
+{% if hostvars[host].docker_host | default(false) %}
+{% set docker_host_count.value = docker_host_count.value + 1 %}
+{% endif %}
+{% endfor %}
+| Docker Hosts | {{ docker_host_count.value }} |
+{% set homepage_host_count = namespace(value=0) %}
+{% for host in groups['all'] %}
+{% if hostvars[host].homepage_show_server | default(false) %}
+{% set homepage_host_count.value = homepage_host_count.value + 1 %}
+{% endif %}
+{% endfor %}
+| Homepage Hosts | {{ homepage_host_count.value }} |
 
 {% set service_count = namespace(value=0) %}
 {% for host in groups['all'] %}

@@ -8,9 +8,9 @@ Generated automatically by Ansible.
 
 | Service | URL | Description | Container |
 |---------|-----|-------------|-----------|
-| Open WebUI | http://192.168.1.87:3000 | Local AI Interface | N/A |
-| Ollama | http://192.168.1.87:11434 | RTX 4060 AI Server | N/A |
-| Portainer Agent | http://192.168.1.87:9001 | AI Worker Docker Agent | N/A |
+| Open WebUI | http://192.168.1.87:3000 | Local AI Interface | open-webui |
+| Ollama | http://192.168.1.87:11434 | RTX 4060 AI Server | ollama |
+| Portainer Agent | http://192.168.1.87:9001 | AI Worker Docker Agent | portainer-agent |
 
 ## rocky-ansible01
 
