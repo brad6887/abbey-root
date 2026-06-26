@@ -98,3 +98,52 @@ Information is defined once and consumed by:
 - Generated documentation
 - Future automation
 
+## 2026-06-26 Progress
+
+### Documentation
+
+- Added lab-summary.md generated documentation.
+- Improved generated server documentation.
+- Added service lifecycle status (active, planned, etc.).
+- Improved template robustness using default() and namespace().
+- Introduced inventory validation before documentation generation.
+
+### Command-Line Toolkit
+
+Created the initial Abbey Root CLI toolkit:
+
+- abbey-build
+- abbey-docs
+- abbey-validate
+- abbey-help
+- abbey-git-status
+- abbey-git-history
+- abbey-git-last
+
+Features include:
+
+- Consistent command naming
+- Standardized headers
+- --help support
+- Colored output
+- Standard build workflow
+
+### Workflow
+
+The standard Abbey Root development workflow is now:
+
+1. Update inventory or code.
+2. Run abbey-build.
+3. Review generated documentation.
+4. Review git diff.
+5. Commit and push.
+
+### Current Direction
+
+Abbey Root is evolving into a self-documenting Infrastructure-as-Code platform where:
+
+- Inventory is the single source of truth.
+- Documentation is generated automatically.
+- Homepage configuration is generated automatically.
+- Developer tools provide a consistent workflow.
+- Future BradCooke.com content will be generated from the same source data.
