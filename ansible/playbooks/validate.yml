@@ -1,0 +1,26 @@
+---
+- name: Validate Abbey Root inventory data
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    required_host_vars:
+      - host_description
+      - primary_ip
+      - server_purpose
+      - docker_host
+      - homepage_show_server
+
+  tasks:
+    - name: Validate required host variables
+      ansible.builtin.assert:
+        that:
+          - hostvars[host_name][required_var] is defined
+        fail_msg: "{{ host_name }} is missing required variable: {{ required_var }}"
+        success_msg: "{{ host_name }} has required variable: {{ required_var }}"
+      loop: "{{ groups['all'] | product(required_host_vars) | list }}"
+      loop_control:
+        label: "{{ item.0 }} -> {{ item.1 }}"
+      vars:
+        host_name: "{{ item.0 }}"
+        required_var: "{{ item.1 }}"

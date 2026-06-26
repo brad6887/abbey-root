@@ -1,3 +1,60 @@
 #!/bin/bash
+#
+# Abbey Root Tool: abbey-git-history
+#
+# Purpose:
+#   Display the commit history graph for the Abbey Root repository.
+#
+# Usage:
+#   abbey-git-history
+#   abbey-git-history --help
+#
 
-git log --oneline --graph --decorate --all
+set -e
+
+# Colors
+BLUE='\033[1;34m'
+GREEN='\033[1;32m'
+NC='\033[0m'
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+cat <<EOF
+abbey-git-history
+
+Display the Git commit history graph for the Abbey Root repository.
+
+Usage:
+    abbey-git-history
+
+This command displays:
+
+  • Branch graph
+  • Commit hashes
+  • Branch/tag decorations
+  • Commit messages
+
+EOF
+exit 0
+fi
+
+cd "$ABBEY_ROOT"
+
+echo -e "${BLUE}========================================${NC}"
+echo -e "${BLUE} Abbey Root Git History${NC}"
+echo -e "${BLUE}========================================${NC}"
+echo
+
+echo -e "${GREEN}Repository:${NC} $ABBEY_ROOT"
+echo -e "${GREEN}Branch:${NC} $(git branch --show-current)"
+echo -e "${GREEN}Date:${NC} $(date)"
+echo
+
+git \
+    -c color.ui=always \
+    log \
+    --graph \
+    --decorate \
+    --all \
+    --abbrev-commit \
+    --date=short \
+    --pretty=format:'%C(auto)%h %C(cyan)%ad%C(reset) %C(yellow)%d%C(reset) %s %C(green)(%an)%C(reset)'

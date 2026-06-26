@@ -18,7 +18,7 @@
 |------|------------|--------|--------|----------|----------|
 | ai-worker01 | 192.168.1.87 | ai | Yes | Yes | 3 |
 | rocky-ansible01 | 192.168.1.88 | automation | No | Yes | 1 |
-| ubuntu-dev01 | 192.168.1.86 | infrastructure | Yes | No | 14 |
+| ubuntu-dev01 | 192.168.1.86 | infrastructure | Yes | Yes | 14 |
 
 ---
 
@@ -110,7 +110,7 @@ Ansible control node
 
 **Description**
 
-Unknown
+Infrastructure and Docker services
 
 **IP Address**
 
@@ -122,14 +122,15 @@ Unknown
 
 **Purpose**
 
-- Unknown
+- Infrastructure services
+- Docker host
 
 **Capabilities**
 
 | Capability | Value |
 |------------|-------|
 | Docker Host | Yes |
-| Homepage Server Entry | No |
+| Homepage Server Entry | Yes |
 | Homepage Services | 14 |
 
 **Homepage Services**

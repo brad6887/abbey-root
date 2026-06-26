@@ -1,0 +1,65 @@
+#!/bin/bash
+#
+# Abbey Root Tool: abbey-build
+#
+# Purpose:
+#   Run the standard Abbey Root build pipeline.
+#
+# Usage:
+#   abbey-build
+#   abbey-build --help
+#
+
+set -e
+
+# Colors
+BLUE='\033[1;34m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+cat <<EOF
+abbey-build
+
+Run the Abbey Root build pipeline.
+
+Usage:
+    abbey-build
+
+The build pipeline performs:
+
+  • Inventory validation
+  • Documentation generation
+  • Git repository status
+
+EOF
+exit 0
+fi
+
+START_TIME=$(date +%s)
+
+echo -e "${BLUE}========================================${NC}"
+echo -e "${BLUE} Abbey Root Build Pipeline${NC}"
+echo -e "${BLUE}========================================${NC}"
+echo
+
+echo -e "${YELLOW}==>${NC} Inventory Validation"
+abbey-validate
+
+echo
+echo -e "${YELLOW}==>${NC} Documentation Generation"
+abbey-docs
+
+echo
+echo -e "${YELLOW}==>${NC} Repository Status"
+abbey-git-status
+
+END_TIME=$(date +%s)
+ELAPSED=$((END_TIME - START_TIME))
+
+echo
+echo -e "${BLUE}========================================${NC}"
+echo -e "${GREEN}✓ Abbey Root build completed successfully.${NC}"
+echo -e "${GREEN}Elapsed Time:${NC} ${ELAPSED} seconds"
+echo -e "${BLUE}========================================${NC}"

@@ -1,3 +1,52 @@
 #!/bin/bash
+#
+# Abbey Root Tool: abbey-git-status
+#
+# Purpose:
+#   Display the current Git repository status for Abbey Root.
+#
+# Usage:
+#   abbey-git-status
+#   abbey-git-status --help
+#
 
-git status
+set -e
+
+# Colors
+BLUE='\033[1;34m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+cat <<EOF
+abbey-git-status
+
+Display the current Git status of the Abbey Root repository.
+
+Usage:
+    abbey-git-status
+
+This command:
+
+  • Changes to the Abbey Root repository
+  • Displays the current branch
+  • Shows modified, staged, and untracked files
+
+EOF
+exit 0
+fi
+
+cd "$ABBEY_ROOT"
+
+echo -e "${BLUE}========================================${NC}"
+echo -e "${BLUE} Abbey Root Git Status${NC}"
+echo -e "${BLUE}========================================${NC}"
+echo
+
+echo -e "${GREEN}Repository:${NC} $ABBEY_ROOT"
+echo -e "${GREEN}Branch:${NC} $(git branch --show-current)"
+echo -e "${GREEN}Date:${NC} $(date)"
+echo
+
+git -c color.status=always status

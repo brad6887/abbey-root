@@ -12,6 +12,7 @@ Generated automatically by Ansible.
 | facts.yml | Gathers and displays Ansible facts from managed hosts. |
 | site.yml | Runs the main Abbey Root configuration and deployment workflow. |
 | update.yml | Applies package updates to managed hosts. |
+| validate.yml | No documentation found |
 
 ## Roles
 
