@@ -46,3 +46,9 @@
   template:
     src: architecture.md.j2
     dest: "{{ playbook_dir }}/../../docs/generated/architecture.md"
+
+- name: Generate lab summary documentation
+  ansible.builtin.template:
+    src: lab-summary.md.j2
+    dest: "{{ playbook_dir }}/../../docs/generated/lab-summary.md"
+    mode: "0644"
