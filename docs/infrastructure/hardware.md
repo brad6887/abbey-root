@@ -1,0 +1,174 @@
+# Abbey Root Hardware Inventory
+
+This document tracks the physical hardware that supports the Abbey Root lab.
+
+The purpose of this inventory is to document the major infrastructure components, their role within the lab, and future expansion plans.
+
+---
+
+# Hardware Summary
+
+| Device | Purpose | Status |
+|---------|---------|--------|
+| MacBook Pro (M3 Pro) | Primary workstation | In Service |
+| Dell Laptop (Service Tag: ST-GB24CL3) | Proxmox virtualization host | In Service |
+| Gigabyte G6-KF (2024) Laptop | AI Worker host | In Service |
+| SanDisk Extreme Portable SSD (2 TB) | Proxmox backup storage | Ordered |
+| Anker USB-C Hub | USB expansion for Proxmox | Ordered |
+| Belkin 12-Outlet Surge Protector | Power protection | Ordered |
+
+---
+
+# MacBook Pro (M3 Pro)
+
+## Role
+
+Primary workstation for Abbey Root.
+
+## Responsibilities
+
+- SSH administration
+- Git and GitHub
+- VS Code development
+- Documentation
+- ChatGPT
+- Website development
+- Infrastructure management
+- General lab administration
+
+This is the primary interface used to manage the entire environment.
+
+---
+
+# Dell Laptop (Service Tag: ST-GB24CL3)
+
+## Role
+
+Primary Proxmox host.
+
+## Responsibilities
+
+- Proxmox VE
+- Virtual machine hosting
+- Docker hosts
+- Infrastructure services
+- Templates
+- Future backup management
+
+This system is the foundation of the Abbey Root infrastructure.
+
+---
+
+# Gigabyte G6-KF (2024)
+
+## Role
+
+AI Worker host.
+
+## Responsibilities
+
+- AI experimentation
+- Local AI models
+- Open WebUI
+- Future code assistants
+- AI-assisted website generation
+- AI workflow automation
+
+This system is dedicated to AI workloads and is intended to become the primary AI engine for BradCooke.com.
+
+---
+
+# SanDisk Extreme Portable SSD (2 TB)
+
+## Role
+
+Dedicated Proxmox backup storage.
+
+## Planned Usage
+
+- Virtual machine backups
+- Restore testing
+- Disaster recovery
+- Future backup automation
+
+### Deployment Checklist
+
+- Update firmware
+- Perform read/write validation
+- Configure as Proxmox backup storage
+- Create backup jobs
+- Verify restore process
+
+Status: Ordered
+
+---
+
+# Anker USB-C Hub
+
+## Role
+
+USB expansion for the Proxmox host.
+
+## Planned Usage
+
+- Backup SSD
+- USB installer media
+- UPS monitoring cable
+- Future USB peripherals
+- General expansion
+
+Status: Ordered
+
+---
+
+# Belkin 12-Outlet Surge Protector
+
+## Role
+
+Power protection for the Abbey Root lab.
+
+## Purpose
+
+- Surge protection
+- Additional outlet capacity
+- Foundation for future UPS deployment
+
+Status: Ordered
+
+---
+
+# Future Hardware Roadmap
+
+Potential additions include:
+
+- UPS
+- Network Attached Storage (NAS)
+- Additional Proxmox node
+- Memory upgrades
+- Managed network switch
+- 10 Gb networking
+- Dedicated backup server
+
+Each hardware purchase should improve one or more of the following:
+
+- Reliability
+- Automation
+- Documentation
+- AI capabilities
+- Learning opportunities
+
+---
+
+# Hardware Philosophy
+
+Hardware should be selected to support the long-term goals of Abbey Root.
+
+When practical:
+
+- Buy once, use for multiple purposes.
+- Prefer reliability over maximum performance.
+- Document every significant piece of infrastructure.
+- Validate new hardware before placing it into production.
+- Build incrementally rather than all at once.
+
+The goal is to create a reliable, reproducible, AI-assisted infrastructure that continues to evolve over time.
