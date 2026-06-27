@@ -13,9 +13,9 @@ The purpose of this inventory is to document the major infrastructure components
 | MacBook Pro (M3 Pro) | Primary workstation | In Service |
 | Dell Laptop (Service Tag: ST-GB24CL3) | Proxmox virtualization host | In Service |
 | Gigabyte G6-KF (2024) Laptop | AI Worker host | In Service |
-| SanDisk Extreme Portable SSD (2 TB) | Proxmox backup storage | Ordered |
-| Anker USB-C Hub | USB expansion for Proxmox | Ordered |
-| Belkin 12-Outlet Surge Protector | Power protection | Ordered |
+| SanDisk Extreme Portable SSD (2 TB) | Proxmox backup storage | In Service |
+| Anker USB-C Hub | USB expansion for Proxmox | In Service |
+| Belkin 12-Outlet Surge Protector | Power protection | In Service |
 
 ---
 
@@ -53,7 +53,7 @@ Primary Proxmox host.
 - Docker hosts
 - Infrastructure services
 - Templates
-- Future backup management
+- Backup management
 
 This system is the foundation of the Abbey Root infrastructure.
 
@@ -84,22 +84,28 @@ This system is dedicated to AI workloads and is intended to become the primary A
 
 Dedicated Proxmox backup storage.
 
-## Planned Usage
+## Configuration
 
-- Virtual machine backups
+- Capacity: 2 TB
+- Filesystem: ext4
+- Volume Label: abbey-backup
+- Mount Point: /mnt/abbey-backup
+- Backup Directory: /mnt/abbey-backup/proxmox
+
+## Purpose
+
+- Proxmox VM backups
 - Restore testing
 - Disaster recovery
-- Future backup automation
+- Future configuration exports
 
-### Deployment Checklist
+## Notes
 
-- Update firmware
-- Perform read/write validation
-- Configure as Proxmox backup storage
-- Create backup jobs
-- Verify restore process
+- Mounted using UUID via /etc/fstab
+- Dedicated exclusively to Abbey Root
+- Used as the primary Proxmox backup repository
 
-Status: Ordered
+Status: In Service
 
 ---
 
@@ -109,15 +115,19 @@ Status: Ordered
 
 USB expansion for the Proxmox host.
 
+## Connected Devices
+
+- SanDisk Extreme Portable SSD (2 TB)
+
 ## Planned Usage
 
 - Backup SSD
 - USB installer media
-- UPS monitoring cable
+- Future UPS monitoring cable
 - Future USB peripherals
-- General expansion
+- General USB expansion
 
-Status: Ordered
+Status: In Service
 
 ---
 
@@ -125,7 +135,7 @@ Status: Ordered
 
 ## Role
 
-Power protection for the Abbey Root lab.
+Primary power distribution and surge protection for the Abbey Root lab.
 
 ## Purpose
 
@@ -133,7 +143,13 @@ Power protection for the Abbey Root lab.
 - Additional outlet capacity
 - Foundation for future UPS deployment
 
-Status: Ordered
+## Connected Equipment
+
+- Proxmox host
+- AI Worker host
+- Lab peripherals
+
+Status: In Service
 
 ---
 

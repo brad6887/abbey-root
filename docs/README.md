@@ -14,6 +14,8 @@ Abbey Root is a self-documenting home Linux lab managed with Git, Ansible, Docke
 - [Network](generated/network.md)
 - [Inventory](generated/inventory.md)
 - [Architecture](generated/architecture.md)
+- Hardware
+- Backup Strategy
 
 ## Applications
 
