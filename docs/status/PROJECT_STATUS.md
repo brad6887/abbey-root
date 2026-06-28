@@ -2,30 +2,40 @@
 
 ## Proxmox
 
+Management IP
+
 192.168.1.55
+
+---
 
 ## ubuntu-dev01
 
+IP Address
+
 192.168.1.86
 
-Services
+### Services
 
 - Homepage
 - Portainer
 - Uptime Kuma
 - Nginx Proxy Manager
 
+---
+
 ## ai-worker01
+
+IP Address
 
 192.168.1.87
 
-Hardware
+### Hardware
 
 - RTX 4060 Laptop GPU
 - 32 GB RAM
 - 1 TB SSD
 
-Services
+### Services
 
 - Docker
 - NVIDIA Driver 595
@@ -34,32 +44,51 @@ Services
 - Open WebUI
 - Portainer Agent
 
-Models
+### Models
 
 - qwen3:8b
 - gemma3:4b
 - gpt-oss:20b
 
-## Next Steps
+---
 
-- Push Abbey Root to GitHub
-- Convert containers to compose files
-- rocky-ansible01
+# Current Priorities
+
+## Primary
+
+- Continue BradCooke.com content pipeline
+- Develop AI-assisted website generation workflow
+- Continue expanding Infrastructure-as-Code
+- Improve Abbey Root developer toolkit
+
+## Planned
+
+- Convert remaining containers to Docker Compose
 - Watchtower
 - Tailscale
 - Kali VM
 - Grafana
 - Prometheus
-- BradCooke.com rebuild
 
+---
 
-## Current Status (2026-06-25)
+# Current Status (2026-06-28)
 
-### Documentation
+## Infrastructure
 
-Documentation is now generated automatically from Ansible inventory and host metadata.
+- Proxmox environment operational.
+- Three managed Linux servers online.
+- GitHub repository established.
+- Backup infrastructure deployed.
+- Backup restore successfully tested.
 
-Generated documents include:
+---
+
+## Documentation
+
+Documentation is generated automatically from Ansible inventory and host metadata.
+
+Generated documentation includes:
 
 - Architecture
 - Servers
@@ -68,94 +97,84 @@ Generated documents include:
 - Network
 - Inventory
 - Automation
+- Lab Summary
 
-### Metadata
+---
 
-Host variables have become the authoritative source for:
+## Single Source of Truth
+
+Host variables now serve as the authoritative source for:
 
 - Homepage configuration
 - Generated documentation
 - Service inventory
 - Server inventory
 
-### Automation
+The project continues to follow a "define once, reuse everywhere" philosophy.
 
-Each Ansible role now contains a README describing its purpose.
+---
 
-Each playbook has accompanying documentation used to generate the automation guide.
+## Automation
 
-### Homepage
+Each Ansible role contains documentation.
 
-Homepage configuration is generated from host metadata rather than being maintained manually.
+Each playbook contains accompanying documentation used to generate the Automation Guide.
 
-### Documentation Philosophy
+Inventory validation is performed automatically before documentation generation.
 
-Abbey Root now follows a "single source of truth" model.
+---
 
-Information is defined once and consumed by:
+## Homepage
 
-- Homepage
-- Generated documentation
-- Future automation
+Homepage configuration is generated automatically from Ansible inventory and host metadata.
 
-## 2026-06-26 Progress
+Manual editing is no longer required.
 
-### Documentation
+---
 
-- Added lab-summary.md generated documentation.
-- Improved generated server documentation.
-- Added service lifecycle status (active, planned, etc.).
-- Improved template robustness using default() and namespace().
-- Introduced inventory validation before documentation generation.
+## Backup Strategy
 
-# Abbey Root Backup Strategy
+### Storage
 
-## Overview
-
-Abbey Root uses a dedicated external SSD for Proxmox backups.
-
-## Backup Storage
-
-- Device: SanDisk Extreme Portable SSD (2 TB)
-- Label: abbey-backup
-- Filesystem: ext4
-- Mount Point: /mnt/abbey-backup
+- SanDisk Extreme Portable SSD (2 TB)
 - Storage ID: abbey-backup
+- Mount Point: /mnt/abbey-backup
 
-## Backup Schedule
+### Schedule
 
-- Node: pve
-- Mode: Snapshot
-- Compression: ZSTD
-- Schedule: Daily
-- Retention: Keep last 7 backups
+- Daily
+- Snapshot mode
+- ZSTD compression
+- Retain last 7 backups
 
-## Protected Virtual Machines
+### Protected Systems
 
 - ubuntu-dev01
 - ai-worker01
 - rocky-ansible01
 
-Templates are excluded from backups because they are reproducible.
+Templates remain excluded because they are reproducible.
 
-## Restore Policy
+### Restore Testing
 
-Backups are not considered validated until a successful restore test has been completed.
+Status: Complete
 
-Last Restore Test:
-- Pending
+A full restore test of rocky-ansible01 was successfully performed and validated.
 
-## Future Improvements
+Future improvements:
 
 - Scheduled restore testing
 - Backup monitoring
 - Backup reporting
-- Off-site backup replication
+- Off-site replication
 
-### Command-Line Toolkit
+---
 
-Created the initial Abbey Root CLI toolkit:
+## Developer Toolkit
 
+Current Abbey Root commands:
+
+- abbey-status
 - abbey-build
 - abbey-docs
 - abbey-validate
@@ -164,30 +183,57 @@ Created the initial Abbey Root CLI toolkit:
 - abbey-git-history
 - abbey-git-last
 
-Features include:
+Current capabilities include:
 
-- Consistent command naming
-- Standardized headers
-- --help support
-- Colored output
+- Standardized command interface
+- Inventory validation
+- Documentation generation
+- Lab status reporting
+- Git helpers
+- Consistent help output
 - Standard build workflow
 
-### Workflow
+---
 
-The standard Abbey Root development workflow is now:
+## Repository Architecture
+
+ansible/     Infrastructure as Code docs/        Technical documentation content/     BradCooke.com source content homepage/    Homepage configuration tools/       Developer toolkit scripts/     Helper scripts
+
+---
+
+## BradCooke.com
+
+A dedicated content/ directory has been created as the source for future website content.
+
+The long-term publishing pipeline is:
+
+Infrastructure         ↓ Generated Documentation         ↓ Markdown Content         ↓ AI Enhancement         ↓ BradCooke.com
+
+Markdown remains the primary source format for all publishable content.
+
+---
+
+## Standard Workflow
 
 1. Update inventory or code.
-2. Run abbey-build.
-3. Review generated documentation.
-4. Review git diff.
-5. Commit and push.
+2. Run abbey-status.
+3. Run abbey-build.
+4. Review generated documentation.
+5. Review git diff.
+6. Commit and push.
 
-### Current Direction
+---
 
-Abbey Root is evolving into a self-documenting Infrastructure-as-Code platform where:
+## Current Direction
 
-- Inventory is the single source of truth.
-- Documentation is generated automatically.
-- Homepage configuration is generated automatically.
-- Developer tools provide a consistent workflow.
-- Future BradCooke.com content will be generated from the same source data.
+Abbey Root has evolved beyond simply building infrastructure.
+
+The project is now becoming a self-documenting Infrastructure-as-Code platform where:
+
+- Infrastructure generates documentation.
+- Documentation feeds AI workflows.
+- AI assists with content creation.
+- Markdown becomes the source for BradCooke.com.
+- The website becomes the public presentation of work already taking place inside the lab.
+
+The goal remains to build once, document once, and reuse everywhere.

@@ -73,6 +73,7 @@ AI Worker host.
 - Future code assistants
 - AI-assisted website generation
 - AI workflow automation
+- AI-assisted BradCooke.com content generation
 
 This system is dedicated to AI workloads and is intended to become the primary AI engine for BradCooke.com.
 
@@ -152,6 +153,48 @@ Primary power distribution and surge protection for the Abbey Root lab.
 Status: In Service
 
 ---
+---
+
+# Pending Hardware
+
+## Plugable USB-C 2.5 Gb Ethernet Adapter
+
+### Status
+
+Ordered (2026-06-28)
+
+### Planned Purpose
+
+Provide a second wired network interface for ai-worker01.
+
+### Planned Uses
+
+- Future dedicated storage network
+- Docker networking experiments
+- Network isolation
+- Lab expansion
+- High-speed file transfers
+
+---
+
+## Cat6 Patch Cables (10 × 3 ft)
+
+### Status
+
+Ordered (2026-06-28)
+
+### Planned Purpose
+
+Improve cable management and provide short patch cables throughout the Abbey Root lab.
+
+### Planned Uses
+
+- Proxmox host
+- AI Worker host
+- Network switch
+- Future lab hardware
+
+These items will move into their permanent hardware sections once installed and placed into service.
 
 # Future Hardware Roadmap
 
