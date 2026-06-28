@@ -54,3 +54,4 @@ ansible-playbook playbooks/validate.yml
 
 echo
 echo -e "${GREEN}✓ Inventory validation completed successfully.${NC}"
+

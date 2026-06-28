@@ -63,3 +63,4 @@ echo -e "${BLUE}========================================${NC}"
 echo -e "${GREEN}✓ Abbey Root build completed successfully.${NC}"
 echo -e "${GREEN}Elapsed Time:${NC} ${ELAPSED} seconds"
 echo -e "${BLUE}========================================${NC}"
+
