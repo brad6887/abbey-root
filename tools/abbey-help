@@ -16,7 +16,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 echo -e "${BLUE}========================================${NC}"
-echo -e "${BLUE} Abbey Root Devloper Toolkit${NC}"
+echo -e "${BLUE} Abbey Root Developer Toolkit${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo
 
@@ -35,6 +35,7 @@ echo
 
 echo -e "${GREEN}Automation${NC}"
 echo "----------"
+printf "  %-22s %s\n" "abbey-status" "Show Abbey Root lab status"
 printf "  %-22s %s\n" "abbey-build" "Run the standard Abbey Root build pipeline"
 printf "  %-22s %s\n" "abbey-validate" "Validate the Ansible inventory"
 printf "  %-22s %s\n" "abbey-docs" "Generate documentation"
@@ -47,16 +48,16 @@ echo
 
 echo -e "${YELLOW}Typical Workflow${NC}"
 echo "----------------"
+echo
 
-cat <<EOF
+printf "  %-22s %s\n" "abbey"        "# Open the repository"
+printf "  %-22s %s\n" "abbey-status" "# Check lab health"
+printf "  %-22s %s\n" "abbey-build"  "# Validate and regenerate documentation"
+printf "  %s\n" "git diff"
+printf "  %s\n" "git add ."
+printf "  %s\n" 'git commit -m "message"'
+printf "  %s\n" "git push"
 
-  abbey               # Open the repository
-  abbey-build         # Validate and regenerate documentation
-  git diff
-  git add .
-  git commit -m "message"
-  git push
-
-EOF
-
+echo
 echo "Tip: Most commands support '--help' for additional information."
+

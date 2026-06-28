@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+
+set -u
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ANSIBLE_DIR="$REPO_ROOT/ansible"
+INVENTORY="$ANSIBLE_DIR/inventory/hosts.yml"
+
+cd "$REPO_ROOT" || exit 1
+
+print_line() {
+  printf '%*s\n' 40 '' | tr ' ' '='
+}
+
+print_section() {
+  echo
+  echo "$1"
+  printf '%*s\n' "${#1}" '' | tr ' ' '-'
+}
+
+print_line
+echo " Abbey Root Status"
+print_line
+echo
+echo "Repository: $REPO_ROOT"
+echo "Date: $(date)"
+
+print_section "Git"
+
+BRANCH="$(git branch --show-current 2>/dev/null || echo unknown)"
+echo "Branch : $BRANCH"
+
+if git diff --quiet && git diff --cached --quiet; then
+  echo "Status : Clean"
+else
+  echo "Status : Changes present"
+fi
+
+print_section "Inventory"
+
+if [[ ! -f "$INVENTORY" ]]; then
+  echo "Inventory file not found: $INVENTORY"
+  exit 1
+fi
+
+HOST_COUNT="$(cd "$ANSIBLE_DIR" && ansible-inventory -i "$INVENTORY" --list 2>/dev/null \
+  | python3 -c '
+import json, sys
+data=json.load(sys.stdin)
+hosts=set()
+for group, value in data.items():
+    if group.startswith("_"):
+        continue
+    if isinstance(value, dict):
+        for host in value.get("hosts", []):
+            hosts.add(host)
+print(len(hosts))
+' 2>/dev/null || echo unknown)"
+
+DOCKER_HOST_COUNT="$(cd "$ANSIBLE_DIR" && ansible-inventory -i inventory/hosts.yml --list 2>/dev/null \
+  | python3 -c '
+import json, sys
+data=json.load(sys.stdin)
+hostvars=data.get("_meta", {}).get("hostvars", {})
+count=sum(1 for v in hostvars.values() if str(v.get("docker_host")).lower() == "true")
+print(count)
+' 2>/dev/null || echo unknown)"
+
+echo "Hosts        : $HOST_COUNT"
+echo "Docker Hosts : $DOCKER_HOST_COUNT"
+
+print_section "Connectivity"
+
+if cd "$ANSIBLE_DIR" && ansible all -i "$INVENTORY" -m ping -o; then
+  echo
+  echo "Connectivity: PASS"
+else
+  echo
+  echo "Connectivity: FAIL"
+  exit 1
+fi
+
+print_section "Documentation"
+
+if [[ -d "$REPO_ROOT/docs/generated" ]]; then
+  echo "Generated docs: Present"
+else
+  echo "Generated docs: Missing"
+fi
+
+echo
+print_line
+echo " Abbey Root status check completed."
+print_line
