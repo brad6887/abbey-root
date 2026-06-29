@@ -14,7 +14,7 @@ Instead, information should originate from the systems that own it, then flow th
 
 The pipeline follows this model:
 
-text Configuration       ↓ Structured Data       ↓ Documentation       ↓ AI Assistance       ↓ Website 
+Configuration -> Structured Data -> Documentation -> AI Assistance -> Website 
 
 Each layer builds upon the previous one.
 
@@ -48,7 +48,7 @@ Information should be entered once and reused many times.
 
 For example:
 
-text Inventory         │         ├── Configure server         ├── Homepage         ├── Architecture documentation         ├── AI context         └── Website 
+Inventory -> Configure server, Homepage, Architecture documentation, AI context, Website 
 
 Avoid maintaining duplicate information whenever practical.
 
@@ -304,3 +304,29 @@ Build once.
 Document once.
 
 Reuse everywhere.
+
+---
+
+# Initial Proof of Concept
+
+Created on 2026-06-29.
+
+The first BradCooke.com proof of concept uses:
+
+- Markdown source files from content/
+- A simple shell script at tools/build-website.sh
+- Disposable generated output in website/
+
+The initial builder proves that Markdown files can be discovered automatically and converted into simple HTML pages.
+
+Current behavior:
+
+- content/README.md becomes website/index.html
+- content/abbey-root/README.md becomes website/abbey-root/index.html
+- content/pages/about.md becomes website/about/index.html
+- content/pages/projects.md becomes website/projects/index.html
+- content/journal/2026/*.md becomes website/journal/2026/*/index.html
+
+This is intentionally simple.
+
+The goal is to prove the end-to-end content flow before choosing a long-term static site generator or adding AI enhancement.
