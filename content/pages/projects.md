@@ -1,6 +1,9 @@
 ---
-title: "Projects"
-description: "Projects, lab work, and experiments."
+title: Projects
+description: Current projects, experiments, and lab work.
+nav: true
+nav_order: 20
+draft: false
 ---
 
 # Projects

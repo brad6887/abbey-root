@@ -1,6 +1,9 @@
 ---
-title: "About"
-description: "About BradCooke.com and the Abbey Root lab."
+title: About
+description: Learn more about Brad Cooke.
+nav: true
+nav_order: 10
+draft: false
 ---
 
 # About
