@@ -1,3 +1,8 @@
+---
+title: "About"
+description: "About BradCooke.com and the Abbey Root lab."
+---
+
 # About
 
 This page will become the public About page for BradCooke.com.

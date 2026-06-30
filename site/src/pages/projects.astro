@@ -1,0 +1,19 @@
+---
+import { getEntry, render } from 'astro:content';
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+
+const page = await getEntry('pages', 'projects');
+
+if (!page) {
+  throw new Error('Projects page not found');
+}
+
+const { Content } = await render(page);
+---
+
+<Layout title={page.data.title}>
+  <Content />
+
+  <Nav />
+</Layout>

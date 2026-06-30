@@ -1,7 +1,8 @@
+---
+title: "Projects"
+description: "Projects, lab work, and experiments."
+---
+
 # Projects
 
-This page will become the public projects index for BradCooke.com.
-
-Initial project:
-
-- Abbey Root
+This page will list projects, lab work, experiments, and lessons learned.
