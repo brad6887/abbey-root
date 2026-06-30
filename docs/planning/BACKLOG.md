@@ -20,6 +20,7 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Add repository consistency checks.
 - [ ] Expand build reporting.
 - [ ] Create `tools/build-website.sh`.
+- [ ] Add `abbey-site` alias (`cd ~/git/abbey-root/site`).
 
 ---
 

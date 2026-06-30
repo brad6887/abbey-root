@@ -238,11 +238,23 @@ The project is now becoming a self-documenting Infrastructure-as-Code platform w
 
 The goal remains to build once, document once, and reuse everywhere.
 
-06-29-2026
-* Established BradCooke.com content philosophy.
-* Added content/pages for timeless site content.
-* Implemented first Markdown → HTML proof-of-concept builder.
-* Installed Node.js 24 LTS on ubuntu-dev01.
-* Created initial Astro project.
-* Verified Astro development server is running.
-* Chose a hybrid content discovery model (folders define structure, metadata customizes behavior).
+###2026-06-30
+
+- Established BradCooke.com content philosophy.
+- Added content/pages for timeless site content.
+- Implemented first Markdown → HTML proof-of-concept builder.
+- Installed Node.js 24 LTS on ubuntu-dev01.
+- Created initial Astro project.
+- Verified Astro development server is running.
+- Chose a hybrid content discovery model (folders define structure, metadata customizes behavior).
+
+### 2026-06-30
+
+- Installed Astro 7 development environment.
+- Learned Astro pages, layouts, and components.
+- Created reusable `Layout.astro` and `Nav.astro`.
+- Configured Astro Content Collections using the external `content/` directory.
+- Added schema validation for publishable content.
+- Converted the About and Projects pages to render from Markdown.
+- Established the first end-to-end content pipeline:
+  `Markdown → Content Collection → Astro → Generated HTML`.
