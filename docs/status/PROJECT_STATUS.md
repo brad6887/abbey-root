@@ -237,3 +237,12 @@ The project is now becoming a self-documenting Infrastructure-as-Code platform w
 - The website becomes the public presentation of work already taking place inside the lab.
 
 The goal remains to build once, document once, and reuse everywhere.
+
+06-29-2026
+* Established BradCooke.com content philosophy.
+* Added content/pages for timeless site content.
+* Implemented first Markdown → HTML proof-of-concept builder.
+* Installed Node.js 24 LTS on ubuntu-dev01.
+* Created initial Astro project.
+* Verified Astro development server is running.
+* Chose a hybrid content discovery model (folders define structure, metadata customizes behavior).

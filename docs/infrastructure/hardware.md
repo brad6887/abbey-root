@@ -59,23 +59,47 @@ This system is the foundation of the Abbey Root infrastructure.
 
 ---
 
-# Gigabyte G6-KF (2024)
+# Gigabyte G6-KF (2024) Laptop
 
 ## Role
 
-AI Worker host.
+AI experimentation and development server.
 
 ## Responsibilities
 
-- AI experimentation
-- Local AI models
+- Ollama host
 - Open WebUI
-- Future code assistants
-- AI-assisted website generation
-- AI workflow automation
-- AI-assisted BradCooke.com content generation
+- AI-assisted content generation
+- AI experimentation
+- Docker host
+- BradCooke.com AI publishing workflows
 
-This system is dedicated to AI workloads and is intended to become the primary AI engine for BradCooke.com.
+## Operating System
+
+Ubuntu Linux
+
+## Network
+
+- Primary connection: Wired Ethernet
+- USB-C Realtek RTL8156 2.5 Gb Ethernet adapter
+- DHCP reservation managed by the router
+- Currently negotiating at 1 Gb/s with the existing network infrastructure
+- Wi-Fi retained as an emergency fallback but disabled for normal operation
+
+## Docker Services
+
+- Open WebUI
+- Portainer Agent
+
+## Notes
+
+Originally deployed using Wi-Fi.
+
+Migrated to wired Ethernet on 2026-06-29 to improve reliability, reduce latency, and provide a stable platform for AI services and future website generation workflows.
+
+The migration preserved the existing DHCP reservation and required a routing adjustment so local LAN traffic preferred the wired interface when both Wi-Fi and Ethernet were present.
+
+Future network upgrades may allow the adapter to operate at its full 2.5 Gb/s capability.
 
 ---
 
