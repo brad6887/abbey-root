@@ -30,4 +30,3 @@ homepage_container:
     - "3000:3000"
   volumes:
     - "/home/bcooke/docker/homepage/config:/app/config"
-  environment: {}
