@@ -27,3 +27,19 @@
       - bind-utils
     state: present
   when: ansible_os_family == "RedHat"
+
+- name: Install Abbey shell aliases
+  copy:
+    src: abbey-aliases.sh
+    dest: /etc/profile.d/abbey-aliases.sh
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Install Abbey shell functions
+  copy:
+    src: abbey-functions.sh
+    dest: /etc/profile.d/abbey-functions.sh
+    owner: root
+    group: root
+    mode: "0644"
