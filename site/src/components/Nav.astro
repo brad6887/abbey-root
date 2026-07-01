@@ -1,6 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+
+const pages = await getCollection('pages', ({ data }) => {
+  return data.nav === true && data.draft !== true;
+});
+
+const navPages = pages.sort((a, b) => {
+  return a.data.nav_order - b.data.nav_order;
+});
+---
+
 <nav>
-  <a href="/">Home</a> |
-  <a href="/about/">About</a> |
-  <a href="/projects/">Projects</a> |
-  <a href="/journal/">Journal</a>
+  <a href="/">Home</a>
+  {navPages.map((page) => (
+    <>
+      {' | '}
+      <a href={`/${page.id}/`}>{page.data.title}</a>
+    </>
+  ))}
 </nav>
