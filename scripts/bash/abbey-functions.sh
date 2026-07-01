@@ -1,4 +1,7 @@
 # Abbey Root shell functions
+#
+# Abbey Root tool path
+export PATH="$HOME/git/abbey-root/tools:$PATH"
 
 abbey-status() {
   echo "========================================"
@@ -34,3 +37,5 @@ abbey-git-sync() {
   git pull
   git status
 }
+
+
