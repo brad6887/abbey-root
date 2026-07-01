@@ -1,0 +1,13 @@
+---
+labtest_owner: bcooke
+labtest_group: bcooke
+
+labtest_compose_dir: /home/bcooke/docker/labtest
+
+labtest_container:
+  service_name: nginx-labtest
+  image: nginx:latest
+  container_name: nginx-labtest
+  restart_policy: unless-stopped
+  ports:
+    - "8080:80"
