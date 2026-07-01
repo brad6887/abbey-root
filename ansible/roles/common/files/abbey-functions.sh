@@ -32,10 +32,3 @@ abbey-git-history() {
   git log --oneline -10
 }
 
-abbey-git-sync() {
-  cd ~/git/abbey-root || return 1
-  git pull
-  git status
-}
-
-
