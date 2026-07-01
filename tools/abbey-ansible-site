@@ -12,6 +12,8 @@
 
 set -e
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
 cat <<EOF
 abbey-ansible-site
@@ -24,5 +26,5 @@ EOF
 exit 0
 fi
 
-cd "$ABBEY_ROOT/ansible" || exit 1
+cd "$REPO_ROOT/ansible" || exit 1
 ansible-playbook playbooks/site.yml

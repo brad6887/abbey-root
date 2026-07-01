@@ -2,7 +2,13 @@
 homepage_owner: bcooke
 homepage_group: bcooke
 
-homepage_settings: {}
-homepage_widgets: []
+homepage_settings:
+  providers: {}
+
+homepage_widgets:
+  resources: []
+  search: []
+
 homepage_bookmarks: []
+
 homepage_docker_servers: []

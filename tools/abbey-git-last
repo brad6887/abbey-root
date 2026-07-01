@@ -12,6 +12,8 @@
 
 set -e
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 # Colors
 BLUE='\033[1;34m'
 GREEN='\033[1;32m'
@@ -39,14 +41,14 @@ EOF
 exit 0
 fi
 
-cd "$ABBEY_ROOT"
+cd "$REPO_ROOT"
 
 echo -e "${BLUE}========================================${NC}"
 echo -e "${BLUE} Abbey Root - Last Git Commit${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo
 
-echo -e "${GREEN}Repository:${NC} $ABBEY_ROOT"
+echo -e "${GREEN}Repository:${NC} $REPO_ROOT"
 echo -e "${GREEN}Branch:${NC} $(git branch --show-current)"
 echo -e "${GREEN}Date:${NC} $(date)"
 echo

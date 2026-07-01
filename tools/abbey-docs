@@ -12,6 +12,8 @@
 
 set -e
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+
 BLUE='\033[1;34m'
 GREEN='\033[1;32m'
 NC='\033[0m'
@@ -35,19 +37,19 @@ EOF
 exit 0
 fi
 
-cd "$ABBEY_ROOT/ansible"
+cd "$REPO_ROOT/ansible"
 
 echo -e "${BLUE}========================================${NC}"
 echo -e "${BLUE} Abbey Root Documentation Generation${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo
 
-echo -e "${GREEN}Repository:${NC} $ABBEY_ROOT"
+echo -e "${GREEN}Repository:${NC} $REPO_ROOT"
 echo -e "${GREEN}Playbook:${NC} playbooks/docs.yml"
 echo -e "${GREEN}Date:${NC} $(date)"
 echo
 
-"$ABBEY_ROOT/tools/generate-command-docs.sh"
+"$ABBEY_REPO/tools/generate-command-docs.sh"
 echo
 ansible-playbook playbooks/docs.yml
 

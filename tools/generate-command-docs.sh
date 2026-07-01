@@ -11,7 +11,9 @@
 
 set -e
 
-REPO_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+REPO_ROOT="${REPO_ROOT:-$HOME/git/abbey-root}"
 TOOLS_DIR="$REPO_ROOT/tools"
 OUTPUT_DIR="$REPO_ROOT/docs/generated"
 OUTPUT_FILE="$OUTPUT_DIR/abbey-commands.md"
