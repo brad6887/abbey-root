@@ -1,3 +1,23 @@
 #!/bin/bash
 cd ~/git/abbey-root/ansible || exit 1
 ansible-playbook playbooks/update.yml
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+cat <<EOF
+abbey-ansible-update
+
+Update packages on all managed Abbey Root hosts.
+
+Usage:
+    abbey-ansible-update
+
+This command:
+
+  • Updates package repositories
+  • Installs available package updates
+  • Supports Debian/Ubuntu and Rocky/RHEL hosts
+  • Applies operating system updates across the lab
+
+EOF
+exit 0
+fi

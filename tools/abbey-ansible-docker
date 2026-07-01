@@ -3,3 +3,23 @@
 cd ~/git/abbey-root/ansible || exit 1
 
 ansible-playbook playbooks/docker.yml
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+cat <<EOF
+abbey-ansible-docker
+
+Run the Docker verification playbook.
+
+Usage:
+    abbey-ansible-docker
+
+This command:
+
+  • Verifies Docker is installed
+  • Checks the Docker service
+  • Displays the Docker version
+  • Lists running containers on Docker hosts
+
+EOF
+exit 0
+fi

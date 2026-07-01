@@ -1,3 +1,22 @@
 #!/bin/bash
 cd "$(dirname "$0")/../ansible" || exit 1
 ansible-playbook playbooks/docs.yml
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+cat <<EOF
+abbey-ansible-docs
+
+Generate Abbey Root documentation using Ansible.
+
+Usage:
+    abbey-ansible-docs
+
+This command:
+
+  • Runs the documentation playbook
+  • Regenerates files in docs/generated/
+  • Uses the Ansible inventory and host variables as source data
+
+EOF
+exit 0
+fi

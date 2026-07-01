@@ -1,3 +1,24 @@
 #!/bin/bash
 cd ~/git/abbey-root/ansible || exit 1
 ansible-playbook playbooks/facts.yml
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+cat <<EOF
+abbey-ansible-facts
+
+Gather and display system facts for all managed hosts.
+
+Usage:
+    abbey-ansible-facts
+
+This command:
+
+  • Gathers Ansible facts from all managed hosts
+  • Displays operating system information
+  • Shows kernel version
+  • Shows primary IP address
+  • Displays memory and CPU information
+
+EOF
+exit 0
+fi
