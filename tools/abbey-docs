@@ -47,6 +47,8 @@ echo -e "${GREEN}Playbook:${NC} playbooks/docs.yml"
 echo -e "${GREEN}Date:${NC} $(date)"
 echo
 
+"$ABBEY_ROOT/tools/generate-command-docs.sh"
+echo
 ansible-playbook playbooks/docs.yml
 
 echo

@@ -1,4 +1,14 @@
-#!/usr/bin/env bash
+#!/bin/bash
+#
+# Abbey Root Tool: abbey-status
+#
+# Purpose:
+#   Show the current Abbey Root lab and repository status.
+#
+# Usage:
+#   abbey-status
+#   abbey-status --help
+#
 
 set -u
 
