@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Abbey Root Tool: abbey-ansible-site
+#
+# Purpose:
+#   Run the main Abbey Root Ansible site playbook.
+#
+# Usage:
+#   abbey-ansible-site
+#   abbey-ansible-site --help
+#
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+cat <<EOF
+abbey-ansible-site
+
+Run the main Abbey Root Ansible site playbook.
+
+Usage:
+    abbey-ansible-site
+EOF
+exit 0
+fi
+
+cd "$ABBEY_ROOT/ansible" || exit 1
+ansible-playbook playbooks/site.yml

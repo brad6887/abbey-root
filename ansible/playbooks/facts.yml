@@ -3,13 +3,5 @@
   hosts: all
   become: false
 
-  tasks:
-    - name: Show host summary
-      ansible.builtin.debug:
-        msg:
-          - "Host: {{ inventory_hostname }}"
-          - "OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
-          - "Kernel: {{ ansible_kernel }}"
-          - "IP: {{ ansible_default_ipv4.address | default('N/A') }}"
-          - "Memory MB: {{ ansible_memtotal_mb }}"
-          - "vCPUs: {{ ansible_processor_vcpus | default(ansible_processor_count) }}"
+  roles:
+    - facts

@@ -1,4 +1,8 @@
 ---
+# ============================================================================
+# Base operating system configuration
+# ============================================================================
+
 - name: Configure all hosts
   hosts: all
   become: true
@@ -8,22 +12,32 @@
     - time
     - motd
     - issue
-    
+
+# ============================================================================
+# Container infrastructure
+# ============================================================================
 
 - name: Verify Docker hosts
   hosts: infrastructure:ai
   become: true
+
   roles:
     - docker
+
+# ============================================================================
+# Application deployment
+# ============================================================================
 
 - name: Manage Homepage
   hosts: ubuntu-dev01
   become: true
+
   roles:
     - homepage
 
 - name: Manage labtest container
   hosts: ubuntu-dev01
   become: true
+
   roles:
     - labtest

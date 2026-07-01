@@ -21,6 +21,7 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Expand build reporting.
 - [ ] Create `tools/build-website.sh`.
 - [ ] Add `abbey-site` alias (`cd ~/git/abbey-root/site`).
+- [ ] Generate abbey-help from Abbey tool metadata
 
 ---
 
@@ -35,6 +36,8 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Generate RSS feed.
 - [ ] Add search capability.
 - [ ] Define `docs/` vs `content/` publishing boundaries.
+- [ ] Retire legacy build-website.sh references after Astro publishing pipeline is fully stable
+
 
 ---
 

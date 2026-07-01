@@ -8,7 +8,11 @@
 # Usage:
 #   abbey-validate
 #   abbey-validate --help
-#
+# 
+# This command:
+#  - Validates required host variables
+#  - Verifies inventory consistency
+#  - Stops the workflow if validation fails
 
 set -e
 
@@ -23,7 +27,7 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
 cat <<EOF
 abbey-validate
 
-Validate the Abbey Root inventory before generating documentation.
+Validate the Abbey Root inventory before builds, deployments, or documentation generation.
 
 Usage:
     abbey-validate

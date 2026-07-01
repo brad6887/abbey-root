@@ -1,0 +1,12 @@
+---
+- name: Update packages on Debian/Ubuntu systems
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: dist
+  when: ansible_os_family == "Debian"
+
+- name: Update packages on Rocky/RHEL systems
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+  when: ansible_os_family == "RedHat"

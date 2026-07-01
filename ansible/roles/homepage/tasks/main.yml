@@ -1,47 +1,17 @@
 ---
-- name: Deploy Homepage services configuration
+- name: Deploy Homepage configuration files
   ansible.builtin.template:
-    src: services.yaml.j2
-    dest: "{{ homepage_config_dir }}/services.yaml"
+    src: "{{ item.src }}"
+    dest: "{{ homepage_config_dir }}/{{ item.dest }}"
     owner: bcooke
     group: bcooke
-    mode: '0644'
-  notify: Restart homepage container
-
-- name: Deploy Homepage Docker configuration
-  ansible.builtin.template:
-    src: docker.yaml.j2
-    dest: "{{ homepage_config_dir }}/docker.yaml"
-    owner: bcooke
-    group: bcooke
-    mode: '0644'
-  notify: Restart homepage container
-
-- name: Deploy Homepage settings configuration
-  ansible.builtin.template:
-    src: settings.yaml.j2
-    dest: "{{ homepage_config_dir }}/settings.yaml"
-    owner: bcooke
-    group: bcooke
-    mode: '0644'
-  notify: Restart homepage container
-
-- name: Deploy Homepage widgets configuration
-  ansible.builtin.template:
-    src: widgets.yaml.j2
-    dest: "{{ homepage_config_dir }}/widgets.yaml"
-    owner: bcooke
-    group: bcooke
-    mode: '0644'
-  notify: Restart homepage container
-
-- name: Deploy Homepage bookmarks configuration
-  ansible.builtin.template:
-    src: bookmarks.yaml.j2
-    dest: "{{ homepage_config_dir }}/bookmarks.yaml"
-    owner: bcooke
-    group: bcooke
-    mode: '0644'
+    mode: "0644"
+  loop:
+    - { src: "services.yaml.j2",  dest: "services.yaml" }
+    - { src: "docker.yaml.j2",    dest: "docker.yaml" }
+    - { src: "settings.yaml.j2",  dest: "settings.yaml" }
+    - { src: "widgets.yaml.j2",   dest: "widgets.yaml" }
+    - { src: "bookmarks.yaml.j2", dest: "bookmarks.yaml" }
   notify: Restart homepage container
 
 - name: Deploy Homepage Docker Compose file
@@ -50,5 +20,5 @@
     dest: "{{ homepage_compose_dir }}/docker-compose.yml"
     owner: bcooke
     group: bcooke
-    mode: '0644'
+    mode: "0644"
   notify: Redeploy Homepage

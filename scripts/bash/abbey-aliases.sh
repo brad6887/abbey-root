@@ -5,7 +5,7 @@ alias abbey='cd ~/git/abbey-root'
 alias abbey-site='cd ~/git/abbey-root/site'
 alias abbey-content='cd ~/git/abbey-root/content'
 alias abbey-pages='cd ~/git/abbey-root/content/pages'
-alias abbey-docs='cd ~/git/abbey-root/docs'
+alias abbey-docdir='cd ~/git/abbey-root/docs'
 alias abbey-scripts='cd ~/git/abbey-root/scripts'
 
 # Astro / site helpers

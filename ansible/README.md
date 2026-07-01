@@ -8,7 +8,7 @@ cd ~/git/abbey-root/ansible
 
 Run from the repository root.
 
-./scripts/ansible-site.sh
-./scripts/ansible-docker.sh
-./scripts/ansible-facts.sh
-./scripts/ansible-update.sh
+abbey-ansible-site
+abbey-ansible-update
+abbey-ansible-facts
+abbey-ansible-docker

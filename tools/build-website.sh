@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#   Deprecated:
+#   Legacy static Markdown website builder.
+#   Retained for reference after migration to Astro.
 set -euo pipefail
 
 SRC_DIR="content"
