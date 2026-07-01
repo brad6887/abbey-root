@@ -1,5 +1,7 @@
-
 ---
+homepage_config_dir: /home/bcooke/docker/homepage/config
+homepage_compose_dir: /home/bcooke/docker/homepage
+
 homepage_owner: bcooke
 homepage_group: bcooke
 
