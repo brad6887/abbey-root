@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "$(dirname "$0")/../ansible" || exit 1
-ansible-playbook playbooks/docs.yml
+
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
 cat <<EOF
@@ -20,3 +20,6 @@ This command:
 EOF
 exit 0
 fi
+
+
+ansible-playbook playbooks/docs.yml
