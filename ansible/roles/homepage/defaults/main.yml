@@ -4,18 +4,9 @@ homepage_group: bcooke
 
 homepage_config_dir: /home/bcooke/docker/homepage/config
 homepage_compose_dir: /home/bcooke/docker/homepage
-homepage_container: homepage
 
-homepage_container:
-  service_name: homepage
-  image: ghcr.io/gethomepage/homepage:latest
-  container_name: homepage
-  restart_policy: unless-stopped
-  ports:
-    - "3000:3000"
-  volumes:
-    - "/home/bcooke/docker/homepage/config:/app/config"
-  environment: {}
+homepage_settings:
+  providers: {}
 
 homepage_widgets:
   resources:
@@ -29,3 +20,14 @@ homepage_widgets:
 homepage_bookmarks: []
 
 homepage_docker_servers: []
+
+homepage_container:
+  service_name: homepage
+  image: ghcr.io/gethomepage/homepage:latest
+  container_name: homepage
+  restart_policy: unless-stopped
+  ports:
+    - "3000:3000"
+  volumes:
+    - "/home/bcooke/docker/homepage/config:/app/config"
+  environment: {}
