@@ -1,0 +1,99 @@
+---
+const { project } = Astro.props;
+
+const startedDate = project.data.startedDate
+  ? project.data.startedDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  : null;
+
+const updatedDate = project.data.updatedDate
+  ? project.data.updatedDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  : null;
+---
+
+<section class="project-header">
+  <p class="project-back">
+    <a href="/projects/">← Back to Projects</a>
+  </p>
+
+  <h1>{project.data.title}</h1>
+
+  {project.data.description && (
+    <p class="project-description">{project.data.description}</p>
+  )}
+
+  <dl class="project-meta">
+    {project.data.status && (
+      <>
+        <dt>Status</dt>
+        <dd>{project.data.status}</dd>
+      </>
+    )}
+
+    {startedDate && (
+      <>
+        <dt>Started</dt>
+        <dd>{startedDate}</dd>
+      </>
+    )}
+
+    {updatedDate && (
+      <>
+        <dt>Updated</dt>
+        <dd>{updatedDate}</dd>
+      </>
+    )}
+
+    {project.data.tags.length > 0 && (
+      <>
+        <dt>Stack</dt>
+        <dd>{project.data.tags.join(' • ')}</dd>
+      </>
+    )}
+  </dl>
+</section>
+
+<style>
+  .project-header {
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .project-back {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .project-header h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .project-description {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.5rem 1rem;
+    margin: 0;
+  }
+
+  .project-meta dt {
+    font-weight: 700;
+  }
+
+  .project-meta dd {
+    margin: 0;
+  }
+</style>

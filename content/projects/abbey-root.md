@@ -19,6 +19,12 @@ Abbey Root is my home Linux lab for learning, experimentation, automation, and A
 
 The goal is not to build the perfect lab. The goal is to build practical skills by creating real systems, documenting what I learn, and automating the pieces that repeat.
 
+Metadata First
+
+Whenever practical, describe information once as structured metadata.
+
+Generate documentation, interfaces, and automation from that metadata rather than maintaining multiple independent copies.
+
 ## Current Environment
 
 The lab currently runs on Proxmox and includes several Linux virtual machines with dedicated roles.
@@ -106,6 +112,40 @@ The site is intended to become:
 - A place to document experiments
 - A record of lessons learned
 - A practical output of the home lab
+
+## The Four Members of the Lab
+
+Each VM in Abbey Root has a clearly defined purpose. Rather than collecting virtual machines, each system exists to own a specific responsibility within the environment.
+
+Together they form the core of the lab.
+
+### rocky-ansible01
+
+`rocky-ansible01` brings the lab together through Ansible, Git, inventory, playbooks, and generated documentation.
+
+It is the automation control node and the place where infrastructure starts becoming reproducible.
+
+### ubuntu-dev01
+
+`ubuntu-dev01` is the main development and infrastructure host.
+
+It runs Docker services, supports BradCooke.com development, and acts as the place I keep coming back to while building the public-facing side of the project.
+
+### ai-worker01
+
+`ai-worker01` is the AI experimentation node.
+
+It is where new ideas start to rise: Open WebUI, self-hosted AI tools, documentation assistance, content workflows, and future automation experiments.
+
+### Security VM
+
+A dedicated security VM is planned for safe, isolated security learning.
+
+Its purpose will be to help validate the lab through scanning, testing, hardening, log analysis, and defensive security practice.
+
+As Abbey Root continues to evolve, each system will grow alongside the project while remaining focused on a single responsibility. The goal is not to collect servers, but to build a small, cohesive platform where every component has a purpose.
+
+The name Abbey Root is a small nod to Abbey Road, filtered through Linux, root access, and the idea of getting closer to how systems really work.
 
 ## Guiding Principles
 
