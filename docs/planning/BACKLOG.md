@@ -6,38 +6,40 @@ Items should be moved to the roadmap or completed as priorities change.
 ---
 
 ## Infrastructure
-- [ ] Make .bashrc Ansible-managed.
-- [ ] Add `abbey` alias to all managed hosts.
-- [ ] Install `tree` through the common Ansible role.
+
+- [ ] Make `.bashrc` Ansible-managed.
 - [ ] Configure hostname resolution between lab systems.
-- [ ] Improve `abbey-status` with Docker and health summaries.
+- [ ] Enhance `abbey-status` with Docker health, disk usage, and service summaries.
+- [ ] Automate deployment of ai-worker01 shell environment through Ansible.
 
 ---
 
 ## Developer Toolkit
 
-- [ ] Create `abbey-tree` helper.
+- [ ] Generate `abbey-help` automatically from tool metadata.
+- [ ] Create `abbey-doctor` system health and dependency checker.
+- [ ] Expand `abbey-build` reporting and validation.
 - [ ] Add repository consistency checks.
-- [ ] Expand build reporting.
-- [ ] Create `tools/build-website.sh`.
-- [ ] Add `abbey-site` alias (`cd ~/git/abbey-root/site`).
-- [ ] Generate abbey-help from Abbey tool metadata
+- [ ] Create `abbey-tree` helper.
+- [ ] Standardize tool output formatting and color usage.
+- [ ] Add automated toolkit regression testing.
+- [ ] Generate `abbey-help` automatically from tool metadata.
 
 ---
 
 ## BradCooke.com
 
-- [ ] Integrate Astro with the external `content/` directory.
+- [x] Integrate Astro with the external `content/` directory.
+- [x] Add Markdown front matter support.
+- [x] Generate navigation automatically.
+- [ ] Flesh out the Contact page.
 - [ ] Learn Astro layouts.
 - [ ] Learn Astro components.
-- [ ] Add Markdown front matter support.
-- [ ] Generate navigation automatically.
 - [ ] Generate sitemap.
 - [ ] Generate RSS feed.
 - [ ] Add search capability.
 - [ ] Define `docs/` vs `content/` publishing boundaries.
-- [ ] Retire legacy build-website.sh references after Astro publishing pipeline is fully stable
-
+- [ ] Remove remaining legacy `build-website.sh` references.
 
 ---
 
@@ -55,4 +57,4 @@ Items should be moved to the roadmap or completed as priorities change.
 
 - [ ] Automate BradCooke.com builds.
 - [ ] Automate deployment.
-- [ ] Evaluate GitHub Actions vs self-hosted automation.
+- [ ] Evaluate GitHub Actions vs. self-hosted automation.

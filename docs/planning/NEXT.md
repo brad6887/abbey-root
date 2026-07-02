@@ -1,17 +1,37 @@
-## Next Session
+# Abbey Root - Next Session
 
-### Primary Goal
+## Primary Goal
 
-Replace the per-page wrappers with a single dynamic route.
+Return focus to BradCooke.com development now that the Abbey developer toolkit has been standardized and validated.
 
-### Objectives
+---
 
-- Learn Astro dynamic routes.
-- Eliminate duplicate page wrappers.
-- Automatically generate routes from `content/pages/`.
-- Continue moving toward a Markdown-first publishing workflow.
+## High Priority
 
-### Stretch Goals
+- [ ] Auto-generate `abbey-help` from tool metadata.
+- [ ] Review all Abbey tools for consistency and remove any remaining duplication.
+- [ ] Review generated documentation for formatting and completeness.
 
-- Generate navigation automatically.
-- Begin integrating journal entries.
+---
+
+## BradCooke.com
+
+- [ ] Flesh out the Contact page.
+- [ ] Create the first real site content.
+- [ ] Continue building layouts and reusable Astro components.
+- [ ] Begin preparing the first publishable version of BradCooke.com.
+
+---
+
+## Infrastructure
+
+- [ ] Automate deployment of the ai-worker01 shell environment through Ansible.
+- [ ] Improve `abbey-status` with Docker health and service summaries.
+
+---
+
+## Stretch Goals
+
+- [ ] Design `abbey-doctor`.
+- [ ] Design automatic `abbey-help` generation.
+- [ ] Continue evolving the project-aware developer environment.
