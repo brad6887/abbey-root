@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Abbey Root Tool: abbey-site-dev
+#
+# Purpose:
+#   Start the BradCooke.com Astro development server.
+#
+# Usage:
+#   abbey-site-dev
+#
+
+set -e
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SITE_DIR="$REPO_ROOT/site"
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+cat <<EOF
+abbey-site-dev
+
+Start the BradCooke.com Astro development server.
+
+Usage:
+    abbey-site-dev
+
+This command:
+
+  • Changes to the Astro site directory
+  • Starts the Astro development server
+  • Allows browser preview while editing site content and components
+
+EOF
+exit 0
+fi
+
+cd "$SITE_DIR"
+npm run dev -- --host 0.0.0.0
