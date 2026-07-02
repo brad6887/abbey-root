@@ -32,6 +32,15 @@ projects.sort((a, b) => {
 
   return a.data.title.localeCompare(b.data.title);
 });
+
+const journalEntries =
+  page.id === 'journal'
+    ? await getCollection('journal', ({ data }) => data.draft !== true)
+    : [];
+
+journalEntries.sort((a, b) => {
+  return b.data.date.getTime() - a.data.date.getTime();
+});
 ---
 
 <Layout title={page.data.title} description={page.data.description}>
@@ -43,6 +52,38 @@ projects.sort((a, b) => {
 
       {projects.map((project) => (
         <ProjectCard project={project} />
+      ))}
+    </section>
+  )}
+
+  {page.id === 'journal' && journalEntries.length > 0 && (
+    <section>
+      <h2>Journal Entries</h2>
+
+      {journalEntries.map((entry) => (
+        <article>
+          <h3>{entry.data.title}</h3>
+
+          <p>
+            <time datetime={entry.data.date.toISOString()}>
+              {entry.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
+          </p>
+
+          {entry.data.description && (
+            <p>{entry.data.description}</p>
+          )}
+
+          {entry.data.tags.length > 0 && (
+            <p>
+              <strong>Tags:</strong> {entry.data.tags.join(' • ')}
+            </p>
+          )}
+        </article>
       ))}
     </section>
   )}

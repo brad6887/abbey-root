@@ -35,10 +35,13 @@ Items should be moved to the roadmap or completed as priorities change.
 ### Content
 
 - [ ] Flesh out the Contact page.
-- [ ] Create the Power Infrastructure project page.
+- [X] Create the Power Infrastructure project page.
 - [ ] Add additional project pages.
 - [ ] Begin writing technical articles.
-- [ ] Publish Abbey Root journal entries.
+- [X] Publish Abbey Root journal entries.
+- [ ] Create JournalCard component.
+- [ ] Create JournalHeader component.
+- [ ] Create Date formatting helper.
 
 ### Components
 
@@ -68,6 +71,9 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Create BradCooke.com publishing runbook.
 - [ ] Configure GitHub Pages deployment.
 - [ ] Add custom domain configuration.
+- [ ] Create dynamic journal detail pages.
+- [ ] Group journal entries by year.
+- [ ] Add previous/next journal navigation.
 
 ---
 
@@ -85,7 +91,6 @@ Items should be moved to the roadmap or completed as priorities change.
 ---
 
 ## Automation
-
 - [ ] Automate BradCooke.com builds.
 - [ ] Automate deployment.
 - [ ] Evaluate GitHub Actions vs. self-hosted automation.
@@ -98,3 +103,4 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Design AI-assisted email workflows.
 - [ ] Generate weekly Abbey Root project summaries via email.
 - [ ] Investigate automated project status reports.
+- [ ] Design end-of-session AI summary email.

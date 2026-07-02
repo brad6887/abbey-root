@@ -42,7 +42,24 @@ const projects = defineCollection({
   }),
 });
 
+const journal = defineCollection({
+  loader: glob({
+    base: '../content/journal',
+    pattern: ['**/*.md', '!README.md'],
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+
+    date: z.date(),
+    draft: z.boolean().default(false),
+
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
 export const collections = {
   pages,
   projects,
+  journal,
 };

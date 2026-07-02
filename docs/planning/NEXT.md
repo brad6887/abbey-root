@@ -1,50 +1,31 @@
 # Abbey Root - Next Session
 
-## Primary Goal
+Primary Goal
 
-Continue building BradCooke.com now that the publishing platform, developer toolkit, and project architecture are established.
+Continue creating content now that the publishing platform is established.
 
----
+High Priority
 
-## High Priority
-
-- [ ] Create the Power Infrastructure project page.
+- [ ] Complete dynamic journal detail pages.
+- [ ] Improve ProjectHeader.
 - [ ] Flesh out the Contact page.
-- [ ] Continue improving the Home page using real content.
-- [ ] Review the overall visual layout while browsing the site.
+- [ ] Create the first technical article.
+- [ ] Document the completed data closet.
 
----
+BradCooke.com
 
-## BradCooke.com
+- [ ] Improve styling.
+- [ ] Continue reusable components.
+- [ ] Connect journal entries together.
+- [ ] Plan GitHub Pages deployment.
 
-- [ ] Continue building reusable components only as content requires them.
-- [ ] Begin writing the first technical articles.
-- [ ] Add additional project pages.
-- [ ] Create the BradCooke.com publishing runbook.
-- [ ] Plan the GitHub Pages deployment workflow.
+Infrastructure
 
----
+- [ ] Automate ai-worker01 shell deployment.
+- [ ] Improve abbey-status.
 
-## Infrastructure
+Stretch Goals
 
-- [ ] Document the completed data closet organization.
-- [ ] Add updated hardware documentation and photos.
-- [ ] Automate deployment of the ai-worker01 shell environment through Ansible.
-- [ ] Improve `abbey-status` with Docker health and service summaries.
-
----
-
-## AI
-
-- [ ] Begin planning ai-worker01 as the AI experimentation platform.
-- [ ] Design AI-assisted publishing workflows.
-- [ ] Explore AI-generated project summaries and documentation.
-
----
-
-## Stretch Goals
-
-- [ ] Design `abbey-doctor`.
-- [ ] Add `abbey-site-build`.
-- [ ] Add `abbey-site-preview`.
-- [ ] Continue evolving the metadata-driven developer toolkit.
+- [ ] Create abbey-doctor.
+- [ ] Build metadata-driven date formatter.
+- [ ] Begin workstation documentation.

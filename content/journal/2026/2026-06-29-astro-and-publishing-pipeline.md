@@ -1,3 +1,14 @@
+---
+title: Astro and Publishing Pipeline
+description: Notes on integrating Astro and shaping the BradCooke.com publishing workflow.
+date: 2026-06-29
+draft: false
+tags:
+  - Astro
+  - BradCooke.com
+  - Publishing
+---
+
 # Abbey Root Journal
 
 Date: 2026-06-29

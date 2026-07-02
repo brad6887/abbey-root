@@ -1,3 +1,13 @@
+---
+title: Astro Content Collections
+description: Notes on using Astro content collections to organize pages, posts, projects, and journal entries.
+date: 2026-06-30
+draft: false
+tags:
+  - Astro
+  - Content Collections
+  - Metadata
+---
 # Astro Content Collections and the First Publishing Pipeline
 
 Today marked an important shift in the Abbey Root project. Rather than simply learning Astro, I began integrating it into the long-term publishing architecture for BradCooke.com.

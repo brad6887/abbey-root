@@ -1,54 +1,16 @@
-# Abbey Root
+# Abbey Root Project Status
 
-## Proxmox
-
-Management IP
-
-192.168.1.55
+**Last Updated:** 2026-07-02
 
 ---
 
-## ubuntu-dev01
+# Current Phase
 
-IP Address
+**Phase 2 – Publishing Platform**
 
-192.168.1.86
+Abbey Root has evolved from a Linux home lab into a metadata-driven platform for infrastructure automation, documentation, and technical publishing.
 
-### Services
-
-- Homepage
-- Portainer
-- Uptime Kuma
-- Nginx Proxy Manager
-
----
-
-## ai-worker01
-
-IP Address
-
-192.168.1.87
-
-### Hardware
-
-- RTX 4060 Laptop GPU
-- 32 GB RAM
-- 1 TB SSD
-
-### Services
-
-- Docker
-- NVIDIA Driver 595
-- CUDA 13.2
-- Ollama
-- Open WebUI
-- Portainer Agent
-
-### Models
-
-- qwen3:8b
-- gemma3:4b
-- gpt-oss:20b
+The primary focus is now expanding BradCooke.com with real project content while continuing to improve the underlying automation and developer experience.
 
 ---
 
@@ -56,205 +18,233 @@ IP Address
 
 ## Primary
 
-- Continue BradCooke.com content pipeline
-- Develop AI-assisted website generation workflow
-- Continue expanding Infrastructure-as-Code
-- Improve Abbey Root developer toolkit
+- Expand BradCooke.com with projects, journal entries, and technical articles.
+- Continue developing the metadata-driven publishing platform.
+- Expand Infrastructure-as-Code throughout the lab.
+- Continue improving the Abbey Root developer toolkit.
 
 ## Planned
 
-- Convert remaining containers to Docker Compose
-- Watchtower
-- Tailscale
-- Kali VM
-- Grafana
-- Prometheus
+- GitHub Pages deployment
+- Custom domain integration
+- AI Worker expansion
+- Kali security VM
+- Monitoring and observability
 
 ---
 
-# Current Status (2026-06-28)
+# Infrastructure
 
-## Infrastructure
+## Hypervisor
 
-- Proxmox environment operational.
-- Three managed Linux servers online.
-- GitHub repository established.
-- Backup infrastructure deployed.
-- Backup restore successfully tested.
+- Proxmox
+- Management IP: 192.168.1.55
 
 ---
 
-## Documentation
+## Virtual Machines
 
-Documentation is generated automatically from Ansible inventory and host metadata.
+### ubuntu-dev01
 
-Generated documentation includes:
+**Purpose**
+
+Primary development and infrastructure host.
+
+**Services**
+
+- Homepage
+- Portainer
+- Uptime Kuma
+- Nginx Proxy Manager
+- BradCooke.com development
+- Astro development environment
+
+---
+
+### rocky-ansible01
+
+**Purpose**
+
+Automation control node.
+
+Responsibilities include:
+
+- Git repository
+- Ansible inventory
+- Playbooks
+- Roles
+- Generated documentation
+- Developer toolkit
+
+---
+
+### ai-worker01
+
+**Purpose**
+
+AI experimentation platform.
+
+**Hardware**
+
+- RTX 4060 Laptop GPU
+- 32 GB RAM
+- 1 TB SSD
+
+**Services**
+
+- Docker
+- NVIDIA Driver
+- CUDA
+- Ollama
+- Open WebUI
+- Portainer Agent
+
+Current models include:
+
+- qwen3:8b
+- gemma3:4b
+- gpt-oss:20b
+
+---
+
+# Infrastructure Status
+
+Current infrastructure includes:
+
+- Proxmox virtualization
+- Three managed Linux systems
+- GitHub repository
+- Automated backups
+- Restore validation
+- Docker infrastructure
+- Homepage dashboard
+- AI experimentation platform
+
+---
+
+# Documentation
+
+Documentation is generated wherever practical.
+
+Current generated documentation includes:
 
 - Architecture
 - Servers
 - Services
 - Containers
-- Network
 - Inventory
+- Network
 - Automation
-- Lab Summary
-
----
-
-## Single Source of Truth
-
-Host variables now serve as the authoritative source for:
-
 - Homepage configuration
+
+Host metadata remains the primary source of truth for generated documentation.
+
+---
+
+# Automation
+
+Current automation includes:
+
+- Ansible-managed infrastructure
+- Generated Homepage configuration
 - Generated documentation
-- Service inventory
-- Server inventory
+- Standardized developer toolkit
+- Backup workflows
+- Git helper commands
+- Validation workflows
 
-The project continues to follow a "define once, reuse everywhere" philosophy.
-
----
-
-## Automation
-
-Each Ansible role contains documentation.
-
-Each playbook contains accompanying documentation used to generate the Automation Guide.
-
-Inventory validation is performed automatically before documentation generation.
+The long-term goal remains reducing manual configuration through Infrastructure-as-Code.
 
 ---
 
-## Homepage
+# Publishing Platform
 
-Homepage configuration is generated automatically from Ansible inventory and host metadata.
-
-Manual editing is no longer required.
-
----
-
-## Backup Strategy
-
-### Storage
-
-- SanDisk Extreme Portable SSD (2 TB)
-- Storage ID: abbey-backup
-- Mount Point: /mnt/abbey-backup
-
-### Schedule
-
-- Daily
-- Snapshot mode
-- ZSTD compression
-- Retain last 7 backups
-
-### Protected Systems
-
-- ubuntu-dev01
-- ai-worker01
-- rocky-ansible01
-
-Templates remain excluded because they are reproducible.
-
-### Restore Testing
-
-Status: Complete
-
-A full restore test of rocky-ansible01 was successfully performed and validated.
-
-Future improvements:
-
-- Scheduled restore testing
-- Backup monitoring
-- Backup reporting
-- Off-site replication
-
----
-
-## Developer Toolkit
-
-Current Abbey Root commands:
-
-- abbey-status
-- abbey-build
-- abbey-docs
-- abbey-validate
-- abbey-help
-- abbey-git-status
-- abbey-git-history
-- abbey-git-last
+The BradCooke.com publishing platform is now operational.
 
 Current capabilities include:
 
+- External Markdown content directory
+- Astro Content Collections
+- Metadata validation
+- Dynamic navigation
+- Dynamic project pages
+- Dynamic project listing
+- Journal collection
+- Reusable Astro components
+- Local development workflow
+
+Markdown remains the authoritative source for publishable content.
+
+---
+
+# Developer Toolkit
+
+Current toolkit capabilities include:
+
 - Standardized command interface
-- Inventory validation
+- Project status reporting
 - Documentation generation
-- Lab status reporting
 - Git helpers
-- Consistent help output
-- Standard build workflow
+- Website development helpers
+- Build automation
+- Validation workflows
+
+The toolkit is evolving toward a project-aware development environment.
 
 ---
 
-## Repository Architecture
+# Single Source of Truth
 
-ansible/     Infrastructure as Code docs/        Technical documentation content/     BradCooke.com source content homepage/    Homepage configuration tools/       Developer toolkit scripts/     Helper scripts
+Abbey Root continues to follow a metadata-first philosophy.
 
----
+Information should be described once and reused everywhere practical.
 
-## BradCooke.com
+Examples include:
 
-A dedicated content/ directory has been created as the source for future website content.
+- Ansible inventory
+- Host metadata
+- Website front matter
+- Tool metadata
+- Markdown content
 
-The long-term publishing pipeline is:
-
-Infrastructure         ↓ Generated Documentation         ↓ Markdown Content         ↓ AI Enhancement         ↓ BradCooke.com
-
-Markdown remains the primary source format for all publishable content.
-
----
-
-## Standard Workflow
-
-1. Update inventory or code.
-2. Run abbey-status.
-3. Run abbey-build.
-4. Review generated documentation.
-5. Review git diff.
-6. Commit and push.
+These sources generate documentation, navigation, reports, and website content.
 
 ---
 
-## Current Direction
+# Standard Workflow
 
-Abbey Root has evolved beyond simply building infrastructure.
+A normal Abbey Root development session is becoming:
 
-The project is now becoming a self-documenting Infrastructure-as-Code platform where:
+1. Start the development environment.
+2. Review project status.
+3. Build or improve infrastructure.
+4. Update documentation.
+5. Write a journal entry.
+6. Commit changes.
+7. Push to GitHub.
+8. Synchronize development systems.
 
-- Infrastructure generates documentation.
-- Documentation feeds AI workflows.
-- AI assists with content creation.
-- Markdown becomes the source for BradCooke.com.
-- The website becomes the public presentation of work already taking place inside the lab.
+---
 
-The goal remains to build once, document once, and reuse everywhere.
+# Current Direction
 
-###2026-06-30
+Abbey Root is no longer simply a Linux lab.
 
-- Established BradCooke.com content philosophy.
-- Added content/pages for timeless site content.
-- Implemented first Markdown → HTML proof-of-concept builder.
-- Installed Node.js 24 LTS on ubuntu-dev01.
-- Created initial Astro project.
-- Verified Astro development server is running.
-- Chose a hybrid content discovery model (folders define structure, metadata customizes behavior).
+It has become a collection of interconnected systems:
 
-### 2026-06-30
+- Infrastructure
+- Automation
+- Documentation
+- Developer toolkit
+- Publishing platform
+- AI experimentation
 
-- Installed Astro 7 development environment.
-- Learned Astro pages, layouts, and components.
-- Created reusable `Layout.astro` and `Nav.astro`.
-- Configured Astro Content Collections using the external `content/` directory.
-- Added schema validation for publishable content.
-- Converted the About and Projects pages to render from Markdown.
-- Established the first end-to-end content pipeline:
-  `Markdown → Content Collection → Astro → Generated HTML`.
+Each system reinforces the others through shared metadata, automation, and reusable components.
+
+The long-term vision remains:
+
+- Build once.
+- Describe once.
+- Generate everything else.
+
+While AI plays an important role throughout the project, its purpose is to amplify creativity and understanding rather than replace them.

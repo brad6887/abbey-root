@@ -43,9 +43,16 @@
 - [x] About page
 - [x] Initial Projects page
 - [x] Abbey Root project page
-- [ ] Power Infrastructure project page
+- [x] Power Infrastructure project page
 - [ ] Contact page
 - [ ] First technical articles
+
+### Journal
+
+[x] Journal content collection
+[x] Journal landing page
+[ ] Journal detail pages
+[ ] Journal navigation
 
 ### Deployment
 

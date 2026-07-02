@@ -1,3 +1,16 @@
+---
+title: Abbey Root Status and Content Pipeline
+description: Progress update covering Abbey Root status work and the early content pipeline.
+date: 2026-06-28
+draft: false
+tags:
+  - Abbey Root
+  - Documentation
+  - Content
+---
+
+
+
 # Abbey Root Status Utility and Content Pipeline
 
 Date: 2026-06-28
