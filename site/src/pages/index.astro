@@ -1,5 +1,14 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const projects = await getCollection("projects", ({ data }) => {
+  return data.draft !== true;
+});
+
+const featuredProject =
+  projects.find((project) => project.data.featured === true) ?? projects[0];
 ---
 
 <Layout
@@ -25,22 +34,12 @@ import Layout from "../layouts/Layout.astro";
     </p>
   </section>
 
-  <section class="featured-project">
-    <p class="section-label">Featured Project</p>
-
-    <h2>
-      <a href="/projects/abbey-root/">Abbey Root</a>
-    </h2>
-
-    <p>
-      A home Linux lab focused on Proxmox, Docker, Ansible,
-      Infrastructure-as-Code, and AI-assisted development.
-    </p>
-
-    <p>
-      <a href="/projects/abbey-root/">View project →</a>
-    </p>
-  </section>
+  {featuredProject && (
+    <section>
+      <p class="section-label">Featured Project</p>
+      <ProjectCard project={featuredProject} />
+    </section>
+  )}
 
   <section>
     <h2>Current Focus</h2>
@@ -64,18 +63,11 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <style>
-  .featured-project {
-    border: 1px solid #ddd;
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    margin: 2rem 0;
-  }
-
   .section-label {
     font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-top: 0;
+    margin-bottom: 0;
   }
 </style>

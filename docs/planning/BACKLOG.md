@@ -89,3 +89,12 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Automate BradCooke.com builds.
 - [ ] Automate deployment.
 - [ ] Evaluate GitHub Actions vs. self-hosted automation.
+
+## Communications
+
+- [ ] Evaluate custom email hosting for bradcooke.com.
+- [ ] Create `brad@bradcooke.com`.
+- [ ] Create `contact@bradcooke.com`.
+- [ ] Design AI-assisted email workflows.
+- [ ] Generate weekly Abbey Root project summaries via email.
+- [ ] Investigate automated project status reports.
