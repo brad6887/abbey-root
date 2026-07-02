@@ -1,0 +1,34 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => {
+    return data.draft !== true;
+  });
+
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Layout title={project.data.title} description={project.data.description}>
+  <p><a href="/projects/">← Back to Projects</a></p>
+
+  <h1>{project.data.title}</h1>
+
+  {project.data.description && <p>{project.data.description}</p>}
+
+  {project.data.status && <p><strong>Status:</strong> {project.data.status}</p>}
+
+  {project.data.tags.length > 0 && (
+    <p><strong>Tags:</strong> {project.data.tags.join(', ')}</p>
+  )}
+
+  <Content />
+</Layout>

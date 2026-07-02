@@ -16,13 +16,33 @@ const pages = defineCollection({
 
     draft: z.boolean().default(false),
     publishDate: z.date().optional(),
-
     updatedDate: z.date().optional(),
 
     heroImage: z.string().optional(),
   }),
 });
 
+const projects = defineCollection({
+  loader: glob({
+    base: '../content/projects',
+    pattern: ['**/*.md', '!README.md'],
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+
+    status: z.string().optional(),
+    featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
+
+    startedDate: z.date().optional(),
+    updatedDate: z.date().optional(),
+
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
 export const collections = {
   pages,
+  projects,
 };

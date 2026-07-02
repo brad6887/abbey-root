@@ -15,8 +15,57 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
+
+const projects =
+  page.id === 'projects'
+    ? await getCollection('projects', ({ data }) => data.draft !== true)
+    : [];
+
+projects.sort((a, b) => {
+  const aFeatured = a.data.featured ? 1 : 0;
+  const bFeatured = b.data.featured ? 1 : 0;
+
+  if (aFeatured !== bFeatured) {
+    return bFeatured - aFeatured;
+  }
+
+  return a.data.title.localeCompare(b.data.title);
+});
 ---
 
 <Layout title={page.data.title} description={page.data.description}>
   <Content />
+
+  {page.id === 'projects' && projects.length > 0 && (
+  <section>
+    <h2>Current Projects</h2>
+
+    <div>
+      {projects.map((project) => (
+        <article>
+          <h3>
+            <a href={`/projects/${project.id}/`}>
+              {project.data.title}
+            </a>
+          </h3>
+
+          {project.data.description && (
+            <p>{project.data.description}</p>
+          )}
+
+          {project.data.status && (
+            <p><strong>Status:</strong> {project.data.status}</p>
+          )}
+
+          {project.data.tags.length > 0 && (
+            <p>
+              <strong>Tags:</strong> {project.data.tags.join(', ')}
+            </p>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
 </Layout>
