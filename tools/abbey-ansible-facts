@@ -1,5 +1,18 @@
 #!/bin/bash
-cd ~/git/abbey-root/ansible || exit 1
+#
+# Abbey Root Tool: abbey-ansible-facts
+#
+# Purpose:
+#   Gather and display system facts for all managed hosts.
+#
+# Usage:
+#   abbey-ansible-facts
+#
+
+set -e
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT/ansible" || exit 1
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
 cat <<EOF
@@ -21,6 +34,5 @@ This command:
 EOF
 exit 0
 fi
-
 
 ansible-playbook playbooks/facts.yml

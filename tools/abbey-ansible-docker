@@ -1,8 +1,18 @@
 #!/bin/bash
+#
+# Abbey Root Tool: abbey-ansible-docker
+#
+# Purpose:
+#   Run the Docker verification playbook.
+#
+# Usage:
+#   abbey-ansible-docker
+#
 
-cd ~/git/abbey-root/ansible || exit 1
+set -e
 
-
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT/ansible" || exit 1
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
 cat <<EOF
@@ -23,6 +33,5 @@ This command:
 EOF
 exit 0
 fi
-
 
 ansible-playbook playbooks/docker.yml

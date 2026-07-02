@@ -3,54 +3,55 @@
 # Abbey Root Tool: abbey-help
 #
 # Purpose:
-#   Display available Abbey Root aliases and command-line tools.
+#   Display available Abbey Root command-line tools from command headers.
 #
 # Usage:
 #   abbey-help
 #
 
-# Colors
-BLUE='\033[1;34m'
-GREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m'
+set -e
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TOOLS_DIR="$REPO_ROOT/tools"
+
+echo "========================================"
+echo " Abbey Root Developer Toolkit"
+echo "========================================"
+echo
+echo "Commands"
+echo "--------"
+
+for tool in "$TOOLS_DIR"/abbey-*; do
+  [ -f "$tool" ] || continue
+  [ -x "$tool" ] || continue
+
+  command_name="$(basename "$tool")"
+
+  purpose="$(
+    awk '
+      /^# Purpose:/ { in_purpose=1; next }
+      /^# Usage:/ { in_purpose=0 }
+      in_purpose && /^#/ {
+        sub(/^# */, "")
+        if (length($0) > 0) print
+      }
+    ' "$tool" | sed 's/^ *//' | paste -sd ' ' -
+  )"
+
+  printf "  %-22s %s\n" "$command_name" "$purpose"
+done
 
 cat <<EOF
-========================================
- Abbey Root Developer Toolkit
-========================================
 
-Navigation
-----------
+Navigation Aliases
+------------------
   abbey                  Change to the Abbey Root repository
   ans                    Change to the Ansible directory
   abbey-site             Change to the Astro site
   abbey-docdir           Change to the documentation directory
 
-Git
----
-  abbey-git-status       Show repository status
-  abbey-git-history      Show graphical Git history
-  abbey-git-last         Show the latest commit
-
-Development
------------
-  abbey-status           Show Abbey Root lab status
-  abbey-build            Run the standard build pipeline
-  abbey-docs             Generate project documentation
-  abbey-validate         Validate inventory data
-
-Ansible
---------
-  abbey-ansible-site     Run the main site playbook
-  abbey-ansible-update   Update all managed hosts
-  abbey-ansible-facts    Collect host facts
-  abbey-ansible-docker   Run the Docker playbook
-  abbey-ansible-docs     Generate documentation playbook
-
 Typical Workflow
 ----------------
-
   abbey
   abbey-git-status
   abbey-build
@@ -58,9 +59,5 @@ Typical Workflow
   git commit -m "message"
   git push
 
-Help
-----
-  abbey-help             Display this help screen
-
-Tip: Most commands support '--help' for additional information.
+Tip: Command details are generated in docs/generated/abbey-commands.md
 EOF

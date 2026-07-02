@@ -1,6 +1,18 @@
 #!/bin/bash
-cd "$(dirname "$0")/../ansible" || exit 1
+#
+# Abbey Root Tool: abbey-ansible-docs
+#
+# Purpose:
+#   Generate Abbey Root documentation using Ansible.
+#
+# Usage:
+#   abbey-ansible-docs
+#
 
+set -e
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT/ansible" || exit 1
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
 cat <<EOF
@@ -20,6 +32,5 @@ This command:
 EOF
 exit 0
 fi
-
 
 ansible-playbook playbooks/docs.yml
