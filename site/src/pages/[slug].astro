@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages', ({ data }) => {
@@ -37,35 +38,12 @@ projects.sort((a, b) => {
   <Content />
 
   {page.id === 'projects' && projects.length > 0 && (
-  <section>
-    <h2>Current Projects</h2>
+    <section>
+      <h2>Current Projects</h2>
 
-    <div>
       {projects.map((project) => (
-        <article>
-          <h3>
-            <a href={`/projects/${project.id}/`}>
-              {project.data.title}
-            </a>
-          </h3>
-
-          {project.data.description && (
-            <p>{project.data.description}</p>
-          )}
-
-          {project.data.status && (
-            <p><strong>Status:</strong> {project.data.status}</p>
-          )}
-
-          {project.data.tags.length > 0 && (
-            <p>
-              <strong>Tags:</strong> {project.data.tags.join(', ')}
-            </p>
-          )}
-        </article>
+        <ProjectCard project={project} />
       ))}
-    </div>
-  </section>
-)}
-
+    </section>
+  )}
 </Layout>

@@ -10,12 +10,39 @@ const navPages = pages.sort((a, b) => {
 });
 ---
 
-<nav>
-  <a href="/">Home</a>
-  {navPages.map((page) => (
-    <>
-      {' | '}
-      <a href={`/${page.id}/`}>{page.data.title}</a>
-    </>
-  ))}
-</nav>
+<header class="site-header">
+  <nav class="site-nav">
+    <a class="site-brand" href="/">Brad Cooke</a>
+
+    <div class="site-links">
+      {navPages.map((page) => (
+        <a href={`/${page.id}/`}>{page.data.title}</a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 2rem;
+  }
+
+  .site-nav {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .site-brand {
+    font-weight: 700;
+  }
+
+  .site-links {
+    display: flex;
+    gap: 1rem;
+  }
+</style>

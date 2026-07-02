@@ -1,0 +1,62 @@
+---
+const { project } = Astro.props;
+---
+
+<article class="project-card">
+  <h3>
+    <a href={`/projects/${project.id}/`}>
+      {project.data.title}
+    </a>
+  </h3>
+
+  {project.data.description && (
+    <p>{project.data.description}</p>
+  )}
+
+  <dl>
+    {project.data.status && (
+      <>
+        <dt>Status</dt>
+        <dd>{project.data.status}</dd>
+      </>
+    )}
+
+    {project.data.tags.length > 0 && (
+      <>
+        <dt>Stack</dt>
+        <dd>{project.data.tags.join(' • ')}</dd>
+      </>
+    )}
+  </dl>
+
+  <p>
+    <a href={`/projects/${project.id}/`}>View project →</a>
+  </p>
+</article>
+
+<style>
+  .project-card {
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .project-card h3 {
+    margin-top: 0;
+  }
+
+  .project-card dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.25rem 1rem;
+  }
+
+  .project-card dt {
+    font-weight: 700;
+  }
+
+  .project-card dd {
+    margin: 0;
+  }
+</style>

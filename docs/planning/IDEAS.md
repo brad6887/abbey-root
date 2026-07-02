@@ -1,79 +1,173 @@
 # Project-Aware Developer Environment
 
-**Status:** Emerging direction
+**Status:** Active architectural direction
 
-This concept became more concrete after the Abbey Root developer toolkit was standardized into standalone executable tools, Ansible-managed shell configuration, and auto-generated command documentation.
+The Abbey Root developer toolkit has evolved from a collection of helper scripts into the foundation of a metadata-driven, project-aware development environment.
 
----
-
-## Long-Term Vision
-
-Transform the Abbey Root developer toolkit into a project-aware command-line environment.
-
-Instead of only reporting infrastructure status, tools such as `abbey-status` should understand the current state of the project and guide development.
+The long-term vision is to build an environment that not only automates infrastructure, but also understands the current state of the project and helps guide future work.
 
 ---
 
-## Potential Capabilities
+# Core Philosophy
 
-### Project Awareness
+The development environment should become another product of Abbey Root.
 
-- Display the current roadmap phase.
-- Display the active milestone.
+Rather than requiring the developer to remember project context, the environment should continuously provide it.
+
+The toolkit should answer questions such as:
+
+- Where did I leave off?
+- What changed recently?
+- What should I work on next?
+- Is everything healthy?
+- Is the documentation current?
+- Is anything inconsistent?
+
+---
+
+# Design Principles
+
+## Metadata First
+
+Whenever practical, describe information once as structured metadata.
+
+Generate documentation, interfaces, reports, and automation from that metadata rather than maintaining multiple independent copies.
+
+## Single Source of Truth
+
+Avoid duplicate configuration.
+
+Whenever possible:
+
+Metadata → Components → Documentation → Automation
+
+should all originate from the same source.
+
+## Learn by Building
+
+The toolkit should encourage progress rather than perfection.
+
+Every improvement should reduce manual work while increasing understanding.
+
+---
+
+# Potential Capabilities
+
+## Project Awareness
+
+- Display current roadmap phase.
+- Display active milestone.
 - Count open backlog items.
-- Suggest the next recommended task.
-- Show the most recent journal entry.
-- Summarize recent accomplishments.
+- Recommend the next task.
+- Show recent accomplishments.
+- Display latest journal entries.
+- Highlight documentation requiring attention.
 
-### Infrastructure Awareness
+## Infrastructure Awareness
 
 - Report Git repository status.
 - Display infrastructure health.
-- Display Docker service status.
-- Report documentation coverage.
-- Report website build status.
-- Detect inconsistencies between sources of truth.
+- Report Docker service status.
+- Validate Ansible inventory.
+- Detect inconsistent metadata.
+- Detect configuration drift.
 
-### Developer Toolkit
+## Developer Toolkit
 
-- Generate `abbey-help` automatically from tool metadata.
-- Generate command documentation from tool metadata.
+- Auto-generate `abbey-help`.
+- Generate command documentation.
 - Validate toolkit consistency.
-- Report missing documentation or metadata.
-- Verify required development tools are installed.
+- Detect missing Purpose/Usage metadata.
+- Verify required development tools.
 - Detect stale generated documentation.
+- Create new tools from templates.
 
-### Publishing Platform
+## Website Awareness
 
-- Show unpublished content.
-- Display the latest generated pages.
-- Validate site navigation.
-- Detect missing front matter or metadata.
 - Report website build status.
+- Show unpublished content.
+- Detect missing metadata.
+- Validate navigation.
+- Report broken internal links.
+- Detect missing project pages.
+- Validate collections.
+
+## AI Awareness
+
+Future ai-worker01 responsibilities may include:
+
+- Session summaries.
+- Suggested next tasks.
+- Weekly project recap.
+- Documentation review.
+- Metadata suggestions.
+- Project historian.
+- AI-assisted publishing.
 
 ---
 
-## Daily Workflow
+# Daily Workflow
 
-A typical development session would become:
+A normal development session should eventually become:
 
 ```text
 abbey
 abbey-status
 ```
 
-Rather than remembering where work stopped, the project itself should communicate:
+followed by a summary similar to:
 
-- where work stopped
-- what changed since the last session
-- what should be done next
-- whether the environment is healthy
-- whether documentation is current
+```text
+Abbey Root
+
+Project
+--------
+Phase: Publishing Platform
+Current Focus:
+• BradCooke.com
+• Abbey Root
+
+Recent Changes
+--------------
+✓ 3 commits
+✓ 2 pages updated
+✓ Documentation current
+
+Recommended Next Task
+---------------------
+Create the Power Infrastructure project page.
+
+Infrastructure
+--------------
+✓ Git clean
+✓ Documentation current
+✓ Website builds successfully
+✓ All hosts reachable
+
+AI Notes
+--------
+Last session:
+- Added ProjectHeader.
+- Added ProjectCard.
+- Improved Home page.
+```
+
+The goal is to eliminate the need to remember project context between work sessions.
 
 ---
 
-## Long-Term Goal
+# Long-Term Vision
 
-Abbey Root should evolve into a **self-documenting**, **self-validating**, **project-aware** development environment rather than simply a collection of scripts.
+Abbey Root should evolve into a:
 
-The environment should continuously reduce the amount of project context the developer needs to remember, allowing work to resume quickly even after days or weeks away from the project.
+- self-documenting platform
+- self-validating platform
+- project-aware development environment
+- AI-assisted publishing platform
+- continuous learning platform
+
+Every improvement should reduce cognitive overhead while preserving understanding.
+
+The environment should help answer questions, suggest work, validate changes, and document progress without replacing the developer's judgment.
+
+Ultimately, Abbey Root should become a system that helps build itself.

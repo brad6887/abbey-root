@@ -2,17 +2,80 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Abbey Root">
-  <h1>Abbey Root</h1>
+<Layout
+  title="Brad Cooke"
+  description="Linux infrastructure, automation, Infrastructure-as-Code, and AI-assisted development."
+>
+  <section>
+    <h1>Brad Cooke</h1>
 
-  <p>
-    Abbey Root is a home Linux lab for learning, experimentation,
-    automation, and AI-assisted development.
-  </p>
+    <p>
+      Linux • Automation • Infrastructure as Code • AI
+    </p>
 
-  <p>
-    The goal is to build real systems, document what was learned,
-    and reuse that knowledge through automation and publishing.
-  </p>
+    <p>
+      I build Linux infrastructure, automation, and AI-assisted development
+      environments while documenting what I learn along the way.
+    </p>
 
+    <p>
+      <a href="/about/">About</a> ·
+      <a href="/projects/">Projects</a> ·
+      <a href="/contact/">Contact</a>
+    </p>
+  </section>
+
+  <section class="featured-project">
+    <p class="section-label">Featured Project</p>
+
+    <h2>
+      <a href="/projects/abbey-root/">Abbey Root</a>
+    </h2>
+
+    <p>
+      A home Linux lab focused on Proxmox, Docker, Ansible,
+      Infrastructure-as-Code, and AI-assisted development.
+    </p>
+
+    <p>
+      <a href="/projects/abbey-root/">View project →</a>
+    </p>
+  </section>
+
+  <section>
+    <h2>Current Focus</h2>
+
+    <ul>
+      <li>Building BradCooke.com as a technical portfolio and project journal.</li>
+      <li>Expanding Abbey Root as a reproducible Linux lab.</li>
+      <li>Using Ansible, Git, templates, and generated documentation to reduce manual work.</li>
+      <li>Developing ai-worker01 into a dedicated AI experimentation node.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What I’m Working Toward</h2>
+
+    <p>
+      My goal is to build useful systems, break them safely, understand how they
+      work, automate what repeats, and share the lessons through this site.
+    </p>
+  </section>
 </Layout>
+
+<style>
+  .featured-project {
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .section-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0;
+  }
+</style>

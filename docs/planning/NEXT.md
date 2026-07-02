@@ -2,36 +2,49 @@
 
 ## Primary Goal
 
-Return focus to BradCooke.com development now that the Abbey developer toolkit has been standardized and validated.
+Continue building BradCooke.com now that the publishing platform, developer toolkit, and project architecture are established.
 
 ---
 
 ## High Priority
 
-- [ ] Auto-generate `abbey-help` from tool metadata.
-- [ ] Review all Abbey tools for consistency and remove any remaining duplication.
-- [ ] Review generated documentation for formatting and completeness.
+- [ ] Create the Power Infrastructure project page.
+- [ ] Flesh out the Contact page.
+- [ ] Continue improving the Home page using real content.
+- [ ] Review the overall visual layout while browsing the site.
 
 ---
 
 ## BradCooke.com
 
-- [ ] Flesh out the Contact page.
-- [ ] Create the first real site content.
-- [ ] Continue building layouts and reusable Astro components.
-- [ ] Begin preparing the first publishable version of BradCooke.com.
+- [ ] Continue building reusable components only as content requires them.
+- [ ] Begin writing the first technical articles.
+- [ ] Add additional project pages.
+- [ ] Create the BradCooke.com publishing runbook.
+- [ ] Plan the GitHub Pages deployment workflow.
 
 ---
 
 ## Infrastructure
 
+- [ ] Document the completed data closet organization.
+- [ ] Add updated hardware documentation and photos.
 - [ ] Automate deployment of the ai-worker01 shell environment through Ansible.
 - [ ] Improve `abbey-status` with Docker health and service summaries.
+
+---
+
+## AI
+
+- [ ] Begin planning ai-worker01 as the AI experimentation platform.
+- [ ] Design AI-assisted publishing workflows.
+- [ ] Explore AI-generated project summaries and documentation.
 
 ---
 
 ## Stretch Goals
 
 - [ ] Design `abbey-doctor`.
-- [ ] Design automatic `abbey-help` generation.
-- [ ] Continue evolving the project-aware developer environment.
+- [ ] Add `abbey-site-build`.
+- [ ] Add `abbey-site-preview`.
+- [ ] Continue evolving the metadata-driven developer toolkit.
