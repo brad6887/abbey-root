@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -u
 
-ABBEY_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+ABBEY_ROOT="$(cd "$(dirname "$SCRIPT_PATH")/../.." && pwd)"
 DOCTOR_DIR="$ABBEY_ROOT/tools/doctor"
 
 source "$DOCTOR_DIR/lib/output.sh"
