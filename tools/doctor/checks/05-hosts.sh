@@ -49,7 +49,7 @@ if [ -z "$hosts" ]; then
 fi
 
 for host in $hosts; do
-  if ping -c 1 -W 1 "$host" >/dev/null 2>&1; then
+  if ping -4 -c 1 -W 1 "$host" >/dev/null 2>&1; then
     ok "Host reachable: $host"
   else
     fail "Host unreachable: $host"
