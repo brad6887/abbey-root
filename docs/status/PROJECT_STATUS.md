@@ -172,6 +172,9 @@ Current capabilities include:
 - Journal collection
 - Reusable Astro components
 - Local development workflow
+- Dynamic journal pages
+- Previous/next journal navigation
+- shared date formatting
 
 Markdown remains the authoritative source for publishable content.
 
@@ -181,8 +184,11 @@ Markdown remains the authoritative source for publishable content.
 
 Current toolkit capabilities include:
 
+Current toolkit capabilities include:
+
 - Standardized command interface
 - Project status reporting
+- Project health validation (`abbey-doctor`)
 - Documentation generation
 - Git helpers
 - Website development helpers

@@ -18,10 +18,11 @@ Items should be moved to the roadmap or completed as priorities change.
 ## Developer Toolkit
 
 - [x] Generate `abbey-help` automatically from tool metadata.
-- [ ] Create `abbey-doctor` system health and dependency checker.
+- [x] Create `abbey-doctor` system health and dependency checker.
 - [ ] Expand `abbey-build` reporting and validation.
 - [ ] Add repository consistency checks.
 - [ ] Create `abbey-tree` helper.
+- [ ] Create `abbey-journal` helper.
 - [ ] Standardize tool output formatting and color usage.
 - [ ] Add automated toolkit regression testing.
 - [ ] Add `abbey-site-build`.
@@ -35,13 +36,13 @@ Items should be moved to the roadmap or completed as priorities change.
 ### Content
 
 - [ ] Flesh out the Contact page.
-- [X] Create the Power Infrastructure project page.
+- [x] Create the Power Infrastructure project page.
 - [ ] Add additional project pages.
 - [ ] Begin writing technical articles.
-- [X] Publish Abbey Root journal entries.
+- [x] Publish Abbey Root journal entries.
 - [ ] Create JournalCard component.
 - [ ] Create JournalHeader component.
-- [ ] Create Date formatting helper.
+- [x] Create Date formatting helper.
 
 ### Components
 
@@ -71,9 +72,9 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Create BradCooke.com publishing runbook.
 - [ ] Configure GitHub Pages deployment.
 - [ ] Add custom domain configuration.
-- [ ] Create dynamic journal detail pages.
+- [x] Create dynamic journal detail pages.
 - [ ] Group journal entries by year.
-- [ ] Add previous/next journal navigation.
+- [x] Add previous/next journal navigation.
 
 ---
 
@@ -91,9 +92,12 @@ Items should be moved to the roadmap or completed as priorities change.
 ---
 
 ## Automation
+
 - [ ] Automate BradCooke.com builds.
 - [ ] Automate deployment.
 - [ ] Evaluate GitHub Actions vs. self-hosted automation.
+
+---
 
 ## Communications
 
@@ -105,6 +109,7 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Investigate automated project status reports.
 - [ ] Design end-of-session AI summary email.
 
+---
 
 ## Abbey Doctor V2 Ideas
 
@@ -112,7 +117,7 @@ Items should be moved to the roadmap or completed as priorities change.
 - Add quiet mode for scripting.
 - Add metadata-driven required document list.
 - Add documentation freshness checks.
-- Add backup freshness checks that can run remotely against pve.
+- Add backup freshness checks that can run remotely against Proxmox.
 - Add Proxmox VM status checks.
 - Add Docker container checks for ubuntu-dev01 and ai-worker01.
 - Add Homepage/NPM/Uptime Kuma HTTP checks.

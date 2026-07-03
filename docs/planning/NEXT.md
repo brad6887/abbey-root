@@ -2,11 +2,10 @@
 
 Primary Goal
 
-Continue creating content now that the publishing platform is established.
+Begin regularly publishing content now that the journal platform is complete.
 
 High Priority
 
-- [ ] Complete dynamic journal detail pages.
 - [ ] Improve ProjectHeader.
 - [ ] Flesh out the Contact page.
 - [ ] Create the first technical article.
@@ -16,7 +15,6 @@ BradCooke.com
 
 - [ ] Improve styling.
 - [ ] Continue reusable components.
-- [ ] Connect journal entries together.
 - [ ] Plan GitHub Pages deployment.
 
 Infrastructure
@@ -26,6 +24,4 @@ Infrastructure
 
 Stretch Goals
 
-- [ ] Create abbey-doctor.
-- [ ] Build metadata-driven date formatter.
 - [ ] Begin workstation documentation.

@@ -19,6 +19,7 @@
 - [x] Metadata-driven developer toolkit
 - [x] Automated documentation generation
 - [x] Consistent developer workflow across lab systems
+- [x] Repository health validation (`abbey-doctor`)
 
 ---
 
