@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -u
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+DOCTOR_DIR="$ABBEY_ROOT/tools/doctor"
+
+command="${1:-help}"
+
+case "$command" in
+  doctor)
+    shift
+    "$ABBEY_ROOT/tools/bin/abbey-doctor" "$@"
+    ;;
+
+  help|-h|--help)
+    echo "Abbey Root Toolkit"
+    echo
+    echo "Usage:"
+    echo "  abbey doctor        Run Abbey Root health checks"
+    echo
+    echo "Commands:"
+    echo "  doctor              Run health checks"
+    ;;
+
+  *)
+    echo "Unknown command: $command"
+    echo
+    echo "Run 'abbey help' for available commands."
+    exit 1
+    ;;
+esac

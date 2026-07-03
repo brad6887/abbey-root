@@ -104,3 +104,21 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Generate weekly Abbey Root project summaries via email.
 - [ ] Investigate automated project status reports.
 - [ ] Design end-of-session AI summary email.
+
+
+## Abbey Doctor V2 Ideas
+
+- Add verbose mode.
+- Add quiet mode for scripting.
+- Add metadata-driven required document list.
+- Add documentation freshness checks.
+- Add backup freshness checks that can run remotely against pve.
+- Add Proxmox VM status checks.
+- Add Docker container checks for ubuntu-dev01 and ai-worker01.
+- Add Homepage/NPM/Uptime Kuma HTTP checks.
+- Add DNS checks for lab hostnames.
+- Add Ansible Vault detection and optional vault password file support.
+- Add check categories: local, remote, storage, docs, services.
+- Add host role awareness so checks run based on host purpose instead of hostname.
+- Add JSON output for future automation.
+- Add restore-test status tracking.
