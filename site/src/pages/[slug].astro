@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import { formatDate } from '../lib/date';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages', ({ data }) => {
@@ -62,15 +63,15 @@ journalEntries.sort((a, b) => {
 
       {journalEntries.map((entry) => (
         <article>
-          <h3>{entry.data.title}</h3>
+          <h3>
+            <a href={`/journal/${entry.id}/`}>
+              {entry.data.title}
+            </a>
+          </h3>
 
           <p>
             <time datetime={entry.data.date.toISOString()}>
-              {entry.data.date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
+              {formatDate(entry.data.date)}
             </time>
           </p>
 
