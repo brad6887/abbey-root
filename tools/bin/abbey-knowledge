@@ -4,8 +4,11 @@
 set -euo pipefail
 
 ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
-KNOWLEDGE_DIR="$ABBEY_ROOT/.abbey/knowledge"
-SNAPSHOT="$KNOWLEDGE_DIR/snapshot.md"
+source "$ABBEY_ROOT/tools/lib/config.sh"
+load_abbey_config
+
+SNAPSHOT="$ABBEY_ROOT/$ABBEY_KNOWLEDGE_FILE"
+KNOWLEDGE_DIR="$(dirname "$SNAPSHOT")"
 
 usage() {
   cat <<'HELP'

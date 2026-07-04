@@ -4,8 +4,10 @@
 set -euo pipefail
 
 ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
-KNOWLEDGE_FILE="$ABBEY_ROOT/.abbey/knowledge/snapshot.md"
-OPEN_WEBUI_URL="${OPEN_WEBUI_URL:-http://localhost:3000}"
+source "$ABBEY_ROOT/tools/lib/config.sh"
+load_abbey_config
+
+KNOWLEDGE_FILE="$ABBEY_ROOT/$ABBEY_KNOWLEDGE_FILE"
 
 usage() {
   cat <<HELP
