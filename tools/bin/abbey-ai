@@ -17,6 +17,7 @@ Usage:
   abbey ai                 Show Abbey AI connection/context info
   abbey ai context         Show current knowledge context
   abbey ai open            Print Open WebUI URL
+  abbey ai check           Check Open WebUI connectivity
   abbey ai rebuild         Rebuild knowledge context
   abbey ai help            Show this help
 
@@ -63,6 +64,30 @@ PROMPT
 
   open)
     echo "$OPEN_WEBUI_URL"
+    ;;
+
+  check)
+    echo "Checking Open WebUI..."
+    echo "URL: $OPEN_WEBUI_URL"
+    echo
+
+    if curl -fsS "$OPEN_WEBUI_URL/api/config" >/tmp/abbey-openwebui-config.json 2>/dev/null; then
+      echo "OK   Open WebUI API reachable"
+      if command -v python3 >/dev/null 2>&1; then
+        python3 - <<'PYJSON'
+import json
+from pathlib import Path
+
+data = json.loads(Path("/tmp/abbey-openwebui-config.json").read_text())
+print(f"INFO Name: {data.get('name', 'unknown')}")
+print(f"INFO Version: {data.get('version', 'unknown')}")
+print(f"INFO Auth enabled: {data.get('features', {}).get('auth', 'unknown')}")
+PYJSON
+      fi
+    else
+      echo "WARN Open WebUI API not reachable"
+      exit 1
+    fi
     ;;
 
   help|-h|--help)
