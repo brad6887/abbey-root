@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# COMMAND: doctor
+# DESCRIPTION: Run Abbey Root health checks
 set -u
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# COMMAND: ai
+# DESCRIPTION: Show Abbey AI helper information
 set -euo pipefail
 
 ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"

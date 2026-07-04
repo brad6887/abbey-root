@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# COMMAND: knowledge
+# DESCRIPTION: Build or show Abbey AI knowledge context
 set -euo pipefail
 
 ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"

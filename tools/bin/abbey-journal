@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# COMMAND: journal
+# DESCRIPTION: Create or open a journal entry
 set -euo pipefail
 
 REPO_DIR="${ABBEY_ROOT:-$HOME/git/abbey-root}"

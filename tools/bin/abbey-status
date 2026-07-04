@@ -1,68 +1,19 @@
 #!/usr/bin/env bash
+# COMMAND: status
+# DESCRIPTION: Show local Abbey Root status
 set -euo pipefail
 
 ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+STATUS_DIR="$ABBEY_ROOT/tools/status"
 
-section() {
-  echo
-  echo "$1"
-  printf '%*s\n' "${#1}" '' | tr ' ' '-'
-}
-
-ok() { echo "OK   $*"; }
-warn() { echo "WARN $*"; }
-info() { echo "INFO $*"; }
+source "$STATUS_DIR/lib/output.sh"
 
 echo "Abbey Root Status"
 echo "Date: $(date)"
 echo "Host: $(hostname)"
 echo "Repo: $ABBEY_ROOT"
 
-section "System"
-info "Uptime: $(uptime -p 2>/dev/null || uptime)"
-info "Kernel: $(uname -srmo)"
-
-section "Repository"
-if [[ -d "$ABBEY_ROOT/.git" ]]; then
-  cd "$ABBEY_ROOT"
-  ok "Git repository detected"
-  info "Branch: $(git branch --show-current 2>/dev/null || echo unknown)"
-
-  if [[ -z "$(git status --porcelain)" ]]; then
-    ok "Working tree clean"
-  else
-    warn "Working tree has uncommitted changes"
-    git status --short
-  fi
-
-  if git remote get-url origin >/dev/null 2>&1; then
-    info "Origin: $(git remote get-url origin)"
-  else
-    warn "No origin remote configured"
-  fi
-else
-  warn "Not inside Abbey Root repository"
-fi
-
-section "Docker"
-if command -v docker >/dev/null 2>&1; then
-  ok "Docker command available"
-
-  if docker info >/dev/null 2>&1; then
-    ok "Docker daemon reachable"
-    docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
-  else
-    warn "Docker daemon not reachable by current user"
-  fi
-else
-  warn "Docker command not found"
-fi
-
-section "Abbey Tools"
-for tool in abbey abbey-doctor abbey-journal abbey-ai abbey-status abbey-knowledge; do
-  if [[ -x "$ABBEY_ROOT/tools/bin/$tool" ]]; then
-    ok "$tool exists"
-  else
-    warn "$tool missing or not executable"
-  fi
+for check in "$STATUS_DIR"/checks/*.sh; do
+  [[ -f "$check" ]] || continue
+  source "$check"
 done
