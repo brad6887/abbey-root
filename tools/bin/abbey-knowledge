@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+KNOWLEDGE_DIR="$ABBEY_ROOT/.abbey/knowledge"
+SNAPSHOT="$KNOWLEDGE_DIR/snapshot.md"
+
+usage() {
+  cat <<'HELP'
+Abbey Knowledge
+
+Usage:
+  abbey knowledge build     Build a local Abbey Root knowledge snapshot
+  abbey knowledge show      Show the current knowledge snapshot path
+HELP
+}
+
+build_snapshot() {
+  mkdir -p "$KNOWLEDGE_DIR"
+
+  {
+    echo "# Abbey Root Knowledge Snapshot"
+    echo
+    echo "- Generated: $(date)"
+    echo "- Host: $(hostname)"
+    echo "- Repository: $ABBEY_ROOT"
+    echo
+
+    echo "## Git"
+    echo
+    if [[ -d "$ABBEY_ROOT/.git" ]]; then
+      cd "$ABBEY_ROOT"
+      echo "- Branch: $(git branch --show-current 2>/dev/null || echo unknown)"
+      echo "- Origin: $(git remote get-url origin 2>/dev/null || echo none)"
+      echo
+      echo "### Recent Commits"
+      echo
+      git log --oneline -5 2>/dev/null || true
+    else
+      echo "- Git repository not found"
+    fi
+    echo
+
+    echo "## Project Files"
+    echo
+    find "$ABBEY_ROOT" -maxdepth 3 -type f \
+      \( -path '*/docs/*' -o -path '*/ansible/*' -o -path '*/tools/*' -o -path '*/content/*' \) \
+      | sed "s#$ABBEY_ROOT/##" \
+      | sort
+    echo
+
+    echo "## Docker Containers"
+    echo
+    if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+      docker ps --format '- {{.Names}}: {{.Status}}'
+    else
+      echo "- Docker unavailable"
+    fi
+  } > "$SNAPSHOT"
+
+  echo "Knowledge snapshot written to:"
+  echo "$SNAPSHOT"
+}
+
+case "${1:-help}" in
+  build)
+    build_snapshot
+    ;;
+  show)
+    echo "$SNAPSHOT"
+    ;;
+  help|-h|--help)
+    usage
+    ;;
+  *)
+    echo "Unknown knowledge command: $1"
+    echo
+    usage
+    exit 1
+    ;;
+esac

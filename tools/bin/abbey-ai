@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+KNOWLEDGE_FILE="$ABBEY_ROOT/.abbey/knowledge/snapshot.md"
+OPEN_WEBUI_URL="${OPEN_WEBUI_URL:-http://localhost:3000}"
+
+usage() {
+  cat <<HELP
+Abbey AI
+
+Usage:
+  abbey ai                 Show Abbey AI connection/context info
+  abbey ai context         Show current knowledge context
+  abbey ai open            Print Open WebUI URL
+  abbey ai help            Show this help
+
+Environment:
+  OPEN_WEBUI_URL           Default: $OPEN_WEBUI_URL
+HELP
+}
+
+case "${1:-info}" in
+  info)
+    echo "Abbey AI"
+    echo
+    echo "Open WebUI: $OPEN_WEBUI_URL"
+    echo "Knowledge:  $KNOWLEDGE_FILE"
+    echo
+    if [[ -f "$KNOWLEDGE_FILE" ]]; then
+      echo "Knowledge snapshot exists."
+      echo
+      echo "Suggested prompt to paste into Open WebUI:"
+      echo
+      cat <<'PROMPT'
+You are Abbey AI, an assistant for the Abbey Root home Linux lab. Use the project knowledge below as context. Help with Linux, Docker, Ansible, Git, documentation, troubleshooting, and lab design. Prefer practical step-by-step guidance.
+PROMPT
+      echo
+      echo "Attach or paste this file:"
+      echo "$KNOWLEDGE_FILE"
+    else
+      echo "Knowledge snapshot does not exist yet."
+      echo "Run: abbey knowledge build"
+    fi
+    ;;
+
+  context)
+    if [[ -f "$KNOWLEDGE_FILE" ]]; then
+      cat "$KNOWLEDGE_FILE"
+    else
+      echo "Knowledge snapshot not found."
+      echo "Run: abbey knowledge build"
+      exit 1
+    fi
+    ;;
+
+  open)
+    echo "$OPEN_WEBUI_URL"
+    ;;
+
+  help|-h|--help)
+    usage
+    ;;
+
+  *)
+    echo "Unknown ai command: $1"
+    echo
+    usage
+    exit 1
+    ;;
+esac
