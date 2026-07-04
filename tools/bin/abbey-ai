@@ -15,6 +15,7 @@ Usage:
   abbey ai                 Show Abbey AI connection/context info
   abbey ai context         Show current knowledge context
   abbey ai open            Print Open WebUI URL
+  abbey ai rebuild         Rebuild knowledge context
   abbey ai help            Show this help
 
 Environment:
@@ -22,38 +23,40 @@ Environment:
 HELP
 }
 
+ensure_knowledge() {
+  if [[ ! -f "$KNOWLEDGE_FILE" ]]; then
+    echo "Knowledge snapshot not found. Building it now..."
+    "$ABBEY_ROOT/tools/bin/abbey-knowledge" build
+    echo
+  fi
+}
+
 case "${1:-info}" in
   info)
+    ensure_knowledge
+
     echo "Abbey AI"
     echo
     echo "Open WebUI: $OPEN_WEBUI_URL"
     echo "Knowledge:  $KNOWLEDGE_FILE"
     echo
-    if [[ -f "$KNOWLEDGE_FILE" ]]; then
-      echo "Knowledge snapshot exists."
-      echo
-      echo "Suggested prompt to paste into Open WebUI:"
-      echo
-      cat <<'PROMPT'
+    echo "Suggested prompt to paste into Open WebUI:"
+    echo
+    cat <<'PROMPT'
 You are Abbey AI, an assistant for the Abbey Root home Linux lab. Use the project knowledge below as context. Help with Linux, Docker, Ansible, Git, documentation, troubleshooting, and lab design. Prefer practical step-by-step guidance.
 PROMPT
-      echo
-      echo "Attach or paste this file:"
-      echo "$KNOWLEDGE_FILE"
-    else
-      echo "Knowledge snapshot does not exist yet."
-      echo "Run: abbey knowledge build"
-    fi
+    echo
+    echo "Attach or paste this file:"
+    echo "$KNOWLEDGE_FILE"
     ;;
 
   context)
-    if [[ -f "$KNOWLEDGE_FILE" ]]; then
-      cat "$KNOWLEDGE_FILE"
-    else
-      echo "Knowledge snapshot not found."
-      echo "Run: abbey knowledge build"
-      exit 1
-    fi
+    ensure_knowledge
+    cat "$KNOWLEDGE_FILE"
+    ;;
+
+  rebuild)
+    "$ABBEY_ROOT/tools/bin/abbey-knowledge" build
     ;;
 
   open)
