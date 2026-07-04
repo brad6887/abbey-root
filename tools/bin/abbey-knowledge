@@ -17,6 +17,45 @@ Usage:
 HELP
 }
 
+list_files() {
+  local title="$1"
+  local path="$2"
+  local pattern="${3:-*}"
+
+  echo "## $title"
+  echo
+
+  if [[ -d "$ABBEY_ROOT/$path" ]]; then
+    find "$ABBEY_ROOT/$path" -maxdepth 3 -type f -name "$pattern" \
+      | sed "s#$ABBEY_ROOT/##" \
+      | sort \
+      | sed 's/^/- /'
+  else
+    echo "- Not found: $path"
+  fi
+
+  echo
+}
+
+section_excerpt() {
+  local title="$1"
+  local file="$2"
+  local lines="${3:-80}"
+
+  echo "## $title"
+  echo
+
+  if [[ -f "$ABBEY_ROOT/$file" ]]; then
+    echo "Source: $file"
+    echo
+    sed -n "1,${lines}p" "$ABBEY_ROOT/$file"
+  else
+    echo "- Not found: $file"
+  fi
+
+  echo
+}
+
 build_snapshot() {
   mkdir -p "$KNOWLEDGE_DIR"
 
@@ -34,21 +73,14 @@ build_snapshot() {
       cd "$ABBEY_ROOT"
       echo "- Branch: $(git branch --show-current 2>/dev/null || echo unknown)"
       echo "- Origin: $(git remote get-url origin 2>/dev/null || echo none)"
+      echo "- Working tree: $(git status --porcelain | wc -l | awk '{print $1}') changed files"
       echo
       echo "### Recent Commits"
       echo
-      git log --oneline -5 2>/dev/null || true
+      git log --oneline -8 2>/dev/null | sed 's/^/- /' || true
     else
       echo "- Git repository not found"
     fi
-    echo
-
-    echo "## Project Files"
-    echo
-    find "$ABBEY_ROOT" -maxdepth 3 -type f \
-      \( -path '*/docs/*' -o -path '*/ansible/*' -o -path '*/tools/*' -o -path '*/content/*' \) \
-      | sed "s#$ABBEY_ROOT/##" \
-      | sort
     echo
 
     echo "## Docker Containers"
@@ -58,6 +90,31 @@ build_snapshot() {
     else
       echo "- Docker unavailable"
     fi
+    echo
+
+    echo "## Inventory"
+    echo
+    if [[ -f "$ABBEY_ROOT/ansible/inventory/hosts.yml" ]]; then
+      sed -n '1,160p' "$ABBEY_ROOT/ansible/inventory/hosts.yml"
+    else
+      echo "- Inventory not found"
+    fi
+    echo
+
+    list_files "Playbooks" "ansible/playbooks" "*.yml"
+    list_files "Roles" "ansible/roles"
+    list_files "Tools" "tools/bin"
+    list_files "Planning Documents" "docs/planning" "*.md"
+    list_files "Generated Documentation" "docs/generated" "*.md"
+    list_files "Runbooks" "docs/runbooks" "*.md"
+    list_files "Guides" "docs/guides" "*.md"
+    list_files "Content Journal Entries" "content/journal" "*.md"
+
+    section_excerpt "Current Project Status" "docs/status/PROJECT_STATUS.md" 120
+    section_excerpt "Next Actions" "docs/planning/NEXT.md" 120
+    section_excerpt "Roadmap" "docs/planning/ROADMAP.md" 120
+    section_excerpt "Backlog" "docs/planning/BACKLOG.md" 120
+    section_excerpt "Abbey CLI Guide" "docs/guides/abbey-cli.md" 160
   } > "$SNAPSHOT"
 
   echo "Knowledge snapshot written to:"
