@@ -18,6 +18,7 @@ Usage:
   abbey ai context         Show current knowledge context
   abbey ai open            Print Open WebUI URL
   abbey ai check           Check Open WebUI connectivity
+  abbey ai models          List available Open WebUI models
   abbey ai rebuild         Rebuild knowledge context
   abbey ai help            Show this help
 
@@ -88,6 +89,41 @@ PYJSON
       echo "WARN Open WebUI API not reachable"
       exit 1
     fi
+    ;;
+
+  models)
+    if [[ -z "${OPEN_WEBUI_API_KEY:-}" ]]; then
+      echo "Missing OPEN_WEBUI_API_KEY."
+      echo "Add it to: $ABBEY_ROOT/.abbey/config.conf"
+      exit 1
+    fi
+
+    curl -fsS "$OPEN_WEBUI_URL/api/models"       -H "Authorization: Bearer $OPEN_WEBUI_API_KEY"       > /tmp/abbey-openwebui-models.json
+
+    python3 - <<'PYJSON'
+import json
+from pathlib import Path
+
+data = json.loads(Path("/tmp/abbey-openwebui-models.json").read_text())
+models = data.get("data", data if isinstance(data, list) else [])
+
+print("Open WebUI Models")
+print()
+
+if not models:
+    print("No models returned.")
+else:
+    for model in models:
+        if isinstance(model, dict):
+            model_id = model.get("id") or model.get("name") or "unknown"
+            owned_by = model.get("owned_by")
+            if owned_by:
+                print(f"- {model_id} ({owned_by})")
+            else:
+                print(f"- {model_id}")
+        else:
+            print(f"- {model}")
+PYJSON
     ;;
 
   help|-h|--help)
