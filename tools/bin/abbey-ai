@@ -19,6 +19,7 @@ Usage:
   abbey ai open            Print Open WebUI URL
   abbey ai check           Check Open WebUI connectivity
   abbey ai models          List available Open WebUI models
+  abbey ai ask <prompt>    Ask Open WebUI a question
   abbey ai rebuild         Rebuild knowledge context
   abbey ai help            Show this help
 
@@ -123,6 +124,71 @@ else:
                 print(f"- {model_id}")
         else:
             print(f"- {model}")
+PYJSON
+    ;;
+
+  ask)
+    shift
+    prompt="${*:-}"
+
+    if [[ -z "$prompt" ]]; then
+      echo "Usage: abbey ai ask <prompt>"
+      exit 1
+    fi
+
+    if [[ -z "${OPEN_WEBUI_API_KEY:-}" ]]; then
+      echo "Missing OPEN_WEBUI_API_KEY."
+      echo "Add it to: $ABBEY_ROOT/.abbey/config.conf"
+      exit 1
+    fi
+
+    python3 - "$OPEN_WEBUI_URL" "$OPEN_WEBUI_API_KEY" "$OPEN_WEBUI_MODEL" "$prompt" <<'PYJSON'
+import json
+import sys
+import urllib.request
+import urllib.error
+
+url, api_key, model, prompt = sys.argv[1:5]
+
+payload = {
+    "model": model,
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are Abbey AI, a practical assistant for the Abbey Root Linux lab. Keep answers concise and useful."
+        },
+        {
+            "role": "user",
+            "content": prompt
+        }
+    ]
+}
+
+request = urllib.request.Request(
+    f"{url}/api/chat/completions",
+    data=json.dumps(payload).encode("utf-8"),
+    headers={
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    },
+    method="POST"
+)
+
+try:
+    with urllib.request.urlopen(request, timeout=120) as response:
+        data = json.loads(response.read().decode("utf-8"))
+except urllib.error.HTTPError as exc:
+    print(f"HTTP error: {exc.code}", file=sys.stderr)
+    print(exc.read().decode("utf-8"), file=sys.stderr)
+    sys.exit(1)
+except Exception as exc:
+    print(f"Request failed: {exc}", file=sys.stderr)
+    sys.exit(1)
+
+try:
+    print(data["choices"][0]["message"]["content"].strip())
+except Exception:
+    print(json.dumps(data, indent=2))
 PYJSON
     ;;
 
