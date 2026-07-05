@@ -144,6 +144,7 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] AI-aware Abbey toolkit integration.
 - [ ] Define AI knowledge sources.
 - [ ] Track AI knowledge rebuild freshness.
+- [ ] Establish a recurring AI technology review process to evaluate new models, tooling, and workflows against the Abbey AI evaluation suite.
 
 ---
 
