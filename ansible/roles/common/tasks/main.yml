@@ -36,20 +36,13 @@
 # Git Configuration
 ###############################################################################
 
-- name: Configure Git pull strategy
-  ansible.builtin.command:
-    cmd: git config --global pull.rebase true
-  changed_when: false
-
-- name: Configure Git fetch pruning
-  ansible.builtin.command:
-    cmd: git config --global fetch.prune true
-  changed_when: false
-
-- name: Configure Git automatic stash during rebase
-  ansible.builtin.command:
-    cmd: git config --global rebase.autoStash true
-  changed_when: false
+- name: Install Git configuration
+  ansible.builtin.copy:
+    src: gitconfig
+    dest: "/home/{{ ansible_user }}/.gitconfig"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
 
 ###############################################################################
 # Abbey Shell
