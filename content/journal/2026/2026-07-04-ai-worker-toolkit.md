@@ -1,3 +1,15 @@
+---
+title: AI Worker Toolkit
+description: Improving the Abbey Root toolkit and shaping the future of AI-assisted project awareness.
+date: 2026-07-04
+draft: false
+tags:
+  - Abbey Root
+  - AI
+  - Toolkit
+  - Project Awareness
+---
+
 # 2026-07-04 - AI Worker Toolkit
 
 ## Summary

@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
-# COMMAND: journal
-# DESCRIPTION: Create or open a journal entry
+#
+# Abbey Root Tool: abbey-journal
+#
+# Purpose:
+#   Create or open an Abbey Root journal entry with valid Astro frontmatter.
+#
+# Usage:
+#   abbey journal <journal title>
+#
 set -euo pipefail
 
 REPO_DIR="${ABBEY_ROOT:-$HOME/git/abbey-root}"
@@ -11,8 +18,8 @@ YEAR="$(date +%Y)"
 TITLE="${*:-}"
 
 if [[ -z "$TITLE" ]]; then
-  echo "Usage: abbey-journal <journal title>"
-  echo "Example: abbey-journal Completing the Journal Platform"
+  echo "Usage: abbey journal <journal title>"
+  echo "Example: abbey journal Completing the Journal Platform"
   exit 1
 fi
 
@@ -27,14 +34,37 @@ mkdir -p "$JOURNAL_DIR/$YEAR"
 if [[ ! -f "$FILE" ]]; then
   cat > "$FILE" <<EOF
 ---
-title: $TITLE
-description:
+title: "$TITLE"
+description: "TODO: Add a short summary."
 date: $DATE
+draft: false
 tags:
-  - abbey-root
+  - Abbey Root
 ---
+
+# $TITLE
+
+## Summary
+
+TODO
+
+## Accomplishments
+
+- TODO
+
+## Lessons Learned
+
+- TODO
+
+## Next Steps
+
+- TODO
 
 EOF
 fi
 
 vi "$FILE"
+
+echo
+echo "Next step:"
+echo "  abbey site build"

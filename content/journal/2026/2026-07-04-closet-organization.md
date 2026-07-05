@@ -1,3 +1,15 @@
+---
+title: Closet Organization
+description: Organizing the physical Abbey Root lab workspace, cabling, networking gear, and structured wiring cabinet.
+date: 2026-07-04
+draft: false
+tags:
+  - Abbey Root
+  - Lab
+  - Hardware
+  - Cable Management
+---
+
 # 2026-07-04 - Closet Organization
 
 ## Summary

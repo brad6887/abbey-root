@@ -1,3 +1,15 @@
+---
+title: Network Upgrade and Recovery
+description: Installing the 2.5 Gb switch, recovering from a failed Ethernet adapter, and improving lab network resilience.
+date: 2026-07-04
+draft: false
+tags:
+  - Abbey Root
+  - Networking
+  - Troubleshooting
+  - Proxmox
+---
+
 # 2026-07-04 - Network Upgrade and Recovery
 
 ## Summary
