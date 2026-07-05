@@ -1,47 +1,67 @@
-#!/bin/bash
-#
-# Abbey Root Tool: abbey-git-sync
-#
-# Purpose:
-#   Pull the latest Abbey Root changes and show repository status.
-#
-# Usage:
-#   abbey-git-sync
-#   abbey-git-sync --help
-#
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+echo "========================================"
+echo " Abbey Root Git Sync"
+echo "========================================"
+echo
 
-BLUE='\033[1;34m'
-GREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m'
-
-if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-cat <<EOF
-abbey-git-sync
-
-Pull the latest Abbey Root changes and show repository status.
-
-Usage:
-    abbey-git-sync
-
-EOF
-exit 0
+# Verify we're in a git repository
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "FAIL Not inside a Git repository."
+    exit 1
 fi
 
-cd "$REPO_ROOT"
+REPO=$(git rev-parse --show-toplevel)
+cd "$REPO"
 
-echo -e "${BLUE}========================================${NC}"
-echo -e "${BLUE} Abbey Root Git Sync${NC}"
-echo -e "${BLUE}========================================${NC}"
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+echo "Repository: $REPO"
+echo "Branch:     $BRANCH"
 echo
 
-git pull
-echo
-git status
+# Ensure working tree is clean
+if ! git diff --quiet || ! git diff --cached --quiet; then
+    echo "FAIL Working tree has uncommitted changes."
+    echo
+    git status --short
+    exit 1
+fi
+
+echo "Fetching..."
+git fetch --prune --quiet
+
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse @{u})
+BASE=$(git merge-base @ @{u})
+
+if [[ "$LOCAL" == "$REMOTE" ]]; then
+    echo "OK   Repository already up to date."
+    exit 0
+fi
+
+AHEAD=$(git rev-list --count @{u}..HEAD)
+BEHIND=$(git rev-list --count HEAD..@{u})
 
 echo
-echo -e "${GREEN}✓ Git sync completed.${NC}"
+echo "Status"
+echo "------"
+echo "Ahead : $AHEAD"
+echo "Behind: $BEHIND"
+echo
+
+echo "Rebasing..."
+git pull --rebase
+
+AHEAD=$(git rev-list --count @{u}..HEAD)
+
+if [[ "$AHEAD" -gt 0 ]]; then
+    echo
+    echo "Pushing..."
+    git push
+fi
+
+echo
+echo "OK   Repository synchronized."

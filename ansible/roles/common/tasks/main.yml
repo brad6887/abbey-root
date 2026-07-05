@@ -1,4 +1,8 @@
 ---
+###############################################################################
+# Common Packages
+###############################################################################
+
 - name: Install common tools on Debian/Ubuntu
   ansible.builtin.apt:
     name:
@@ -28,8 +32,31 @@
     state: present
   when: ansible_os_family == "RedHat"
 
+###############################################################################
+# Git Configuration
+###############################################################################
+
+- name: Configure Git pull strategy
+  ansible.builtin.command:
+    cmd: git config --global pull.rebase true
+  changed_when: false
+
+- name: Configure Git fetch pruning
+  ansible.builtin.command:
+    cmd: git config --global fetch.prune true
+  changed_when: false
+
+- name: Configure Git automatic stash during rebase
+  ansible.builtin.command:
+    cmd: git config --global rebase.autoStash true
+  changed_when: false
+
+###############################################################################
+# Abbey Shell
+###############################################################################
+
 - name: Install Abbey shell aliases
-  copy:
+  ansible.builtin.copy:
     src: abbey-aliases.sh
     dest: /etc/profile.d/abbey-aliases.sh
     owner: root
@@ -37,7 +64,7 @@
     mode: "0644"
 
 - name: Install Abbey shell functions
-  copy:
+  ansible.builtin.copy:
     src: abbey-functions.sh
     dest: /etc/profile.d/abbey-functions.sh
     owner: root
