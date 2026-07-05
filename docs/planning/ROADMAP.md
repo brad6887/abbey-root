@@ -52,8 +52,8 @@
 
 [x] Journal content collection
 [x] Journal landing page
-[ ] Journal detail pages
-[ ] Journal navigation
+[X] Journal detail pages
+[X] Journal navigation
 
 ### Deployment
 
@@ -73,6 +73,11 @@
 - [ ] Search
 - [ ] RSS
 - [ ] Content indexing
+- [ ] AI project context engine
+- [ ] AI task recommendations
+- [ ] AI documentation review
+- [ ] AI-assisted project historian
+- [ ] AI session summaries
 
 ---
 

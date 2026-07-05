@@ -12,6 +12,10 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Enhance `abbey-status` with Docker health, disk usage, and service summaries.
 - [ ] Automate deployment of ai-worker01 shell environment through Ansible.
 - [ ] Document and photograph the completed data closet layout.
+- [ ] Document apartment network wall jack locations.
+- [ ] Label structured wiring cabinet.
+- [ ] Create network diagram.
+- [ ] Keep a spare USB Ethernet adapter for lab recovery.
 
 ---
 
@@ -22,12 +26,18 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Expand `abbey-build` reporting and validation.
 - [ ] Add repository consistency checks.
 - [ ] Create `abbey-tree` helper.
-- [ ] Create `abbey-journal` helper.
+- [X] Create `abbey-journal` helper.
 - [ ] Standardize tool output formatting and color usage.
 - [ ] Add automated toolkit regression testing.
 - [ ] Add `abbey-site-build`.
 - [ ] Add `abbey-site-preview`.
 - [ ] Add `abbey-site-deploy-check`.
+- [ ] Add network health checks to abbey-doctor.
+- [ ] Verify bridge-ports references an existing interface.
+- [ ] Report negotiated Ethernet link speed.
+- [ ] Verify gateway connectivity.
+- [ ] Verify Internet connectivity.
+- [ ] Detect probable replacement network adapters.
 
 ---
 
@@ -88,6 +98,11 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] AI-assisted publishing workflow.
 - [ ] AI-generated session summaries.
 - [ ] AI-assisted project history.
+- [ ] AI project context awareness.
+- [ ] AI-powered "What should I work on next?"
+- [ ] AI documentation review.
+- [ ] AI session recap generation.
+- [ ] AI-aware Abbey toolkit integration.
 
 ---
 

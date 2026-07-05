@@ -150,6 +150,39 @@ Last session:
 - Added ProjectHeader.
 - Added ProjectCard.
 - Improved Home page.
+
+# Abbey as the Lab Interface
+
+Long-term vision:
+
+Rather than interacting directly with Linux tools, the primary interface becomes:
+
+abbey
+
+Examples:
+
+abbey doctor
+abbey status
+abbey ai
+abbey journal
+abbey build
+abbey site
+abbey update
+
+The toolkit becomes the operating interface for the lab while AI provides context, recommendations, and documentation assistance.
+
+AI should understand:
+
+- project status
+- roadmap
+- backlog
+- journal history
+- infrastructure inventory
+- Ansible inventory
+- Docker services
+
+rather than relying solely on conversational memory.
+
 ```
 
 The goal is to eliminate the need to remember project context between work sessions.

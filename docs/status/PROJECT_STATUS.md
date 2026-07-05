@@ -1,256 +1,241 @@
 # Abbey Root Project Status
 
-**Last Updated:** 2026-07-02
+**Last Updated:** 2026-07-04
 
 ---
 
-# Current Phase
+# Overall Status
 
-**Phase 2 – Publishing Platform**
+Abbey Root has successfully evolved from a basic Linux lab into an AI-assisted Infrastructure-as-Code platform.
 
-Abbey Root has evolved from a Linux home lab into a metadata-driven platform for infrastructure automation, documentation, and technical publishing.
+The core infrastructure is stable, reproducible, and managed through Git, Ansible, and a growing developer toolkit. Development is now shifting from building foundational infrastructure toward publishing content, improving automation, and integrating AI more deeply into the project workflow.
 
-The primary focus is now expanding BradCooke.com with real project content while continuing to improve the underlying automation and developer experience.
-
----
-
-# Current Priorities
-
-## Primary
-
-- Expand BradCooke.com with projects, journal entries, and technical articles.
-- Continue developing the metadata-driven publishing platform.
-- Expand Infrastructure-as-Code throughout the lab.
-- Continue improving the Abbey Root developer toolkit.
-
-## Planned
-
-- GitHub Pages deployment
-- Custom domain integration
-- AI Worker expansion
-- Kali security VM
-- Monitoring and observability
+The project is entering a stage where the infrastructure increasingly supports itself, allowing more time to be spent creating, documenting, and experimenting.
 
 ---
 
-# Infrastructure
+# Current Focus
 
-## Hypervisor
+Current priorities are:
 
-- Proxmox
-- Management IP: 192.168.1.55
-
----
-
-## Virtual Machines
-
-### ubuntu-dev01
-
-**Purpose**
-
-Primary development and infrastructure host.
-
-**Services**
-
-- Homepage
-- Portainer
-- Uptime Kuma
-- Nginx Proxy Manager
-- BradCooke.com development
-- Astro development environment
-
----
-
-### rocky-ansible01
-
-**Purpose**
-
-Automation control node.
-
-Responsibilities include:
-
-- Git repository
-- Ansible inventory
-- Playbooks
-- Roles
-- Generated documentation
-- Developer toolkit
-
----
-
-### ai-worker01
-
-**Purpose**
-
-AI experimentation platform.
-
-**Hardware**
-
-- RTX 4060 Laptop GPU
-- 32 GB RAM
-- 1 TB SSD
-
-**Services**
-
-- Docker
-- NVIDIA Driver
-- CUDA
-- Ollama
-- Open WebUI
-- Portainer Agent
-
-Current models include:
-
-- qwen3:8b
-- gemma3:4b
-- gpt-oss:20b
+- Continue developing the Abbey toolkit.
+- Publish Abbey Root documentation and journal entries.
+- Expand BradCooke.com.
+- Improve AI-assisted workflows.
+- Continue automating repetitive development tasks.
 
 ---
 
 # Infrastructure Status
 
-Current infrastructure includes:
+## Virtualization
 
-- Proxmox virtualization
-- Three managed Linux systems
-- GitHub repository
-- Automated backups
-- Restore validation
-- Docker infrastructure
-- Homepage dashboard
-- AI experimentation platform
+- ✅ Proxmox operational
+- ✅ Linux virtual machines deployed
+- ✅ VM templates established
+- ✅ Virtual infrastructure documented
 
----
+## Networking
 
-# Documentation
+- ✅ 2.5 Gb network upgrade completed
+- ✅ TRENDnet 8-port 2.5 Gb switch installed
+- ✅ Proxmox host upgraded to 2.5 Gb Ethernet
+- ✅ Standardized lab networking
+- ⏳ Apartment Ethernet runs still being documented
 
-Documentation is generated wherever practical.
+## Docker
 
-Current generated documentation includes:
+ubuntu-dev01 hosts:
 
-- Architecture
-- Servers
-- Services
-- Containers
-- Inventory
-- Network
-- Automation
-- Homepage configuration
+- Homepage
+- Portainer
+- Uptime Kuma
+- Nginx Proxy Manager
+- nginx-labtest
 
-Host metadata remains the primary source of truth for generated documentation.
+ai-worker01 hosts:
+
+- Open WebUI
+- Portainer Agent
 
 ---
 
 # Automation
 
-Current automation includes:
+## Ansible
 
-- Ansible-managed infrastructure
-- Generated Homepage configuration
-- Generated documentation
-- Standardized developer toolkit
-- Backup workflows
-- Git helper commands
-- Validation workflows
+Current roles include:
 
-The long-term goal remains reducing manual configuration through Infrastructure-as-Code.
+- common
+- docker
+- homepage
+- issue
+- labtest
+- motd
+- time
+
+Current playbooks include:
+
+- site.yml
+- docker.yml
+- facts.yml
+- update.yml
+
+Environment includes:
+
+- Passwordless SSH
+- Ansible Vault
+- Standardized configuration management
+- Metadata-driven Homepage deployment
 
 ---
 
-# Publishing Platform
+# Abbey Toolkit
 
-The BradCooke.com publishing platform is now operational.
+Current commands include:
 
-Current capabilities include:
+- abbey
+- abbey ai
+- abbey doctor
+- abbey help
+- abbey journal
 
-- External Markdown content directory
-- Astro Content Collections
-- Metadata validation
-- Dynamic navigation
+Development is shifting toward making the toolkit the primary interface for managing the lab.
+
+Upcoming enhancements include:
+
+- Expanded abbey-doctor validation
+- Improved abbey-status
+- AI-assisted project awareness
+- Additional workflow automation
+
+---
+
+# Website Status
+
+BradCooke.com now includes:
+
+- Home page
+- About page
+- Abbey Root project page
+- Power Infrastructure project page
 - Dynamic project pages
-- Dynamic project listing
 - Journal collection
-- Reusable Astro components
-- Local development workflow
 - Dynamic journal pages
 - Previous/next journal navigation
-- shared date formatting
 
-Markdown remains the authoritative source for publishable content.
+Current focus:
 
----
-
-# Developer Toolkit
-
-Current toolkit capabilities include:
-
-Current toolkit capabilities include:
-
-- Standardized command interface
-- Project status reporting
-- Project health validation (`abbey-doctor`)
-- Documentation generation
-- Git helpers
-- Website development helpers
-- Build automation
-- Validation workflows
-
-The toolkit is evolving toward a project-aware development environment.
+- Publish additional journal entries
+- Improve reusable components
+- Build technical content
+- Prepare GitHub Pages deployment
 
 ---
 
-# Single Source of Truth
+# AI Platform
 
-Abbey Root continues to follow a metadata-first philosophy.
+Current AI platform:
 
-Information should be described once and reused everywhere practical.
+- Dedicated AI Worker host
+- Open WebUI
+- Local model experimentation
+- abbey ai command
 
-Examples include:
+Long-term direction:
 
-- Ansible inventory
-- Host metadata
-- Website front matter
-- Tool metadata
-- Markdown content
-
-These sources generate documentation, navigation, reports, and website content.
-
----
-
-# Standard Workflow
-
-A normal Abbey Root development session is becoming:
-
-1. Start the development environment.
-2. Review project status.
-3. Build or improve infrastructure.
-4. Update documentation.
-5. Write a journal entry.
-6. Commit changes.
-7. Push to GitHub.
-8. Synchronize development systems.
+- Project-aware AI
+- AI-assisted documentation
+- AI-assisted project planning
+- AI-assisted publishing
+- AI-assisted infrastructure management
 
 ---
 
-# Current Direction
+# Documentation
 
-Abbey Root is no longer simply a Linux lab.
+Maintained documentation includes:
 
-It has become a collection of interconnected systems:
+- Roadmap
+- Project Status
+- Backlog
+- Next Session
+- Ideas
+- Journal entries
 
-- Infrastructure
-- Automation
-- Documentation
-- Developer toolkit
-- Publishing platform
-- AI experimentation
+Documentation is considered a first-class component of the project rather than an afterthought.
 
-Each system reinforces the others through shared metadata, automation, and reusable components.
+---
 
-The long-term vision remains:
+# Recent Accomplishments
 
-- Build once.
-- Describe once.
-- Generate everything else.
+Recent milestones include:
 
-While AI plays an important role throughout the project, its purpose is to amplify creativity and understanding rather than replace them.
+- Created abbey-doctor
+- Created abbey ai
+- Created abbey journal
+- Implemented metadata-driven toolkit architecture
+- Completed Astro journal platform
+- Added dynamic journal navigation
+- Standardized developer workflow
+- Installed 2.5 Gb networking
+- Recovered Proxmox from hardware failure
+- Continued physical lab organization
+
+---
+
+# Current Challenges
+
+Current work includes:
+
+- Completing the physical data closet
+- Publishing additional website content
+- Expanding AI integration
+- Increasing developer toolkit capabilities
+- Mapping apartment Ethernet infrastructure
+
+---
+
+# Next Major Milestones
+
+Near-term goals:
+
+- Continue publishing Abbey Root content
+- Improve abbey-doctor networking validation
+- Expand abbey ai capabilities
+- Complete data closet organization
+- Publish BradCooke.com
+
+Long-term goals:
+
+- AI-aware developer environment
+- Self-validating infrastructure
+- AI-assisted publishing platform
+- Reproducible lab deployments
+- Complete Infrastructure-as-Code environment
+
+---
+
+# Project Health
+
+Infrastructure: 🟢 Healthy
+
+Documentation: 🟢 Active
+
+Automation: 🟢 Mature
+
+Website: 🟡 Active Development
+
+AI Platform: 🟡 Rapid Development
+
+Developer Toolkit: 🟢 Active Development
+
+Overall Project Status: 🟢 Excellent Progress
+
+The project continues to follow its core philosophy:
+
+- Build useful systems.
+- Automate repetitive work.
+- Document everything.
+- Learn by building.
+- Rebuild rather than repair.
