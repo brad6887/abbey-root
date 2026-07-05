@@ -65,6 +65,9 @@ Continue building Abbey Root by improving the developer toolkit, expanding self-
 - [ ] Continue building the project-aware developer environment.
 - [ ] Create repeatable AI benchmark prompts based on the Abbey Session Workflow.
 - [ ] Compare AI model responses against Abbey Root workflow expectations.
+- Maintain the AI News review process.
+- Perform periodic AI technology reviews.
+- Re-run Abbey AI Benchmarks after significant model releases.
 
 ---
 
