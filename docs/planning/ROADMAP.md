@@ -1,91 +1,145 @@
-# Abbey Root Roadmap
+Abbey Root Roadmap
 
-## Phase 1 - Infrastructure
+The roadmap describes the major milestones in the evolution of Abbey Root.
 
-- [x] Proxmox
-- [x] Linux virtual machines
-- [x] Docker
-- [x] Homepage
-- [x] Ansible
-- [x] Documentation generation
-- [x] Backup strategy
-- [x] Developer toolkit
+Unlike the backlog, it focuses on long-term capabilities rather than individual tasks.
 
-### Infrastructure Maturity
+⸻
 
-- [x] Reproducible Ansible roles
-- [x] Self-documenting infrastructure
-- [x] Standardized command-line toolkit
-- [x] Metadata-driven developer toolkit
-- [x] Automated documentation generation
-- [x] Consistent developer workflow across lab systems
-- [x] Repository health validation (`abbey-doctor`)
+Phase 1 - Infrastructure Foundation ✅
 
----
+Core Infrastructure
 
-## Phase 2 - Publishing Platform
+* Proxmox
+* Linux virtual machines
+* Docker
+* Homepage
+* Ansible
+* Documentation generation
+* Backup strategy
+* Developer toolkit
 
-### Foundation
+Infrastructure Maturity
 
-- [x] Content architecture
-- [x] Publishing philosophy
-- [x] Markdown pipeline
-- [x] Astro development environment
-- [x] Astro integration
-- [x] Dynamic navigation
-- [x] Dynamic project routing
-- [x] Project collections
-- [x] Reusable website components
-- [x] Local development workflow
+* Reproducible Ansible roles
+* Self-documenting infrastructure
+* Standardized command-line toolkit
+* Metadata-driven developer toolkit
+* Automated documentation generation
+* Consistent developer workflow
+* Repository health validation (abbey-doctor)
 
-### Content
+⸻
 
-- [x] Home page
-- [x] About page
-- [x] Initial Projects page
-- [x] Abbey Root project page
-- [x] Power Infrastructure project page
-- [ ] Contact page
-- [ ] First technical articles
+Phase 2 - Documentation & Developer Experience 🚧
 
-### Journal
+Documentation Platform
 
-[x] Journal content collection
-[x] Journal landing page
-[X] Journal detail pages
-[X] Journal navigation
+* Documentation architecture
+* Guide system
+* Reference documentation
+* Planning documentation
+* Documentation standards
+* Journal platform
+* Historical journal consolidation
 
-### Deployment
+Developer Workflow
 
-- [ ] GitHub Pages workflow
-- [ ] Custom domain configuration
-- [ ] First public release of BradCooke.com
+* abbey journal
+* abbey session
+* abbey end
+* Project-aware session workflow
+* Self-documenting developer workflows
 
----
+Self-Documenting Platform
 
-## Phase 3 - AI Publishing
+* Metadata-driven documentation
+* Generated project metrics
+* Generated command reference
+* Generated documentation index
+* Documentation validation
+* Eliminate manually maintained generated documentation
 
-- [ ] ai-worker01 development environment
-- [ ] AI-assisted editing
-- [ ] AI-assisted content generation
-- [ ] AI-generated project summaries
-- [ ] AI-assisted publishing
-- [ ] Search
-- [ ] RSS
-- [ ] Content indexing
-- [ ] AI project context engine
-- [ ] AI task recommendations
-- [ ] AI documentation review
-- [ ] AI-assisted project historian
-- [ ] AI session summaries
+⸻
 
----
+Phase 3 - Publishing Platform 🚧
 
-## Phase 4 - Continuous Automation
+Foundation
 
-- [ ] Automated website deployment
-- [ ] AI-assisted documentation
-- [ ] Infrastructure dashboards
-- [ ] Self-updating documentation
-- [ ] Self-validating developer toolkit
-- [ ] AI-assisted project historian
+* Content architecture
+* Publishing philosophy
+* Markdown pipeline
+* Astro development environment
+* Dynamic routing
+* Reusable website components
+
+Content
+
+* Home page
+* About page
+* Abbey Root project page
+* Power Infrastructure project page
+* Contact page
+* Technical articles
+* Operations manual
+
+Publishing
+
+* GitHub Pages deployment
+* Custom domain
+* Search
+* RSS
+* Public launch
+
+⸻
+
+Phase 4 - Project-Aware AI
+
+* AI project context engine
+* AI task recommendations
+* AI documentation review
+* AI-assisted publishing
+* AI-generated project summaries
+* AI-assisted project historian
+* AI session summaries
+* AI-assisted documentation generation
+
+⸻
+
+Phase 5 - Autonomous Platform
+
+* Self-documenting platform
+* Self-validating platform
+* Automated website deployment
+* Infrastructure dashboards
+* Generated project metrics
+* Project-aware developer environment
+* Continuous documentation generation
+
+⸻
+
+Long-Term Vision
+
+Abbey Root continues evolving from:
+
+Linux Lab
+
+↓
+
+Infrastructure-as-Code Platform
+
+↓
+
+Developer Platform
+
+↓
+
+Project-Aware Development Environment
+
+↓
+
+Self-Documenting Platform
+
+↓
+
+AI-Assisted Engineering Platform

@@ -5,7 +5,7 @@ planning_files=(
   "NEXT.md"
   "ROADMAP.md"
   "BACKLOG.md"
-  "IDEAS.md"
+  "VISION.md"
 )
 
 for file in "${planning_files[@]}"; do

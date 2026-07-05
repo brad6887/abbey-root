@@ -2,36 +2,40 @@
 
 ## Primary Goal
 
-Continue building Abbey Root by publishing recent work, improving the developer toolkit, and documenting the physical lab.
+Continue building Abbey Root by improving the developer toolkit, expanding self-documenting workflows, documenting the physical lab, and designing secure remote access for working away from home.
 
 ---
 
 ## High Priority
 
-- [ ] Publish the three July 4 journal entries.
+- [ ] Design secure remote access to Abbey Root for working away from home.
+- [ ] Enhance `abbey-session` with project-aware recommendations.
+- [ ] Continue reducing manually maintained documentation.
 - [ ] Document the completed data closet.
 - [ ] Add network validation checks to `abbey-doctor`.
-- [ ] Review and update project documentation.
 
 ---
 
 ## Abbey Toolkit
 
+- [ ] Expand `abbey-session` with planning summaries.
+- [ ] Design and implement `abbey-end`.
 - [ ] Add bridge interface validation to `abbey-doctor`.
 - [ ] Report negotiated Ethernet link speed.
 - [ ] Verify gateway connectivity.
 - [ ] Verify Internet connectivity.
 - [ ] Detect missing or replaced network interfaces.
 - [ ] Improve `abbey-status`.
+- [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Continue expanding `abbey ai`.
 
 ---
 
 ## BradCooke.com
 
-- [ ] Publish the new Abbey Root journal entries.
-- [ ] Improve `ProjectHeader`.
+- [ ] Publish today's documentation journal entry.
 - [ ] Flesh out the Contact page.
+- [ ] Improve `ProjectHeader`.
 - [ ] Continue improving reusable components.
 - [ ] Continue refining website styling.
 
@@ -44,15 +48,19 @@ Continue building Abbey Root by publishing recent work, improving the developer 
 - [ ] Map apartment Ethernet wall jacks.
 - [ ] Label structured wiring cabinet.
 - [ ] Create a network diagram.
+- [ ] Evaluate VPN, Tailscale, and Cloudflare Tunnel for remote connectivity.
+- [ ] Design and implement secure remote access to the lab.
 
 ---
 
 ## AI
 
-- [ ] Design project context loading.
+- [ ] Expand project context loading.
+- [ ] Improve AI project awareness.
 - [ ] Explore AI-assisted project recommendations.
-- [ ] Begin planning AI project awareness.
-- [ ] Define how AI will consume project documentation.
+- [ ] Define how AI consumes project documentation.
+- [ ] Add AI-assisted documentation generation from project metadata.
+- [ ] Continue building the project-aware developer environment.
 
 ---
 
@@ -60,7 +68,8 @@ Continue building Abbey Root by publishing recent work, improving the developer 
 
 - [ ] Begin workstation documentation.
 - [ ] Review the roadmap for completed milestones.
-- [ ] Continue refining project documentation.
+- [ ] Continue refining documentation.
+- [ ] Begin Architecture Decision Records.
 
 ---
 
@@ -68,9 +77,10 @@ Continue building Abbey Root by publishing recent work, improving the developer 
 
 Priorities may change if operational issues arise.
 
-Continue following the Abbey Root philosophy:
+Current emphasis:
 
-- Build useful things.
+- Build useful systems.
 - Automate repetitive work.
-- Document progress.
-- Learn from every problem encountered.
+- Generate documentation whenever practical.
+- Write metadata once and generate everything else.
+- Continue improving the developer experience.

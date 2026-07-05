@@ -6,15 +6,21 @@ Last Updated: 2026-07-05
 
 Project Snapshot
 
-Project Phase: Infrastructure Expansion
+Project Phase
 
-Overall Health: 🟢 Healthy
+Developer Platform
 
-Primary Goal: Develop Abbey Root into a self-documenting, AI-assisted Infrastructure-as-Code platform.
+Overall Health
 
-Current Focus:
+🟢 Healthy
 
-* Documentation system
+Primary Goal
+
+Develop Abbey Root into a self-documenting, AI-assisted Infrastructure-as-Code platform.
+
+Current Focus
+
+* Self-documenting platform
 * Developer toolkit
 * AI-assisted workflows
 * BradCooke.com
@@ -24,162 +30,192 @@ Current Focus:
 
 Current Session
 
-Session Theme: Documentation Day
+Session Theme
 
-Objectives:
+Documentation Day
 
-* Review and improve project documentation
-* Establish documentation standards
-* Evaluate documentation organization
-* Design session workflow automation
-* Improve AI project context
+Objectives
+
+* Establish documentation architecture.
+* Standardize documentation.
+* Create project standards.
+* Improve AI project context.
+* Build abbey session.
+
+Session Status
+
+Completed
 
 ⸻
 
 Overall Status
 
-Abbey Root has successfully evolved from a basic Linux learning lab into an AI-assisted Infrastructure-as-Code platform.
+Platform
 
-The core infrastructure is stable, reproducible, and managed through Git, Ansible, and a growing developer toolkit. Development is now shifting away from building foundational infrastructure and toward improving automation, documentation, AI integration, and content creation.
+* Infrastructure stable.
+* Documentation architecture established.
+* Developer toolkit expanding.
+* Website actively developed.
+* AI integration increasing.
 
-The project is entering a stage where the infrastructure increasingly supports itself, allowing more time to be spent learning, experimenting, and building useful projects.
+Development Direction
+
+* Reduce manual maintenance.
+* Increase automation.
+* Improve developer workflows.
+* Expand project awareness.
+* Continue technical publishing.
 
 ⸻
 
 Immediate Priorities
 
-1. Continue improving project documentation.
-2. Expand the Abbey developer toolkit.
-3. Publish Abbey Root journal entries.
-4. Continue developing BradCooke.com.
-5. Improve AI-assisted workflows.
-6. Enhance abbey-doctor health checks.
-7. Complete documentation of the physical lab.
+* Expand the Abbey developer toolkit.
+* Design secure remote access.
+* Continue reducing manually maintained documentation.
+* Continue developing BradCooke.com.
+* Improve AI-assisted workflows.
+* Enhance abbey-doctor.
+* Complete documentation of the physical lab.
 
 ⸻
 
 Infrastructure
 
-Virtualization
+Status
 
-* ✅ Proxmox operational
-* ✅ Linux virtual machines deployed
-* ✅ VM templates established
-* ✅ Infrastructure managed through Git and Ansible
+🟢 Healthy
 
-Networking
+Completed
 
-* ✅ 2.5 Gb network upgrade completed
-* ✅ TRENDnet 8-port 2.5 Gb switch installed
-* ✅ Proxmox upgraded to 2.5 Gb Ethernet
-* ✅ Standardized networking
-* ⏳ Apartment Ethernet mapping in progress
+* Proxmox operational.
+* Linux virtual machines deployed.
+* VM templates established.
+* Infrastructure managed through Git and Ansible.
+* 2.5 Gb networking deployed.
+* Passwordless SSH configured.
+* Ansible Vault configured.
 
-Automation
+Current Work
 
-Current automation includes:
-
-* Infrastructure managed through Ansible
-* Passwordless SSH
-* Ansible Vault
-* Metadata-driven Homepage deployment
-* Standardized configuration management
-
-Detailed inventories of hosts, containers, Ansible roles, playbooks, and toolkit commands will eventually be generated automatically.
+* Map apartment Ethernet wall jacks.
+* Document data closet.
+* Design secure remote access.
 
 ⸻
 
 Developer Toolkit
 
-The Abbey toolkit is becoming the primary interface for managing the lab.
+Status
 
-Current development focuses on:
+🟢 Active Development
 
-* AI integration
-* Health validation
-* Documentation automation
-* Workflow automation
-* Project awareness
+Current Capabilities
+
+* abbey doctor
+* abbey status
+* abbey ai
+* abbey journal
+* abbey session
+
+Current Focus
+
+* Project awareness.
+* Documentation automation.
+* Workflow automation.
+* Self-documenting workflows.
 
 ⸻
 
 Website
 
-BradCooke.com now includes:
+Status
 
-* Project pages
-* Journal platform
-* Dynamic content
-* Previous/next journal navigation
+🟡 Active Development
 
-Current priorities:
+Completed
 
-* Publish additional journal entries
-* Expand technical content
-* Improve reusable components
-* Prepare GitHub Pages deployment
+* Project pages.
+* Journal platform.
+* Dynamic routing.
+* Previous/next navigation.
+
+Current Work
+
+* Publish additional journal entries.
+* Expand technical content.
+* Improve reusable components.
+* Prepare GitHub Pages deployment.
 
 ⸻
 
 AI Platform
 
-Current capabilities include:
+Status
 
-* Dedicated AI Worker
-* Open WebUI
-* Local model experimentation
-* abbey ai
+🟡 Rapid Development
 
-Future direction includes:
+Current Capabilities
 
-* Project-aware AI
-* AI-assisted documentation
-* AI-assisted planning
-* AI-assisted publishing
-* AI-assisted infrastructure management
+* Open WebUI.
+* Local model experimentation.
+* abbey ai.
+
+Current Focus
+
+* Project-aware AI.
+* Documentation assistance.
+* Planning assistance.
+* Publishing assistance.
 
 ⸻
 
 Documentation
 
-Documentation is considered a first-class component of Abbey Root.
+Status
 
-Current work focuses on:
+🟢 Active
 
-* Standardizing documentation
-* Increasing automation
-* Improving AI context
-* Building operational guides
-* Creating reproducible workflows
+Completed
+
+* Documentation architecture.
+* Guide system.
+* Documentation standards.
+* Planning standards.
+* Reference standards.
+
+Current Focus
+
+* Metadata-driven documentation.
+* Self-documenting workflows.
+* Operational guides.
+* AI project context.
 
 ⸻
 
 Recent Accomplishments
 
-Recent milestones include:
-
-* Created abbey-doctor
-* Created abbey ai
-* Created abbey journal
-* Implemented metadata-driven toolkit architecture
-* Completed Astro journal platform
-* Added dynamic journal navigation
-* Standardized developer workflow
-* Installed 2.5 Gb networking
-* Recovered Proxmox after hardware failure
-* Continued physical lab organization
+* Established documentation architecture.
+* Created Abbey Root guide system.
+* Created project reference standards.
+* Created abbey session.
+* Created abbey-doctor.
+* Created abbey journal.
+* Created abbey ai.
+* Consolidated project history into journal entries.
+* Completed Astro journal platform.
+* Installed 2.5 Gb networking.
 
 ⸻
 
 Current Challenges
 
-Current work includes:
-
-* Completing the physical data closet
-* Publishing additional website content
-* Expanding AI integration
-* Increasing developer toolkit capabilities
-* Mapping apartment Ethernet infrastructure
+* Secure remote access.
+* Physical data closet documentation.
+* Metadata-driven documentation.
+* Project-aware automation.
+* AI integration.
+* BradCooke.com publishing.
 
 ⸻
 
@@ -187,52 +223,81 @@ Next Major Milestones
 
 Near Term
 
-* Complete documentation improvements
-* Expand abbey-doctor
-* Improve abbey ai
-* Complete data closet organization
-* Publish BradCooke.com
+* Expand abbey-session.
+* Create abbey-end.
+* Improve abbey-doctor.
+* Implement remote access.
+* Continue metadata-driven documentation.
+* Publish BradCooke.com.
 
 Long Term
 
-* AI-aware development environment
-* Self-documenting infrastructure
-* Self-validating infrastructure
-* AI-assisted publishing
-* Reproducible Infrastructure-as-Code deployments
+* Project-aware development environment.
+* Self-documenting platform.
+* Self-validating infrastructure.
+* AI-assisted publishing.
+* Reproducible Infrastructure-as-Code platform.
 
 ⸻
 
 Project Metrics
 
-Planned
+Current
 
-Project metrics will eventually be generated automatically.
+* Metrics generated manually.
 
-Examples include:
+Future
 
-* Virtual machines
-* Docker hosts
-* Containers
-* Ansible roles
-* Playbooks
-* Toolkit commands
-* Website pages
-* Journal entries
-* Documentation statistics
+Generate automatically:
+
+* Virtual machines.
+* Docker hosts.
+* Containers.
+* Ansible roles.
+* Playbooks.
+* Toolkit commands.
+* Website pages.
+* Journal entries.
+* Documentation statistics.
 
 ⸻
 
 Project Health
 
-Area	Status
-Infrastructure	🟢 Healthy
-Documentation	🟢 Active
-Automation	🟢 Mature
-Developer Toolkit	🟢 Active Development
-Website	🟡 Active Development
-AI Platform	🟡 Rapid Development
+Infrastructure
 
-Overall Project Status: 🟢 Excellent Progress
+🟢 Healthy
 
-Abbey Root continues to make steady progress toward becoming a reproducible, self-documenting Infrastructure-as-Code platform with AI integrated into everyday development workflows.
+Documentation
+
+🟢 Active
+
+Automation
+
+🟢 Mature
+
+Developer Toolkit
+
+🟢 Active Development
+
+Website
+
+🟡 Active Development
+
+AI Platform
+
+🟡 Rapid Development
+
+Overall
+
+🟢 Excellent Progress
+
+⸻
+
+Notes
+
+This document follows the schema defined in:
+
+docs/reference/PLANNING_SCHEMA.md
+
+Section names should remain stable to support future Abbey toolkit commands and AI-assisted workflows.
