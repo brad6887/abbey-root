@@ -1,3 +1,14 @@
+---
+title: "Project Philosophy and Automation"
+date: 2026-06-24
+summary: "Defined the Abbey Root philosophy and completed major Ansible, Homepage, and infrastructure automation milestones."
+tags:
+  - Automation
+  - Ansible
+  - Documentation
+  - Homepage
+  - Infrastructure
+---
 # Abbey Root
 
 ## Purpose

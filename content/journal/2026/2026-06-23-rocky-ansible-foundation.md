@@ -1,3 +1,14 @@
+---
+title: "Rocky Ansible Foundation"
+date: 2026-06-23
+summary: "Created rocky-ansible01 and established the first Ansible control node foundation for Abbey Root."
+tags:
+  - Ansible
+  - Linux
+  - Automation
+  - Infrastructure
+  - Git
+---
 # Abbey Root Status - 2026-06-23
 
 ## Completed

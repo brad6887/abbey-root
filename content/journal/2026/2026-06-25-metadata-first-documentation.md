@@ -1,3 +1,14 @@
+---
+title: "Metadata-First Documentation"
+date: 2026-06-25
+summary: "Introduced metadata-first documentation and generated project documentation from inventory and host variables."
+tags:
+  - Documentation
+  - Automation
+  - Ansible
+  - Homepage
+  - Infrastructure
+---
 # Abbey Root Status
 Date: 2026-06-25
 

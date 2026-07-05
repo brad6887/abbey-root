@@ -1,3 +1,14 @@
+---
+title: "Project-Aware Platform"
+date: 2026-07-02
+summary: "Expanded Abbey Root into an integrated platform for infrastructure, tooling, publishing, and AI-assisted development."
+tags:
+  - Automation
+  - Website
+  - Documentation
+  - AI
+  - Project Management
+---
 # Abbey Root Status
 Date: 2026-07-02
 
