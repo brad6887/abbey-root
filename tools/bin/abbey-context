@@ -127,6 +127,16 @@ Repository: $ABBEY_ROOT
 EOF
 }
 
+build_brief() {
+  {
+    write_header
+    include_file "Project Status" "docs/status/PROJECT_STATUS.md" 80
+    include_file "Next Actions" "docs/planning/NEXT.md" 80
+    recent_commits
+    git_status
+  } > "$CURRENT_CONTEXT"
+}
+
 build_next() {
   {
     write_header
@@ -173,6 +183,10 @@ build_full() {
 }
 
 case "$mode" in
+   brief)
+    build_brief
+    ;;
+
   next)
     build_next
     ;;
@@ -195,6 +209,7 @@ case "$mode" in
 Abbey Context
 
 Usage:
+  abbey context brief      Build short default AI context
   abbey context next       Build next-task context
   abbey context website    Build website/publishing context
   abbey context full       Build full knowledge context
