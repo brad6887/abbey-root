@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+set -u
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+export ABBEY_ROOT
+
+ok() {
+  echo "OK   $*"
+}
+
+warn() {
+  echo "WARN $*"
+}
+
+info() {
+  echo "INFO $*"
+}
+
+section() {
+  echo
+  echo "$1"
+  echo "----------"
+}
+
+latest_journal() {
+  find "$ABBEY_ROOT/content/journal" -type f -name "*.md" 2>/dev/null | sort | tail -n 1
+}
+
+echo "========================================"
+echo " Abbey Root Session"
+echo "========================================"
+echo
+echo "Date: $(date)"
+echo "Host: $(hostname)"
+echo "Repo: $ABBEY_ROOT"
+
+section "Repository"
+
+if git -C "$ABBEY_ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  ok "Git repository detected"
+else
+  warn "Not a Git repository"
+  exit 1
+fi
+
+branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null || true)"
+if [[ -n "$branch" ]]; then
+  ok "Current branch: $branch"
+else
+  warn "Could not determine current branch"
+fi
+
+if [[ -z "$(git -C "$ABBEY_ROOT" status --porcelain)" ]]; then
+  ok "Working tree clean"
+else
+  warn "Working tree has uncommitted changes"
+fi
+
+if git -C "$ABBEY_ROOT" remote -v | grep -q .; then
+  ok "Git remote configured"
+else
+  warn "No Git remote configured"
+fi
+
+section "Planning"
+
+project_status="$ABBEY_ROOT/docs/planning/PROJECT_STATUS.md"
+next_file="$ABBEY_ROOT/docs/planning/NEXT.md"
+
+if [[ -f "$project_status" ]]; then
+  ok "Project status: docs/planning/PROJECT_STATUS.md"
+else
+  warn "Missing PROJECT_STATUS.md"
+fi
+
+if [[ -f "$next_file" ]]; then
+  ok "Next tasks: docs/planning/NEXT.md"
+else
+  warn "Missing NEXT.md"
+fi
+
+section "Journal"
+
+journal="$(latest_journal)"
+
+if [[ -n "$journal" ]]; then
+  rel="${journal#$ABBEY_ROOT/}"
+  ok "Most recent journal: $rel"
+else
+  warn "No journal entries found"
+fi
+
+section "Suggested Start"
+
+echo "1. Review docs/planning/PROJECT_STATUS.md"
+echo "2. Review docs/planning/NEXT.md"
+echo "3. Choose today's session theme"
+echo "4. Keep related work grouped together"
+echo "5. Update documentation before committing"
+
+echo
+echo "Tip: run 'abbey status' or 'abbey doctor' for deeper checks."

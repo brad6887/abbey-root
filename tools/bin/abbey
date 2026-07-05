@@ -29,6 +29,11 @@ case "$command" in
     "$ABBEY_ROOT/tools/bin/abbey-status" "$@"
     ;;
 
+  session)
+    shift
+    "$ABBEY_ROOT/tools/bin/abbey-session" "$@"
+    ;;
+
   knowledge)
     shift
     "$ABBEY_ROOT/tools/bin/abbey-knowledge" "$@"
@@ -53,6 +58,7 @@ Usage:
   abbey journal <title>     Create or open a journal entry
   abbey ai                  Start Abbey AI helper
   abbey status              Show local Abbey Root status
+  abbey session             Start an Abbey Root work session
   abbey knowledge build     Build a local knowledge snapshot
   abbey help                Show this help
 
@@ -61,6 +67,7 @@ Commands:
   journal                   Create or open a journal entry
   ai                        AI helper commands
   status                    Show local system/project status
+  session                   Start an Abbey Root work session
   knowledge                 Build/view Abbey knowledge context
 HELP
     ;;
