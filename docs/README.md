@@ -1,43 +1,137 @@
-# Abbey Root Documentation
+Abbey Root Documentation
 
-Abbey Root is a self-documenting home Linux lab managed with Git, Ansible, Docker, and generated documentation.
+Welcome to the Abbey Root documentation.
 
-## Overview
+Abbey Root is an AI-assisted Infrastructure-as-Code home lab focused on learning, automation, documentation, and technical publishing. The documentation is organized by purpose to make information easy to find, maintain, and automate.
 
-- [Lab Summary](generated/lab-summary.md)
+Whether you’re learning how the platform works, looking for operational guidance, or exploring the project’s current status, this documentation is intended to guide you to the appropriate location.
 
----
+⸻
 
-## Infrastructure
+Start Here
 
-- [Servers](generated/servers.md)
-- [Network](generated/network.md)
-- [Inventory](generated/inventory.md)
-- [Architecture](generated/architecture.md)
-- Hardware
-- Backup Strategy
+If you are new to Abbey Root, read these documents in order.
 
-## Applications
+* Getting Started
+* Architecture
+* Environment Overview
+* Session Workflow
+* Documentation Standards
 
-- [Services](generated/services.md)
-- [Containers](generated/containers.md)
+These guides provide the foundation for understanding the project.
 
-## Automation
+⸻
 
-- [Automation](generated/automation.md)
+Planning
 
-## Guides
+Planning documents describe the current state of the project and its future direction.
 
-- [Environment Overview](guides/environment-overview.md)
+* Project Status
+* Next
+* Backlog
+* Roadmap
+* Ideas
 
-## Status
+⸻
 
-- [Project Status](status/PROJECT_STATUS.md)
+Reference
 
-## Regenerate Documentation
+Reference documents describe the current environment and project standards.
 
-Run from the repository root:
+* Hardware
+* Backups
+* Backup Strategy
+* External Services
 
-```bash
+Additional reference documentation will be added as the project evolves.
+
+⸻
+
+Runbooks
+
+Runbooks provide repeatable operational procedures.
+
+* Network Interface Migration
+
+⸻
+
+Generated Documentation
+
+The following documents are generated automatically from project metadata and should not be edited manually.
+
+Environment
+
+* Lab Summary
+* Architecture
+* Servers
+* Inventory
+* Network
+
+Services
+
+* Services
+* Containers
+
+Automation
+
+* Automation
+* Abbey Commands
+
+If generated documentation is incorrect, update the automation that produces it rather than editing the generated files.
+
+⸻
+
+Architecture Decision Records
+
+Architecture Decision Records (ADRs) document significant design decisions made throughout the project’s development.
+
+The adr/ directory will contain records describing:
+
+* The problem being solved
+* The decision that was made
+* Alternatives that were considered
+* The reasoning behind the decision
+
+⸻
+
+Project Journal
+
+The historical record of Abbey Root is maintained under:
+
+content/journal/
+
+Journal entries document:
+
+* Accomplishments
+* Lessons learned
+* Design decisions
+* Problems encountered
+* Future ideas
+
+The journal serves as the long-term history of the project and provides the source content for BradCooke.com.
+
+⸻
+
+Regenerating Documentation
+
+Generated documentation can be rebuilt from the repository root:
+
 ./scripts/ansible-docs.sh
-```
+
+⸻
+
+Documentation Principles
+
+Abbey Root documentation follows several guiding principles:
+
+* Automate whenever possible.
+* Maintain a single source of truth.
+* Keep documentation current.
+* Prefer small, focused documents.
+* Write for both people and AI.
+* Record significant architectural decisions.
+* Preserve the project’s history through journal entries.
+
+Additional documentation standards are described in:
+
+* Documentation Standards
