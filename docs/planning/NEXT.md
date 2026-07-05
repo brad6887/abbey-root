@@ -28,6 +28,7 @@ Continue building Abbey Root by improving the developer toolkit, expanding self-
 - [ ] Improve `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Continue expanding `abbey ai`.
+- [ ] Add AI benchmark prompt support to `abbey ai`.
 
 ---
 
@@ -61,6 +62,8 @@ Continue building Abbey Root by improving the developer toolkit, expanding self-
 - [ ] Define how AI consumes project documentation.
 - [ ] Add AI-assisted documentation generation from project metadata.
 - [ ] Continue building the project-aware developer environment.
+- [ ] Create repeatable AI benchmark prompts based on the Abbey Session Workflow.
+- [ ] Compare AI model responses against Abbey Root workflow expectations.
 
 ---
 
