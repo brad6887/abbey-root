@@ -39,6 +39,11 @@ case "$command" in
     "$ABBEY_ROOT/tools/bin/abbey-site" "$@"
     ;;
 
+  context)
+    shift
+    "$ABBEY_ROOT/tools/bin/abbey-context" "$@"
+    ;;    
+
   help|-h|--help)
     cat <<'HELP'
 Abbey Root Toolkit

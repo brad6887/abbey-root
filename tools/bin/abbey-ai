@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
-# COMMAND: ai
-# DESCRIPTION: Show Abbey AI helper information
+#
+# Abbey Root Tool: abbey-ai
+#
+# Purpose:
+#   Interact with Abbey Root AI services and project context.
+#
+# Usage:
+#   abbey ai
+#   abbey ai context
+#   abbey ai open
+#   abbey ai check
+#   abbey ai models
+#   abbey ai ask <prompt>
+#   abbey ai rebuild
+#
 set -euo pipefail
 
 ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+
 source "$ABBEY_ROOT/tools/lib/config.sh"
 load_abbey_config
 
@@ -36,47 +50,47 @@ ensure_knowledge() {
   fi
 }
 
-case "${1:-info}" in
-  info)
-    ensure_knowledge
+ai_info() {
+  ensure_knowledge
 
-    echo "Abbey AI"
-    echo
-    echo "Open WebUI: $OPEN_WEBUI_URL"
-    echo "Knowledge:  $KNOWLEDGE_FILE"
-    echo
-    echo "Suggested prompt to paste into Open WebUI:"
-    echo
-    cat <<'PROMPT'
+  echo "Abbey AI"
+  echo
+  echo "Open WebUI: $OPEN_WEBUI_URL"
+  echo "Knowledge:  $KNOWLEDGE_FILE"
+  echo
+  echo "Suggested prompt to paste into Open WebUI:"
+  echo
+  cat <<'PROMPT'
 You are Abbey AI, an assistant for the Abbey Root home Linux lab. Use the project knowledge below as context. Help with Linux, Docker, Ansible, Git, documentation, troubleshooting, and lab design. Prefer practical step-by-step guidance.
 PROMPT
-    echo
-    echo "Attach or paste this file:"
-    echo "$KNOWLEDGE_FILE"
-    ;;
+  echo
+  echo "Attach or paste this file:"
+  echo "$KNOWLEDGE_FILE"
+}
 
-  context)
-    ensure_knowledge
-    cat "$KNOWLEDGE_FILE"
-    ;;
+ai_context() {
+  ensure_knowledge
+  cat "$KNOWLEDGE_FILE"
+}
 
-  rebuild)
-    "$ABBEY_ROOT/tools/bin/abbey-knowledge" build
-    ;;
+ai_rebuild() {
+  "$ABBEY_ROOT/tools/bin/abbey-knowledge" build
+}
 
-  open)
-    echo "$OPEN_WEBUI_URL"
-    ;;
+ai_open() {
+  echo "$OPEN_WEBUI_URL"
+}
 
-  check)
-    echo "Checking Open WebUI..."
-    echo "URL: $OPEN_WEBUI_URL"
-    echo
+ai_check() {
+  echo "Checking Open WebUI..."
+  echo "URL: $OPEN_WEBUI_URL"
+  echo
 
-    if curl -fsS "$OPEN_WEBUI_URL/api/config" >/tmp/abbey-openwebui-config.json 2>/dev/null; then
-      echo "OK   Open WebUI API reachable"
-      if command -v python3 >/dev/null 2>&1; then
-        python3 - <<'PYJSON'
+  if curl -fsS "$OPEN_WEBUI_URL/api/config" >/tmp/abbey-openwebui-config.json 2>/dev/null; then
+    echo "OK   Open WebUI API reachable"
+
+    if command -v python3 >/dev/null 2>&1; then
+      python3 - <<'PYJSON'
 import json
 from pathlib import Path
 
@@ -85,23 +99,25 @@ print(f"INFO Name: {data.get('name', 'unknown')}")
 print(f"INFO Version: {data.get('version', 'unknown')}")
 print(f"INFO Auth enabled: {data.get('features', {}).get('auth', 'unknown')}")
 PYJSON
-      fi
-    else
-      echo "WARN Open WebUI API not reachable"
-      exit 1
     fi
-    ;;
+  else
+    echo "WARN Open WebUI API not reachable"
+    exit 1
+  fi
+}
 
-  models)
-    if [[ -z "${OPEN_WEBUI_API_KEY:-}" ]]; then
-      echo "Missing OPEN_WEBUI_API_KEY."
-      echo "Add it to: $ABBEY_ROOT/.abbey/config.conf"
-      exit 1
-    fi
+ai_models() {
+  if [[ -z "${OPEN_WEBUI_API_KEY:-}" ]]; then
+    echo "Missing OPEN_WEBUI_API_KEY."
+    echo "Add it to: $ABBEY_ROOT/.abbey/config.conf"
+    exit 1
+  fi
 
-    curl -fsS "$OPEN_WEBUI_URL/api/models"       -H "Authorization: Bearer $OPEN_WEBUI_API_KEY"       > /tmp/abbey-openwebui-models.json
+  curl -fsS "$OPEN_WEBUI_URL/api/models" \
+    -H "Authorization: Bearer $OPEN_WEBUI_API_KEY" \
+    > /tmp/abbey-openwebui-models.json
 
-    python3 - <<'PYJSON'
+  python3 - <<'PYJSON'
 import json
 from pathlib import Path
 
@@ -125,41 +141,75 @@ else:
         else:
             print(f"- {model}")
 PYJSON
-    ;;
+}
 
-  ask)
-    shift
-    prompt="${*:-}"
+build_ai_context() {
+  local mode="${1:-next}"
 
-    if [[ -z "$prompt" ]]; then
-      echo "Usage: abbey ai ask <prompt>"
-      exit 1
-    fi
+  if [[ -x "$ABBEY_ROOT/tools/bin/abbey-context" ]]; then
+    "$ABBEY_ROOT/tools/bin/abbey-context" "$mode" >/dev/null
+    "$ABBEY_ROOT/tools/bin/abbey-context" path
+  else
+    ensure_knowledge
+    echo "$KNOWLEDGE_FILE"
+  fi
+}
 
-    if [[ -z "${OPEN_WEBUI_API_KEY:-}" ]]; then
-      echo "Missing OPEN_WEBUI_API_KEY."
-      echo "Add it to: $ABBEY_ROOT/.abbey/config.conf"
-      exit 1
-    fi
+ai_ask() {
+  local context_mode="next"
+  local prompt=""
 
-    python3 - "$OPEN_WEBUI_URL" "$OPEN_WEBUI_API_KEY" "$OPEN_WEBUI_MODEL" "$prompt" <<'PYJSON'
+  if [[ "${1:-}" == "--context" ]]; then
+    context_mode="${2:-next}"
+    shift 2
+  fi
+
+  prompt="${*:-}"
+
+  if [[ -z "$prompt" ]]; then
+    echo "Usage: abbey ai ask [--context next|website|full] <prompt>"
+    exit 1
+  fi
+
+  if [[ -z "${OPEN_WEBUI_API_KEY:-}" ]]; then
+    echo "Missing OPEN_WEBUI_API_KEY."
+    echo "Add it to: $ABBEY_ROOT/.abbey/config.conf"
+    exit 1
+  fi
+
+  context_file="$(build_ai_context "$context_mode")"
+
+  python3 - "$OPEN_WEBUI_URL" "$OPEN_WEBUI_API_KEY" "$OPEN_WEBUI_MODEL" "$context_file" "$prompt" <<'PYJSON'
 import json
 import sys
 import urllib.request
 import urllib.error
+from pathlib import Path
 
-url, api_key, model, prompt = sys.argv[1:5]
+url, api_key, model, context_file, prompt = sys.argv[1:6]
+context = Path(context_file).read_text(encoding="utf-8")
 
 payload = {
     "model": model,
     "messages": [
         {
             "role": "system",
-            "content": "You are Abbey AI, a practical assistant for the Abbey Root Linux lab. Keep answers concise and useful."
+            "content": (
+                "You are Abbey AI, a practical assistant for the Abbey Root Linux lab. "
+                "Use the provided project context when it is relevant. "
+                "Keep answers concise and useful. "
+                "For troubleshooting, give step-by-step actions in the most likely order. "
+                "Do not invent project facts that are not present in the context."
+            )
         },
         {
             "role": "user",
-            "content": prompt
+            "content": (
+                "Abbey Root project context:\n\n"
+                f"{context}\n\n"
+                "User request:\n\n"
+                f"{prompt}"
+            )
         }
     ]
 }
@@ -190,6 +240,38 @@ try:
 except Exception:
     print(json.dumps(data, indent=2))
 PYJSON
+}
+
+command="${1:-info}"
+
+case "$command" in
+  info)
+    ai_info
+    ;;
+
+  context)
+    ai_context
+    ;;
+
+  rebuild)
+    ai_rebuild
+    ;;
+
+  open)
+    ai_open
+    ;;
+
+  check)
+    ai_check
+    ;;
+
+  models)
+    ai_models
+    ;;
+
+  ask)
+    shift
+    ai_ask "$@"
     ;;
 
   help|-h|--help)
@@ -197,7 +279,7 @@ PYJSON
     ;;
 
   *)
-    echo "Unknown ai command: $1"
+    echo "Unknown ai command: $command"
     echo
     usage
     exit 1

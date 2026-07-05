@@ -1,0 +1,215 @@
+#!/usr/bin/env bash
+#
+# Abbey Root Tool: abbey-context
+#
+# Purpose:
+#   Build focused Abbey Root context bundles for AI-assisted work.
+#
+# Usage:
+#   abbey context next
+#   abbey context website
+#   abbey context full
+#
+set -euo pipefail
+
+ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+
+CONTEXT_DIR="$ABBEY_ROOT/.abbey/context"
+CURRENT_CONTEXT="$CONTEXT_DIR/current.md"
+
+mode="${1:-next}"
+
+mkdir -p "$CONTEXT_DIR"
+
+section() {
+  echo
+  echo "## $1"
+  echo
+}
+
+include_file() {
+  local title="$1"
+  local file="$2"
+  local lines="${3:-160}"
+
+  section "$title"
+
+  if [[ -f "$ABBEY_ROOT/$file" ]]; then
+    echo "Source: $file"
+    echo
+    sed -n "1,${lines}p" "$ABBEY_ROOT/$file"
+  else
+    echo "- Not found: $file"
+  fi
+}
+
+include_command() {
+  local title="$1"
+  shift
+
+  section "$title"
+
+  if "$@" 2>/dev/null; then
+    true
+  else
+    echo "- Command failed: $*"
+  fi
+}
+
+list_files() {
+  local title="$1"
+  local path="$2"
+  local pattern="${3:-*}"
+  local maxdepth="${4:-3}"
+
+  section "$title"
+
+  if [[ -d "$ABBEY_ROOT/$path" ]]; then
+    find "$ABBEY_ROOT/$path" -maxdepth "$maxdepth" -type f -name "$pattern" \
+      | sed "s#$ABBEY_ROOT/##" \
+      | sort \
+      | sed 's/^/- /'
+  else
+    echo "- Not found: $path"
+  fi
+}
+
+latest_journals() {
+  section "Latest Journal Entries"
+
+  if [[ -d "$ABBEY_ROOT/content/journal" ]]; then
+    find "$ABBEY_ROOT/content/journal" -type f -name "*.md" \
+      | sort -r \
+      | head -n 5 \
+      | while read -r file; do
+          rel="${file#$ABBEY_ROOT/}"
+          echo "### $rel"
+          echo
+          sed -n '1,80p' "$file"
+          echo
+        done
+  else
+    echo "- Journal directory not found"
+  fi
+}
+
+recent_commits() {
+  section "Recent Commits"
+
+  if [[ -d "$ABBEY_ROOT/.git" ]]; then
+    cd "$ABBEY_ROOT"
+    git log --oneline -10
+  else
+    echo "- Git repository not found"
+  fi
+}
+
+git_status() {
+  section "Git Status"
+
+  if [[ -d "$ABBEY_ROOT/.git" ]]; then
+    cd "$ABBEY_ROOT"
+    git status --short
+  else
+    echo "- Git repository not found"
+  fi
+}
+
+write_header() {
+  cat <<EOF
+# Abbey Root AI Context
+
+Mode: $mode
+Generated: $(date)
+Host: $(hostname)
+Repository: $ABBEY_ROOT
+
+EOF
+}
+
+build_next() {
+  {
+    write_header
+    include_file "Project Status" "docs/status/PROJECT_STATUS.md" 160
+    include_file "Next Actions" "docs/planning/NEXT.md" 160
+    include_file "Roadmap" "docs/planning/ROADMAP.md" 160
+    recent_commits
+    git_status
+    latest_journals
+  } > "$CURRENT_CONTEXT"
+}
+
+build_website() {
+  {
+    write_header
+    include_file "Content Schema" "site/src/content.config.ts" 220
+    list_files "Pages" "content/pages" "*.md"
+    list_files "Projects" "content/projects" "*.md"
+    list_files "Journal Entries" "content/journal" "*.md"
+    include_file "Package" "site/package.json" 120
+    recent_commits
+    git_status
+    latest_journals
+  } > "$CURRENT_CONTEXT"
+}
+
+build_full() {
+  {
+    write_header
+
+    if [[ -x "$ABBEY_ROOT/tools/bin/abbey-knowledge" ]]; then
+      "$ABBEY_ROOT/tools/bin/abbey-knowledge" build >/dev/null
+      knowledge_file="$ABBEY_ROOT/.abbey/knowledge/snapshot.md"
+
+      if [[ -f "$knowledge_file" ]]; then
+        cat "$knowledge_file"
+      else
+        echo "- Knowledge snapshot not found after build"
+      fi
+    else
+      echo "- abbey-knowledge not found"
+    fi
+  } > "$CURRENT_CONTEXT"
+}
+
+case "$mode" in
+  next)
+    build_next
+    ;;
+  website)
+    build_website
+    ;;
+  full)
+    build_full
+    ;;
+  show)
+    cat "$CURRENT_CONTEXT"
+    exit 0
+    ;;
+  path)
+    echo "$CURRENT_CONTEXT"
+    exit 0
+    ;;
+  help|-h|--help)
+    cat <<'HELP'
+Abbey Context
+
+Usage:
+  abbey context next       Build next-task context
+  abbey context website    Build website/publishing context
+  abbey context full       Build full knowledge context
+  abbey context show       Show current context
+  abbey context path       Show current context path
+HELP
+    exit 0
+    ;;
+  *)
+    echo "Unknown context mode: $mode"
+    echo
+    echo "Run 'abbey context help' for available modes."
+    exit 1
+    ;;
+esac
+
+echo "Context written to:"
+echo "$CURRENT_CONTEXT"
