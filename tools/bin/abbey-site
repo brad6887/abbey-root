@@ -1,0 +1,153 @@
+#!/usr/bin/env bash
+#
+# Abbey Root Tool: abbey-site
+#
+# Purpose:
+#   Build and manage the BradCooke.com development site.
+#
+# Usage:
+#   abbey site <command>
+#
+# Commands:
+#   status     Show development server status.
+#   build      Build the website.
+#   start      Start the development server.
+#   stop       Stop the development server.
+#   restart    Restart the development server.
+#
+# Notes:
+#   Uses Astro's development server.
+#
+set -u
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+SITE_DIR="$ABBEY_ROOT/site"
+LOG_DIR="$ABBEY_ROOT/logs"
+LOG_FILE="$LOG_DIR/abbey-site.log"
+
+command="${1:-status}"
+
+print_header() {
+  echo "========================================"
+  echo " Abbey Root Site"
+  echo "========================================"
+  echo
+}
+
+site_pid() {
+  pgrep -f "npm run dev|astro dev" | head -n 1
+}
+
+site_status() {
+  pid="$(site_pid || true)"
+
+  if [[ -n "${pid:-}" ]]; then
+    echo "OK   Site dev server running: PID $pid"
+  else
+    echo "WARN Site dev server not running"
+  fi
+}
+
+site_build() {
+  print_header
+
+  if [[ ! -d "$SITE_DIR" ]]; then
+    echo "FAIL Site directory not found: $SITE_DIR"
+    exit 1
+  fi
+
+  cd "$SITE_DIR" || exit 1
+  npm run build
+}
+
+site_start() {
+  print_header
+
+  if [[ ! -d "$SITE_DIR" ]]; then
+    echo "FAIL Site directory not found: $SITE_DIR"
+    exit 1
+  fi
+
+  pid="$(site_pid || true)"
+
+  if [[ -n "${pid:-}" ]]; then
+    echo "OK   Site dev server already running: PID $pid"
+    exit 0
+  fi
+
+  mkdir -p "$LOG_DIR"
+
+  cd "$SITE_DIR" || exit 1
+  nohup npm run dev -- --host 0.0.0.0 > "$LOG_FILE" 2>&1 &
+
+  sleep 2
+  site_status
+  echo "LOG  $LOG_FILE"
+}
+
+site_stop() {
+  print_header
+
+  pid="$(site_pid || true)"
+
+  if [[ -z "${pid:-}" ]]; then
+    echo "OK   Site dev server already stopped"
+    exit 0
+  fi
+
+  echo "Stopping site dev server: PID $pid"
+  pkill -f "npm run dev|astro dev" || true
+  sleep 2
+  site_status
+}
+
+site_restart() {
+  "$0" stop
+  echo
+  "$0" start
+}
+
+case "$command" in
+  build)
+    site_build
+    ;;
+
+  start)
+    site_start
+    ;;
+
+  stop)
+    site_stop
+    ;;
+
+  restart)
+    site_restart
+    ;;
+
+  status)
+    print_header
+    site_status
+    ;;
+
+  help|-h|--help)
+    cat <<'HELP'
+Abbey Root Site Tool
+
+Usage:
+  abbey-site status     Show Astro dev server status
+  abbey-site build      Run npm build
+  abbey-site start      Start Astro dev server if stopped
+  abbey-site stop       Stop Astro dev server
+  abbey-site restart    Restart Astro dev server
+HELP
+    ;;
+
+  *)
+    echo "Unknown command: $command"
+    echo
+    echo "Run 'abbey-site help' for available commands."
+    exit 1
+    ;;
+esac

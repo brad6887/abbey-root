@@ -3,3 +3,4 @@ website/
 
 # Abbey generated files
 .abbey/
+logs/

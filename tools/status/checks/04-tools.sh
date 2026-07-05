@@ -1,6 +1,6 @@
 section "Abbey Tools"
 
-for tool in abbey abbey-doctor abbey-journal abbey-ai abbey-status abbey-knowledge; do
+for tool in abbey abbey-doctor abbey-journal abbey-ai abbey-status abbey-knowledge abbey-site; do
   if [[ -x "$ABBEY_ROOT/tools/bin/$tool" ]]; then
     ok "$tool exists"
   else
