@@ -29,6 +29,7 @@ Continue building Abbey Root by improving the developer toolkit, expanding self-
 - [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Continue expanding `abbey ai`.
 - [ ] Add AI benchmark prompt support to `abbey ai`.
+- [ ] Implement `abbey-end` to generate session update files.
 
 ---
 

@@ -28,6 +28,10 @@ latest_journal() {
   find "$ABBEY_ROOT/content/journal" -type f -name "*.md" 2>/dev/null | sort | tail -n 1
 }
 
+pending_session_updates() {
+  find "$ABBEY_ROOT/docs/session-updates" -type f -name "*.md" 2>/dev/null | wc -l
+}
+
 echo "========================================"
 echo " Abbey Root Session"
 echo "========================================"
@@ -68,6 +72,7 @@ section "Planning"
 
 project_status="$ABBEY_ROOT/docs/planning/PROJECT_STATUS.md"
 next_file="$ABBEY_ROOT/docs/planning/NEXT.md"
+session_update_count="$(pending_session_updates)"
 
 if [[ -f "$project_status" ]]; then
   ok "Project status: docs/planning/PROJECT_STATUS.md"
@@ -81,6 +86,12 @@ else
   warn "Missing NEXT.md"
 fi
 
+if [[ "$session_update_count" -gt 0 ]]; then
+  ok "Pending session updates: $session_update_count"
+else
+  ok "Pending session updates: none"
+fi
+
 section "Journal"
 
 journal="$(latest_journal)"
@@ -92,13 +103,23 @@ else
   warn "No journal entries found"
 fi
 
-section "Suggested Start"
+section "Workflow"
 
-echo "1. Review docs/planning/PROJECT_STATUS.md"
-echo "2. Review docs/planning/NEXT.md"
-echo "3. Choose today's session theme"
-echo "4. Keep related work grouped together"
-echo "5. Update documentation before committing"
+echo "1. Review"
+echo "2. Define"
+echo "3. Build"
+echo "4. Validate"
+echo "5. Document"
+echo "6. Capture"
+echo "7. Commit"
+echo "8. Review"
+
+section "Current Step"
+
+echo "Review docs/planning/PROJECT_STATUS.md"
+echo "Review docs/planning/NEXT.md"
+echo "Choose one focused session objective"
+echo "Define what done looks like"
 
 echo
 echo "Tip: run 'abbey status' or 'abbey doctor' for deeper checks."
