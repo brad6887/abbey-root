@@ -1,238 +1,283 @@
-Session Workflow
+# Session Workflow
 
-Purpose
+## Purpose
 
-Abbey Root development follows a consistent workflow to ensure that infrastructure, documentation, planning, and project history remain synchronized.
+Abbey Root development follows a consistent workflow that keeps implementation, documentation, planning, and project history synchronized.
 
-Using the same workflow for every session reduces context switching, improves documentation quality, and makes it easier to automate repetitive tasks.
+The workflow emphasizes capturing information once and allowing long-term planning documents to be updated through a dedicated review process rather than during every development session.
 
-The long-term goal is for much of this workflow to be managed through the Abbey developer toolkit.
+The long-term goal is for nearly every step of this workflow to be guided or automated by the Abbey toolkit.
 
-⸻
+---
 
-Guiding Principles
+# Guiding Principles
 
 Every development session should:
 
-* Begin with an understanding of the current project state.
-* Focus on one primary objective.
-* Keep documentation current.
-* Record significant accomplishments.
-* Leave the repository in a clean, reproducible state.
+- Begin with an understanding of the current project state.
+- Focus on one primary objective.
+- Capture completed work once.
+- Reduce manually maintained documentation.
+- Leave the repository in a clean, reproducible state.
+- Improve both the project and the workflow used to build it.
 
-⸻
+---
 
-Start of Session
+# Session Lifecycle
 
-Before beginning development:
+A complete development session follows this workflow:
 
-1. Synchronize the Repository
+```text
+abbey session
+        ↓
+Review project context
+        ↓
+Review due recurring reviews
+        ↓
+Define session objective
+        ↓
+Complete focused work
+        ↓
+Maintain session update
+        ↓
+abbey-end
+        ↓
+Review generated session update
+        ↓
+Validate project
+        ↓
+Commit
+        ↓
+Push
+        ↓
+abbey-review
+        ↓
+Update planning documents
+```
+
+Session updates become the operational record of completed work.
+
+Planning documents become the strategic view of the project.
+
+---
+
+# Start of Session
+
+## 1. Synchronize the Repository
 
 Synchronize the local repository with the remote repository.
 
 Confirm:
 
-* Git repository is healthy.
-* Working tree is clean.
-* Current branch is correct.
+- Repository is healthy.
+- Working tree is clean.
+- Current branch is correct.
 
-⸻
+Future versions of `abbey session` should perform these checks automatically.
 
-2. Review Project Status
+---
 
-Review the current planning documents.
+## 2. Review Project Context
 
-At minimum:
+Review current project context.
 
-* planning/PROJECT_STATUS.md
-* planning/NEXT.md
+This may include:
 
-Review the most recent journal entry if additional context is needed.
+- `PROJECT_STATUS.md`
+- `NEXT.md`
+- Recent session updates
+- Current roadmap
+- Outstanding backlog items
 
-⸻
+Future versions of `abbey session` should summarize this information automatically.
 
-3. Select a Session Theme
+---
 
-Each development session should have a primary focus.
+## 3. Review Recurring Work
+
+Determine whether recurring project reviews are due.
 
 Examples include:
 
-* Documentation Day
-* Automation Day
-* Website Development
-* AI Development
-* Infrastructure
-* Networking
-* Docker
-* Ansible
+- AI News review
+- Documentation audit
+- Dependency review
+- Infrastructure review
+- Backup verification
 
-A clearly defined theme helps maintain focus and provides context for future journal entries.
+Future versions of `abbey session` should recommend overdue reviews automatically.
 
-⸻
+---
 
-4. Define Session Goals
+## 4. Define Session Goals
 
-Identify one primary objective and any secondary objectives.
+Choose one primary objective.
 
 Examples:
 
-Primary:
+- Documentation
+- Automation
+- AI
+- Website
+- Infrastructure
+- Networking
 
-* Improve documentation.
+Secondary objectives are acceptable, but the session should have one clear focus.
 
-Secondary:
+---
 
-* Update planning documents.
-* Refactor toolkit commands.
-* Publish a journal entry.
-
-⸻
-
-During the Session
+# During the Session
 
 Development should proceed in small, logical steps.
 
-Recommended practices include:
+Recommended practices:
 
-* Commit related work together.
-* Avoid unrelated changes.
-* Update documentation alongside code.
-* Record lessons learned while they are fresh.
-* Prefer automation over manual processes.
-* Keep generated documentation out of manual edits.
+- Commit related work together.
+- Keep changes focused.
+- Update documentation alongside implementation.
+- Record lessons learned immediately.
+- Prefer automation over manual work.
+- Avoid editing generated documentation directly.
 
-When project direction changes, update the appropriate planning documents rather than relying on memory.
+---
 
-⸻
+# Session Updates
 
-Documentation
+Maintain a session update throughout the development session.
 
-Documentation is maintained continuously rather than at the end of a project.
+The session update is the primary record of completed work.
 
-Examples include:
+Typical sections include:
 
-* Architecture changes
-* New workflows
-* Operational procedures
-* Design decisions
-* Planning updates
+- Summary
+- Completed
+- Future Direction
+- Impact
+- Lessons Learned
 
-Documentation should evolve alongside the project.
+Long-term planning documents should not require continual edits during development.
 
-⸻
+Instead, capture information once in the session update.
 
-Journal Entries
+---
 
-Create a journal entry whenever a session includes meaningful progress.
+# End of Session
 
-Typical journal entries summarize:
+## 1. Run `abbey-end`
 
-* Work completed
-* Problems encountered
-* Lessons learned
-* Design decisions
-* Follow-up work
+The long-term purpose of `abbey-end` is to gather project information and prepare the session for completion.
 
-Journal entries should describe the session rather than every command that was executed.
+Potential inputs include:
 
-⸻
+- Git status
+- Git diff
+- Journal entry
+- Session metadata
+- Existing session update
 
-End of Session
+Future versions should generate a draft session update for review.
 
-Before ending development:
+---
 
-Review Documentation
+## 2. Review the Session Update
 
-Confirm documentation reflects completed work.
+Confirm the session update accurately describes:
 
-Examples include:
+- Completed work
+- Design decisions
+- Lessons learned
+- Future work
 
-* Planning documents
-* Guides
-* Runbooks
-* Reference documentation
+The session update becomes the source document for future planning updates.
 
-⸻
+---
 
-Review Planning
+## 3. Validate the Project
 
-Update planning documents if priorities have changed.
+Run appropriate validation.
 
-Common updates include:
+Examples:
 
-* PROJECT_STATUS
-* NEXT
-* BACKLOG
-* ROADMAP
+- `abbey doctor`
+- Website build
+- Test suite
+- Documentation validation
 
-⸻
+---
 
-Validate the Environment
+## 4. Commit
 
-Run project validation tools as appropriate.
+Create a single logical commit representing the completed work.
 
-Examples include:
+---
 
-* Abbey Doctor
-* Website build
-* Ansible syntax checks
-* Other project-specific validation
-
-⸻
-
-Commit Changes
-
-Create a commit that represents a single logical unit of work.
-
-Commit messages should clearly describe the completed work.
-
-⸻
-
-Push Changes
+## 5. Push
 
 Synchronize the completed work with the remote repository.
 
-The goal is for the remote repository to accurately reflect the current project state.
+---
 
-⸻
+## 6. Run `abbey-review`
 
-Future Automation
+`abbey-review` examines completed session updates and recommends updates to long-term planning documents.
 
-The Abbey developer toolkit will gradually automate much of this workflow.
+Examples include:
 
-Planned capabilities include:
+- `PROJECT_STATUS.md`
+- `NEXT.md`
+- `BACKLOG.md`
+- `ROADMAP.md`
 
-Session Start
+Planning documents become summaries of accumulated project knowledge rather than being edited throughout each development session.
 
-Future abbey session functionality may include:
+---
 
-* Synchronize Git
-* Verify repository health
-* Review planning documents
-* Display project status
-* Suggest next work items
-* Create a session summary
+# Future Automation
 
-⸻
+The Abbey toolkit will gradually automate this workflow.
 
-Session End
+## `abbey session`
 
-Future abbey close functionality may include:
+Future capabilities:
 
-* Validate project health
-* Review documentation updates
-* Generate journal templates
-* Suggest commit messages
-* Build the website
-* Run health checks
-* Push completed work
+- Verify repository health.
+- Summarize project status.
+- Recommend recurring reviews.
+- Display planning summaries.
+- Recommend next work.
+- Resume previous sessions.
 
-⸻
+---
 
-Continuous Improvement
+## `abbey-end`
 
-The workflow itself is expected to evolve.
+Future capabilities:
 
-As Abbey Root grows, repetitive tasks should be identified, documented, and eventually automated through the Abbey developer toolkit.
+- Analyze Git changes.
+- Generate session update drafts.
+- Suggest journal updates.
+- Recommend commit messages.
+- Run validation.
+- Build the website.
 
-The objective is not simply to complete work, but to continuously improve the process used to complete that work.
+---
+
+## `abbey-review`
+
+Future capabilities:
+
+- Reconcile session updates into planning documents.
+- Detect stale planning information.
+- Recommend backlog changes.
+- Generate project summaries.
+- Update project metrics.
+
+---
+
+# Continuous Improvement
+
+The workflow itself is part of the project.
+
+Every improvement should reduce repetitive work while preserving understanding.
+
+The objective is not simply to automate development, but to create a development environment that continuously improves its own workflow through documentation, automation, and AI.

@@ -1,303 +1,313 @@
-Abbey Root Project Status
+# Abbey Root Project Status
 
-Last Updated: 2026-07-05
+Last Updated: 2026-07-06
 
-⸻
+---
 
-Project Snapshot
+# Project Snapshot
 
-Project Phase
+## Project Phase
 
 Developer Platform
 
-Overall Health
+## Overall Health
 
 🟢 Healthy
 
-Primary Goal
+## Primary Goal
 
-Develop Abbey Root into a self-documenting, AI-assisted Infrastructure-as-Code platform.
+Develop Abbey Root into a self-documenting, AI-assisted Infrastructure-as-Code platform where documentation, automation, and AI share a common source of truth.
 
-Current Focus
+## Current Focus
 
-* Self-documenting platform
-* Developer toolkit
-* AI-assisted workflows
-* BradCooke.com
-* Workflow automation
+- Self-documenting platform
+- Developer toolkit
+- Project-aware automation
+- AI-assisted workflows
+- BradCooke.com
 
-⸻
+---
 
-Current Session
+# Current Session
 
-Session Theme
+## Session Theme
 
-Documentation Day
+Documentation Architecture and Workflow Automation
 
-Objectives
+## Objectives
 
-* Establish documentation architecture.
-* Standardize documentation.
-* Create project standards.
-* Improve AI project context.
-* Build abbey session.
+- Complete the planning document framework.
+- Standardize machine-readable project documentation.
+- Introduce session update reconciliation.
+- Expand the Abbey developer workflow.
+- Reduce manually maintained documentation.
 
-Session Status
+## Session Status
 
 Completed
 
-⸻
+---
 
-Overall Status
+# Overall Status
 
-Platform
+## Platform
 
-* Infrastructure stable.
-* Documentation architecture established.
-* Developer toolkit expanding.
-* Website actively developed.
-* AI integration increasing.
+- Infrastructure stable.
+- Documentation architecture established.
+- Planning document framework established.
+- Developer toolkit expanding.
+- Website actively developed.
+- AI integration increasing.
 
-Development Direction
+## Development Direction
 
-* Reduce manual maintenance.
-* Increase automation.
-* Improve developer workflows.
-* Expand project awareness.
-* Continue technical publishing.
+- Complete the core Abbey workflow (`abbey session` → `abbey-end` → `abbey-review`).
+- Reduce manual maintenance.
+- Increase project-aware automation.
+- Expand AI evaluation capabilities.
+- Continue technical publishing.
 
-⸻
+---
 
-Immediate Priorities
+# Immediate Priorities
 
-* Expand the Abbey developer toolkit.
-* Design secure remote access.
-* Continue reducing manually maintained documentation.
-* Continue developing BradCooke.com.
-* Improve AI-assisted workflows.
-* Enhance abbey-doctor.
-* Complete documentation of the physical lab.
+- Complete `abbey-end`.
+- Complete `abbey-review`.
+- Expand `abbey-session` with planning summaries.
+- Continue replacing manually maintained documentation.
+- Design secure remote access.
+- Continue developing BradCooke.com.
 
-⸻
+---
 
-Infrastructure
+# Infrastructure
 
-Status
+## Status
 
 🟢 Healthy
 
-Completed
+## Completed
 
-* Proxmox operational.
-* Linux virtual machines deployed.
-* VM templates established.
-* Infrastructure managed through Git and Ansible.
-* 2.5 Gb networking deployed.
-* Passwordless SSH configured.
-* Ansible Vault configured.
+- Proxmox operational.
+- Linux virtual machines deployed.
+- VM templates established.
+- Infrastructure managed through Git and Ansible.
+- 2.5 Gb networking deployed.
+- Passwordless SSH configured.
+- Ansible Vault configured.
 
-Current Work
+## Current Work
 
-* Map apartment Ethernet wall jacks.
-* Document data closet.
-* Design secure remote access.
+- Map apartment Ethernet wall jacks.
+- Document the completed data closet.
+- Design secure remote access.
 
-⸻
+---
 
-Developer Toolkit
+# Developer Toolkit
 
-Status
+## Status
 
 🟢 Active Development
 
-Current Capabilities
+## Current Capabilities
 
-* abbey doctor
-* abbey status
-* abbey ai
-* abbey journal
-* abbey session
+- `abbey doctor`
+- `abbey status`
+- `abbey ai`
+- `abbey journal`
+- `abbey session`
 
-Current Focus
+## Current Focus
 
-* Project awareness.
-* Documentation automation.
-* Workflow automation.
-* Self-documenting workflows.
+- Complete `abbey-end`.
+- Complete `abbey-review`.
+- Project-aware workflows.
+- Documentation automation.
+- Self-documenting development.
 
-⸻
+---
 
-Website
+# Website
 
-Status
+## Status
 
 🟡 Active Development
 
-Completed
+## Completed
 
-* Project pages.
-* Journal platform.
-* Dynamic routing.
-* Previous/next navigation.
+- Project pages.
+- Journal platform.
+- Dynamic routing.
+- Previous/next navigation.
+- Documentation publishing workflow.
 
-Current Work
+## Current Work
 
-* Publish additional journal entries.
-* Expand technical content.
-* Improve reusable components.
-* Prepare GitHub Pages deployment.
+- Publish documentation journal entries.
+- Expand technical content.
+- Improve reusable components.
+- Prepare GitHub Pages deployment.
 
-⸻
+---
 
-AI Platform
+# AI Platform
 
-Status
+## Status
 
 🟡 Rapid Development
 
-Current Capabilities
+## Current Capabilities
 
-* Open WebUI.
-* Local model experimentation.
-* abbey ai.
+- Open WebUI.
+- Local model experimentation.
+- `abbey ai`.
+- AI benchmark planning.
+- AI technology review process.
 
-Current Focus
+## Current Focus
 
-* Project-aware AI.
-* Documentation assistance.
-* Planning assistance.
-* Publishing assistance.
+- Project-aware AI.
+- AI evaluation framework.
+- Documentation assistance.
+- Planning assistance.
+- Knowledge freshness.
+- Workflow assistance.
 
-⸻
+---
 
-Documentation
+# Documentation
 
-Status
+## Status
 
 🟢 Active
 
-Completed
+## Completed
 
-* Documentation architecture.
-* Guide system.
-* Documentation standards.
-* Planning standards.
-* Reference standards.
+- Documentation architecture.
+- Guide system.
+- Documentation standards.
+- Planning document standards.
+- Planning schemas.
+- Session update framework.
 
-Current Focus
+## Current Focus
 
-* Metadata-driven documentation.
-* Self-documenting workflows.
-* Operational guides.
-* AI project context.
+- Metadata-driven documentation.
+- Planning document automation.
+- Session reconciliation.
+- AI project context.
+- Self-documenting workflows.
 
-⸻
+---
 
-Recent Accomplishments
+# Recent Accomplishments
 
-* Established documentation architecture.
-* Created Abbey Root guide system.
-* Created project reference standards.
-* Created abbey session.
-* Created abbey-doctor.
-* Created abbey journal.
-* Created abbey ai.
-* Consolidated project history into journal entries.
-* Completed Astro journal platform.
-* Installed 2.5 Gb networking.
+- Established the long-term documentation architecture.
+- Created machine-readable planning document schemas.
+- Created the session update framework.
+- Designed the `abbey-review` workflow.
+- Defined the `abbey-end` workflow.
+- Created the AI benchmark planning framework.
+- Created the AI News review process.
+- Expanded `abbey session` to support workflow guidance.
+- Continued reorganizing project documentation.
 
-⸻
+---
 
-Current Challenges
+# Current Challenges
 
-* Secure remote access.
-* Physical data closet documentation.
-* Metadata-driven documentation.
-* Project-aware automation.
-* AI integration.
-* BradCooke.com publishing.
+- Completing the end-to-end Abbey workflow.
+- Reducing manually maintained documentation.
+- Secure remote access.
+- Physical lab documentation.
+- AI project awareness.
+- BradCooke.com publishing.
 
-⸻
+---
 
-Next Major Milestones
+# Next Major Milestones
 
-Near Term
+## Near Term
 
-* Expand abbey-session.
-* Create abbey-end.
-* Improve abbey-doctor.
-* Implement remote access.
-* Continue metadata-driven documentation.
-* Publish BradCooke.com.
+- Complete `abbey-end`.
+- Complete `abbey-review`.
+- Expand `abbey-session`.
+- Improve `abbey-doctor`.
+- Continue metadata-driven documentation.
+- Publish BradCooke.com updates.
 
-Long Term
+## Long Term
 
-* Project-aware development environment.
-* Self-documenting platform.
-* Self-validating infrastructure.
-* AI-assisted publishing.
-* Reproducible Infrastructure-as-Code platform.
+- Project-aware development environment.
+- Self-documenting platform.
+- AI evaluation framework.
+- Self-validating infrastructure.
+- AI-assisted publishing.
+- Reproducible Infrastructure-as-Code platform.
 
-⸻
+---
 
-Project Metrics
+# Project Metrics
 
-Current
+## Current
 
-* Metrics generated manually.
+- Metrics generated manually.
 
-Future
+## Future
 
 Generate automatically:
 
-* Virtual machines.
-* Docker hosts.
-* Containers.
-* Ansible roles.
-* Playbooks.
-* Toolkit commands.
-* Website pages.
-* Journal entries.
-* Documentation statistics.
+- Virtual machines.
+- Docker hosts.
+- Containers.
+- Ansible roles.
+- Playbooks.
+- Toolkit commands.
+- Website pages.
+- Journal entries.
+- Documentation statistics.
+- Planning summaries.
+- AI evaluation reports.
 
-⸻
+---
 
-Project Health
+# Project Health
 
-Infrastructure
+## Infrastructure
 
 🟢 Healthy
 
-Documentation
+## Documentation
 
 🟢 Active
 
-Automation
-
-🟢 Mature
-
-Developer Toolkit
+## Automation
 
 🟢 Active Development
 
-Website
+## Developer Toolkit
+
+🟢 Active Development
+
+## Website
 
 🟡 Active Development
 
-AI Platform
+## AI Platform
 
 🟡 Rapid Development
 
-Overall
+## Overall
 
 🟢 Excellent Progress
 
-⸻
+---
 
-Notes
+# Notes
 
 This document follows the schema defined in:
 
-docs/reference/PLANNING_SCHEMA.md
+`docs/reference/PLANNING_SCHEMA.md`
 
-Section names should remain stable to support future Abbey toolkit commands and AI-assisted workflows.
+Section names should remain stable to support future Abbey toolkit commands, documentation generation, and AI-assisted workflows.

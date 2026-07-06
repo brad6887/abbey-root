@@ -22,7 +22,6 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Configure hostname resolution between lab systems.
 - [ ] Enhance `abbey-status` with Docker health, disk usage, and service summaries.
 - [ ] Automate deployment of ai-worker01 shell environment through Ansible.
-- [ ] Document and photograph the completed data closet layout.
 - [ ] Document apartment network wall jack locations.
 - [ ] Label structured wiring cabinet.
 - [ ] Create network diagram.
@@ -55,6 +54,10 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Add project-aware recommendations to `abbey-session`.
 - [ ] Display planning summaries in `abbey-session`.
 - [ ] Create `abbey-end`.
+- [ ] Design `abbey-end` to analyze Git changes and draft session updates.
+- [ ] Create `abbey-review` to reconcile session updates into long-term planning documents.
+- [ ] Create `abbey session-update` helper to generate formatted files under `docs/session-updates/`.
+- [ ] Associate journal entries with active Abbey sessions.
 - [ ] Add project metrics to `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Detect stale AI knowledge before running `abbey ai ask`.
@@ -74,7 +77,27 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Generate Architecture Decision Record index.
 - [ ] Eliminate manually maintained generated documentation.
 - [ ] Expand metadata-driven documentation generation.
+- [ ] Build metadata-driven documentation generation using planning schemas.
+- [ ] Generate planning summaries from session updates.
+- [ ] Generate AI context from planning documents.
 - [ ] Build `abbey docs generate`.
+- [ ] Document the session update workflow in `docs/guide/SESSION_WORKFLOW.md`.
+- [ ] Make planning documents the primary interface for Abbey toolkit commands.
+- [ ] Expand stable machine-readable planning document schemas.
+- [ ] Build project metadata APIs for future Abbey automation.
+
+---
+
+## Recurring Reviews
+
+- [ ] Create a recurring review registry.
+- [ ] Surface due and overdue reviews during `abbey session`.
+- [ ] Support AI news reviews.
+- [ ] Support documentation audits.
+- [ ] Support infrastructure health reviews.
+- [ ] Support dependency reviews.
+- [ ] Support backup verification reviews.
+- [ ] Support security reviews.
 
 ---
 
@@ -144,9 +167,10 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] AI-aware Abbey toolkit integration.
 - [ ] Define AI knowledge sources.
 - [ ] Track AI knowledge rebuild freshness.
+- [ ] Build AI knowledge freshness validation.
+- [ ] Generate project-aware AI context from planning documents.
+- [ ] Automate AI knowledge rebuilds when project context changes.
 - [ ] Establish a recurring AI technology review process to evaluate new models, tooling, and workflows against the Abbey AI evaluation suite.
-
----
 
 ### AI Evaluation
 
@@ -158,6 +182,7 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Track AI evaluation scores over time.
 - [ ] Compare AI performance across models and context generation methods.
 - [ ] Generate AI evaluation reports and historical trends.
+- [ ] Evaluate new AI models using real Abbey Root development workflows.
 
 ---
 

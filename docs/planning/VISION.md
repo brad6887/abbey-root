@@ -1,223 +1,268 @@
-Abbey Root Vision
+# Abbey Root Vision
 
-Status: Active architectural direction
+**Status:** Active architectural direction
 
-Abbey Root has evolved from a home Linux lab into an AI-assisted, metadata-driven Infrastructure-as-Code platform for learning, automation, documentation, and technical publishing.
+Abbey Root is evolving from a home Linux lab into a self-documenting, project-aware development platform that combines infrastructure, documentation, automation, and AI into a single cohesive system.
 
-The long-term vision is to build an environment that not only automates infrastructure, but also understands itself, documents itself, and helps guide future development.
+The long-term objective is not simply to automate infrastructure, but to build an environment that continuously improves itself by reducing manual work, preserving knowledge, and assisting future development.
 
-Every improvement should reduce manual work while increasing understanding.
+Every improvement should reduce cognitive overhead while increasing understanding.
 
-⸻
+---
 
-Vision
+# Vision
 
 Abbey Root exists to create practical knowledge by building real systems.
 
-Rather than collecting virtual machines or experimenting without purpose, every component should contribute toward a reproducible, maintainable platform that supports learning, automation, publishing, and AI-assisted development.
+Rather than collecting virtual machines or experimenting without purpose, every component should contribute to a reproducible, maintainable platform for learning, automation, documentation, publishing, and software development.
 
-The project itself becomes both the laboratory and the product.
+The project itself is both the laboratory and the product.
 
-⸻
+---
 
-Core Philosophy
+# Core Philosophy
 
 The Abbey Root developer environment should become another product of the project.
 
-Rather than requiring the developer to remember project context, the platform should continuously provide it.
+Instead of requiring the developer to remember project context, the platform should continuously provide it.
 
 The environment should answer questions such as:
 
-* Where did I leave off?
-* What changed recently?
-* What should I work on next?
-* Is everything healthy?
-* Is the documentation current?
-* Is anything inconsistent?
-* What can be automated next?
+- Where did I leave off?
+- What changed recently?
+- What should I work on next?
+- Is everything healthy?
+- Is the documentation current?
+- Is anything inconsistent?
+- What can be automated next?
 
-⸻
+The goal is to augment—not replace—the developer by making project knowledge continuously available.
 
-Design Principles
+---
 
-Metadata First
+# Design Principles
+
+## Metadata First
 
 Whenever practical, describe information once as structured metadata.
 
-Generate documentation, interfaces, reports, and automation from that metadata.
+Generate documentation, reports, interfaces, AI context, and automation from that metadata.
 
-⸻
+---
 
-Single Source of Truth
+## Single Source of Truth
 
 Avoid duplicate information.
 
-Configuration, documentation, automation, and AI context should originate from one authoritative source whenever practical.
+Documentation, automation, AI context, reporting, and developer tooling should originate from one authoritative source whenever practical.
 
-⸻
+---
 
-Generate Rather Than Maintain
+## Generate Rather Than Maintain
 
-If information can be generated reliably from authoritative metadata, it should not be maintained manually.
+If information can be generated reliably, it should not be maintained manually.
 
 Write metadata once.
 
 Generate everything else.
 
-⸻
+---
 
-Learn by Building
+## Stable Interfaces
+
+Planning documents are interfaces.
+
+Their structure should remain stable so developers, Abbey toolkit commands, and AI workflows can reliably consume the same information.
+
+---
+
+## Workflow Before Automation
+
+Automating a poor workflow creates poor automation.
+
+Every workflow should first be validated through real project use before being automated.
+
+---
+
+## Learn by Building
 
 The platform exists to create practical experience.
 
 Real projects should always be preferred over theoretical exercises.
 
-⸻
+---
 
-Continuous Improvement
+## Continuous Improvement
 
-Every session should improve not only the project but also the process used to build the project.
+Every development session should improve both the project and the process used to build the project.
 
-Automation should continuously reduce repetitive work while preserving understanding.
+The project should become progressively easier to maintain over time.
 
-⸻
+---
 
-Long-Term Objectives
+# Long-Term Objectives
 
 Abbey Root should evolve into a:
 
-* self-documenting platform
-* self-validating platform
-* metadata-driven platform
-* Infrastructure-as-Code platform
-* project-aware development environment
-* AI-assisted publishing platform
-* continuous learning platform
+- self-documenting platform
+- self-validating platform
+- metadata-driven platform
+- Infrastructure-as-Code platform
+- project-aware development platform
+- AI-assisted engineering platform
+- continuous learning platform
 
-⸻
+---
 
-Platform Awareness
+# Platform Awareness
 
-Project Awareness
-
-The platform should understand:
-
-* Current roadmap
-* Active milestone
-* Current priorities
-* Recent accomplishments
-* Outstanding work
-* Documentation status
-
-⸻
-
-Infrastructure Awareness
+## Project Awareness
 
 The platform should understand:
 
-* Git status
-* Infrastructure health
-* Docker services
-* Ansible inventory
-* Configuration drift
-* Generated documentation
+- Vision
+- Roadmap
+- Project status
+- Current priorities
+- Active milestone
+- Recent accomplishments
+- Outstanding work
+- Documentation status
 
-⸻
+---
 
-Documentation Awareness
+## Workflow Awareness
+
+The platform should understand:
+
+- Active development session
+- Session history
+- Pending session updates
+- Documentation requiring review
+- Recurring reviews
+- Recent commits
+
+It should guide the developer through a consistent workflow rather than simply executing commands.
+
+---
+
+## Infrastructure Awareness
+
+The platform should understand:
+
+- Git status
+- Infrastructure health
+- Docker services
+- Virtual machines
+- Ansible inventory
+- Configuration drift
+- Generated documentation
+
+---
+
+## Documentation Awareness
 
 The platform should:
 
-* Recommend documentation to review.
-* Detect stale documentation.
-* Generate documentation indexes.
-* Validate documentation links.
-* Detect orphaned documentation.
-* Measure documentation coverage.
+- Recommend documentation to review.
+- Detect stale documentation.
+- Generate documentation indexes.
+- Validate documentation links.
+- Detect orphaned documentation.
+- Measure documentation coverage.
+- Generate planning summaries from session updates.
 
-⸻
+---
 
-Website Awareness
+## Website Awareness
 
 The platform should understand:
 
-* Website build status
-* Unpublished content
-* Missing metadata
-* Navigation consistency
-* Internal links
-* Content collections
+- Website build status
+- Unpublished content
+- Missing metadata
+- Navigation consistency
+- Internal links
+- Content collections
 
-⸻
+---
 
-AI Awareness
+## AI Awareness
 
 AI should understand:
 
-* Project status
-* Roadmap
-* Backlog
-* Journal history
-* Infrastructure inventory
-* Documentation
-* Generated metadata
+- Vision
+- Project status
+- Roadmap
+- Backlog
+- Session history
+- Journal history
+- Infrastructure inventory
+- Documentation
+- Planning documents
+- Generated metadata
 
-AI should assist with planning, documentation, publishing, and project awareness rather than relying solely on conversational memory.
+AI should assist with planning, documentation, publishing, workflow guidance, and project awareness using generated project context instead of relying solely on conversational memory.
 
-⸻
+---
 
-Abbey Toolkit
+# Abbey Toolkit
 
 The Abbey toolkit should become the primary interface to the platform.
 
 Examples include:
 
-* abbey doctor
-* abbey status
-* abbey session
-* abbey end
-* abbey ai
-* abbey journal
-* abbey site
+- `abbey doctor`
+- `abbey status`
+- `abbey session`
+- `abbey-end`
+- `abbey-review`
+- `abbey ai`
+- `abbey journal`
+- `abbey site`
 
-Rather than interacting directly with individual tools, the developer interacts with Abbey Root through a consistent command-line interface.
+Rather than interacting directly with individual tools, the developer interacts with Abbey Root through a consistent project-aware interface.
 
-⸻
+---
 
-Daily Workflow
+# Development Workflow
 
-A typical session should eventually look like:
+A typical development session should eventually become:
 
+```text
 abbey session
+        ↓
+Review project context
+        ↓
+Review due recurring tasks
+        ↓
+Receive project-aware recommendations
+        ↓
+Complete focused work
+        ↓
+abbey-end
+        ↓
+Generate session update
+        ↓
+Commit changes
+        ↓
+abbey-review
+        ↓
+Update long-term planning documents
+```
 
-↓
+Session updates become the operational source of truth for completed work.
 
-Review project context.
+Planning documents become the strategic source of truth for the project.
 
-↓
+---
 
-Receive AI recommendations.
-
-↓
-
-Complete focused work.
-
-↓
-
-abbey end
-
-↓
-
-Validate, document, summarize, and commit.
-
-⸻
-
-Ultimate Goal
+# Ultimate Goal
 
 Abbey Root should become a platform that continuously improves itself.
 
-Every improvement should reduce cognitive overhead, improve documentation, increase automation, and make future work easier.
+Documentation, planning, automation, AI, and developer tooling should all share a common source of truth.
 
-The environment should help answer questions, recommend work, validate changes, preserve project history, and accelerate learning while leaving technical decisions in the hands of the developer.
+The platform should preserve knowledge, reduce repetitive work, recommend the next logical action, measure its own progress, and continually improve the development experience without removing control from the developer.
 
-Ultimately, Abbey Root should become a system that helps build itself.
+Ultimately, Abbey Root should become a development environment that understands itself, documents itself, validates itself, and helps build itself.

@@ -1,199 +1,267 @@
-Planning Document Schema
+# Planning Document Schema
 
-Purpose
+## Purpose
 
-This document defines the structure of Abbey Root planning documents.
+This document defines the planning architecture used by Abbey Root.
 
-These documents are consumed by both humans and automation. Their structure should therefore remain stable over time.
+Planning documents serve two audiences:
 
-The section headings defined in this document are considered part of the public interface used by the Abbey toolkit and future AI-assisted workflows.
+- Developers, who need concise project information.
+- Automation, which relies on stable document structures for reliable parsing.
 
-Changing document structure should be treated as an interface change rather than a formatting change.
+Planning documents are not simply documentation—they are interfaces consumed by the Abbey toolkit and future AI workflows.
 
-⸻
+Changes to document structure should therefore be treated as interface changes.
 
-General Principles
+---
+
+# Planning Architecture
+
+Abbey Root planning follows a layered model.
+
+```
+Ideas
+        ↓
+Backlog
+        ↓
+Next
+        ↓
+Development Session
+        ↓
+Session Update
+        ↓
+abbey-review
+        ↓
+Planning Documents
+        ↓
+Journal
+```
+
+Each document has a distinct purpose.
+
+Information should move forward through the system rather than being duplicated.
+
+---
+
+# General Principles
 
 Planning documents should be:
 
-* Easy for people to read.
-* Easy for automation to parse.
-* Stable over time.
-* Predictable in structure.
-* Focused on facts rather than narrative.
+- Easy for people to read.
+- Easy for automation to parse.
+- Stable over time.
+- Predictable in structure.
+- Focused on facts rather than narrative.
+- Derived from authoritative information whenever practical.
 
-⸻
+---
 
-Formatting Standards
+# Formatting Standards
 
-Planning documents should follow these guidelines:
+Planning documents should:
 
-* Use Markdown.
-* Use consistent heading levels.
-* Prefer lists over long paragraphs.
-* Keep section names stable.
-* Avoid tables unless they provide significant value.
-* Use one bullet style consistently.
-* Prefer short, structured statements over lengthy prose.
+- Use Markdown.
+- Use consistent heading levels.
+- Prefer lists over long paragraphs.
+- Keep section names stable.
+- Avoid tables unless they provide significant value.
+- Use one bullet style consistently.
+- Prefer concise, structured statements.
 
-⸻
+---
 
-PROJECT_STATUS.md
+# Planning Documents
 
-Purpose:
+## PROJECT_STATUS.md
 
-Provide a high-level snapshot of the current state of Abbey Root.
+### Purpose
 
-Required sections:
+Provides a snapshot of the current state of the project.
 
-Project Snapshot
-Current Session
-Overall Status
-Immediate Priorities
-Infrastructure
-Developer Toolkit
-Website
-AI Platform
-Documentation
-Recent Accomplishments
-Current Challenges
-Next Major Milestones
-Project Metrics
-Project Health
+### Primary Audience
 
-These section names should remain stable.
+Developers
 
-⸻
-
-NEXT.md
-
-Purpose:
-
-Define the current priorities for upcoming work sessions.
-
-Required sections:
-
-Primary Goal
-High Priority
-Abbey Toolkit
-BradCooke.com
-Infrastructure
-AI
-Stretch Goals
-Notes
-
-⸻
-
-BACKLOG.md
-
-Purpose:
-
-Maintain the inventory of known work that has not yet been scheduled.
-
-Recommended sections:
-
-High Priority
-Infrastructure
-Developer Toolkit
-Self-Documenting Platform
-BradCooke.com
-AI
 Automation
-Communications
-Abbey Doctor Ideas
 
-Additional sections may be introduced when they represent long-term project areas.
+### Required Sections
 
-⸻
+- Project Snapshot
+- Current Session
+- Overall Status
+- Immediate Priorities
+- Infrastructure
+- Developer Toolkit
+- Website
+- AI Platform
+- Documentation
+- Recent Accomplishments
+- Current Challenges
+- Next Major Milestones
+- Project Metrics
+- Project Health
 
-ROADMAP.md
+---
 
-Purpose:
+## NEXT.md
 
-Describe major milestones rather than individual tasks.
+### Purpose
 
-Roadmap items should represent significant project goals instead of day-to-day work.
+Defines the current execution plan.
 
-⸻
+Unlike the backlog, this document should remain intentionally small and focused on near-term work.
 
-VISION.md
+### Required Sections
 
-Purpose:
+- Primary Goal
+- High Priority
+- Abbey Toolkit
+- Self-Documenting Platform
+- BradCooke.com
+- Infrastructure
+- AI
+- Stretch Goals
+- Notes
 
-Describe the long-term architectural direction of Abbey Root.
+---
 
-This document should evolve slowly and capture enduring principles rather than short-term priorities.
+## BACKLOG.md
 
-⸻
+### Purpose
 
-IDEAS.md
+Maintains the inventory of known work that has not yet been scheduled.
 
-Purpose:
+The backlog represents possibilities rather than commitments.
 
-Capture brainstorming ideas before they are evaluated.
+### Recommended Sections
 
-Ideas may later move to:
+- High Priority
+- Infrastructure
+- Developer Toolkit
+- Self-Documenting Platform
+- Recurring Reviews
+- BradCooke.com
+- AI
+- Automation
+- Communications
+- Abbey Doctor Ideas
 
-IDEAS
-    ↓
-BACKLOG
-    ↓
-NEXT
-    ↓
-Completed
-    ↓
-Journal Entry
+Additional sections may be added as the project evolves.
 
-⸻
+---
 
-Journal Entries
+## ROADMAP.md
 
-Journal entries are historical records.
+### Purpose
 
-They should remain human-focused and are not considered machine-readable planning documents.
+Describes long-term capabilities and major milestones.
 
-⸻
+Roadmap items should represent architectural progress rather than individual tasks.
 
-Generated Documentation
+---
+
+## VISION.md
+
+### Purpose
+
+Defines the long-term architectural direction of Abbey Root.
+
+The Vision should evolve slowly and describe enduring principles instead of implementation details.
+
+---
+
+## IDEAS.md
+
+### Purpose
+
+Captures brainstorming ideas before they are evaluated.
+
+Typical lifecycle:
+
+```
+Ideas
+        ↓
+Backlog
+        ↓
+Next
+        ↓
+Development
+        ↓
+Session Update
+        ↓
+abbey-review
+        ↓
+Planning Documents
+        ↓
+Journal
+```
+
+---
+
+# Session Updates
+
+Session updates are operational documents.
+
+Their purpose is to capture completed work once during a development session.
+
+They become the primary input to `abbey-review`.
+
+Planning documents summarize many session updates.
+
+---
+
+# Journal Entries
+
+Journal entries are historical publications.
+
+Unlike planning documents, they are intended primarily for people rather than automation.
+
+---
+
+# Generated Documentation
 
 Generated documentation should never be edited manually.
 
-Automation should regenerate these documents from authoritative metadata.
+Whenever practical, documentation should be regenerated from authoritative project metadata.
 
-⸻
+---
 
-Future Automation
+# Consumers
 
-Future Abbey toolkit commands may rely on these schemas.
+Planning documents are intended to be consumed by:
 
-Examples include:
+- Developers
+- `abbey session`
+- `abbey-end`
+- `abbey-review`
+- `abbey status`
+- `abbey doctor`
+- `abbey ai`
+- Website generation
+- Future automation
 
-* abbey session
-* abbey end
-* abbey status
-* abbey ai
-* abbey doctor
+All consumers should rely on stable section names while allowing document content to evolve.
 
-These commands should assume section names remain stable while allowing document content to evolve.
+---
 
-⸻
+# Versioning
 
-Versioning
+Changing document structure is an interface change.
 
-When planning document structures change:
+When planning document schemas change:
 
-* Update this document.
-* Update any affected toolkit commands.
-* Update AI prompts or automation that depend on the previous structure.
+- Update this document.
+- Update affected toolkit commands.
+- Update AI prompts.
+- Update documentation generators.
+- Update planning validation.
 
-Treat structural changes as interface changes rather than documentation edits.
+---
 
-⸻
+# Philosophy
 
-Philosophy
+Planning documents are the shared language of Abbey Root.
 
-Planning documents are more than documentation.
+They provide a stable interface between developers, documentation, automation, and AI.
 
-They are structured interfaces between the developer, the Abbey toolkit, and future AI systems.
-
-Stable schemas reduce complexity, simplify automation, and allow Abbey Root to become increasingly project-aware over time.
+By writing structured information once and allowing multiple systems to consume it, Abbey Root reduces duplication, improves consistency, and becomes increasingly project-aware over time.

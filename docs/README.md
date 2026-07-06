@@ -1,137 +1,153 @@
-Abbey Root Documentation
+# Abbey Root Documentation
 
 Welcome to the Abbey Root documentation.
 
-Abbey Root is an AI-assisted Infrastructure-as-Code home lab focused on learning, automation, documentation, and technical publishing. The documentation is organized by purpose to make information easy to find, maintain, and automate.
+Abbey Root is a self-documenting, project-aware development platform that combines infrastructure, documentation, automation, and AI into a single cohesive system.
 
-Whether you’re learning how the platform works, looking for operational guidance, or exploring the project’s current status, this documentation is intended to guide you to the appropriate location.
+This documentation is organized by purpose so that both developers and automation can reliably locate and consume project information.
 
-⸻
+---
 
-Start Here
+# Documentation Architecture
 
-If you are new to Abbey Root, read these documents in order.
+The documentation is organized into several categories.
 
-* Getting Started
-* Architecture
-* Environment Overview
-* Session Workflow
-* Documentation Standards
+## Guides
 
-These guides provide the foundation for understanding the project.
+Guides explain how to use and contribute to Abbey Root.
 
-⸻
+Examples include:
 
-Planning
+- Getting Started
+- Environment Overview
+- Session Workflow
+- Documentation Standards
 
-Planning documents describe the current state of the project and its future direction.
+---
 
-* Project Status
-* Next
-* Backlog
-* Roadmap
-* Ideas
+## Planning
 
-⸻
+Planning documents describe the current state and future direction of the project.
 
-Reference
+These documents are intentionally structured and follow stable schemas so they can be consumed by both developers and the Abbey toolkit.
 
-Reference documents describe the current environment and project standards.
+Planning documents include:
 
-* Hardware
-* Backups
-* Backup Strategy
-* External Services
+- Vision
+- Roadmap
+- Project Status
+- Next
+- Backlog
+- Ideas
 
-Additional reference documentation will be added as the project evolves.
+---
 
-⸻
+## Reference
 
-Runbooks
+Reference documentation describes the environment, standards, and architecture.
 
-Runbooks provide repeatable operational procedures.
+Examples include:
 
-* Network Interface Migration
+- Planning Schema
+- Hardware
+- Backup Strategy
+- External Services
 
-⸻
+---
 
-Generated Documentation
+## Runbooks
 
-The following documents are generated automatically from project metadata and should not be edited manually.
+Runbooks describe repeatable operational procedures.
 
-Environment
+Examples include:
 
-* Lab Summary
-* Architecture
-* Servers
-* Inventory
-* Network
+- Network Interface Migration
 
-Services
+---
 
-* Services
-* Containers
+## Generated Documentation
 
-Automation
+Generated documentation is produced automatically from authoritative project metadata.
 
-* Automation
-* Abbey Commands
+Generated documents should **never** be edited manually.
 
 If generated documentation is incorrect, update the automation that produces it rather than editing the generated files.
 
-⸻
+---
 
-Architecture Decision Records
+## Session Updates
 
-Architecture Decision Records (ADRs) document significant design decisions made throughout the project’s development.
+Session updates capture completed work during development sessions.
 
-The adr/ directory will contain records describing:
+Unlike planning documents, they are temporary operational records.
 
-* The problem being solved
-* The decision that was made
-* Alternatives that were considered
-* The reasoning behind the decision
+Completed session updates become input for `abbey-review`, which reconciles completed work into the long-term planning documents.
 
-⸻
+---
 
-Project Journal
+## Journal
 
-The historical record of Abbey Root is maintained under:
-
-content/journal/
+The project journal preserves the historical record of Abbey Root.
 
 Journal entries document:
 
-* Accomplishments
-* Lessons learned
-* Design decisions
-* Problems encountered
-* Future ideas
+- Accomplishments
+- Design decisions
+- Lessons learned
+- Problems encountered
+- Significant milestones
 
-The journal serves as the long-term history of the project and provides the source content for BradCooke.com.
+The journal provides the historical narrative of the project and serves as published content for BradCooke.com.
 
-⸻
+---
 
-Regenerating Documentation
+# Information Flow
+
+Project information moves through the documentation system rather than being duplicated.
+
+```text
+Ideas
+        ↓
+Backlog
+        ↓
+Next
+        ↓
+Development Session
+        ↓
+Session Update
+        ↓
+abbey-review
+        ↓
+Planning Documents
+        ↓
+Journal
+```
+
+This workflow captures project knowledge once and allows long-term documentation to evolve through structured review.
+
+---
+
+# Documentation Principles
+
+Abbey Root documentation follows several guiding principles.
+
+- Write information once.
+- Generate whenever practical.
+- Maintain a single source of truth.
+- Keep planning documents machine-readable.
+- Prefer small, focused documents.
+- Preserve stable document structures.
+- Record significant architectural decisions.
+- Preserve project history through journal entries.
+
+---
+
+# Regenerating Documentation
 
 Generated documentation can be rebuilt from the repository root:
 
+```bash
 ./scripts/ansible-docs.sh
+```
 
-⸻
-
-Documentation Principles
-
-Abbey Root documentation follows several guiding principles:
-
-* Automate whenever possible.
-* Maintain a single source of truth.
-* Keep documentation current.
-* Prefer small, focused documents.
-* Write for both people and AI.
-* Record significant architectural decisions.
-* Preserve the project’s history through journal entries.
-
-Additional documentation standards are described in:
-
-* Documentation Standards
+As Abbey Root evolves, additional documentation will be generated directly from project metadata rather than maintained manually.
