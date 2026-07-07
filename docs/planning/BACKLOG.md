@@ -222,3 +222,39 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Add host role awareness so checks run based on host purpose instead of hostname.
 - [ ] Add JSON output for future automation.
 - [ ] Add restore-test status tracking.
+
+## Request Intake Framework
+
+Create a lightweight request tracking process for Abbey Root.
+
+Initial approach:
+
+- Use GitHub Issues as the first request/ticket system.
+
+- Create issue templates for:
+
+  - Feature request
+
+  - Bug
+
+  - Lab task
+
+  - Documentation update
+
+  - Architecture idea
+
+  - Workflow experiment
+
+- Define labels for status, type, priority, and framework area.
+
+- Link requests to session updates when work begins.
+
+- Reference completed issues from commits and session updates.
+
+Future evaluation:
+
+- Determine whether Abbey needs a self-hosted issue tracker.
+
+- Evaluate Gitea as a lab-hosted Git and issue tracking platform.
+
+- Avoid building a custom ticketing system until the workflow is proven.

@@ -8,7 +8,7 @@ This documentation is organized by purpose so that both developers and automatio
 
 ---
 
-# Documentation Architecture
+# Documentation Organization
 
 The documentation is organized into several categories.
 
@@ -42,9 +42,28 @@ Planning documents include:
 
 ---
 
+## Architecture
+
+Architecture documents describe the reusable engineering frameworks and design principles that underpin Abbey Root.
+
+These documents define how the project is organized internally and provide the reference architecture for reusable engineering components.
+
+Examples include:
+
+- Architecture Principles
+- Engineering Framework
+- Documentation Framework
+- CLI Framework
+- Session Framework
+- Workflow Engine
+- Workflow Contract
+- Reporting Framework
+
+---
+
 ## Reference
 
-Reference documentation describes the environment, standards, and architecture.
+Reference documentation describes the environment, standards, and implementation details.
 
 Examples include:
 
