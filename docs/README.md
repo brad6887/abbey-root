@@ -2,9 +2,27 @@
 
 Welcome to the Abbey Root documentation.
 
-Abbey Root is a self-documenting, project-aware development platform that combines infrastructure, documentation, automation, and AI into a single cohesive system.
+Abbey Root is the reference implementation of the Abbey Framework—a reusable engineering framework for building self-documenting, AI-assisted development platforms.
+
+The project combines infrastructure, automation, documentation, publishing, and AI into a single cohesive engineering environment. While Abbey Root is itself a working project, its larger purpose is to develop reusable engineering practices that can be adopted by future repositories.
 
 This documentation is organized by purpose so that both developers and automation can reliably locate and consume project information.
+
+---
+
+# Recommended Reading Order
+
+If you are new to Abbey Root, read the documentation in this order.
+
+1. Guide
+2. Planning
+3. Framework
+4. Architecture
+5. Reference
+6. Runbooks
+7. Generated Documentation
+
+Each section answers a different question about the project.
 
 ---
 
@@ -12,16 +30,20 @@ This documentation is organized by purpose so that both developers and automatio
 
 The documentation is organized into several categories.
 
-## Guides
+## Guide
 
-Guides explain how to use and contribute to Abbey Root.
+The Guide provides the starting point for anyone new to the project.
 
-Examples include:
+Begin here before reading the technical documentation.
 
-- Getting Started
-- Environment Overview
-- Session Workflow
-- Documentation Standards
+Typical guide documents include:
+
+- Start Here
+- Using the CLI
+- Workflow
+- Philosophy
+
+The Guide explains how to work with Abbey Root rather than how it is implemented.
 
 ---
 
@@ -40,13 +62,36 @@ Planning documents include:
 - Backlog
 - Ideas
 
+Planning documents answer the question:
+
+> **What are we building next?**
+
+---
+
+## Framework
+
+Framework documents define the reusable engineering standards shared across Abbey-style projects.
+
+These documents describe how projects should be organized rather than how Abbey Root itself is implemented.
+
+Examples include:
+
+- Project Standard
+- CLI Standard
+
+As the framework evolves, additional standards will define common engineering practices, documentation, workflows, and AI integration.
+
+Framework documents answer the question:
+
+> **How should every Abbey-style project be built?**
+
 ---
 
 ## Architecture
 
-Architecture documents describe the reusable engineering frameworks and design principles that underpin Abbey Root.
+Architecture documents describe how Abbey Root itself is designed and implemented.
 
-These documents define how the project is organized internally and provide the reference architecture for reusable engineering components.
+These documents define the internal engineering frameworks and reusable technical components that make the project work.
 
 Examples include:
 
@@ -58,6 +103,10 @@ Examples include:
 - Workflow Engine
 - Workflow Contract
 - Reporting Framework
+
+Architecture documents answer the question:
+
+> **How does Abbey Root work?**
 
 ---
 
@@ -72,6 +121,10 @@ Examples include:
 - Backup Strategy
 - External Services
 
+Reference documents answer the question:
+
+> **What information do I need while working on the project?**
+
 ---
 
 ## Runbooks
@@ -81,6 +134,8 @@ Runbooks describe repeatable operational procedures.
 Examples include:
 
 - Network Interface Migration
+
+Runbooks document proven procedures that should be followed consistently.
 
 ---
 
@@ -92,15 +147,21 @@ Generated documents should **never** be edited manually.
 
 If generated documentation is incorrect, update the automation that produces it rather than editing the generated files.
 
+Examples include:
+
+- CLI Reference
+- Environment Summaries
+- Generated Reports
+
 ---
 
 ## Session Updates
 
 Session updates capture completed work during development sessions.
 
-Unlike planning documents, they are temporary operational records.
+Unlike planning documents, they are temporary operational records that summarize what was accomplished, why it matters, and what should happen next.
 
-Completed session updates become input for `abbey-review`, which reconciles completed work into the long-term planning documents.
+Completed session updates become input for future review and planning updates.
 
 ---
 
@@ -116,7 +177,7 @@ Journal entries document:
 - Problems encountered
 - Significant milestones
 
-The journal provides the historical narrative of the project and serves as published content for BradCooke.com.
+The journal provides the historical narrative of Abbey Root and serves as published content for BradCooke.com.
 
 ---
 
@@ -135,7 +196,7 @@ Development Session
         ↓
 Session Update
         ↓
-abbey-review
+Planning Review
         ↓
 Planning Documents
         ↓
@@ -158,15 +219,22 @@ Abbey Root documentation follows several guiding principles.
 - Preserve stable document structures.
 - Record significant architectural decisions.
 - Preserve project history through journal entries.
+- Build reusable frameworks before one-off solutions.
+- Design documentation for both humans and AI.
 
 ---
 
 # Regenerating Documentation
 
-Generated documentation can be rebuilt from the repository root:
+Generated documentation should be rebuilt through the Abbey CLI whenever practical.
+
+Examples include:
 
 ```bash
-./scripts/ansible-docs.sh
+abbey build
+abbey site build
 ```
 
 As Abbey Root evolves, additional documentation will be generated directly from project metadata rather than maintained manually.
+
+The long-term objective is for the repository to become increasingly self-documenting through metadata-driven tooling and automation.

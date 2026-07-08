@@ -1,88 +1,102 @@
-# Abbey Root - Next Session
+# Abbey Root Next
 
-## Primary Goal
+This document identifies the next recommended work for Abbey Root.
 
-Reduce the backlog by completing the core Abbey Root workflow and enabling project-aware automation. Focus on finishing existing capabilities before introducing new features.
-
----
-
-## High Priority
-
-- [ ] Complete the `abbey-end` workflow.
-- [ ] Complete the `abbey-review` workflow.
-- [ ] Expand `abbey-session` with planning summaries and project-aware recommendations.
-- [ ] Continue replacing manually maintained documentation with generated content.
-- [ ] Design secure remote access to Abbey Root for working away from home.
+Unlike the backlog, this document contains only the current priorities.
 
 ---
 
-## Abbey Toolkit
+# Current Theme
 
-- [ ] Design and implement `abbey-end`.
-- [ ] Generate session update files automatically.
-- [ ] Analyze Git status and Git diff when creating session updates.
-- [ ] Associate journal entries with active sessions.
-- [ ] Design and implement `abbey-review`.
-- [ ] Reconcile completed session updates into planning documents.
-- [ ] Expand `abbey-session` with planning summaries.
-- [ ] Add project-aware recommendations to `abbey-session`.
-- [ ] Improve `abbey-status`.
-- [ ] Add documentation validation to `abbey-doctor`.
-- [ ] Add network validation checks to `abbey-doctor`.
+## Build with the Framework
+
+The Abbey Framework foundation has reached a point where it should be exercised through real projects rather than expanded in isolation.
+
+The primary focus is now using Abbey Root to build and publish BradCooke.com while allowing real development experience to guide future framework improvements.
 
 ---
 
-## Self-Documenting Platform
+# Primary Objective
 
-- [ ] Continue eliminating manually maintained documentation.
-- [ ] Generate planning summaries from session updates.
-- [ ] Generate AI context from planning documents.
-- [ ] Expand metadata-driven documentation generation.
-- [ ] Make planning documents the primary interface for Abbey toolkit commands.
+Complete BradCooke.com as the first major public project built using the Abbey Framework.
+
+Use real website development to validate the framework, identify friction points, and improve Abbey only where practical experience demonstrates a need.
 
 ---
 
-## AI
-
-- [ ] Expand project-aware AI context.
-- [ ] Create repeatable Abbey AI benchmark prompts.
-- [ ] Continue building the AI evaluation framework.
-- [ ] Maintain the AI News review process.
-- [ ] Re-run Abbey AI benchmarks after significant model releases.
-
----
+# Current Priorities
 
 ## BradCooke.com
 
-- [ ] Publish today's documentation journal entry.
-- [ ] Continue improving reusable website components.
-- [ ] Continue refining website styling.
+- Expand project pages.
+- Publish additional technical content.
+- Improve reusable Astro components.
+- Continue refining the overall site design.
+- Prepare the site for public launch.
+- Continue documenting Abbey Root and Power Infrastructure.
 
 ---
 
-## Infrastructure
+## AI Assistant
 
-- [ ] Document the completed data closet.
-- [ ] Create a network diagram.
-- [ ] Evaluate VPN, Tailscale, and Cloudflare Tunnel for remote connectivity.
-- [ ] Design and implement secure remote access to the lab.
+Develop practical AI-assisted workflows that improve everyday development.
+
+Focus on:
+
+- Documentation assistance
+- Technical writing
+- Content generation
+- Image generation
+- Session summaries
+- Project review
+- Publishing assistance
+
+The emphasis should remain on solving real development problems rather than building AI features for their own sake.
 
 ---
 
-## Stretch Goals
+## Abbey Framework
 
-- [ ] Review the roadmap for completed milestones.
-- [ ] Continue refining project documentation.
-- [ ] Begin Architecture Decision Records.
+Continue improving Abbey Root, but only when real project work exposes opportunities.
+
+Priority areas include:
+
+- Complete `abbey-end`.
+- Complete `abbey-review`.
+- Design `abbey init`.
+- Continue metadata-driven automation.
+- Improve onboarding documentation.
+- Expand the developer toolkit where it reduces repetitive work.
+
+Framework improvements should be driven by experience rather than speculation.
 
 ---
 
-## Notes
+# Success Criteria
 
-Current emphasis:
+This phase will be considered successful when:
 
-- Finish workflows before creating new tools.
-- Reduce backlog through completion rather than expansion.
-- Automate repetitive project maintenance.
-- Use session updates as the single source of truth.
-- Generate documentation whenever practical.
+- BradCooke.com is substantially complete and ready for public use.
+- Abbey Root continues to mature through practical experience.
+- AI becomes a useful day-to-day development assistant.
+- Framework improvements arise naturally from building real projects.
+
+---
+
+# Future Direction
+
+Once BradCooke.com reaches a stable public release, begin the next Abbey-style repository:
+
+**Mystery Shopper Assistant**
+
+The project will serve as an independent validation that the Abbey Framework can support domains beyond infrastructure engineering.
+
+---
+
+# Guiding Principle
+
+> Build real projects.
+
+Use those projects to improve the framework.
+
+Allow the framework to mature through practical experience instead of attempting to design every future capability in advance.

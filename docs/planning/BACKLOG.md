@@ -1,18 +1,37 @@
 # Abbey Root Backlog
 
-This document contains tasks that have been identified but are not necessarily scheduled.
-Items should be moved to the roadmap or completed as priorities change.
+This document contains work that has been identified but is not necessarily scheduled.
+
+Items are captured here until they are either promoted to the roadmap, completed during a development session, or determined to no longer be necessary.
+
+The backlog is intentionally broad and serves as the project's working inventory of ideas, improvements, and future capabilities.
 
 ---
 
 ## High Priority
 
-- [ ] Expand `abbey-session` with planning summaries.
+- [ ] Design `abbey init` project bootstrap command.
 - [ ] Create `abbey-end` session workflow.
+- [ ] Create `abbey-review` planning reconciliation workflow.
 - [ ] Continue eliminating manually maintained documentation.
 - [ ] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.
 - [ ] Publish additional BradCooke.com content.
+
+---
+
+## Abbey Framework
+
+- [ ] Design `abbey init`.
+- [ ] Create shared CLI libraries.
+- [ ] Standardize universal CLI commands.
+- [ ] Create framework validation.
+- [ ] Create framework adoption guide.
+- [ ] Create project templates.
+- [ ] Design framework versioning.
+- [ ] Expand framework documentation.
+- [ ] Standardize documentation across Abbey-style repositories.
+- [ ] Create framework migration guide.
 
 ---
 
@@ -33,41 +52,56 @@ Items should be moved to the roadmap or completed as priorities change.
 
 ## Developer Toolkit
 
-- [x] Generate `abbey-help` automatically from tool metadata.
-- [x] Create `abbey-doctor` system health and dependency checker.
-- [x] Create `abbey-journal` helper.
+### Completed
+
+- [x] Generate CLI help from metadata.
+- [x] Generate CLI reference documentation.
+- [x] Create `abbey-doctor`.
+- [x] Create `abbey-status`.
 - [x] Create `abbey-session`.
+- [x] Create `abbey-journal`.
+- [x] Create `abbey-version`.
+
+### Toolkit Evolution
+
 - [ ] Expand `abbey-build` reporting and validation.
 - [ ] Add repository consistency checks.
-- [ ] Create `abbey-tree` helper.
-- [ ] Standardize tool output formatting and color usage.
+- [ ] Create `abbey-tree`.
+- [ ] Standardize tool output formatting and colors.
 - [ ] Add automated toolkit regression testing.
-- [ ] Add `abbey-site-build`.
-- [ ] Add `abbey-site-preview`.
-- [ ] Add `abbey-site-deploy-check`.
+- [ ] Expand `abbey site` commands.
+- [ ] Add `abbey site preview`.
+- [ ] Add `abbey site deploy-check`.
+- [ ] Add project metrics to `abbey-status`.
+- [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Add network health checks to `abbey-doctor`.
 - [ ] Verify bridge-ports references an existing interface.
 - [ ] Report negotiated Ethernet link speed.
 - [ ] Verify gateway connectivity.
 - [ ] Verify Internet connectivity.
 - [ ] Detect missing or replaced network interfaces.
-- [ ] Add project-aware recommendations to `abbey-session`.
-- [ ] Display planning summaries in `abbey-session`.
+
+### Workflow
+
+- [ ] Expand `abbey-session` with project-aware recommendations.
+- [ ] Display planning summaries during `abbey session`.
 - [ ] Create `abbey-end`.
 - [ ] Design `abbey-end` to analyze Git changes and draft session updates.
-- [ ] Create `abbey-review` to reconcile session updates into long-term planning documents.
-- [ ] Create `abbey session-update` helper to generate formatted files under `docs/session-updates/`.
+- [ ] Create `abbey-review`.
+- [ ] Create `abbey session-update`.
 - [ ] Associate journal entries with active Abbey sessions.
-- [ ] Add project metrics to `abbey-status`.
-- [ ] Add documentation validation to `abbey-doctor`.
-- [ ] Detect stale AI knowledge before running `abbey ai ask`.
-- [ ] Offer to automatically rebuild AI knowledge when project context has changed.
+
+### AI Integration
+
+- [ ] Detect stale AI knowledge before running `abbey ai`.
+- [ ] Offer to rebuild AI knowledge automatically when project context changes.
 
 ---
 
 ## Self-Documenting Platform
 
-- [ ] Generate toolkit command reference.
+- [x] Generate toolkit command reference.
+
 - [ ] Generate project metrics.
 - [ ] Generate documentation index.
 - [ ] Generate host inventory.
@@ -81,22 +115,33 @@ Items should be moved to the roadmap or completed as priorities change.
 - [ ] Generate planning summaries from session updates.
 - [ ] Generate AI context from planning documents.
 - [ ] Build `abbey docs generate`.
-- [ ] Document the session update workflow in `docs/guide/SESSION_WORKFLOW.md`.
 - [ ] Make planning documents the primary interface for Abbey toolkit commands.
 - [ ] Expand stable machine-readable planning document schemas.
-- [ ] Build project metadata APIs for future Abbey automation.
+- [ ] Build project metadata APIs.
+
+---
+
+## Documentation
+
+- [ ] Complete the onboarding guide series.
+- [ ] Create `WORKFLOW.md`.
+- [ ] Create `PHILOSOPHY.md`.
+- [ ] Expand architecture documentation.
+- [ ] Create framework documentation index.
+- [ ] Build document update workflow.
+- [ ] Design automated document review workflow.
 
 ---
 
 ## Recurring Reviews
 
-- [ ] Create a recurring review registry.
-- [ ] Surface due and overdue reviews during `abbey session`.
+- [ ] Create recurring review registry.
+- [ ] Surface due reviews during `abbey session`.
 - [ ] Support AI news reviews.
 - [ ] Support documentation audits.
-- [ ] Support infrastructure health reviews.
+- [ ] Support infrastructure reviews.
 - [ ] Support dependency reviews.
-- [ ] Support backup verification reviews.
+- [ ] Support backup verification.
 - [ ] Support security reviews.
 
 ---
@@ -112,7 +157,7 @@ Items should be moved to the roadmap or completed as priorities change.
 - [x] Publish Abbey Root journal entries.
 - [ ] Create JournalCard component.
 - [ ] Create JournalHeader component.
-- [x] Create Date formatting helper.
+- [x] Create date formatting helper.
 
 ### Components
 
@@ -136,9 +181,9 @@ Items should be moved to the roadmap or completed as priorities change.
 
 - [ ] Generate sitemap.
 - [ ] Generate RSS feed.
-- [ ] Add search capability.
+- [ ] Add search.
 - [ ] Define `docs/` vs `content/` publishing boundaries.
-- [ ] Remove remaining legacy `build-website.sh` references.
+- [ ] Remove remaining `build-website.sh` references.
 - [ ] Create BradCooke.com publishing runbook.
 - [ ] Publish the Abbey Root Operations Manual.
 - [ ] Configure GitHub Pages deployment.
@@ -151,38 +196,40 @@ Items should be moved to the roadmap or completed as priorities change.
 
 ## AI
 
+### Platform
+
 - [ ] Expand ai-worker01 into the AI experimentation platform.
 - [ ] AI-assisted metadata generation.
-- [ ] AI-assisted documentation generation from project metadata.
+- [ ] AI-assisted documentation generation.
 - [ ] AI-generated summaries.
 - [ ] AI-generated internal links.
 - [ ] AI-assisted image alt text.
-- [ ] AI-assisted publishing workflow.
+- [ ] AI-assisted publishing.
 - [ ] AI-generated session summaries.
 - [ ] AI-assisted project history.
-- [ ] AI project context awareness.
+- [ ] AI project awareness.
 - [ ] AI-powered "What should I work on next?"
 - [ ] AI documentation review.
 - [ ] AI session recap generation.
 - [ ] AI-aware Abbey toolkit integration.
 - [ ] Define AI knowledge sources.
-- [ ] Track AI knowledge rebuild freshness.
+- [ ] Track AI knowledge freshness.
 - [ ] Build AI knowledge freshness validation.
-- [ ] Generate project-aware AI context from planning documents.
-- [ ] Automate AI knowledge rebuilds when project context changes.
-- [ ] Establish a recurring AI technology review process to evaluate new models, tooling, and workflows against the Abbey AI evaluation suite.
+- [ ] Generate project-aware AI context.
+- [ ] Automate AI knowledge rebuilds.
+- [ ] Continue recurring AI technology reviews.
 
-### AI Evaluation
+### Evaluation
 
-- [ ] Create an AI evaluation framework for Abbey Root.
-- [ ] Define a standard suite of AI evaluation prompts.
-- [ ] Record expected concepts for each evaluation prompt.
-- [ ] Create `abbey ai test` to run repeatable AI evaluations.
-- [ ] Score AI responses against expected project concepts.
-- [ ] Track AI evaluation scores over time.
-- [ ] Compare AI performance across models and context generation methods.
-- [ ] Generate AI evaluation reports and historical trends.
-- [ ] Evaluate new AI models using real Abbey Root development workflows.
+- [ ] Create AI evaluation framework.
+- [ ] Define evaluation prompt suite.
+- [ ] Record expected concepts.
+- [ ] Create `abbey ai test`.
+- [ ] Score AI responses.
+- [ ] Track evaluation history.
+- [ ] Compare models.
+- [ ] Generate evaluation reports.
+- [ ] Evaluate new AI models using real Abbey workflows.
 
 ---
 
@@ -190,38 +237,39 @@ Items should be moved to the roadmap or completed as priorities change.
 
 - [ ] Automate BradCooke.com builds.
 - [ ] Automate deployment.
-- [ ] Evaluate GitHub Actions vs. self-hosted automation.
+- [ ] Evaluate GitHub Actions vs self-hosted automation.
 
 ---
 
 ## Communications
 
-- [ ] Evaluate custom email hosting for bradcooke.com.
+- [ ] Evaluate custom email hosting.
 - [ ] Create `brad@bradcooke.com`.
 - [ ] Create `contact@bradcooke.com`.
 - [ ] Design AI-assisted email workflows.
-- [ ] Generate weekly Abbey Root project summaries via email.
-- [ ] Investigate automated project status reports.
+- [ ] Generate weekly project summaries.
+- [ ] Investigate automated status reports.
 - [ ] Design end-of-session AI summary email.
 
 ---
 
-## Abbey Doctor Ideas
+## Abbey Doctor
 
 - [ ] Add verbose mode.
-- [ ] Add quiet mode for scripting.
+- [ ] Add quiet mode.
 - [ ] Add metadata-driven required document list.
 - [ ] Add documentation freshness checks.
-- [ ] Add backup freshness checks that can run remotely against Proxmox.
-- [ ] Add Proxmox VM status checks.
-- [ ] Add Docker container checks for ubuntu-dev01 and ai-worker01.
+- [ ] Add backup freshness checks.
+- [ ] Add Proxmox VM status.
+- [ ] Add Docker container checks.
 - [ ] Add Homepage/NPM/Uptime Kuma HTTP checks.
-- [ ] Add DNS checks for lab hostnames.
-- [ ] Add Ansible Vault detection and optional vault password file support.
-- [ ] Add check categories: local, remote, storage, docs, services.
-- [ ] Add host role awareness so checks run based on host purpose instead of hostname.
-- [ ] Add JSON output for future automation.
-- [ ] Add restore-test status tracking.
+- [ ] Add DNS checks.
+- [ ] Add Ansible Vault detection.
+- [ ] Add role-aware checks.
+- [ ] Add JSON output.
+- [ ] Add restore-test tracking.
+
+---
 
 ## Request Intake Framework
 
@@ -229,32 +277,14 @@ Create a lightweight request tracking process for Abbey Root.
 
 Initial approach:
 
-- Use GitHub Issues as the first request/ticket system.
-
-- Create issue templates for:
-
-  - Feature request
-
-  - Bug
-
-  - Lab task
-
-  - Documentation update
-
-  - Architecture idea
-
-  - Workflow experiment
-
+- Use GitHub Issues.
+- Create issue templates.
 - Define labels for status, type, priority, and framework area.
-
-- Link requests to session updates when work begins.
-
+- Link requests to session updates.
 - Reference completed issues from commits and session updates.
 
 Future evaluation:
 
-- Determine whether Abbey needs a self-hosted issue tracker.
-
-- Evaluate Gitea as a lab-hosted Git and issue tracking platform.
-
-- Avoid building a custom ticketing system until the workflow is proven.
+- Evaluate self-hosted issue tracking.
+- Evaluate Gitea.
+- Avoid building a custom ticketing system until the workflow has been proven.

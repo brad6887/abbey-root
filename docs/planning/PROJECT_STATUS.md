@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-07-06
+Last Updated: 2026-07-08
 
 ---
 
@@ -8,7 +8,7 @@ Last Updated: 2026-07-06
 
 ## Project Phase
 
-Developer Platform
+Abbey Framework Foundation
 
 ## Overall Health
 
@@ -16,12 +16,13 @@ Developer Platform
 
 ## Primary Goal
 
-Develop Abbey Root into a self-documenting, AI-assisted Infrastructure-as-Code platform where documentation, automation, and AI share a common source of truth.
+Develop Abbey Root into the reference implementation of the Abbey Framework—a self-documenting, AI-assisted engineering platform where documentation, automation, tooling, and AI share a common source of truth.
 
 ## Current Focus
 
-- Self-documenting platform
-- Developer toolkit
+- Abbey Framework
+- Universal developer toolkit
+- Metadata-driven engineering
 - Project-aware automation
 - AI-assisted workflows
 - BradCooke.com
@@ -32,15 +33,15 @@ Develop Abbey Root into a self-documenting, AI-assisted Infrastructure-as-Code p
 
 ## Session Theme
 
-Documentation Architecture and Workflow Automation
+Abbey Framework Foundation
 
 ## Objectives
 
-- Complete the planning document framework.
-- Standardize machine-readable project documentation.
-- Introduce session update reconciliation.
-- Expand the Abbey developer workflow.
-- Reduce manually maintained documentation.
+- Standardize the Abbey Framework.
+- Establish universal CLI behavior.
+- Introduce framework standards.
+- Improve project onboarding.
+- Continue reducing manually maintained documentation.
 
 ## Session Status
 
@@ -54,27 +55,31 @@ Completed
 
 - Infrastructure stable.
 - Documentation architecture established.
-- Planning document framework established.
+- Framework standards established.
 - Developer toolkit expanding.
+- Metadata-driven CLI implemented.
 - Website actively developed.
 - AI integration increasing.
 
 ## Development Direction
 
-- Complete the core Abbey workflow (`abbey session` → `abbey-end` → `abbey-review`).
-- Reduce manual maintenance.
+- Complete the Abbey engineering workflow.
+- Continue reducing manual maintenance.
+- Expand the Abbey Framework.
 - Increase project-aware automation.
-- Expand AI evaluation capabilities.
+- Expand AI-assisted engineering.
 - Continue technical publishing.
 
 ---
 
 # Immediate Priorities
 
+- Design `abbey init`.
 - Complete `abbey-end`.
 - Complete `abbey-review`.
-- Expand `abbey-session` with planning summaries.
-- Continue replacing manually maintained documentation.
+- Expand onboarding documentation.
+- Continue CLI standardization.
+- Evaluate shared CLI libraries.
 - Design secure remote access.
 - Continue developing BradCooke.com.
 
@@ -104,6 +109,32 @@ Completed
 
 ---
 
+# Abbey Framework
+
+## Status
+
+🟢 Foundation Established
+
+## Completed
+
+- Project Standard.
+- CLI Standard.
+- Metadata-driven CLI.
+- Universal CLI commands.
+- Framework documentation.
+- Guide documentation.
+- Power Infrastructure framework adoption.
+
+## Current Focus
+
+- Project bootstrap framework.
+- Shared engineering standards.
+- Universal developer experience.
+- Framework adoption across repositories.
+- Shared CLI libraries.
+
+---
+
 # Developer Toolkit
 
 ## Status
@@ -114,9 +145,12 @@ Completed
 
 - `abbey doctor`
 - `abbey status`
-- `abbey ai`
-- `abbey journal`
 - `abbey session`
+- `abbey version`
+- `abbey journal`
+- `abbey ai`
+- Metadata-driven CLI help
+- Generated CLI reference
 
 ## Current Focus
 
@@ -125,6 +159,7 @@ Completed
 - Project-aware workflows.
 - Documentation automation.
 - Self-documenting development.
+- Framework consistency.
 
 ---
 
@@ -186,7 +221,8 @@ Completed
 
 - Documentation architecture.
 - Guide system.
-- Documentation standards.
+- Framework documentation.
+- Metadata-driven CLI documentation.
 - Planning document standards.
 - Planning schemas.
 - Session update framework.
@@ -198,29 +234,29 @@ Completed
 - Session reconciliation.
 - AI project context.
 - Self-documenting workflows.
+- Onboarding documentation.
 
 ---
 
 # Recent Accomplishments
 
-- Established the long-term documentation architecture.
-- Created machine-readable planning document schemas.
-- Created the session update framework.
-- Designed the `abbey-review` workflow.
-- Defined the `abbey-end` workflow.
-- Created the AI benchmark planning framework.
-- Created the AI News review process.
-- Expanded `abbey session` to support workflow guidance.
-- Continued reorganizing project documentation.
+- Established the Abbey Framework.
+- Defined Project and CLI standards.
+- Introduced metadata-driven CLI architecture.
+- Added universal `abbey version`.
+- Generated CLI reference documentation.
+- Created onboarding documentation.
+- Adopted the framework within Power Infrastructure.
+- Continued improving project-aware workflows.
 
 ---
 
 # Current Challenges
 
 - Completing the end-to-end Abbey workflow.
+- Designing `abbey init`.
 - Reducing manually maintained documentation.
 - Secure remote access.
-- Physical lab documentation.
 - AI project awareness.
 - BradCooke.com publishing.
 
@@ -230,15 +266,18 @@ Completed
 
 ## Near Term
 
+- Design `abbey init`.
 - Complete `abbey-end`.
 - Complete `abbey-review`.
-- Expand `abbey-session`.
+- Expand onboarding documentation.
 - Improve `abbey-doctor`.
 - Continue metadata-driven documentation.
 - Publish BradCooke.com updates.
 
 ## Long Term
 
+- Reusable engineering framework.
+- Project bootstrap platform.
 - Project-aware development environment.
 - Self-documenting platform.
 - AI evaluation framework.
@@ -269,6 +308,7 @@ Generate automatically:
 - Documentation statistics.
 - Planning summaries.
 - AI evaluation reports.
+- Framework adoption metrics.
 
 ---
 
@@ -281,6 +321,10 @@ Generate automatically:
 ## Documentation
 
 🟢 Active
+
+## Abbey Framework
+
+🟢 Foundation Established
 
 ## Automation
 
@@ -311,3 +355,5 @@ This document follows the schema defined in:
 `docs/reference/PLANNING_SCHEMA.md`
 
 Section names should remain stable to support future Abbey toolkit commands, documentation generation, and AI-assisted workflows.
+
+Abbey Root serves as the reference implementation of the Abbey Framework. Other repositories are expected to adopt and extend the framework while preserving the shared engineering standards and developer experience.

@@ -4,6 +4,8 @@ The roadmap describes the major milestones in the evolution of Abbey Root.
 
 Unlike the backlog, it focuses on long-term capabilities rather than individual tasks.
 
+Each phase builds upon the previous one, gradually transforming Abbey Root from a personal Linux lab into a reusable engineering framework and AI-assisted development platform.
+
 ---
 
 # Phase 1 – Infrastructure Foundation ✅
@@ -39,9 +41,8 @@ Unlike the backlog, it focuses on long-term capabilities rather than individual 
 - Reference documentation
 - Planning documentation
 - Machine-readable planning schemas
-- Documentation standards
 - Journal platform
-- Historical journal consolidation
+- Session update framework
 
 ## Developer Workflow
 
@@ -50,7 +51,7 @@ Unlike the backlog, it focuses on long-term capabilities rather than individual 
 - `abbey-end`
 - `abbey-review`
 - Session update workflow
-- Project-aware session workflow
+- Project-aware workflow
 - Self-documenting development workflow
 
 ## Self-Documenting Platform
@@ -66,14 +67,54 @@ Unlike the backlog, it focuses on long-term capabilities rather than individual 
 
 **Success Criteria**
 
-- Every development session follows the complete workflow:
-  `abbey session` → development → `abbey-end` → commit → `abbey-review`
+- Every development session follows the complete engineering workflow.
 - Planning documents become the authoritative source for both developers and automation.
-- Documentation maintenance is largely generated instead of handwritten.
+- Documentation maintenance is primarily generated rather than handwritten.
 
 ---
 
-# Phase 3 – Publishing Platform 🚧
+# Phase 3 – Abbey Framework 🚧
+
+## Framework Standards
+
+- Project Standard
+- CLI Standard
+- Documentation standards
+- Session workflow standards
+- Engineering conventions
+
+## Universal Developer Experience
+
+- Universal CLI commands
+- Metadata-driven CLI
+- Generated CLI documentation
+- Consistent documentation structure
+- Shared engineering workflow
+
+## Project Bootstrap
+
+- `abbey init`
+- Repository templates
+- Shared project layouts
+- Shared CLI libraries
+- Framework adoption guidance
+
+## Framework Adoption
+
+- Power Infrastructure
+- Future engineering projects
+- Website projects
+- Automation platforms
+
+**Success Criteria**
+
+- New projects can be created from the Abbey Framework with minimal manual setup.
+- Developers can move between Abbey-style repositories without relearning project structure or workflows.
+- The framework becomes reusable independent of Abbey Root itself.
+
+---
+
+# Phase 4 – Publishing Platform 🚧
 
 ## Foundation
 
@@ -88,9 +129,7 @@ Unlike the backlog, it focuses on long-term capabilities rather than individual 
 
 - Home page
 - About page
-- Abbey Root project page
-- Power Infrastructure project page
-- Contact page
+- Project pages
 - Technical articles
 - Operations manual
 
@@ -105,11 +144,11 @@ Unlike the backlog, it focuses on long-term capabilities rather than individual 
 **Success Criteria**
 
 - BradCooke.com becomes the public publishing platform for Abbey Root.
-- Technical documentation can be selectively published from the project repository.
+- Technical documentation can be selectively published from project repositories.
 
 ---
 
-# Phase 4 – Project-Aware AI 🚧
+# Phase 5 – Project-Aware AI 🚧
 
 ## AI Foundation
 
@@ -118,7 +157,7 @@ Unlike the backlog, it focuses on long-term capabilities rather than individual 
 - AI documentation review
 - AI-assisted documentation generation
 - AI-assisted publishing
-- AI-assisted project historian
+- AI project historian
 - AI session summaries
 
 ## AI Evaluation
@@ -127,7 +166,7 @@ Unlike the backlog, it focuses on long-term capabilities rather than individual 
 - AI evaluation framework
 - Historical model comparisons
 - AI performance tracking
-- AI knowledge freshness validation
+- Knowledge freshness validation
 
 ## Project Awareness
 
@@ -138,12 +177,12 @@ Unlike the backlog, it focuses on long-term capabilities rather than individual 
 
 **Success Criteria**
 
-- AI consistently understands the Abbey Root project using generated project context.
-- AI improvements are measurable using repeatable evaluation workflows.
+- AI consistently understands Abbey Root using generated project context.
+- AI improvements are measurable through repeatable evaluation workflows.
 
 ---
 
-# Phase 5 – Autonomous Development Platform
+# Phase 6 – Autonomous Development Platform
 
 ## Autonomous Documentation
 
@@ -163,28 +202,30 @@ Unlike the backlog, it focuses on long-term capabilities rather than individual 
 
 - Project-aware developer environment
 - Workflow recommendations
-- Automated project summaries
 - Intelligent backlog reduction
 - AI-assisted planning
+- Automated engineering assistance
 
 **Success Criteria**
 
-Abbey Root becomes a project-aware development platform that continuously maintains its own documentation, validates itself, measures AI performance, and assists future development.
+Abbey Root becomes a project-aware engineering platform that continuously maintains its own documentation, validates itself, measures AI performance, and assists future development.
 
 ---
 
 # Long-Term Vision
 
-Abbey Root continues evolving from:
+Abbey Root continues evolving through the following stages:
 
-```
+```text
 Linux Lab
         ↓
 Infrastructure-as-Code Platform
         ↓
 Developer Platform
         ↓
-Self-Documenting Platform
+Abbey Framework
+        ↓
+Project Bootstrap Platform
         ↓
 Project-Aware Development Platform
         ↓
@@ -193,4 +234,6 @@ AI-Assisted Engineering Platform
 Autonomous Development Platform
 ```
 
-The long-term objective is not simply to build infrastructure, but to create a development environment that understands itself, documents itself, validates itself, and continuously improves through automation and AI.
+Each stage produces reusable capabilities that become part of the Abbey Framework.
+
+The long-term objective is not simply to build infrastructure, but to create a reusable engineering platform that allows future projects to begin with years of accumulated knowledge, standardized workflows, consistent tooling, and AI-assisted engineering practices.

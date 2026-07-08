@@ -2,7 +2,9 @@
 
 **Status:** Active architectural direction
 
-Abbey Root is evolving from a home Linux lab into a self-documenting, project-aware development platform that combines infrastructure, documentation, automation, and AI into a single cohesive system.
+Abbey Root is evolving from a home Linux lab into the reference implementation of the Abbey Framework—a reusable engineering framework for building self-documenting, AI-assisted development platforms.
+
+The project combines infrastructure, documentation, automation, publishing, and AI into a single cohesive engineering environment. While Abbey Root is itself a working platform, its broader purpose is to develop reusable engineering practices that can be applied to future projects.
 
 The long-term objective is not simply to automate infrastructure, but to build an environment that continuously improves itself by reducing manual work, preserving knowledge, and assisting future development.
 
@@ -16,7 +18,9 @@ Abbey Root exists to create practical knowledge by building real systems.
 
 Rather than collecting virtual machines or experimenting without purpose, every component should contribute to a reproducible, maintainable platform for learning, automation, documentation, publishing, and software development.
 
-The project itself is both the laboratory and the product.
+Abbey Root is both a working project and the reference implementation of the Abbey Framework.
+
+Every successful idea should become reusable whenever practical so that future projects begin with a stronger engineering foundation.
 
 ---
 
@@ -84,6 +88,14 @@ Every workflow should first be validated through real project use before being a
 
 ---
 
+## Build Frameworks Before Features
+
+Whenever practical, solve recurring problems by extending the Abbey Framework rather than creating one-off solutions.
+
+Future projects should inherit improvements automatically instead of rediscovering them independently.
+
+---
+
 ## Learn by Building
 
 The platform exists to create practical experience.
@@ -104,6 +116,8 @@ The project should become progressively easier to maintain over time.
 
 Abbey Root should evolve into a:
 
+- reusable engineering framework
+- project bootstrap platform
 - self-documenting platform
 - self-validating platform
 - metadata-driven platform
@@ -206,6 +220,23 @@ AI should assist with planning, documentation, publishing, workflow guidance, an
 
 ---
 
+# Abbey Framework
+
+The Abbey Framework is the reusable engineering methodology developed within Abbey Root.
+
+Its purpose is to provide future repositories with a consistent:
+
+- Project structure
+- Documentation organization
+- Engineering workflow
+- Command-line interface
+- Metadata model
+- AI integration strategy
+
+Abbey Root serves as the reference implementation, while future repositories adopt and extend the framework for their own domain.
+
+---
+
 # Abbey Toolkit
 
 The Abbey toolkit should become the primary interface to the platform.
@@ -215,13 +246,16 @@ Examples include:
 - `abbey doctor`
 - `abbey status`
 - `abbey session`
-- `abbey-end`
-- `abbey-review`
+- `abbey version`
+- `abbey build`
+- `abbey validate`
+- `abbey publish`
 - `abbey ai`
 - `abbey journal`
-- `abbey site`
 
 Rather than interacting directly with individual tools, the developer interacts with Abbey Root through a consistent project-aware interface.
+
+Universal commands should remain consistent across every Abbey-style project, while project-specific commands extend the framework without changing the meaning of the core commands.
 
 ---
 
@@ -265,4 +299,4 @@ Documentation, planning, automation, AI, and developer tooling should all share 
 
 The platform should preserve knowledge, reduce repetitive work, recommend the next logical action, measure its own progress, and continually improve the development experience without removing control from the developer.
 
-Ultimately, Abbey Root should become a development environment that understands itself, documents itself, validates itself, and helps build itself.
+Ultimately, Abbey Root should become both a world-class development environment and a reusable engineering framework that allows future projects to begin with years of accumulated knowledge instead of starting from scratch.
