@@ -58,8 +58,32 @@ const journal = defineCollection({
   }),
 });
 
+const plants = defineCollection({
+  loader: glob({
+    base: '../content/plants',
+    pattern: ['**/*.md', '!README.md'],
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+
+    type: z.string(),
+    status: z.string(),
+    species: z.string().optional(),
+
+    acquired: z.date().optional(),
+    featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
+
+    updatedDate: z.date().optional(),
+
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
 export const collections = {
   pages,
   projects,
   journal,
+  plants,
 };

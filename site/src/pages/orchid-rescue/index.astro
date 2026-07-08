@@ -1,0 +1,77 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const plants = await getCollection("plants");
+
+const orchids = plants
+  .filter((plant) => plant.data.type === "orchid")
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<Layout title="Orchid Rescue">
+  <main class="page">
+    <section>
+      <h1>Orchid Rescue</h1>
+
+      <p>
+        I am not an orchid expert. This is a plant rescue journal about learning
+        as I go, documenting what works, what fails, and what each plant teaches
+        along the way.
+      </p>
+
+      <p>
+        Some orchids recover. Some do not. The point is to pay attention, keep
+        notes, and see what a little patience can do.
+      </p>
+    </section>
+
+    <section>
+      <h2>Current Orchid Rescues</h2>
+
+      <div class="plant-grid">
+        {orchids.map((orchid) => (
+          <article class="plant-card">
+            <h3>
+              <a href={`/orchid-rescue/${orchid.slug}/`}>
+                {orchid.data.title}
+              </a>
+            </h3>
+            <p class="status">{orchid.data.status}</p>
+            {orchid.data.species && <p>{orchid.data.species}</p>}
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    line-height: 1.6;
+  }
+
+  .plant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .plant-card {
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+  }
+
+  .plant-card h3 {
+    margin-top: 0;
+  }
+
+  .status {
+    font-weight: 700;
+  }
+</style>

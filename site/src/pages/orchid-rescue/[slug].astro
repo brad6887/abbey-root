@@ -1,0 +1,71 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const plants = await getCollection("plants");
+
+  const orchids = plants.filter(
+    (plant) => plant.data.type === "orchid"
+  );
+
+  return orchids.map((plant) => ({
+    params: {
+      slug: plant.id.replace(/\.md$/, ""),
+    },
+    props: {
+      plant,
+    },
+  }));
+}
+
+const { plant } = Astro.props;
+const { Content } = await render(plant);
+---
+
+<Layout title={`${plant.data.title} | Orchid Rescue`}>
+  <main class="page">
+    <p><a href="/orchid-rescue/">← Orchid Rescue</a></p>
+
+    <h1>{plant.data.title}</h1>
+
+    <dl>
+      <dt>Status</dt>
+      <dd>{plant.data.status}</dd>
+
+      {plant.data.species && (
+        <>
+          <dt>Species</dt>
+          <dd>{plant.data.species}</dd>
+        </>
+      )}
+
+      {plant.data.acquired && (
+        <>
+          <dt>Acquired</dt>
+          <dd>{plant.data.acquired.toLocaleDateString()}</dd>
+        </>
+      )}
+    </dl>
+
+    <Content />
+  </main>
+</Layout>
+
+<style>
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    line-height: 1.6;
+  }
+
+  dt {
+    font-weight: 700;
+    margin-top: 1rem;
+  }
+
+  dd {
+    margin: 0 0 0.75rem 0;
+  }
+</style>
