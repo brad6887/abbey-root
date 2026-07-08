@@ -62,6 +62,22 @@ abbey status
 abbey status
 ```
 
+### `abbey version`
+
+Show project version and framework information.
+
+**Usage**
+
+```text
+abbey version
+```
+
+**Examples**
+
+```text
+abbey version
+```
+
 ## Workflow
 
 ### `abbey journal`

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -u
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+export ABBEY_ROOT
+
+project_name="Abbey Root"
+branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null || echo unknown)"
+commit="$(git -C "$ABBEY_ROOT" rev-parse --short HEAD 2>/dev/null || echo unknown)"
+version="$(git -C "$ABBEY_ROOT" describe --tags --always --dirty 2>/dev/null || echo "$commit")"
+
+if [[ -z "$(git -C "$ABBEY_ROOT" status --porcelain 2>/dev/null)" ]]; then
+  working_tree="Clean"
+else
+  working_tree="Changes present"
+fi
+
+if git -C "$ABBEY_ROOT" remote -v | grep -q .; then
+  remote="Configured"
+else
+  remote="Not configured"
+fi
+
+echo "========================================"
+echo " $project_name"
+echo "========================================"
+echo
+printf "%-14s : %s\n" "Version" "$version"
+printf "%-14s : %s\n" "Branch" "$branch"
+printf "%-14s : %s\n" "Commit" "$commit"
+
+echo
+echo "Framework"
+echo "---------"
+printf "%-14s : %s\n" "CLI" "Metadata-driven"
+printf "%-14s : %s\n" "Session Flow" "Enabled"
+printf "%-14s : %s\n" "Docs Standard" "In progress"
+
+echo
+echo "Repository"
+echo "----------"
+printf "%-14s : %s\n" "Working Tree" "$working_tree"
+printf "%-14s : %s\n" "Remote" "$remote"

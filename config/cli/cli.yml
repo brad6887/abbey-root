@@ -100,3 +100,11 @@ commands:
     hidden: false
     examples:
       - abbey ai
+
+  version:
+    category: core
+    description: Show project version and framework information.
+    usage: abbey version
+    hidden: false
+    examples:
+      - abbey version
