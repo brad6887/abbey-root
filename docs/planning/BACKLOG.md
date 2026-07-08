@@ -80,6 +80,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Verify gateway connectivity.
 - [ ] Verify Internet connectivity.
 - [ ] Detect missing or replaced network interfaces.
+- [ ] Design `abbey review` to summarize staged changes, validate session completeness, suggest a commit message, and recommend the next workflow step.
 
 ### Workflow
 
