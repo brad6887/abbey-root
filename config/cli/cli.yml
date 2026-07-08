@@ -1,0 +1,102 @@
+# Abbey Root CLI metadata
+#
+# Purpose:
+#   Single source of truth for abbey command descriptions, categories,
+#   aliases, examples, nested commands, and generated documentation.
+
+version: 1
+
+cli:
+  name: abbey
+  description: Abbey Root Toolkit
+  tagline: AI-assisted infrastructure lab and reusable project framework.
+
+categories:
+  core:
+    description: Core CLI commands
+
+  workflow:
+    description: Workflow commands
+
+  docs:
+    description: Documentation commands
+
+  ai:
+    description: AI and knowledge commands
+
+  site:
+    description: Website commands
+
+commands:
+  help:
+    category: core
+    description: Show Abbey Root CLI help.
+    usage: abbey help
+    hidden: false
+    examples:
+      - abbey help
+
+  doctor:
+    category: core
+    description: Run repository and environment health checks.
+    usage: abbey doctor
+    hidden: false
+    examples:
+      - abbey doctor
+
+  status:
+    category: core
+    description: Show local system and project status.
+    usage: abbey status
+    hidden: false
+    examples:
+      - abbey status
+
+  session:
+    category: workflow
+    description: Start an Abbey Root work session.
+    usage: abbey session
+    hidden: false
+    examples:
+      - abbey session
+
+  journal:
+    category: workflow
+    description: Create or open an Abbey Root journal entry.
+    usage: abbey journal <title>
+    hidden: false
+    examples:
+      - abbey journal "Architecture Framework Introduced"
+
+  site:
+    category: site
+    description: Run Abbey Root website commands.
+    usage: abbey site <command>
+    hidden: false
+    examples:
+      - abbey site build
+      - abbey site dev
+
+  knowledge:
+    category: ai
+    description: Build and view Abbey knowledge context.
+    usage: abbey knowledge <command>
+    hidden: false
+    examples:
+      - abbey knowledge build
+
+  context:
+    category: ai
+    description: Build or inspect Abbey AI context.
+    usage: abbey context <command>
+    hidden: false
+    examples:
+      - abbey context
+
+  ai:
+    category: ai
+    description: Start Abbey AI helper commands.
+    usage: abbey ai <command>
+    hidden: false
+    examples:
+      - abbey ai

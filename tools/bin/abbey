@@ -50,26 +50,7 @@ case "$command" in
     ;;    
 
   help|-h|--help)
-    cat <<'HELP'
-Abbey Root Toolkit
-
-Usage:
-  abbey doctor              Run Abbey Root health checks
-  abbey journal <title>     Create or open a journal entry
-  abbey ai                  Start Abbey AI helper
-  abbey status              Show local Abbey Root status
-  abbey session             Start an Abbey Root work session
-  abbey knowledge build     Build a local knowledge snapshot
-  abbey help                Show this help
-
-Commands:
-  doctor                    Run health checks
-  journal                   Create or open a journal entry
-  ai                        AI helper commands
-  status                    Show local system/project status
-  session                   Start an Abbey Root work session
-  knowledge                 Build/view Abbey knowledge context
-HELP
+    "$ABBEY_ROOT/scripts/abbey_cli.py" help
     ;;
 
   *)
