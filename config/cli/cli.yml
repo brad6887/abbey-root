@@ -27,6 +27,9 @@ categories:
   site:
     description: Website commands
 
+  content:
+    description: Content management commands
+
 commands:
   help:
     category: core
@@ -76,6 +79,18 @@ commands:
     examples:
       - abbey site build
       - abbey site dev
+
+  plant:
+    category: content
+    description: Manage and validate plant workspaces.
+    usage: abbey plant <command>
+    hidden: false
+    subcommands:
+      validate:
+        description: Validate a plant workspace against the Plant Model.
+        usage: abbey plant validate <slug>
+    examples:
+      - abbey plant validate doctor-robert
 
   knowledge:
     category: ai

@@ -1,0 +1,277 @@
+#!/usr/bin/env bash
+#
+# Abbey Root Tool: abbey-plant
+#
+# Purpose:
+#   Manage and validate plant workspaces.
+#
+# Usage:
+#   abbey plant validate <slug>
+#
+
+set -euo pipefail
+
+REPO_DIR="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+PLANTS_DIR="$REPO_DIR/working/plants"
+
+ok_count=0
+warn_count=0
+fail_count=0
+
+ok() {
+    printf 'OK   %s\n' "$1"
+    ((ok_count += 1))
+}
+
+warn() {
+    printf 'WARN %s\n' "$1"
+    ((warn_count += 1))
+}
+
+fail() {
+    printf 'FAIL %s\n' "$1"
+    ((fail_count += 1))
+}
+
+usage() {
+    cat <<'EOF'
+Usage:
+  abbey plant validate <slug>
+
+Commands:
+  validate    Validate a plant workspace against the Plant Model
+EOF
+}
+
+validate_plant() {
+    local slug="${1:-}"
+
+    if [[ -z "$slug" ]]; then
+        echo "ERROR: Plant slug is required."
+        echo
+        usage
+        exit 2
+    fi
+
+    local plant_dir="$PLANTS_DIR/$slug"
+    local facts_file="$plant_dir/facts.yaml"
+
+    echo "Plant Validation"
+    echo "================"
+    echo "Plant: $slug"
+    echo
+
+    echo "Directory"
+    echo "---------"
+
+    if [[ -d "$plant_dir" ]]; then
+        ok "Plant directory exists: $plant_dir"
+    else
+        fail "Plant directory does not exist: $plant_dir"
+        print_summary
+        exit 1
+    fi
+
+    echo
+    echo "Required Files"
+    echo "--------------"
+
+    local required_files=(
+        "facts.yaml"
+        "history.md"
+        "story.md"
+        "inventory.md"
+        "photo-metadata.md"
+    )
+
+    local file
+    for file in "${required_files[@]}"; do
+        if [[ -f "$plant_dir/$file" ]]; then
+            ok "$file"
+        else
+            fail "$file is missing"
+        fi
+    done
+
+    echo
+    echo "Required Directories"
+    echo "--------------------"
+
+    local required_dirs=(
+        "photos"
+        "sources"
+    )
+
+    local dir
+    for dir in "${required_dirs[@]}"; do
+        if [[ -d "$plant_dir/$dir" ]]; then
+            ok "$dir/"
+        else
+            fail "$dir/ is missing"
+        fi
+    done
+
+    echo
+    echo "Facts"
+    echo "-----"
+
+    if [[ ! -f "$facts_file" ]]; then
+        fail "Cannot validate facts because facts.yaml is missing"
+        print_summary
+        exit 1
+    fi
+
+    if ! python3 -c 'import yaml' >/dev/null 2>&1; then
+        fail "Python module PyYAML is not installed"
+        echo
+        echo "Install it with:"
+        echo "  python3 -m pip install --user pyyaml"
+        print_summary
+        exit 1
+    fi
+
+    local facts_output
+    if ! facts_output="$(
+        python3 - "$facts_file" "$plant_dir" <<'PY'
+import os
+import sys
+from pathlib import Path
+
+import yaml
+
+facts_path = Path(sys.argv[1])
+plant_dir = Path(sys.argv[2])
+
+try:
+    with facts_path.open("r", encoding="utf-8") as handle:
+        data = yaml.safe_load(handle)
+except yaml.YAMLError as exc:
+    print(f"FAIL|facts.yaml contains invalid YAML: {exc}")
+    sys.exit(0)
+except OSError as exc:
+    print(f"FAIL|Unable to read facts.yaml: {exc}")
+    sys.exit(0)
+
+if not isinstance(data, dict):
+    print("FAIL|facts.yaml must contain a YAML mapping")
+    sys.exit(0)
+
+print("OK|facts.yaml parses successfully")
+
+def get_value(path):
+    value = data
+    for key in path.split("."):
+        if not isinstance(value, dict) or key not in value:
+            return None
+        value = value[key]
+    return value
+
+required = (
+    "name",
+    "slug",
+    "plant.type",
+    "status.current",
+)
+
+for field in required:
+    value = get_value(field)
+    if value is None or value == "":
+        print(f"FAIL|Required field is missing or empty: {field}")
+    else:
+        print(f"OK|{field}: {value}")
+
+optional = (
+    "plant.genus",
+    "plant.species",
+    "rescue.date",
+    "status.updated",
+)
+
+for field in optional:
+    value = get_value(field)
+    if value is None or value == "":
+        print(f"WARN|Optional field is not set: {field}")
+    else:
+        print(f"OK|{field}: {value}")
+
+slug = get_value("slug")
+if slug and slug != plant_dir.name:
+    print(
+        f"FAIL|facts.yaml slug '{slug}' does not match directory "
+        f"name '{plant_dir.name}'"
+    )
+elif slug:
+    print("OK|Slug matches plant directory")
+
+for field in ("photos.hero", "photos.current"):
+    value = get_value(field)
+
+    if value is None or value == "":
+        print(f"WARN|Photo reference is not set: {field}")
+        continue
+
+    path = plant_dir / value
+
+    if path.is_file():
+        print(f"OK|{field} exists: {value}")
+    else:
+        print(f"FAIL|{field} does not exist: {value}")
+PY
+    )"; then
+        fail "Unable to execute facts.yaml validation"
+    else
+        while IFS='|' read -r level message; do
+            case "$level" in
+                OK)
+                    ok "$message"
+                    ;;
+                WARN)
+                    warn "$message"
+                    ;;
+                FAIL)
+                    fail "$message"
+                    ;;
+            esac
+        done <<< "$facts_output"
+    fi
+
+    print_summary
+
+    if ((fail_count > 0)); then
+        exit 1
+    fi
+}
+
+print_summary() {
+    echo
+    echo "Result"
+    echo "------"
+    printf 'OK: %d  WARN: %d  FAIL: %d\n' \
+        "$ok_count" "$warn_count" "$fail_count"
+
+    if ((fail_count > 0)); then
+        echo "FAIL Plant model validation failed."
+    elif ((warn_count > 0)); then
+        echo "PASS Plant model validation completed with warnings."
+    else
+        echo "PASS Plant model validation completed successfully."
+    fi
+}
+
+command="${1:-help}"
+
+case "$command" in
+    validate)
+        shift
+        validate_plant "${1:-}"
+        ;;
+    help|-h|--help)
+        usage
+        ;;
+    *)
+        echo "Unknown plant command: $command"
+        echo
+        usage
+        exit 1
+        ;;
+esac

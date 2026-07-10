@@ -181,3 +181,26 @@ abbey site build
 abbey site dev
 ```
 
+## Content management
+
+### `abbey plant`
+
+Manage and validate plant workspaces.
+
+**Usage**
+
+```text
+abbey plant <command>
+```
+
+**Subcommands**
+
+- `validate` - Validate a plant workspace against the Plant Model.
+  - `abbey plant validate <slug>`
+
+**Examples**
+
+```text
+abbey plant validate doctor-robert
+```
+

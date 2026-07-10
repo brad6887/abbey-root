@@ -1,0 +1,39 @@
+name:
+slug:
+
+plant:
+  type:
+  genus: null
+  species: null
+  hybrid: null
+
+rescue:
+  date: null
+  source: null
+  location:
+    city: null
+    state: null
+    country: null
+
+status:
+  current: unknown
+  current_location:
+    city: null
+    state: null
+    country: null
+  updated: null
+
+care:
+  potting_medium: null
+  container: null
+
+photos:
+  hero: null
+  current: null
+  metadata: photo-metadata.md
+
+documents:
+  story: story.md
+  history: history.md
+
+tags: []

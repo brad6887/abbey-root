@@ -82,6 +82,8 @@ Completed
 - Evaluate shared CLI libraries.
 - Design secure remote access.
 - Continue developing BradCooke.com.
+- Complete the Doctor Robert reference implementation.
+- Connect the Plant Model to BradCooke.com.
 
 ---
 
@@ -151,6 +153,8 @@ Completed
 - `abbey ai`
 - Metadata-driven CLI help
 - Generated CLI reference
+- `abbey plant validate <slug>`
+- Structured content workspace validation
 
 ## Current Focus
 
@@ -183,6 +187,13 @@ Completed
 - Expand technical content.
 - Improve reusable components.
 - Prepare GitHub Pages deployment.
+- Publish Doctor Robert from the canonical plant workspace.
+- Prototype the publishing path from `working/plants/` to Astro.
+
+## Current Capabilities
+- Orchid Rescue plant collection
+- Plant content model
+- Version-controlled publishing workspace
 
 ---
 

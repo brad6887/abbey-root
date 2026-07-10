@@ -370,6 +370,57 @@ Avoid duplicating metadata across multiple documents.
 
 ---
 
+## Photo Metadata Philosophy
+
+Photograph metadata is part of the historical record and should be treated with the same care as any written documentation.
+
+### Preserve Original Metadata
+
+Whenever possible, preserve the metadata recorded by the original camera or device.
+
+Do not overwrite original metadata without a documented reason.
+
+### Reconstruct Carefully
+
+When original metadata is missing, metadata may be reconstructed using reliable sources such as:
+
+- Original journals
+- Apple Photos or similar photo libraries
+- Supporting documents
+- ChatGPT-assisted reconstruction based on documented evidence
+- Personal recollection when no better source exists
+
+### Never Invent Precision
+
+Do not fabricate dates, locations, or descriptions.
+
+If only an approximate date is known:
+
+- Record the uncertainty in `photo-metadata.md`.
+- Embed only the best-supported information.
+- Document how the value was determined.
+
+### Verify Changes
+
+After modifying metadata:
+
+1. Verify the embedded metadata using ExifTool.
+2. Update `photo-metadata.md`.
+3. Record any assumptions or limitations.
+
+### Provenance Matters
+
+Every photograph should remain traceable back to its source.
+
+Whenever practical, preserve:
+
+- Original image
+- Original filename
+- Original metadata
+- Supporting documentation
+
+The goal is to preserve an accurate historical record rather than create a perfect one.
+
 ## Separate Facts from Narrative
 
 Structured metadata belongs in `facts.yaml`.

@@ -17,6 +17,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.
 - [ ] Publish additional BradCooke.com content.
+- [ ] Complete Doctor Robert as the reference Plant Model implementation.
+- [ ] Connect the Plant Model to BradCooke.com.
 
 ---
 
@@ -61,6 +63,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Create `abbey-session`.
 - [x] Create `abbey-journal`.
 - [x] Create `abbey-version`.
+- [x] Create `abbey plant validate`.
 
 ### Toolkit Evolution
 
@@ -69,18 +72,39 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create `abbey-tree`.
 - [ ] Standardize tool output formatting and colors.
 - [ ] Add automated toolkit regression testing.
+- [ ] Add regression tests for `abbey plant validate`.
 - [ ] Expand `abbey site` commands.
 - [ ] Add `abbey site preview`.
 - [ ] Add `abbey site deploy-check`.
 - [ ] Add project metrics to `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Add network health checks to `abbey-doctor`.
+- [ ] Add Git author identity checks to `abbey-doctor`.
 - [ ] Verify bridge-ports references an existing interface.
 - [ ] Report negotiated Ethernet link speed.
 - [ ] Verify gateway connectivity.
 - [ ] Verify Internet connectivity.
 - [ ] Detect missing or replaced network interfaces.
+- [ ] Evaluate shared validation helpers after additional model validators exist.
 - [ ] Design `abbey review` to summarize staged changes, validate session completeness, suggest a commit message, and recommend the next workflow step.
+
+### Plant Toolkit
+
+- [x] Define the Plant Model.
+- [x] Create a reusable plant workspace template.
+- [x] Create `abbey plant validate`.
+- [ ] Complete the Doctor Robert reference implementation.
+- [ ] Create `abbey plant new`.
+- [ ] Create `abbey plant inventory`.
+- [ ] Create plant photo import workflow.
+- [ ] Create plant photo metadata workflow.
+- [ ] Create plant publishing workflow.
+- [ ] Add AI-assisted plant workspace review.
+- [ ] Add plant workspace consistency checks.
+- [ ] Validate referenced photographs against the plant workspace.
+- [ ] Detect undocumented and orphaned plant photographs.
+- [ ] Generate current inventory summaries from verified observations.
+- [ ] Evaluate command refactoring after additional `abbey plant` subcommands are implemented.
 
 ### Workflow
 
@@ -96,6 +120,10 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Detect stale AI knowledge before running `abbey ai`.
 - [ ] Offer to rebuild AI knowledge automatically when project context changes.
+- [ ] Add structured content consistency review.
+- [ ] Add photo metadata validation assistance.
+- [ ] Add inventory summarization assistance.
+- [ ] Add draft publishing assembly from canonical source material.
 
 ---
 
@@ -119,6 +147,9 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Make planning documents the primary interface for Abbey toolkit commands.
 - [ ] Expand stable machine-readable planning document schemas.
 - [ ] Build project metadata APIs.
+- [ ] Define reusable content models for personal projects.
+- [ ] Build source-to-publication transformation workflows.
+- [ ] Validate structured working content before publication.
 
 ---
 
@@ -131,6 +162,9 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create framework documentation index.
 - [ ] Build document update workflow.
 - [ ] Design automated document review workflow.
+- [ ] Document the canonical `working/` workspace purpose and conventions.
+- [ ] Document the principle: model information before building tools.
+- [ ] Document the principle: humans record observations; automation manages state.
 
 ---
 
@@ -159,6 +193,14 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create JournalCard component.
 - [ ] Create JournalHeader component.
 - [x] Create date formatting helper.
+- [ ] Publish Doctor Robert as the first complete Orchid Rescue profile.
+- [ ] Publish Doctor Robert's story, current status, and selected photographs.
+- [ ] Create reusable plant profile and timeline components.
+- [ ] Prototype the publishing path from `working/plants/` to Astro.
+- [ ] Validate the plant publishing workflow before creating additional profiles.
+- [ ] Add additional Orchid Rescue profiles after validating Doctor Robert.
+- [ ] Add Phal McCartney to the documented orchid collection.
+- [ ] Create a separate future section for bromeliads.
 
 ### Components
 
@@ -167,6 +209,10 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create Technology Badge component.
 - [ ] Create Timeline component.
 - [ ] Create Callout component.
+- [ ] Create PlantProfile component.
+- [ ] Create PlantStatus component.
+- [ ] Create PlantTimeline component.
+- [ ] Create PlantPhotoGallery component.
 
 ### Styling
 
@@ -177,6 +223,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create `project.css`.
 - [ ] Improve mobile responsiveness.
 - [ ] Add light/dark mode.
+- [ ] Create reusable styles for plant profiles and photo timelines.
 
 ### Publishing
 
@@ -184,6 +231,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Generate RSS feed.
 - [ ] Add search.
 - [ ] Define `docs/` vs `content/` publishing boundaries.
+- [ ] Define `working/` vs published content boundaries.
 - [ ] Remove remaining `build-website.sh` references.
 - [ ] Create BradCooke.com publishing runbook.
 - [ ] Publish the Abbey Root Operations Manual.
@@ -192,6 +240,9 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Create dynamic journal detail pages.
 - [ ] Group journal entries by year.
 - [x] Add previous/next journal navigation.
+- [ ] Create a plant source-to-publication pipeline.
+- [ ] Ensure published images use meaningful filenames and optimized copies.
+- [ ] Preserve original plant photographs separately from published derivatives.
 
 ---
 
@@ -219,6 +270,12 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Generate project-aware AI context.
 - [ ] Automate AI knowledge rebuilds.
 - [ ] Continue recurring AI technology reviews.
+- [ ] AI-assisted Plant Model validation.
+- [ ] AI-assisted plant history consistency review.
+- [ ] AI-assisted plant inventory summaries.
+- [ ] AI-assisted selection of milestone photographs.
+- [ ] AI-assisted assembly of draft plant pages from verified source material.
+- [ ] Keep human observations authoritative in AI-assisted workflows.
 
 ### Evaluation
 
@@ -231,6 +288,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Compare models.
 - [ ] Generate evaluation reports.
 - [ ] Evaluate new AI models using real Abbey workflows.
+- [ ] Evaluate AI performance on structured content validation.
+- [ ] Evaluate AI accuracy when summarizing plant histories from source files.
 
 ---
 
@@ -239,6 +298,10 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Automate BradCooke.com builds.
 - [ ] Automate deployment.
 - [ ] Evaluate GitHub Actions vs self-hosted automation.
+- [ ] Automate plant workspace validation before publishing.
+- [ ] Automate plant image metadata checks.
+- [ ] Automate creation of optimized published image copies.
+- [ ] Automate generation of plant profile pages from canonical source material.
 
 ---
 
@@ -269,6 +332,9 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add role-aware checks.
 - [ ] Add JSON output.
 - [ ] Add restore-test tracking.
+- [ ] Check whether Git `user.name` is configured.
+- [ ] Check whether Git `user.email` is configured.
+- [ ] Report the effective Git configuration source.
 
 ---
 

@@ -132,6 +132,8 @@ Each phase builds upon the previous one, gradually transforming Abbey Root from 
 - Project pages
 - Technical articles
 - Operations manual
+- Orchid Rescue plant profiles
+- Plant histories and photo timelines
 
 ## Publishing
 
@@ -140,6 +142,9 @@ Each phase builds upon the previous one, gradually transforming Abbey Root from 
 - Search
 - RSS
 - Public launch
+- Structured personal-project content models
+- Version-controlled working content
+- Source-to-publication transformation workflows
 
 **Success Criteria**
 
@@ -174,6 +179,8 @@ Each phase builds upon the previous one, gradually transforming Abbey Root from 
 - Planning document consumption
 - Context-aware workflow assistance
 - Project-aware developer guidance
+- AI-assisted structured content validation
+- AI-assisted source-to-publication assembly
 
 **Success Criteria**
 
