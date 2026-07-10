@@ -1,0 +1,43 @@
+name: Doctor Robert
+slug: doctor-robert
+
+plant:
+  type: orchid
+  genus: Phalaenopsis
+  species: null
+  hybrid: true
+
+rescue:
+  date: 2026-03-01
+  source: Lowe's clearance rack
+  location:
+    city: Naples
+    state: Florida
+    country: United States
+
+status:
+  current: recovering
+  current_location:
+    city: Fort Worth
+    state: Texas
+    country: United States
+  updated: 2026-07-05
+
+care:
+  potting_medium: orchid bark
+  container: clear orchid pot
+
+photos:
+  hero: photos/IMG_C52D2813-DCED-40FD-BBF7-605ACE5D9306.jpeg
+  current: photos/Image (4).png
+  metadata: photo-metadata.md
+
+documents:
+  story: story.md
+  history: history.md
+
+tags:
+  - orchid
+  - orchid-rescue
+  - phalaenopsis
+  - rescue-plant
