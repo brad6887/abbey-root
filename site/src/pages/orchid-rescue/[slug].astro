@@ -23,11 +23,22 @@ const { plant } = Astro.props;
 const { Content } = await render(plant);
 ---
 
-<Layout title={`${plant.data.title} | Orchid Rescue`}>
+<Layout
+  title={`${plant.data.title} | Orchid Rescue`}
+  description={plant.data.description}
+>
   <main class="page">
     <p><a href="/orchid-rescue/">← Orchid Rescue</a></p>
 
     <h1>{plant.data.title}</h1>
+
+    {plant.data.heroImage && (
+      <img
+        class="hero-image"
+        src={plant.data.heroImage}
+        alt={`${plant.data.title} at the beginning of the rescue`}
+      />
+    )}
 
     <dl>
       <dt>Status</dt>
@@ -48,7 +59,26 @@ const { Content } = await render(plant);
       )}
     </dl>
 
-    <Content />
+    <article class="plant-content">
+      <Content />
+    </article>
+
+    {plant.data.currentImage && (
+      <section class="current-status">
+        <h2>Current Condition</h2>
+
+        <img
+          src={plant.data.currentImage}
+          alt={`${plant.data.title} in its current condition`}
+        />
+
+        {plant.data.updatedDate && (
+          <p>
+            Last updated: {plant.data.updatedDate.toLocaleDateString()}
+          </p>
+        )}
+      </section>
+    )}
   </main>
 </Layout>
 
@@ -60,6 +90,16 @@ const { Content } = await render(plant);
     line-height: 1.6;
   }
 
+  .hero-image,
+  .current-status img {
+    display: block;
+    width: 100%;
+    max-height: 650px;
+    margin: 1.5rem 0;
+    border-radius: 0.75rem;
+    object-fit: contain;
+  }
+
   dt {
     font-weight: 700;
     margin-top: 1rem;
@@ -67,5 +107,13 @@ const { Content } = await render(plant);
 
   dd {
     margin: 0 0 0.75rem 0;
+  }
+
+  .plant-content {
+    margin-top: 2rem;
+  }
+
+  .current-status {
+    margin-top: 3rem;
   }
 </style>

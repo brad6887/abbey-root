@@ -77,6 +77,9 @@ const plants = defineCollection({
 
     updatedDate: z.date().optional(),
 
+    heroImage: z.string().optional(),
+    currentImage: z.string().optional(),
+
     tags: z.array(z.string()).default([]),
   }),
 });

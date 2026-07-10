@@ -3,16 +3,19 @@
 # Abbey Root Tool: abbey-plant
 #
 # Purpose:
-#   Manage and validate plant workspaces.
+#   Manage, validate, and publish plant workspaces.
 #
 # Usage:
 #   abbey plant validate <slug>
+#   abbey plant publish <slug>
 #
 
 set -euo pipefail
 
 REPO_DIR="${ABBEY_ROOT:-$HOME/git/abbey-root}"
 PLANTS_DIR="$REPO_DIR/working/plants"
+CONTENT_DIR="$REPO_DIR/content/plants"
+PUBLIC_PLANTS_DIR="$REPO_DIR/site/public/images/plants"
 
 ok_count=0
 warn_count=0
@@ -34,13 +37,15 @@ fail() {
 }
 
 usage() {
-    cat <<'EOF'
+    cat <<'USAGE'
 Usage:
   abbey plant validate <slug>
+  abbey plant publish <slug>
 
 Commands:
   validate    Validate a plant workspace against the Plant Model
-EOF
+  publish     Generate Astro content and copy selected public images
+USAGE
 }
 
 validate_plant() {
@@ -133,7 +138,6 @@ validate_plant() {
     local facts_output
     if ! facts_output="$(
         python3 - "$facts_file" "$plant_dir" <<'PY'
-import os
 import sys
 from pathlib import Path
 
@@ -158,6 +162,7 @@ if not isinstance(data, dict):
 
 print("OK|facts.yaml parses successfully")
 
+
 def get_value(path):
     value = data
     for key in path.split("."):
@@ -165,6 +170,7 @@ def get_value(path):
             return None
         value = value[key]
     return value
+
 
 required = (
     "name",
@@ -242,6 +248,167 @@ PY
     fi
 }
 
+publish_plant() {
+    local slug="${1:-}"
+
+    if [[ -z "$slug" ]]; then
+        echo "ERROR: Plant slug is required."
+        echo
+        usage
+        exit 2
+    fi
+
+    local plant_dir="$PLANTS_DIR/$slug"
+    local facts_file="$plant_dir/facts.yaml"
+    local output_file="$CONTENT_DIR/$slug.md"
+    local public_dir="$PUBLIC_PLANTS_DIR/$slug"
+
+    echo "Plant Publishing"
+    echo "================"
+    echo "Plant: $slug"
+    echo
+
+    validate_plant "$slug"
+
+    echo
+    echo "Publishing"
+    echo "----------"
+
+    mkdir -p "$CONTENT_DIR"
+    rm -rf "$public_dir"
+    mkdir -p "$public_dir"
+
+    python3 - \
+        "$facts_file" \
+        "$plant_dir" \
+        "$output_file" \
+        "$public_dir" <<'PY'
+import shutil
+import sys
+from pathlib import Path
+
+import yaml
+
+facts_path = Path(sys.argv[1])
+plant_dir = Path(sys.argv[2])
+output_path = Path(sys.argv[3])
+public_dir = Path(sys.argv[4])
+
+with facts_path.open("r", encoding="utf-8") as handle:
+    facts = yaml.safe_load(handle)
+
+
+def get(path, default=None):
+    value = facts
+    for key in path.split("."):
+        if not isinstance(value, dict):
+            return default
+        value = value.get(key)
+        if value is None:
+            return default
+    return value
+
+
+def read_document(relative_path):
+    path = plant_dir / relative_path
+    text = path.read_text(encoding="utf-8").strip()
+
+    lines = text.splitlines()
+
+    if lines and lines[0].startswith("# "):
+        lines = lines[1:]
+
+        while lines and not lines[0].strip():
+            lines.pop(0)
+
+    return "\n".join(lines).strip()
+
+
+def copy_public_image(field_name, public_name):
+    relative_path = get(field_name)
+
+    if not relative_path:
+        return None
+
+    source = plant_dir / relative_path
+    destination = public_dir / f"{public_name}{source.suffix.lower()}"
+
+    shutil.copy2(source, destination)
+
+    return f"/images/plants/{get('slug')}/{destination.name}"
+
+
+name = get("name")
+slug = get("slug")
+plant_type = get("plant.type")
+status = get("status.current")
+genus = get("plant.genus")
+species = get("plant.species")
+acquired = get("rescue.date")
+updated = get("status.updated")
+tags = get("tags", [])
+
+story_path = get("documents.story")
+history_path = get("documents.history")
+
+story = read_document(story_path)
+history = read_document(history_path)
+
+hero_image = copy_public_image("photos.hero", "hero")
+current_image = copy_public_image("photos.current", "current")
+
+species_label = genus
+if species:
+    species_label = f"{genus} {species}" if genus else species
+
+description = (
+    f"The rescue and recovery story of {name}, "
+    f"a {species_label or plant_type} rescued from neglect."
+)
+
+frontmatter = {
+    "title": name,
+    "description": description,
+    "type": plant_type,
+    "status": status,
+    "species": species_label,
+    "acquired": acquired,
+    "featured": True,
+    "draft": False,
+    "updatedDate": updated,
+    "heroImage": hero_image,
+    "currentImage": current_image,
+    "tags": tags,
+}
+
+frontmatter = {
+    key: value
+    for key, value in frontmatter.items()
+    if value is not None
+}
+
+body = f"""---
+{yaml.safe_dump(frontmatter, sort_keys=False).strip()}
+---
+
+{story}
+
+{history}
+"""
+
+output_path.write_text(body, encoding="utf-8")
+
+print(f"Generated content: {output_path}")
+if hero_image:
+    print(f"Published hero image: {hero_image}")
+if current_image:
+    print(f"Published current image: {current_image}")
+PY
+
+    echo
+    echo "PASS Plant published successfully."
+}
+
 print_summary() {
     echo
     echo "Result"
@@ -264,6 +431,10 @@ case "$command" in
     validate)
         shift
         validate_plant "${1:-}"
+        ;;
+    publish)
+        shift
+        publish_plant "${1:-}"
         ;;
     help|-h|--help)
         usage
