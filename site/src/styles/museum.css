@@ -1,0 +1,213 @@
+.museum-page {
+  --museum-paper: #f4ecd8;
+  --museum-paper-dark: #e7dcc1;
+  --museum-ink: #2f2a22;
+  --museum-muted: #6b6254;
+  --museum-border: #9b8c70;
+  --museum-accent: #7a2f24;
+
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  color: var(--museum-ink);
+}
+
+.museum-hero,
+.exhibit-header {
+  padding: 2.5rem;
+  border: 1px solid var(--museum-border);
+  background:
+    linear-gradient(rgba(244, 236, 216, 0.96), rgba(244, 236, 216, 0.96)),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 24px,
+      rgba(47, 42, 34, 0.04) 25px
+    );
+  box-shadow: 0 8px 24px rgba(47, 42, 34, 0.12);
+}
+
+.museum-kicker,
+.exhibit-number,
+.plaque-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--museum-accent);
+}
+
+.museum-hero h1,
+.exhibit-header h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  line-height: 1;
+}
+
+.museum-subtitle {
+  max-width: 650px;
+  margin-top: 1.5rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+}
+
+.curator-note {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-left: 5px solid var(--museum-accent);
+  background: var(--museum-paper);
+}
+
+.curator-note h2 {
+  margin-top: 0;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.wing-grid,
+.exhibit-grid,
+.rating-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.museum-section {
+  margin-top: 3rem;
+}
+
+.museum-section h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+}
+
+.wing-card,
+.exhibit-card,
+.museum-plaque,
+.rating-card {
+  padding: 1.4rem;
+  border: 1px solid var(--museum-border);
+  background: var(--museum-paper);
+  box-shadow: 4px 4px 0 var(--museum-paper-dark);
+}
+
+.wing-card h3,
+.exhibit-card h3,
+.rating-card h3 {
+  margin-top: 0;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.exhibit-card a {
+  color: var(--museum-accent);
+  font-weight: 700;
+}
+
+.exhibit-status {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--museum-border);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.museum-back {
+  margin-bottom: 1.5rem;
+}
+
+.museum-back a {
+  color: var(--museum-accent);
+  font-weight: 700;
+}
+
+.museum-plaque {
+  margin: 2rem 0;
+}
+
+.museum-plaque dl {
+  display: grid;
+  grid-template-columns: minmax(130px, 180px) 1fr;
+  gap: 0.65rem 1rem;
+  margin: 0;
+}
+
+.museum-plaque dt {
+  font-weight: 700;
+}
+
+.museum-plaque dd {
+  margin: 0;
+}
+
+.exhibit-body {
+  max-width: 760px;
+  margin: 2.5rem auto 0;
+}
+
+.exhibit-body h2 {
+  margin-top: 2.5rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+}
+
+.exhibit-body blockquote {
+  margin: 2rem 0;
+  padding: 1.2rem 1.5rem;
+  border-left: 5px solid var(--museum-accent);
+  background: var(--museum-paper);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+}
+
+.rating-value {
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+}
+
+.museum-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--museum-border);
+  color: var(--museum-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  .museum-page {
+    --museum-paper: #332f27;
+    --museum-paper-dark: #211f1a;
+    --museum-ink: #f3ead7;
+    --museum-muted: #c1b59f;
+    --museum-border: #83765f;
+    --museum-accent: #e59a82;
+  }
+
+  .museum-hero,
+  .exhibit-header {
+    background:
+      linear-gradient(rgba(51, 47, 39, 0.97), rgba(51, 47, 39, 0.97)),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 24px,
+        rgba(243, 234, 215, 0.04) 25px
+      );
+  }
+}
+
+@media (max-width: 600px) {
+  .museum-hero,
+  .exhibit-header {
+    padding: 1.5rem;
+  }
+
+  .museum-plaque dl {
+    grid-template-columns: 1fr;
+  }
+
+  .museum-plaque dd {
+    margin-bottom: 0.8rem;
+  }
+}
