@@ -62,25 +62,25 @@ That orchid eventually became **Doctor Robert**.
 
 ### Photos
 
-#### IMG_8259.JPG
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-01.jpg)
 
 Photo of the Lowe's where Doctor Robert was discovered.
 
-#### IMG_8260.JPG
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-02.jpg)
 
 Clearance rack containing several heavily discounted orchids.
 
 Doctor Robert is among them.
 
-#### IMG_8261.JPG
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-03.jpg)
 
 Another view of the clearance orchids, giving a better perspective of the display.
 
-#### IMG_C52D2813-DCED-40FD-BBF7-605ACE5D9306.jpeg
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-04.jpeg)
 
 Doctor Robert by himself on the clearance shelf.
 
-#### IMG_D2B0CA18-C0E9-4633-831E-7648FF4547E3.jpeg
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-05.jpeg)
 
 Another angle of Doctor Robert before purchase.
 
@@ -95,8 +95,8 @@ Another angle of Doctor Robert before purchase.
 
 ### Photos
 
-- IMG_097E3E1F-3013-4AC3-920B-A050FC31B1A4.jpeg
-- IMG_E2CF4234-AAC5-41D4-9208-37E4CC2B2AE8.jpeg
+![Doctor Robert — 2026-03-01 — Initial Inspection](/images/plants/doctor-robert/photo-06.jpeg)
+![Doctor Robert — 2026-03-01 — Initial Inspection](/images/plants/doctor-robert/photo-07.jpeg)
 
 ### What Happened
 
@@ -122,7 +122,7 @@ Before doing anything else, I wanted to know whether the plant had a realistic c
 
 ### Photos
 
-- IMG_AED18240-722E-4F34-A118-1A830E476B7B.jpeg
+![Doctor Robert — 2026-03-02 — Repotting](/images/plants/doctor-robert/photo-08.jpeg)
 
 ### What Happened
 
@@ -151,7 +151,7 @@ Now the hard part would be waiting to see how the orchid responded.
 
 ### Photos
 
-- IMG_2CD0CB08-64FB-449E-9D57-C33935DA967A.jpeg
+![Doctor Robert — 2026-03-07 — Settling In](/images/plants/doctor-robert/photo-09.jpeg)
 
 ### What Happened
 
@@ -177,7 +177,7 @@ This is the stage where patience becomes more important than constantly trying t
 
 ### Photos
 
-- IMG_C8FD0882-A6EE-4260-B739-093CAA7C4CE9.jpeg
+![Doctor Robert — 2026-03-22 — Waiting for a Response](/images/plants/doctor-robert/photo-10.jpeg)
 
 ### What Happened
 
@@ -203,7 +203,7 @@ One of the hardest parts of rescuing orchids is learning patience. After address
 
 ### Photos
 
-- IMG_1CB1F4E6-4A6E-469E-9EAF-875DD3FEF4C3.jpeg
+![Doctor Robert — 2026-03-29 — First Signs of Progress](/images/plants/doctor-robert/photo-11.jpeg)
 
 ### What Happened
 
@@ -231,8 +231,8 @@ Recovery doesn't always happen in obvious leaps. Sometimes the biggest victory i
 
 ### Photos
 
-- IMG_505720FC-4A93-47C0-83D5-63464371B578.jpeg
-- IMG_1481C7B6-2459-4C3F-826D-752A88C735DC.jpeg
+![Doctor Robert — 2026-04-05 — Mixed Signals](/images/plants/doctor-robert/photo-12.jpeg)
+![Doctor Robert — 2026-04-05 — Mixed Signals](/images/plants/doctor-robert/photo-13.jpeg)
 
 ### What Happened
 
@@ -258,7 +258,7 @@ I reminded myself that the older leaves reflected the orchid's past, not its fut
 
 ### Photos
 
-- IMG_E7705915-A459-417A-AE8F-6650A0639F3B.jpeg
+![Doctor Robert — 2026-04-06 — The Turning Point](/images/plants/doctor-robert/photo-14.jpeg)
 
 ### What Happened
 
@@ -288,7 +288,7 @@ Sometimes the smallest changes are the most important. New growth is one of the 
 
 ### Photos
 
-- IMG_447C79E7-A7DA-422B-94E4-72C13BE37E95.jpeg
+![Doctor Robert — 2026-04-08 — The First New Leaf](/images/plants/doctor-robert/photo-15.jpeg)
 
 ### What Happened
 
@@ -316,7 +316,7 @@ Healthy new growth is a much better indicator of an orchid's condition than the 
 
 ### Photos
 
-- IMG_BF242AFE-FE1A-4140-B7EA-23E46F79472B.jpeg
+![Doctor Robert — 2026-04-10 — Looking Healthier](/images/plants/doctor-robert/photo-16.jpeg)
 
 ### What Happened
 
@@ -406,7 +406,7 @@ Plants don't exist in isolation from our lives. Sometimes a gap in the journal t
 
 ### Photos
 
-- Image (1).png
+![Doctor Robert — 2026-06-13 — A New Beginning in Texas](/images/plants/doctor-robert/photo-17.png)
 
 ### What Happened
 
@@ -441,7 +441,7 @@ Losing damaged leaves isn't always a setback—it can be an important part of th
 
 ### Photos
 
-- Image (2).png
+![Doctor Robert — 2026-06-21 — Quiet Progress](/images/plants/doctor-robert/photo-18.png)
 
 ### What Happened
 
@@ -473,7 +473,7 @@ For a recovering orchid, a week without decline can be just as meaningful as a w
 
 ### Photos
 
-- Image (3).png
+![Doctor Robert — 2026-06-28 — The Lonely Leaf](/images/plants/doctor-robert/photo-19.png)
 
 ### What Happened
 
@@ -506,7 +506,7 @@ Healthy growth matters far more than hanging onto damaged leaves.
 
 ### Photos
 
-- Image (4).png
+![Doctor Robert — 2026-07-05 — Ready for the Next Chapter](/images/plants/doctor-robert/photo-20.png)
 
 ### What Happened
 

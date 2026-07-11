@@ -1,0 +1,44 @@
+name: Helter Skelter
+slug: helter-skelter
+
+plant:
+  type: orchid
+  genus: Dendrobium
+  species: null
+  hybrid: true
+
+rescue:
+  date: 2026-03-01
+  source: null
+  location:
+    city: Naples
+    state: Florida
+    country: United States
+
+status:
+  current: thriving
+  current_location:
+    city: Fort Worth
+    state: Texas
+    country: United States
+  updated: 2026-07-05
+
+care:
+  potting_medium: coconut husk chunks
+  container: null
+
+photos:
+  hero: photos/HelterSkelter - 1 of 12.jpeg
+  current: photos/HelterSkelter - 12 of 12.png
+  metadata: photo-metadata.md
+
+documents:
+  story: story.md
+  history: history.md
+
+tags:
+  - orchid
+  - orchid-rescue
+  - dendrobium
+  - latouria
+  - rescue-plant

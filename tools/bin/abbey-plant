@@ -283,6 +283,7 @@ publish_plant() {
         "$plant_dir" \
         "$output_file" \
         "$public_dir" <<'PY'
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -338,6 +339,61 @@ def copy_public_image(field_name, public_name):
     return f"/images/plants/{get('slug')}/{destination.name}"
 
 
+def publish_history_photos(markdown, plant_name, slug):
+    photos_dir = plant_dir / "photos"
+    image_files = {
+        photo.name: photo
+        for photo in photos_dir.iterdir()
+        if photo.is_file()
+        and photo.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}
+    }
+
+    published = {}
+    output = []
+    current_section = None
+
+    photo_pattern = re.compile(
+        r"^\s*(?:-\s+|####\s+)`?([^`]+\.(?:jpe?g|png|webp))`?\s*$",
+        re.IGNORECASE,
+    )
+
+    for line in markdown.splitlines():
+        if line.startswith("## "):
+            current_section = line[3:].strip()
+
+        match = photo_pattern.match(line)
+
+        if not match:
+            output.append(line)
+            continue
+
+        filename = match.group(1)
+        source = image_files.get(filename)
+
+        if source is None:
+            output.append(line)
+            continue
+
+        if filename not in published:
+            sequence = len(published) + 1
+            destination = public_dir / (
+                f"photo-{sequence:02d}{source.suffix.lower()}"
+            )
+            shutil.copy2(source, destination)
+            published[filename] = (
+                f"/images/plants/{slug}/{destination.name}"
+            )
+
+        alt_text = (
+            f"{plant_name} — {current_section}"
+            if current_section
+            else f"{plant_name} progress photograph"
+        )
+
+        output.append(f"![{alt_text}]({published[filename]})")
+
+    return "\n".join(output), published
+
 name = get("name")
 slug = get("slug")
 plant_type = get("plant.type")
@@ -356,6 +412,12 @@ history = read_document(history_path)
 
 hero_image = copy_public_image("photos.hero", "hero")
 current_image = copy_public_image("photos.current", "current")
+
+history, history_images = publish_history_photos(
+    history,
+    name,
+    slug,
+)
 
 species_label = genus
 if species:
