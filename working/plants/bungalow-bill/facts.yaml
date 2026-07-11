@@ -1,0 +1,43 @@
+name: Bungalow Bill
+slug: bungalow-bill
+
+plant:
+  type: orchid
+  genus: Phalaenopsis
+  species: null
+  hybrid: null
+
+rescue:
+  date: 2026-03-29
+  source: clearance rack
+  location:
+    city: null
+    state: null
+    country: USA
+
+status:
+  current: recovering
+  current_location:
+    city: null
+    state: Texas
+    country: USA
+  updated: 2026-07-05
+
+care:
+  potting_medium: orchid bark
+  container: clear plastic orchid pot
+
+photos:
+  hero: photos/Bungalow Bill - 19.png
+  current: photos/Bungalow Bill - 19.png
+  metadata: photo-metadata.md
+
+documents:
+  story: story.md
+  history: history.md
+
+tags:
+  - orchid
+  - phalaenopsis
+  - rescue
+  - clearance
