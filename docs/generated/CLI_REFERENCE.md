@@ -166,7 +166,7 @@ abbey knowledge build
 
 ### `abbey site`
 
-Run Abbey Root website commands.
+Build, run, and publish the BradCooke.com website.
 
 **Usage**
 
@@ -174,11 +174,28 @@ Run Abbey Root website commands.
 abbey site <command>
 ```
 
+**Subcommands**
+
+- `build` - Build the Astro production site.
+  - `abbey site build`
+- `publish` - Build and publish the site to GitHub Pages.
+  - `abbey site publish [--dry-run]`
+- `restart` - Restart the Astro development server.
+  - `abbey site restart`
+- `start` - Start the Astro development server.
+  - `abbey site start`
+- `status` - Show the Astro development server status.
+  - `abbey site status`
+- `stop` - Stop the Astro development server.
+  - `abbey site stop`
+
 **Examples**
 
 ```text
 abbey site build
-abbey site dev
+abbey site publish --dry-run
+abbey site publish
+abbey site start
 ```
 
 ## Content management

@@ -73,12 +73,39 @@ commands:
 
   site:
     category: site
-    description: Run Abbey Root website commands.
+    description: Build, run, and publish the BradCooke.com website.
     usage: abbey site <command>
     hidden: false
+    subcommands:
+      build:
+        description: Build the Astro production site.
+        usage: abbey site build
+
+      publish:
+        description: Build and publish the site to GitHub Pages.
+        usage: abbey site publish [--dry-run]
+
+      status:
+        description: Show the Astro development server status.
+        usage: abbey site status
+
+      start:
+        description: Start the Astro development server.
+        usage: abbey site start
+
+      stop:
+        description: Stop the Astro development server.
+        usage: abbey site stop
+
+      restart:
+        description: Restart the Astro development server.
+        usage: abbey site restart
+
     examples:
       - abbey site build
-      - abbey site dev
+      - abbey site publish --dry-run
+      - abbey site publish
+      - abbey site start
 
   plant:
     category: content
