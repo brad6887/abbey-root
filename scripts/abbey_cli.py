@@ -7,8 +7,9 @@ from pathlib import Path
 import yaml
 
 
-METADATA_FILE = Path("config/cli/cli.yml")
-CLI_REFERENCE = Path("docs/generated/CLI_REFERENCE.md")
+REPO_ROOT = Path(__file__).resolve().parent.parent
+METADATA_FILE = REPO_ROOT / "config/cli/cli.yml"
+CLI_REFERENCE = REPO_ROOT / "docs/generated/CLI_REFERENCE.md"
 
 
 def load_metadata():
