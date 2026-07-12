@@ -202,7 +202,7 @@ abbey site start
 
 ### `abbey plant`
 
-Manage and validate plant workspaces.
+Manage, validate, and publish plant workspaces.
 
 **Usage**
 
@@ -212,6 +212,8 @@ abbey plant <command>
 
 **Subcommands**
 
+- `publish` - Generate Astro content and copy selected public images.
+  - `abbey plant publish <slug>`
 - `validate` - Validate a plant workspace against the Plant Model.
   - `abbey plant validate <slug>`
 
@@ -219,5 +221,6 @@ abbey plant <command>
 
 ```text
 abbey plant validate doctor-robert
+abbey plant publish doctor-robert
 ```
 

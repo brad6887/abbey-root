@@ -4,7 +4,7 @@ title: Orchid Rescue Content Model
 status: pending
 session: website
 journal: 
-reviewed: false
+reviewed: true
 ---
 
 # Session Update

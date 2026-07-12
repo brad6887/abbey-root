@@ -2,7 +2,9 @@
 
 This document defines the canonical content model for plants within Abbey Root.
 
-Every plant in the collection follows the same directory structure and metadata conventions. The goal is to maintain a single, machine-readable source of truth that can be consumed by websites, automation, AI workers, and future tooling.
+New and migrated plant profiles follow the same directory structure and metadata conventions. Existing lightweight public profiles may remain until they are migrated to the canonical workspace model.
+
+The goal is to maintain a single, machine-readable source of truth that can be consumed by websites, automation, AI workers, and future tooling.
 
 Plant source material is stored under:
 
@@ -17,6 +19,7 @@ working/plants/doctor-robert/
 ├── facts.yaml
 ├── story.md
 ├── history.md
+├── inventory.md
 ├── photo-metadata.md
 ├── photos/
 └── sources/
@@ -35,6 +38,7 @@ working/plants/<slug>/
 ├── facts.yaml
 ├── story.md
 ├── history.md
+├── inventory.md
 ├── photo-metadata.md
 ├── photos/
 └── sources/
@@ -47,6 +51,7 @@ working/plants/<slug>/
 | `facts.yaml` | Canonical machine-readable metadata |
 | `story.md` | Public narrative |
 | `history.md` | Detailed chronological journal |
+| `inventory.md` | Current verified physical state |
 | `photo-metadata.md` | Metadata tracking for recovered or edited photos |
 | `photos/` | Original and recovered photographs |
 | `sources/` | Supporting material such as exported chats, PDFs, notes, and research |
@@ -314,6 +319,16 @@ This document is the authoritative historical record.
 
 ---
 
+# inventory.md
+
+Purpose:
+
+Record the current verified physical state of the plant.
+
+Use this document for present observations and inventory rather than chronological history or public narrative.
+
+---
+
 # photo-metadata.md
 
 Purpose:
@@ -357,6 +372,35 @@ Examples:
 - External references
 
 These files are not intended for publication.
+
+---
+
+# Publishing Workflow
+
+Plant workspaces under `working/plants/<slug>/` are the canonical source for plant metadata, narrative, history, inventory, photographs, and supporting material.
+
+The publishing workflow is:
+
+```text
+working/plants/<slug>/
+        ↓
+abbey plant validate <slug>
+        ↓
+abbey plant publish <slug>
+        ↓
+content/plants/<slug>.md
+site/public/images/plants/<slug>/
+        ↓
+Astro website
+```
+
+Validation confirms that the canonical workspace satisfies the Plant Model before publication. Publishing derives the website-facing Markdown and selected public images from that workspace. Astro consumes those generated outputs to build the website.
+
+Files under `content/plants/` and `site/public/images/plants/` are generated outputs for migrated plant profiles. Correct canonical source material or the publishing workflow rather than editing generated output directly.
+
+Working notes, source documents, metadata records, original photographs, and other workspace material remain canonical source material and are not automatically public.
+
+Existing lightweight public profiles may remain under `content/plants/` until a canonical workspace is created and the profile is migrated through this workflow.
 
 ---
 

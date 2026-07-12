@@ -1,3 +1,10 @@
+---
+date: 2026-07-08
+title: Abbey Framework Foundation
+journal: 2026-07-08-abbey-framework-foundation
+reviewed: true
+---
+
 # Session Update
 
 ## Summary

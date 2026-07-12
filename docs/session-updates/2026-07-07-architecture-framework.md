@@ -4,7 +4,7 @@ title: Architecture Framework Introduced
 status: pending
 session: architecture
 journal: 2026-07-07-architecture-framework
-reviewed: false
+reviewed: true
 ---
 
 # Session Update

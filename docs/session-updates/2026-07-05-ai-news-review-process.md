@@ -4,7 +4,7 @@ title: AI News Review Process
 status: pending
 session: bonus
 journal: 2026-07-05-ai-news-review-process
-reviewed: false
+reviewed: true
 ---
 
 # Session Update

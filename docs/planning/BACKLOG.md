@@ -17,8 +17,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.
 - [ ] Publish additional BradCooke.com content.
-- [ ] Complete Doctor Robert as the reference Plant Model implementation.
-- [ ] Connect the Plant Model to BradCooke.com.
+- [x] Complete Doctor Robert as the reference Plant Model implementation.
+- [x] Connect the Plant Model to BradCooke.com.
 
 ---
 
@@ -93,12 +93,12 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Define the Plant Model.
 - [x] Create a reusable plant workspace template.
 - [x] Create `abbey plant validate`.
-- [ ] Complete the Doctor Robert reference implementation.
+- [x] Complete the Doctor Robert reference implementation.
 - [ ] Create `abbey plant new`.
 - [ ] Create `abbey plant inventory`.
 - [ ] Create plant photo import workflow.
 - [ ] Create plant photo metadata workflow.
-- [ ] Create plant publishing workflow.
+- [x] Create plant publishing workflow.
 - [ ] Add AI-assisted plant workspace review.
 - [ ] Add plant workspace consistency checks.
 - [ ] Validate referenced photographs against the plant workspace.
@@ -193,11 +193,11 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create JournalCard component.
 - [ ] Create JournalHeader component.
 - [x] Create date formatting helper.
-- [ ] Publish Doctor Robert as the first complete Orchid Rescue profile.
-- [ ] Publish Doctor Robert's story, current status, and selected photographs.
+- [x] Publish Doctor Robert as the first complete Orchid Rescue profile.
+- [x] Publish Doctor Robert's story, current status, and selected photographs.
 - [ ] Create reusable plant profile and timeline components.
-- [ ] Prototype the publishing path from `working/plants/` to Astro.
-- [ ] Validate the plant publishing workflow before creating additional profiles.
+- [x] Prototype the publishing path from `working/plants/` to Astro.
+- [x] Validate the plant publishing workflow before creating additional profiles.
 - [ ] Add additional Orchid Rescue profiles after validating Doctor Robert.
 - [ ] Add Phal McCartney to the documented orchid collection.
 - [ ] Create a separate future section for bromeliads.
@@ -240,9 +240,9 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Create dynamic journal detail pages.
 - [ ] Group journal entries by year.
 - [x] Add previous/next journal navigation.
-- [ ] Create a plant source-to-publication pipeline.
+- [x] Create a plant source-to-publication pipeline.
 - [ ] Ensure published images use meaningful filenames and optimized copies.
-- [ ] Preserve original plant photographs separately from published derivatives.
+- [x] Preserve original plant photographs separately from published derivatives.
 
 ---
 
@@ -298,10 +298,10 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Automate BradCooke.com builds.
 - [ ] Automate deployment.
 - [ ] Evaluate GitHub Actions vs self-hosted automation.
-- [ ] Automate plant workspace validation before publishing.
+- [x] Automate plant workspace validation before publishing.
 - [ ] Automate plant image metadata checks.
 - [ ] Automate creation of optimized published image copies.
-- [ ] Automate generation of plant profile pages from canonical source material.
+- [x] Automate generation of plant profile pages from canonical source material.
 
 ---
 

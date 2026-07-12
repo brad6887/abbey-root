@@ -82,8 +82,6 @@ Completed
 - Evaluate shared CLI libraries.
 - Design secure remote access.
 - Continue developing BradCooke.com.
-- Complete the Doctor Robert reference implementation.
-- Connect the Plant Model to BradCooke.com.
 
 ---
 
@@ -154,7 +152,9 @@ Completed
 - Metadata-driven CLI help
 - Generated CLI reference
 - `abbey plant validate <slug>`
-- Structured content workspace validation
+- `abbey plant publish <slug>`
+- Structured content workspace validation and publishing
+- Canonical plant source-to-publication workflow
 
 ## Current Focus
 
@@ -180,6 +180,9 @@ Completed
 - Dynamic routing.
 - Previous/next navigation.
 - Documentation publishing workflow.
+- Canonical plant source-to-publication workflow.
+- Doctor Robert published as the Plant Model reference implementation.
+- Helter Skelter published as the second validated Plant Model profile.
 
 ## Current Work
 
@@ -187,13 +190,12 @@ Completed
 - Expand technical content.
 - Improve reusable components.
 - Prepare GitHub Pages deployment.
-- Publish Doctor Robert from the canonical plant workspace.
-- Prototype the publishing path from `working/plants/` to Astro.
 
 ## Current Capabilities
 - Orchid Rescue plant collection
 - Plant content model
 - Version-controlled publishing workspace
+- Generated plant profiles and selected public images from canonical workspaces
 
 ---
 

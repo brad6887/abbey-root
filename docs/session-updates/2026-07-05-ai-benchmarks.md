@@ -4,7 +4,7 @@ title: AI Benchmarks Become Part of Abbey Root
 status: pending
 session: bonus
 journal: 2026-07-05-ai-benchmarks-become-part-of-abbey-root
-reviewed: false
+reviewed: true
 ---
 
 # Session Update

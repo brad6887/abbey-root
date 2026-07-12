@@ -109,15 +109,19 @@ commands:
 
   plant:
     category: content
-    description: Manage and validate plant workspaces.
+    description: Manage, validate, and publish plant workspaces.
     usage: abbey plant <command>
     hidden: false
     subcommands:
       validate:
         description: Validate a plant workspace against the Plant Model.
         usage: abbey plant validate <slug>
+      publish:
+        description: Generate Astro content and copy selected public images.
+        usage: abbey plant publish <slug>
     examples:
       - abbey plant validate doctor-robert
+      - abbey plant publish doctor-robert
 
   knowledge:
     category: ai

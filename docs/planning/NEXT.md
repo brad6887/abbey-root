@@ -34,10 +34,6 @@ Use real website development to validate the framework, identify friction points
 - Continue refining the overall site design.
 - Prepare the site for public launch.
 - Continue documenting Abbey Root and Power Infrastructure.
-- Complete Doctor Robert as the reference Plant Model implementation.
-- Prototype the publishing path from `working/plants/` to Astro.
-- Publish the Doctor Robert story, current status, and selected photographs.
-- Validate the workflow before creating additional plant profiles.
 - Improve reusable Astro components only where the plant implementation exposes a need.
 - Continue documenting Abbey Root and Power Infrastructure.
 

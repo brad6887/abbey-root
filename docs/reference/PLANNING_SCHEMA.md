@@ -113,15 +113,18 @@ Unlike the backlog, this document should remain intentionally small and focused 
 
 ### Required Sections
 
-- Primary Goal
-- High Priority
-- Abbey Toolkit
-- Self-Documenting Platform
-- BradCooke.com
-- Infrastructure
-- AI
-- Stretch Goals
-- Notes
+- Current Theme
+- Primary Objective
+- Current Priorities
+- Success Criteria
+- Future Direction
+- Guiding Principle
+
+The theme subheading beneath Current Theme may vary by project phase.
+
+Priority-domain subheadings beneath Current Priorities may vary by project phase.
+
+Automation should rely on the stable top-level headings rather than fixed domain names.
 
 ---
 
