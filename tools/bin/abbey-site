@@ -3,20 +3,22 @@
 # Abbey Root Tool: abbey-site
 #
 # Purpose:
-#   Build and manage the BradCooke.com development site.
+#   Build, manage, and publish the BradCooke.com Astro site.
 #
 # Usage:
 #   abbey site <command>
 #
 # Commands:
-#   status     Show development server status.
-#   build      Build the website.
-#   start      Start the development server.
-#   stop       Stop the development server.
-#   restart    Restart the development server.
+#   status        Show development server status.
+#   build         Build the website.
+#   publish       Build and publish the site to GitHub Pages.
+#   start         Start the development server.
+#   stop          Stop the development server.
+#   restart       Restart the development server.
 #
-# Notes:
-#   Uses Astro's development server.
+# Publish options:
+#   --dry-run     Build and show what would be published without changing
+#                 the production repository.
 #
 set -u
 
@@ -24,10 +26,14 @@ SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 SITE_DIR="$ABBEY_ROOT/site"
+DIST_DIR="$SITE_DIR/dist"
 LOG_DIR="$ABBEY_ROOT/logs"
 LOG_FILE="$LOG_DIR/abbey-site.log"
+PRODUCTION_REPO="${ABBEY_SITE_PRODUCTION_REPO:-$HOME/git/brad6887.github.io}"
+EXPECTED_CNAME="bradcooke.com"
 
 command="${1:-status}"
+shift || true
 
 print_header() {
   echo "========================================"
@@ -36,11 +42,83 @@ print_header() {
   echo
 }
 
+fail() {
+  echo "FAIL $*"
+  exit 1
+}
+
+confirm() {
+  local prompt="$1"
+  local response
+
+  read -r -p "$prompt [y/N] " response
+
+  case "$response" in
+    y|Y|yes|YES)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+require_command() {
+  local required_command="$1"
+
+  command -v "$required_command" >/dev/null 2>&1 ||
+    fail "Required command not found: $required_command"
+}
+
+require_site_directory() {
+  [[ -d "$SITE_DIR" ]] ||
+    fail "Site directory not found: $SITE_DIR"
+}
+
+require_clean_source_repo() {
+  if [[ -n "$(git -C "$ABBEY_ROOT" status --porcelain)" ]]; then
+    echo "FAIL Abbey Root has uncommitted changes."
+    echo
+    git -C "$ABBEY_ROOT" status --short
+    echo
+    echo "Commit or discard the source changes before publishing."
+    exit 1
+  fi
+}
+
+require_production_repo() {
+  [[ -d "$PRODUCTION_REPO/.git" ]] ||
+    fail "Production repository not found: $PRODUCTION_REPO"
+
+  if [[ -n "$(git -C "$PRODUCTION_REPO" status --porcelain)" ]]; then
+    echo "FAIL Production repository has uncommitted changes."
+    echo
+    git -C "$PRODUCTION_REPO" status --short
+    echo
+    echo "Resolve the production changes before publishing."
+    exit 1
+  fi
+}
+
+validate_cname() {
+  local cname_file="$PRODUCTION_REPO/CNAME"
+
+  [[ -f "$cname_file" ]] ||
+    fail "Production CNAME file not found: $cname_file"
+
+  [[ "$(tr -d '\r\n' < "$cname_file")" == "$EXPECTED_CNAME" ]] ||
+    fail "Unexpected production CNAME value"
+
+  echo "OK   CNAME preserved: $EXPECTED_CNAME"
+}
+
 site_pid() {
   pgrep -f "npm run dev|astro dev" | head -n 1
 }
 
 site_status() {
+  local pid
+
   pid="$(site_pid || true)"
 
   if [[ -n "${pid:-}" ]]; then
@@ -52,23 +130,157 @@ site_status() {
 
 site_build() {
   print_header
-
-  if [[ ! -d "$SITE_DIR" ]]; then
-    echo "FAIL Site directory not found: $SITE_DIR"
-    exit 1
-  fi
+  require_site_directory
 
   cd "$SITE_DIR" || exit 1
   npm run build
 }
 
-site_start() {
+publish_rsync() {
+  local dry_run="${1:-false}"
+  local args=(
+    -av
+    --delete
+    --exclude=.git/
+    --exclude=CNAME
+  )
+
+  if [[ "$dry_run" == "true" ]]; then
+    args+=(--dry-run)
+  fi
+
+  rsync "${args[@]}" "$DIST_DIR/" "$PRODUCTION_REPO/"
+}
+
+site_publish() {
+  local dry_run=false
+  local commit_message
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --dry-run)
+        dry_run=true
+        ;;
+      -h|--help)
+        cat <<'HELP'
+Usage:
+  abbey site publish
+  abbey site publish --dry-run
+
+The publish workflow:
+
+  1. Requires a clean Abbey Root repository.
+  2. Requires a clean production repository.
+  3. Builds the Astro site.
+  4. Shows the rsync changes.
+  5. Preserves the production CNAME.
+  6. Copies the generated site.
+  7. Shows the production Git diff.
+  8. Commits and pushes after confirmation.
+
+Environment:
+  ABBEY_SITE_PRODUCTION_REPO
+      Override the production checkout path.
+
+      Default:
+      ~/git/brad6887.github.io
+HELP
+        return 0
+        ;;
+      *)
+        fail "Unknown publish option: $1"
+        ;;
+    esac
+
+    shift
+  done
+
   print_header
 
-  if [[ ! -d "$SITE_DIR" ]]; then
-    echo "FAIL Site directory not found: $SITE_DIR"
-    exit 1
+  require_command git
+  require_command npm
+  require_command rsync
+  require_site_directory
+  require_clean_source_repo
+  require_production_repo
+  validate_cname
+
+  echo "Source repository:     $ABBEY_ROOT"
+  echo "Production repository: $PRODUCTION_REPO"
+  echo
+
+  echo "Building Astro site..."
+  (
+    cd "$SITE_DIR" || exit 1
+    npm run build
+  ) || fail "Astro build failed"
+
+  [[ -f "$DIST_DIR/index.html" ]] ||
+    fail "Generated index.html not found"
+
+  echo
+  echo "Publish preview"
+  echo "---------------"
+  publish_rsync true
+
+  if [[ "$dry_run" == "true" ]]; then
+    echo
+    echo "DRY RUN complete. No production files were changed."
+    return 0
   fi
+
+  echo
+  if ! confirm "Publish these generated files?"; then
+    echo "Publish cancelled."
+    return 0
+  fi
+
+  publish_rsync false
+  validate_cname
+
+  git -C "$PRODUCTION_REPO" add -A
+
+  echo
+  echo "Production changes"
+  echo "------------------"
+
+  git -C "$PRODUCTION_REPO" diff --cached --check ||
+    fail "Production diff validation failed"
+
+  git -C "$PRODUCTION_REPO" diff --cached --stat
+  echo
+  git -C "$PRODUCTION_REPO" status --short
+
+  if git -C "$PRODUCTION_REPO" diff --cached --quiet; then
+    echo
+    echo "OK   Production site is already current."
+    return 0
+  fi
+
+  echo
+  if ! confirm "Commit and push the production site?"; then
+    echo
+    echo "Production files were updated but not committed."
+    echo "Review or discard them in:"
+    echo "  $PRODUCTION_REPO"
+    return 0
+  fi
+
+  commit_message="Publish BradCooke.com from Abbey Root $(git -C "$ABBEY_ROOT" rev-parse --short HEAD)"
+
+  git -C "$PRODUCTION_REPO" commit -m "$commit_message"
+  git -C "$PRODUCTION_REPO" push
+
+  echo
+  echo "OK   BradCooke.com publish pushed successfully."
+  echo "INFO GitHub Pages may take a few minutes to update."
+}
+
+site_start() {
+  local pid
+
+  print_header
+  require_site_directory
 
   pid="$(site_pid || true)"
 
@@ -88,6 +300,8 @@ site_start() {
 }
 
 site_stop() {
+  local pid
+
   print_header
 
   pid="$(site_pid || true)"
@@ -114,6 +328,10 @@ case "$command" in
     site_build
     ;;
 
+  publish)
+    site_publish "$@"
+    ;;
+
   start)
     site_start
     ;;
@@ -136,18 +354,20 @@ case "$command" in
 Abbey Root Site Tool
 
 Usage:
-  abbey-site status     Show Astro dev server status
-  abbey-site build      Run npm build
-  abbey-site start      Start Astro dev server if stopped
-  abbey-site stop       Stop Astro dev server
-  abbey-site restart    Restart Astro dev server
+  abbey site status              Show Astro dev server status
+  abbey site build               Run the Astro production build
+  abbey site publish             Build and publish to GitHub Pages
+  abbey site publish --dry-run   Preview publication without changing production
+  abbey site start               Start Astro dev server if stopped
+  abbey site stop                Stop Astro dev server
+  abbey site restart             Restart Astro dev server
 HELP
     ;;
 
   *)
     echo "Unknown command: $command"
     echo
-    echo "Run 'abbey-site help' for available commands."
+    echo "Run 'abbey site help' for available commands."
     exit 1
     ;;
 esac
