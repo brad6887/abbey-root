@@ -3,7 +3,7 @@
 section "Documentation"
 
 docs=(
-  "docs/status/PROJECT_STATUS.md"
+  "docs/planning/PROJECT_STATUS.md"
   "docs/planning/NEXT.md"
   "docs/planning/ROADMAP.md"
   "docs/planning/BACKLOG.md"

@@ -130,7 +130,7 @@ EOF
 build_brief() {
   {
     write_header
-    include_file "Project Status" "docs/status/PROJECT_STATUS.md" 80
+    include_file "Project Status" "docs/planning/PROJECT_STATUS.md" 80
     include_file "Next Actions" "docs/planning/NEXT.md" 80
     recent_commits
     git_status
@@ -140,7 +140,7 @@ build_brief() {
 build_next() {
   {
     write_header
-    include_file "Project Status" "docs/status/PROJECT_STATUS.md" 160
+    include_file "Project Status" "docs/planning/PROJECT_STATUS.md" 160
     include_file "Next Actions" "docs/planning/NEXT.md" 160
     include_file "Roadmap" "docs/planning/ROADMAP.md" 160
     recent_commits

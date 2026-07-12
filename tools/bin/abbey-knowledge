@@ -113,7 +113,7 @@ build_snapshot() {
     list_files "Guides" "docs/guides" "*.md"
     list_files "Content Journal Entries" "content/journal" "*.md"
 
-    section_excerpt "Current Project Status" "docs/status/PROJECT_STATUS.md" 120
+    section_excerpt "Current Project Status" "docs/planning/PROJECT_STATUS.md" 120
     section_excerpt "Next Actions" "docs/planning/NEXT.md" 120
     section_excerpt "Roadmap" "docs/planning/ROADMAP.md" 120
     section_excerpt "Backlog" "docs/planning/BACKLOG.md" 120
