@@ -13,6 +13,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Design `abbey init` project bootstrap command.
 - [ ] Create `abbey-end` session workflow.
 - [ ] Create `abbey-review` planning reconciliation workflow.
+- [ ] Design `abbey infrastructure review` workflow.
 - [ ] Continue eliminating manually maintained documentation.
 - [ ] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.
@@ -41,7 +42,17 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Make `.bashrc` Ansible-managed.
 - [ ] Configure hostname resolution between lab systems.
+- [ ] Implement internal DNS.
 - [ ] Enhance `abbey-status` with Docker health, disk usage, and service summaries.
+- [ ] Create `abbey infrastructure review`.
+- [ ] Manage infrastructure systemd units and automation scripts from the Abbey repository.
+- [ ] Deploy infrastructure services through Ansible.
+- [ ] Automate restore validation for backups.
+- [ ] Implement infrastructure patch management workflow.
+- [ ] Define recurring infrastructure maintenance windows.
+- [ ] Expand infrastructure monitoring dashboards.
+- [ ] Add infrastructure backup failure alerting.
+- [ ] Investigate and document Nginx Proxy Manager configuration.
 - [ ] Automate deployment of ai-worker01 shell environment through Ansible.
 - [ ] Document apartment network wall jack locations.
 - [ ] Label structured wiring cabinet.

@@ -55,3 +55,72 @@ The Museum should feel like walking through a collection of stories rather than 
 
 Visitors should leave thinking:
 "This guy builds serious things... but he also doesn't take himself too seriously."
+
+## Project Health Dashboard
+
+### Summary
+
+Teach Abbey to track the types of work performed over time so it can help guide future sessions rather than simply recording them.
+
+The goal is **not** time tracking or enforcing quotas. The goal is helping prevent important areas of the project from being neglected while still encouraging exploration.
+
+### Possible Areas
+
+- Infrastructure
+- Automation
+- AI
+- Workflow
+- Web Development
+- Documentation
+- Backlog / Maintenance
+- Ideas / Research
+
+The list should be configurable rather than hard-coded.
+
+### Possible Session Metadata
+
+```yaml
+primary: automation
+
+secondary:
+  - ai
+  - workflow
+
+session_type: standard
+```
+
+Possible future session types:
+
+- standard
+- sidequest
+- maintenance
+- research
+
+### Future Reports
+
+Examples:
+
+- Activity by area
+- Areas not touched recently
+- Monthly trends
+- Project health dashboard
+- Suggested focus for next session
+
+Example output:
+
+- Infrastructure: Healthy
+- Automation: Very Active
+- Documentation: Needs Attention
+- Ideas: Stale (28 days)
+
+### Design Principles
+
+- Encourage balance without enforcing quotas.
+- Preserve the freedom to follow interesting side quests.
+- Use history to suggest—not dictate—future work.
+- Make side quests a first-class part of the engineering process.
+- Keep metadata lightweight so session startup remains fast.
+
+### Not Yet
+
+Do not implement until the session workflow and review process have stabilized. This feature should build on the existing session metadata rather than complicating it prematurely.
