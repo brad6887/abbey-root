@@ -50,7 +50,19 @@
           - "Address: {{ ansible_host | default(inventory_hostname) }}"
           - "OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
           - "Kernel: {{ ansible_kernel }}"
-          - "Uptime: {{ ansible_uptime_seconds | int // 86400 }} days"
+          - >-
+            Uptime:
+            {{ ansible_uptime_seconds | int // 86400 }}d
+            {{ (ansible_uptime_seconds | int % 86400) // 3600 }}h
+            {{ (ansible_uptime_seconds | int % 3600) // 60 }}m
+          - >-
+            Memory:
+            {{ ansible_memory_mb.real.used | default('unknown') }} MB used /
+            {{ ansible_memory_mb.real.total | default('unknown') }} MB total
+          - >-
+            Swap:
+            {{ ansible_memory_mb.swap.used | default('unknown') }} MB used /
+            {{ ansible_memory_mb.swap.total | default('unknown') }} MB total
           - "Load: {{ system_load.stdout | default('unavailable') }}"
           - "D-state processes: {{ blocked_processes.stdout_lines | default([]) | length }}"
           - "Root filesystem: {{ (root_filesystem.stdout_lines | default([]) | last) | default('unavailable') }}"
@@ -76,39 +88,119 @@
       when: blocked_processes.stdout_lines | default([]) | length > 0
 
 
-- name: Check NVIDIA health
+- name: Check NVIDIA and Ollama health
   hosts: all
   gather_facts: false
   become: false
 
   tasks:
-    - name: Run timeout-protected NVIDIA status check
+    - name: Read timeout-protected NVIDIA metrics
       ansible.builtin.command:
         argv:
           - timeout
           - "15"
           - nvidia-smi
-      register: nvidia_status
+          - --query-gpu=driver_version,temperature.gpu,utilization.gpu,memory.used,memory.total
+          - --format=csv,noheader,nounits
+      register: nvidia_metrics
       changed_when: false
       failed_when: false
       when: ai_node | default(false) | bool
 
-    - name: Display NVIDIA health summary
+    - name: Read active NVIDIA process count
+      ansible.builtin.shell: |
+        timeout 15 nvidia-smi \
+          --query-compute-apps=pid \
+          --format=csv,noheader,nounits |
+        awk 'NF {count++} END {print count+0}'
+      register: nvidia_process_count
+      changed_when: false
+      failed_when: false
+      when:
+        - ai_node | default(false) | bool
+        - nvidia_metrics.rc | default(1) == 0
+
+    - name: Read Ollama service status
+      ansible.builtin.command:
+        argv:
+          - systemctl
+          - is-active
+          - ollama
+      register: ollama_service
+      changed_when: false
+      failed_when: false
+      when: ai_node | default(false) | bool
+
+    - name: Read loaded Ollama models
+      ansible.builtin.command:
+        argv:
+          - ollama
+          - ps
+      register: ollama_models
+      changed_when: false
+      failed_when: false
+      when: ai_node | default(false) | bool
+
+    - name: Count llama-server processes
+      ansible.builtin.shell: |
+        pgrep -c -x llama-server || true
+      register: llama_server_count
+      changed_when: false
+      failed_when: false
+      when: ai_node | default(false) | bool
+
+    - name: Display NVIDIA and Ollama health summary
       ansible.builtin.debug:
         msg:
           - "Host: {{ inventory_hostname }}"
-          - "nvidia-smi return code: {{ nvidia_status.rc | default('not run') }}"
-          - "NVIDIA status: {{ 'healthy' if nvidia_status.rc | default(1) == 0 else 'unavailable or timed out' }}"
+          - "NVIDIA status: {{ 'healthy' if nvidia_metrics.rc | default(1) == 0 else 'unavailable or timed out' }}"
+          - "NVIDIA driver: {{ nvidia_values[0] | default('unavailable') }}"
+          - "GPU temperature: {{ nvidia_values[1] | default('unknown') }} C"
+          - "GPU utilization: {{ nvidia_values[2] | default('unknown') }}%"
+          - >-
+            GPU memory:
+            {{ nvidia_values[3] | default('unknown') }} MiB used /
+            {{ nvidia_values[4] | default('unknown') }} MiB total
+          - "Active NVIDIA processes: {{ nvidia_process_count.stdout | default('unknown') }}"
+          - "Ollama service: {{ ollama_service.stdout | default('unavailable') }}"
+          - >-
+            Loaded Ollama models:
+            {{
+              (
+                ollama_models.stdout_lines | default([])
+                | reject('match', '^NAME')
+                | reject('equalto', '')
+                | list
+                | length
+              )
+            }}
+          - "llama-server processes: {{ llama_server_count.stdout | default('unknown') }}"
+      vars:
+        nvidia_values: >-
+          {{
+            nvidia_metrics.stdout.split(', ')
+            if nvidia_metrics.rc | default(1) == 0
+            else []
+          }}
       when: ai_node | default(false) | bool
 
     - name: Warn when NVIDIA status check fails or times out
       ansible.builtin.debug:
         msg: >-
           WARN nvidia-smi failed or timed out with return code
-          {{ nvidia_status.rc | default('unknown') }}
+          {{ nvidia_metrics.rc | default('unknown') }}
       when:
         - ai_node | default(false) | bool
-        - nvidia_status.rc | default(1) != 0
+        - nvidia_metrics.rc | default(1) != 0
+
+    - name: Warn when Ollama is not active
+      ansible.builtin.debug:
+        msg: >-
+          WARN Ollama service is
+          {{ ollama_service.stdout | default('unavailable') }}
+      when:
+        - ai_node | default(false) | bool
+        - ollama_service.stdout | default('unknown') != 'active'
 
 
 - name: Check Docker host health
