@@ -1,0 +1,185 @@
+---
+- name: Check Abbey Root lab health
+  hosts: all
+  gather_facts: true
+  become: false
+
+  tasks:
+    - name: Read root filesystem usage
+      ansible.builtin.command:
+        argv:
+          - df
+          - -P
+          - /
+      register: root_filesystem
+      changed_when: false
+      failed_when: false
+
+    - name: Read system load
+      ansible.builtin.command:
+        argv:
+          - cat
+          - /proc/loadavg
+      register: system_load
+      changed_when: false
+      failed_when: false
+
+    - name: Read processes in uninterruptible sleep
+      ansible.builtin.shell: |
+        ps -eo state,pid,comm,wchan:32,args |
+        awk '$1 == "D" {print}'
+      register: blocked_processes
+      changed_when: false
+      failed_when: false
+
+    - name: Read failed systemd units
+      ansible.builtin.command:
+        argv:
+          - systemctl
+          - --failed
+          - --no-legend
+          - --plain
+      register: failed_systemd_units
+      changed_when: false
+      failed_when: false
+
+    - name: Display host health summary
+      ansible.builtin.debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "Address: {{ ansible_host | default(inventory_hostname) }}"
+          - "OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+          - "Kernel: {{ ansible_kernel }}"
+          - "Uptime: {{ ansible_uptime_seconds | int // 86400 }} days"
+          - "Load: {{ system_load.stdout | default('unavailable') }}"
+          - "D-state processes: {{ blocked_processes.stdout_lines | default([]) | length }}"
+          - "Root filesystem: {{ (root_filesystem.stdout_lines | default([]) | last) | default('unavailable') }}"
+          - "Failed systemd units: {{ failed_systemd_units.stdout_lines | default([]) | length }}"
+
+    - name: Warn when root filesystem usage is unavailable
+      ansible.builtin.debug:
+        msg: "WARN Unable to read root filesystem usage"
+      when: root_filesystem.rc | default(1) != 0
+
+    - name: Warn when failed systemd units exist
+      ansible.builtin.debug:
+        msg: >-
+          WARN Failed systemd units:
+          {{ failed_systemd_units.stdout_lines | join(', ') }}
+      when: failed_systemd_units.stdout_lines | default([]) | length > 0
+
+    - name: Warn when processes are stuck in uninterruptible sleep
+      ansible.builtin.debug:
+        msg: >-
+          WARN D-state processes:
+          {{ blocked_processes.stdout_lines | join(' | ') }}
+      when: blocked_processes.stdout_lines | default([]) | length > 0
+
+
+- name: Check NVIDIA health
+  hosts: all
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Run timeout-protected NVIDIA status check
+      ansible.builtin.command:
+        argv:
+          - timeout
+          - "15"
+          - nvidia-smi
+      register: nvidia_status
+      changed_when: false
+      failed_when: false
+      when: ai_node | default(false) | bool
+
+    - name: Display NVIDIA health summary
+      ansible.builtin.debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "nvidia-smi return code: {{ nvidia_status.rc | default('not run') }}"
+          - "NVIDIA status: {{ 'healthy' if nvidia_status.rc | default(1) == 0 else 'unavailable or timed out' }}"
+      when: ai_node | default(false) | bool
+
+    - name: Warn when NVIDIA status check fails or times out
+      ansible.builtin.debug:
+        msg: >-
+          WARN nvidia-smi failed or timed out with return code
+          {{ nvidia_status.rc | default('unknown') }}
+      when:
+        - ai_node | default(false) | bool
+        - nvidia_status.rc | default(1) != 0
+
+
+- name: Check Docker host health
+  hosts: all
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Check whether Docker is available
+      ansible.builtin.command:
+        argv:
+          - docker
+          - version
+          - --format
+          - "{{ '{{' }}.Server.Version{{ '}}' }}"
+      register: docker_version
+      changed_when: false
+      failed_when: false
+      when: docker_host | default(false) | bool
+
+    - name: Read running Docker containers
+      ansible.builtin.command:
+        argv:
+          - docker
+          - ps
+          - --format
+          - "{{ '{{' }}.Names{{ '}}' }}"
+      register: running_containers
+      changed_when: false
+      failed_when: false
+      when:
+        - docker_host | default(false) | bool
+        - docker_version.rc | default(1) == 0
+
+    - name: Read unhealthy Docker containers
+      ansible.builtin.command:
+        argv:
+          - docker
+          - ps
+          - --filter
+          - health=unhealthy
+          - --format
+          - "{{ '{{' }}.Names{{ '}}' }}"
+      register: unhealthy_containers
+      changed_when: false
+      failed_when: false
+      when:
+        - docker_host | default(false) | bool
+        - docker_version.rc | default(1) == 0
+
+    - name: Display Docker health summary
+      ansible.builtin.debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "Docker version: {{ docker_version.stdout | default('unavailable') }}"
+          - "Running containers: {{ running_containers.stdout_lines | default([]) | length }}"
+          - "Unhealthy containers: {{ unhealthy_containers.stdout_lines | default([]) | length }}"
+      when: docker_host | default(false) | bool
+
+    - name: Warn when Docker is unavailable
+      ansible.builtin.debug:
+        msg: "WARN Docker is unavailable on configured Docker host"
+      when:
+        - docker_host | default(false) | bool
+        - docker_version.rc | default(1) != 0
+
+    - name: Warn when unhealthy Docker containers exist
+      ansible.builtin.debug:
+        msg: >-
+          WARN Unhealthy containers:
+          {{ unhealthy_containers.stdout_lines | join(', ') }}
+      when:
+        - docker_host | default(false) | bool
+        - unhealthy_containers.stdout_lines | default([]) | length > 0

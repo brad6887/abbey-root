@@ -162,6 +162,29 @@ abbey knowledge <command>
 abbey knowledge build
 ```
 
+## Lab infrastructure
+
+### `abbey lab`
+
+Inspect and manage Abbey Root lab infrastructure.
+
+**Usage**
+
+```text
+abbey lab <command>
+```
+
+**Subcommands**
+
+- `check` - Run read-only health checks against managed lab hosts.
+  - `abbey lab check`
+
+**Examples**
+
+```text
+abbey lab check
+```
+
 ## Website
 
 ### `abbey site`

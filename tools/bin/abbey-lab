@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+#
+# Abbey Root Tool: abbey-lab
+#
+# Purpose:
+#   Inspect and manage the Abbey Root lab.
+#
+# Usage:
+#   abbey lab check
+#
+
+set -u
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
+ANSIBLE_DIR="$ABBEY_ROOT/ansible"
+INVENTORY_FILE="$ANSIBLE_DIR/inventory/hosts.yml"
+CHECK_PLAYBOOK="$ANSIBLE_DIR/playbooks/lab-check.yml"
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  abbey lab check
+  abbey lab help
+
+Commands:
+  check    Run read-only health checks against managed lab hosts
+  help     Show this help
+USAGE
+}
+
+fail() {
+  printf 'FAIL %s\n' "$1" >&2
+  exit 1
+}
+
+lab_check() {
+  command -v ansible-playbook >/dev/null 2>&1 || {
+    echo "FAIL ansible-playbook is not installed on $(hostname)."
+    echo
+    echo "Run this command from an Abbey Ansible control node."
+    echo "Remote control-node execution is not configured yet."
+    exit 1
+  }
+
+  [[ -f "$INVENTORY_FILE" ]] ||
+    fail "Inventory file not found: $INVENTORY_FILE"
+
+  [[ -f "$CHECK_PLAYBOOK" ]] ||
+    fail "Lab check playbook not found: $CHECK_PLAYBOOK"
+
+  echo "========================================"
+  echo " Abbey Root Lab Check"
+  echo "========================================"
+  echo
+  echo "Date: $(date)"
+  echo "Control host: $(hostname)"
+  echo "Inventory: $INVENTORY_FILE"
+  echo
+
+  (
+    cd "$ANSIBLE_DIR" || exit 1
+    ansible-playbook \
+      -i "$INVENTORY_FILE" \
+      "$CHECK_PLAYBOOK"
+  )
+}
+
+command="${1:-help}"
+shift || true
+
+case "$command" in
+  check)
+    lab_check "$@"
+    ;;
+
+  help|-h|--help)
+    usage
+    ;;
+
+  *)
+    echo "Unknown lab command: $command"
+    echo
+    usage
+    exit 2
+    ;;
+esac

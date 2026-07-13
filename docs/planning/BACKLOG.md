@@ -60,6 +60,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Keep a spare USB Ethernet adapter for lab recovery.
 - [ ] Evaluate VPN, Tailscale, and Cloudflare Tunnel for remote connectivity.
 - [ ] Design and implement secure remote access to the lab.
+- [ ] Expand `abbey lab` with additional infrastructure diagnostics.
 
 ---
 

@@ -24,6 +24,9 @@ categories:
   ai:
     description: AI and knowledge commands
 
+  lab:
+    description: Lab infrastructure commands
+
   site:
     description: Website commands
 
@@ -146,6 +149,18 @@ commands:
     hidden: false
     examples:
       - abbey ai
+
+  lab:
+    category: lab
+    description: Inspect and manage Abbey Root lab infrastructure.
+    usage: abbey lab <command>
+    hidden: false
+    subcommands:
+      check:
+        description: Run read-only health checks against managed lab hosts.
+        usage: abbey lab check
+    examples:
+      - abbey lab check
 
   version:
     category: core
