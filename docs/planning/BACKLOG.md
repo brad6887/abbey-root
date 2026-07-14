@@ -177,6 +177,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Document the canonical `working/` workspace purpose and conventions.
 - [ ] Document the principle: model information before building tools.
 - [ ] Document the principle: humans record observations; automation manages state.
+- [ ] Develop lightweight architecture diagrams for Abbey systems (network, publishing, AI, workflows, remote access) and establish a standard diagram style.
 
 ---
 

@@ -16,10 +16,10 @@ import yaml
 
 path = sys.argv[1]
 
-with open(path, "r", encoding="utf-8") as f:
-    data = yaml.safe_load(f) or {}
+with open(path, "r", encoding="utf-8") as handle:
+    data = yaml.safe_load(handle) or {}
 
-found = set()
+found = {}
 
 def walk(node):
     if not isinstance(node, dict):
@@ -27,8 +27,9 @@ def walk(node):
 
     hosts = node.get("hosts", {})
     if isinstance(hosts, dict):
-        for host in hosts:
-            found.add(host)
+        for name, values in hosts.items():
+            values = values if isinstance(values, dict) else {}
+            found[name] = values.get("ansible_host", name)
 
     children = node.get("children", {})
     if isinstance(children, dict):
@@ -37,8 +38,8 @@ def walk(node):
 
 walk(data.get("all", data))
 
-for host in sorted(found):
-    print(host)
+for name in sorted(found):
+    print(f"{name}\t{found[name]}")
 PY
 )"
 
@@ -48,12 +49,20 @@ if [ -z "$hosts" ]; then
   return
 fi
 
-for host in $hosts; do
-  if ping -4 -c 1 -W 1 "$host" >/dev/null 2>&1; then
-    ok "Host reachable: $host"
+while IFS=$'\t' read -r host target; do
+  if ping -4 -c 1 -W 1 "$target" >/dev/null 2>&1; then
+    if [ "$host" = "$target" ]; then
+      ok "Host reachable: $host"
+    else
+      ok "Host reachable: $host ($target)"
+    fi
   else
-    fail "Host unreachable: $host"
+    if [ "$host" = "$target" ]; then
+      fail "Host unreachable: $host"
+    else
+      fail "Host unreachable: $host ($target)"
+    fi
   fi
-done
+done <<< "$hosts"
 
 echo
