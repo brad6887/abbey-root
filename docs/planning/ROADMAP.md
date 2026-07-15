@@ -48,7 +48,7 @@ Each phase builds upon the previous one, gradually transforming Abbey Root from 
 
 - `abbey journal`
 - `abbey session`
-- `abbey-end`
+- `abbey end`
 - `abbey-review`
 - Session update workflow
 - Project-aware workflow

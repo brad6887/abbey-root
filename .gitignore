@@ -7,3 +7,7 @@ logs/
 
 # Generated upload-ready session context
 working/session-context/
+
+# macOS metadata
+.DS_Store
+._*

@@ -81,6 +81,14 @@ commands:
       - abbey session review
       - abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 
+  end:
+    category: workflow
+    description: Certify that the current Abbey session is complete.
+    usage: abbey end
+    hidden: false
+    examples:
+      - abbey end
+
   journal:
     category: workflow
     description: Create or open an Abbey Root journal entry.

@@ -80,6 +80,22 @@ abbey version
 
 ## Workflow
 
+### `abbey end`
+
+Certify that the current Abbey session is complete.
+
+**Usage**
+
+```text
+abbey end
+```
+
+**Examples**
+
+```text
+abbey end
+```
+
 ### `abbey journal`
 
 Create or open an Abbey Root journal entry.

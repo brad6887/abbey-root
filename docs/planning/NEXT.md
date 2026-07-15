@@ -67,7 +67,6 @@ Continue improving Abbey Root, but only when real project work exposes opportuni
 
 Priority areas include:
 
-- Complete `abbey-end`.
 - Complete `abbey-review`.
 - Design `abbey init`.
 - Continue metadata-driven automation.

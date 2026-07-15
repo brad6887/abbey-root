@@ -1,0 +1,195 @@
+#!/usr/bin/env bash
+# COMMAND: end
+# DESCRIPTION: Certify that the current Abbey session is complete
+set -u
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+
+ok_count=0
+warning_count=0
+failure_count=0
+
+ok() {
+  echo "OK   $*"
+  ok_count=$((ok_count + 1))
+}
+
+warn() {
+  echo "WARN $*"
+  warning_count=$((warning_count + 1))
+}
+
+fail() {
+  echo "FAIL $*"
+  failure_count=$((failure_count + 1))
+}
+
+section() {
+  echo
+  echo "$1"
+  printf '%*s\n' "${#1}" '' | tr ' ' '-'
+}
+
+echo "========================================"
+echo " Abbey End"
+echo "========================================"
+echo
+echo "Date: $(date)"
+echo "Host: $(hostname)"
+echo "Repo: $ABBEY_ROOT"
+
+section "Repository"
+
+if ! git -C "$ABBEY_ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  fail "Git repository not detected: $ABBEY_ROOT"
+else
+  ok "Git repository detected"
+
+  branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null || true)"
+  if [[ -n "$branch" ]]; then
+    ok "Current branch: $branch"
+  else
+    fail "Unable to determine current branch"
+  fi
+
+  if [[ -z "$(git -C "$ABBEY_ROOT" status --porcelain 2>/dev/null)" ]]; then
+    ok "Working tree clean"
+  else
+    fail "Working tree contains uncommitted changes"
+  fi
+fi
+
+section "Latest Commit"
+
+latest_commit="$(git -C "$ABBEY_ROOT" log -1 --format='%h %s' 2>/dev/null || true)"
+latest_commit_hash="$(git -C "$ABBEY_ROOT" rev-parse HEAD 2>/dev/null || true)"
+
+if [[ -n "$latest_commit" ]]; then
+  ok "$latest_commit"
+else
+  fail "No commit found"
+fi
+
+section "Session Documentation"
+
+commit_files=""
+if [[ -n "$latest_commit_hash" ]]; then
+  commit_files="$(
+    git -C "$ABBEY_ROOT" diff-tree \
+      --no-commit-id \
+      --name-only \
+      -r "$latest_commit_hash" 2>/dev/null || true
+  )"
+fi
+
+if grep -Eq '^docs/session-updates/[^/]+\.md$' <<<"$commit_files"; then
+  session_update="$(
+    grep -E '^docs/session-updates/[^/]+\.md$' <<<"$commit_files" |
+      head -1
+  )"
+  ok "Session update committed: $session_update"
+else
+  fail "Latest commit does not contain a session update"
+fi
+
+if grep -Eq '^content/journal/.+\.md$' <<<"$commit_files"; then
+  journal_entry="$(
+    grep -E '^content/journal/.+\.md$' <<<"$commit_files" |
+      head -1
+  )"
+  ok "Journal entry committed: $journal_entry"
+else
+  fail "Latest commit does not contain a journal entry"
+fi
+
+section "Validation"
+
+doctor_output=""
+doctor_status=0
+
+if [[ -x "$ABBEY_ROOT/tools/bin/abbey-doctor" ]]; then
+  doctor_output="$("$ABBEY_ROOT/tools/bin/abbey-doctor" 2>&1)" || doctor_status=$?
+
+  doctor_failures="$(
+    awk '/^Failures:[[:space:]]*/ {print $2}' <<<"$doctor_output" |
+      tail -1
+  )"
+
+  if [[ "$doctor_failures" =~ ^[0-9]+$ ]]; then
+    if (( doctor_failures == 0 )); then
+      ok "Abbey Doctor reports no failures"
+    else
+      fail "Abbey Doctor reports $doctor_failures failure(s)"
+    fi
+  elif (( doctor_status == 0 )); then
+    ok "Abbey Doctor completed successfully"
+  else
+    fail "Unable to verify Abbey Doctor result"
+  fi
+else
+  fail "Abbey Doctor command not found"
+fi
+
+section "Remote"
+
+upstream="$(git -C "$ABBEY_ROOT" rev-parse --abbrev-ref '@{upstream}' 2>/dev/null || true)"
+
+if [[ -z "$upstream" ]]; then
+  warn "Current branch has no configured upstream"
+else
+  counts="$(
+    git -C "$ABBEY_ROOT" rev-list \
+      --left-right \
+      --count "$upstream...HEAD" 2>/dev/null || true
+  )"
+
+  behind="${counts%%[[:space:]]*}"
+  ahead="${counts##*[[:space:]]}"
+
+  if [[ "$behind" =~ ^[0-9]+$ && "$ahead" =~ ^[0-9]+$ ]]; then
+    if (( behind > 0 )); then
+      fail "Branch is behind $upstream by $behind commit(s)"
+    elif (( ahead > 0 )); then
+      ok "Branch is ahead of $upstream by $ahead commit(s)"
+    else
+      ok "Branch is synchronized with $upstream"
+    fi
+  else
+    warn "Unable to determine upstream branch status"
+  fi
+fi
+
+section "Summary"
+
+printf "%-10s %s\n" "OK:" "$ok_count"
+printf "%-10s %s\n" "Warnings:" "$warning_count"
+printf "%-10s %s\n" "Failures:" "$failure_count"
+
+echo
+echo "========================================"
+
+if (( failure_count == 0 )); then
+  echo " Session Complete"
+  echo "========================================"
+  echo
+
+  if [[ "${ahead:-0}" =~ ^[0-9]+$ ]] && (( ahead > 0 )); then
+    echo "Next recommended action:"
+    echo
+    echo "    git push"
+  else
+    echo "The session has been successfully concluded."
+  fi
+
+  exit 0
+fi
+
+echo " Session Incomplete"
+echo "========================================"
+echo
+echo "Resolve the failures above, run abbey session review if changes are required,"
+echo "commit the final session state, and run abbey end again."
+
+exit 1

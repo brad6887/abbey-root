@@ -11,7 +11,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 ## High Priority
 
 - [ ] Design `abbey init` project bootstrap command.
-- [ ] Create `abbey-end` session workflow.
+- [x] Create `abbey end` session workflow.
 - [ ] Create `abbey-review` planning reconciliation workflow.
 - [ ] Design `abbey infrastructure review` workflow.
 - [ ] Continue eliminating manually maintained documentation.
@@ -123,8 +123,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Expand `abbey-session` with project-aware recommendations.
 - [ ] Display planning summaries during `abbey session`.
-- [ ] Create `abbey-end`.
-- [ ] Design `abbey-end` to analyze Git changes and draft session updates.
+- [x] Create `abbey end`.
+- [ ] Evaluate future `abbey end` enhancements through practical usage.
 - [ ] Create `abbey-review`.
 - [ ] Create `abbey session-update`.
 - [ ] Associate journal entries with active Abbey sessions.

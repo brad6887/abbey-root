@@ -75,7 +75,6 @@ Completed
 # Immediate Priorities
 
 - Design `abbey init`.
-- Complete `abbey-end`.
 - Complete `abbey-review`.
 - Expand onboarding documentation.
 - Continue CLI standardization.
@@ -146,6 +145,7 @@ Completed
 - `abbey doctor`
 - `abbey status`
 - `abbey session`
+- `abbey end`
 - `abbey version`
 - `abbey journal`
 - `abbey ai`
@@ -158,7 +158,6 @@ Completed
 
 ## Current Focus
 
-- Complete `abbey-end`.
 - Complete `abbey-review`.
 - Project-aware workflows.
 - Documentation automation.
@@ -282,7 +281,6 @@ Completed
 ## Near Term
 
 - Design `abbey init`.
-- Complete `abbey-end`.
 - Complete `abbey-review`.
 - Expand onboarding documentation.
 - Improve `abbey-doctor`.
