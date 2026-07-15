@@ -18,7 +18,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.
 - [ ] Publish additional BradCooke.com content.
-- [x] Complete Doctor Robert as the reference Plant Model implementation.
+- [x] Publish Doctor Robert as the reference Plant Model profile.
 - [x] Connect the Plant Model to BradCooke.com.
 
 ---
@@ -105,8 +105,9 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [x] Define the Plant Model.
 - [x] Create a reusable plant workspace template.
+- [ ] Review the Plant Model against the reusable template and Doctor Robert reference implementation.
 - [x] Create `abbey plant validate`.
-- [x] Complete the Doctor Robert reference implementation.
+- [x] Publish Doctor Robert through the Plant Model as its first reference profile.
 - [ ] Create `abbey plant new`.
 - [ ] Create `abbey plant inventory`.
 - [ ] Create plant photo import workflow.

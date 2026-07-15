@@ -4,7 +4,7 @@ title: Plant Model and Validation Workflow
 status: pending
 session: primary
 journal: 2026-07-10-plant-model-and-validation-workflow
-reviewed: false
+reviewed: true
 ---
 
 # Session Update
