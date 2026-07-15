@@ -3,8 +3,8 @@ date: 2026-07-11
 title: Bungalow Bill Working Profile
 status: pending
 session: regular
-journal: 2026-07-11-bungalow-bill-working-profile
-reviewed: false
+journal:
+reviewed: true
 ---
 
 # Session Update

@@ -182,6 +182,7 @@ Completed
 - Canonical plant source-to-publication workflow.
 - Doctor Robert generated into the Astro site as the Plant Model reference implementation.
 - Helter Skelter generated into the Astro site as the second validated Plant Model profile.
+- Bungalow Bill completed as a validated canonical Plant Model workspace, ready for future Astro publication.
 
 ## Current Work
 
