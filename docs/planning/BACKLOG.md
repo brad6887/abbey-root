@@ -83,6 +83,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add repository consistency checks.
 - [ ] Create `abbey-tree`.
 - [ ] Standardize tool output formatting and colors.
+- [ ] Standardize artifact-creation command output so commands report the path of every generated file.
 - [ ] Add automated toolkit regression testing.
 - [ ] Add regression tests for `abbey plant validate`.
 - [ ] Expand `abbey site` commands.

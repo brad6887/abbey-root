@@ -278,6 +278,9 @@ then define one focused objective and its definition of done.
 
 EOF
 
+  context_file "AI Session Guidance" \
+    ".abbey/session-guidance.md"
+
   context_command "Repository Status" \
     git -C "$ABBEY_ROOT" status
 

@@ -2,7 +2,8 @@
 website/
 
 # Abbey generated files
-.abbey/
+.abbey/*
+!.abbey/session-guidance.md
 logs/
 
 # Generated upload-ready session context
