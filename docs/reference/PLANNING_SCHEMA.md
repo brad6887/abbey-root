@@ -84,6 +84,12 @@ Developers
 
 Automation
 
+### Last Updated
+
+`Last Updated` records the date of the last authoritative project-status review or refresh.
+
+It does not need to change for every narrow reconciliation or editorial update. A newer accomplishment does not by itself make the field stale when the document has not undergone a full status refresh.
+
 ### Required Sections
 
 - Project Snapshot
@@ -110,6 +116,14 @@ Automation
 Defines the current execution plan.
 
 Unlike the backlog, this document should remain intentionally small and focused on near-term work.
+
+### Historical Session Reconciliation
+
+- `NEXT.md` represents current priorities.
+- Historical session review must not add an item to `NEXT.md` solely because it appeared as future work in the reviewed session.
+- Determine whether the work was completed later or is already represented elsewhere before changing planning documents.
+- If the work remains incomplete but accepted, record it in `BACKLOG.md` unless current project context independently establishes it as an immediate priority.
+- Incidental `NEXT.md` cleanup, including duplicates and wording improvements, is repository drift rather than a session-related change and should not block review, even when the historical session mentions it.
 
 ### Required Sections
 

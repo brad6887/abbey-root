@@ -111,6 +111,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create plant photo import workflow.
 - [ ] Create plant photo metadata workflow.
 - [x] Create plant publishing workflow.
+- [ ] Update the Doctor Robert inventory checklist.
 - [ ] Add AI-assisted plant workspace review.
 - [ ] Add plant workspace consistency checks.
 - [ ] Validate referenced photographs against the plant workspace.
@@ -206,12 +207,12 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create JournalCard component.
 - [ ] Create JournalHeader component.
 - [x] Create date formatting helper.
-- [x] Publish Doctor Robert as the first complete Orchid Rescue profile.
-- [x] Publish Doctor Robert's story, current status, and selected photographs.
+- [x] Generate Doctor Robert as the first complete Orchid Rescue profile in the Abbey Root Astro site.
+- [x] Generate Doctor Robert's story, current status, and selected photographs into the Abbey Root Astro site.
 - [ ] Create reusable plant profile and timeline components.
 - [x] Prototype the publishing path from `working/plants/` to Astro.
 - [x] Validate the plant publishing workflow before creating additional profiles.
-- [ ] Add additional Orchid Rescue profiles after validating Doctor Robert.
+- [ ] Continue adding Orchid Rescue profiles beyond Doctor Robert and Helter Skelter.
 - [ ] Add Phal McCartney to the documented orchid collection.
 - [ ] Create a separate future section for bromeliads.
 
@@ -248,13 +249,14 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Remove remaining `build-website.sh` references.
 - [ ] Create BradCooke.com publishing runbook.
 - [ ] Publish the Abbey Root Operations Manual.
-- [ ] Configure GitHub Pages deployment.
-- [ ] Add custom domain configuration.
+- [ ] Configure production deployment of the Abbey Root Astro site to GitHub Pages.
+- [ ] Transfer or configure `bradcooke.com` for the Abbey Root Astro deployment.
 - [x] Create dynamic journal detail pages.
 - [ ] Group journal entries by year.
 - [x] Add previous/next journal navigation.
 - [x] Create a plant source-to-publication pipeline.
-- [ ] Ensure published images use meaningful filenames and optimized copies.
+- [x] Generate stable public filenames for published plant images.
+- [ ] Use meaningful filenames for published images where practical.
 - [x] Preserve original plant photographs separately from published derivatives.
 
 ---

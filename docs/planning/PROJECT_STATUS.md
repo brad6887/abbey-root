@@ -181,21 +181,22 @@ Completed
 - Previous/next navigation.
 - Documentation publishing workflow.
 - Canonical plant source-to-publication workflow.
-- Doctor Robert published as the Plant Model reference implementation.
-- Helter Skelter published as the second validated Plant Model profile.
+- Doctor Robert generated into the Astro site as the Plant Model reference implementation.
+- Helter Skelter generated into the Astro site as the second validated Plant Model profile.
 
 ## Current Work
 
 - Publish documentation journal entries.
 - Expand technical content.
 - Improve reusable components.
-- Prepare GitHub Pages deployment.
+- Prepare production deployment of the Abbey Root Astro site to GitHub Pages.
 
 ## Current Capabilities
 - Orchid Rescue plant collection
 - Plant content model
 - Version-controlled publishing workspace
 - Generated plant profiles and selected public images from canonical workspaces
+- Plant histories can generate referenced timeline photographs with stable public filenames while sidecars and unreferenced source material remain private
 
 ---
 
@@ -253,6 +254,7 @@ Completed
 
 # Recent Accomplishments
 
+- Published a temporary BradCooke.com landing page from the existing GitHub Pages repository while the Abbey Root production publishing workflow remains under development.
 - Established the Abbey Framework.
 - Defined Project and CLI standards.
 - Introduced metadata-driven CLI architecture.
