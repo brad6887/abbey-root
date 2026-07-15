@@ -60,11 +60,22 @@ commands:
 
   session:
     category: workflow
-    description: Start an Abbey Root work session.
-    usage: abbey session
+    description: Start and review Abbey Root work sessions.
+    usage: abbey session [command]
     hidden: false
+    subcommands:
+      start:
+        description: Show Abbey session startup information.
+        usage: abbey session
+
+      review:
+        description: Review a selected session update or the oldest unreviewed update with Codex.
+        usage: abbey session review [file]
+
     examples:
       - abbey session
+      - abbey session review
+      - abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 
   journal:
     category: workflow

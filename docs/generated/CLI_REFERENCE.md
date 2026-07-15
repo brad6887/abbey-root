@@ -98,18 +98,27 @@ abbey journal "Architecture Framework Introduced"
 
 ### `abbey session`
 
-Start an Abbey Root work session.
+Start and review Abbey Root work sessions.
 
 **Usage**
 
 ```text
-abbey session
+abbey session [command]
 ```
+
+**Subcommands**
+
+- `review` - Review a selected session update or the oldest unreviewed update with Codex.
+  - `abbey session review [file]`
+- `start` - Show Abbey session startup information.
+  - `abbey session`
 
 **Examples**
 
 ```text
 abbey session
+abbey session review
+abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 ```
 
 ## AI and knowledge

@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
-set -u
+#
+# Abbey Root Tool: abbey-session
+#
+# Purpose:
+#   Start Abbey work sessions and review completed session updates.
+#
+# Usage:
+#   abbey session
+#   abbey session review
+#
+set -euo pipefail
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
@@ -24,102 +34,331 @@ section() {
   echo "----------"
 }
 
+usage() {
+  cat <<'HELP'
+Abbey Session
+
+Usage:
+  abbey session            Show Abbey session startup information
+  abbey session review [file]
+                           Review a selected session update, or the oldest unreviewed one
+  abbey session help       Show this help
+
+The review command runs Codex in a read-only sandbox. It recommends
+documentation and planning changes but does not modify repository files.
+HELP
+}
+
 latest_journal() {
-  find "$ABBEY_ROOT/content/journal" -type f -name "*.md" 2>/dev/null | sort | tail -n 1
+  find "$ABBEY_ROOT/content/journal" \
+    -type f \
+    -name "*.md" \
+    2>/dev/null |
+    sort |
+    tail -n 1
+}
+
+unreviewed_session_updates() {
+  {
+    grep -l '^reviewed:[[:space:]]*false[[:space:]]*$' \
+      "$ABBEY_ROOT"/docs/session-updates/*.md \
+      2>/dev/null || true
+  } | sort
+}
+
+oldest_unreviewed_session() {
+  unreviewed_session_updates | head -n 1
 }
 
 pending_session_updates() {
-  find "$ABBEY_ROOT/docs/session-updates" -type f -name "*.md" 2>/dev/null | wc -l
+  local count
+
+  count="$(unreviewed_session_updates | wc -l)"
+  echo "${count//[[:space:]]/}"
 }
 
-echo "========================================"
-echo " Abbey Root Session"
-echo "========================================"
-echo
-echo "Date: $(date)"
-echo "Host: $(hostname)"
-echo "Repo: $ABBEY_ROOT"
+session_start() {
+  echo "========================================"
+  echo " Abbey Root Session"
+  echo "========================================"
+  echo
+  echo "Date: $(date)"
+  echo "Host: $(hostname)"
+  echo "Repo: $ABBEY_ROOT"
 
-section "Repository"
+  section "Repository"
 
-if git -C "$ABBEY_ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-  ok "Git repository detected"
-else
-  warn "Not a Git repository"
-  exit 1
-fi
+  if git -C "$ABBEY_ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    ok "Git repository detected"
+  else
+    warn "Not a Git repository"
+    exit 1
+  fi
 
-branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null || true)"
-if [[ -n "$branch" ]]; then
-  ok "Current branch: $branch"
-else
-  warn "Could not determine current branch"
-fi
+  local branch
+  branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null || true)"
 
-if [[ -z "$(git -C "$ABBEY_ROOT" status --porcelain)" ]]; then
-  ok "Working tree clean"
-else
-  warn "Working tree has uncommitted changes"
-fi
+  if [[ -n "$branch" ]]; then
+    ok "Current branch: $branch"
+  else
+    warn "Could not determine current branch"
+  fi
 
-if git -C "$ABBEY_ROOT" remote -v | grep -q .; then
-  ok "Git remote configured"
-else
-  warn "No Git remote configured"
-fi
+  if [[ -z "$(git -C "$ABBEY_ROOT" status --porcelain)" ]]; then
+    ok "Working tree clean"
+  else
+    warn "Working tree has uncommitted changes"
+  fi
 
-section "Planning"
+  if git -C "$ABBEY_ROOT" remote -v | grep -q .; then
+    ok "Git remote configured"
+  else
+    warn "No Git remote configured"
+  fi
 
-project_status="$ABBEY_ROOT/docs/planning/PROJECT_STATUS.md"
-next_file="$ABBEY_ROOT/docs/planning/NEXT.md"
-session_update_count="$(pending_session_updates)"
+  section "Planning"
 
-if [[ -f "$project_status" ]]; then
-  ok "Project status: docs/planning/PROJECT_STATUS.md"
-else
-  warn "Missing PROJECT_STATUS.md"
-fi
+  local project_status
+  local next_file
+  local session_update_count
 
-if [[ -f "$next_file" ]]; then
-  ok "Next tasks: docs/planning/NEXT.md"
-else
-  warn "Missing NEXT.md"
-fi
+  project_status="$ABBEY_ROOT/docs/planning/PROJECT_STATUS.md"
+  next_file="$ABBEY_ROOT/docs/planning/NEXT.md"
+  session_update_count="$(pending_session_updates)"
 
-if [[ "$session_update_count" -gt 0 ]]; then
-  ok "Pending session updates: $session_update_count"
-else
-  ok "Pending session updates: none"
-fi
+  if [[ -f "$project_status" ]]; then
+    ok "Project status: docs/planning/PROJECT_STATUS.md"
+  else
+    warn "Missing PROJECT_STATUS.md"
+  fi
 
-section "Journal"
+  if [[ -f "$next_file" ]]; then
+    ok "Next tasks: docs/planning/NEXT.md"
+  else
+    warn "Missing NEXT.md"
+  fi
 
-journal="$(latest_journal)"
+  if [[ "$session_update_count" -gt 0 ]]; then
+    info "Unreviewed session updates: $session_update_count"
+  else
+    ok "Unreviewed session updates: none"
+  fi
 
-if [[ -n "$journal" ]]; then
-  rel="${journal#$ABBEY_ROOT/}"
-  ok "Most recent journal: $rel"
-else
-  warn "No journal entries found"
-fi
+  section "Journal"
 
-section "Workflow"
+  local journal
+  journal="$(latest_journal)"
 
-echo "1. Review"
-echo "2. Define"
-echo "3. Build"
-echo "4. Validate"
-echo "5. Document"
-echo "6. Capture"
-echo "7. Commit"
-echo "8. Review"
+  if [[ -n "$journal" ]]; then
+    local relative_journal
+    relative_journal="${journal#$ABBEY_ROOT/}"
+    ok "Most recent journal: $relative_journal"
+  else
+    warn "No journal entries found"
+  fi
 
-section "Current Step"
+  section "Workflow"
 
-echo "Review docs/planning/PROJECT_STATUS.md"
-echo "Review docs/planning/NEXT.md"
-echo "Choose one focused session objective"
-echo "Define what done looks like"
+  echo "1. Review"
+  echo "2. Define"
+  echo "3. Build"
+  echo "4. Validate"
+  echo "5. Document"
+  echo "6. Capture"
+  echo "7. Commit"
+  echo "8. Review"
 
-echo
-echo "Tip: run 'abbey status' or 'abbey doctor' for deeper checks."
+  section "Current Step"
+
+  echo "Review docs/planning/PROJECT_STATUS.md"
+  echo "Review docs/planning/NEXT.md"
+  echo "Choose one focused session objective"
+  echo "Define what done looks like"
+
+  echo
+  echo "Tip: run 'abbey status' or 'abbey doctor' for deeper checks."
+}
+
+session_review() {
+  local requested_session="${1:-}"
+  local session_file
+  local relative_session
+
+  if ! command -v codex >/dev/null 2>&1; then
+    echo "ERROR Codex CLI is not available."
+    exit 1
+  fi
+
+  if [[ -n "$requested_session" ]]; then
+    if [[ "$requested_session" = /* ]]; then
+      session_file="$requested_session"
+    else
+      session_file="$ABBEY_ROOT/$requested_session"
+    fi
+
+    if [[ ! -f "$session_file" ]]; then
+      echo "ERROR Session update not found: $requested_session"
+      exit 1
+    fi
+  else
+    session_file="$(oldest_unreviewed_session)"
+  fi
+
+  echo "========================================"
+  echo " Abbey Session Review"
+  echo "========================================"
+  echo
+
+  if [[ -z "$session_file" ]]; then
+    ok "No unreviewed session updates found."
+    return 0
+  fi
+
+  relative_session="${session_file#$ABBEY_ROOT/}"
+
+  echo "Session: $relative_session"
+  echo "Mode:    read-only"
+  echo
+
+  {
+    cat <<EOF_PROMPT
+Perform a read-only Abbey Root session reconciliation review using only the
+repository content supplied below.
+
+Do not attempt to run shell commands, browse the web, use connectors, or inspect
+files that are not included in this prompt.
+
+Review this session update:
+
+$relative_session
+
+Compare it against the supplied authoritative planning documents.
+
+Report:
+
+1. Session-related completed outcomes not reflected in authoritative documentation.
+2. Session-related planning statements that are stale, contradictory, duplicated,
+   or obsolete.
+3. Session-related unfinished work that belongs in NEXT.md, BACKLOG.md,
+   ROADMAP.md, or IDEAS.md.
+4. Metadata or formatting problems in the selected session update.
+5. Specific recommended edits grouped by file.
+6. Authoritative files that need no session-related changes.
+7. Incidental repository drift noticed during review but not caused by or
+   required to reconcile this session.
+8. Whether the selected session will be ready to mark reviewed after only the
+   session-related recommendations are reconciled.
+
+Clearly separate session-related findings from incidental repository drift.
+Incidental drift must not prevent the selected session from being marked
+reviewed.
+
+Do not recommend changing metadata values unless the supplied evidence defines
+the expected value. When evidence is insufficient, label the item as needing
+verification rather than prescribing a change.
+
+Do not treat missing detail in a summary or command list as proof that an action
+did not occur. Identify it as a documentation inconsistency requiring
+verification.
+
+Preserve the distinction between ideas and committed work:
+
+- Keep speculative, optional, conditional, humorous, or exploratory future
+  possibilities in IDEAS.md.
+- Recommend BACKLOG.md only when the selected session clearly establishes the
+  work as accepted, intended, or required.
+- Recommend NEXT.md only when the selected session or current planning clearly
+  establishes the work as an immediate priority.
+- Do not promote an idea merely because it is concrete or actionable.
+
+Recommend the smallest authoritative changes necessary.
+
+Planning documents summarize sessions rather than reproducing them.
+
+Prefer concise additions over expanding planning documents with
+implementation details that already exist in the session update.
+
+Distinguish completing one implementation from completing a broader capability
+or milestone. Mark an existing task complete only when its scope clearly matches
+the demonstrated outcome. Otherwise recommend clarification or verification.
+
+In the final report, classify each supplied authoritative file exactly once as
+either:
+- requiring a session-related change; or
+- requiring no session-related change.
+
+Do not place the same file in both categories.
+
+Treat reviewed: true as meaning that completed outcomes and unfinished work
+have been reconciled into authoritative repository documentation. It does not
+mean every proposed future enhancement has been implemented.
+
+Return recommendations only. Do not apply changes.
+
+Repository evidence follows.
+
+============================================================
+SESSION UPDATE: $relative_session
+============================================================
+
+EOF_PROMPT
+
+    cat "$session_file"
+
+    for planning_file in \
+      docs/planning/PROJECT_STATUS.md \
+      docs/planning/NEXT.md \
+      docs/planning/BACKLOG.md \
+      docs/planning/ROADMAP.md \
+      docs/planning/IDEAS.md \
+      docs/reference/PLANNING_SCHEMA.md
+    do
+      echo
+      echo "============================================================"
+      echo "AUTHORITATIVE FILE: $planning_file"
+      echo "============================================================"
+      echo
+
+      if [[ -f "$ABBEY_ROOT/$planning_file" ]]; then
+        cat "$ABBEY_ROOT/$planning_file"
+      else
+        echo "FILE NOT FOUND"
+      fi
+    done
+  } |
+    codex exec \
+      --sandbox read-only \
+      --cd "$ABBEY_ROOT" \
+      --ephemeral \
+      --output-last-message /tmp/abbey-session-review.txt \
+      - >/tmp/abbey-session-review.log 2>&1 || {
+        cat /tmp/abbey-session-review.log >&2
+        return 1
+      }
+
+  cat /tmp/abbey-session-review.txt
+}
+
+command="${1:-start}"
+
+case "$command" in
+  start)
+    session_start
+    ;;
+
+  review)
+    shift
+    session_review "$@"
+    ;;
+
+  help|-h|--help)
+    usage
+    ;;
+
+  *)
+    echo "Unknown session command: $command"
+    echo
+    usage
+    exit 1
+    ;;
+esac
