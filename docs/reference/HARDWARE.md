@@ -13,6 +13,9 @@ The purpose of this inventory is to document the major infrastructure components
 | MacBook Pro (M3 Pro) | Primary workstation | In Service |
 | Dell Laptop (Service Tag: ST-GB24CL3) | Proxmox virtualization host | In Service |
 | Gigabyte G6-KF (2024) Laptop | AI Worker host | In Service |
+| TRENDnet TEG-S380 8-Port 2.5 Gb Switch | Primary lab network switch | In Service |
+| UGREEN USB 3.0 2.5 Gb Ethernet Adapter | AI Worker wired networking | In Service |
+| Raspberry Pi 5 (4 GB) - edge01 | Edge infrastructure node | Ordered |
 | SanDisk Extreme Portable SSD (2 TB) | Proxmox backup storage | In Service |
 | Anker USB-C Hub | USB expansion for Proxmox | In Service |
 | Belkin 12-Outlet Surge Protector | Power protection | In Service |
@@ -81,9 +84,9 @@ Ubuntu Linux
 ## Network
 
 - Primary connection: Wired Ethernet
-- USB-C Realtek RTL8156 2.5 Gb Ethernet adapter
+- UGREEN USB 3.0 2.5 Gb Ethernet adapter
+- Connected to the TRENDnet TEG-S380 2.5 Gb switch
 - DHCP reservation managed by the router
-- Currently negotiating at 1 Gb/s with the existing network infrastructure
 - Wi-Fi retained as an emergency fallback but disabled for normal operation
 
 ## Docker Services
@@ -95,11 +98,63 @@ Ubuntu Linux
 
 Originally deployed using Wi-Fi.
 
-Migrated to wired Ethernet on 2026-06-29 to improve reliability, reduce latency, and provide a stable platform for AI services and future website generation workflows.
+Migrated to wired Ethernet to improve reliability, reduce latency, and provide a stable platform for AI services and future website generation workflows.
 
-The migration preserved the existing DHCP reservation and required a routing adjustment so local LAN traffic preferred the wired interface when both Wi-Fi and Ethernet were present.
+---
 
-Future network upgrades may allow the adapter to operate at its full 2.5 Gb/s capability.
+# TRENDnet TEG-S380 8-Port 2.5 Gb Switch
+
+## Role
+
+Primary network switch for the Abbey Root lab.
+
+## Responsibilities
+
+- Multi-gigabit connectivity
+- Interconnect lab infrastructure
+- Foundation for future network expansion
+- Low-latency communication between infrastructure services
+
+## Specifications
+
+- 8 × 2.5GBASE-T ports
+- Fanless design
+- 25 Gbps switching capacity
+
+## Connected Systems
+
+- Proxmox host
+- AI Worker
+- Primary workstation (when docked)
+- Future edge infrastructure
+- Additional lab systems
+
+## Notes
+
+Installed as part of the Abbey Root network refresh to provide reliable multi-gigabit networking and support future infrastructure growth.
+
+Status: In Service
+
+---
+
+# UGREEN USB 3.0 2.5 Gb Ethernet Adapter
+
+## Role
+
+Primary wired network interface for the AI Worker.
+
+## Responsibilities
+
+- Stable wired networking
+- 2.5 Gb Ethernet connectivity
+- Primary interface for AI services
+- Docker networking
+
+## Notes
+
+Installed to replace Wi-Fi as the primary network connection for the AI Worker.
+
+Status: In Service
 
 ---
 
@@ -126,7 +181,7 @@ Dedicated Proxmox backup storage.
 
 ## Notes
 
-- Mounted using UUID via /etc/fstab
+- Mounted using UUID via `/etc/fstab`
 - Dedicated exclusively to Abbey Root
 - Used as the primary Proxmox backup repository
 
@@ -177,27 +232,53 @@ Primary power distribution and surge protection for the Abbey Root lab.
 Status: In Service
 
 ---
----
 
 # Pending Hardware
 
-## Plugable USB-C 2.5 Gb Ethernet Adapter
+## Raspberry Pi 5 (4 GB) - edge01
 
 ### Status
 
-Ordered (2026-06-28)
+Ordered (2026-07-14)
 
-### Planned Purpose
+### Planned Hostname
 
-Provide a second wired network interface for ai-worker01.
+`edge01`
 
-### Planned Uses
+### Planned Role
 
-- Future dedicated storage network
-- Docker networking experiments
-- Network isolation
-- Lab expansion
-- High-speed file transfers
+Edge Infrastructure Node
+
+### Initial Responsibilities
+
+- Local DNS
+- Tailscale
+- SSH
+- Abbey infrastructure experimentation
+- ARM Linux learning platform
+
+### Future Responsibilities
+
+- Infrastructure services
+- Network monitoring
+- NTP
+- Environmental monitoring
+- Additional lightweight infrastructure services
+
+### Notes
+
+`edge01` will be the first physical system commissioned after the Abbey Root platform architecture was established.
+
+Unlike earlier lab systems, it will be integrated into Abbey using the project's current standards for:
+
+- Documentation
+- Inventory management
+- Session workflow
+- Architecture
+- Validation
+- Automation
+
+The system will initially boot from the supplied microSD card. Migration to NVMe storage will be evaluated after commissioning and integration into the lab.
 
 ---
 
@@ -219,6 +300,8 @@ Improve cable management and provide short patch cables throughout the Abbey Roo
 - Future lab hardware
 
 These items will move into their permanent hardware sections once installed and placed into service.
+
+---
 
 # Future Hardware Roadmap
 

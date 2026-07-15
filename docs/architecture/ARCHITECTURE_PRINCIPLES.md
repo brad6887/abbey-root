@@ -32,6 +32,12 @@ Frameworks provide reusable structure and orchestration.
 
 Implementations provide project-specific business logic.
 
+### Design Around Stable Responsibilities
+
+Define architecture in terms of stable platform responsibilities rather than specific hardware or software implementations.
+
+Hardware, operating systems, and services may evolve over time while the platform's mission remains consistent.
+
 ### Documentation Is Part of the Workflow
 
 Documentation is produced alongside engineering work, not after it.
