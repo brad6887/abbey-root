@@ -108,6 +108,8 @@ abbey session [command]
 
 **Subcommands**
 
+- `context` - Generate an upload-ready session context file.
+  - `abbey session context [--stdout | --output FILE]`
 - `review` - Review a selected session update or the oldest unreviewed update with Codex.
   - `abbey session review [file]`
 - `start` - Show Abbey session startup information.
@@ -117,6 +119,7 @@ abbey session [command]
 
 ```text
 abbey session
+abbey session context
 abbey session review
 abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 ```

@@ -4,3 +4,6 @@ website/
 # Abbey generated files
 .abbey/
 logs/
+
+# Generated upload-ready session context
+working/session-context/

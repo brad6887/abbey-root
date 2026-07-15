@@ -7,6 +7,7 @@
 #
 # Usage:
 #   abbey session
+#   abbey session context
 #   abbey session review
 #
 set -euo pipefail
@@ -40,9 +41,18 @@ Abbey Session
 
 Usage:
   abbey session            Show Abbey session startup information
+  abbey session context [options]
+                           Generate an upload-ready session context file
   abbey session review [file]
                            Review a selected session update, or the oldest unreviewed one
   abbey session help       Show this help
+
+Context options:
+  --stdout                 Write context to standard output
+  --output FILE            Write context to a selected file
+
+The context command is read-only and failure-tolerant. Generated default files
+are written under working/session-context/.
 
 The review command runs Codex in a read-only sandbox. It recommends
 documentation and planning changes but does not modify repository files.
@@ -178,6 +188,235 @@ session_start() {
   echo
   echo "Tip: run 'abbey status' or 'abbey doctor' for deeper checks."
 }
+
+
+latest_session_update() {
+  find "$ABBEY_ROOT/docs/session-updates" \
+    -maxdepth 1 \
+    -type f \
+    -name "*.md" \
+    2>/dev/null |
+    sort |
+    tail -n 1
+}
+
+context_section() {
+  echo
+  echo "## $1"
+  echo
+}
+
+context_file() {
+  local title="$1"
+  local relative_file="$2"
+  local absolute_file="$ABBEY_ROOT/$relative_file"
+
+  context_section "$title"
+
+  echo "Source: \`$relative_file\`"
+  echo
+
+  if [[ -f "$absolute_file" ]]; then
+    cat "$absolute_file"
+  else
+    echo "_File not found._"
+  fi
+}
+
+context_command() {
+  local title="$1"
+  shift
+
+  context_section "$title"
+
+  echo '```text'
+
+  if "$@" 2>&1; then
+    true
+  else
+    local command_status=$?
+    echo
+    echo "Command exit status: $command_status."
+  fi
+
+  echo '```'
+}
+
+session_context_document() {
+  local generated
+  local branch
+  local commit
+  local origin
+  local recent_session
+  local recent_journal
+
+  generated="$(date --iso-8601=seconds)"
+  branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null || true)"
+  commit="$(git -C "$ABBEY_ROOT" log -1 --format='%H %s' 2>/dev/null || true)"
+  origin="$(git -C "$ABBEY_ROOT" remote get-url origin 2>/dev/null || true)"
+  recent_session="$(latest_session_update)"
+  recent_journal="$(latest_journal)"
+
+  cat <<EOF
+# Abbey Root Session Context
+
+> Generated session-start snapshot. This file is not an authoritative project
+> document and should not be edited as a source of truth.
+
+- Generated: $generated
+- Host: $(hostname)
+- Repository: $ABBEY_ROOT
+- Branch: ${branch:-unknown}
+- Commit: ${commit:-unknown}
+- Origin: ${origin:-not configured}
+
+## Intended Use
+
+This file contains the repository context normally collected at the beginning
+of an Abbey Root work session. Upload the file as the initial project context,
+then define one focused objective and its definition of done.
+
+EOF
+
+  context_command "Repository Status" \
+    git -C "$ABBEY_ROOT" status
+
+  context_command "Changed Files" \
+    git -C "$ABBEY_ROOT" diff --stat
+
+  context_command "Recent Commits" \
+    git -C "$ABBEY_ROOT" log --oneline -10
+
+  context_file "Project Status" \
+    "docs/planning/PROJECT_STATUS.md"
+
+  context_file "Next" \
+    "docs/planning/NEXT.md"
+
+  context_file "Backlog" \
+    "docs/planning/BACKLOG.md"
+
+  context_file "Roadmap" \
+    "docs/planning/ROADMAP.md"
+
+  context_file "Ideas" \
+    "docs/planning/IDEAS.md"
+
+  context_section "Most Recent Session Update"
+
+  if [[ -n "$recent_session" ]]; then
+    local relative_session
+    relative_session="${recent_session#$ABBEY_ROOT/}"
+    echo "Source: \`$relative_session\`"
+    echo
+    cat "$recent_session"
+  else
+    echo "_No session update found._"
+  fi
+
+  context_section "Most Recent Journal Entry"
+
+  if [[ -n "$recent_journal" ]]; then
+    local relative_journal
+    relative_journal="${recent_journal#$ABBEY_ROOT/}"
+    echo "Source: \`$relative_journal\`"
+    echo
+    cat "$recent_journal"
+  else
+    echo "_No journal entry found._"
+  fi
+
+  context_command "Abbey Doctor" \
+    "$ABBEY_ROOT/tools/bin/abbey-doctor"
+
+  context_command "Abbey Version" \
+    "$ABBEY_ROOT/tools/bin/abbey-version"
+}
+
+session_context() {
+  local output_file=""
+  local stdout=false
+  local context_dir="$ABBEY_ROOT/working/session-context"
+  local timestamp
+  local temporary_file
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --stdout)
+        stdout=true
+        shift
+        ;;
+
+      --output)
+        if [[ $# -lt 2 ]]; then
+          echo "ERROR --output requires a file."
+          return 1
+        fi
+
+        output_file="$2"
+        shift 2
+        ;;
+
+      help|-h|--help)
+        cat <<'HELP'
+Abbey Session Context
+
+Usage:
+  abbey session context
+  abbey session context --stdout
+  abbey session context --output FILE
+
+Generate a read-only, upload-ready Markdown snapshot containing repository,
+planning, recent session, journal, and Abbey health context.
+
+Default output:
+  working/session-context/<timestamp>-abbey-root-context.md
+HELP
+        return 0
+        ;;
+
+      *)
+        echo "ERROR Unknown session context option: $1"
+        return 1
+        ;;
+    esac
+  done
+
+  if [[ "$stdout" == true && -n "$output_file" ]]; then
+    echo "ERROR --stdout and --output cannot be used together."
+    return 1
+  fi
+
+  if ! git -C "$ABBEY_ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "ERROR Abbey Root is not a Git repository."
+    return 1
+  fi
+
+  if [[ "$stdout" == true ]]; then
+    session_context_document
+    return 0
+  fi
+
+  if [[ -z "$output_file" ]]; then
+    timestamp="$(date '+%Y-%m-%d-%H%M%S')"
+    output_file="$context_dir/${timestamp}-abbey-root-context.md"
+  elif [[ "$output_file" != /* ]]; then
+    output_file="$PWD/$output_file"
+  fi
+
+  mkdir -p "$(dirname "$output_file")"
+
+  temporary_file="$(mktemp)"
+  trap 'rm -f "$temporary_file"' RETURN
+
+  session_context_document > "$temporary_file"
+  mv "$temporary_file" "$output_file"
+  chmod 0644 "$output_file"
+
+  echo "Session context written to:"
+  echo "$output_file"
+}
+
 
 session_review() {
   local requested_session="${1:-}"
@@ -344,6 +583,11 @@ command="${1:-start}"
 case "$command" in
   start)
     session_start
+    ;;
+
+  context)
+    shift
+    session_context "$@"
     ;;
 
   review)
