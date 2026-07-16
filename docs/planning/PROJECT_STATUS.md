@@ -149,6 +149,7 @@ Completed
 - `abbey version`
 - `abbey journal`
 - `abbey ai`
+- `abbey site publish [--dry-run]`
 - Metadata-driven CLI help
 - Generated CLI reference
 - `abbey plant validate <slug>`
@@ -179,6 +180,8 @@ Completed
 - Dynamic routing.
 - Previous/next navigation.
 - Documentation publishing workflow.
+- Production Astro site published to GitHub Pages at bradcooke.com through `abbey site publish`.
+- Museum of Dumb Ideas established with OmeletYouFinish.com as its first completed exhibit.
 - Canonical plant source-to-publication workflow.
 - Doctor Robert generated into the Astro site as the Plant Model reference implementation.
 - Helter Skelter generated into the Astro site as the second validated Plant Model profile.
@@ -189,7 +192,7 @@ Completed
 - Publish documentation journal entries.
 - Expand technical content.
 - Improve reusable components.
-- Prepare production deployment of the Abbey Root Astro site to GitHub Pages.
+- Continue publishing and refining the live BradCooke.com site.
 
 ## Current Capabilities
 - Orchid Rescue plant collection
@@ -254,7 +257,7 @@ Completed
 
 # Recent Accomplishments
 
-- Published a temporary BradCooke.com landing page from the existing GitHub Pages repository while the Abbey Root production publishing workflow remains under development.
+- Published the Abbey Root Astro site to GitHub Pages at bradcooke.com using the guarded `abbey site publish` workflow.
 - Established the Abbey Framework.
 - Defined Project and CLI standards.
 - Introduced metadata-driven CLI architecture.
@@ -273,7 +276,7 @@ Completed
 - Reducing manually maintained documentation.
 - Secure remote access.
 - AI project awareness.
-- BradCooke.com publishing.
+- Reducing publish-preview noise and adding automatic live-site verification.
 
 ---
 

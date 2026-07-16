@@ -75,6 +75,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Create `abbey-session`.
 - [x] Create `abbey-journal`.
 - [x] Create `abbey-version`.
+- [x] Create `abbey site publish` with guarded preview and `--dry-run` support.
 - [x] Create `abbey plant validate`.
 
 ### Toolkit Evolution
@@ -89,6 +90,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Expand `abbey site` commands.
 - [ ] Add `abbey site preview`.
 - [ ] Add `abbey site deploy-check`.
+- [ ] Reduce noise in `abbey site publish` previews.
+- [ ] Add live-site verification to `abbey site publish`.
 - [ ] Add project metrics to `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Add network health checks to `abbey-doctor`.
@@ -251,8 +254,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Remove remaining `build-website.sh` references.
 - [ ] Create BradCooke.com publishing runbook.
 - [ ] Publish the Abbey Root Operations Manual.
-- [ ] Configure production deployment of the Abbey Root Astro site to GitHub Pages.
-- [ ] Transfer or configure `bradcooke.com` for the Abbey Root Astro deployment.
+- [x] Configure production deployment of the Abbey Root Astro site to GitHub Pages.
+- [x] Transfer or configure `bradcooke.com` for the Abbey Root Astro deployment.
 - [x] Create dynamic journal detail pages.
 - [ ] Group journal entries by year.
 - [x] Add previous/next journal navigation.

@@ -3,8 +3,8 @@ date: 2026-07-11
 title: Museum of Dumb Ideas Foundation
 status: complete
 session: standard
-journal: 2026-07-11-museum-of-dumb-ideas-foundation
-reviewed: false
+journal:
+reviewed: true
 ---
 
 # Session Update

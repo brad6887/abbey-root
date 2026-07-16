@@ -32,7 +32,7 @@ Use real website development to validate the framework, identify friction points
 - Publish additional technical content.
 - Improve reusable Astro components.
 - Continue refining the overall site design.
-- Prepare the site for public launch.
+- Continue publishing and refining the live site.
 - Continue documenting Abbey Root and Power Infrastructure.
 - Improve reusable Astro components only where the plant implementation exposes a need.
 - Continue documenting Abbey Root and Power Infrastructure.

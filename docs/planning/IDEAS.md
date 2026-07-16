@@ -2,11 +2,11 @@
 
 ## Museum of Dumb Ideas
 
-A future section of BradCooke.com dedicated to humorous projects, questionable decisions, abandoned ideas, and stories that are too good not to tell.
+An established section of BradCooke.com dedicated to humorous projects, questionable decisions, abandoned ideas, and stories that are too good not to tell.
 
 The goal isn't to celebrate failure—it's to document the creative process and remind people that not every idea has to become a serious project. Some ideas are funny. Some are terrible. Occasionally one accidentally becomes something worthwhile.
 
-The Museum should have the feel of an actual museum, with exhibits, artifact descriptions, curator's notes, and a healthy dose of self-deprecating humor.
+The Museum has the feel of an actual museum, with exhibits, artifact descriptions, curator's notes, and a healthy dose of self-deprecating humor.
 
 Possible future wings:
 
@@ -16,17 +16,17 @@ Possible future wings:
 - Questionable Experiments
 - Retired Exhibits
 
-Potential exhibits:
+Current and potential exhibits:
 
 ### OmeletYouFinish.com
 
 Purchased the domain after the idea of creating an omelet-themed travel blog. Fortunately, common sense returned before development began.
 
-Current plan:
-- Small landing page with the "Imma let you finish..." joke.
-- Explain the origin of the domain.
-- Link visitors to BradCooke.com.
-- Eventually become an exhibit in the Museum.
+Current status:
+
+- Completed as the Museum's first exhibit.
+- Published at `https://bradcooke.com/museum/omelet-you-finish/`.
+- `https://omeletyoufinish.com/` permanently redirects to the exhibit.
 
 ### Bread Pitt
 
