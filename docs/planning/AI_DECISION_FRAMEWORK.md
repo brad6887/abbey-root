@@ -406,6 +406,8 @@ Structured Personal Projects
 
 ⸻
 
+Not all planning documents are authoritative in the same way. Some represent project state (PROJECT_STATUS.md, BACKLOG.md, ROADMAP.md), while others represent current human intent (NEXT.md). Decision definitions should explicitly choose whether human intent is part of the evidence for that decision.
+
 Guiding Principle
 
 AI should produce reproducible engineering evidence, not invisible authority.
