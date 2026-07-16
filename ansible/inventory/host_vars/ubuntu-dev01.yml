@@ -75,25 +75,3 @@ homepage_services:
         href: https://chatgpt.com
         description: AI Assistant
         status: active
-
-  - group: Planned Services
-    services:
-      - name: Grafana
-        description: Metrics
-        status: planned
-
-      - name: Prometheus
-        description: Monitoring
-        status: planned
-
-      - name: Watchtower
-        description: Docker Updates
-        status: planned
-
-      - name: Immich
-        description: Photos
-        status: planned
-
-      - name: n8n
-        description: Automation
-        status: planned

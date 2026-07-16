@@ -61,6 +61,14 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Evaluate VPN, Tailscale, and Cloudflare Tunnel for remote connectivity.
 - [ ] Design and implement secure remote access to the lab.
 - [ ] Expand `abbey lab` with additional infrastructure diagnostics.
+- [ ] Review and refine Ansible playbook and role architecture.
+  - Preserve `site.yml` as the full convergence entry point.
+  - Add focused playbooks for routine service deployments.
+  - Define a true universal host baseline.
+  - Split the current `common` role into packages, Git configuration, and Abbey shell concerns.
+  - Apply roles according to host purpose rather than targeting every host uniformly.
+  - Review time synchronization policy for Debian appliances.
+  - Validate check-mode behavior for package installation followed by service management.
 
 ---
 

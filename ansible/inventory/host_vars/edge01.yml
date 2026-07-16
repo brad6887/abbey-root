@@ -1,0 +1,20 @@
+---
+host_description: Internal DNS and edge services
+primary_ip: 192.168.1.221
+homepage_icon: raspberry-pi.png
+
+server_purpose:
+  - Internal DNS
+  - Foundational network services
+  - Edge infrastructure
+
+docker_host: false
+homepage_show_server: true
+
+homepage_services:
+  - group: Infrastructure
+    services:
+      - name: Technitium DNS
+        href: http://192.168.1.221:5380
+        description: Internal DNS server
+        ping: 192.168.1.221
