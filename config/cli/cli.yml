@@ -89,6 +89,14 @@ commands:
     examples:
       - abbey end
 
+  review:
+    category: workflow
+    description: Review the current Abbey session before commit.
+    usage: abbey review
+    hidden: false
+    examples:
+      - abbey review
+
   journal:
     category: workflow
     description: Create or open an Abbey Root journal entry.

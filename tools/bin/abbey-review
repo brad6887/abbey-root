@@ -1,0 +1,270 @@
+#!/usr/bin/env bash
+# COMMAND: review
+# DESCRIPTION: Review the current Abbey session before commit
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+
+ok() {
+  echo "OK   $*"
+}
+
+warn() {
+  echo "WARN $*"
+}
+
+info() {
+  echo "INFO $*"
+}
+
+section() {
+  echo
+  echo "$1"
+  printf '%*s\n' "${#1}" '' | tr ' ' '-'
+}
+
+usage() {
+  cat <<'HELP'
+Abbey Review
+
+Usage:
+  abbey review
+  abbey review help
+
+Review the current working session before commit.
+
+The command is read-only. It summarizes repository changes, checks for session
+documentation, recommends planning documents to inspect, suggests a commit
+message, and identifies the next Abbey workflow step.
+HELP
+}
+
+if [[ "${1:-}" =~ ^(help|-h|--help)$ ]]; then
+  usage
+  exit 0
+fi
+
+if [[ $# -gt 0 ]]; then
+  echo "ERROR Unknown review option: $1"
+  echo
+  usage
+  exit 1
+fi
+
+echo "========================================"
+echo " Abbey Review"
+echo "========================================"
+echo
+echo "Date: $(date)"
+echo "Host: $(hostname)"
+echo "Repo: $ABBEY_ROOT"
+
+section "Repository"
+
+if ! git -C "$ABBEY_ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "FAIL Git repository not detected: $ABBEY_ROOT"
+  exit 1
+fi
+
+ok "Git repository detected"
+
+branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null || true)"
+
+if [[ -n "$branch" ]]; then
+  ok "Current branch: $branch"
+else
+  warn "Unable to determine current branch"
+fi
+
+status_output="$(git -C "$ABBEY_ROOT" status --porcelain)"
+
+staged_count=0
+unstaged_count=0
+untracked_count=0
+
+while IFS= read -r line; do
+  [[ -n "$line" ]] || continue
+
+  index_status="${line:0:1}"
+  worktree_status="${line:1:1}"
+
+  if [[ "$index_status" == "?" && "$worktree_status" == "?" ]]; then
+    untracked_count=$((untracked_count + 1))
+    continue
+  fi
+
+  if [[ "$index_status" != " " ]]; then
+    staged_count=$((staged_count + 1))
+  fi
+
+  if [[ "$worktree_status" != " " ]]; then
+    unstaged_count=$((unstaged_count + 1))
+  fi
+done <<<"$status_output"
+
+if [[ -z "$status_output" ]]; then
+  ok "Working tree clean"
+else
+  info "Staged changes:   $staged_count"
+  info "Unstaged changes: $unstaged_count"
+  info "Untracked files:  $untracked_count"
+fi
+
+section "Changed Files"
+
+if [[ -z "$status_output" ]]; then
+  ok "No changed files"
+else
+  git -C "$ABBEY_ROOT" status --short
+fi
+
+changed_files="$(
+  {
+    git -C "$ABBEY_ROOT" diff --name-only
+    git -C "$ABBEY_ROOT" diff --cached --name-only
+    git -C "$ABBEY_ROOT" ls-files --others --exclude-standard
+  } |
+    sed '/^[[:space:]]*$/d' |
+    sort -u
+)"
+
+section "Session Documentation"
+
+session_updates="$(
+  grep -E '^docs/session-updates/[^/]+\.md$' <<<"$changed_files" || true
+)"
+
+journal_entries="$(
+  grep -E '^content/journal/.+\.md$' <<<"$changed_files" || true
+)"
+
+if [[ -n "$session_updates" ]]; then
+  ok "Session update present"
+  sed 's/^/     /' <<<"$session_updates"
+else
+  warn "No session update found in current changes"
+fi
+
+if [[ -n "$journal_entries" ]]; then
+  ok "Journal entry present"
+  sed 's/^/     /' <<<"$journal_entries"
+else
+  warn "No journal entry found in current changes"
+fi
+
+section "Planning Review"
+
+planning_recommended=false
+review_backlog=false
+review_project_status=false
+
+if grep -Eq '^(tools/|config/cli/|scripts/)' <<<"$changed_files"; then
+  review_backlog=true
+  review_project_status=true
+fi
+
+if grep -Eq '^(ansible/|inventory/|infrastructure/)' <<<"$changed_files"; then
+  review_backlog=true
+  review_project_status=true
+fi
+
+if grep -Eq '^(site/|content/|working/plants/)' <<<"$changed_files"; then
+  review_backlog=true
+fi
+
+if [[ "$review_backlog" == true ]]; then
+  info "Review suggested: docs/planning/BACKLOG.md"
+  planning_recommended=true
+fi
+
+if [[ "$review_project_status" == true ]]; then
+  info "Consider reviewing: docs/planning/PROJECT_STATUS.md"
+  planning_recommended=true
+fi
+
+if grep -Eq '^docs/planning/' <<<"$changed_files"; then
+  ok "Planning documents are included in current changes"
+  planning_recommended=true
+fi
+
+if [[ "$planning_recommended" == false ]]; then
+  ok "No planning review indicated by changed paths"
+fi
+
+echo
+echo "NEXT.md remains a human-directed priority document."
+echo "This command does not recommend changing it solely from repository activity."
+
+section "Work Summary"
+
+if [[ -z "$changed_files" ]]; then
+  echo "No uncommitted work detected."
+else
+  tools_count="$(grep -Ec '^(tools/|scripts/|config/cli/)' <<<"$changed_files" || true)"
+  docs_count="$(grep -Ec '^(docs/|content/)' <<<"$changed_files" || true)"
+  site_count="$(grep -Ec '^site/' <<<"$changed_files" || true)"
+  infra_count="$(grep -Ec '^(ansible/|inventory/|infrastructure/)' <<<"$changed_files" || true)"
+  other_count="$(grep -Evc '^(tools/|scripts/|config/cli/|docs/|content/|site/|ansible/|inventory/|infrastructure/)' <<<"$changed_files" || true)"
+
+  (( tools_count > 0 )) && echo "- Toolkit or CLI changes: $tools_count file(s)"
+  (( docs_count > 0 )) && echo "- Documentation or content changes: $docs_count file(s)"
+  (( site_count > 0 )) && echo "- Website changes: $site_count file(s)"
+  (( infra_count > 0 )) && echo "- Infrastructure changes: $infra_count file(s)"
+  (( other_count > 0 )) && echo "- Other changes: $other_count file(s)"
+fi
+
+section "Suggested Commit"
+
+if grep -qx 'tools/bin/abbey-review' <<<"$changed_files"; then
+  echo "Add initial Abbey review workflow"
+elif grep -Eq '^(tools/|scripts/|config/cli/)' <<<"$changed_files"; then
+  echo "Update Abbey developer toolkit"
+elif grep -Eq '^(ansible/|inventory/|infrastructure/)' <<<"$changed_files"; then
+  echo "Update Abbey infrastructure configuration"
+elif grep -Eq '^site/' <<<"$changed_files"; then
+  echo "Update BradCooke.com"
+elif [[ -n "$changed_files" ]]; then
+  echo "Update Abbey Root session work"
+else
+  echo "No commit needed"
+fi
+
+section "Next Abbey Step"
+
+if [[ -z "$status_output" ]]; then
+  echo "Working tree is clean."
+  echo
+  echo "Run:"
+  echo "    abbey end"
+elif (( unstaged_count > 0 || untracked_count > 0 )); then
+  echo "Validate the current changes."
+  echo
+  echo "Suggested checks:"
+  echo "    bash -n tools/bin/abbey tools/bin/abbey-review"
+  echo "    git diff --check"
+  echo "    abbey help"
+  echo
+  if [[ -n "$session_updates" && -n "$journal_entries" ]]; then
+    echo "After validation, stage the completed changes."
+  else
+    echo "After validation, document and capture the session."
+  fi
+elif [[ -z "$session_updates" || -z "$journal_entries" ]]; then
+  echo "Document and capture the session."
+  echo
+  echo "Create the missing session update or journal entry, then run:"
+  echo "    abbey review"
+elif (( staged_count > 0 )); then
+  echo "Review the staged diff and commit the session."
+  echo
+  echo "Suggested checks:"
+  echo "    git diff --cached --check"
+  echo "    git diff --cached"
+  echo
+  echo "After committing:"
+  echo "    abbey end"
+else
+  echo "Continue the Abbey session workflow."
+fi

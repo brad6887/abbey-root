@@ -110,7 +110,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Verify Internet connectivity.
 - [ ] Detect missing or replaced network interfaces.
 - [ ] Evaluate shared validation helpers after additional model validators exist.
-- [ ] Design `abbey review` to summarize staged changes, validate session completeness, suggest a commit message, and recommend the next workflow step.
+- [x] Design `abbey review` to summarize staged changes, validate session completeness, suggest a commit message, and recommend the next workflow step.
 
 ### Plant Toolkit
 
@@ -138,7 +138,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Display planning summaries during `abbey session`.
 - [x] Create `abbey end`.
 - [ ] Evaluate future `abbey end` enhancements through practical usage.
-- [ ] Create `abbey-review`.
+- [x] Create `abbey-review`.
 - [ ] Create `abbey session-update`.
 - [ ] Associate journal entries with active Abbey sessions.
 

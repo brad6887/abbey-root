@@ -39,6 +39,11 @@ case "$command" in
     "$ABBEY_ROOT/tools/bin/abbey-end" "$@"
     ;;
 
+  review)
+    shift
+    "$ABBEY_ROOT/tools/bin/abbey-review" "$@"
+    ;;
+
   knowledge)
     shift
     "$ABBEY_ROOT/tools/bin/abbey-knowledge" "$@"

@@ -75,7 +75,7 @@ Completed
 # Immediate Priorities
 
 - Design `abbey init`.
-- Complete `abbey-review`.
+- Refine `abbey review` through practical usage.
 - Expand onboarding documentation.
 - Continue CLI standardization.
 - Evaluate shared CLI libraries.
@@ -146,6 +146,7 @@ Completed
 - `abbey status`
 - `abbey session`
 - `abbey end`
+- `abbey review`
 - `abbey version`
 - `abbey journal`
 - `abbey ai`
