@@ -1,0 +1,15 @@
+{
+  "name": "Time Saver",
+  "description": "Choose the project improvement most likely to save Brad the most recurring time.",
+  "model": "gpt-oss:20b",
+  "documents": [
+    "docs/planning/PROJECT_STATUS.md",
+    "docs/planning/NEXT.md",
+    "docs/planning/BACKLOG.md",
+    "docs/planning/ROADMAP.md"
+  ],
+  "options": {
+    "temperature": 0,
+    "num_ctx": 32768
+  }
+}

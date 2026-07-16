@@ -1,0 +1,16 @@
+{
+  "name": "Next Project",
+  "description": "Recommend the single project or command that should be worked on next.",
+  "category": "planning",
+  "model": "gpt-oss:20b",
+  "documents": [
+    "docs/planning/PROJECT_STATUS.md",
+    "docs/planning/NEXT.md",
+    "docs/planning/BACKLOG.md",
+    "docs/planning/ROADMAP.md"
+  ],
+  "options": {
+    "temperature": 0,
+    "num_ctx": 32768
+  }
+}

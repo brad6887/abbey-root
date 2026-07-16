@@ -12,6 +12,9 @@
 #   abbey ai check
 #   abbey ai models
 #   abbey ai ask <prompt>
+#   abbey ai decide [--model MODEL] <decision>
+#   abbey ai history
+#   abbey ai compare <decision>
 #   abbey ai rebuild
 #
 set -euo pipefail
@@ -32,8 +35,13 @@ Usage:
   abbey ai context         Show current knowledge context
   abbey ai open            Print Open WebUI URL
   abbey ai check           Check Open WebUI connectivity
-  abbey ai models          List available Open WebUI models
+  abbey ai models          List available Ollama models
   abbey ai ask [--context brief|next|website|full] <prompt>
+  abbey ai decide [--model MODEL] <decision>
+                           Run a structured project decision
+  abbey ai history         Show recent structured decision results
+  abbey ai compare <decision>
+                           Compare the latest result from each model
   abbey ai rebuild         Rebuild knowledge context
   abbey ai help            Show this help
 
@@ -106,42 +114,67 @@ PYJSON
   fi
 }
 
+
 ai_models() {
-  if [[ -z "${OPEN_WEBUI_API_KEY:-}" ]]; then
-    echo "Missing OPEN_WEBUI_API_KEY."
-    echo "Add it to: $ABBEY_ROOT/.abbey/config.conf"
-    exit 1
-  fi
+  echo "Abbey AI Models"
+  echo
+  echo "Ollama: $OLLAMA_URL"
+  echo
 
-  curl -fsS "$OPEN_WEBUI_URL/api/models" \
-    -H "Authorization: Bearer $OPEN_WEBUI_API_KEY" \
-    > /tmp/abbey-openwebui-models.json
-
-  python3 - <<'PYJSON'
+  python3 - "$OLLAMA_URL" <<'PYJSON'
 import json
-from pathlib import Path
+import sys
+import urllib.error
+import urllib.request
 
-data = json.loads(Path("/tmp/abbey-openwebui-models.json").read_text())
-models = data.get("data", data if isinstance(data, list) else [])
+ollama_url = sys.argv[1]
 
-print("Open WebUI Models")
-print()
+try:
+    with urllib.request.urlopen(
+        f"{ollama_url.rstrip('/')}/api/tags",
+        timeout=15,
+    ) as response:
+        data = json.loads(response.read().decode("utf-8"))
+except urllib.error.HTTPError as exc:
+    print(f"HTTP error: {exc.code}", file=sys.stderr)
+    sys.exit(1)
+except Exception as exc:
+    print(f"Ollama request failed: {exc}", file=sys.stderr)
+    sys.exit(1)
+
+models = data.get("models", [])
 
 if not models:
-    print("No models returned.")
-else:
-    for model in models:
-        if isinstance(model, dict):
-            model_id = model.get("id") or model.get("name") or "unknown"
-            owned_by = model.get("owned_by")
-            if owned_by:
-                print(f"- {model_id} ({owned_by})")
-            else:
-                print(f"- {model_id}")
-        else:
-            print(f"- {model}")
+    print("No Ollama models found.")
+    sys.exit(0)
+
+print(
+    f"{'MODEL':<22}"
+    f"{'PARAMETERS':<12}"
+    f"{'QUANTIZATION':<14}"
+    f"{'SIZE':>10}"
+)
+print(
+    f"{'-' * 20:<22}"
+    f"{'-' * 10:<12}"
+    f"{'-' * 12:<14}"
+    f"{'-' * 10:>10}"
+)
+
+for model in sorted(models, key=lambda item: item.get("name", "")):
+    details = model.get("details", {})
+    size_bytes = model.get("size", 0)
+    size_gib = size_bytes / (1024 ** 3)
+
+    print(
+        f"{model.get('name', 'unknown'):<22}"
+        f"{details.get('parameter_size', 'unknown'):<12}"
+        f"{details.get('quantization_level', 'unknown'):<14}"
+        f"{size_gib:>8.1f} GB"
+    )
 PYJSON
 }
+
 
 build_ai_context() {
   local mode="${1:-next}"
@@ -242,6 +275,606 @@ except Exception:
 PYJSON
 }
 
+
+
+ai_decide() {
+  local decision=""
+  local override_model=""
+  local decisions_root="$ABBEY_ROOT/config/ai/decisions"
+  local decision_dir
+  local definition_file
+  local prompt_file
+  local schema_file
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --model)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --model requires a model name."
+          exit 1
+        fi
+
+        override_model="$2"
+        shift 2
+        ;;
+
+      -*)
+        echo "Unknown option: $1"
+        exit 1
+        ;;
+
+      *)
+        if [[ -n "$decision" ]]; then
+          echo "Unexpected argument: $1"
+          exit 1
+        fi
+
+        decision="$1"
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "$decision" ]]; then
+    echo "Usage: abbey ai decide [--model MODEL] <decision>"
+    echo
+    echo "Available decisions:"
+
+    if [[ ! -d "$decisions_root" ]]; then
+      echo "  None"
+      exit 1
+    fi
+
+    find "$decisions_root" \
+      -mindepth 1 \
+      -maxdepth 1 \
+      -type d \
+      -printf '  %f\n' 2>/dev/null | sort
+
+    exit 1
+  fi
+
+  decision_dir="$decisions_root/$decision"
+  definition_file="$decision_dir/decision.json"
+  prompt_file="$decision_dir/prompt.md"
+  schema_file="$decision_dir/schema.json"
+
+  for required_file in \
+    "$definition_file" \
+    "$prompt_file" \
+    "$schema_file"
+  do
+    if [[ ! -f "$required_file" ]]; then
+      echo "Required decision file not found:"
+      echo "$required_file"
+      exit 1
+    fi
+  done
+
+  python3 - \
+    "$ABBEY_ROOT" \
+    "$decision" \
+    "$definition_file" \
+    "$prompt_file" \
+    "$schema_file" \
+    "$OLLAMA_URL" \
+    "$ABBEY_AI_DECISION_MODEL" \
+    "$override_model" \
+    "$ABBEY_ROOT/.abbey/ai/history" <<'PYJSON'
+import json
+import sys
+import time
+import urllib.error
+import urllib.request
+from datetime import datetime
+from pathlib import Path
+
+(
+    abbey_root,
+    decision_id,
+    definition_file,
+    prompt_file,
+    schema_file,
+    default_ollama_url,
+    default_model,
+    override_model,
+    history_root,
+) = sys.argv[1:]
+
+root = Path(abbey_root)
+definition_path = Path(definition_file)
+prompt_path = Path(prompt_file)
+schema_path = Path(schema_file)
+
+try:
+    definition = json.loads(definition_path.read_text(encoding="utf-8"))
+except json.JSONDecodeError as exc:
+    print(
+        f"Invalid decision definition JSON: {exc}",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+try:
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+except json.JSONDecodeError as exc:
+    print(
+        f"Invalid decision schema JSON: {exc}",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+decision_name = definition.get("name", decision_id)
+description = definition.get("description", "")
+model = (
+    override_model
+    or definition.get("model")
+    or default_model
+)
+ollama_url = definition.get("ollama_url", default_ollama_url)
+options = definition.get("options", {})
+
+documents = definition.get("documents", [])
+
+if not isinstance(documents, list) or not documents:
+    print(
+        "Decision definition must contain a non-empty documents list.",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+planning_sections = []
+resolved_documents = []
+
+for relative_name in documents:
+    document_path = root / relative_name
+
+    if not document_path.is_file():
+        print(
+            f"Required decision document not found:\n{document_path}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    resolved_documents.append(relative_name)
+    planning_sections.append(
+        f"===== {relative_name} =====\n"
+        f"{document_path.read_text(encoding='utf-8')}"
+    )
+
+decision_prompt = prompt_path.read_text(encoding="utf-8")
+planning_context = "\n\n".join(planning_sections)
+
+payload = {
+    "model": model,
+    "stream": False,
+    "think": False,
+    "format": schema,
+    "messages": [
+        {
+            "role": "system",
+            "content": (
+                "You are Abbey AI, a project-aware engineering decision assistant. "
+                "Treat the supplied project documents as authoritative. "
+                "Base conclusions only on evidence contained in those documents. "
+                "Return valid JSON matching the supplied schema. "
+                "Do not modify files or invent completed work."
+            ),
+        },
+        {
+            "role": "user",
+            "content": (
+                f"{decision_prompt}\n\n"
+                "Authoritative Abbey Root project documents:\n\n"
+                f"{planning_context}"
+            ),
+        },
+    ],
+    "options": options,
+}
+
+print("Abbey AI Decision")
+print()
+print(f"Decision:  {decision_id}")
+print(f"Name:      {decision_name}")
+print(f"Model:     {model}")
+print(f"Ollama:    {ollama_url}")
+print(f"Documents: {len(resolved_documents)}")
+
+if description:
+    print(f"Purpose:   {description}")
+
+print()
+print("Evaluating project documents...")
+print()
+
+request = urllib.request.Request(
+    f"{ollama_url.rstrip('/')}/api/chat",
+    data=json.dumps(payload).encode("utf-8"),
+    headers={"Content-Type": "application/json"},
+    method="POST",
+)
+
+started = time.monotonic()
+
+try:
+    with urllib.request.urlopen(request, timeout=600) as response:
+        response_data = json.loads(response.read().decode("utf-8"))
+except urllib.error.HTTPError as exc:
+    print(f"HTTP error: {exc.code}", file=sys.stderr)
+    print(exc.read().decode("utf-8"), file=sys.stderr)
+    sys.exit(1)
+except Exception as exc:
+    print(f"Ollama request failed: {exc}", file=sys.stderr)
+    sys.exit(1)
+
+runtime = time.monotonic() - started
+
+done_reason = response_data.get("done_reason", "unknown")
+content = response_data.get("message", {}).get("content", "").strip()
+
+if not content:
+    prompt_tokens = response_data.get("prompt_eval_count", "unknown")
+    output_tokens = response_data.get("eval_count", "unknown")
+
+    print("Ollama returned an empty response.", file=sys.stderr)
+    print(f"Done reason:   {done_reason}", file=sys.stderr)
+    print(f"Prompt tokens: {prompt_tokens}", file=sys.stderr)
+    print(f"Output tokens: {output_tokens}", file=sys.stderr)
+    sys.exit(1)
+
+try:
+    result = json.loads(content)
+except json.JSONDecodeError as exc:
+    print(f"Model returned invalid JSON: {exc}", file=sys.stderr)
+    print(content, file=sys.stderr)
+    sys.exit(1)
+
+missing = [
+    field
+    for field in schema.get("required", [])
+    if field not in result
+]
+
+if missing:
+    print(
+        "Model response is missing required fields: "
+        + ", ".join(missing),
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+generated_at = datetime.now().astimezone()
+generated_iso = generated_at.isoformat(timespec="seconds")
+
+safe_model = "".join(
+    character if character.isalnum() or character in "-_" else "-"
+    for character in model
+).strip("-")
+
+history_directory = (
+    Path(history_root)
+    / generated_at.strftime("%Y")
+    / generated_at.strftime("%m")
+)
+
+history_directory.mkdir(parents=True, exist_ok=True)
+
+history_file = history_directory / (
+    f"{generated_at.strftime('%Y%m%d-%H%M%S')}"
+    f"-{decision_id}-{safe_model}.json"
+)
+
+artifact = {
+    "decision": decision_id,
+    "name": decision_name,
+    "description": description,
+    "generated": generated_iso,
+    "model": model,
+    "ollama_url": ollama_url,
+    "documents": resolved_documents,
+    "options": options,
+    "execution": {
+        "runtime_seconds": round(runtime, 3),
+        "done_reason": done_reason,
+        "prompt_tokens": response_data.get("prompt_eval_count"),
+        "output_tokens": response_data.get("eval_count"),
+        "total_duration_nanoseconds": response_data.get("total_duration"),
+        "load_duration_nanoseconds": response_data.get("load_duration"),
+        "prompt_eval_duration_nanoseconds": response_data.get(
+            "prompt_eval_duration"
+        ),
+        "eval_duration_nanoseconds": response_data.get("eval_duration"),
+    },
+    "result": result,
+}
+
+history_file.write_text(
+    json.dumps(artifact, indent=2, ensure_ascii=False) + "\n",
+    encoding="utf-8",
+)
+
+print("Recommendation")
+print("--------------")
+print(result.get("recommendation", "unknown"))
+
+summary = result.get("summary")
+
+if summary:
+    print()
+    print(summary)
+
+if "priority_reason" in result:
+    print()
+    print("Priority Reason")
+    print("---------------")
+    print(result["priority_reason"])
+
+benefit_fields = [
+    ("Frequency", "estimated_frequency"),
+    ("Effort", "estimated_effort"),
+    ("Score", "time_saving_score"),
+    ("Confidence", "confidence"),
+]
+
+available_benefit_fields = [
+    (label, field)
+    for label, field in benefit_fields
+    if field in result
+]
+
+if available_benefit_fields:
+    print()
+    print("Decision Metrics")
+    print("----------------")
+
+    for label, field in available_benefit_fields:
+        value = result[field]
+
+        if field == "time_saving_score":
+            value = f"{value}/10"
+        elif field == "confidence" and isinstance(value, (int, float)):
+            value = f"{value:.0%}"
+
+        print(f"{label + ':':<12} {value}")
+
+list_sections = [
+    ("Recurring Work Eliminated", "recurring_work_eliminated"),
+    ("Blocking Items", "blocking_items"),
+]
+
+for heading, field in list_sections:
+    items = result.get(field, [])
+
+    if items:
+        print()
+        print(heading)
+        print("-" * len(heading))
+
+        for item in items:
+            print(f"- {item}")
+
+evidence = result.get("evidence", [])
+
+if evidence:
+    print()
+    print("Evidence")
+    print("--------")
+
+    for item in evidence:
+        if isinstance(item, dict):
+            document = item.get("document", "unknown")
+            evidence_item = item.get("item", "unknown")
+            print(f"- {document}: {evidence_item}")
+        else:
+            print(f"- {item}")
+
+alternatives = result.get("alternatives", [])
+
+if alternatives:
+    print()
+    print("Alternatives Considered")
+    print("-----------------------")
+
+    for item in alternatives:
+        if isinstance(item, dict):
+            name = item.get("item", "unknown")
+            reason = item.get("reason_not_selected", "No reason supplied.")
+            print(f"- {name}: {reason}")
+        else:
+            print(f"- {item}")
+
+assumptions = result.get("assumptions", [])
+
+if assumptions:
+    print()
+    print("Assumptions")
+    print("-----------")
+
+    for item in assumptions:
+        print(f"- {item}")
+print()
+print("Execution")
+print("---------")
+print(f"Generated:     {generated_iso}")
+print(f"Runtime:       {runtime:.1f} seconds")
+print(f"Done reason:   {done_reason}")
+print(f"Prompt tokens: {response_data.get('prompt_eval_count', 'unknown')}")
+print(f"Output tokens: {response_data.get('eval_count', 'unknown')}")
+print(f"Context size:  {options.get('num_ctx', 'Ollama default')}")
+print(f"History:       {history_file}")
+PYJSON
+}
+
+
+ai_history() {
+  local history_root="$ABBEY_ROOT/.abbey/ai/history"
+  local limit="${1:-10}"
+
+  if [[ ! "$limit" =~ ^[0-9]+$ ]] || [[ "$limit" -lt 1 ]]; then
+    echo "Usage: abbey ai history [number]"
+    exit 1
+  fi
+
+  if [[ ! -d "$history_root" ]]; then
+    echo "No Abbey AI decision history found."
+    exit 0
+  fi
+
+  python3 - "$history_root" "$limit" <<'PYJSON'
+import json
+import sys
+from pathlib import Path
+
+history_root = Path(sys.argv[1])
+limit = int(sys.argv[2])
+
+history_files = sorted(
+    history_root.rglob("*.json"),
+    key=lambda path: path.stat().st_mtime,
+    reverse=True,
+)[:limit]
+
+print("Abbey AI Decision History")
+print()
+
+if not history_files:
+    print("No decision results found.")
+    sys.exit(0)
+
+for history_file in history_files:
+    try:
+        data = json.loads(history_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"WARN Could not read {history_file}: {exc}")
+        continue
+
+    result = data.get("result", {})
+    execution = data.get("execution", {})
+
+    print(f"{data.get('generated', 'unknown')}")
+    print(f"  Decision:       {data.get('decision', 'unknown')}")
+    print(f"  Model:          {data.get('model', 'unknown')}")
+    print(f"  Recommendation: {result.get('recommendation', 'unknown')}")
+    print(
+        "  Runtime:        "
+        f"{execution.get('runtime_seconds', 'unknown')} seconds"
+    )
+    print(f"  File:           {history_file}")
+    print()
+PYJSON
+}
+
+
+ai_compare() {
+  local decision="${1:-}"
+  local history_root="$ABBEY_ROOT/.abbey/ai/history"
+
+  if [[ -z "$decision" ]]; then
+    echo "Usage: abbey ai compare <decision>"
+    exit 1
+  fi
+
+  if [[ ! -d "$history_root" ]]; then
+    echo "No Abbey AI decision history found."
+    exit 1
+  fi
+
+  python3 - "$history_root" "$decision" <<'PYJSON'
+import json
+import sys
+from pathlib import Path
+
+history_root = Path(sys.argv[1])
+decision_id = sys.argv[2]
+
+latest_by_model = {}
+
+for history_file in history_root.rglob("*.json"):
+    try:
+        data = json.loads(history_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        continue
+
+    if data.get("decision") != decision_id:
+        continue
+
+    model = data.get("model")
+
+    if not model:
+        continue
+
+    generated = data.get("generated", "")
+
+    current = latest_by_model.get(model)
+
+    if current is None or generated > current["generated"]:
+        latest_by_model[model] = {
+            "generated": generated,
+            "file": history_file,
+            "data": data,
+        }
+
+print("Abbey AI Decision Comparison")
+print()
+print(f"Decision: {decision_id}")
+print()
+
+if not latest_by_model:
+    print("No matching decision results found.")
+    sys.exit(1)
+
+print(f"Models:   {len(latest_by_model)}")
+print()
+
+for model in sorted(latest_by_model):
+    entry = latest_by_model[model]
+    data = entry["data"]
+    result = data.get("result", {})
+    execution = data.get("execution", {})
+    options = data.get("options", {})
+
+    confidence = result.get("confidence")
+
+    if isinstance(confidence, (int, float)):
+        confidence_text = f"{confidence:.0%}"
+    else:
+        confidence_text = "unknown"
+
+    runtime = execution.get("runtime_seconds")
+
+    if isinstance(runtime, (int, float)):
+        runtime_text = f"{runtime:.1f} seconds"
+    else:
+        runtime_text = "unknown"
+
+    print(model)
+    print("-" * len(model))
+    print(
+        "Recommendation: "
+        f"{result.get('recommendation', 'unknown')}"
+    )
+    print(f"Confidence:     {confidence_text}")
+    print(f"Runtime:        {runtime_text}")
+    print(
+        "Prompt tokens:  "
+        f"{execution.get('prompt_tokens', 'unknown')}"
+    )
+    print(
+        "Output tokens:  "
+        f"{execution.get('output_tokens', 'unknown')}"
+    )
+    print(
+        "Context size:   "
+        f"{options.get('num_ctx', 'Ollama default')}"
+    )
+    print(f"Generated:      {data.get('generated', 'unknown')}")
+    print(f"File:           {entry['file']}")
+    print()
+PYJSON
+}
+
+
 command="${1:-info}"
 
 case "$command" in
@@ -272,6 +905,21 @@ case "$command" in
   ask)
     shift
     ai_ask "$@"
+    ;;
+
+  decide)
+    shift
+    ai_decide "$@"
+    ;;
+
+  history)
+    shift
+    ai_history "$@"
+    ;;
+
+  compare)
+    shift
+    ai_compare "$@"
     ;;
 
   help|-h|--help)
