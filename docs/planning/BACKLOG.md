@@ -170,6 +170,11 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add inventory summarization assistance.
 - [ ] Add draft publishing assembly from canonical source material.
 
+### Abbey AI
+
+- [ ] Add discoverable `abbey ai decide` help and decision listing generated from decision-definition metadata.
+- [ ] Add `abbey ai decide easy-win` to identify low-risk, one-session work that delivers durable value and meaningfully reduces the backlog.
+
 ---
 
 ## Self-Documenting Platform
