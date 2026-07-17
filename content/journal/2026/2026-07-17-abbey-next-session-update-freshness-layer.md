@@ -1,3 +1,4 @@
+---
 title: "Abbey Next Learns From Recent Sessions"
 
 description: "Added a deterministic freshness layer so abbey next can distinguish authoritative plans from work that was recently completed or discovered."
