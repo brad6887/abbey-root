@@ -185,6 +185,15 @@ mapfile -t ranked_candidates < <(
     --backlog "$backlog"
 )
 
+mapfile -t planning_conflicts < <(
+  "$SCRIPT_DIR/../../scripts/abbey_next_candidates.py" \
+    --repo "$ABBEY_ROOT" \
+    --next "$next_document" \
+    --project-status "$project_status" \
+    --backlog "$backlog" \
+    --mode conflicts
+)
+
 if [[ -z "$theme" ]]; then
   fail "Unable to read the current theme from docs/planning/NEXT.md"
   exit 1
@@ -206,6 +215,8 @@ IFS='|' read -r \
   next_evidence \
   status_evidence \
   active_evidence \
+  session_evidence \
+  session_paths \
   <<<"${ranked_candidates[0]}"
 
 status_output="$(
@@ -278,6 +289,14 @@ if [[ -n "$active_evidence" ]]; then
   echo "- Related files are already active in the working tree."
 fi
 
+if [[ -n "$session_evidence" ]]; then
+  echo "- It is supported by follow-up work recorded in an unreconciled session update."
+fi
+
+if (( ${#planning_conflicts[@]} > 0 )); then
+  echo "- Recently completed work was suppressed using unreconciled session evidence."
+fi
+
 echo "- The recommendation is derived from deterministic project evidence."
 
 section "Definition of Done"
@@ -313,6 +332,21 @@ fi
 
 if [[ -n "$active_evidence" ]]; then
   echo "- Current Git working tree: $active_evidence"
+fi
+
+if [[ -n "$session_evidence" ]]; then
+  echo "- Unreconciled session update: $session_paths"
+  echo "  Follow-up: $session_evidence"
+fi
+
+if (( ${#planning_conflicts[@]} > 0 )); then
+  section "Planning Conflicts"
+
+  for conflict in "${planning_conflicts[@]}"; do
+    IFS='|' read -r conflict_item conflict_path conflict_evidence <<<"$conflict"
+    echo "- BACKLOG.md still lists incomplete: $conflict_item"
+    echo "  Recent completion evidence: $conflict_path"
+  done
 fi
 
 section "Suggested First Step"

@@ -123,6 +123,116 @@ assert_contains \
   "$output" \
   "Define the initial candidate collection and scoring functions."
 
+
+mkdir -p "$fixture_root/docs/session-updates"
+
+cat > "$fixture_root/docs/session-updates/recent-completion.md" <<'EOF'
+---
+title: "Deterministic Recommendation Engine"
+status: completed
+reviewed: false
+---
+
+# Deterministic Recommendation Engine
+
+## Accomplishments
+
+- Built the deterministic project recommendation engine.
+
+## Next Steps
+
+- Generate focused session objectives from planning documents.
+EOF
+
+output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_NEXT")"
+
+recommended_item="$(
+  awk '
+    $0 == "Recommended Session" {
+      getline
+      getline
+      print
+      exit
+    }
+  ' <<<"$output"
+)"
+
+if [[ "$recommended_item" != "Build deterministic project recommendation engine" ]]; then
+  pass "suppresses work completed in an unreconciled update"
+else
+  fail "suppresses work completed in an unreconciled update"
+fi
+
+assert_contains \
+  "uses session-update next steps as recommendation evidence" \
+  "$output" \
+  "supported by follow-up work recorded in an unreconciled session update"
+
+assert_contains \
+  "reports stale planning state" \
+  "$output" \
+  "Planning Conflicts"
+
+assert_contains \
+  "identifies stale backlog item" \
+  "$output" \
+  "BACKLOG.md still lists incomplete: Build deterministic project recommendation engine"
+
+
+cat > "$fixture_root/docs/session-updates/generic-planning-followup.md" <<'EOF'
+---
+title: "Planning Reconciliation"
+status: pending
+reviewed: false
+---
+
+## Next Steps
+
+- Continue refining planning documents as reconciliation identifies drift.
+EOF
+
+candidate_output="$(
+  "$ABBEY_ROOT/scripts/abbey_next_candidates.py" \
+    --repo "$fixture_root" \
+    --next "$fixture_root/docs/planning/NEXT.md" \
+    --project-status "$fixture_root/docs/planning/PROJECT_STATUS.md" \
+    --backlog "$fixture_root/docs/planning/BACKLOG.md"
+)"
+
+session_objective_row="$(
+  grep -F '|Generate session objectives from planning documents|' \
+    <<<"$candidate_output" || true
+)"
+
+if grep -Fq 'generic-planning-followup.md' <<<"$session_objective_row"; then
+  fail "does not promote candidates from generic planning language"
+else
+  pass "does not promote candidates from generic planning language"
+fi
+
+cat > "$fixture_root/docs/session-updates/pending-work.md" <<'EOF'
+---
+title: "Pending Documentation Work"
+status: pending
+reviewed: false
+---
+
+## Accomplishments
+
+- Started reviewing documentation.
+
+## Next Steps
+
+- Explain recommendation reasoning using visible project evidence.
+EOF
+
+output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_NEXT")"
+
+assert_contains \
+  "does not treat pending updates as completed" \
+  "$output" \
+  "Explain recommendation reasoning"
+
 rm "$fixture_root/docs/planning/ROADMAP.md"
 
 set +e
