@@ -13,7 +13,6 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Design `abbey init` project bootstrap command.
 - [x] Create `abbey end` session workflow.
 - [ ] Continue automating and refining the `abbey review` planning reconciliation workflow.
-- [ ] Design `abbey infrastructure review` workflow.
 - [ ] Continue eliminating manually maintained documentation.
 - [ ] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.

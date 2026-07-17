@@ -98,6 +98,9 @@ Completed
 - 2.5 Gb networking deployed.
 - Passwordless SSH configured.
 - Ansible Vault configured.
+- Proxmox backup storage recovered and successful VM backups validated.
+- Nightly automated Open WebUI backups implemented and validated for the AI Worker, including remote verification.
+- Infrastructure health and Ansible connectivity validated across managed hosts.
 
 ## Current Work
 

@@ -3,8 +3,8 @@ date: 2026-07-12
 title: Infrastructure Health Review
 status: completed
 session: infrastructure
-journal: 2026-07-12-infrastructure-health-review
-reviewed: false
+journal:
+reviewed: true
 ---
 
 # Session Update
