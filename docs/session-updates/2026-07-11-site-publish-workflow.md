@@ -1,10 +1,10 @@
 ---
-date: 2026-07-12
+date: 2026-07-11
 title: Site Publish Workflow
 status: complete
 session: standard
-journal: 2026-07-12-site-publish-workflow
-reviewed: false
+journal: 2026-07-11-site-publish-workflow
+reviewed: true
 ---
 
 # Session Update
@@ -81,7 +81,7 @@ Validation confirmed:
 
 - Astro production build completed successfully.
 - The generated site copied correctly.
-- The production repository remained clean after publication.
+- The production repository returned to a clean state after the generated files were committed and pushed.
 - GitHub Pages published successfully.
 - `https://bradcooke.com/museum/omelet-you-finish/` returned HTTP 200.
 - `https://omeletyoufinish.com/` permanently redirected to the published exhibit.

@@ -114,6 +114,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add `abbey site preview`.
 - [ ] Add `abbey site deploy-check`.
 - [ ] Reduce noise in `abbey site publish` previews.
+- [ ] Display the Abbey Root commit hash in `abbey site publish`.
 - [ ] Add live-site verification to `abbey site publish`.
 - [ ] Add project metrics to `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
