@@ -12,7 +12,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Design `abbey init` project bootstrap command.
 - [x] Create `abbey end` session workflow.
-- [ ] Create `abbey-review` planning reconciliation workflow.
+- [ ] Continue automating and refining the `abbey review` planning reconciliation workflow.
 - [ ] Design `abbey infrastructure review` workflow.
 - [ ] Continue eliminating manually maintained documentation.
 - [ ] Design secure remote access to Abbey Root for working away from home.
@@ -154,6 +154,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Create `abbey end`.
 - [ ] Evaluate future `abbey end` enhancements through practical usage.
 - [x] Create `abbey-review`.
+- [ ] Standardize front matter for older session updates that predate the current metadata format.
 - [ ] Create `abbey session-update`.
 - [ ] Associate journal entries with active Abbey sessions.
 

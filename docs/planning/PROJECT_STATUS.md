@@ -156,6 +156,7 @@ Completed
 - `abbey plant publish <slug>`
 - Structured content workspace validation and publishing
 - Canonical plant source-to-publication workflow
+- Historical session reconciliation validated through repeated reviews and authoritative planning reconciliation
 
 ## Current Focus
 

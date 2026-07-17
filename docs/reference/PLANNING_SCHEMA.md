@@ -221,6 +221,8 @@ Session updates are operational documents.
 
 Their purpose is to capture completed work once during a development session.
 
+`reviewed: true` means completed outcomes have been reconciled into authoritative documentation and unfinished accepted work has been captured in planning; optional session ideas do not have to be implemented.
+
 They become the primary input to `abbey-review`.
 
 Planning documents summarize many session updates.
