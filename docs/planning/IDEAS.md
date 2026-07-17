@@ -4,6 +4,10 @@
 
 Only if demonstrated need warrants them, evaluate optimized web image derivatives and file-size review, optional captions and lazy loading, and a reusable plant photo gallery.
 
+## Generated Lab Health Documentation
+
+Explore whether summarized lab-health information should be published as generated project documentation.
+
 ## Museum of Dumb Ideas
 
 An established section of BradCooke.com dedicated to humorous projects, questionable decisions, abandoned ideas, and stories that are too good not to tell.

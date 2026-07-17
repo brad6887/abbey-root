@@ -101,6 +101,8 @@ Completed
 - Proxmox backup storage recovered and successful VM backups validated.
 - Nightly automated Open WebUI backups implemented and validated for the AI Worker, including remote verification.
 - Infrastructure health and Ansible connectivity validated across managed hosts.
+- Read-only Ansible infrastructure health review completed across managed hosts; the detected AI Worker issue remains under investigation.
+- Operational issue tracking established under `docs/issues/`.
 
 ## Current Work
 
@@ -152,6 +154,7 @@ Completed
 - `abbey version`
 - `abbey journal`
 - `abbey ai`
+- `abbey lab`
 - `abbey site publish [--dry-run]`
 - Metadata-driven CLI help
 - Generated CLI reference

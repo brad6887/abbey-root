@@ -65,6 +65,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Evaluate VPN, Tailscale, and Cloudflare Tunnel for remote connectivity.
 - [ ] Design and implement secure remote access to the lab.
 - [ ] Expand `abbey lab` with additional infrastructure diagnostics.
+- [ ] Continue investigating and document resolution of the `ai-worker01` NVIDIA/Ollama reboot hang.
+- [ ] Evaluate running `abbey lab` remotely from development workstations.
 - [ ] Review and refine Ansible playbook and role architecture.
   - Preserve `site.yml` as the full convergence entry point.
   - Add focused playbooks for routine service deployments.

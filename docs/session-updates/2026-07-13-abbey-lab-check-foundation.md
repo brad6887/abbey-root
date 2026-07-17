@@ -1,10 +1,10 @@
 ---
 date: 2026-07-13
-title: Abbey Lab Health Foundation
+title: Abbey Lab Check Foundation
 status: pending
 session: infrastructure
-journal: 2026-07-13-abbey-lab-health-foundation
-reviewed: false
+journal:
+reviewed: true
 ---
 
 # Session Update
