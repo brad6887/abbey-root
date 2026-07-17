@@ -3,9 +3,9 @@ title: "Historical Session Review Workflow Validation"
 description: "Validated and refined the historical Abbey session review workflow through reconciliation of multiple completed sessions."
 date: 2026-07-14
 status: pending
-reviewed: false
+reviewed: true
 session: primary
-journal: 2026-07-14-historical-session-review-workflow-validation
+journal:
 ---
 
 # Session Update

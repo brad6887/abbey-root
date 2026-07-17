@@ -123,6 +123,8 @@ Unlike the backlog, this document should remain intentionally small and focused 
 - Historical session review must not add an item to `NEXT.md` solely because it appeared as future work in the reviewed session.
 - Determine whether the work was completed later or is already represented elsewhere before changing planning documents.
 - If the work remains incomplete but accepted, record it in `BACKLOG.md` unless current project context independently establishes it as an immediate priority.
+- Reconciliation findings must distinguish session-related work from incidental repository drift; report incidental drift separately, and do not let it block `reviewed: true`.
+- Historical session records must preserve what was known and intended at the time rather than being rewritten using later project knowledge.
 - Incidental `NEXT.md` cleanup, including duplicates and wording improvements, is repository drift rather than a session-related change and should not block review, even when the historical session mentions it.
 
 ### Required Sections

@@ -10,6 +10,10 @@ Explore whether summarized lab-health information should be published as generat
 
 Other exploratory possibilities include health scoring, Uptime Kuma integration, historical health-trend collection, and automatic issue creation.
 
+## Historical Session Review Enhancements
+
+Explore generating reconciliation instructions directly from `abbey session review` and evaluating a dedicated historical-review mode.
+
 ## Museum of Dumb Ideas
 
 An established section of BradCooke.com dedicated to humorous projects, questionable decisions, abandoned ideas, and stories that are too good not to tell.
