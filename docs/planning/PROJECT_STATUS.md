@@ -103,6 +103,7 @@ Completed
 - Infrastructure health and Ansible connectivity validated across managed hosts.
 - Read-only Ansible infrastructure health review completed across managed hosts; the detected AI Worker issue remains under investigation.
 - Operational issue tracking established under `docs/issues/`.
+- `abbey lab check` refined and validated across managed hosts with expanded host, NVIDIA, and Ollama reporting while retaining read-only, timeout-protected, failure-tolerant operation.
 
 ## Current Work
 

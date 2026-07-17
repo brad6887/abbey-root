@@ -4,7 +4,7 @@ title: Abbey Lab Check Refinement
 status: completed
 session: infrastructure
 journal:
-reviewed: false
+reviewed: true
 ---
 
 # Session Update
@@ -82,6 +82,8 @@ Ollama service: active
 Loaded Ollama models: 0
 llama-server processes: 0
 ```
+
+This point-in-time validation did not resolve the intermittent NVIDIA/Ollama reboot-hang issue, which remains under investigation.
 
 The existing `systemd-networkd-wait-online.service` warning remains visible and will be investigated separately.
 

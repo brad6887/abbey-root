@@ -8,6 +8,8 @@ Only if demonstrated need warrants them, evaluate optimized web image derivative
 
 Explore whether summarized lab-health information should be published as generated project documentation.
 
+Other exploratory possibilities include health scoring, Uptime Kuma integration, historical health-trend collection, and automatic issue creation.
+
 ## Museum of Dumb Ideas
 
 An established section of BradCooke.com dedicated to humorous projects, questionable decisions, abandoned ideas, and stories that are too good not to tell.
