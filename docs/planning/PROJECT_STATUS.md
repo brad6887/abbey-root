@@ -163,7 +163,7 @@ Completed
 - `abbey plant publish <slug>`
 - Structured content workspace validation and publishing
 - Canonical plant source-to-publication workflow
-- Historical session reconciliation validated through repeated reviews and authoritative planning reconciliation
+- `abbey session review` validated across varied historical sessions as a read-only, evidence-based reconciliation assistant; historical reconciliation remains ongoing and refinement usage-driven
 - Abbey context generation, knowledge snapshots, and documentation health checks use `docs/planning/PROJECT_STATUS.md` as the authoritative project status
 
 ## Current Focus
