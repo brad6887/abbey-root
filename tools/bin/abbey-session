@@ -685,66 +685,104 @@ $relative_session
 
 Compare it against the supplied authoritative planning documents.
 
-Report:
+Produce a concise operational report using exactly these sections:
 
-1. Session-related completed outcomes not reflected in authoritative documentation.
-2. Session-related planning statements that are stale, contradictory, duplicated,
-   or obsolete.
-3. Session-related unfinished work that belongs in NEXT.md, BACKLOG.md,
-   ROADMAP.md, or IDEAS.md.
-4. Metadata or formatting problems in the selected session update.
-5. Specific recommended edits grouped by file.
-6. Authoritative files that need no session-related changes.
-7. Incidental repository drift noticed during review but not caused by or
-   required to reconcile this session.
-8. Whether the selected session will be ready to mark reviewed after only the
-   session-related recommendations are reconciled.
+Result
+------
 
-Clearly separate session-related findings from incidental repository drift.
-Incidental drift must not prevent the selected session from being marked
-reviewed.
+State exactly one of:
 
-Do not recommend changing metadata values unless the supplied evidence defines
-the expected value. When evidence is insufficient, label the item as needing
-verification rather than prescribing a change.
+- READY
+- NOT READY
+
+Use READY only when no required session-related reconciliation remains.
+If required edits or required verification remain, use NOT READY.
+
+Required Reconciliation
+-----------------------
+
+List only changes required before the session can be marked reviewed.
+
+Group required changes by file. State each required action once. Do not repeat
+the same finding in later sections.
+
+Do not include optional improvements or incidental repository cleanup here.
+
+Verification Required
+---------------------
+
+List only questions that must be resolved before reconciliation can be
+completed.
 
 Do not treat missing detail in a summary or command list as proof that an action
-did not occur. Identify it as a documentation inconsistency requiring
-verification.
+did not occur. Treat such cases as verification rather than prescribing a
+change.
 
-Preserve the distinction between ideas and committed work:
+If no verification is required, write:
 
-- Keep speculative, optional, conditional, humorous, or exploratory future
-  possibilities in IDEAS.md.
+None.
+
+Suggested Follow-Up
+-------------------
+
+List useful session-related follow-up work that is not required to mark the
+session reviewed.
+
+Clearly label inferred or optional recommendations as suggestions. Do not treat
+model-inferred work as accepted project work.
+
+If no follow-up is warranted, write:
+
+None.
+
+No Session-Related Changes
+--------------------------
+
+List all supplied authoritative files that require no session-related change on
+one concise line.
+
+Each supplied authoritative file must appear exactly once, either under
+Required Reconciliation or under No Session-Related Changes.
+
+Incidental Drift
+----------------
+
+List unrelated repository drift briefly. Incidental drift must never affect the
+Result.
+
+If no incidental drift is found, write:
+
+None.
+
+Additional rules:
+
+- Recommend the smallest authoritative changes necessary.
+- Planning documents summarize sessions rather than reproducing them.
+- PROJECT_STATUS.md should summarize durable completed capabilities. Do not
+  require it to also describe unfinished rollout details when those details
+  belong in BACKLOG.md.
+- Prefer concise additions over implementation detail already preserved in the
+  session update.
+- Preserve the distinction between speculative ideas and accepted work.
 - Recommend BACKLOG.md only when the selected session clearly establishes the
   work as accepted, intended, or required.
-- Recommend NEXT.md only when the selected session or current planning clearly
-  establishes the work as an immediate priority.
-- Do not promote an idea merely because it is concrete or actionable.
-
-Recommend the smallest authoritative changes necessary.
-
-Planning documents summarize sessions rather than reproducing them.
-
-Prefer concise additions over expanding planning documents with
-implementation details that already exist in the session update.
-
-Distinguish completing one implementation from completing a broader capability
-or milestone. Mark an existing task complete only when its scope clearly matches
-the demonstrated outcome. Otherwise recommend clarification or verification.
-
-In the final report, classify each supplied authoritative file exactly once as
-either:
-- requiring a session-related change; or
-- requiring no session-related change.
-
-Do not place the same file in both categories.
-
-Treat reviewed: true as meaning that completed outcomes and unfinished work
-have been reconciled into authoritative repository documentation. It does not
-mean every proposed future enhancement has been implemented.
-
-Return recommendations only. Do not apply changes.
+- Recommend NEXT.md only when current project context independently establishes
+  immediate priority.
+- Distinguish one completed implementation from a broader unfinished capability.
+- Do not recommend metadata changes unless the supplied evidence establishes the
+  expected value.
+- Treat reviewed: true as meaning completed outcomes and accepted unfinished
+  work have been reconciled. Optional enhancements do not have to be completed.
+- Never recommend changing status unless PLANNING_SCHEMA.md explicitly defines
+  the required status value for this session state. When it does not, leave
+  status unchanged and do not make it a verification requirement.
+- Do not require verification of every historical Next Step. Require
+  verification only when resolving it is necessary to decide a specific
+  authoritative planning edit.
+- Suggested Follow-Up must come directly from unfinished work or explicit ideas
+  in the selected session. Do not invent new implementation approaches,
+  automation opportunities, or architectural enhancements.
+- Return recommendations only. Do not apply changes.
 
 Repository evidence follows.
 

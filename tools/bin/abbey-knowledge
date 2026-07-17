@@ -1,22 +1,38 @@
 #!/usr/bin/env bash
 # COMMAND: knowledge
-# DESCRIPTION: Build or show Abbey AI knowledge context
+# DESCRIPTION: Build, inspect, and maintain Abbey AI knowledge context
 set -euo pipefail
 
 ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+
 source "$ABBEY_ROOT/tools/lib/config.sh"
 load_abbey_config
 
 SNAPSHOT="$ABBEY_ROOT/$ABBEY_KNOWLEDGE_FILE"
 KNOWLEDGE_DIR="$(dirname "$SNAPSHOT")"
+METADATA="$KNOWLEDGE_DIR/metadata.json"
 
 usage() {
   cat <<'HELP'
 Abbey Knowledge
 
 Usage:
-  abbey knowledge build     Build a local Abbey Root knowledge snapshot
-  abbey knowledge show      Show the current knowledge snapshot path
+  abbey knowledge build
+      Build a local Abbey Root knowledge snapshot.
+
+  abbey knowledge show
+      Show the current knowledge snapshot path.
+
+  abbey knowledge status
+      Report whether repository knowledge sources are current.
+
+  abbey knowledge ensure [--auto-build|--no-auto-build] [--quiet]
+      Ensure a current knowledge snapshot exists.
+
+Status exit codes:
+  0  Repository knowledge is fresh
+  1  Repository knowledge is stale
+  2  Snapshot or metadata is missing or invalid
 HELP
 }
 
@@ -59,8 +75,39 @@ section_excerpt() {
   echo
 }
 
+knowledge_state() {
+  python3 \
+    "$ABBEY_ROOT/scripts/abbey_knowledge_manifest.py" \
+    state \
+    "$ABBEY_ROOT" \
+    "$SNAPSHOT" \
+    "$METADATA"
+}
+
+write_metadata() {
+  local output_file="$1"
+
+  python3 \
+    "$ABBEY_ROOT/scripts/abbey_knowledge_manifest.py" \
+    write-metadata \
+    "$ABBEY_ROOT" \
+    "$output_file"
+}
+
 build_snapshot() {
+  local snapshot_tmp
+  local metadata_tmp
+
   mkdir -p "$KNOWLEDGE_DIR"
+
+  snapshot_tmp="$(mktemp "$KNOWLEDGE_DIR/.snapshot.XXXXXX")"
+  metadata_tmp="$(mktemp "$KNOWLEDGE_DIR/.metadata.XXXXXX")"
+
+  cleanup_knowledge_temps() {
+    rm -f "$snapshot_tmp" "$metadata_tmp"
+  }
+
+  trap cleanup_knowledge_temps RETURN
 
   {
     echo "# Abbey Root Knowledge Snapshot"
@@ -72,6 +119,7 @@ build_snapshot() {
 
     echo "## Git"
     echo
+
     if [[ -d "$ABBEY_ROOT/.git" ]]; then
       cd "$ABBEY_ROOT"
       echo "- Branch: $(git branch --show-current 2>/dev/null || echo unknown)"
@@ -84,26 +132,29 @@ build_snapshot() {
     else
       echo "- Git repository not found"
     fi
-    echo
 
+    echo
     echo "## Docker Containers"
     echo
-    if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+
+    if command -v docker >/dev/null 2>&1 &&
+       docker info >/dev/null 2>&1; then
       docker ps --format '- {{.Names}}: {{.Status}}'
     else
       echo "- Docker unavailable"
     fi
-    echo
 
+    echo
     echo "## Inventory"
     echo
+
     if [[ -f "$ABBEY_ROOT/ansible/inventory/hosts.yml" ]]; then
       sed -n '1,160p' "$ABBEY_ROOT/ansible/inventory/hosts.yml"
     else
       echo "- Inventory not found"
     fi
-    echo
 
+    echo
     list_files "Playbooks" "ansible/playbooks" "*.yml"
     list_files "Roles" "ansible/roles"
     list_files "Tools" "tools/bin"
@@ -113,31 +164,181 @@ build_snapshot() {
     list_files "Guides" "docs/guides" "*.md"
     list_files "Content Journal Entries" "content/journal" "*.md"
 
-    section_excerpt "Current Project Status" "docs/planning/PROJECT_STATUS.md" 120
-    section_excerpt "Next Actions" "docs/planning/NEXT.md" 120
-    section_excerpt "Roadmap" "docs/planning/ROADMAP.md" 120
-    section_excerpt "Backlog" "docs/planning/BACKLOG.md" 120
-    section_excerpt "Abbey CLI Guide" "docs/guides/abbey-cli.md" 160
-  } > "$SNAPSHOT"
+    section_excerpt \
+      "Current Project Status" \
+      "docs/planning/PROJECT_STATUS.md" \
+      120
 
-  echo "Knowledge snapshot written to:"
-  echo "$SNAPSHOT"
+    section_excerpt \
+      "Next Actions" \
+      "docs/planning/NEXT.md" \
+      120
+
+    section_excerpt \
+      "Roadmap" \
+      "docs/planning/ROADMAP.md" \
+      120
+
+    section_excerpt \
+      "Backlog" \
+      "docs/planning/BACKLOG.md" \
+      120
+
+    section_excerpt \
+      "Abbey CLI Guide" \
+      "docs/guides/abbey-cli.md" \
+      160
+  } > "$snapshot_tmp"
+
+  write_metadata "$metadata_tmp"
+
+  mv "$snapshot_tmp" "$SNAPSHOT"
+  mv "$metadata_tmp" "$METADATA"
+
+  trap - RETURN
+
+  echo "Abbey Knowledge Build"
+  echo "====================="
+  echo
+  echo "OK   Snapshot: $SNAPSHOT"
+  echo "OK   Metadata: $METADATA"
+  echo "OK   Repository knowledge is fresh"
+}
+
+show_status() {
+  local state
+  local state_rc
+  local generated="unknown"
+  local content_count="unknown"
+  local listed_count="unknown"
+
+  set +e
+  state="$(knowledge_state)"
+  state_rc=$?
+  set -e
+
+  if [[ -f "$METADATA" ]]; then
+    readarray -t metadata_values < <(
+      python3 - "$METADATA" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+try:
+    data = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+except Exception:
+    print("unknown")
+    print("unknown")
+    print("unknown")
+    sys.exit(0)
+
+print(data.get("generated_at", "unknown"))
+print(data.get("content_source_count", "unknown"))
+print(data.get("listed_path_count", "unknown"))
+PY
+    )
+
+    generated="${metadata_values[0]:-unknown}"
+    content_count="${metadata_values[1]:-unknown}"
+    listed_count="${metadata_values[2]:-unknown}"
+  fi
+
+  echo "Abbey Knowledge Status"
+  echo "======================"
+  echo
+  echo "Snapshot:    $SNAPSHOT"
+  echo "Metadata:    $METADATA"
+  echo "Generated:   $generated"
+  echo "Content:     $content_count source files"
+  echo "Listings:    $listed_count paths"
+  echo "Repository:  $state"
+  echo "Runtime:     captured at build time"
+
+  return "$state_rc"
+}
+
+ensure_snapshot() {
+  local auto_build="true"
+  local quiet="false"
+  local state
+  local state_rc
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --auto-build)
+        auto_build="true"
+        ;;
+      --no-auto-build)
+        auto_build="false"
+        ;;
+      --quiet)
+        quiet="true"
+        ;;
+      *)
+        echo "Unknown ensure option: $1" >&2
+        return 2
+        ;;
+    esac
+
+    shift
+  done
+
+  set +e
+  state="$(knowledge_state)"
+  state_rc=$?
+  set -e
+
+  if [[ "$state" == "FRESH" ]]; then
+    if [[ "$quiet" != "true" ]]; then
+      echo "OK   Abbey knowledge is current."
+    fi
+
+    return 0
+  fi
+
+  if [[ "$auto_build" != "true" ]]; then
+    echo "WARN Abbey knowledge is ${state,,}." >&2
+    echo "Run: abbey knowledge build" >&2
+    return "$state_rc"
+  fi
+
+  if [[ "$quiet" != "true" ]]; then
+    echo "INFO Abbey knowledge is ${state,,}; rebuilding."
+  fi
+
+  if [[ "$quiet" == "true" ]]; then
+    build_snapshot >/dev/null
+  else
+    build_snapshot
+  fi
 }
 
 case "${1:-help}" in
   build)
     build_snapshot
     ;;
+
   show)
     echo "$SNAPSHOT"
     ;;
+
+  status)
+    show_status
+    ;;
+
+  ensure)
+    shift
+    ensure_snapshot "$@"
+    ;;
+
   help|-h|--help)
     usage
     ;;
+
   *)
-    echo "Unknown knowledge command: $1"
-    echo
-    usage
+    echo "Unknown knowledge command: ${1:-}" >&2
+    echo >&2
+    usage >&2
     exit 1
     ;;
 esac

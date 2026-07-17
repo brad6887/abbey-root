@@ -51,11 +51,17 @@ HELP
 }
 
 ensure_knowledge() {
-  if [[ ! -f "$KNOWLEDGE_FILE" ]]; then
-    echo "Knowledge snapshot not found. Building it now..."
-    "$ABBEY_ROOT/tools/bin/abbey-knowledge" build
-    echo
-  fi
+  local ensure_mode="--no-auto-build"
+
+  case "${ABBEY_AI_AUTO_BUILD_KNOWLEDGE,,}" in
+    true|1|yes|on)
+      ensure_mode="--auto-build"
+      ;;
+  esac
+
+  "$ABBEY_ROOT/tools/bin/abbey-knowledge" ensure \
+    "$ensure_mode" \
+    --quiet
 }
 
 ai_info() {

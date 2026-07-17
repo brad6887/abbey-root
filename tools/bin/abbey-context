@@ -14,6 +14,10 @@ set -euo pipefail
 
 ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
 
+source "$ABBEY_ROOT/tools/lib/config.sh"
+load_abbey_config
+
+KNOWLEDGE_FILE="$ABBEY_ROOT/$ABBEY_KNOWLEDGE_FILE"
 CONTEXT_DIR="$ABBEY_ROOT/.abbey/context"
 CURRENT_CONTEXT="$CONTEXT_DIR/current.md"
 
@@ -168,13 +172,14 @@ build_full() {
     write_header
 
     if [[ -x "$ABBEY_ROOT/tools/bin/abbey-knowledge" ]]; then
-      "$ABBEY_ROOT/tools/bin/abbey-knowledge" build >/dev/null
-      knowledge_file="$ABBEY_ROOT/.abbey/knowledge/snapshot.md"
+      "$ABBEY_ROOT/tools/bin/abbey-knowledge" ensure \
+        --auto-build \
+        --quiet
 
-      if [[ -f "$knowledge_file" ]]; then
-        cat "$knowledge_file"
+      if [[ -f "$KNOWLEDGE_FILE" ]]; then
+        cat "$KNOWLEDGE_FILE"
       else
-        echo "- Knowledge snapshot not found after build"
+        echo "- Knowledge snapshot not found after ensure"
       fi
     else
       echo "- abbey-knowledge not found"
