@@ -8,13 +8,14 @@
 # Usage:
 #   abbey session
 #   abbey session context
+#   abbey session update <slug>
 #   abbey session review
 #
 set -euo pipefail
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 export ABBEY_ROOT
 
 ok() {
@@ -43,6 +44,8 @@ Usage:
   abbey session            Show Abbey session startup information
   abbey session context [options]
                            Generate an upload-ready session context file
+  abbey session update [options] <slug>
+                           Create a new session update from the standard template
   abbey session review [file]
                            Review a selected session update, or the oldest unreviewed one
   abbey session help       Show this help
@@ -50,6 +53,10 @@ Usage:
 Context options:
   --stdout                 Write context to standard output
   --output FILE            Write context to a selected file
+
+Update options:
+  --title TITLE            Override the title derived from the slug
+  -h, --help               Show update command help
 
 The context command is read-only and failure-tolerant. Generated default files
 are written under working/session-context/.
@@ -421,6 +428,208 @@ HELP
 }
 
 
+slug_title() {
+  local slug="$1"
+
+  python3 - "$slug" <<'PYTITLE'
+import sys
+
+slug = sys.argv[1]
+words = slug.replace("_", "-").split("-")
+minor_words = {"a", "an", "and", "as", "at", "by", "for", "in", "of", "on", "or", "the", "to"}
+
+title_words = []
+
+for index, word in enumerate(words):
+    if not word:
+        continue
+
+    lower = word.lower()
+
+    if index > 0 and lower in minor_words:
+        title_words.append(lower)
+    elif lower == "ai":
+        title_words.append("AI")
+    elif lower == "cli":
+        title_words.append("CLI")
+    else:
+        title_words.append(lower.capitalize())
+
+print(" ".join(title_words))
+PYTITLE
+}
+
+validate_session_slug() {
+  local slug="$1"
+
+  if [[ ! "$slug" =~ ^[a-z0-9]+([a-z0-9-]*[a-z0-9])?$ ]]; then
+    echo "ERROR Invalid session update slug: $slug"
+    echo "Use lowercase letters, numbers, and single hyphens."
+    return 1
+  fi
+
+  if [[ "$slug" == *--* ]]; then
+    echo "ERROR Invalid session update slug: $slug"
+    echo "Consecutive hyphens are not allowed."
+    return 1
+  fi
+}
+
+session_update_help() {
+  cat <<'HELP'
+Abbey Session Update
+
+Usage:
+  abbey session update [--title TITLE] <slug>
+
+Create a new session update under:
+
+  docs/session-updates/YYYY-MM-DD-<slug>.md
+
+Options:
+  --title TITLE            Override the title derived from the slug
+  -h, --help               Show this help
+
+Examples:
+  abbey session update abbey-ai-decision-help
+  abbey session update --title "Abbey AI Decision Help" abbey-ai-decision-help
+
+The command refuses to overwrite an existing file.
+HELP
+}
+
+session_update() {
+  local slug=""
+  local title=""
+  local date_value
+  local update_dir
+  local update_file
+  local relative_file
+  local temporary_file
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --title)
+        if [[ $# -lt 2 || -z "$2" ]]; then
+          echo "ERROR --title requires a value."
+          return 1
+        fi
+
+        title="$2"
+        shift 2
+        ;;
+
+      help|-h|--help)
+        session_update_help
+        return 0
+        ;;
+
+      -*)
+        echo "ERROR Unknown session update option: $1"
+        return 1
+        ;;
+
+      *)
+        if [[ -n "$slug" ]]; then
+          echo "ERROR Only one session update slug may be supplied."
+          return 1
+        fi
+
+        slug="$1"
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "$slug" ]]; then
+    session_update_help
+    return 1
+  fi
+
+  validate_session_slug "$slug" || return 1
+
+  if [[ -z "$title" ]]; then
+    title="$(slug_title "$slug")"
+  fi
+
+  date_value="$(date '+%Y-%m-%d')"
+  update_dir="$ABBEY_ROOT/docs/session-updates"
+  update_file="$update_dir/${date_value}-${slug}.md"
+  relative_file="${update_file#$ABBEY_ROOT/}"
+
+  if [[ -e "$update_file" ]]; then
+    echo "ERROR Session update already exists:"
+    echo "$relative_file"
+    return 1
+  fi
+
+  mkdir -p "$update_dir"
+
+  temporary_file="$(mktemp)"
+  trap 'rm -f "$temporary_file"' RETURN
+
+  cat > "$temporary_file" <<EOF
+---
+title: "$title"
+description: "TODO: Add a concise description of this session."
+date: $date_value
+status: pending
+reviewed: false
+session: primary
+tags:
+  - Abbey Root
+---
+
+# $title
+
+## Objective
+
+TODO
+
+## Definition of Done
+
+- TODO
+
+## Summary
+
+TODO
+
+## Accomplishments
+
+- TODO
+
+## Impact
+
+TODO
+
+## Validation
+
+- TODO
+
+## Lessons Learned
+
+TODO
+
+## Next Steps
+
+- TODO
+
+## Notes
+
+TODO
+EOF
+
+  mv "$temporary_file" "$update_file"
+  chmod 0644 "$update_file"
+
+  echo "Session update created:"
+  echo "$relative_file"
+  echo
+  echo "Next:"
+  echo "  Edit the session update, then run 'abbey review'."
+}
+
+
 session_review() {
   local requested_session="${1:-}"
   local session_file
@@ -591,6 +800,11 @@ case "$command" in
   context)
     shift
     session_context "$@"
+    ;;
+
+  update)
+    shift
+    session_update "$@"
     ;;
 
   review)

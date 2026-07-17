@@ -277,6 +277,83 @@ PYJSON
 
 
 
+show_decision_help() {
+  local decisions_root="$ABBEY_ROOT/config/ai/decisions"
+
+  cat <<'HELP'
+Abbey AI Decision
+
+Usage:
+  abbey ai decide [--model MODEL] <decision>
+
+Run a structured project decision using project documents and
+decision-definition metadata.
+
+Options:
+  --model MODEL            Override the model defined by the decision
+  -h, --help               Show this help
+
+Available decisions:
+HELP
+
+  if [[ ! -d "$decisions_root" ]]; then
+    echo
+    echo "  None"
+    return
+  fi
+
+  python3 - "$decisions_root" <<'PYJSON'
+import json
+import sys
+from pathlib import Path
+
+decisions_root = Path(sys.argv[1])
+decisions = []
+
+for decision_dir in sorted(decisions_root.iterdir()):
+    if not decision_dir.is_dir():
+        continue
+
+    definition_file = decision_dir / "decision.json"
+
+    if not definition_file.is_file():
+        continue
+
+    try:
+        definition = json.loads(
+            definition_file.read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError):
+        continue
+
+    decision_id = decision_dir.name
+    name = definition.get("name", decision_id)
+    description = definition.get("description", "")
+
+    decisions.append(
+        (decision_id, str(name), str(description))
+    )
+
+if not decisions:
+    print()
+    print("  None")
+    sys.exit(0)
+
+width = max(len(decision_id) for decision_id, _, _ in decisions)
+
+print()
+
+for decision_id, name, description in decisions:
+    print(f"  {decision_id:<{width}}  {name}")
+
+    if description:
+        print(f"  {'':<{width}}  {description}")
+
+    print()
+PYJSON
+}
+
+
 ai_decide() {
   local decision=""
   local override_model=""
@@ -298,6 +375,11 @@ ai_decide() {
         shift 2
         ;;
 
+      help|-h|--help)
+        show_decision_help
+        exit 0
+        ;;
+
       -*)
         echo "Unknown option: $1"
         exit 1
@@ -316,21 +398,7 @@ ai_decide() {
   done
 
   if [[ -z "$decision" ]]; then
-    echo "Usage: abbey ai decide [--model MODEL] <decision>"
-    echo
-    echo "Available decisions:"
-
-    if [[ ! -d "$decisions_root" ]]; then
-      echo "  None"
-      exit 1
-    fi
-
-    find "$decisions_root" \
-      -mindepth 1 \
-      -maxdepth 1 \
-      -type d \
-      -printf '  %f\n' 2>/dev/null | sort
-
+    show_decision_help
     exit 1
   fi
 
