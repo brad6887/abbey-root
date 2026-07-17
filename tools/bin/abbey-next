@@ -1,0 +1,339 @@
+#!/usr/bin/env bash
+# COMMAND: next
+# DESCRIPTION: Recommend the next focused Abbey engineering session
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+
+project_status="$ABBEY_ROOT/docs/planning/PROJECT_STATUS.md"
+next_document="$ABBEY_ROOT/docs/planning/NEXT.md"
+backlog="$ABBEY_ROOT/docs/planning/BACKLOG.md"
+roadmap="$ABBEY_ROOT/docs/planning/ROADMAP.md"
+
+ok() {
+  echo "OK   $*"
+}
+
+fail() {
+  echo "FAIL $*"
+}
+
+section() {
+  echo
+  echo "$1"
+  printf '%*s\n' "${#1}" '' | tr ' ' '-'
+}
+
+usage() {
+  cat <<'HELP'
+Abbey Next
+
+Usage:
+  abbey next
+  abbey next help
+
+Recommend the next focused Abbey engineering session.
+
+The command reads Abbey planning documents and produces one deterministic,
+explainable recommendation. Human direction in NEXT.md remains authoritative.
+HELP
+}
+
+extract_heading_value() {
+  local file="$1"
+  local heading="$2"
+
+  awk -v heading="$heading" '
+    $0 == heading {
+      found = 1
+      next
+    }
+
+    found && /^## / {
+      sub(/^## /, "")
+      print
+      exit
+    }
+
+    found && /^# / {
+      exit
+    }
+  ' "$file"
+}
+
+extract_primary_objective() {
+  local file="$1"
+
+  awk '
+    $0 == "# Primary Objective" {
+      found = 1
+      next
+    }
+
+    found && /^# / {
+      exit
+    }
+
+    found && /^---$/ {
+      exit
+    }
+
+    found && NF {
+      print
+      exit
+    }
+  ' "$file"
+}
+
+extract_recommendation_items() {
+  local file="$1"
+
+  awk '
+    $0 == "### Project-Aware Recommendations" {
+      found = 1
+      next
+    }
+
+    found && /^##/ {
+      exit
+    }
+
+    found && /^---$/ {
+      exit
+    }
+
+    found && /^- \[ \] / {
+      sub(/^- \[ \] /, "")
+      print
+    }
+  ' "$file"
+}
+
+clean_item() {
+  local value="$1"
+
+  value="${value//\`/}"
+  value="${value%.}"
+
+  printf '%s\n' "$value"
+}
+
+if [[ "${1:-}" =~ ^(help|-h|--help)$ ]]; then
+  usage
+  exit 0
+fi
+
+if [[ $# -gt 0 ]]; then
+  echo "ERROR Unknown next option: $1"
+  echo
+  usage
+  exit 1
+fi
+
+echo "========================================"
+echo " Abbey Next"
+echo "========================================"
+echo
+echo "Date: $(date)"
+echo "Host: $(hostname)"
+echo "Repo: $ABBEY_ROOT"
+
+section "Planning Sources"
+
+required_documents=(
+  "$project_status"
+  "$next_document"
+  "$backlog"
+  "$roadmap"
+)
+
+missing_count=0
+
+for document in "${required_documents[@]}"; do
+  relative_path="${document#"$ABBEY_ROOT/"}"
+
+  if [[ -f "$document" ]]; then
+    ok "Document present: $relative_path"
+  else
+    fail "Document missing: $relative_path"
+    missing_count=$((missing_count + 1))
+  fi
+done
+
+if (( missing_count > 0 )); then
+  echo
+  echo "Unable to generate a recommendation."
+  echo "Restore the missing required planning documents and run:"
+  echo "    abbey next"
+  exit 1
+fi
+
+theme="$(extract_heading_value "$next_document" "# Current Theme")"
+primary_objective="$(extract_primary_objective "$next_document")"
+
+mapfile -t recommendation_items < <(
+  extract_recommendation_items "$backlog"
+)
+
+mapfile -t ranked_candidates < <(
+  "$SCRIPT_DIR/../../scripts/abbey_next_candidates.py" \
+    --repo "$ABBEY_ROOT" \
+    --next "$next_document" \
+    --project-status "$project_status" \
+    --backlog "$backlog"
+)
+
+if [[ -z "$theme" ]]; then
+  fail "Unable to read the current theme from docs/planning/NEXT.md"
+  exit 1
+fi
+
+if [[ -z "$primary_objective" ]]; then
+  fail "Unable to read the primary objective from docs/planning/NEXT.md"
+  exit 1
+fi
+
+if (( ${#ranked_candidates[@]} == 0 )); then
+  fail "No incomplete work candidates found in BACKLOG.md"
+  exit 1
+fi
+
+IFS='|' read -r \
+  recommendation_score \
+  recommended_item \
+  next_evidence \
+  status_evidence \
+  active_evidence \
+  <<<"${ranked_candidates[0]}"
+
+status_output="$(
+  git -C "$ABBEY_ROOT" status --porcelain --untracked-files=all
+)"
+recommendation_work_active=false
+
+if grep -Eq '(^|[[:space:]])(tools/bin/abbey-next|docs/architecture/(ABBEY_NEXT_OUTPUT|RECOMMENDATION_(ENGINE|ALGORITHM))\.md)$' \
+  <<<"$status_output"; then
+  recommendation_work_active=true
+fi
+
+section "Project Direction"
+
+echo "Theme: $theme"
+echo
+echo "Primary Objective:"
+echo "$primary_objective"
+
+section "Recommended Session"
+
+echo "$recommended_item"
+echo
+echo "Score: $recommendation_score"
+
+section "Objective"
+
+case "$recommended_item" in
+  "Create abbey next")
+    echo "Implement and validate the initial deterministic abbey next command."
+    ;;
+  "Build deterministic project recommendation engine")
+    echo "Build the deterministic engine that ranks project work using"
+    echo "authoritative Abbey planning sources."
+    ;;
+  "Generate session objectives from planning documents")
+    echo "Generate focused Abbey session objectives from authoritative planning documents."
+    ;;
+  "Generate Definitions of Done")
+    echo "Generate measurable Definitions of Done for recommended Abbey sessions."
+    ;;
+  "Explain recommendation reasoning")
+    echo "Make every Abbey recommendation traceable to visible project evidence."
+    ;;
+  *)
+    echo "$recommended_item."
+    ;;
+esac
+
+section "Why This?"
+
+if [[ "$recommendation_work_active" == true ]]; then
+  echo "- Related implementation or architecture work is active in the repository."
+  echo "- Completing coherent work already in progress takes precedence over unrelated work."
+else
+  echo "- The working tree does not contain active Recommendation Engine implementation work."
+fi
+
+echo "- It is an incomplete work item in docs/planning/BACKLOG.md."
+
+if [[ -n "$next_evidence" ]]; then
+  echo "- It aligns with current human direction in docs/planning/NEXT.md."
+fi
+
+if [[ -n "$status_evidence" ]]; then
+  echo "- It aligns with an immediate priority in docs/planning/PROJECT_STATUS.md."
+fi
+
+if [[ -n "$active_evidence" ]]; then
+  echo "- Related files are already active in the working tree."
+fi
+
+echo "- The recommendation is derived from deterministic project evidence."
+
+section "Definition of Done"
+
+definition_count=0
+
+for item in "${recommendation_items[@]:1}"; do
+  clean="$(clean_item "$item")"
+  echo "- $clean"
+  definition_count=$((definition_count + 1))
+
+  if (( definition_count == 4 )); then
+    break
+  fi
+done
+
+if (( definition_count == 0 )); then
+  echo "- Implement and validate the recommended capability."
+  echo "- Capture the completed session."
+fi
+
+section "Supporting Evidence"
+
+echo "- docs/planning/BACKLOG.md: $recommended_item"
+
+if [[ -n "$next_evidence" ]]; then
+  echo "- docs/planning/NEXT.md: $next_evidence"
+fi
+
+if [[ -n "$status_evidence" ]]; then
+  echo "- docs/planning/PROJECT_STATUS.md: $status_evidence"
+fi
+
+if [[ -n "$active_evidence" ]]; then
+  echo "- Current Git working tree: $active_evidence"
+fi
+
+section "Suggested First Step"
+
+case "$recommended_item" in
+  "Create abbey next")
+    echo "Continue implementing and validating tools/bin/abbey-next."
+    ;;
+  "Build deterministic project recommendation engine")
+    echo "Define the initial candidate collection and scoring functions."
+    ;;
+  "Generate session objectives from planning documents")
+    echo "Define objective templates for the supported recommendation types."
+    ;;
+  "Generate Definitions of Done")
+    echo "Define measurable completion criteria for each recommendation type."
+    ;;
+  "Explain recommendation reasoning")
+    echo "Map each scoring factor to a user-visible evidence statement."
+    ;;
+  *)
+    echo "Review the supporting planning item and define one focused implementation step."
+    ;;
+esac

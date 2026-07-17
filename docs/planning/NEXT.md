@@ -68,7 +68,6 @@ Continue improving Abbey Root, but only when real project work exposes opportuni
 Priority areas include:
 
 - Complete `abbey-review`.
-- Design `abbey init`.
 - Continue metadata-driven automation.
 - Improve onboarding documentation.
 - Expand the developer toolkit where it reduces repetitive work.

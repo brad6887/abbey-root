@@ -97,6 +97,14 @@ commands:
     examples:
       - abbey review
 
+  next:
+    category: workflow
+    description: Recommend the next focused Abbey engineering session.
+    usage: abbey next
+    hidden: false
+    examples:
+      - abbey next
+
   journal:
     category: workflow
     description: Create or open an Abbey Root journal entry.

@@ -20,6 +20,11 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Publish additional BradCooke.com content.
 - [x] Publish Doctor Robert as the reference Plant Model profile.
 - [x] Connect the Plant Model to BradCooke.com.
+- [ ] Add generated Abbey CLI architecture and registered-command summaries to `abbey session context`.
+- [ ] Use unreconciled session updates as recommendation evidence.
+- [ ] Suppress work completed in unreconciled session updates.
+- [ ] Extract candidate follow-up work from session update Next Steps.
+- [ ] Report conflicts between recent session updates and planning documents.
 
 ---
 
@@ -71,6 +76,16 @@ The backlog is intentionally broad and serves as the project's working inventory
   - Validate check-mode behavior for package installation followed by service management.
 
 ---
+### Project-Aware Recommendations
+
+- [x] Create `abbey next`.
+- [ ] Build deterministic project recommendation engine.
+- [ ] Generate session objectives from planning documents.
+- [ ] Generate Definitions of Done.
+- [ ] Explain recommendation reasoning.
+- [ ] Detect recently completed work.
+- [ ] Balance neglected project areas.
+- [ ] Add optional AI recommendation mode.
 
 ## Developer Toolkit
 
