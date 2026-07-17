@@ -3,7 +3,7 @@ title: "Abbey Session Context Generation"
 description: "Added an upload-ready session context command that replaces repetitive manual repository-state collection at the start of Abbey Root sessions."
 date: 2026-07-15
 status: pending
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

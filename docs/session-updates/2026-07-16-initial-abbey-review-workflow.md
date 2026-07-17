@@ -3,7 +3,7 @@ title: "Initial Abbey Review Workflow"
 description: "Created a deterministic pre-commit review command for summarizing session work, checking documentation, and recommending the next workflow step."
 date: 2026-07-16
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

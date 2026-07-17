@@ -3,7 +3,7 @@ title: "Abbey AI Decision Help and Session Update Generation"
 description: "Added metadata-driven Abbey AI decision help and a reusable command for generating standardized session updates."
 date: 2026-07-17
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

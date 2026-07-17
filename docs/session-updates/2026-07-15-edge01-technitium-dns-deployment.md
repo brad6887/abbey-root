@@ -3,7 +3,7 @@ title: "Edge01 Technitium DNS Deployment"
 description: "Deployed Technitium DNS on edge01 and established Abbey's first internal authoritative DNS service."
 date: 2026-07-15
 status: pending
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

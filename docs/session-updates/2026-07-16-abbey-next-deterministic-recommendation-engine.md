@@ -8,7 +8,7 @@ title: “Abbey Next Deterministic Recommendation Engine”
 description: “Designed and implemented the initial project-aware abbey next command, validated deterministic recommendation behavior, and identified unreconciled session updates as a required freshness layer.”
 date: 2026-07-16
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
 

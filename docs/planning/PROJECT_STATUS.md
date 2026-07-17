@@ -104,6 +104,8 @@ Completed
 - Read-only Ansible infrastructure health review completed across managed hosts; the detected AI Worker issue remains under investigation.
 - Operational issue tracking established under `docs/issues/`.
 - `abbey lab check` refined and validated across managed hosts with expanded host, NVIDIA, and Ollama reporting while retaining read-only, timeout-protected, failure-tolerant operation.
+- Technitium DNS deployed on `edge01` as the authoritative `home.arpa` service, with forward resolution, reverse resolution, and upstream forwarding validated from `ubuntu-dev01`.
+- Homepage recovery is managed through the authoritative Ansible role, with `edge01` integrated into managed inventory and the operational dashboard.
 
 ## Current Work
 
@@ -151,11 +153,14 @@ Completed
 - `abbey status`
 - `abbey session`
 - `abbey end`
-- `abbey review`
+- `abbey review` as a deterministic, read-only pre-commit reviewer that summarizes current-session work and recommends the next workflow step
 - `abbey version`
 - `abbey journal`
 - `abbey ai`
+- Metadata-driven `abbey ai decide` discovery and help
+- `abbey session update` generation from the standard repository template
 - `abbey lab`
+- `abbey next` with an initial deterministic, explainable recommendation engine for selecting focused engineering sessions
 - `abbey site publish [--dry-run]`
 - Metadata-driven CLI help
 - Generated CLI reference
@@ -165,10 +170,11 @@ Completed
 - Canonical plant source-to-publication workflow
 - `abbey session review` validated across varied historical sessions as a read-only, evidence-based reconciliation assistant; historical reconciliation remains ongoing and refinement usage-driven
 - Abbey context generation, knowledge snapshots, and documentation health checks use `docs/planning/PROJECT_STATUS.md` as the authoritative project status
+- `abbey session context` generates readable, upload-ready repository context for starting AI-assisted sessions, includes version-controlled repository-defined AI guidance when available, and remains failure-tolerant when guidance is absent
 
 ## Current Focus
 
-- Refine `abbey review` through practical session reconciliation.
+- Refine `abbey review` through practical pre-commit usage.
 - Project-aware workflows.
 - Documentation automation.
 - Self-documenting development.
@@ -295,7 +301,7 @@ Completed
 ## Near Term
 
 - Design `abbey init`.
-- Refine `abbey review` through practical session reconciliation.
+- Refine `abbey review` through practical pre-commit usage.
 - Expand onboarding documentation.
 - Improve `abbey-doctor`.
 - Continue metadata-driven documentation.

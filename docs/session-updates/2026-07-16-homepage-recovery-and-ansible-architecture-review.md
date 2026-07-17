@@ -3,7 +3,7 @@ title: "Homepage Recovery and Ansible Architecture Review"
 description: "Restored Homepage through Ansible, added edge01 to the lab inventory, and reviewed the long-term Ansible architecture."
 date: 2026-07-16
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Homepage

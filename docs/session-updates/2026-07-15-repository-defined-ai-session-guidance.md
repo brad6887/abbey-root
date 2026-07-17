@@ -3,7 +3,7 @@ title: "Repository-Defined AI Session Guidance"
 description: "Added version-controlled AI session guidance that travels with Abbey session context and defines the repository's preferred engineering workflow."
 date: 2026-07-15
 status: pending
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

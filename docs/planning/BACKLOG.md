@@ -12,7 +12,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Design `abbey init` project bootstrap command.
 - [x] Create `abbey end` session workflow.
-- [ ] Continue automating and refining the `abbey review` planning reconciliation workflow.
+- [ ] Continue refining `abbey session review` and historical planning reconciliation through practical usage before adding broader automation.
 - [ ] Continue eliminating manually maintained documentation.
 - [ ] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.
@@ -38,6 +38,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Design framework versioning.
 - [ ] Expand framework documentation.
 - [ ] Standardize documentation across Abbey-style repositories.
+- [ ] Adopt repository-defined AI session guidance across other Abbey-style repositories.
 - [ ] Create framework migration guide.
 
 ---
@@ -46,7 +47,9 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Make `.bashrc` Ansible-managed.
 - [ ] Configure hostname resolution between lab systems.
-- [ ] Implement internal DNS.
+- [x] Deploy Technitium DNS on `edge01` as the authoritative `home.arpa` service and validate it from `ubuntu-dev01`.
+- [ ] Complete extended validation and lab-wide rollout of internal DNS.
+- [ ] Finalize the infrastructure naming strategy and add friendly DNS service records.
 - [ ] Enhance `abbey-status` with Docker health, disk usage, and service summaries.
 - [ ] Create `abbey infrastructure review`.
 - [ ] Manage infrastructure systemd units and automation scripts from the Abbey repository.
@@ -128,7 +131,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Verify Internet connectivity.
 - [ ] Detect missing or replaced network interfaces.
 - [ ] Evaluate shared validation helpers after additional model validators exist.
-- [x] Design `abbey review` to reconcile session updates with authoritative project documentation and guide the next workflow step.
+- [x] Design `abbey review` as a deterministic, read-only pre-commit reviewer that summarizes current-session work and recommends the next workflow step.
 
 ### Plant Toolkit
 
@@ -156,9 +159,15 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Display planning summaries during `abbey session`.
 - [x] Create `abbey end`.
 - [ ] Evaluate future `abbey end` enhancements through practical usage.
-- [x] Create `abbey-review`.
+- [x] Implement `abbey review`.
+- [ ] Restrict **Required Reconciliation** to changes directly required by the reviewed session.
+- [ ] Report unrelated planning inconsistencies as **Planning Drift** rather than **Required Reconciliation**.
+- [ ] Consider separating **Planning Drift** from **Incidental Drift**.
+- [ ] Consider adding a concise **Reconciliation Scope** summary near the top of `abbey session review` output.
+- [ ] Preserve a small set of unreconciled historical session updates as regression fixtures.
+- [ ] Default reusable Abbey artifacts, including Codex prompts, session updates, journals, and planning documents, to raw Markdown in fenced code blocks unless another format is requested.
 - [ ] Standardize front matter for older session updates that predate the current metadata format.
-- [ ] Create `abbey session-update`.
+- [x] Implement `abbey session update`.
 - [ ] Associate journal entries with active Abbey sessions.
 
 ### AI Integration
