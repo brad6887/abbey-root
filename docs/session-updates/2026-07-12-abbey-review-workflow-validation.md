@@ -4,7 +4,7 @@ title: Abbey Review Workflow Validation
 status: complete
 session: standard
 journal: 2026-07-12-abbey-review-workflow-validation
-reviewed: false
+reviewed: true
 ---
 
 # Session Update
