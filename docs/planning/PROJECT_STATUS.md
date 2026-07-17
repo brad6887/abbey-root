@@ -200,6 +200,7 @@ Completed
 - Version-controlled publishing workspace
 - Generated plant profiles and selected public images from canonical workspaces
 - Plant histories can generate referenced timeline photographs with stable public filenames while sidecars and unreferenced source material remain private
+- Shared plant-page styling provides consistent presentation for timeline photographs with differing dimensions
 
 ---
 

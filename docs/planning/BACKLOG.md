@@ -243,6 +243,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Continue adding Orchid Rescue profiles beyond Doctor Robert and Helter Skelter.
 - [ ] Add Phal McCartney to the documented orchid collection.
 - [ ] Create a separate future section for bromeliads.
+- [ ] After the remaining plant profiles are published, review selected plant narratives, photograph order and placement, and the relationship between photographs and timeline text.
 
 ### Components
 
@@ -265,7 +266,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create `project.css`.
 - [ ] Improve mobile responsiveness.
 - [ ] Add light/dark mode.
-- [ ] Create reusable styles for plant profiles and photo timelines.
+- [x] Create reusable presentation styles for Markdown-generated plant timeline images, including consistent sizing, containment, centering, spacing, aspect-ratio preservation, maximum height, and border radius.
+- [ ] Continue developing reusable styles for broader plant profiles and photo timelines.
 
 ### Publishing
 
