@@ -31,6 +31,10 @@ Usage:
     --output FILE \
     [--force]
 
+  abbey research sanitize \
+    --input FILE \
+    --output FILE
+
   abbey research validate \
     --input FILE
 
@@ -543,6 +547,74 @@ print(f"Result: {output_path}")
 PYTHON_NORMALIZE
 }
 
+
+sanitize_research() {
+  local input_file=""
+  local output_file=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --input)
+        input_file="$2"
+        shift 2
+        ;;
+      --output)
+        output_file="$2"
+        shift 2
+        ;;
+      -h|--help|help)
+        usage
+        exit 0
+        ;;
+      *)
+        echo "Unknown option: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$input_file" || -z "$output_file" ]]; then
+    echo "Usage: abbey research sanitize --input FILE --output FILE" >&2
+    exit 1
+  fi
+
+  python3 - "$input_file" "$output_file" <<'PYTHON_SANITIZE'
+import sys
+import unicodedata
+from pathlib import Path
+
+input_path = Path(sys.argv[1])
+output_path = Path(sys.argv[2])
+
+content = input_path.read_text(encoding="utf-8")
+
+content = unicodedata.normalize("NFKC", content)
+
+replacements = {
+    "\u2018": "'",
+    "\u2019": "'",
+    "\u201c": '"',
+    "\u201d": '"',
+    "\u2013": "-",
+    "\u2014": "-",
+    "\u2010": "-",
+    "\u2011": "-",
+    "\u00a0": " ",
+}
+
+for old, new in replacements.items():
+    content = content.replace(old, new)
+
+output_path.write_text(
+    content.rstrip() + "\n",
+    encoding="utf-8",
+)
+
+print("Sanitization complete.")
+PYTHON_SANITIZE
+}
+
+
 validate_research() {
   local input_file=""
 
@@ -716,6 +788,11 @@ case "$command" in
   normalize)
     shift
     normalize_research "$@"
+    ;;
+
+  sanitize)
+    shift
+    sanitize_research "$@"
     ;;
 
   validate)
