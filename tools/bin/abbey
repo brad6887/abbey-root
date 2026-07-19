@@ -24,6 +24,11 @@ case "$command" in
     "$ABBEY_ROOT/tools/bin/abbey-ai" "$@"
     ;;
 
+  research)
+    shift
+    "$ABBEY_ROOT/tools/bin/abbey-research" "$@"
+    ;;
+
   status)
     shift
     "$ABBEY_ROOT/tools/bin/abbey-status" "$@"

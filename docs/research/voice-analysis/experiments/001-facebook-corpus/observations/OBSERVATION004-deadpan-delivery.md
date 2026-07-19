@@ -61,3 +61,9 @@ Rather than telling the reader something is ridiculous, the writing allows the a
 ## Status
 
 Preliminary
+
+---
+
+## Related Evidence
+
+EVIDENCE004-deadpan-delivery.md

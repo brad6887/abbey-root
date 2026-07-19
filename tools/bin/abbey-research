@@ -1,0 +1,319 @@
+#!/usr/bin/env bash
+#
+# Abbey Root Tool: abbey-research
+#
+# Purpose:
+#   Run structured research prompts through a configured Ollama model
+#   and preserve the raw model response in a file.
+#
+set -euo pipefail
+
+ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+
+source "$ABBEY_ROOT/tools/lib/config.sh"
+load_abbey_config
+
+usage() {
+  cat <<'HELP'
+Abbey Research
+
+Usage:
+  abbey research run \
+    --model MODEL \
+    --prompt FILE \
+    [--input FILE ...] \
+    --output FILE \
+    [--force]
+
+Options:
+  --model MODEL   Ollama model to use
+  --prompt FILE   Research prompt file
+  --input FILE    Input document supplied to the model
+                  May be specified multiple times
+  --output FILE   File that receives the raw model response
+  --force         Replace an existing output file
+  -h, --help      Show this help
+
+Example:
+  abbey research run \
+    --model gpt-oss:20b \
+    --prompt working/research/PROMPT.md \
+    --input working/research/facebook-posts.md \
+    --input working/research/OBSERVATION-TEMPLATE.md \
+    --input working/research/EVIDENCE-TEMPLATE.md \
+    --output working/research/results/gpt-oss-20b.md
+HELP
+}
+
+run_research() {
+  local model=""
+  local prompt_file=""
+  local output_file=""
+  local force="false"
+  local -a input_files=()
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --model)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --model requires a model name." >&2
+          exit 1
+        fi
+
+        model="$2"
+        shift 2
+        ;;
+
+      --prompt)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --prompt requires a file." >&2
+          exit 1
+        fi
+
+        prompt_file="$2"
+        shift 2
+        ;;
+
+      --input)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --input requires a file." >&2
+          exit 1
+        fi
+
+        input_files+=("$2")
+        shift 2
+        ;;
+
+      --output)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --output requires a file." >&2
+          exit 1
+        fi
+
+        output_file="$2"
+        shift 2
+        ;;
+
+      --force)
+        force="true"
+        shift
+        ;;
+
+      -h|--help|help)
+        usage
+        exit 0
+        ;;
+
+      *)
+        echo "Unknown option: $1" >&2
+        echo >&2
+        usage >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$model" ]]; then
+    echo "Missing required option: --model" >&2
+    exit 1
+  fi
+
+  if [[ -z "$prompt_file" ]]; then
+    echo "Missing required option: --prompt" >&2
+    exit 1
+  fi
+
+  if [[ -z "$output_file" ]]; then
+    echo "Missing required option: --output" >&2
+    exit 1
+  fi
+
+  if [[ ! -f "$prompt_file" ]]; then
+    echo "Prompt file not found:" >&2
+    echo "$prompt_file" >&2
+    exit 1
+  fi
+
+  local input_file
+
+  for input_file in "${input_files[@]}"; do
+    if [[ ! -f "$input_file" ]]; then
+      echo "Input file not found:" >&2
+      echo "$input_file" >&2
+      exit 1
+    fi
+  done
+
+  if [[ -e "$output_file" && "$force" != "true" ]]; then
+    echo "Output file already exists:" >&2
+    echo "$output_file" >&2
+    echo >&2
+    echo "Use --force to replace it." >&2
+    exit 1
+  fi
+
+  mkdir -p "$(dirname "$output_file")"
+
+  python3 - \
+    "$OLLAMA_URL" \
+    "$model" \
+    "$prompt_file" \
+    "$output_file" \
+    "${input_files[@]}" <<'PYTHON'
+import json
+import sys
+import time
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+ollama_url = sys.argv[1]
+model = sys.argv[2]
+prompt_path = Path(sys.argv[3])
+output_path = Path(sys.argv[4])
+input_paths = [Path(value) for value in sys.argv[5:]]
+
+prompt = prompt_path.read_text(encoding="utf-8")
+
+input_sections = []
+
+for input_path in input_paths:
+    input_sections.append(
+        f"===== INPUT: {input_path} =====\n"
+        f"{input_path.read_text(encoding='utf-8')}"
+    )
+
+user_content = prompt
+
+if input_sections:
+    user_content += (
+        "\n\n"
+        "Research inputs:\n\n"
+        + "\n\n".join(input_sections)
+    )
+
+payload = {
+    "model": model,
+    "stream": False,
+    "think": False,
+    "options": {
+        "num_ctx": 16384,
+        "num_predict": 6144,
+    },
+    "messages": [
+        {
+            "role": "system",
+            "content": (
+                "You are participating in a structured Abbey Root "
+                "research workflow. Use only the supplied research "
+                "prompt and input documents. Preserve traceability "
+                "between findings and evidence. Return the requested "
+                "research artifacts as Markdown."
+            ),
+        },
+        {
+            "role": "user",
+            "content": user_content,
+        },
+    ],
+}
+
+print("Abbey Research")
+print()
+print(f"Model:   {model}")
+print(f"Ollama:  {ollama_url}")
+print(f"Prompt:  {prompt_path}")
+print(f"Inputs:  {len(input_paths)}")
+print(f"Output:  {output_path}")
+print()
+print("Running research...")
+
+request = urllib.request.Request(
+    f"{ollama_url.rstrip('/')}/api/chat",
+    data=json.dumps(payload).encode("utf-8"),
+    headers={"Content-Type": "application/json"},
+    method="POST",
+)
+
+started = time.monotonic()
+
+try:
+    with urllib.request.urlopen(request, timeout=1200) as response:
+        response_data = json.loads(
+            response.read().decode("utf-8")
+        )
+except urllib.error.HTTPError as exc:
+    print(f"HTTP error: {exc.code}", file=sys.stderr)
+    print(exc.read().decode("utf-8"), file=sys.stderr)
+    sys.exit(1)
+except Exception as exc:
+    print(f"Ollama request failed: {exc}", file=sys.stderr)
+    sys.exit(1)
+
+runtime = time.monotonic() - started
+content = response_data.get("message", {}).get("content", "")
+
+thinking = response_data.get("message", {}).get(
+    "thinking",
+    "",
+)
+
+if not content.strip():
+    print("Ollama returned an empty response.", file=sys.stderr)
+    print(
+        "Done reason: "
+        f"{response_data.get('done_reason', 'unknown')}",
+        file=sys.stderr,
+    )
+    print(
+        "Prompt tokens: "
+        f"{response_data.get('prompt_eval_count', 'unknown')}",
+        file=sys.stderr,
+    )
+    print(
+        "Generated tokens: "
+        f"{response_data.get('eval_count', 'unknown')}",
+        file=sys.stderr,
+    )
+    print(
+        f"Thinking characters: {len(thinking)}",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+output_path.write_text(content, encoding="utf-8")
+
+print()
+print("Research complete.")
+print(f"Runtime: {runtime:.1f} seconds")
+print(
+    "Prompt tokens: "
+    f"{response_data.get('prompt_eval_count', 'unknown')}"
+)
+print(
+    "Output tokens: "
+    f"{response_data.get('eval_count', 'unknown')}"
+)
+print(f"Result: {output_path}")
+PYTHON
+}
+
+command="${1:-help}"
+
+case "$command" in
+  run)
+    shift
+    run_research "$@"
+    ;;
+
+  help|-h|--help)
+    usage
+    ;;
+
+  *)
+    echo "Unknown research command: $command" >&2
+    echo >&2
+    usage >&2
+    exit 1
+    ;;
+esac

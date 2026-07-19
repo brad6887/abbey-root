@@ -20,7 +20,7 @@ Observation 007 proposes that the author's writing regularly relies on the reade
 
 ## Evidence Log
 
-### Example 1
+### FB-002648
 
 **Date:** 2009-07-09
 
@@ -36,7 +36,7 @@ The post provides no indication of what question is being answered. Meaning depe
 
 ---
 
-### Example 2
+### FB-002615
 
 **Date:** 2009-07-21
 
@@ -52,7 +52,7 @@ The statement assumes the reader already understands the situation being discuss
 
 ---
 
-### Example 3
+### FB-002595
 
 **Date:** 2009-08-03
 
@@ -68,7 +68,7 @@ The response relies entirely on implied context that is never stated.
 
 ---
 
-### Example 4
+### FB-002578
 
 **Date:** 2009-08-16
 
@@ -84,7 +84,7 @@ The reader must infer what event or situation prompted the reaction.
 
 ---
 
-### Example 5
+### FB-002484
 
 **Date:** 2009-11-25
 
@@ -100,7 +100,7 @@ Although concise, the meaning depends on readers knowing the author was travelin
 
 ---
 
-### Example 6
+### FB-002570
 
 **Date:** 2009-08-20
 
@@ -116,7 +116,7 @@ The request is complete and requires little additional context.
 
 ---
 
-### Example 7
+### FB-002485
 
 **Date:** 2009-11-24
 

@@ -6,7 +6,7 @@ Evidence documents provide reproducible support for observations made during voi
 
 Each evidence document evaluates a single observation using examples drawn from a normalized corpus.
 
-The objective is not to prove an observation correct. The objective is to measure how well the available evidence supports or contradicts the observation.
+The objective is not to prove an observation correct, but to measure how well the available evidence supports or contradicts it.
 
 ---
 
@@ -83,12 +83,12 @@ The heading is always the stable corpus identifier.
 Example:
 
 ```text
-FB-002631
+### FB-002631
 ```
 
 The identifier remains stable regardless of document edits or evidence ordering.
 
-Evidence entries are never numbered.
+Evidence entries are never numbered and should not include a separate **Source ID** field. The heading itself is the canonical identifier.
 
 ---
 
@@ -164,7 +164,7 @@ Every evidence entry must reference the stable corpus identifier.
 Example:
 
 ```text
-FB-002631
+### FB-002631
 ```
 
 These identifiers provide reproducible references across:

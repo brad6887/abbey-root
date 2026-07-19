@@ -20,7 +20,7 @@ The first 100 chronological posts from the normalized corpus.
 
 The sample was reviewed to assess the overall length and structure of individual posts.
 
-The focus of this observation was not the content of the writing, but the amount of text used to communicate an idea.
+The focus of this observation was not the content of the writing, but the amount of text used to communicate a complete idea.
 
 ---
 
@@ -55,3 +55,9 @@ Rather than developing a joke through extended narrative, the writing frequently
 ## Status
 
 Preliminary
+
+---
+
+## Related Evidence
+
+EVIDENCE003-preference-for-concise-writing.md

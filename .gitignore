@@ -12,3 +12,10 @@ working/session-context/
 # macOS metadata
 .DS_Store
 ._*
+
+# Generated Abbey research inputs and model outputs
+working/research/
+
+# Python bytecode
+__pycache__/
+*.py[cod]

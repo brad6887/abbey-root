@@ -26,9 +26,9 @@ Only recurring themes were considered. One-off jokes or isolated references were
 
 ## Findings
 
-Several fictional concepts reappear across multiple posts rather than being used as single, isolated jokes.
+Several fictional concepts reappear across multiple posts rather than being used as isolated jokes.
 
-The most prominent example is an ongoing narrative involving a time machine. Rather than repeating the same joke, later posts assume the reader is already familiar with previous events. Updates describe continued repairs, new components such as a flux capacitor, and incremental progress in making the machine operational.
+The most prominent example is an ongoing narrative involving a time machine. Rather than repeating the same joke, later posts assume the reader is already familiar with previous events. Updates describe continued repairs, new components such as a flux capacitor, and incremental progress toward making the machine operational.
 
 The recurring narrative develops over time, with each post extending the fictional premise instead of restarting it.
 
@@ -36,7 +36,7 @@ The recurring narrative develops over time, with each post extending the fiction
 
 ## Interpretation
 
-The author appears to favor building on previously established fictional concepts rather than continually introducing unrelated ideas.
+The author appears to favor building upon previously established fictional concepts rather than continually introducing unrelated ideas.
 
 This approach creates continuity across otherwise independent posts and rewards readers who recognize earlier references.
 
@@ -47,10 +47,16 @@ This approach creates continuity across otherwise independent posts and rewards 
 - How common are recurring fictional narratives throughout the complete corpus?
 - Are there additional recurring concepts besides the time machine?
 - Do recurring narratives become more or less frequent over time?
-- Are recurring narratives concentrated in humorous writing or present in other contexts as well?
+- Are recurring narratives concentrated in humorous writing, or do they also appear in other contexts?
 
 ---
 
 ## Status
 
 Preliminary
+
+---
+
+## Related Evidence
+
+EVIDENCE005-recurring-narrative-elements.md

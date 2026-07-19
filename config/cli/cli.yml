@@ -24,6 +24,9 @@ categories:
   ai:
     description: AI and knowledge commands
 
+  research:
+    description: Structured research commands
+
   lab:
     description: Lab infrastructure commands
 
@@ -193,6 +196,15 @@ commands:
     hidden: false
     examples:
       - abbey ai
+
+  research:
+    category: research
+    description: Run structured research prompts through Abbey AI models.
+    usage: abbey research <command>
+    hidden: false
+    examples:
+      - abbey research --help
+      - abbey research run --help
 
   lab:
     category: lab

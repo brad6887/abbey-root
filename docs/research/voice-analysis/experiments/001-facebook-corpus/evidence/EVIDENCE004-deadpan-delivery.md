@@ -22,7 +22,8 @@ Observation 004 proposes that the author frequently presents absurd or impossibl
 
 ### FB-002604
 
-**Date:** 2009-07-23  
+**Date:** 2009-07-23
+
 **Score:** +2
 
 **Post:**
@@ -37,7 +38,8 @@ An impossible event is presented as though it were an ordinary life occurrence. 
 
 ### FB-002550
 
-**Date:** 2009-09-22  
+**Date:** 2009-09-22
+
 **Score:** +2
 
 **Post:**
@@ -52,7 +54,8 @@ The exaggerated premise is delivered completely matter-of-factly, allowing the r
 
 ### FB-002595
 
-**Date:** 2009-08-02  
+**Date:** 2009-08-02
+
 **Score:** -1
 
 **Post:**
@@ -67,7 +70,8 @@ The enthusiasm is explicit and reinforced through punctuation, making the tone l
 
 ### FB-002493
 
-**Date:** 2009-11-13  
+**Date:** 2009-11-13
+
 **Score:** -2
 
 **Post:**
