@@ -87,37 +87,47 @@ extract_primary_objective() {
   ' "$file"
 }
 
-extract_recommendation_items() {
-  local file="$1"
+print_definition_of_done() {
+  local recommendation="$1"
 
-  awk '
-    $0 == "### Project-Aware Recommendations" {
-      found = 1
-      next
-    }
-
-    found && /^##/ {
-      exit
-    }
-
-    found && /^---$/ {
-      exit
-    }
-
-    found && /^- \[ \] / {
-      sub(/^- \[ \] /, "")
-      print
-    }
-  ' "$file"
-}
-
-clean_item() {
-  local value="$1"
-
-  value="${value//\`/}"
-  value="${value%.}"
-
-  printf '%s\n' "$value"
+  case "$recommendation" in
+    "Create abbey next")
+      echo "- Implement the initial deterministic command."
+      echo "- Validate recommendation output against project planning."
+      echo "- Add regression coverage."
+      echo "- Capture the completed session."
+      ;;
+    "Build deterministic project recommendation engine")
+      echo "- Rank incomplete work from authoritative planning sources."
+      echo "- Explain the evidence contributing to the recommendation."
+      echo "- Keep candidate selection deterministic."
+      echo "- Add regression coverage."
+      ;;
+    "Generate session objectives from planning documents")
+      echo "- Define objective templates for supported recommendation types."
+      echo "- Generate a focused objective for the selected candidate."
+      echo "- Preserve deterministic output."
+      echo "- Add regression coverage."
+      ;;
+    "Generate Definitions of Done")
+      echo "- Define measurable criteria for supported recommendation types."
+      echo "- Generate criteria relevant to the selected candidate."
+      echo "- Provide a safe fallback for unknown candidates."
+      echo "- Add regression coverage."
+      ;;
+    "Explain recommendation reasoning")
+      echo "- Map scoring factors to visible evidence statements."
+      echo "- Show the authoritative source for each material reason."
+      echo "- Keep explanations deterministic."
+      echo "- Add regression coverage."
+      ;;
+    *)
+      echo "- Define one focused implementation or review scope."
+      echo "- Complete the highest-value work within that scope."
+      echo "- Validate the resulting changes or findings."
+      echo "- Capture the completed session."
+      ;;
+  esac
 }
 
 if [[ "${1:-}" =~ ^(help|-h|--help)$ ]]; then
@@ -172,10 +182,6 @@ fi
 
 theme="$(extract_heading_value "$next_document" "# Current Theme")"
 primary_objective="$(extract_primary_objective "$next_document")"
-
-mapfile -t recommendation_items < <(
-  extract_recommendation_items "$backlog"
-)
 
 mapfile -t ranked_candidates < <(
   "$SCRIPT_DIR/../../scripts/abbey_next_candidates.py" \
@@ -301,22 +307,7 @@ echo "- The recommendation is derived from deterministic project evidence."
 
 section "Definition of Done"
 
-definition_count=0
-
-for item in "${recommendation_items[@]:1}"; do
-  clean="$(clean_item "$item")"
-  echo "- $clean"
-  definition_count=$((definition_count + 1))
-
-  if (( definition_count == 4 )); then
-    break
-  fi
-done
-
-if (( definition_count == 0 )); then
-  echo "- Implement and validate the recommended capability."
-  echo "- Capture the completed session."
-fi
+print_definition_of_done "$recommended_item"
 
 section "Supporting Evidence"
 

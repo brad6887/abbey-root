@@ -99,6 +99,16 @@ assert_contains \
   "$output" \
   "Completing coherent work already in progress takes precedence over unrelated work."
 
+assert_contains \
+  "generates Definition of Done for selected recommendation" \
+  "$output" \
+  "- Implement the initial deterministic command."
+
+assert_not_contains \
+  "does not use neighboring backlog items as Definition of Done" \
+  "$output" \
+  "- Generate session objectives from planning documents."
+
 sed -i \
   's/- \[ \] Create `abbey next`\./- [x] Create `abbey next`./' \
   "$fixture_root/docs/planning/BACKLOG.md"
@@ -226,12 +236,19 @@ reviewed: false
 - Explain recommendation reasoning using visible project evidence.
 EOF
 
-output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_NEXT")"
+candidate_output="$(
+  "$ABBEY_ROOT/scripts/abbey_next_candidates.py" \
+    --repo "$fixture_root" \
+    --next "$fixture_root/docs/planning/NEXT.md" \
+    --project-status "$fixture_root/docs/planning/PROJECT_STATUS.md" \
+    --backlog "$fixture_root/docs/planning/BACKLOG.md"
+)"
 
-assert_contains \
-  "does not treat pending updates as completed" \
-  "$output" \
-  "Explain recommendation reasoning"
+if grep -Fq '|Explain recommendation reasoning|' <<<"$candidate_output"; then
+  pass "does not treat pending updates as completed"
+else
+  fail "does not treat pending updates as completed"
+fi
 
 rm "$fixture_root/docs/planning/ROADMAP.md"
 
