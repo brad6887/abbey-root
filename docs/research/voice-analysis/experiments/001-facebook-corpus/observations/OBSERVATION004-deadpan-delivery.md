@@ -30,11 +30,11 @@ Many humorous posts present impossible situations without announcing that they a
 
 Examples include:
 
-- Being lost in space.
-- Rebooting.
-- Installing a flux capacitor.
-- Successfully traveling two hours into the future.
-- Putting out fires with gasoline.
+- Rebooting (`FB-002625`).
+- Being lost in space (`FB-002613`).
+- Putting out fires with gasoline (`FB-002591`).
+- Installing a flux capacitor and preparing to test a time machine (`FB-002589`).
+- Successfully traveling two hours into the future (`FB-002586`).
 
 The writing generally avoids emotional language, exaggerated punctuation, or explicit signals that the statement is intended humorously.
 

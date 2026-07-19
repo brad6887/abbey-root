@@ -178,6 +178,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add photo metadata validation assistance.
 - [ ] Add inventory summarization assistance.
 - [ ] Add draft publishing assembly from canonical source material.
+- [ ] Audit Experiment 001 evidence documents for mismatched source identifiers, dates, and quoted posts before using them in hypotheses or the Voice Model.
 
 ### Abbey AI
 

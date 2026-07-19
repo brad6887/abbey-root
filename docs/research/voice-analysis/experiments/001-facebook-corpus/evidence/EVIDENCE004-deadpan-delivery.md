@@ -6,6 +6,16 @@ Observation 004 proposes that the author frequently presents absurd or impossibl
 
 ---
 
+## Corpus
+
+**Experiment:** 001 – Facebook Corpus
+
+**Sample:**
+
+The first 100 chronological clean posts from the normalized corpus.
+
+---
+
 ## Scoring
 
 | Score | Meaning |
@@ -20,67 +30,99 @@ Observation 004 proposes that the author frequently presents absurd or impossibl
 
 ## Evidence Log
 
-### FB-002604
+### FB-002625
 
-**Date:** 2009-07-23
+**Date:** 2009-01-26
+
+**Score:** +1
+
+**Post:**
+
+> is rebooting
+
+**Analysis:**
+
+The post applies ordinary computer terminology directly to the author without explanation. Its brevity and lack of emphasis create a mildly absurd, matter-of-fact effect.
+
+---
+
+### FB-002613
+
+**Date:** 2009-02-22
 
 **Score:** +2
 
 **Post:**
 
-> is still recovering from last nights battle with the wizard.
+> is lost in space.
 
 **Analysis:**
 
-An impossible event is presented as though it were an ordinary life occurrence. No explanation or emotional emphasis is provided.
+An impossible or highly improbable situation is presented as a routine status update. The post contains no explanation, emotional emphasis, or explicit signal that it is a joke.
 
 ---
 
-### FB-002550
+### FB-002591
 
-**Date:** 2009-09-22
+**Date:** 2009-04-04
 
 **Score:** +2
 
 **Post:**
 
-> is starting a new project "A Week of Living Dangerously". Today the tags come off all pillows and mattresses.
+> is putting out fires with gasoline.
 
 **Analysis:**
 
-The exaggerated premise is delivered completely matter-of-factly, allowing the reader to discover the humor.
+The contradictory action is stated plainly, without commentary or exaggerated punctuation. The humor depends on the reader recognizing the absurdity while the narrative voice remains neutral.
 
 ---
 
-### FB-002595
+### FB-002589
 
-**Date:** 2009-08-02
+**Date:** 2009-04-06
 
-**Score:** -1
+**Score:** +2
 
 **Post:**
 
-> is excited! Shark week starts today! The new phone books are here! I got mail!
+> has just adjusted the flurb and installed the new flux capacitor. Time machine testing tomorrow, I'll call you yesterday if all goes well.
 
 **Analysis:**
 
-The enthusiasm is explicit and reinforced through punctuation, making the tone less deadpan than typical examples.
+Invented equipment and time travel are described as routine maintenance and scheduling. The impossible premise is sustained through practical, procedural language rather than announced as humor.
 
 ---
 
-### FB-002493
+### FB-002586
 
-**Date:** 2009-11-13
+**Date:** 2009-04-14
 
-**Score:** -2
+**Score:** +2
 
 **Post:**
 
-> just discovered that Kraftwerk is making a new album. Can I get a "Hell Yeah!!?!?!?!?"
+> flew his time machine to the west coast and was able to successfully travel 2 hours into the future, that's progress.
 
 **Analysis:**
 
-Heavy punctuation and overt excitement directly oppose the detached delivery described in the observation.
+Time travel is reported like an incremental technical achievement. The phrase "that's progress" treats the impossible event as an ordinary project milestone, strengthening the deadpan contrast.
+
+---
+
+### FB-002615
+
+**Date:** 2009-02-17
+
+**Score:** 0
+
+**Post:**
+
+> is drinking coffee and working
+
+**Analysis:**
+
+This is an ordinary status update with no absurd or impossible premise. It is neutral evidence because it neither demonstrates nor contradicts the deadpan treatment evaluated by the observation.
 
 ---
 
@@ -88,20 +130,34 @@ Heavy punctuation and overt excitement directly oppose the detached delivery des
 
 | Score | Count |
 |------:|------:|
-| +2 | 2 |
-| +1 | 0 |
-| 0 | 0 |
-| -1 | 1 |
-| -2 | 1 |
+| +2 | 4 |
+| +1 | 1 |
+| 0 | 1 |
+| -1 | 0 |
+| -2 | 0 |
 
-**Weighted Score:** +1
+**Weighted Score:** +9
 
 Calculation:
 
-(2 × +2) + (0 × +1) + (0 × 0) + (1 × -1) + (1 × -2) = **+1**
+```text
+(4 × +2)
++ (1 × +1)
++ (1 × 0)
++ (0 × -1)
++ (0 × -2)
+=
++9
+```
 
 ---
 
 ## Current Assessment
 
-The observation is currently supported, but the evidence indicates that deadpan delivery is a preferred technique rather than a universal characteristic. Counterexamples demonstrate that the author intentionally departs from this style when expressing genuine enthusiasm or excitement.
+The verified evidence supports the observation within the first 100 chronological posts.
+
+Several absurd or impossible situations are presented using short, practical, or emotionally neutral language. The strongest examples involve space travel, time-machine maintenance, time travel, and attempting to extinguish fires with gasoline.
+
+The evidence also shows that the author's overall writing is not uniformly detached. Genuine personal excitement may be expressed directly and with emphatic punctuation. That variation does not contradict the narrower pattern: when the premise itself is absurd, the author often avoids explaining or emphasizing the joke.
+
+The observation should remain Preliminary because the evidence has only been reviewed against the first 100 posts rather than the complete normalized corpus.
