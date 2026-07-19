@@ -25,23 +25,47 @@ Usage:
     --output FILE \
     [--force]
 
+  abbey research normalize \
+    --model MODEL \
+    --input FILE \
+    --output FILE \
+    [--force]
+
+  abbey research validate \
+    --input FILE
+
 Options:
   --model MODEL   Ollama model to use
   --prompt FILE   Research prompt file
-  --input FILE    Input document supplied to the model
-                  May be specified multiple times
-  --output FILE   File that receives the raw model response
+  --input FILE    Input document supplied to the command
+  --output FILE   File that receives the result
   --force         Replace an existing output file
   -h, --help      Show this help
 
-Example:
+Canonical normalized structure:
+
+  # Research Result
+  ## Summary
+  ## Observations
+  ## Evidence
+  ## Conclusions
+  ## Limitations
+  ## Open Questions
+
+Examples:
   abbey research run \
     --model gpt-oss:20b \
     --prompt working/research/PROMPT.md \
     --input working/research/facebook-posts.md \
-    --input working/research/OBSERVATION-TEMPLATE.md \
-    --input working/research/EVIDENCE-TEMPLATE.md \
     --output working/research/results/gpt-oss-20b.md
+
+  abbey research normalize \
+    --model gpt-oss:20b \
+    --input working/research/results/gpt-oss-20b.md \
+    --output working/research/normalized/gpt-oss-20b.md
+
+  abbey research validate \
+    --input working/research/normalized/gpt-oss-20b.md
 HELP
 }
 
@@ -281,7 +305,10 @@ if not content.strip():
     )
     sys.exit(1)
 
-output_path.write_text(content, encoding="utf-8")
+output_path.write_text(
+    content.rstrip() + "\n",
+    encoding="utf-8",
+)
 
 print()
 print("Research complete.")
@@ -298,12 +325,402 @@ print(f"Result: {output_path}")
 PYTHON
 }
 
+
+normalize_research() {
+  local model=""
+  local input_file=""
+  local output_file=""
+  local force="false"
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --model)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --model requires a model name." >&2
+          exit 1
+        fi
+
+        model="$2"
+        shift 2
+        ;;
+
+      --input)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --input requires a file." >&2
+          exit 1
+        fi
+
+        input_file="$2"
+        shift 2
+        ;;
+
+      --output)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --output requires a file." >&2
+          exit 1
+        fi
+
+        output_file="$2"
+        shift 2
+        ;;
+
+      --force)
+        force="true"
+        shift
+        ;;
+
+      -h|--help|help)
+        usage
+        exit 0
+        ;;
+
+      *)
+        echo "Unknown option: $1" >&2
+        echo >&2
+        usage >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$model" ]]; then
+    echo "Missing required option: --model" >&2
+    exit 1
+  fi
+
+  if [[ -z "$input_file" ]]; then
+    echo "Missing required option: --input" >&2
+    exit 1
+  fi
+
+  if [[ -z "$output_file" ]]; then
+    echo "Missing required option: --output" >&2
+    exit 1
+  fi
+
+  if [[ ! -f "$input_file" ]]; then
+    echo "Input file not found:" >&2
+    echo "$input_file" >&2
+    exit 1
+  fi
+
+  if [[ -e "$output_file" && "$force" != "true" ]]; then
+    echo "Output file already exists:" >&2
+    echo "$output_file" >&2
+    echo >&2
+    echo "Use --force to replace it." >&2
+    exit 1
+  fi
+
+  mkdir -p "$(dirname "$output_file")"
+
+  python3 - \
+    "$OLLAMA_URL" \
+    "$model" \
+    "$input_file" \
+    "$output_file" <<'PYTHON_NORMALIZE'
+import json
+import sys
+import time
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+ollama_url = sys.argv[1]
+model = sys.argv[2]
+input_path = Path(sys.argv[3])
+output_path = Path(sys.argv[4])
+
+raw_content = input_path.read_text(encoding="utf-8")
+
+instructions = """Normalize the supplied raw research artifact.
+
+Return Markdown using exactly this structure and heading order:
+
+# Research Result
+
+## Summary
+
+## Observations
+
+## Evidence
+
+## Conclusions
+
+## Limitations
+
+## Open Questions
+
+Requirements:
+
+- Preserve the meaning of the raw artifact.
+- Use only information present in the raw artifact.
+- Do not invent findings or evidence.
+- Keep observations separate from conclusions.
+- Preserve useful examples and tables.
+- Do not infer intent, motivation, audience response, prevalence, or broader applicability unless the raw artifact explicitly addresses it.
+- When the raw artifact does not support a required section, write: "Not established by the raw artifact."
+- Open Questions must arise directly from limitations or uncertainty already present in the raw artifact.
+- Every required section must contain text, but placeholder text is preferable to unsupported speculation.
+- Return only the normalized Markdown artifact.
+"""
+
+payload = {
+    "model": model,
+    "stream": False,
+    "think": False,
+    "options": {
+        "num_ctx": 16384,
+        "num_predict": 6144,
+    },
+    "messages": [
+        {
+            "role": "system",
+            "content": (
+                "You normalize Abbey Root research artifacts into a "
+                "canonical Markdown structure. Use only the supplied "
+                "artifact and do not invent information."
+            ),
+        },
+        {
+            "role": "user",
+            "content": (
+                instructions
+                + "\n\n===== RAW RESEARCH ARTIFACT =====\n"
+                + raw_content
+            ),
+        },
+    ],
+}
+
+print("Abbey Research Normalization")
+print()
+print(f"Model:   {model}")
+print(f"Ollama:  {ollama_url}")
+print(f"Input:   {input_path}")
+print(f"Output:  {output_path}")
+print()
+print("Normalizing research...")
+
+request = urllib.request.Request(
+    f"{ollama_url.rstrip('/')}/api/chat",
+    data=json.dumps(payload).encode("utf-8"),
+    headers={"Content-Type": "application/json"},
+    method="POST",
+)
+
+started = time.monotonic()
+
+try:
+    with urllib.request.urlopen(request, timeout=1200) as response:
+        response_data = json.loads(
+            response.read().decode("utf-8")
+        )
+except urllib.error.HTTPError as exc:
+    print(f"HTTP error: {exc.code}", file=sys.stderr)
+    print(exc.read().decode("utf-8"), file=sys.stderr)
+    sys.exit(1)
+except Exception as exc:
+    print(f"Ollama request failed: {exc}", file=sys.stderr)
+    sys.exit(1)
+
+runtime = time.monotonic() - started
+content = response_data.get("message", {}).get("content", "")
+
+if not content.strip():
+    print("Ollama returned an empty response.", file=sys.stderr)
+    sys.exit(1)
+
+output_path.write_text(
+    content.rstrip() + "\n",
+    encoding="utf-8",
+)
+
+print()
+print("Normalization complete.")
+print(f"Runtime: {runtime:.1f} seconds")
+print(f"Result: {output_path}")
+PYTHON_NORMALIZE
+}
+
+validate_research() {
+  local input_file=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --input)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --input requires a file." >&2
+          exit 1
+        fi
+
+        input_file="$2"
+        shift 2
+        ;;
+
+      -h|--help|help)
+        usage
+        exit 0
+        ;;
+
+      *)
+        echo "Unknown option: $1" >&2
+        echo >&2
+        usage >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$input_file" ]]; then
+    echo "Missing required option: --input" >&2
+    exit 1
+  fi
+
+  if [[ ! -f "$input_file" ]]; then
+    echo "Input file not found:" >&2
+    echo "$input_file" >&2
+    exit 1
+  fi
+
+  python3 - "$input_file" <<'PYTHON_VALIDATE'
+import re
+import sys
+from pathlib import Path
+
+input_path = Path(sys.argv[1])
+content = input_path.read_text(encoding="utf-8")
+
+required_sections = [
+    "Summary",
+    "Observations",
+    "Evidence",
+    "Conclusions",
+    "Limitations",
+    "Open Questions",
+]
+
+failures = []
+
+title_matches = re.findall(
+    r"^# Research Result\s*$",
+    content,
+    flags=re.MULTILINE,
+)
+
+if not title_matches:
+    failures.append(
+        "Missing required title: # Research Result"
+    )
+elif len(title_matches) > 1:
+    failures.append(
+        "Duplicate required title: # Research Result"
+    )
+
+heading_matches = list(
+    re.finditer(
+        r"^## (.+?)\s*$",
+        content,
+        flags=re.MULTILINE,
+    )
+)
+
+heading_names = [
+    match.group(1).strip()
+    for match in heading_matches
+]
+
+for section in required_sections:
+    count = heading_names.count(section)
+
+    if count == 0:
+        failures.append(
+            f"Missing required section: ## {section}"
+        )
+    elif count > 1:
+        failures.append(
+            f"Duplicate required section: ## {section}"
+        )
+
+present_required = [
+    name
+    for name in heading_names
+    if name in required_sections
+]
+
+if (
+    len(present_required) == len(required_sections)
+    and present_required != required_sections
+):
+    failures.append(
+        "Required sections are not in canonical order."
+    )
+
+for index, match in enumerate(heading_matches):
+    section = match.group(1).strip()
+
+    if section not in required_sections:
+        continue
+
+    start = match.end()
+    end = (
+        heading_matches[index + 1].start()
+        if index + 1 < len(heading_matches)
+        else len(content)
+    )
+
+    if not content[start:end].strip():
+        failures.append(
+            f"Section is empty: ## {section}"
+        )
+
+print("========================================")
+print(" Abbey Research Validation")
+print("========================================")
+print()
+print(f"Input: {input_path}")
+print()
+
+if failures:
+    print("Failures")
+    print("--------")
+
+    for failure in failures:
+        print(f"FAIL {failure}")
+
+    print()
+    print("Result: FAIL")
+    sys.exit(1)
+
+print("Checks")
+print("------")
+print("OK   Required title is present")
+print("OK   Required sections are present")
+print("OK   Required sections are unique")
+print("OK   Required sections are in canonical order")
+print("OK   Required sections contain content")
+print()
+print("Result: PASS")
+PYTHON_VALIDATE
+}
+
+
 command="${1:-help}"
 
 case "$command" in
   run)
     shift
     run_research "$@"
+    ;;
+
+  normalize)
+    shift
+    normalize_research "$@"
+    ;;
+
+  validate)
+    shift
+    validate_research "$@"
     ;;
 
   help|-h|--help)

@@ -151,6 +151,167 @@ assert_contains \
   "$output" \
   "Use --force to replace it."
 
+
+cat > "$fixture_root/working/valid-normalized.md" <<'MARKDOWN'
+# Research Result
+
+## Summary
+
+A recurring humorous writing structure was identified.
+
+## Observations
+
+Each post begins with a mundane statement followed by an exaggerated comment.
+
+## Evidence
+
+Three supplied posts use the same two-clause structure.
+
+## Conclusions
+
+The pattern appears intentional and recurring.
+
+## Limitations
+
+The sample contains only three posts.
+
+## Open Questions
+
+Whether the pattern appears consistently in a larger corpus remains unknown.
+MARKDOWN
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+    "$fixture_root/tools/bin/abbey-research" validate \
+    --input "$fixture_root/working/valid-normalized.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "valid normalized artifact passes validation" \
+  "$status" \
+  0
+
+assert_contains \
+  "valid normalized artifact reports PASS" \
+  "$output" \
+  "Result: PASS"
+
+cat > "$fixture_root/working/missing-section.md" <<'MARKDOWN'
+# Research Result
+
+## Summary
+
+Summary text.
+
+## Observations
+
+Observation text.
+
+## Evidence
+
+Evidence text.
+
+## Conclusions
+
+Conclusion text.
+
+## Limitations
+
+Limitation text.
+MARKDOWN
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+    "$fixture_root/tools/bin/abbey-research" validate \
+    --input "$fixture_root/working/missing-section.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "missing section fails validation" \
+  "$status" \
+  1
+
+assert_contains \
+  "missing section is reported" \
+  "$output" \
+  "Missing required section: ## Open Questions"
+
+cat > "$fixture_root/working/empty-section.md" <<'MARKDOWN'
+# Research Result
+
+## Summary
+
+Summary text.
+
+## Observations
+
+Observation text.
+
+## Evidence
+
+## Conclusions
+
+Conclusion text.
+
+## Limitations
+
+Limitation text.
+
+## Open Questions
+
+Question text.
+MARKDOWN
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+    "$fixture_root/tools/bin/abbey-research" validate \
+    --input "$fixture_root/working/empty-section.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "empty section fails validation" \
+  "$status" \
+  1
+
+assert_contains \
+  "empty section is reported" \
+  "$output" \
+  "Section is empty: ## Evidence"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+    "$fixture_root/tools/bin/abbey-research" normalize \
+    --model test-model \
+    --input "$fixture_root/working/valid-normalized.md" \
+    --output "$fixture_root/working/result.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "normalize protects existing output" \
+  "$status" \
+  1
+
+assert_contains \
+  "normalize reports overwrite protection" \
+  "$output" \
+  "Use --force to replace it."
+
 printf '\nPassed: %d\n' "$passed"
 printf 'Failed: %d\n' "$failed"
 
