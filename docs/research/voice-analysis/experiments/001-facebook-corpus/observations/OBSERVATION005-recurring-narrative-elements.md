@@ -26,9 +26,17 @@ Only recurring themes were considered. One-off jokes or isolated references were
 
 ## Findings
 
-Several fictional concepts reappear across multiple posts rather than being used as isolated jokes.
+At least one fictional concept reappears across multiple posts rather than being used as an isolated joke.
 
-The most prominent example is an ongoing narrative involving a time machine. Rather than repeating the same joke, later posts assume the reader is already familiar with previous events. Updates describe continued repairs, new components such as a flux capacitor, and incremental progress toward making the machine operational.
+The clearest example is an ongoing narrative involving a time machine.
+
+The sequence includes:
+
+- adjustments to the machine (`FB-002620`),
+- a failed repair attempt (`FB-002619`),
+- installation of a flux capacitor and planned testing (`FB-002589`),
+- partial success traveling into the future (`FB-002586`),
+- and a later reference to a time machine that works (`FB-002553`).
 
 The recurring narrative develops over time, with each post extending the fictional premise instead of restarting it.
 
