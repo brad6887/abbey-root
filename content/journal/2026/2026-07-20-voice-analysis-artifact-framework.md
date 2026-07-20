@@ -1,3 +1,15 @@
+---
+title: "Expanded Voice Analysis project"
+description: "Expanded the Voice Analysis project from individual research outputs into a reusable research artifact framework."
+date: 2026-07-20
+draft: false
+tags:
+  - Abbey Root
+  - Session Workflow
+  - Metadata
+  - Documentation
+---
+
 # Voice Analysis Artifact Framework
 
 ## Summary
