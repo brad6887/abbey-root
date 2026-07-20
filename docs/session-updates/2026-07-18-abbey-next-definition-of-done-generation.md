@@ -3,7 +3,7 @@ title: "abbey-next-definition-of-done-generation.md"
 description: "Corrected Abbey Next so Definition of Done output matches the selected recommendation and added regression coverage."
 date: 2026-07-18
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

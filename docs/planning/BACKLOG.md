@@ -14,7 +14,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Create `abbey end` session workflow.
 - [ ] Continue refining `abbey session review` and historical planning reconciliation through practical usage before adding broader automation.
 - [ ] Continue eliminating manually maintained documentation.
-- [ ] Design secure remote access to Abbey Root for working away from home.
+- [x] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.
 - [ ] Publish additional BradCooke.com content.
 - [x] Publish Doctor Robert as the reference Plant Model profile.
@@ -44,7 +44,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 ## Abbey Session Workflow Improvements
 
 - Improve session capture workflow by creating session updates and journal entries through a guided process.
-- Add consistent session metadata handling to prevent missing documentation and naming inconsistencies.
+- Validate required metadata for new or modified session updates while reporting pre-existing historical debt without blocking unrelated commits.
 - Fix `abbey journal` argument handling so `--title` and reserved commands like `help` behave consistently.
 - Add session-aware state to reduce manual slug and filename management.
 - Add reliable artifact export workflow for generated research documents and other Abbey artifacts.
@@ -55,6 +55,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Make `.bashrc` Ansible-managed.
 - [ ] Configure hostname resolution between lab systems.
+- [ ] Complete the `edge01` commissioning workflow.
+- [ ] Validate the `edge01` commissioning workflow and procedures.
 - [x] Deploy Technitium DNS on `edge01` as the authoritative `home.arpa` service and validate it from `ubuntu-dev01`.
 - [ ] Complete extended validation and lab-wide rollout of internal DNS.
 - [ ] Finalize the infrastructure naming strategy and add friendly DNS service records.
@@ -73,8 +75,13 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Label structured wiring cabinet.
 - [ ] Create network diagram.
 - [ ] Keep a spare USB Ethernet adapter for lab recovery.
-- [ ] Evaluate VPN, Tailscale, and Cloudflare Tunnel for remote connectivity.
-- [ ] Design and implement secure remote access to the lab.
+- [x] Evaluate VPN, Tailscale, and Cloudflare Tunnel for remote connectivity.
+- [x] Design and implement secure remote access to the lab.
+- [ ] Refine the remote-access architecture document.
+- [ ] Create a Remote Operator Guide.
+- [ ] Validate remote access from an external network.
+- [ ] Design `abbey operator add`.
+- [ ] Evaluate consolidating the Ansible Control Node onto `ubuntu-dev01`.
 - [ ] Expand `abbey lab` with additional infrastructure diagnostics.
 - [ ] Continue investigating and document resolution of the `ai-worker01` NVIDIA/Ollama reboot hang.
 - [ ] Evaluate running `abbey lab` remotely from development workstations.
@@ -92,11 +99,15 @@ The backlog is intentionally broad and serves as the project's working inventory
 ### Project-Aware Recommendations
 
 - [x] Create `abbey next`.
-- [ ] Build deterministic project recommendation engine.
-- [ ] Generate session objectives from planning documents.
-- [ ] Generate Definitions of Done.
-- [ ] Explain recommendation reasoning.
-- [ ] Detect recently completed work.
+- [x] Build deterministic project recommendation engine.
+- [x] Generate session objectives from planning documents.
+- [x] Generate Definitions of Done.
+- [x] Explain recommendation reasoning.
+- [x] Detect recently completed work.
+- [ ] Move recommendation-specific objectives and completion criteria into structured recommendation metadata.
+- [ ] Continue replacing broad token matching with stronger project-state relationships.
+- [ ] Expand recommendation-specific Definitions of Done beyond the current Recommendation Engine types.
+- [ ] Add a clean-repository recommendation scenario to the `abbey next` regression suite.
 - [ ] Balance neglected project areas.
 - [ ] Add optional AI recommendation mode.
 
@@ -174,7 +185,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Consider adding a concise **Reconciliation Scope** summary near the top of `abbey session review` output.
 - [ ] Preserve a small set of unreconciled historical session updates as regression fixtures.
 - [ ] Default reusable Abbey artifacts, including Codex prompts, session updates, journals, and planning documents, to raw Markdown in fenced code blocks unless another format is requested.
-- [ ] Standardize front matter for older session updates that predate the current metadata format.
+- [x] Normalize canonical metadata for historical session updates so they are discoverable by the reconciliation workflow.
 - [x] Implement `abbey session update`.
 - [ ] Associate journal entries with active Abbey sessions.
 
@@ -192,6 +203,21 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [x] Add discoverable `abbey ai decide` help and decision listing generated from decision-definition metadata.
 - [ ] Add `abbey ai decide easy-win` to identify low-risk, one-session work that delivers durable value and meaningfully reduces the backlog.
+- [ ] Implement `abbey ai evaluate` across installed local models.
+- [ ] Validate decision metadata before execution.
+- [ ] Add decision and engine versioning to decision-history artifacts.
+- [ ] Add consensus reporting across multiple models.
+- [ ] Expand the AI decision library with additional engineering workflows.
+
+### Abbey Research
+
+- [ ] Complete deterministic research Markdown normalization using universally safe operations.
+- [ ] Add normalization safety tests proving semantic content is preserved.
+- [ ] Orchestrate research generation, normalization, sanitization, and validation without coupling the workflow to Voice Analysis.
+- [ ] Evaluate a configurable Abbey Research validation framework.
+- [ ] Add research artifact provenance metadata for the model, prompt version, and corpus fingerprint.
+- [ ] Test AI-generated observations against additional Voice Analysis research patterns.
+- [ ] Refine the Voice Analysis methodology based on artifact validation results.
 
 ---
 
@@ -226,7 +252,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Complete the onboarding guide series.
 - [ ] Create `WORKFLOW.md`.
 - [ ] Create `PHILOSOPHY.md`.
-- [ ] Expand architecture documentation.
+- [ ] Expand the lab architecture documentation.
 - [ ] Create framework documentation index.
 - [ ] Build document update workflow.
 - [ ] Design automated document review workflow.

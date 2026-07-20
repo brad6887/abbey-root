@@ -3,7 +3,7 @@ title: "AI Decision Engine and Model Evaluation"
 description: "Expanded Abbey AI into a metadata-driven decision engine with structured history and multi-model evaluation."
 date: 2026-07-16
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

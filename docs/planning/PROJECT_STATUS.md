@@ -78,7 +78,6 @@ Completed
 - Expand onboarding documentation.
 - Continue CLI standardization.
 - Evaluate shared CLI libraries.
-- Design secure remote access.
 - Continue developing BradCooke.com.
 
 ---
@@ -104,6 +103,8 @@ Completed
 - Read-only Ansible infrastructure health review completed across managed hosts; the detected AI Worker issue remains under investigation.
 - Operational issue tracking established under `docs/issues/`.
 - `abbey lab check` refined and validated across managed hosts with expanded host, NVIDIA, and Ollama reporting while retaining read-only, timeout-protected, failure-tolerant operation.
+- Platform-role architecture established around stable responsibilities, with `edge01` designated as the Infrastructure Services Platform.
+- Tailscale-based remote access through `ubuntu-dev01` is documented in the remote-access architecture, validated by Abbey Doctor, and supported by inventory-driven reachability checks for managed hosts.
 - Technitium DNS deployed on `edge01` as the authoritative `home.arpa` service, with forward resolution, reverse resolution, and upstream forwarding validated from `ubuntu-dev01`.
 - Homepage recovery is managed through the authoritative Ansible role, with `edge01` integrated into managed inventory and the operational dashboard.
 
@@ -111,7 +112,6 @@ Completed
 
 - Map apartment Ethernet wall jacks.
 - Document the completed data closet.
-- Design secure remote access.
 
 ---
 
@@ -160,7 +160,7 @@ Completed
 - Metadata-driven `abbey ai decide` discovery and help
 - `abbey session update` generation from the standard repository template
 - `abbey lab`
-- `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, and reports conflicts between recent session evidence and planning documents
+- `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, reports conflicts between recent session evidence and planning documents, and generates Definitions of Done from the selected recommendation using tailored criteria where available and a deterministic fallback otherwise
 - `abbey site publish [--dry-run]`
 - Metadata-driven CLI help
 - Generated CLI reference
@@ -169,6 +169,7 @@ Completed
 - Structured content workspace validation and publishing
 - Canonical plant source-to-publication workflow
 - `abbey session review` validated across varied historical sessions as a read-only, evidence-based reconciliation assistant; historical reconciliation remains ongoing and refinement usage-driven
+- Canonical metadata normalized across historical session updates, making previously invisible sessions discoverable by the reconciliation workflow
 - Abbey context generation, knowledge snapshots, and documentation health checks use `docs/planning/PROJECT_STATUS.md` as the authoritative project status
 - `abbey session context` generates readable, upload-ready repository context for starting AI-assisted sessions, includes version-controlled repository-defined AI guidance when available, and remains failure-tolerant when guidance is absent
 
@@ -230,6 +231,8 @@ Completed
 - Open WebUI.
 - Local model experimentation.
 - `abbey ai`.
+- Metadata-driven AI decision framework with reusable decision definitions, structured history, and cross-model comparison validated through practical use.
+- `abbey research run` provides a reusable Ollama research runner with preserved raw output; AI-assisted normalization, `abbey research sanitize`, and deterministic artifact validation support canonical artifacts before human review; observation-specific artifacts preserve source citations through normalization, sanitization, and validation; the reusable Voice Analysis research artifact framework defines artifact types, metadata, lifecycle, provenance, and evidence-chain traceability; broader deterministic Markdown normalization and end-to-end orchestration remain in development.
 - AI benchmark planning.
 - AI technology review process.
 
@@ -290,7 +293,6 @@ Completed
 - Completing the end-to-end Abbey workflow.
 - Designing `abbey init`.
 - Reducing manually maintained documentation.
-- Secure remote access.
 - AI project awareness.
 - Reducing publish-preview noise and adding automatic live-site verification.
 
@@ -300,7 +302,6 @@ Completed
 
 ## Near Term
 
-- Design `abbey init`.
 - Refine `abbey review` through practical pre-commit usage.
 - Expand onboarding documentation.
 - Improve `abbey-doctor`.

@@ -3,7 +3,7 @@ title: "Historical Session Metadata Normalization"
 description: "Normalized canonical metadata across historical session updates and validated that previously invisible sessions are now discoverable by the Abbey review workflow."
 date: 2026-07-20
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

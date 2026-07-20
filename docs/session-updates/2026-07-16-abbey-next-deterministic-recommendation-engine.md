@@ -1,38 +1,17 @@
 ---
 title: "Abbey Next Deterministic Recommendation Engine"
-description: "Designed and implemented the initial deterministic, explainable abbey next recommendation workflow."
-date: 2026-07-16
-status: complete
-reviewed: false
-session: primary
-tags:
-  - Abbey Root
-  - Developer Toolkit
-  - Recommendation Engine
-  - Project-Aware Automation
----
-
-
-
-
-
-⸻
-
-title: “Abbey Next Deterministic Recommendation Engine”
-description: “Designed and implemented the initial project-aware abbey next command, validated deterministic recommendation behavior, and identified unreconciled session updates as a required freshness layer.”
+description: "Designed and implemented the initial project-aware abbey next command, validated deterministic recommendation behavior, and identified unreconciled session updates as a required freshness layer."
 date: 2026-07-16
 status: complete
 reviewed: true
 session: primary
 tags:
-
-* Abbey Root
-* Developer Toolkit
-* Workflow
-* Recommendation Engine
-* Project-Aware Automation
-
-⸻
+  - Abbey Root
+  - Developer Toolkit
+  - Workflow
+  - Recommendation Engine
+  - Project-Aware Automation
+---
 
 Abbey Next Deterministic Recommendation Engine
 

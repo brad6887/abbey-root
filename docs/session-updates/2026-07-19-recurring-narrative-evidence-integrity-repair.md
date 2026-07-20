@@ -3,7 +3,7 @@ title: "Recurring Narrative Evidence Integrity Repair"
 description: "Rebuilt Recurring Narrative evidence using verified records from the frozen Experiment 001 Facebook corpus sample."
 date: 2026-07-19
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

@@ -3,7 +3,7 @@ title: "Abbey Research Normalization and Validation Workflow"
 description: "Implemented normalization and deterministic validation for canonical Abbey Research artifacts before human review."
 date: 2026-07-18
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root
