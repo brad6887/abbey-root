@@ -16,6 +16,17 @@ Treat the sample as partial.
 
 Do not claim that a pattern is established across the complete corpus.
 
+## Evidence Requirements
+
+For every candidate pattern:
+
+- Provide a complete description of the observed pattern.
+- Include at least two representative source identifiers from the supplied corpus.
+- Source identifiers must use the exact format `FB-000000`.
+- Do not create or infer source identifiers.
+- Do not summarize a finding without retaining its supporting examples.
+- If a pattern cannot be supported by source identifiers, do not include it as a finding.
+
 ## Review Method
 
 Review the posts for recurring characteristics involving areas such as:

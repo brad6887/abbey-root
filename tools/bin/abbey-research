@@ -26,6 +26,7 @@ Usage:
     [--force]
 
   abbey research normalize \
+    --type TYPE \
     --model MODEL \
     --input FILE \
     --output FILE \
@@ -39,6 +40,7 @@ Usage:
     --input FILE
 
 Options:
+  --type TYPE     Research artifact type (default: generic)
   --model MODEL   Ollama model to use
   --prompt FILE   Research prompt file
   --input FILE    Input document supplied to the command
@@ -82,6 +84,16 @@ run_research() {
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
+      --type)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --type requires an artifact type." >&2
+          exit 1
+        fi
+
+        artifact_type="$2"
+        shift 2
+        ;;
+
       --model)
         if [[ -z "${2:-}" ]]; then
           echo "Option --model requires a model name." >&2
@@ -335,9 +347,19 @@ normalize_research() {
   local input_file=""
   local output_file=""
   local force="false"
+  local artifact_type="generic"
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
+      --type)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --type requires an artifact type." >&2
+          exit 1
+        fi
+
+        artifact_type="$2"
+        shift 2
+        ;;
       --model)
         if [[ -z "${2:-}" ]]; then
           echo "Option --model requires a model name." >&2
@@ -408,6 +430,16 @@ normalize_research() {
     exit 1
   fi
 
+  case "$artifact_type" in
+    generic|observation)
+      ;;
+    *)
+      echo "Unsupported artifact type: $artifact_type" >&2
+      echo "Supported types: generic observation" >&2
+      exit 1
+      ;;
+  esac
+
   if [[ -e "$output_file" && "$force" != "true" ]]; then
     echo "Output file already exists:" >&2
     echo "$output_file" >&2
@@ -421,6 +453,7 @@ normalize_research() {
   python3 - \
     "$OLLAMA_URL" \
     "$model" \
+    "$artifact_type" \
     "$input_file" \
     "$output_file" <<'PYTHON_NORMALIZE'
 import json
@@ -432,15 +465,32 @@ from pathlib import Path
 
 ollama_url = sys.argv[1]
 model = sys.argv[2]
-input_path = Path(sys.argv[3])
-output_path = Path(sys.argv[4])
+artifact_type = sys.argv[3]
+input_path = Path(sys.argv[4])
+output_path = Path(sys.argv[5])
 
 raw_content = input_path.read_text(encoding="utf-8")
 
-instructions = """Normalize the supplied raw research artifact.
+if artifact_type == "observation":
+    structure = """
+# Observation
 
-Return Markdown using exactly this structure and heading order:
+## Question
 
+## Corpus
+
+## Method
+
+## Findings
+
+## Interpretation
+
+## Questions Raised
+
+## Status
+"""
+else:
+    structure = """
 # Research Result
 
 ## Summary
@@ -454,14 +504,34 @@ Return Markdown using exactly this structure and heading order:
 ## Limitations
 
 ## Open Questions
+"""
+
+instructions = f"""Normalize the supplied raw research artifact.
+
+Return Markdown using exactly this structure and heading order:
+
+{structure}
 
 Requirements:
 
 - Preserve the meaning of the raw artifact.
 - Use only information present in the raw artifact.
+- This is a normalization pass, not a summarization pass.
+- Preserve all factual detail from the raw artifact.
+- Do not shorten findings, remove examples, or collapse evidence.
+- Source identifiers such as FB-000000 are mandatory evidence references and must be retained.
 - Do not invent findings or evidence.
 - Keep observations separate from conclusions.
-- Preserve useful examples and tables.
+- Normalization is a structural transformation, not a summarization step.
+- Preserve complete finding descriptions from the raw artifact.
+- Do not shorten, compress, or rewrite findings that already contain evidence.
+- Do not replace detailed sections with partial sentences.
+- If the raw artifact already matches the requested artifact type, preserve its content and only repair structure.
+- Source identifiers are evidence references, not formatting.
+- Every finding that has representative source identifiers in the raw artifact must include those identifiers in the normalized artifact.
+- Do not replace cited findings with summaries that remove their supporting source identifiers.
+- If a finding cannot retain its evidence references, preserve the original finding text rather than summarizing it.
+- Never remove evidence references during normalization.
 - Do not infer intent, motivation, audience response, prevalence, or broader applicability unless the raw artifact explicitly addresses it.
 - When the raw artifact does not support a required section, write: "Not established by the raw artifact."
 - Open Questions must arise directly from limitations or uncertainty already present in the raw artifact.
@@ -604,6 +674,16 @@ replacements = {
 
 for old, new in replacements.items():
     content = content.replace(old, new)
+
+lines = []
+
+for line in content.splitlines():
+    if line.startswith("#"):
+        line = line.rstrip()
+
+    lines.append(line)
+
+content = "\n".join(lines)
 
 output_path.write_text(
     content.rstrip() + "\n",
