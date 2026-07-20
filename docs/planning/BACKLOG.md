@@ -41,6 +41,14 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Adopt repository-defined AI session guidance across other Abbey-style repositories.
 - [ ] Create framework migration guide.
 
+## Abbey Session Workflow Improvements
+
+- Improve session capture workflow by creating session updates and journal entries through a guided process.
+- Add consistent session metadata handling to prevent missing documentation and naming inconsistencies.
+- Fix `abbey journal` argument handling so `--title` and reserved commands like `help` behave consistently.
+- Add session-aware state to reduce manual slug and filename management.
+- Add reliable artifact export workflow for generated research documents and other Abbey artifacts.
+
 ---
 
 ## Infrastructure

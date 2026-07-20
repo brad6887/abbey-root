@@ -135,6 +135,86 @@ Example output:
 - Make side quests a first-class part of the engineering process.
 - Keep metadata lightweight so session startup remains fast.
 
+## Abbey Wallboard / Command Center
+
+### Summary
+
+Develop a lightweight web-based Abbey dashboard designed for an always-on display (old iPad, monitor, or TV) that provides a live view of the Abbey Root environment.
+
+The initial goal is passive awareness rather than interaction. Over time, the dashboard could evolve into a secure operations console for common administrative tasks.
+
+### Motivation
+
+Provide a "mission control" view of the lab that makes the current state of Abbey visible at a glance without opening a terminal.
+
+Potential display devices include:
+
+- Old iPad mounted near the desk
+- Secondary monitor
+- Wall-mounted TV
+- Browser on any workstation
+
+### Phase 1 — Wallboard (Read Only)
+
+- Rotating full-screen dashboard pages
+- Current Abbey session
+- Definition of Done
+- Recommended next command
+- Lab health
+- Docker container status
+- AI worker status
+- Backup status
+- Project progress
+- Calendar / daily agenda
+- Optional "fun" screen (orchids, Bread Pitt, weather, dad joke, etc.)
+
+Display should rotate automatically every 15–30 seconds while allowing manual navigation.
+
+### Phase 2 — Command Center
+
+Add authenticated, touch-friendly operational controls for predefined Abbey actions.
+
+Examples:
+
+- Restart Uptime Kuma
+- Restart Homepage
+- Run `abbey doctor`
+- Run `abbey lab check`
+- Refresh dashboard data
+- Start backup
+- Publish website
+
+Actions should execute predefined workflows rather than arbitrary shell commands.
+
+### Architecture Ideas
+
+- Lightweight web application
+- Docker deployment
+- Accessible at `abbey.home.arpa`
+- Optimized for tablet displays
+- Real-time updates via WebSockets or Server-Sent Events
+- Multiple displays supported simultaneously
+
+### Design Principles
+
+- CLI remains the source of truth.
+- Dashboard consumes the same data as Abbey commands.
+- Prefer structured JSON output from Abbey commands over parsing terminal text.
+- Keep the display read-only until operational workflows are mature.
+- Every action should be logged and auditable.
+
+### Future Possibilities
+
+- Event-driven screen changes (show alerts when attention is needed)
+- Notification center
+- Historical graphs
+- AI worker monitoring
+- Deployment status
+- Home lab map
+- Power Infrastructure integration
+- Mobile-friendly command center
+- Voice interface using future Abbey AI capabilities
+
 ### Not Yet
 
 Do not implement until the session workflow and review process have stabilized. This feature should build on the existing session metadata rather than complicating it prematurely.
