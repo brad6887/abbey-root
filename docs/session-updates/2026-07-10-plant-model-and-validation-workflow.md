@@ -1,10 +1,16 @@
 ---
-date: 2026-07-10
 title: Plant Model and Validation Workflow
+description: "Defined the reusable Plant Model and implemented validation for canonical plant workspaces."
+date: 2026-07-10
 status: pending
-session: primary
-journal: 2026-07-10-plant-model-and-validation-workflow
 reviewed: true
+session: primary
+tags:
+  - Abbey Root
+  - Plant Model
+  - Validation
+  - Developer Toolkit
+journal: 2026-07-10-plant-model-and-validation-workflow
 ---
 
 # Session Update

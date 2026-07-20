@@ -1,9 +1,14 @@
 ---
-date: 2026-07-10
 title: BradCooke.com Temporary Landing Page
+description: "Replaced outdated BradCooke.com content with a current temporary landing page while the Abbey publishing workflow was developed."
+date: 2026-07-10
 status: complete
-session: side-quest
 reviewed: true
+session: side-quest
+tags:
+  - Abbey Root
+  - BradCooke.com
+  - Publishing
 ---
 
 # Session Update

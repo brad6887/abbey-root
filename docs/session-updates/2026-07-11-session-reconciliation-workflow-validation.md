@@ -1,10 +1,16 @@
 ---
-date: 2026-07-11
 title: Session Reconciliation Workflow Validation
+description: "Validated historical session reconciliation against authoritative planning, reference, framework, generated documentation, and implementation."
+date: 2026-07-11
 status: pending
-session: standard
-journal: 2026-07-11-session-reconciliation-workflow-validation
 reviewed: true
+session: standard
+tags:
+  - Abbey Root
+  - Session Workflow
+  - Planning
+  - Documentation
+journal: 2026-07-11-session-reconciliation-workflow-validation
 ---
 
 # Session Update

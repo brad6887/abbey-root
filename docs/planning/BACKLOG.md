@@ -20,10 +20,10 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Publish Doctor Robert as the reference Plant Model profile.
 - [x] Connect the Plant Model to BradCooke.com.
 - [ ] Add generated Abbey CLI architecture and registered-command summaries to `abbey session context`.
-- [ ] Use unreconciled session updates as recommendation evidence.
-- [ ] Suppress work completed in unreconciled session updates.
-- [ ] Extract candidate follow-up work from session update Next Steps.
-- [ ] Report conflicts between recent session updates and planning documents.
+- [x] Use unreconciled session updates as recommendation evidence.
+- [x] Suppress work completed in unreconciled session updates.
+- [x] Extract candidate follow-up work from session-update Next Steps.
+- [x] Report conflicts between recent session updates and planning documents.
 
 ---
 

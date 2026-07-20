@@ -1,10 +1,15 @@
 ---
-date: 2026-07-11
 title: Bungalow Bill Working Profile
+description: "Completed Bungalow Bill's canonical working profile with a reconstructed rescue timeline and verified photograph metadata."
+date: 2026-07-11
 status: pending
-session: regular
-journal:
 reviewed: true
+session: regular
+tags:
+  - Abbey Root
+  - Plant Model
+  - Orchid Rescue
+journal:
 ---
 
 # Session Update

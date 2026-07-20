@@ -160,7 +160,7 @@ Completed
 - Metadata-driven `abbey ai decide` discovery and help
 - `abbey session update` generation from the standard repository template
 - `abbey lab`
-- `abbey next` with an initial deterministic, explainable recommendation engine for selecting focused engineering sessions
+- `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, and reports conflicts between recent session evidence and planning documents
 - `abbey site publish [--dry-run]`
 - Metadata-driven CLI help
 - Generated CLI reference

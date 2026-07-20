@@ -1,10 +1,16 @@
 ---
-date: 2026-07-12
 title: Abbey Review Workflow Validation
+description: "Validated the practical Abbey session review workflow against completed historical sessions."
+date: 2026-07-12
 status: complete
-session: standard
-journal: 2026-07-12-abbey-review-workflow-validation
 reviewed: true
+session: standard
+tags:
+  - Abbey Root
+  - Session Workflow
+  - Planning
+  - Developer Toolkit
+journal: 2026-07-12-abbey-review-workflow-validation
 ---
 
 # Session Update

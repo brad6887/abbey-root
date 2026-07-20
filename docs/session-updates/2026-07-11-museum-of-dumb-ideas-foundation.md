@@ -1,10 +1,16 @@
 ---
-date: 2026-07-11
 title: Museum of Dumb Ideas Foundation
+description: "Established and published the initial Museum of Dumb Ideas section for BradCooke.com."
+date: 2026-07-11
 status: complete
-session: standard
-journal:
 reviewed: true
+session: standard
+tags:
+  - Abbey Root
+  - BradCooke.com
+  - Museum of Dumb Ideas
+  - Publishing
+journal:
 ---
 
 # Session Update

@@ -1,10 +1,16 @@
 ---
-date: 2026-07-08
 title: Orchid Rescue Content Model
+description: "Built the first content-driven Orchid Rescue section for BradCooke.com using a reusable plant collection."
+date: 2026-07-08
 status: pending
-session: website
-journal: 
 reviewed: true
+session: website
+tags:
+  - Abbey Root
+  - BradCooke.com
+  - Plant Model
+  - Astro
+journal: 
 ---
 
 # Session Update

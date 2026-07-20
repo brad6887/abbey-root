@@ -3,7 +3,7 @@ title: "Abbey Next Session Update Freshness Layer"
 description: "Extended abbey next to use unreconciled session updates as deterministic freshness evidence."
 date: 2026-07-17
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

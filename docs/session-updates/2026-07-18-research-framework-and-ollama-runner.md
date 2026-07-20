@@ -1,3 +1,17 @@
+---
+title: "Research Framework and Ollama Runner"
+description: "Built a reusable Abbey research workflow that runs structured analysis through Ollama and validates preserved research artifacts."
+date: 2026-07-18
+status: complete
+reviewed: false
+session: primary
+tags:
+  - Abbey Root
+  - AI Research
+  - Ollama
+  - Developer Toolkit
+---
+
 # Research Framework and Ollama Runner
 
 ## Status

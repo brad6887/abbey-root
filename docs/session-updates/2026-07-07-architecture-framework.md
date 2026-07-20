@@ -1,10 +1,15 @@
 ---
-date: 2026-07-07
 title: Architecture Framework Introduced
+description: "Introduced a dedicated architecture layer and reusable engineering frameworks for Abbey Root."
+date: 2026-07-07
 status: pending
-session: architecture
-journal: 2026-07-07-architecture-framework
 reviewed: true
+session: architecture
+tags:
+  - Abbey Root
+  - Architecture
+  - Abbey Framework
+journal: 2026-07-07-architecture-framework
 ---
 
 # Session Update

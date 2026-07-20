@@ -1,3 +1,16 @@
+---
+title: "Deadpan Delivery Evidence Integrity Repair"
+description: "Rebuilt Deadpan Delivery evidence using only verified records from the frozen Experiment 001 Facebook corpus sample."
+date: 2026-07-19
+status: complete
+reviewed: false
+session: primary
+tags:
+  - Abbey Root
+  - Voice Analysis
+  - Research Integrity
+---
+
 # Deadpan Delivery Evidence Integrity Repair
 
 ## Status

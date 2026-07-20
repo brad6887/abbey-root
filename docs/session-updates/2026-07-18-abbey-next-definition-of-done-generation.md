@@ -2,12 +2,15 @@
 title: "abbey-next-definition-of-done-generation.md"
 description: "Corrected Abbey Next so Definition of Done output matches the selected recommendation and added regression coverage."
 date: 2026-07-18
-draft: false
+status: complete
+reviewed: false
+session: primary
 tags:
   - Abbey Root
   - Abbey Next
   - Recommendation Engine
   - Testing
+draft: false
 ---
 
 # abbey-next-definition-of-done-generation.md

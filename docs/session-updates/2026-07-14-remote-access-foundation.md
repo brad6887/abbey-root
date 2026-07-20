@@ -1,3 +1,17 @@
+---
+title: "Remote Access Foundation"
+description: "Established and validated a secure remote access foundation for the Abbey Root lab using Tailscale."
+date: 2026-07-14
+status: complete
+reviewed: false
+session: primary
+tags:
+  - Abbey Root
+  - Infrastructure
+  - Remote Access
+  - Tailscale
+---
+
 # Remote Access Foundation
 
 **Date:** 2026-07-14

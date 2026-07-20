@@ -1,10 +1,16 @@
 ---
-date: 2026-07-10
 title: Doctor Robert Plant Publishing Workflow
+description: "Completed the first end-to-end Plant Model publishing workflow using Doctor Robert as the reference implementation."
+date: 2026-07-10
 status: pending
-session: primary
-journal: 2026-07-10-doctor-robert-plant-publishing-workflow
 reviewed: true
+session: primary
+tags:
+  - Abbey Root
+  - Plant Model
+  - Publishing
+  - BradCooke.com
+journal: 2026-07-10-doctor-robert-plant-publishing-workflow
 ---
 
 # Session Update

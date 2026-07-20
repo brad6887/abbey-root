@@ -1,10 +1,16 @@
 ---
-date: 2026-07-05
 title: AI Benchmarks Become Part of Abbey Root
+description: "Introduced project-specific AI benchmarks, lightweight session updates, and workflow guidance in abbey session."
+date: 2026-07-05
 status: pending
-session: bonus
-journal: 2026-07-05-ai-benchmarks-become-part-of-abbey-root
 reviewed: true
+session: bonus
+tags:
+  - Abbey Root
+  - AI
+  - Benchmarks
+  - Session Workflow
+journal: 2026-07-05-ai-benchmarks-become-part-of-abbey-root
 ---
 
 # Session Update

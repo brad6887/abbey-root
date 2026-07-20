@@ -1,10 +1,16 @@
 ---
-date: 2026-07-11
 title: Plant Timeline Image Presentation
+description: "Improved the shared presentation of timeline photographs across Abbey Root plant profiles."
+date: 2026-07-11
 status: pending
-session: development
-journal: 2026-07-11-plant-timeline-image-presentation
 reviewed: true
+session: development
+tags:
+  - Abbey Root
+  - Plant Model
+  - BradCooke.com
+  - Astro
+journal: 2026-07-11-plant-timeline-image-presentation
 ---
 
 # Session Update

@@ -1,10 +1,16 @@
 ---
-date: 2026-07-10
 title: Helter Skelter Plant Publishing Workflow
+description: "Published Helter Skelter through the Plant Model and improved reusable timeline-image handling for plant profiles."
+date: 2026-07-10
 status: pending
-session: primary
-journal: 2026-07-10-helter-skelter-plant-publishing-workflow
 reviewed: true
+session: primary
+tags:
+  - Abbey Root
+  - Plant Model
+  - Publishing
+  - BradCooke.com
+journal: 2026-07-10-helter-skelter-plant-publishing-workflow
 ---
 
 # Session Update

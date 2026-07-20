@@ -1,10 +1,15 @@
 ---
-date: 2026-07-05
 title: AI News Review Process
+description: "Established a repeatable AI news review process with evaluation triggers, adoption criteria, and recurring review direction."
+date: 2026-07-05
 status: pending
-session: bonus
-journal: 2026-07-05-ai-news-review-process
 reviewed: true
+session: bonus
+tags:
+  - Abbey Root
+  - AI
+  - Recurring Reviews
+journal: 2026-07-05-ai-news-review-process
 ---
 
 # Session Update

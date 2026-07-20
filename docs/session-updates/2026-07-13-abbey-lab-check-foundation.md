@@ -1,10 +1,16 @@
 ---
-date: 2026-07-13
 title: Abbey Lab Check Foundation
+description: "Established the foundation for deterministic infrastructure health monitoring through abbey lab check."
+date: 2026-07-13
 status: pending
-session: infrastructure
-journal:
 reviewed: true
+session: infrastructure
+tags:
+  - Abbey Root
+  - Infrastructure
+  - Developer Toolkit
+  - Validation
+journal:
 ---
 
 # Session Update

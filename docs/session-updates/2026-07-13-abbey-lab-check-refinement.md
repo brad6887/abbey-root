@@ -1,10 +1,16 @@
 ---
-date: 2026-07-13
 title: Abbey Lab Check Refinement
+description: "Refined abbey lab check to provide clearer and more actionable infrastructure health reporting."
+date: 2026-07-13
 status: completed
-session: infrastructure
-journal:
 reviewed: true
+session: infrastructure
+tags:
+  - Abbey Root
+  - Infrastructure
+  - Developer Toolkit
+  - Validation
+journal:
 ---
 
 # Session Update

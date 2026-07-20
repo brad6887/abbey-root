@@ -1,3 +1,17 @@
+---
+title: "Abbey Next Deterministic Recommendation Engine"
+description: "Designed and implemented the initial deterministic, explainable abbey next recommendation workflow."
+date: 2026-07-16
+status: complete
+reviewed: false
+session: primary
+tags:
+  - Abbey Root
+  - Developer Toolkit
+  - Recommendation Engine
+  - Project-Aware Automation
+---
+
 
 
 

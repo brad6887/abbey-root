@@ -1,10 +1,16 @@
 ---
-date: 2026-07-06
 title: Documentation Architecture and Planning Framework
+description: "Established Abbey Root's documentation architecture and machine-readable planning framework for developers and automation."
+date: 2026-07-06
 status: pending
-session: full
-journal: 2026-07-06-building-the-documentation-framework
 reviewed: true
+session: full
+tags:
+  - Abbey Root
+  - Documentation
+  - Planning
+  - Abbey Framework
+journal: 2026-07-06-building-the-documentation-framework
 ---
 
 # Session Update

@@ -5,6 +5,10 @@ date: 2026-07-14
 status: pending
 reviewed: true
 session: primary
+tags:
+  - Abbey Root
+  - Session Workflow
+  - Planning
 journal:
 ---
 

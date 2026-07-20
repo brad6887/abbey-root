@@ -1,3 +1,17 @@
+---
+title: "Abbey Voice Analysis Artifact Framework"
+description: "Defined reusable Voice Analysis artifact types, metadata standards, lifecycle rules, provenance, and traceability requirements."
+date: 2026-07-20
+status: complete
+reviewed: false
+session: primary
+tags:
+  - Abbey Root
+  - Voice Analysis
+  - Research Framework
+  - Documentation
+---
+
 # Session Update
 
 ## Objective

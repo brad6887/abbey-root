@@ -1,8 +1,16 @@
 ---
-date: 2026-07-08
 title: Abbey Framework Foundation
-journal: 2026-07-08-abbey-framework-foundation
+description: "Established Abbey Root as the Abbey Framework reference implementation with shared CLI standards and onboarding guidance."
+date: 2026-07-08
+status: complete
 reviewed: true
+session: primary
+tags:
+  - Abbey Root
+  - Abbey Framework
+  - CLI
+  - Documentation
+journal: 2026-07-08-abbey-framework-foundation
 ---
 
 # Session Update

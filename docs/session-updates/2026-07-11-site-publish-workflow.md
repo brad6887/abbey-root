@@ -1,10 +1,16 @@
 ---
-date: 2026-07-11
 title: Site Publish Workflow
+description: "Implemented the first production publishing workflow for BradCooke.com through Abbey Root."
+date: 2026-07-11
 status: complete
-session: standard
-journal: 2026-07-11-site-publish-workflow
 reviewed: true
+session: standard
+tags:
+  - Abbey Root
+  - BradCooke.com
+  - Publishing
+  - Developer Toolkit
+journal: 2026-07-11-site-publish-workflow
 ---
 
 # Session Update

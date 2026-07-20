@@ -1,3 +1,17 @@
+---
+title: "Abbey Research Observation Artifact Validation"
+description: "Validated an evidence-preserving Abbey research observation pipeline with provenance retained from generation through validation."
+date: 2026-07-20
+status: complete
+reviewed: false
+session: primary
+tags:
+  - Abbey Root
+  - AI Research
+  - Voice Analysis
+  - Validation
+---
+
 # Session Update
 
 ## Objective
