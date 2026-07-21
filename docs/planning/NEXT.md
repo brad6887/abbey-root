@@ -1,5 +1,7 @@
 # Abbey Root Next
 
+Last Reviewed: 2026-07-20
+
 This document identifies the next recommended work for Abbey Root.
 
 Unlike the backlog, this document contains only the current priorities.
@@ -67,7 +69,7 @@ Continue improving Abbey Root, but only when real project work exposes opportuni
 
 Priority areas include:
 
-- Continue historical session reconciliation and refine `abbey review` through practical usage.
+- Refine `abbey review` through practical usage.
 - Continue metadata-driven automation.
 - Improve onboarding documentation.
 - Expand the developer toolkit where it reduces repetitive work.

@@ -768,6 +768,10 @@ Additional rules:
   work as accepted, intended, or required.
 - Recommend NEXT.md only when current project context independently establishes
   immediate priority.
+- When recommending a substantive change to a planning document that contains a
+  Last Updated: field, also require setting that field to the current date. Do
+  not recommend changing the date in an otherwise unchanged file, and do not
+  recommend date-only edits.
 - Distinguish one completed implementation from a broader unfinished capability.
 - Do not recommend metadata changes unless the supplied evidence establishes the
   expected value.

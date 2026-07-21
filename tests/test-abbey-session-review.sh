@@ -44,6 +44,9 @@ check "keeps incidental drift non-blocking" \
 check "avoids project-status rollout duplication" \
   "PROJECT_STATUS.md should summarize durable completed capabilities."
 
+check "maintains dates for changed planning documents" \
+  "When recommending a substantive change to a planning document that contains a"
+
 check "requires single file classification" \
   "Each supplied authoritative file must appear exactly once"
 

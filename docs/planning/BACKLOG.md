@@ -12,7 +12,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Design `abbey init` project bootstrap command.
 - [x] Create `abbey end` session workflow.
-- [ ] Continue refining `abbey session review` and historical planning reconciliation through practical usage before adding broader automation.
+- [ ] Continue refining `abbey session review` through practical usage before adding broader automation.
 - [ ] Continue eliminating manually maintained documentation.
 - [x] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.
@@ -108,6 +108,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Continue replacing broad token matching with stronger project-state relationships.
 - [ ] Expand recommendation-specific Definitions of Done beyond the current Recommendation Engine types.
 - [ ] Add a clean-repository recommendation scenario to the `abbey next` regression suite.
+- [ ] Define and implement stale-`NEXT.md` reporting in `abbey next`: warn when its review date exceeds a defined threshold without discarding or reducing `NEXT.md` authority or changing recommendation scores solely because of age.
 - [ ] Balance neglected project areas.
 - [ ] Add optional AI recommendation mode.
 

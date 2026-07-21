@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-07-08
+Last Updated: 2026-07-20
 
 ---
 
@@ -168,7 +168,7 @@ Completed
 - `abbey plant publish <slug>`
 - Structured content workspace validation and publishing
 - Canonical plant source-to-publication workflow
-- `abbey session review` validated across varied historical sessions as a read-only, evidence-based reconciliation assistant; historical reconciliation remains ongoing and refinement usage-driven
+- `abbey session review` validated across varied historical sessions as a read-only, evidence-based reconciliation assistant; historical session reconciliation is complete and refinement remains usage-driven
 - Canonical metadata normalized across historical session updates, making previously invisible sessions discoverable by the reconciliation workflow
 - Abbey context generation, knowledge snapshots, and documentation health checks use `docs/planning/PROJECT_STATUS.md` as the authoritative project status
 - `abbey session context` generates readable, upload-ready repository context for starting AI-assisted sessions, includes version-controlled repository-defined AI guidance when available, and remains failure-tolerant when guidance is absent

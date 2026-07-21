@@ -72,6 +72,18 @@ Planning documents should:
 
 # Planning Documents
 
+## Freshness Metadata
+
+`Last Updated:` records the date a document's substantive content last changed.
+
+`Last Reviewed:` records the date a human deliberately confirmed that a document still reflects current intent, even when no substantive content changed.
+
+`PROJECT_STATUS.md` uses `Last Updated:`. `NEXT.md` uses `Last Reviewed:`.
+
+Document-level freshness metadata is not currently required for `BACKLOG.md`, `ROADMAP.md`, or `IDEAS.md`.
+
+Automation must not change freshness metadata merely because it read a file.
+
 ## PROJECT_STATUS.md
 
 ### Purpose
@@ -83,12 +95,6 @@ Provides a snapshot of the current state of the project.
 Developers
 
 Automation
-
-### Last Updated
-
-`Last Updated` records the date of the last authoritative project-status review or refresh.
-
-It does not need to change for every narrow reconciliation or editorial update. A newer accomplishment does not by itself make the field stale when the document has not undergone a full status refresh.
 
 ### Required Sections
 
