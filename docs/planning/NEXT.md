@@ -2,107 +2,167 @@
 
 Last Reviewed: 2026-07-20
 
-This document identifies the next recommended work for Abbey Root.
-
-Unlike the backlog, this document contains only the current priorities.
-
----
-
 # Current Theme
 
 ## Build with the Framework
 
-The Abbey Framework foundation has reached a point where it should be exercised through real projects rather than expanded in isolation.
-
-The primary focus is now using Abbey Root to build and publish BradCooke.com while allowing real development experience to guide future framework improvements.
-
----
-
 # Primary Objective
 
-Complete BradCooke.com as the first major public project built using the Abbey Framework.
+Establish the foundation for reproducible Voice Analysis research by creating the formal corpus artifact and aligning existing research artifacts with the methodology.
 
-Use real website development to validate the framework, identify friction points, and improve Abbey only where practical experience demonstrates a need.
+# Definition of Done
 
----
+The Voice Analysis foundation phase is complete when:
 
-# Current Priorities
+- CORPUS-001 exists as a formal research artifact.
+- The Facebook corpus source is documented.
+- Corpus normalization steps are documented.
+- Experiment 001 references the formal corpus artifact.
+- Existing experiment outputs can be traced through the formal artifact lifecycle.
+- The research workflow can begin from source material rather than existing analysis.
 
-## BradCooke.com
+## Current Objective
 
-- Expand project pages.
-- Publish additional technical content.
-- Improve reusable Astro components.
-- Continue refining the overall site design.
-- Continue publishing and refining the live site.
-- Continue documenting Abbey Root and Power Infrastructure.
-- Improve reusable Astro components only where the plant implementation exposes a need.
-- Continue documenting Abbey Root and Power Infrastructure.
+Establish the foundation for reproducible Voice Analysis research by creating the formal corpus artifact and aligning existing research artifacts with the methodology.
 
----
+## Definition of Done
 
-## AI Assistant
+The Voice Analysis foundation phase is complete when:
 
-Develop practical AI-assisted workflows that improve everyday development.
-
-Focus on:
-
-- Documentation assistance
-- Technical writing
-- Content generation
-- Image generation
-- Session summaries
-- Project review
-- Publishing assistance
-- Plant workspace consistency review
-- Photo metadata validation
-- Inventory summarization
-- Draft publishing assembly
-
-The emphasis should remain on solving real development problems rather than building AI features for their own sake.
+- CORPUS-001 exists as a formal research artifact.
+- The Facebook corpus source is documented.
+- Corpus normalization steps are documented.
+- Experiment 001 references the formal corpus artifact.
+- Existing experiment outputs can be traced through the formal artifact lifecycle.
+- The research workflow can begin from source material rather than existing analysis.
 
 ---
 
-## Abbey Framework
+# Phase 1 — Corpus Foundation
 
-Continue improving Abbey Root, but only when real project work exposes opportunities.
+## Objective
 
-Priority areas include:
+Create the source foundation that all future Voice Analysis artifacts will reference.
 
-- Refine `abbey review` through practical usage.
-- Continue metadata-driven automation.
-- Improve onboarding documentation.
-- Expand the developer toolkit where it reduces repetitive work.
+## Tasks
 
-Framework improvements should be driven by experience rather than speculation.
+### Define CORPUS-001
 
----
+Create:
 
-# Success Criteria
+docs/research/voice-analysis/corpus/CORPUS-001.md
 
-This phase will be considered successful when:
+Document:
 
-- BradCooke.com is substantially complete and ready for public use.
-- Abbey Root continues to mature through practical experience.
-- AI becomes a useful day-to-day development assistant.
-- Framework improvements arise naturally from building real projects.
-
----
-
-# Future Direction
-
-Once BradCooke.com reaches a stable public release, begin the next Abbey-style repository:
-
-**Mystery Shopper Assistant**
-
-The project will serve as an independent validation that the Abbey Framework can support domains beyond infrastructure engineering.
+- Source material
+- Collection method
+- Date range
+- File format
+- Size
+- Limitations
+- Privacy considerations
 
 ---
 
-# Guiding Principle
+### Document Corpus Structure
 
-> Build real projects.
+Define:
 
-Use those projects to improve the framework.
+- Raw source location
+- Normalized corpus location
+- Metadata format
+- Stable identifiers
 
-Allow the framework to mature through practical experience instead of attempting to design every future capability in advance.
+Expected flow:
+
+Raw Facebook Export
+
+↓
+
+Normalized Corpus
+
+↓
+
+Research Artifacts
+
+---
+
+### Validate Corpus Normalization
+
+Confirm:
+
+- Posts have stable identifiers.
+- Dates are preserved.
+- Original text is retained.
+- Processing steps are reproducible.
+
+---
+
+# Phase 2 — Experiment Alignment
+
+## Objective
+
+Align existing Experiment 001 research with the formal artifact model.
+
+Tasks:
+
+- Link EXP-001 to CORPUS-001.
+- Document relationship between experiment artifacts and formal artifacts.
+- Preserve original experiment history.
+
+---
+
+# Phase 3 — Artifact Migration
+
+## Objective
+
+Promote existing research outputs into formal artifacts.
+
+Priority order:
+
+1. Deadpan Delivery
+2. Preference for Concise Writing
+3. Implicit Reader Participation
+4. Literal Reframing
+5. Recurring Narrative Elements
+
+---
+
+# Phase 4 — Validation Expansion
+
+## Objective
+
+Test whether hypotheses represent stable writing characteristics.
+
+Review:
+
+- Multiple time periods
+- Multiple writing formats
+- Counterexamples
+
+---
+
+# Phase 5 — Voice Model Development
+
+## Objective
+
+Create the first Voice Model only after sufficient validation.
+
+Requirements:
+
+- Multiple validated hypotheses
+- Supporting evidence
+- Documented exceptions
+- Confidence levels
+
+---
+
+# Future Automation Opportunities
+
+Potential Abbey research commands:
+
+- Artifact creation
+- Artifact validation
+- Artifact dependency graph
+- Research status reporting
+- Corpus analysis workflows

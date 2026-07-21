@@ -40,6 +40,11 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Standardize documentation across Abbey-style repositories.
 - [ ] Adopt repository-defined AI session guidance across other Abbey-style repositories.
 - [ ] Create framework migration guide.
+- Improve abbey next NEXT.md parsing and validation.
+  - Document required NEXT.md structure.
+  - Support normal Markdown heading/body formatting.
+  - Add clear errors for missing required sections.
+  - Add `abbey next init` or `abbey next update` to create valid templates.
 
 ## Abbey Session Workflow Improvements
 
