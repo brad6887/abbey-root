@@ -3,7 +3,7 @@ title: "Planning Freshness and Session Review Guidance"
 description: "Improved Abbey session reconciliation guidance, completed historical planning reconciliation, and defined explicit planning freshness semantics."
 date: 2026-07-20
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root
