@@ -1,9 +1,16 @@
 ---
-artifact_id: JOURNAL-2026-07-20-voice-analysis-artifact-workflow-validation
+artifact_id: JOURNAL-2026-07-20-VOICE-ANALYSIS-ARTIFACT-WORKFLOW-VALIDATION
 artifact_type: journal-entry
 title: Validate Voice Analysis Artifact Workflow
 version: 1
 status: draft
+
+date: 2026-07-20
+category: research
+tags:
+  - voice-analysis
+  - methodology
+  - artifacts
 
 created:
   date: 2026-07-20
