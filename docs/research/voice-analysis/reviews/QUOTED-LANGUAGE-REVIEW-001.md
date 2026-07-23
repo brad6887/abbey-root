@@ -156,6 +156,8 @@ or whether all framing subtypes belong in one final hypothesis.
 
 Human review complete.
 
-Create OBS-004 as a draft observation. Do not create EVID-004, HYP-004, or
-VAL-004 until a complete candidate review and subtype decision are completed.
+OBS-004 was created as a draft observation.
 
+Follow-up review completed all 165 candidate decisions in seventeen batches
+of no more than ten sources. REVIEW-004 and EVID-004 now preserve that complete
+review. HYP-004 and VAL-004 remain deferred.

@@ -1,0 +1,1999 @@
+{
+  "schema_version": 1,
+  "review_id": "REVIEW-004",
+  "evidence_artifact": "EVID-004",
+  "review_scope": "complete_candidate_review",
+  "corpus": {
+    "artifact_id": "CORPUS-001",
+    "path": "/home/bcooke/research/facebook/output/clean_corpus.csv",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "method": {
+    "model": "gpt-oss:20b",
+    "prompt": "docs/research/voice-analysis/prompts/quoted-language-classification.md",
+    "reviewer": "Brad Cooke",
+    "review_date": "2026-07-23"
+  },
+  "items": [
+    {
+      "review_item_id": "QUOTE-001",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-000003",
+          "text": "Jessica posted this a few days ago and I can't stop reading it. It's the best \"About Me\" ever."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-002",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000012",
+          "text": "This is the 'netflix boc' I was telling you about, cheaper than giving Sony $200."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-003",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-000031",
+          "text": "\"It's the only argument I need, Sean!\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-004",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-000051",
+          "text": "The Free Times has called us \"Especially Ambitious\" but I think we can handle it. Saturday 31 New Brookland Tavern Covers Eve — If it ain’t broke, why fix it? The venerable New Brookland Tavern has for years offered New Year’s Eve as an opportunity for regular guests to its stage to pay tribute to their favorite acts and biggest influences. This year’s no different, with a bevy of local musician...s banding together to do some one-off tributeering; we’re most excited about muscular indie-pop act Ye Mighty! tackling Queen, mostly to hear how it’ll pull off “Bohemian Rhapsody.” Also on the bill: Versus the Robot as Green Day; The Noise as Faith No More; Philadelphia-based punk act Big Attack! as Elvis Costello and the Attractions (!!!); and Genius of the Heard as — and this one’s especially ambitious — Talking Heads. P. Wall New Brookland Tavern: 7 p.m., $5 ($8 under 21); 791-4413, newbrooklandtavern.com."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-005",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-000052",
+          "text": "Led Zeppelin's \"The Ocean\" from our sound check on NYE. It's just recorded on a handheld digital recorder so it's not high quality, but it's good enough for the internets."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-006",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000057",
+          "text": "Tonight at the Art Bar with Burnt Books and The Fishing Journal. It seems wrong that we don't have any reading material in our name so tonight we will be known as \"Genius Of The Heard the Audiobook\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-007",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-000093",
+          "text": "This guy's playing \"Honesty\" on his show tomorrow. We're taking over the world one podcast at a time my friend."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-008",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000117",
+          "text": "This is an interview with my son's band. 55 seconds in he uses the term \"sonic diarrhea\". So proud."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-009",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-000125",
+          "text": "Most people just call me \"Prick\" for short."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-010",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-000357",
+          "text": "The smell of lighter fluid mixed with the sounds of Marvin Gay's \"Sexual Healing\" coming from next door reminds me that it's Mothers Day."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-011",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-000363",
+          "text": "I'm \"live\" tweeting tonight from @HGBrewery I'm drinking a beer."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-012",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-000367",
+          "text": "I'm no longer \"live tweeting\" any events. From now on my all tweets will be pre-recorded in front of a live studio audience."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-013",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000368",
+          "text": "Apparently Ikea is Swedish for \"screaming babies\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-014",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000374",
+          "text": "I just invented a new drinking game called \"fiscal cliff\" 10 minutes of @Morning_Joe has put me in an alcohol induced coma."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-015",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-000375",
+          "text": "\"Please let me sit down; this is making me sick.\" - George Washington #rickyricardo"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-016",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-000381",
+          "text": "Stupidest question ever asked on @FoodNetwork \"Why do you want to win the $50,000?\" um, because it's $50,000..."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-017",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-000505",
+          "text": "When can we stop calling video on the Internet \"viral video\" and just start calling it \"video\"? #stupidvirus"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-018",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000554",
+          "text": "I just checked \"peed behind some bushes in Sacramento\" off my bucket list."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-019",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000565",
+          "text": "I suspect that movie \"Country Strong\" should be named \"Country Suck\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-020",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000573",
+          "text": "I just heard someone complain about \"the rednecks in Pennysylvania\". I'm in South Carolina. I'm just sayin'."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-021",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-000663",
+          "text": "I have an irrational fear of grown men named \"Dusty\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-022",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000664",
+          "text": "I'm getting a little suspicious of these 'tea party' people because I never see them with any tea."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-023",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-000784",
+          "text": "I find it disturbing when people say \"what the F\" when they're in a room full of adults. Either use the f bomb or don't, you can have it both ways."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-024",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-000785",
+          "text": "I wonder why they never play that Prince song \"1999\" anymore?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-025",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-000859",
+          "text": "unlocked \"Pygmy-Kabob Shaman\" in \"Pocket God\"!"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-026",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-001002",
+          "text": "“I’m not saying it won’t be hard, but we can make it work.”"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-027",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001018",
+          "text": "This is one of the few times I've been called \"balanced\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-028",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001042",
+          "text": "Either this app is very bad, or my \"Robot Name\" is unpronounceable in English."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-029",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001085",
+          "text": "yummy \"meat\" pressed into the shape of \"ribs?\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-030",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-001165",
+          "text": "Really? I was sure it would be \"The Only Hell My Mama Ever Raised\". I guess I shouldn't have chosen \"Stay at home mom\" as my choice of a perfect job."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-031",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001221",
+          "text": "I’m currently getting the run down on the “truth about Covid”. Also left wing retailers that I can’t shop at. And also pieces of shit that vote for Democrats who enjoy the protection of real men who will kill for their freedom. Thanks East Texas."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-032",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-001244",
+          "text": "Sometimes I hear music that is so bad that I have to Shazam it so I know where to direct my fury. I’m talking to you Atomic Kitten and your awful Brit pop attempt to cover Blondie “The Tide is High”. You should’ve been the kind of girl who gives up just like that"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-033",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001292",
+          "text": "Obligatory “Even though my birthday was on Saturday, I had to work so I’m drinking a big ass beer on Sunday morning” photo."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-034",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-001317",
+          "text": "“When a Texan fancies he'll take his chances, Chances will be taken.“ - RIP Jerry Jeff. Another 2020 bummer."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-035",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001354",
+          "text": "You conspiracy people have to come up with a better insult than \"sheep.\" Sheep are actually pretty cool. And you can't have \"snowflake\" back. You've ruined that one with all your crying."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-036",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-001364",
+          "text": "Larry says “hi!”"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-037",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001386",
+          "text": "Dear Facebook. I have aced all your \"genius\" quizzes. I'll be expecting my Noble Peace prize to arrive in 3-5 days please."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-038",
+      "evidence_role": "comparison",
+      "decision": "reject",
+      "note": "Rejected because the match is copied, platform-derived, malformed, or unsuitable for voice inference. Classification: MN-X.",
+      "citations": [
+        {
+          "source_id": "FB-001391",
+          "text": "John Prine, I'm crushed When I get to heaven, I'm gonna shake God's hand Thank him for more blessings than one man can stand Then I'm gonna get a guitar and start a rock-n-roll band Check into a swell hotel; ain't the afterlife grand? And then I'm gonna get a cocktail: vodka and ginger ale Yeah, I'm gonna smoke a cigarette that's nine miles long I'm gonna kiss that pretty girl on the tilt-a-whirl 'Cause this old man is goin' to town"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-039",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-001417",
+          "text": "I think the surprise winner of the \"Trump is Jesus\" vs \"Trump is Satan\" contest turned out to be \"Trump is Russian\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-040",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: SD-C.",
+      "citations": [
+        {
+          "source_id": "FB-001435",
+          "text": "Hey 'friend'"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-041",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-001455",
+          "text": "Another addition to my “food found on gas pumps” collection."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-042",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-001582",
+          "text": "I'm keeping score on the Facebook \"Gun meme battle\". Non-assholes: 0 Assholes: 4,311,324 Check back for regular updates."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-043",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-001583",
+          "text": "I’ve developed a new algorithm for Facebook that I’m trying to sell them. It’s called “ chronological order”. It’s very sophisticated."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-044",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001630",
+          "text": "Type 'yes' if you agree that you'd rather type 'no' right now."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-045",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-001638",
+          "text": "Happy Black Friday. It’s now officially “Bitch about Starbucks cups “ season."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-046",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-001650",
+          "text": "Random Survey: 1. Do you like Bleu Cheese? As a friend 2. Coke or Pepsi? I've never done Pepsi, is it legal? 3. Do you own a gun? 'merica 4. What do you think of hot dogs? Bring them inside, let them cool off a little, or throw them in the pool. 5. Favorite cookie? Fortune 6. Favorite TV show? Cop Rock 7. Favorite movie? Chud 9. Can you do a pushup? I don't wear a bra anymore 10. Favorite jewelry? All Jewelry matters 11. Favorite hobby? Hollie 12. Do you have A.D.D.? I'm gonna come back to this one later 13. Do you wear glasses? Only when I need to see something 14. What book are you currently reading? \"Lose Weight by Eating Skinny People\" by Dick Handler 15. Three things you did yesterday? Your mom, your sister, your girlfriend. 16. Three things you drink regularly? None, I'm an irregular drinker. 17. Dogs or cats? Depends on how you cook them. 18. Current dislike? Same as past dislike. 19. Favorite place to go? Big Bone Lick, KY 20. How did you bring in the New year? passed out facedown by the hostess stand at Spaghetti Warehouse. 21. Where would you like to go? Arby's 22. Name five people who will do this: B.J Cobbledick, Dixie Normous, Phat Ho, Jack Kanoff, Luedglenristen Kleisswegaard Wolfenstien Smith 23. Favorite color? Corn nut 24. Do you like sleeping on satin sheets? yeah, I love randomly sliding out of bed at 3am. 25. Can you whistle? I've never tried it. 26. Where are you now? North Piddle 27. Would you be a pirate? What are the hours? Are weekends involved? 28. Favorite food? Jellied Moose Nose 29. Last thing that made you laugh? Politics 30. Favorite animal? Harvey Weinstien 31. Favorite song on the radio currently? To answer this, I'd have to turn on the radio, listen to every song that's currently on every station, and if any of those songs ended while I was deciding, I'd have to listen to them and mark the ones that currently aren't on anymore. And while I was doing this, more songs would end and new songs would come on. It's too much trouble. I'm not willing to go through it. I probably wouldn't like any of them. 32. How many countries have you visited? 69 33. Best smell? Napalm in the morning 34. Do you like to dance? Not with you 35. How many siblings do you have? I don't have them, they have me. 36.Do you love life? yeah, but I'm not willing to get into a serious relationship with it right now."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-047",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-001657",
+          "text": "It's national cinnamon roll day once again. \"To eat is human, to digest divine.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-048",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001698",
+          "text": "Impossible Quiz - 97% of people can't get 3 correct answers! 1. Where did I leave my keys 2. What's your deal? 3. Who decided 'nugget' should be a real word? 4. Isn't it ironic? 5. What's up with all these easy quizzes on Facebook that tell you you're a genius just because you know there are 50 states and trees are made of wood."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-049",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-001727",
+          "text": "I just got drafted by that prison team from \"The Longest Yard\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-050",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-001773",
+          "text": "I'm trying to keep score on the Trump is Satan vs Trump is Jesus contest you guys are running here on Facebook and I'm really confused. So far the only thing I've determined for sure is that \"Facebook is a place for Assholes\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-051",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001809",
+          "text": "Share if you remember where I left my keys. Type 'amen' if you also can't find your keys."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-052",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-001818",
+          "text": "I just read an article that used the term \"restaurant quality fish sticks\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-053",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: RS-S.",
+      "citations": [
+        {
+          "source_id": "FB-001826",
+          "text": "Worst response to the question \"do you have a margarita that is not so overwhelmingly sweet?\" ...... \"The skinny margarita I guess?\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-054",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-001841",
+          "text": "“Only the good cannot live by bread alone.”"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-055",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-001842",
+          "text": "“A man with a hammer shouldn't rock the boat.”"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-056",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001851",
+          "text": "Or maybe you could just figure out how to boil a damn egg on your own. \"Boiled egg\". All the clues you need are right there in the name."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-057",
+      "evidence_role": "comparison",
+      "decision": "reject",
+      "note": "Rejected because the match is copied, platform-derived, malformed, or unsuitable for voice inference. Classification: PC-X.",
+      "citations": [
+        {
+          "source_id": "FB-001866",
+          "text": "Stacy Murphy Ross - It took me a while to get to it, but here you go. \"Rules of the Game: Copy this and post as your status update. List 12 albums that stayed with you, but only 1 per band/artist. Don't take too long and don't think too hard. Tag 12 (or less, or more) friends to do the same, including me, so I can see what you put. No compilations/Greatest Hits. Reasons or memories help us see your favorites the way you do, so share a little about why it made your list! Feel free to play along even if you weren't tagged. 1. AC/DC - Dirty Deeds Done Dirt Cheap - First album I bought with my own money. 2. Beatles - White Album - It blew my 8 year old mind 3. Johnny Cash - Everybody Loves a Nut - Self explanatory. 4. Rainmakers - The Rainmakers - Music and sarcasm swirled together. 5. Uncle Tupelo - Anodyne - When I was in the Navy, I'd take several CD's with me every time we went to sea, this was the only one I listened to for and entire 3 month patrol. Bands that are falling apart make great albums. (Queensrych - Empire was another good 'Patrol album'. 6. The Clash - London Calling - I couldn't get my friends to buy into the Clash, but I wore this album out anyway. 7. Drive-by Truckers- The Dirty South - This was the best lineup for the DBT's in my correct opinion. 8. Freddy King - Is a Blues Master - Freddy paved the way for SRV. Gerald Jemmott plays bass on this album which made it maximum awesome 9. Eagles - On The Border - It's not cool to love the Eagles, but I do it anyway. 10. Tesla - Mechanical Resonance - I still jam to this album. 11. Waylon Jennings, Willie Nelson, Jessi Colter, and Tompall Glaser - Wanted! The Outlaws - Technical this is a cheat because it's a compilation album, but it's so much more. 12. Weird Al\" Yankovic in 3-D - My little brother gave me this album and it reminds me of him anytime I hear \"Eat It\" (or \"Beat it\" too)."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-058",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001907",
+          "text": "If you're trying to do me a favor by posting news stories from right and left wingnut websites, please stop. I'm on the internet, I can find them myself just fine. I'm on facebook so I can try figure out why Joey from Toledo set his relationship status to \"It's Complicated\", not so I can find out how he's planning to handle ISIS. So in conclusion, PLEASE stop. You're just making yourself look ridiculous."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-059",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001944",
+          "text": "When I hear the term \"comfort food\" I alway picture myself in a hot tub filled with gravy, or sleeping on a bed of macaroni and cheese."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-060",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001961",
+          "text": "Somebody broke into my house and changed all my default search engines to Bing. If I ever catch that person, there might be some \"stand your ground\" action."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-061",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001962",
+          "text": "I assume they confused the term \"groan worthy\" for the word AWESOME because these are some of the best album titles ever."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-062",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-001969",
+          "text": "Best Commercial - Budweiser \"You're an asshole if you're drinking anything except Budweiser. Also, we own most of those craft beers we're mocking you for drinking.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-063",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-001970",
+          "text": "Call me old fashioned, but I just don't think \"Shake Your Groove Thing\" is an appropriate jingle for an adult diaper."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-064",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001972",
+          "text": "Did some kind of \"Politics\" thing happen yesterday or did everyone just unexpectedly decide they needed to prepare for an appearance on Meet The Press?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-065",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-001984",
+          "text": "Dear 2014, you were a pretty good girlfriend. You were a lot of work, but we got some shit accomplished. Sometimes you did some crazy shit that made me want to drop you off on the side of the interstate. Now we must part ways. Tell your sister 2015 that B-rad said \"whassup\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-066",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-001987",
+          "text": "If you're offended when someone says 'happy holidays' then you need to spend some time finding more important shit to worry about."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-067",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-001990",
+          "text": "\"Yeah, well, you know, that’s just, like, your opinion, man.” — The Dude"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-068",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-001999",
+          "text": "The worst part of this Cowboys game is the announcement that Katy Perry is the super bowl \"entertainment\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-069",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002017",
+          "text": "I never say \"what's wrong?\" when I read a vague fb post. I just assume I'll be sorry I asked."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-070",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002025",
+          "text": "I just watched \"10 videos you won't believe.\" I believed every one of them. Prize?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-071",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002044",
+          "text": "I always thought she was a little too \"wordsy\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-072",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002050",
+          "text": "When someplace has multiple signs up about enforcing their \"dress code\" after 9pm, it really makes me wonder what goes on after 9 pm."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-073",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002051",
+          "text": "Quote of the day at my first day at the new job- \"nobody's sat at that desk since Bad News Larry was here\" I hope I can fill the shoes of BNL."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-074",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002056",
+          "text": "I never know what to say when people ask \"who's in your bracket\" I've just been replying \"Andy Dick\". That's my best guess."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-075",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002064",
+          "text": "I'd like to propose that we ban the term \"viral video\" and replace it with \"some crap we saw on the internet and decided to use as filler on our news broadcast.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-076",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-002084",
+          "text": "The weatherman just said \"frostbite is not something to sneeze at\". I'm not sure if I agree with that."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-077",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002095",
+          "text": "Please do not ask me to post, repost, share, like, or join any thing pro- or against that dude on the show about the duck whistles. I simply do not give a shit about \"reality show\" characters."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-078",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002105",
+          "text": "When someone posts something that says \"Watch this and it will make you cry\" but I watch it and don't cry, whose responsibility is that? What should the penalty be?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-079",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002109",
+          "text": "If this guy at the bar doesn't stop pointing at the TV and saying \"look at that\" I'm going to stab him with a fork."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-080",
+      "evidence_role": "comparison",
+      "decision": "reject",
+      "note": "Rejected because the match is copied, platform-derived, malformed, or unsuitable for voice inference. Classification: MN-X.",
+      "citations": [
+        {
+          "source_id": "FB-002113",
+          "text": "Ok I have been given the letter \"^&\"..Describe me in one word that begins with the letter \"^&\" and I will give you a letter and post on your timeline."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-081",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002115",
+          "text": "#tiredofpeoplesaying\"hashtag\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-082",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002117",
+          "text": "This week I'm taking a \"Thinking INSIDE the box only approach\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-083",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002118",
+          "text": "Someone posted that we should kick Foreigner out of the country. I hope they wait until after they play at the state fair, I'd hate to miss \"Hot Blooded\" and \"Double Vision\" before they go."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-084",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002125",
+          "text": "Wisdom overheard in a bar: \"well, when I'm not here I'm at school, so I'm pretty busy\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-085",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002134",
+          "text": "The other night I saw a 'fishing reality show' on tV. One of the challenges was backing a boat trailer down a ramp. I've decided to create my own reality show where we film me traveling the country and playing board games with people. Occasionally there will be a 'twist' such as releasing a panther or crocodile in the room if I start to lose. I think it would be more exciting than watching someone back a boat into a lake."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-086",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002138",
+          "text": "My favorite feature of facebook is the \"People You May Know\" which on my page should be called \"Here's a list of people who've defriended you recently\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-087",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002139",
+          "text": "I response to several questions I've seen on Facebook over the last couple of days, the answer is \"NO\". You can't let someone off the hook because they use a lot of butter. I feel like I shouldn't have to explain why."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-088",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002144",
+          "text": "I'm just gonna 'lol' because I guess we're still doing that."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-089",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002152",
+          "text": "Someone just referred to something as \"about the size of Montana\". This made me realize 2 things: 1. I don't really know how big Montana is 2. I don't want to talk to this person anymore."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-090",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: RS-S.",
+      "citations": [
+        {
+          "source_id": "FB-002153",
+          "text": "The loudest Easter egg hunt in history is going on next door. It seems some kids won't look for the eggs unless someone continuously yells \"YA'LL LOOK FOR THE EGGS!\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-091",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002167",
+          "text": "Last night I dreamed that I got into a fight with a band called \"1/2 mile Exit To Jesus\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-092",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002168",
+          "text": "The single biggest threat to our planet, something out there which threatens our very existence and may be the end to the human race as we know it. I'm talking of course, about... \"manbearpig.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-093",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-002179",
+          "text": "\"No one needs 10 bullets to kill a deer.\" - Andrew Cuomo has obviously never seen me hunt."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-094",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002183",
+          "text": "Live tweeting the Cowboys - Redskins Game: \"Well shit, how 'bout that. Goodnight.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-095",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002186",
+          "text": "When someone says \"Failure is not an option!\" but then they fail, I find it difficult to just let them off the hook. Seems like there should be some kind of follow up."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-096",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002189",
+          "text": "I just saw a story about \"Storage Wars\" being fake! I hope A&E pays a heavy price for putting something on TV that's not real. If something's not 100% real I don't waste my time with it! Later today I'm watching that documentary about the giant lizard that crawled out of the ocean and destroyed Tokyo."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-097",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002192",
+          "text": "Apparently, if you want to be a newscaster you have to figure out how to use the term \"Get this\" at least once every 15 minutes."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-098",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002195",
+          "text": "What's up with all the \"Texas secede from the nation\" petitions going around today. We tried that once, remember? I didn't work out so good. Remember?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-099",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002198",
+          "text": "Does last year's \"Storm Of The Century\" winner have to give it's trophy back?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-100",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002204",
+          "text": "Rock and Roll hall of fame nominees this year include Albert King, Deep Purple, and Rush. It's ridiculous that these bands are not already there. Also, Kraftwerk had been nominated, can I get a \"HELL YES!\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-101",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: RS-S.",
+      "citations": [
+        {
+          "source_id": "FB-002205",
+          "text": "Yesterday someone told me I should be a writer for Saturday Night Fever. This seemed odd, but I thought I'd give it a shot. I wrote a screenplay for Saturday Night Fever II - Tony Takes Manhattan!. Then I discovered there already WAS a Saturday Night Fever II (Staying Alive) AND Saturday Night Fever III (Urban Cowboy). So I wrote a screenplay for :Saturday Night Fever IV - Geriatric Boga-loo.\" Keeping the continuity of the other 3 movies was difficult since I haven't seen any of them but I think I did a good job. I gave the screenplay to my friend today and he said \"NO, I said SATURDAY NIGHT LIVE\". Well son of a bitch, now I'm out of ideas."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-102",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002206",
+          "text": "Hey, here's a shout out to all you people spending your Friday night Googling \"news\" about Obama and Romney and posting it on Facebook. Party on, you've make my night because I hate having to google stuff myself."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-103",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002210",
+          "text": "I like to say horrible things, and then I put \"LOL\" at the end so It's cool."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-104",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: RS-S.",
+      "citations": [
+        {
+          "source_id": "FB-002211",
+          "text": "Rejected move quote #3 - \"I'll be back. Well, hang on. Actually I've a few things to take care of, there's this woman who has a baby in the future and he destroys Skynet and I've got to kill ... we'll it's really to complicated to explain but I'm gonna try and get back here and drive a police car through this wall ....probably... but don't wait up..\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-105",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: RS-S.",
+      "citations": [
+        {
+          "source_id": "FB-002215",
+          "text": "Rejected movie quote #2: \"There's no crying in baseball!!! Unless we win a really big game or somebody retires. Sometimes a fastball to to my head will make me tear up a little too. OH! and if somebody on the team dies, well I'll just cry like a big baby. But other than that.....\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-106",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: RS-S.",
+      "citations": [
+        {
+          "source_id": "FB-002216",
+          "text": "Rejected movie quotes: \"I could tell you, but I'd have to kill you. Well, no I wouldn't HAVE to kill you, but there would be an investigation, lots of paperwork and I'd have to explain to a lot of people why I'm going around telling people things that they have no business knowing. So, yeah.....\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-107",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-002218",
+          "text": "\"Every day I get up in the morning and go to work and do my job, whatever\" -Warren Zevon"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-108",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002223",
+          "text": "I just hid all the \"Daily inspirational quotes\" I'm so sick of being inspired every day."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-109",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002224",
+          "text": "Keith Richard wrote \"Satisfaction\" after hearing it in one of his dreams. It was a huge hit. Last night I dreamed up a song called \"Sugar and the Muffin\". I can't wait until the money starts rolling in."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-110",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002225",
+          "text": "Decide for yourself. Is this a code or coincidence? Sarah Palin and John McCain claimed to be a Mavericks Mark Cuban the \"Rich Jerk\" owns the Dallas Mavericks basketball team Obama claims his basketball name was Barack O'Bomber Sarah Palin claims her basketball name is Sarah Barracuda Obama claims to have been born in Hawaii Sarah Palin claims to have attended school at Hawaii Hilo and graduated from U of Idaho in Moscow Idaho Sarah Palin mocked by Tina Fey claiming she could see Russia from her house. (much more coming on this) Mark Cuban was under investigation for insider trading of a search engine company named Mamma Sarah Palin claims to be a Mama Grizzly Obama was a Chicago Senator Chicago Bears Chicago Cubs = Mama Grizzly Gayle King and Oprah were both news anchors Sarah Palin claims to have also been a news anchor Gayle King was in a movie called the Manchurian Candidate"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-111",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002227",
+          "text": "Two people have called me \"Jeff\" this morning. Did someone change my name and forget to tell me?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-112",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002233",
+          "text": "When the instructions say \"Wash, Rinse, Repeat\", are they just assuming I'll totally screw up the first attempt?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-113",
+      "evidence_role": "comparison",
+      "decision": "reject",
+      "note": "Rejected because the match is copied, platform-derived, malformed, or unsuitable for voice inference. Classification: MN-X.",
+      "citations": [
+        {
+          "source_id": "FB-002242",
+          "text": "This is the first year I've lived in South Carolina during the presidential primary season. I DON\"T KNOW HOW YOU PEOPLE DO IT!"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-114",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-002246",
+          "text": "You had me at \"Let's stop using worn out phrases from the 90's.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-115",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002252",
+          "text": "Lunch special - Cajun Pasta with a choice of alfredo or marinara sauce. I think someone skipped 'cajun week' in culinary school...."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-116",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002258",
+          "text": "IBM tech: \"we'll be done by 6!\" (brad closes eyes and tries to remember how to silence his bullshit alarm) IBM tech: \"are you ok?\" Me: \"so far\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-117",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002264",
+          "text": "Come see my band \"Amish Mugshot\" next Tuesday at the barn raising."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-118",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002272",
+          "text": "As I mentioned near the close of the last record, this record you are now playing is another example of the \"Completion Backward Principal.\" If you can possibly manage the time please play both sides at one meeting."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-119",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002273",
+          "text": "People are always using the phrase \"Sunday fun day\". Why don't we have other day/rhyming word phrases. I'm gonna see if I can get \"Saturday fatter day\" to catch on."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-120",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-002275",
+          "text": "Inspirational quote of the day: \"Stick This in your fuse box!\" - Bon Scott"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-121",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: SD-C.",
+      "citations": [
+        {
+          "source_id": "FB-002277",
+          "text": "The word \"Invigorate\" has always sounded creepy to me."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-122",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: SD-C.",
+      "citations": [
+        {
+          "source_id": "FB-002281",
+          "text": "I'm going to enter some kind of contest so I can use the term \"in it to win it\" more."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-123",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-002282",
+          "text": "\"Hey asshole, you don't come to my show to fight, you come here to dance. Now get OUT\". -Dave Grohl for president."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-124",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: RS-S.",
+      "citations": [
+        {
+          "source_id": "FB-002291",
+          "text": "Overheard today at lunch \"she's one of the 3rd shift waitresses, but she also owns the place\". What I really heard was \"Hello, my bullshit detector is not functioning anymore. \""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-125",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-002308",
+          "text": "There is a quote on my calendar that says \"Leave your ego at the door\", but I'm pretty sure they meant to say umbrella."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-126",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: SD-C.",
+      "citations": [
+        {
+          "source_id": "FB-002311",
+          "text": "Memo to 'news' channels... Reading facebook posts and twitter is not news. It's exactly the opposite. I'm watching CNN now, I hope they read this."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-127",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: DQ-S.",
+      "citations": [
+        {
+          "source_id": "FB-002318",
+          "text": "\"I can saw a woman in two, but you won't want to look in the box when I'm through. For my next trick I'll need a volunteer.\" -Warren Zevon"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-128",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002324",
+          "text": "I've just declared myself \"President of my cubicle\" so I can have today off. I wish I would have thought of that before I actually went to work."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-129",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: SD-C.",
+      "citations": [
+        {
+          "source_id": "FB-002325",
+          "text": "IMPORTANT. Tomorrow Facebook will change its settings to allow zombies to come into your house while you sleep and eat your brains with a sharpened spoon. To stop this from happening go to Accounts / Home Invasion Settings / Cannibalism / Brains and un-check the \"Tasty\" box. Please copy and re-post."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-130",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002326",
+          "text": "I'm feeling like a super-hero today, my power is \"extreme punctuality\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-131",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002329",
+          "text": "FYI, if I say \"I don't watch American Idol\" that means \"Hey, would you stop talking to me about American Idol because I don't give a rats ass\". I hope this information has been of some use."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-132",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002333",
+          "text": "I wish I had an extra finger so I could give you a 'high six'."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-133",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002334",
+          "text": "When someone says \"Failure is not an option\", I immediately think \"That person is an idiot\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-134",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002338",
+          "text": "Why do newscasters always emphasize the age of someone who gets punched by a cop? \"A FIFTY-THREE! year old woman was repeatedly punched in the face by police.\" What is the correct age range for face punching? Shouldn't people in that age range be required to wear some kind of marking so we'll all know it's cool to punch them in the face?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-135",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002355",
+          "text": "Quote of the day \"why is the fighting stick out?\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-136",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002356",
+          "text": "I just invented a new iphone app called \"words with people you would murder if you thought you could get away with it\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-137",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002357",
+          "text": "Overheard at work: \"She was a communist, but I didn't realize that when I married her because I was in love with her at the time\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-138",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002361",
+          "text": "One of the reasons I love Suzy: Me: \"I think I'm gonna go play my bass\" Suzy: \"Cool, but play some Brodie songs, don't sit in there playing Rush songs all night.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-139",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002362",
+          "text": "\"I know we're going to be sent to the prison asteroid, and we deserve it.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-140",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002364",
+          "text": "Last night I dreamed that they made a documentary about the band \"The Escape Club\". The preview looked awesome, until a midget died."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-141",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Worker marked the quotation as supporting, but direct quotation or reported speech requires case-specific framing review. Classification: RS-S.",
+      "citations": [
+        {
+          "source_id": "FB-002365",
+          "text": "It was a fun party, and you could tell it was a party full of geeks when someone said \"Hey, what operating system is this?\" Matt De Camara"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-142",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-002379",
+          "text": "I've always believed that \"No matter where you go, there you are\" until yesterday when I went somewhere and discovered I WASN'T there. Wow, it blew my mind."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-143",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002387",
+          "text": "Apparently they're having some kind of 'who has the most annoying laugh' contest at this restaurant today."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-144",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002397",
+          "text": "Coffee, Breakfast Burrito, Thin Lizzy CD, Noise canceling headphones, yes.... I'm ready for \"work\"."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-145",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-002398",
+          "text": "Things I wish people would stop saying \"I can't believe we can put a man on the moon but we can't....<whatever>\" Putting a man on the moon is easy, it's a huge rock. You just put a man on a rocket and shoot it at the huge rock."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-146",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002419",
+          "text": "'Dexter' and 'Dexter's Lab' are apparently two totally different shows."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-147",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002423",
+          "text": "Listened to the \"Fast Times At Ridgemont High\" soundtrack this morning. Cheesy Goodness."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-148",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002433",
+          "text": "joined the group \"People who use ... as their status should be slapped.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-149",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: SD-C.",
+      "citations": [
+        {
+          "source_id": "FB-002457",
+          "text": "became a fan of the word 'flapjack'."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-150",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: DQ-C.",
+      "citations": [
+        {
+          "source_id": "FB-002458",
+          "text": "\"After much thoughtful deliberation Chynna Phillips has checked herself into an undisclosed treatment facility for anxiety,\" <-- how do you rehab from \"anxiety\"?????"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-151",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002466",
+          "text": "The girl I bought coffee from this morning said \"Have a great weekend!\" I was very excited until she said, \"uh wait, I've been working for 12 days straight, I have no idea what day it is\". damn."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-152",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: RS-C.",
+      "citations": [
+        {
+          "source_id": "FB-002470",
+          "text": "\"That's the whole trouble. You can't ever find a place that's nice and peaceful, because there isn't any. You may think there is, but once you get there, when you're not looking, somebody'll sneak up and write \"F*** you\" right under your nose.\" RIP JD Salinger."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-153",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: SD-C.",
+      "citations": [
+        {
+          "source_id": "FB-002473",
+          "text": "became a fan of never hearing \"pants on the ground\" or \"who dat?\" ever again."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-154",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002481",
+          "text": "I've decided my favorite Knights of the Round Table are \"Sir Not Appearing In This Film\" and \"Sir Robin\" who slew the vicious Chicken Of Bristol and personallly wet himself at the Battle of Badon Hill. Just so ya know."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-155",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002483",
+          "text": "Random flashback thought: Has anyone out there ever complained about something at work and as a result your manager tells you to read \"Who Moved My Cheese\". Whoever wrote that book should be burried under 5000 lbs of cheddar."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-156",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002487",
+          "text": "Why can you only choose \"friendship, relationship etc... in your profile under \"Looking for\" why can't you select things like \"my keys\" or \"a pair of socks that match\" or \"a pair of pants that won't make my ass look too big\"????"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-157",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002513",
+          "text": "heard at least a dozen news stories this morning about the death of Patrick Swayze and not a single mention of his 1989 masterpiece \"Roadhouse\"? How soon they forget."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-158",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002517",
+          "text": "finds it humorous that people are using the words \"credibility\" and \"American Idol\" in the same sentence today."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-159",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002543",
+          "text": "took the \"How well you you know John Jacob Jingleheimer Schmidt\" quiz. Brad got 10 of 10 questions right for 100% simply because his name is my name too."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-160",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002548",
+          "text": "RIP Billy Mays, I hope the 'Sham-Wow' guy is OK."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-161",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-002592",
+          "text": "tried his best and failed miserably. The lesson is 'never try'"
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-162",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: IR-S.",
+      "citations": [
+        {
+          "source_id": "FB-002596",
+          "text": "took the \"why can't I find my socks?\" quiz and the result is: Attention deficit Disorder."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-163",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: SD-C.",
+      "citations": [
+        {
+          "source_id": "FB-002859",
+          "text": "I just want to make it clear that these \"First Citizens\" must NOT use envelopes."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-164",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Retained as an ordinary or non-supporting quotation comparison. Classification: TP-C.",
+      "citations": [
+        {
+          "source_id": "FB-002938",
+          "text": "I've had this for 5 years and nobody has ever asked why I have the name \"Dora\" in mirrored letters on my desk."
+        }
+      ]
+    },
+    {
+      "review_item_id": "QUOTE-165",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Human review retained the worker classification as direct support for distancing or comic renaming. Classification: SD-S.",
+      "citations": [
+        {
+          "source_id": "FB-003035",
+          "text": "I've had some complaints about my other movies not being \"EXCITING\" enough, so this one is ALL action."
+        }
+      ]
+    }
+  ]
+}

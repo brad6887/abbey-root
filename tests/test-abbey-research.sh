@@ -111,7 +111,7 @@ assert_contains \
 assert_contains \
   "status reports formal artifact count" \
   "$output" \
-  "Formal artifacts:     15"
+  "Formal artifacts:     16"
 
 assert_contains \
   "status reports first complete chain" \
@@ -136,7 +136,7 @@ assert_contains \
 assert_contains \
   "status reports draft fourth observation" \
   "$output" \
-  "WARN OBS-004"
+  "WARN OBS-004 → EVID-004"
 
 assert_contains \
   "status reports one incomplete chain" \
@@ -257,6 +257,12 @@ cp "$ROOT/tools/research/run_observation_discovery.py" \
 
 cp "$ROOT/tools/research/build_quoted_language_candidates.py" \
   "$fixture_root/tools/research/build_quoted_language_candidates.py"
+
+cp "$ROOT/tools/research/normalize_quoted_language_classification.py" \
+  "$fixture_root/tools/research/normalize_quoted_language_classification.py"
+
+cp "$ROOT/tools/research/build_quoted_language_review_manifest.py" \
+  "$fixture_root/tools/research/build_quoted_language_review_manifest.py"
 
 cat > "$fixture_root/config/abbey.conf" <<'CONFIG'
 OLLAMA_URL="http://localhost:11434"
@@ -592,6 +598,51 @@ assert_contains \
   "quoted-language candidate build excludes contraction" \
   "$output" \
   "Candidates:    1"
+
+cat > "$fixture_root/working/quote-batch.json" <<'JSON'
+{
+  "batch_id": "quote-evidence-001",
+  "candidates": [
+    {"source_id": "FB-000001"},
+    {"source_id": "FB-000002"}
+  ]
+}
+JSON
+
+cat > "$fixture_root/working/quote-raw.json" <<'JSON'
+```json
+{
+  "schema_version": 1,
+  "review_type": "quoted_language_classification",
+  "items": {
+    "FB-000001": "SD-S",
+    "FB-000002": "TP-C"
+  }
+}
+```
+JSON
+
+set +e
+output="$(
+  python3 \
+    "$fixture_root/tools/research/normalize_quoted_language_classification.py" \
+    --input "$fixture_root/working/quote-batch.json" \
+    --raw-result "$fixture_root/working/quote-raw.json" \
+    --output "$fixture_root/working/quote-normalized.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "quoted-language classification normalization succeeds" \
+  "$status" \
+  0
+
+assert_contains \
+  "quoted-language classification requires complete batch" \
+  "$output" \
+  "PASS candidates: 2"
 
 printf '\nPassed: %d\n' "$passed"
 printf 'Failed: %d\n' "$failed"
