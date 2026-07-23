@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "review_id": "REVIEW-002",
+  "evidence_artifact": "EVID-002",
+  "review_scope": "canonical_evidence_selection",
+  "corpus": {
+    "artifact_id": "CORPUS-001",
+    "path": "/home/bcooke/research/facebook/output/clean_corpus.csv",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "method": {
+    "model": "gpt-oss:20b",
+    "prompt": "docs/research/voice-analysis/prompts/concise-expression-candidate-retrieval.md",
+    "reviewer": "Brad Cooke",
+    "review_date": "2026-07-23"
+  },
+  "items": [
+    {
+      "review_item_id": "CONCISE-S01",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Equation-like shorthand compresses a spill narrative.",
+      "citations": [
+        {
+          "source_id": "FB-000801",
+          "text": "Coffee + defective cup = shirt that smells like starbucks. And a huge stain."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S02",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Cultural references are compressed into one question.",
+      "citations": [
+        {
+          "source_id": "FB-002449",
+          "text": "First boner dies, then one of the Frog Brothers, who's next maybe Steve Urkle?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S03",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "A familiar expression and conclusion are combined compactly.",
+      "citations": [
+        {
+          "source_id": "FB-002363",
+          "text": "It's five o'clock somewhere, and by somewhere I mean right here."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S04",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Motive, action, and punch line fit one sentence.",
+      "citations": [
+        {
+          "source_id": "FB-002281",
+          "text": "I'm going to enter some kind of contest so I can use the term \"in it to win it\" more."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S05",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "A shopping experience is reduced to a mock translation.",
+      "citations": [
+        {
+          "source_id": "FB-000368",
+          "text": "Apparently Ikea is Swedish for \"screaming babies\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S06",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Objects permit the activity to be inferred.",
+      "citations": [
+        {
+          "source_id": "FB-000097",
+          "text": "I got two olives and a couple of limes, Guessin' that means it's martini time."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S07",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Two sentences establish and subvert a platform convention.",
+      "citations": [
+        {
+          "source_id": "FB-002928",
+          "text": "Throw back Thursday. This is me, last Thursday."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S08",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "An event and absurd alternative are compressed tightly.",
+      "citations": [
+        {
+          "source_id": "FB-003010",
+          "text": "Did I just lose a molar? Or is this gravy? you be the judge!"
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S09",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "A social judgment is a compact mock reminder.",
+      "citations": [
+        {
+          "source_id": "FB-001890",
+          "text": "Reminder: Nobody cares who you're voting for."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S10",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Observation, criticism, and sarcasm share one sentence.",
+      "citations": [
+        {
+          "source_id": "FB-001593",
+          "text": "I don't know why people need to announce they're not watching the Oscars, but thanks for letting me know I guess?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-S11",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "An absurd image is communicated in five words.",
+      "citations": [
+        {
+          "source_id": "FB-001316",
+          "text": "Giant flying lobsters of Mexico."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-C01",
+      "evidence_role": "contradictory",
+      "decision": "retain",
+      "note": "Repeated questions and explanation build the parody.",
+      "citations": [
+        {
+          "source_id": "FB-002438",
+          "text": "Do you know where OBAMA was on 9/11? Me either, doesn't that make you wonder? Did you know the current Secretary of Defence doesn't even know karate? HE DOESN'T EVEN KNOW TAE KWON DO! How is HE supposed to defend anybody? 99% of you will not repost this because it's some stupid crap I just made up, but those of you who care about the ridiculous please repost this as your status and enjoy."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-C02",
+      "evidence_role": "contradictory",
+      "decision": "retain",
+      "note": "A thank-you expands into a narrated warning.",
+      "citations": [
+        {
+          "source_id": "FB-002348",
+          "text": "Thanks to everyone who wished me happy birthday! And those of you who didn't... Well I just hope you find a way to make peace with that decision, paybacks are a BITCH!!!"
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-C03",
+      "evidence_role": "contradictory",
+      "decision": "retain",
+      "note": "Repetition intentionally extends the complaint.",
+      "citations": [
+        {
+          "source_id": "FB-002260",
+          "text": "I can't decide what's more annoying, people bitching about Facebook or people bitching about people who are bitching about Facebook. I fall under both categories so I'm annoying X2."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-C04",
+      "evidence_role": "contradictory",
+      "decision": "provisional",
+      "note": "The album-list format invites extensive explanation.",
+      "citations": [
+        {
+          "source_id": "FB-001866",
+          "text": "Stacy Murphy Ross - It took me a while to get to it, but here you go. \"Rules of the Game: Copy this and post as your status update. List 12 albums that stayed with you, but only 1 per band/artist. Don't take too long and don't think too hard. Tag 12 (or less, or more) friends to do the same, including me, so I can see what you put. No compilations/Greatest Hits. Reasons or memories help us see your favorites the way you do, so share a little about why it made your list! Feel free to play along even if you weren't tagged. 1. AC/DC - Dirty Deeds Done Dirt Cheap - First album I bought with my own money. 2. Beatles - White Album - It blew my 8 year old mind 3. Johnny Cash - Everybody Loves a Nut - Self explanatory. 4. Rainmakers - The Rainmakers - Music and sarcasm swirled together. 5. Uncle Tupelo - Anodyne - When I was in the Navy, I'd take several CD's with me every time we went to sea, this was the only one I listened to for and entire 3 month patrol. Bands that are falling apart make great albums. (Queensrych - Empire was another good 'Patrol album'. 6. The Clash - London Calling - I couldn't get my friends to buy into the Clash, but I wore this album out anyway. 7. Drive-by Truckers- The Dirty South - This was the best lineup for the DBT's in my correct opinion. 8. Freddy King - Is a Blues Master - Freddy paved the way for SRV. Gerald Jemmott plays bass on this album which made it maximum awesome 9. Eagles - On The Border - It's not cool to love the Eagles, but I do it anyway. 10. Tesla - Mechanical Resonance - I still jam to this album. 11. Waylon Jennings, Willie Nelson, Jessi Colter, and Tompall Glaser - Wanted! The Outlaws - Technical this is a cheat because it's a compilation album, but it's so much more. 12. Weird Al\" Yankovic in 3-D - My little brother gave me this album and it reminds me of him anytime I hear \"Eat It\" (or \"Beat it\" too)."
+        }
+      ]
+    },
+    {
+      "review_item_id": "CONCISE-C05",
+      "evidence_role": "contradictory",
+      "decision": "provisional",
+      "note": "The survey format invites extended comic answers.",
+      "citations": [
+        {
+          "source_id": "FB-001650",
+          "text": "Random Survey: 1. Do you like Bleu Cheese? As a friend 2. Coke or Pepsi? I've never done Pepsi, is it legal? 3. Do you own a gun? 'merica 4. What do you think of hot dogs? Bring them inside, let them cool off a little, or throw them in the pool. 5. Favorite cookie? Fortune 6. Favorite TV show? Cop Rock 7. Favorite movie? Chud 9. Can you do a pushup? I don't wear a bra anymore 10. Favorite jewelry? All Jewelry matters 11. Favorite hobby? Hollie 12. Do you have A.D.D.? I'm gonna come back to this one later 13. Do you wear glasses? Only when I need to see something 14. What book are you currently reading? \"Lose Weight by Eating Skinny People\" by Dick Handler 15. Three things you did yesterday? Your mom, your sister, your girlfriend. 16. Three things you drink regularly? None, I'm an irregular drinker. 17. Dogs or cats? Depends on how you cook them. 18. Current dislike? Same as past dislike. 19. Favorite place to go? Big Bone Lick, KY 20. How did you bring in the New year? passed out facedown by the hostess stand at Spaghetti Warehouse. 21. Where would you like to go? Arby's 22. Name five people who will do this: B.J Cobbledick, Dixie Normous, Phat Ho, Jack Kanoff, Luedglenristen Kleisswegaard Wolfenstien Smith 23. Favorite color? Corn nut 24. Do you like sleeping on satin sheets? yeah, I love randomly sliding out of bed at 3am. 25. Can you whistle? I've never tried it. 26. Where are you now? North Piddle 27. Would you be a pirate? What are the hours? Are weekends involved? 28. Favorite food? Jellied Moose Nose 29. Last thing that made you laugh? Politics 30. Favorite animal? Harvey Weinstien 31. Favorite song on the radio currently? To answer this, I'd have to turn on the radio, listen to every song that's currently on every station, and if any of those songs ended while I was deciding, I'd have to listen to them and mark the ones that currently aren't on anymore. And while I was doing this, more songs would end and new songs would come on. It's too much trouble. I'm not willing to go through it. I probably wouldn't like any of them. 32. How many countries have you visited? 69 33. Best smell? Napalm in the morning 34. Do you like to dance? Not with you 35. How many siblings do you have? I don't have them, they have me. 36.Do you love life? yeah, but I'm not willing to get into a serious relationship with it right now."
+        }
+      ]
+    }
+  ]
+}

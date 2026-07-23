@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "review_id": "REVIEW-003",
+  "evidence_artifact": "EVID-003",
+  "review_scope": "canonical_evidence_selection",
+  "corpus": {
+    "artifact_id": "CORPUS-001",
+    "path": "/home/bcooke/research/facebook/output/clean_corpus.csv",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "method": {
+    "model": "gpt-oss:20b",
+    "prompt": "docs/research/voice-analysis/prompts/recurring-narrative-candidate-retrieval.md",
+    "reviewer": "Brad Cooke",
+    "review_date": "2026-07-23"
+  },
+  "items": [
+    {
+      "review_item_id": "RECUR-TIME",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "The time-machine premise progresses and later callbacks assume prior use.",
+      "citations": [
+        {
+          "source_id": "FB-002620",
+          "text": "is making adjustments to his time machine."
+        },
+        {
+          "source_id": "FB-002619",
+          "text": "is is disappointed his time machine is still not working. I'll try again yesterday."
+        },
+        {
+          "source_id": "FB-002589",
+          "text": "has just adjusted the flurb and installed the new flux capacitor. Time machine testing tomorrow, I'll call you yesterday if all goes well."
+        },
+        {
+          "source_id": "FB-002586",
+          "text": "flew his time machine to the west coast and was able to successfully travel 2 hours into the future, that's progress."
+        },
+        {
+          "source_id": "FB-002553",
+          "text": "wants to do away with the phrase \"In today's economy\". Everything you do is in \"today's economy\" unless you have a time machine...... If you do have a time machine (that works), call me.....I have some ideas."
+        },
+        {
+          "source_id": "FB-002476",
+          "text": "I just found out I have jury duty in Tyler last week. I hope my time machine works better than it did the last time I used it."
+        },
+        {
+          "source_id": "FB-002065",
+          "text": "can't find my flux capacitor."
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-OVERHEARD",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "A distinctive workplace-reporting frame recurs with new content.",
+      "citations": [
+        {
+          "source_id": "FB-002357",
+          "text": "Overheard at work: \"She was a communist, but I didn't realize that when I married her because I was in love with her at the time\"."
+        },
+        {
+          "source_id": "FB-002310",
+          "text": "Overheard at work - Computer Geek insult attempt: You're so dumb you probably tried to buy a kindle and an iPad on the dame day....."
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-PAY",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "A mock-altruistic closing recurs in unrelated situations.",
+      "citations": [
+        {
+          "source_id": "FB-002854",
+          "text": "Sometimes people go to a public restroom and leave a drink for the next visitor. Paying it forward people."
+        },
+        {
+          "source_id": "FB-002872",
+          "text": "The only coffee in the hotel room this morning was decaffeinated. I made it just so I could throw it away. Pay it forward people."
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-GRANDBRAD",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "A named persona is introduced and reused more than a year later.",
+      "citations": [
+        {
+          "source_id": "FB-001474",
+          "text": "I’m going to be a GrandBrad."
+        },
+        {
+          "source_id": "FB-001360",
+          "text": "Look who came to see GrandBrad!"
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-DAUGHTER",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Annual posts explicitly develop the same failure narrative.",
+      "citations": [
+        {
+          "source_id": "FB-001183",
+          "text": "Whelp, missed National Daughters Day again. I think this is the only photo I have of her. Sorry Megan Cooke"
+        },
+        {
+          "source_id": "FB-000531",
+          "text": "Megan Cooke I thought national daughters day meant my daughter was supposed to post about me. I’m sorry I messed this up for the 20th consecutive time."
+        },
+        {
+          "source_id": "FB-000347",
+          "text": "Happy day after National Daughters day Megan Cooke. #fatheroftheyear"
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-FRED",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "Text introduces and revisits Fred, but image context is missing.",
+      "citations": [
+        {
+          "source_id": "FB-002782",
+          "text": "Introducing Fred."
+        },
+        {
+          "source_id": "FB-003032",
+          "text": "Fred offers his opinion on a passing car."
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-SUZY",
+      "evidence_role": "supporting",
+      "decision": "provisional",
+      "note": "The named event recurs but both posts come from one weekend.",
+      "citations": [
+        {
+          "source_id": "FB-001940",
+          "text": "DON'T FORGET ABOUT SUZYPALOOZA!!"
+        },
+        {
+          "source_id": "FB-003012",
+          "text": "suzypalooza 2015 complete. Preparations for suzypalooza 2016 start tomorrow."
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-I01",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "A distinctive circus premise remains standalone.",
+      "citations": [
+        {
+          "source_id": "FB-002484",
+          "text": "I've decided to join the circus....Where do I do that?"
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-I02",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "A prison-asteroid premise remains standalone.",
+      "citations": [
+        {
+          "source_id": "FB-002362",
+          "text": "\"I know we're going to be sent to the prison asteroid, and we deserve it.\""
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-I03",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "An invented blended website remains standalone.",
+      "citations": [
+        {
+          "source_id": "FB-002214",
+          "text": "Apparently I've logged into Chick-Fil-a-Obama-Romney-book.com"
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-I04",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "The Zark Muckerberg parody remains standalone.",
+      "citations": [
+        {
+          "source_id": "FB-001903",
+          "text": "THANK YOU, ZARK MUCKERBERG, for your backward-thinking malevolence! And congrats on becoming a newt! Zark Muckerberg has announced that he is giving away $45 billion of chicken socks. What you may not have heard is that he plans to give .01% of it away to bed-wetters like YOU and YOUR MOM! All you have to do is copy and paste this message onto a fence post EVENTUALLY. At mildnight PST, Krampus will search through his underwear drawer and award 1000 mouth breathers with 4.5 socks EACH as a way of saying screw you for making meth such a powerful vehicle for contention. By the way this was on the newts!"
+        }
+      ]
+    },
+    {
+      "review_item_id": "RECUR-I05",
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "The flying-lobster premise remains standalone.",
+      "citations": [
+        {
+          "source_id": "FB-001316",
+          "text": "Giant flying lobsters of Mexico."
+        }
+      ]
+    }
+  ]
+}

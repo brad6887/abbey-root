@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "review_id": "REVIEW-001",
+  "evidence_artifact": "EVID-001",
+  "review_scope": "canonical_evidence_selection",
+  "corpus": {
+    "artifact_id": "CORPUS-001",
+    "path": "/home/bcooke/research/facebook/output/clean_corpus.csv",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "method": {
+    "model": "gpt-oss:20b",
+    "prompt": "docs/research/voice-analysis/prompts/deadpan-candidate-retrieval.md",
+    "reviewer": "Brad Cooke",
+    "review_date": "2026-07-23"
+  },
+  "items": [
+    {
+      "review_item_id": "DEADPAN-S01",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Time travel is reported as technical progress.",
+      "citations": [
+        {
+          "source_id": "FB-002586",
+          "text": "flew his time machine to the west coast and was able to successfully travel 2 hours into the future, that's progress."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-S02",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "A fictional duel is followed up as routine correspondence.",
+      "citations": [
+        {
+          "source_id": "FB-002420",
+          "text": "I just challenged Gary Coleman to a duel to the death. I have not heard back from him yet, we'll see how it goes."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-S03",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Zombie invasion is framed as a settings procedure.",
+      "citations": [
+        {
+          "source_id": "FB-002325",
+          "text": "IMPORTANT. Tomorrow Facebook will change its settings to allow zombies to come into your house while you sleep and eat your brains with a sharpened spoon. To stop this from happening go to Accounts / Home Invasion Settings / Cannibalism / Brains and un-check the \"Tasty\" box. Please copy and re-post."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-S04",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "An impossible website is reported as an ordinary login.",
+      "citations": [
+        {
+          "source_id": "FB-002214",
+          "text": "Apparently I've logged into Chick-Fil-a-Obama-Romney-book.com"
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-S05",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Contradictory live and recorded communication is a procedural change.",
+      "citations": [
+        {
+          "source_id": "FB-000367",
+          "text": "I'm no longer \"live tweeting\" any events. From now on my all tweets will be pre-recorded in front of a live studio audience."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-S06",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "A fictional device is treated as ordinarily misplaced.",
+      "citations": [
+        {
+          "source_id": "FB-002065",
+          "text": "can't find my flux capacitor."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-S07",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Impossible travel is reported as routine transportation.",
+      "citations": [
+        {
+          "source_id": "FB-001966",
+          "text": "I just used my hot tub time machine to travel to the future and watch Hot Tub Time Machine 3."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-S08",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Chronological order is framed as a sophisticated invention.",
+      "citations": [
+        {
+          "source_id": "FB-001583",
+          "text": "I’ve developed a new algorithm for Facebook that I’m trying to sell them. It’s called “ chronological order”. It’s very sophisticated."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-S09",
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "An impossible image is stated without explanation.",
+      "citations": [
+        {
+          "source_id": "FB-001316",
+          "text": "Giant flying lobsters of Mexico."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-C01",
+      "evidence_role": "contradictory",
+      "decision": "retain",
+      "note": "The absurd event uses capitalization and emphatic questioning.",
+      "citations": [
+        {
+          "source_id": "FB-002502",
+          "text": "WHAT?! Obama wins the Nobel Peace prize and the only hours later bombs the moon."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-C02",
+      "evidence_role": "contradictory",
+      "decision": "retain",
+      "note": "Political parody is overtly explained and emphasized.",
+      "citations": [
+        {
+          "source_id": "FB-002438",
+          "text": "Do you know where OBAMA was on 9/11? Me either, doesn't that make you wonder? Did you know the current Secretary of Defence doesn't even know karate? HE DOESN'T EVEN KNOW TAE KWON DO! How is HE supposed to defend anybody? 99% of you will not repost this because it's some stupid crap I just made up, but those of you who care about the ridiculous please repost this as your status and enjoy."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-C03",
+      "evidence_role": "contradictory",
+      "decision": "retain",
+      "note": "The legal exaggeration uses capitalization and a complaint hashtag.",
+      "citations": [
+        {
+          "source_id": "FB-000629",
+          "text": "I hope the new Republican congress will pass a law to SEVERELY punish people who burn microwave popcorn at work. #officestinks"
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-C04",
+      "evidence_role": "contradictory",
+      "decision": "retain",
+      "note": "The impossible premise uses overt love and alarm.",
+      "citations": [
+        {
+          "source_id": "FB-002278",
+          "text": "I LOVE Johnny cash but I'm a little freaked out that he is dead, yet still posting things of Facebook."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-C05",
+      "evidence_role": "contradictory",
+      "decision": "retain",
+      "note": "The contrast is explained with repeated emphasis.",
+      "citations": [
+        {
+          "source_id": "FB-002189",
+          "text": "I just saw a story about \"Storage Wars\" being fake! I hope A&E pays a heavy price for putting something on TV that's not real. If something's not 100% real I don't waste my time with it! Later today I'm watching that documentary about the giant lizard that crawled out of the ocean and destroyed Tokyo."
+        }
+      ]
+    },
+    {
+      "review_item_id": "DEADPAN-C06",
+      "evidence_role": "contradictory",
+      "decision": "retain",
+      "note": "An ordinary event receives extreme punctuation.",
+      "citations": [
+        {
+          "source_id": "FB-003027",
+          "text": "A double yolk! WHAT DOES IT MEAN??!?!!?"
+        }
+      ]
+    }
+  ]
+}

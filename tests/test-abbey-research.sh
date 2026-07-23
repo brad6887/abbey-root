@@ -73,6 +73,11 @@ assert_contains \
   "$output" \
   "abbey research status"
 
+assert_contains \
+  "--help shows review validation usage" \
+  "$output" \
+  "abbey research validate-review"
+
 set +e
 output="$("$TOOL" status 2>&1)"
 status=$?
@@ -132,6 +137,21 @@ assert_contains \
   "missing model reports required option" \
   "$output" \
   "Missing required option: --model"
+
+set +e
+output="$("$TOOL" validate-review 2>&1)"
+status=$?
+set -e
+
+assert_status \
+  "missing review manifest exits with error" \
+  "$status" \
+  1
+
+assert_contains \
+  "missing review manifest is reported" \
+  "$output" \
+  "Missing required option: --manifest"
 
 set +e
 output="$(

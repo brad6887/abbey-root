@@ -39,6 +39,10 @@ Usage:
   abbey research validate \
     --input FILE
 
+  abbey research validate-review \
+    --manifest FILE \
+    --corpus FILE
+
   abbey research status
 
 Options:
@@ -74,6 +78,10 @@ Examples:
 
   abbey research validate \
     --input working/research/normalized/gpt-oss-20b.md
+
+  abbey research validate-review \
+    --manifest working/research/voice-analysis/review.json \
+    --corpus /path/to/clean_corpus.csv
 
   abbey research status
 HELP
@@ -860,6 +868,67 @@ print("Result: PASS")
 PYTHON_VALIDATE
 }
 
+validate_review() {
+  local manifest_file=""
+  local corpus_file=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --manifest)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --manifest requires a file." >&2
+          exit 1
+        fi
+        manifest_file="$2"
+        shift 2
+        ;;
+      --corpus)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --corpus requires a file." >&2
+          exit 1
+        fi
+        corpus_file="$2"
+        shift 2
+        ;;
+      -h|--help|help)
+        usage
+        exit 0
+        ;;
+      *)
+        echo "Unknown option for validate-review: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$manifest_file" ]]; then
+    echo "Missing required option: --manifest" >&2
+    exit 1
+  fi
+
+  if [[ -z "$corpus_file" ]]; then
+    echo "Missing required option: --corpus" >&2
+    exit 1
+  fi
+
+  if [[ ! -f "$manifest_file" ]]; then
+    echo "Review manifest not found:" >&2
+    echo "$manifest_file" >&2
+    exit 1
+  fi
+
+  if [[ ! -f "$corpus_file" ]]; then
+    echo "Corpus not found:" >&2
+    echo "$corpus_file" >&2
+    exit 1
+  fi
+
+  python3 \
+    "$ABBEY_ROOT/tools/research/validate_review_manifest.py" \
+    --manifest "$manifest_file" \
+    --corpus "$corpus_file"
+}
+
 
 status_research() {
   if [[ $# -gt 0 ]]; then
@@ -912,6 +981,11 @@ case "$command" in
   validate)
     shift
     validate_research "$@"
+    ;;
+
+  validate-review)
+    shift
+    validate_review "$@"
     ;;
 
   status)

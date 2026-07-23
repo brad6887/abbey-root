@@ -206,9 +206,13 @@ commands:
       status:
         description: Report formal research artifact relationships and chain status.
         usage: abbey research status
+      validate-review:
+        description: Validate a machine-readable review manifest and exact corpus citations.
+        usage: abbey research validate-review --manifest FILE --corpus FILE
     examples:
       - abbey research --help
       - abbey research run --help
+      - abbey research validate-review --manifest FILE --corpus FILE
       - abbey research status
 
   lab:
