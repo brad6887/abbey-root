@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch-010",
+  "status": "candidate_discovery_human_review_required",
+  "corpus": {
+    "artifact_id": "facebook-clean-corpus",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "model": "gpt-oss:20b",
+  "prompt": "full-corpus-observation-discovery-v1",
+  "candidates": [
+    {
+      "candidate_id": "B010-C01",
+      "label": "Short celebratory statements",
+      "description": "Brief, single-sentence holiday or event greetings in informal tone.",
+      "citations": [
+        {
+          "source_id": "FB-001520",
+          "text": "Happy Halloween"
+        },
+        {
+          "source_id": "FB-001485",
+          "text": "Happy siblings day or whatever."
+        },
+        {
+          "source_id": "FB-001445",
+          "text": "Happy National Sons day Zachary Spartacus Cooke and the rest."
+        }
+      ],
+      "scope_note": "Observations are limited to posts in this batch.",
+      "boundary_note": "Not all brief statements are celebratory; for example, \"New boots y’all!\" is informal but not a holiday greeting."
+    },
+    {
+      "candidate_id": "B010-C02",
+      "label": "Structured daily challenge posts",
+      "description": "Posts that include a day number and an explicit challenge or task.",
+      "citations": [
+        {
+          "source_id": "FB-001464",
+          "text": "Day 1: I’ve been challenged to share my life for 7 days, no people, no words, just pictures, (unless I'm asked a question). Anne Elliott Payne"
+        },
+        {
+          "source_id": "FB-001459",
+          "text": "Day 2: I’ve been challenged to share my life for 7 days, no people, no words, just pictures, (unless I'm asked a question). Anne Elliott Payne"
+        },
+        {
+          "source_id": "FB-001382",
+          "text": "Day #2 Today I challenge Dixie Normous"
+        },
+        {
+          "source_id": "FB-001380",
+          "text": "Day 3. Sorry Dude. Today I challenge Marvin Gardens."
+        }
+      ],
+      "scope_note": "Observations are limited to posts in this batch.",
+      "boundary_note": "Some posts use the \"Day\" format for other purposes that do not involve a challenge; these would need separate classification."
+    },
+    {
+      "candidate_id": "B010-C03",
+      "label": "Pun/wordplay in casual posts",
+      "description": "Informal posts containing playful word substitutions or puns.",
+      "citations": [
+        {
+          "source_id": "FB-001477",
+          "text": "Cinco de drinko"
+        },
+        {
+          "source_id": "FB-001483",
+          "text": "All these Easter puns are getting ridiculous. You peeps aren’t even bunny."
+        }
+      ],
+      "scope_note": "Observations are limited to posts in this batch.",
+      "boundary_note": "Not all informal statements include puns; for example, \"Happy siblings day or whatever.\" is playful but not a pun."
+    }
+  ]
+}

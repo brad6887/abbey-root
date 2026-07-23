@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch-003",
+  "status": "candidate_discovery_human_review_required",
+  "corpus": {
+    "artifact_id": "facebook-clean-corpus",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "model": "gpt-oss:20b",
+  "prompt": "full-corpus-observation-discovery-v1",
+  "candidates": [
+    {
+      "candidate_id": "B003-C01",
+      "label": "Hyperbolic Absurd Claims",
+      "description": "Use of exaggerated, surreal assertions about personal events or reality for humor.",
+      "citations": [
+        {
+          "source_id": "FB-000654",
+          "text": "Sometimes I get a funny feeling In my central processing unit that I might be a robot."
+        },
+        {
+          "source_id": "FB-002356",
+          "text": "I just invented a new iphone app called \"words with people you would murder if you thought you could get away with it\"."
+        }
+      ],
+      "scope_note": "Pattern observed within this batch only.",
+      "boundary_note": "Not all posts exhibit such exaggeration; many are straightforward."
+    },
+    {
+      "candidate_id": "B003-C02",
+      "label": "'I wish' Opening",
+      "description": "Posts begin with the first-person declarative 'I wish' followed by a personal desire or complaint.",
+      "citations": [
+        {
+          "source_id": "FB-002324",
+          "text": "I've just declared myself \"President of my cubicle\" so I can have today off. I wish I would have thought of that before I actually went to work."
+        },
+        {
+          "source_id": "FB-000548",
+          "text": "I wish @unitedairlines would unite my plane with a pilot so I could get out of Sacramento."
+        }
+      ],
+      "scope_note": "Observed only in this batch.",
+      "boundary_note": "Other posts do not use this phrase; pattern is limited."
+    },
+    {
+      "candidate_id": "B003-C03",
+      "label": "Hashtag Labeling",
+      "description": "Inclusion of one or more '#tag' terms inserted mid- or end-of-post to categorize the statement.",
+      "citations": [
+        {
+          "source_id": "FB-000629",
+          "text": "I hope the new Republican congress will pass a law to SEVERELY punish people who burn microwave popcorn at work. #officestinks"
+        },
+        {
+          "source_id": "FB-000625",
+          "text": "Why why why?? #damntrain"
+        },
+        {
+          "source_id": "FB-000604",
+          "text": "Currently jamming to some Donnie Iris. Hellz yeah. #80sjamz"
+        },
+        {
+          "source_id": "FB-000562",
+          "text": "Thank you Seahawks, you made my day. #datjustme"
+        }
+      ],
+      "scope_note": "Seen in this batch.",
+      "boundary_note": "Some posts lack tags; pattern not universal."
+    }
+  ]
+}

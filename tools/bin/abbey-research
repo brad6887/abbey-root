@@ -23,6 +23,7 @@ Usage:
     --prompt FILE \
     [--input FILE ...] \
     --output FILE \
+    [--max-tokens N] \
     [--force]
 
   abbey research normalize \
@@ -43,6 +44,11 @@ Usage:
     --manifest FILE \
     --corpus FILE
 
+  abbey research validate-discovery \
+    --manifest FILE \
+    --corpus FILE \
+    --batch FILE
+
   abbey research status
 
 Options:
@@ -51,6 +57,7 @@ Options:
   --prompt FILE   Research prompt file
   --input FILE    Input document supplied to the command
   --output FILE   File that receives the result
+  --max-tokens N  Maximum generated tokens (default: 6144)
   --force         Replace an existing output file
   -h, --help      Show this help
 
@@ -83,6 +90,11 @@ Examples:
     --manifest working/research/voice-analysis/review.json \
     --corpus /path/to/clean_corpus.csv
 
+  abbey research validate-discovery \
+    --manifest working/research/voice-analysis/discovery.json \
+    --corpus /path/to/clean_corpus.csv \
+    --batch working/research/voice-analysis/batch-001.md
+
   abbey research status
 HELP
 }
@@ -91,6 +103,7 @@ run_research() {
   local model=""
   local prompt_file=""
   local output_file=""
+  local max_tokens="6144"
   local force="false"
   local -a input_files=()
 
@@ -143,6 +156,15 @@ run_research() {
         fi
 
         output_file="$2"
+        shift 2
+        ;;
+
+      --max-tokens)
+        if [[ ! "${2:-}" =~ ^[1-9][0-9]*$ ]]; then
+          echo "Option --max-tokens requires a positive integer." >&2
+          exit 1
+        fi
+        max_tokens="$2"
         shift 2
         ;;
 
@@ -211,6 +233,7 @@ run_research() {
     "$model" \
     "$prompt_file" \
     "$output_file" \
+    "$max_tokens" \
     "${input_files[@]}" <<'PYTHON'
 import json
 import sys
@@ -223,7 +246,8 @@ ollama_url = sys.argv[1]
 model = sys.argv[2]
 prompt_path = Path(sys.argv[3])
 output_path = Path(sys.argv[4])
-input_paths = [Path(value) for value in sys.argv[5:]]
+max_tokens = int(sys.argv[5])
+input_paths = [Path(value) for value in sys.argv[6:]]
 
 prompt = prompt_path.read_text(encoding="utf-8")
 
@@ -249,8 +273,8 @@ payload = {
     "stream": False,
     "think": False,
     "options": {
-        "num_ctx": 16384,
-        "num_predict": 6144,
+        "num_ctx": max(16384, max_tokens * 2),
+        "num_predict": max_tokens,
     },
     "messages": [
         {
@@ -929,6 +953,83 @@ validate_review() {
     --corpus "$corpus_file"
 }
 
+validate_discovery() {
+  local manifest_file=""
+  local corpus_file=""
+  local batch_file=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --manifest)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --manifest requires a file." >&2
+          exit 1
+        fi
+        manifest_file="$2"
+        shift 2
+        ;;
+      --corpus)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --corpus requires a file." >&2
+          exit 1
+        fi
+        corpus_file="$2"
+        shift 2
+        ;;
+      --batch)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --batch requires a file." >&2
+          exit 1
+        fi
+        batch_file="$2"
+        shift 2
+        ;;
+      -h|--help|help)
+        usage
+        exit 0
+        ;;
+      *)
+        echo "Unknown option for validate-discovery: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$manifest_file" ]]; then
+    echo "Missing required option: --manifest" >&2
+    exit 1
+  fi
+  if [[ -z "$corpus_file" ]]; then
+    echo "Missing required option: --corpus" >&2
+    exit 1
+  fi
+  if [[ -z "$batch_file" ]]; then
+    echo "Missing required option: --batch" >&2
+    exit 1
+  fi
+  if [[ ! -f "$manifest_file" ]]; then
+    echo "Discovery manifest not found:" >&2
+    echo "$manifest_file" >&2
+    exit 1
+  fi
+  if [[ ! -f "$corpus_file" ]]; then
+    echo "Corpus not found:" >&2
+    echo "$corpus_file" >&2
+    exit 1
+  fi
+  if [[ ! -f "$batch_file" ]]; then
+    echo "Batch not found:" >&2
+    echo "$batch_file" >&2
+    exit 1
+  fi
+
+  python3 \
+    "$ABBEY_ROOT/tools/research/validate_discovery_manifest.py" \
+    --manifest "$manifest_file" \
+    --corpus "$corpus_file" \
+    --batch "$batch_file"
+}
+
 
 status_research() {
   if [[ $# -gt 0 ]]; then
@@ -986,6 +1087,11 @@ case "$command" in
   validate-review)
     shift
     validate_review "$@"
+    ;;
+
+  validate-discovery)
+    shift
+    validate_discovery "$@"
     ;;
 
   status)

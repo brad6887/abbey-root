@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch-007",
+  "status": "candidate_discovery_human_review_required",
+  "corpus": {
+    "artifact_id": "facebook-clean-corpus",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "model": "gpt-oss:20b",
+  "prompt": "full-corpus-observation-discovery-v1",
+  "candidates": [
+    {
+      "candidate_id": "B007-C01",
+      "label": "Fragmentary posts",
+      "description": "Short status updates that consist of a single word or brief fragment with minimal punctuation.",
+      "citations": [
+        {
+          "source_id": "FB-002901",
+          "text": "Arrived"
+        },
+        {
+          "source_id": "FB-002910",
+          "text": "Warning! Pork skin bandit is on the loose!"
+        },
+        {
+          "source_id": "FB-002911",
+          "text": "Break in' the law x 2"
+        }
+      ],
+      "scope_note": "Observed only in this batch; may not generalize to other data.",
+      "boundary_note": "Other longer, complete sentences are common, so this pattern does not cover all posts."
+    },
+    {
+      "candidate_id": "B007-C02",
+      "label": "I just statements",
+      "description": "Personal updates that begin with 'I just' followed by a clause describing an event or action.",
+      "citations": [
+        {
+          "source_id": "FB-002073",
+          "text": "I just found out that Bob Seeger's dad died. RIP Pete."
+        },
+        {
+          "source_id": "FB-002074",
+          "text": "I just bought 4 gallons of milk because it's going to snow. I don't drink milk so I'm not sure what I'm gonna do with it."
+        },
+        {
+          "source_id": "FB-002025",
+          "text": "I just watched \"10 videos you won't believe.\" I believed every one of them. Prize?"
+        }
+      ],
+      "scope_note": "Appears multiple times in this batch; may be coincidental.",
+      "boundary_note": "Not every post starting with 'I' follows this structure, limiting its generality."
+    },
+    {
+      "candidate_id": "B007-C03",
+      "label": "External link posts",
+      "description": "Status updates that include at least one URL to an external site.",
+      "citations": [
+        {
+          "source_id": "FB-000115",
+          "text": "As discussed earlier this week. This is Zack's band. I guess they do have some stuff on the interweb. http://babetones.bandcamp.com/"
+        },
+        {
+          "source_id": "FB-000124",
+          "text": "Bought a house during lunch. Like a Boss. http://youtu.be/eSQVij6Fny4"
+        }
+      ],
+      "scope_note": "Found only a few occurrences in this batch.",
+      "boundary_note": "Other posts may reference external content without a link, so this pattern is not exhaustive."
+    }
+  ]
+}

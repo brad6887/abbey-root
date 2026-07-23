@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch-005",
+  "status": "candidate_discovery_human_review_required",
+  "corpus": {
+    "artifact_id": "facebook-clean-corpus",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "model": "gpt-oss:20b",
+  "prompt": "full-corpus-observation-discovery-v1",
+  "candidates": [
+    {
+      "candidate_id": "B005-C01",
+      "label": "Homebrew updates",
+      "description": "Frequent brief posts announcing progress on homemade alcohol.",
+      "citations": [
+        {
+          "source_id": "FB-002797",
+          "text": "It home brew time."
+        },
+        {
+          "source_id": "FB-002803",
+          "text": "More home brewed hooch on the way!"
+        },
+        {
+          "source_id": "FB-002804",
+          "text": "More homebrew in progress."
+        },
+        {
+          "source_id": "FB-002806",
+          "text": "The brew closet is double booked"
+        }
+      ],
+      "scope_note": "Limited to the observed batch; other batches may differ.",
+      "boundary_note": "Posts describing commercial beer production are not captured by this pattern."
+    },
+    {
+      "candidate_id": "B005-C02",
+      "label": "Political voting frustration",
+      "description": "Recurrent expressions of annoyance with being told how to vote or political encouragement.",
+      "citations": [
+        {
+          "source_id": "FB-002209",
+          "text": "I'm not sure why everybody on Facebook keeps telling me who to vote for, I won't remember. Just write it on a $100 bill and give it to me next time you see me, that's much more effective."
+        },
+        {
+          "source_id": "FB-002196",
+          "text": "STOP TELLING ME TO VOTE! I DO WHAT I WANT!"
+        },
+        {
+          "source_id": "FB-000376",
+          "text": "Don't forget to go out and vote today! #vote2012"
+        }
+      ],
+      "scope_note": "Only the examples in this batch support this observation.",
+      "boundary_note": "Posts that simply report political news are not covered."
+    },
+    {
+      "candidate_id": "B005-C03",
+      "label": "Short declarative statements",
+      "description": "Single‑clause, minimal context posts often ending with an exclamation or period.",
+      "citations": [
+        {
+          "source_id": "FB-002793",
+          "text": "AMERICA!!"
+        },
+        {
+          "source_id": "FB-002817",
+          "text": "You beat me this time, but I will return!"
+        },
+        {
+          "source_id": "FB-002820",
+          "text": "Me and Fred."
+        }
+      ],
+      "scope_note": "Limited to the examples in this batch.",
+      "boundary_note": "Multi‑sentence status updates do not fall under this pattern."
+    }
+  ]
+}

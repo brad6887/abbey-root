@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch-004",
+  "status": "candidate_discovery_human_review_required",
+  "corpus": {
+    "artifact_id": "facebook-clean-corpus",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "model": "gpt-oss:20b",
+  "prompt": "full-corpus-observation-discovery-v1",
+  "candidates": [
+    {
+      "candidate_id": "B004-C01",
+      "label": "Quoted external text inclusion",
+      "description": "Posts frequently embed quoted phrases from pop culture or media, attributing them to sources.",
+      "citations": [
+        {
+          "source_id": "FB-002275",
+          "text": "Inspirational quote of the day: \"Stick This in your fuse box!\" - Bon Scott"
+        },
+        {
+          "source_id": "FB-002282",
+          "text": "\"Hey asshole, you don't come to my show to fight, you come here to dance. Now get OUT\". -Dave Grohl for president."
+        },
+        {
+          "source_id": "FB-002272",
+          "text": "As I mentioned near the close of the last record, this record you are now playing is another example of the \"Completion Backward Principal.\" If you can possibly manage the time please play both sides at one meeting."
+        }
+      ],
+      "scope_note": "Pattern appears in multiple non‑adjacent posts within this batch.",
+      "boundary_note": "This pattern does not appear in posts such as FB-002280."
+    },
+    {
+      "candidate_id": "B004-C02",
+      "label": "All‑caps emphasis or stylized block text",
+      "description": "Posts use all uppercase letters or stylized blocks to emphasize content.",
+      "citations": [
+        {
+          "source_id": "FB-000041",
+          "text": "Answer=YES"
+        },
+        {
+          "source_id": "FB-002266",
+          "text": "╔══════════════ ೋღ☃ღೋ ══════════════╗ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Repost this if ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ you are a beautiful strong black woman ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ who don’t need no man ~ ~ ~ ~ ~ ~ ~ ╚══════════════ ೋღ☃ღೋ ══════════════╝"
+        },
+        {
+          "source_id": "FB-002783",
+          "text": "MAN GROCERIES."
+        }
+      ],
+      "scope_note": "The all‑caps or stylized format is repeated in multiple posts across the batch.",
+      "boundary_note": "Not all capitalized text appears in posts such as FB-002283."
+    },
+    {
+      "candidate_id": "B004-C03",
+      "label": "Inclusion of URLs or social media handles",
+      "description": "Posts embed web addresses or handle references to other accounts or sites.",
+      "citations": [
+        {
+          "source_id": "FB-000401",
+          "text": "Brewing beer and listening to @drivebytruckers http://t.co/2DhA6i7D"
+        },
+        {
+          "source_id": "FB-002214",
+          "text": "Apparently I've logged into Chick-Fil-a-Obama-Romney-book.com"
+        }
+      ],
+      "scope_note": "This pattern is observed in a few posts that contain external links or handles.",
+      "boundary_note": "Posts such as FB-002216 do not include URLs or handles."
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "review_id": "DISCOVERY-REVIEW-001",
+  "corpus_sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e",
+  "batch_count": 11,
+  "candidate_count": 33,
+  "citation_count": 92,
+  "status": "human_review_complete",
+  "clusters": [
+    {
+      "cluster_id": "DISC-C01",
+      "label": "Quoted language as comic framing",
+      "decision": "recommended_for_targeted_observation",
+      "priority": "high",
+      "candidate_ids": ["B001-C02", "B004-C01"]
+    },
+    {
+      "cluster_id": "DISC-C02",
+      "label": "Hashtags as closing commentary",
+      "decision": "recommended_for_targeted_observation",
+      "priority": "high",
+      "candidate_ids": ["B003-C03", "B011-C01"]
+    },
+    {
+      "cluster_id": "DISC-C03",
+      "label": "Reusable first-person openings",
+      "decision": "targeted_review_needed",
+      "priority": "medium",
+      "candidate_ids": ["B002-C03", "B003-C02", "B007-C02"]
+    },
+    {
+      "cluster_id": "DISC-C04",
+      "label": "Wordplay in casual statements",
+      "decision": "targeted_review_needed",
+      "priority": "medium",
+      "candidate_ids": ["B010-C03"]
+    },
+    {
+      "cluster_id": "DISC-C05",
+      "label": "Concise and fragmentary delivery",
+      "decision": "related_existing_observation",
+      "related_artifact": "OBS-002",
+      "candidate_ids": [
+        "B001-C01",
+        "B002-C01",
+        "B005-C03",
+        "B007-C01",
+        "B008-C01",
+        "B009-C03"
+      ]
+    },
+    {
+      "cluster_id": "DISC-C06",
+      "label": "Hyperbolic absurdity",
+      "decision": "related_existing_observation",
+      "related_artifact": "OBS-001",
+      "candidate_ids": ["B003-C01"]
+    },
+    {
+      "cluster_id": "DISC-C07",
+      "label": "Repeated formulations and serial motifs",
+      "decision": "related_existing_observation",
+      "related_artifact": "OBS-003",
+      "candidate_ids": [
+        "B002-C02",
+        "B005-C01",
+        "B006-C01",
+        "B006-C02",
+        "B006-C03",
+        "B010-C02"
+      ]
+    },
+    {
+      "cluster_id": "DISC-C08",
+      "label": "External-link sharing",
+      "decision": "context_or_platform_convention",
+      "candidate_ids": ["B001-C03", "B004-C03", "B007-C03"]
+    },
+    {
+      "cluster_id": "DISC-C09",
+      "label": "Social and holiday greetings",
+      "decision": "context_or_platform_convention",
+      "candidate_ids": ["B008-C02", "B009-C02", "B010-C01", "B011-C02"]
+    },
+    {
+      "cluster_id": "DISC-C10",
+      "label": "Topic-centered clusters",
+      "decision": "context_or_topic",
+      "candidate_ids": ["B005-C02", "B008-C03", "B011-C03"]
+    },
+    {
+      "cluster_id": "DISC-C11",
+      "label": "Platform-era formatted prompts",
+      "decision": "hold_for_more_evidence",
+      "candidate_ids": ["B004-C02", "B009-C01"]
+    }
+  ]
+}

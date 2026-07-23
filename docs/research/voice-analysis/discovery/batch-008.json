@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch-008",
+  "status": "candidate_discovery_human_review_required",
+  "corpus": {
+    "artifact_id": "facebook-clean-corpus",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "model": "gpt-oss:20b",
+  "prompt": "full-corpus-observation-discovery-v1",
+  "candidates": [
+    {
+      "candidate_id": "B008-C01",
+      "label": "Concise microstatus updates",
+      "description": "Short declarative statements or single-word exclamations that serve as standalone status messages.",
+      "citations": [
+        {
+          "source_id": "FB-001967",
+          "text": "Today is my Wednesday."
+        },
+        {
+          "source_id": "FB-001960",
+          "text": "Styx!"
+        },
+        {
+          "source_id": "FB-001910",
+          "text": "Tom Guffey"
+        }
+      ],
+      "scope_note": "Observed in a few sporadic posts within this batch.",
+      "boundary_note": "Not all short posts are purely declarative; some include commentary (e.g., FB-001968)."
+    },
+    {
+      "candidate_id": "B008-C02",
+      "label": "Playful festive greetings",
+      "description": "Posts that begin with a holiday or celebration greeting, often with informal wording.",
+      "citations": [
+        {
+          "source_id": "FB-001965",
+          "text": "Happy Valentimes day!"
+        },
+        {
+          "source_id": "FB-003016",
+          "text": "Happy 4th y'all"
+        },
+        {
+          "source_id": "FB-003008",
+          "text": "Happy Mothers Day!"
+        }
+      ],
+      "scope_note": "Appears on a handful of holiday posts in this batch.",
+      "boundary_note": "Other festive mentions may not follow the same informal style (e.g., FB-002994)."
+    },
+    {
+      "candidate_id": "B008-C03",
+      "label": "Travel narrative updates",
+      "description": "First-person posts that list multiple locations and describe journeys between them.",
+      "citations": [
+        {
+          "source_id": "FB-002990",
+          "text": "From Texas to Colorado to Texas Roadhouse to drink a local Brew from Colorado"
+        },
+        {
+          "source_id": "FB-001964",
+          "text": "We woke up in Shreveport LA this morning with no particular plans. Went 350 miles by car, foot, and pedicab. Waking up in Austin tomorrow with no particular plans."
+        }
+      ],
+      "scope_note": "Found in two non-adjacent posts of this batch.",
+      "boundary_note": "Not all posts that mention locations are travel narratives; for example FB-001953."
+    }
+  ]
+}

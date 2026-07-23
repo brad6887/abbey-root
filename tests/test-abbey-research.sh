@@ -69,6 +69,11 @@ assert_contains \
   "abbey research run"
 
 assert_contains \
+  "--help shows generation budget option" \
+  "$output" \
+  "--max-tokens N"
+
+assert_contains \
   "--help shows status usage" \
   "$output" \
   "abbey research status"
@@ -77,6 +82,11 @@ assert_contains \
   "--help shows review validation usage" \
   "$output" \
   "abbey research validate-review"
+
+assert_contains \
+  "--help shows discovery validation usage" \
+  "$output" \
+  "abbey research validate-discovery"
 
 set +e
 output="$("$TOOL" status 2>&1)"
@@ -139,6 +149,21 @@ assert_contains \
   "Missing required option: --model"
 
 set +e
+output="$("$TOOL" run --max-tokens nope 2>&1)"
+status=$?
+set -e
+
+assert_status \
+  "invalid generation budget exits with error" \
+  "$status" \
+  1
+
+assert_contains \
+  "invalid generation budget is reported" \
+  "$output" \
+  "Option --max-tokens requires a positive integer."
+
+set +e
 output="$("$TOOL" validate-review 2>&1)"
 status=$?
 set -e
@@ -150,6 +175,21 @@ assert_status \
 
 assert_contains \
   "missing review manifest is reported" \
+  "$output" \
+  "Missing required option: --manifest"
+
+set +e
+output="$("$TOOL" validate-discovery 2>&1)"
+status=$?
+set -e
+
+assert_status \
+  "missing discovery manifest exits with error" \
+  "$status" \
+  1
+
+assert_contains \
+  "missing discovery manifest is reported" \
   "$output" \
   "Missing required option: --manifest"
 
@@ -180,6 +220,7 @@ trap 'rm -rf "$fixture_root"' EXIT
 mkdir -p \
   "$fixture_root/tools/bin" \
   "$fixture_root/tools/lib" \
+  "$fixture_root/tools/research" \
   "$fixture_root/scripts" \
   "$fixture_root/config" \
   "$fixture_root/working"
@@ -192,6 +233,9 @@ cp "$ROOT/tools/lib/config.sh" \
 
 cp "$ROOT/scripts/abbey_research_status.py" \
   "$fixture_root/scripts/abbey_research_status.py"
+
+cp "$ROOT/tools/research/validate_discovery_manifest.py" \
+  "$fixture_root/tools/research/validate_discovery_manifest.py"
 
 cat > "$fixture_root/config/abbey.conf" <<'CONFIG'
 OLLAMA_URL="http://localhost:11434"

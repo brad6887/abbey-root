@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "batch_id": "batch-006",
+  "status": "candidate_discovery_human_review_required",
+  "corpus": {
+    "artifact_id": "facebook-clean-corpus",
+    "sha256": "b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e"
+  },
+  "model": "gpt-oss:20b",
+  "prompt": "full-corpus-observation-discovery-v1",
+  "candidates": [
+    {
+      "candidate_id": "B006-C01",
+      "label": "Live Tweeting with Location",
+      "description": "Posts frequently self‑identify as live tweets from a named location while describing ongoing activities.",
+      "citations": [
+        {
+          "source_id": "FB-000363",
+          "text": "I'm \"live\" tweeting tonight from @HGBrewery I'm drinking a beer."
+        },
+        {
+          "source_id": "FB-000362",
+          "text": "Live tweeting @HGBrewery I'm halfway done with my steak and beer 2."
+        },
+        {
+          "source_id": "FB-000361",
+          "text": "Live tweeting @HGBrewery Sun is blazing through window and blinding me. Bartender loaned m prescription Ray Bans. http://t.co/ftVDi19quq"
+        },
+        {
+          "source_id": "FB-002121",
+          "text": "I'll be live tweeting the Government shutdown. So far the only thing I've noticed is the battery in my noise canceling headphones is dead."
+        }
+      ],
+      "scope_note": "Occurs across multiple non‑consecutive posts within the batch.",
+      "boundary_note": "Not every post that mentions activity or location uses the live‑tweet phrasing; some are plain updates without 'live'."
+    },
+    {
+      "candidate_id": "B006-C02",
+      "label": "\"Martini Time\" Phrase Repetition",
+      "description": "The phrase \"martini time\" appears verbatim in separate posts months apart, signaling a recurring personal cue.",
+      "citations": [
+        {
+          "source_id": "FB-002853",
+          "text": "It's martini time."
+        },
+        {
+          "source_id": "FB-000097",
+          "text": "I got two olives and a couple of limes, Guessin' that means it's martini time."
+        }
+      ],
+      "scope_note": "Found in two separate posts dated April and September, indicating a pattern.",
+      "boundary_note": "The phrase is not used outside these instances and may be idiosyncratic to this author."
+    },
+    {
+      "candidate_id": "B006-C03",
+      "label": "\"Pay It Forward People\" Recurrence",
+      "description": "A set phrase \"Pay it forward people\" is repeated in distinct contexts to emphasize altruistic actions.",
+      "citations": [
+        {
+          "source_id": "FB-002854",
+          "text": "Sometimes people go to a public restroom and leave a drink for the next visitor. Paying it forward people."
+        },
+        {
+          "source_id": "FB-002872",
+          "text": "The only coffee in the hotel room this morning was decaffeinated. I made it just so I could throw it away. Pay it forward people."
+        }
+      ],
+      "scope_note": "Appears in at least two posts, suggesting a recurring expression.",
+      "boundary_note": "It appears only in contexts involving sharing a drink, not in all posts about generosity."
+    }
+  ]
+}
