@@ -9,6 +9,7 @@ ABBEY_ROOT="$(cd "$(dirname "$SCRIPT_PATH")/../.." && pwd)"
 DOCTOR_DIR="$ABBEY_ROOT/tools/doctor"
 
 source "$DOCTOR_DIR/lib/output.sh"
+source "$DOCTOR_DIR/lib/platform.sh"
 
 print_header "Abbey Root Doctor"
 

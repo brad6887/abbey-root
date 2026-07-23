@@ -50,7 +50,7 @@ if [ -z "$hosts" ]; then
 fi
 
 while IFS=$'\t' read -r host target; do
-  if ping -4 -c 1 -W 1 "$target" >/dev/null 2>&1; then
+  if doctor_ping_host "$target"; then
     if [ "$host" = "$target" ]; then
       ok "Host reachable: $host"
     else
