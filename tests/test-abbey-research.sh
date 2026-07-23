@@ -68,6 +68,56 @@ assert_contains \
   "$output" \
   "abbey research run"
 
+assert_contains \
+  "--help shows status usage" \
+  "$output" \
+  "abbey research status"
+
+set +e
+output="$("$TOOL" status 2>&1)"
+status=$?
+set -e
+
+assert_status \
+  "status exits successfully for repository artifacts" \
+  "$status" \
+  0
+
+assert_contains \
+  "status reports Voice Analysis project" \
+  "$output" \
+  "OK   voice-analysis"
+
+assert_contains \
+  "status reports formal artifact count" \
+  "$output" \
+  "Formal artifacts:     14"
+
+assert_contains \
+  "status reports first complete chain" \
+  "$output" \
+  "OBS-001 → EVID-001 → HYP-001 → VAL-001"
+
+assert_contains \
+  "status reports second complete chain" \
+  "$output" \
+  "OBS-002 → EVID-002 → HYP-002 → VAL-002"
+
+assert_contains \
+  "status reports third complete chain" \
+  "$output" \
+  "OBS-003 → EVID-003 → HYP-003 → VAL-003"
+
+assert_contains \
+  "status reports three complete chains" \
+  "$output" \
+  "Complete chains:      3"
+
+assert_contains \
+  "status reports legacy provenance" \
+  "$output" \
+  "INFO OBS-001 → OBSERVATION004-deadpan-delivery"
+
 set +e
 output="$("$TOOL" run 2>&1)"
 status=$?
@@ -110,6 +160,7 @@ trap 'rm -rf "$fixture_root"' EXIT
 mkdir -p \
   "$fixture_root/tools/bin" \
   "$fixture_root/tools/lib" \
+  "$fixture_root/scripts" \
   "$fixture_root/config" \
   "$fixture_root/working"
 
@@ -118,6 +169,9 @@ cp "$TOOL" \
 
 cp "$ROOT/tools/lib/config.sh" \
   "$fixture_root/tools/lib/config.sh"
+
+cp "$ROOT/scripts/abbey_research_status.py" \
+  "$fixture_root/scripts/abbey_research_status.py"
 
 cat > "$fixture_root/config/abbey.conf" <<'CONFIG'
 OLLAMA_URL="http://localhost:11434"

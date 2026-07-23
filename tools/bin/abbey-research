@@ -39,6 +39,8 @@ Usage:
   abbey research validate \
     --input FILE
 
+  abbey research status
+
 Options:
   --type TYPE     Research artifact type (default: generic)
   --model MODEL   Ollama model to use
@@ -72,6 +74,8 @@ Examples:
 
   abbey research validate \
     --input working/research/normalized/gpt-oss-20b.md
+
+  abbey research status
 HELP
 }
 
@@ -857,6 +861,36 @@ PYTHON_VALIDATE
 }
 
 
+status_research() {
+  if [[ $# -gt 0 ]]; then
+    case "$1" in
+      -h|--help|help)
+        cat <<'HELP'
+Abbey Research Status
+
+Usage:
+  abbey research status
+
+Discover formal research artifacts and report their relationships,
+chain completeness, and provenance references.
+
+The command is deterministic and read-only.
+HELP
+        return 0
+        ;;
+
+      *)
+        echo "Unknown option for research status: $1" >&2
+        return 1
+        ;;
+    esac
+  fi
+
+  python3 "$ABBEY_ROOT/scripts/abbey_research_status.py" \
+    --repo "$ABBEY_ROOT"
+}
+
+
 command="${1:-help}"
 
 case "$command" in
@@ -878,6 +912,11 @@ case "$command" in
   validate)
     shift
     validate_research "$@"
+    ;;
+
+  status)
+    shift
+    status_research "$@"
     ;;
 
   help|-h|--help)

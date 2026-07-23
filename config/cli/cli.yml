@@ -199,12 +199,17 @@ commands:
 
   research:
     category: research
-    description: Run structured research prompts through Abbey AI models.
+    description: Run structured research workflows and inspect formal research artifacts.
     usage: abbey research <command>
     hidden: false
+    subcommands:
+      status:
+        description: Report formal research artifact relationships and chain status.
+        usage: abbey research status
     examples:
       - abbey research --help
       - abbey research run --help
+      - abbey research status
 
   lab:
     category: lab
