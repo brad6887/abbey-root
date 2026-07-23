@@ -2,7 +2,7 @@
 artifact_id: EVID-002
 artifact_type: evidence
 title: Evidence Supporting Preference for Concise Expression
-version: 2
+version: 3
 status: draft
 
 source:
@@ -43,12 +43,14 @@ Frozen source:
 
 Derived research view:
 
-- 1,502 voice-eligible posts
+- 1,469 voice-eligible posts
 - 127 Facebook status-prompt completions flagged
-- 1,375 unflagged eligible posts reviewed through eleven deterministic chronological batches
+- 1,342 unflagged eligible posts represented across eleven deterministic chronological batches
 - Coverage from 2009-03-04 through 2026-05-10
 
 The derived view excludes platform-generated records without changing CORPUS-001.
+
+The Version 3 view additionally excludes 33 records beginning with the generated `Mobile uploads Place:` prefix. None of those records was cited by EVID-002.
 
 ## Method
 
@@ -241,3 +243,6 @@ Initial evidence from the first 100 chronological clean Facebook posts.
 
 Version 2:
 Expanded to the reviewed 1,375-post unflagged voice-eligible view, added cross-period supporting and contradictory evidence, documented prompt correction and human-review safeguards, and narrowed the assessment to the supported scope.
+
+Version 3:
+Applied the residual location-metadata exclusion, updated the derived view to 1,469 eligible and 1,342 unflagged posts, and confirmed that no retained citation was removed.

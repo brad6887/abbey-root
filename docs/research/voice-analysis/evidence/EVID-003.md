@@ -2,7 +2,7 @@
 artifact_id: EVID-003
 artifact_type: evidence
 title: Evidence Supporting Recurring Narrative Elements
-version: 2
+version: 3
 status: draft
 
 source:
@@ -44,10 +44,12 @@ Frozen source:
 Research views:
 
 - The original first-100 sample, including authored Facebook status-prompt completions.
-- Eleven deterministic chronological batches from the 1,375-post unflagged voice-eligible view.
+- Eleven deterministic chronological batches from the corrected 1,342-post unflagged voice-eligible view.
 - Combined coverage from 2009 through 2026.
 
 CORPUS-001 remained unchanged.
+
+The corrected view excludes 33 records beginning with the generated `Mobile uploads Place:` prefix. None of those records was cited by EVID-003.
 
 ## Method
 
@@ -177,7 +179,7 @@ These show that distinctive concepts frequently remain standalone. They establis
 - All retained identifiers and quotations match the source corpus or deterministic batches.
 - The model attached the first "Overheard at work" quotation to FB-002359; deterministic search found the actual source at FB-002357, and only the verified identifier was retained.
 - A same-event concert sequence, real-band updates, ordinary home-brewing posts, and a duplicated concert upload were rejected.
-- Thirty-three residual `Mobile uploads Place:` records were discovered in the unflagged batches and excluded from evidence.
+- Thirty-three residual `Mobile uploads Place:` records were discovered during Version 2 review and are now excluded deterministically from the Version 3 derived view.
 - One Batch 008 run returned no artifact after exhausting its output budget; its successful retry is the only Batch 008 result used.
 - The frozen corpus was not modified.
 
@@ -196,3 +198,6 @@ Initial evidence from the 2009 time-machine sequence in the first 100 chronologi
 
 Version 2:
 Expanded to cross-period cluster retrieval, deterministic corpus search, and human review; added five retained clusters through 2024, provisional clusters, isolated comparisons, integrity corrections, and the residual-platform-artifact limitation.
+
+Version 3:
+Applied the residual location-metadata exclusion, updated the derived view to 1,469 eligible and 1,342 unflagged posts, and confirmed that no retained citation was removed.

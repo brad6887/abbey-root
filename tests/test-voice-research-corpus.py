@@ -56,6 +56,22 @@ class EligibilityTests(unittest.TestCase):
         result = eligibility.classify("https://example.com/post")
         self.assertEqual(result, ("excluded", "link_only", []))
 
+    def test_mobile_upload_location_metadata_is_excluded(self):
+        result = eligibility.classify(
+            "Mobile uploads Place: Example Cafe (32.0, -97.0) "
+            "Address: 123 Main St"
+        )
+        self.assertEqual(result, ("excluded", "location_metadata", []))
+
+    def test_authored_mobile_upload_reference_remains_eligible(self):
+        result = eligibility.classify(
+            "My mobile uploads finally found the right place."
+        )
+        self.assertEqual(
+            result,
+            ("eligible", "authored_voice_candidate", []),
+        )
+
     def test_facebook_mention_token_requires_review(self):
         result = eligibility.classify(
             "Hello @[12345:2048:Example Person]"

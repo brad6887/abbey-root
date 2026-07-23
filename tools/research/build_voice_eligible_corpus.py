@@ -21,7 +21,7 @@ EXCLUDE_PATTERNS = [
         "link_only",
     ),
     (
-        re.compile(r"^(?:Place|Address):", re.I),
+        re.compile(r"^(?:Mobile uploads\s+)?(?:Place|Address):", re.I),
         "location_metadata",
     ),
 ]
