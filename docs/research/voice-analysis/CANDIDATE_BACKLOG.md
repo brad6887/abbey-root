@@ -28,14 +28,17 @@ Candidates below are review findings, not formal voice-model claims.
 
 **Candidates:** B001-C02, B004-C01
 
+**Decision:** Promoted to draft observation OBS-004 after
+QUOTED-LANGUAGE-REVIEW-001.
+
 Quotation marks appear in two distinct roles: casting doubt on an ordinary
 label and importing a recognizable outside phrase. The common possibility is
 that quoted language creates distance between the literal wording and the
 post's stance.
 
-**Next test:** Review quoted phrases across the full eligible corpus and
-separate skeptical emphasis, direct quotation, titles, and ordinary
-punctuation.
+**Next test:** Complete the 165-candidate functional review, decide whether
+distancing, renaming, and reversal remain one observation, and then select
+EVID-004.
 
 ### Hashtags as punchlines or closing commentary
 
@@ -141,4 +144,3 @@ Quoted-language framing and hashtag closers are the strongest new candidates.
 Reusable first-person templates and wordplay warrant targeted follow-up.
 
 No candidate is promoted automatically.
-

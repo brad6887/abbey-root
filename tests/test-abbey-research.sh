@@ -111,7 +111,7 @@ assert_contains \
 assert_contains \
   "status reports formal artifact count" \
   "$output" \
-  "Formal artifacts:     14"
+  "Formal artifacts:     15"
 
 assert_contains \
   "status reports first complete chain" \
@@ -132,6 +132,16 @@ assert_contains \
   "status reports three complete chains" \
   "$output" \
   "Complete chains:      3"
+
+assert_contains \
+  "status reports draft fourth observation" \
+  "$output" \
+  "WARN OBS-004"
+
+assert_contains \
+  "status reports one incomplete chain" \
+  "$output" \
+  "Incomplete chains:    1"
 
 assert_contains \
   "status reports legacy provenance" \
@@ -244,6 +254,9 @@ cp "$ROOT/tools/research/validate_discovery_manifest.py" \
 
 cp "$ROOT/tools/research/run_observation_discovery.py" \
   "$fixture_root/tools/research/run_observation_discovery.py"
+
+cp "$ROOT/tools/research/build_quoted_language_candidates.py" \
+  "$fixture_root/tools/research/build_quoted_language_candidates.py"
 
 cat > "$fixture_root/config/abbey.conf" <<'CONFIG'
 OLLAMA_URL="http://localhost:11434"
@@ -546,6 +559,39 @@ if [[ -f \
 else
   fail "discovery creates review scaffold"
 fi
+
+cat > "$fixture_root/working/quoted-language.csv" <<'CSV'
+source_id,datetime,text,research_status,platform_context
+1,2020-01-01T00:00:00,"Calls this ""Alpha"".",eligible,
+2,2020-01-02T00:00:00,Don’t,eligible,
+3,2020-01-03T00:00:00,"Calls this ""Excluded"".",eligible,facebook_status_prompt_completion
+CSV
+
+set +e
+output="$(
+  python3 \
+    "$fixture_root/tools/research/build_quoted_language_candidates.py" \
+    --corpus "$fixture_root/working/quoted-language.csv" \
+    --output "$fixture_root/working/quoted-language.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "quoted-language candidate build exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "quoted-language candidate build applies research scope" \
+  "$output" \
+  "Eligible rows: 2"
+
+assert_contains \
+  "quoted-language candidate build excludes contraction" \
+  "$output" \
+  "Candidates:    1"
 
 printf '\nPassed: %d\n' "$passed"
 printf 'Failed: %d\n' "$failed"
