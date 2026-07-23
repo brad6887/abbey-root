@@ -1,6 +1,6 @@
 # Abbey Root Next
 
-Last Reviewed: 2026-07-20
+Last Reviewed: 2026-07-22
 
 # Current Theme
 
@@ -8,161 +8,206 @@ Last Reviewed: 2026-07-20
 
 # Primary Objective
 
-Establish the foundation for reproducible Voice Analysis research by creating the formal corpus artifact and aligning existing research artifacts with the methodology.
+Design a deterministic Abbey Research status workflow using the completed Voice Analysis artifact chains as reference implementations.
 
 # Definition of Done
 
-The Voice Analysis foundation phase is complete when:
+The research status design phase is complete when:
 
-- CORPUS-001 exists as a formal research artifact.
-- The Facebook corpus source is documented.
-- Corpus normalization steps are documented.
-- Experiment 001 references the formal corpus artifact.
-- Existing experiment outputs can be traced through the formal artifact lifecycle.
-- The research workflow can begin from source material rather than existing analysis.
+- Existing research artifacts can be discovered deterministically.
+- Corpus, experiment, observation, evidence, hypothesis, and validation relationships are defined.
+- Complete, incomplete, broken, and orphaned artifact chains are distinguishable.
+- Expected `abbey research status` output is documented.
+- Research status reporting remains read-only and does not generate conclusions.
+- The design is reviewed before implementation begins.
 
 ## Current Objective
 
-Establish the foundation for reproducible Voice Analysis research by creating the formal corpus artifact and aligning existing research artifacts with the methodology.
+Design a deterministic Abbey Research status workflow using the completed Voice Analysis artifact chains as reference implementations.
 
 ## Definition of Done
 
-The Voice Analysis foundation phase is complete when:
+The research status design phase is complete when:
 
-- CORPUS-001 exists as a formal research artifact.
-- The Facebook corpus source is documented.
-- Corpus normalization steps are documented.
-- Experiment 001 references the formal corpus artifact.
-- Existing experiment outputs can be traced through the formal artifact lifecycle.
-- The research workflow can begin from source material rather than existing analysis.
+- Existing research artifacts can be discovered deterministically.
+- Corpus, experiment, observation, evidence, hypothesis, and validation relationships are defined.
+- Complete, incomplete, broken, and orphaned artifact chains are distinguishable.
+- Expected `abbey research status` output is documented.
+- Research status reporting remains read-only and does not generate conclusions.
+- The design is reviewed before implementation begins.
 
 ---
 
-# Phase 1 — Corpus Foundation
+# Completed Foundation
+
+## Corpus Foundation
+
+Completed:
+
+- CORPUS-001 formalizes the Facebook source corpus.
+- Source locations, normalization, identifiers, limitations, and provenance are documented.
+
+## Experiment Alignment
+
+Completed:
+
+- EXP-001 formalizes Experiment 001.
+- EXP-001 references CORPUS-001.
+- Existing experiment outputs remain traceable.
+
+## Artifact Workflow Validation
+
+Three complete formal artifact chains now exist:
+
+### Deadpan Delivery
+
+- OBS-001
+- EVID-001
+- HYP-001
+- VAL-001
+
+### Concise Expression
+
+- OBS-002
+- EVID-002
+- HYP-002
+- VAL-002
+
+### Recurring Narrative Elements
+
+- OBS-003
+- EVID-003
+- HYP-003
+- VAL-003
+
+These migrations demonstrated that the artifact lifecycle is repeatable:
+
+Observation
+
+↓
+
+Evidence
+
+↓
+
+Hypothesis
+
+↓
+
+Validation
+
+---
+
+# Current Phase — Research Status Design
 
 ## Objective
 
-Create the source foundation that all future Voice Analysis artifacts will reference.
+Define how Abbey discovers and reports the current state of formal research artifacts.
 
-## Tasks
+## Design Questions
 
-### Define CORPUS-001
-
-Create:
-
-docs/research/voice-analysis/corpus/CORPUS-001.md
-
-Document:
-
-- Source material
-- Collection method
-- Date range
-- File format
-- Size
-- Limitations
-- Privacy considerations
-
----
-
-### Document Corpus Structure
+### Artifact Discovery
 
 Define:
 
-- Raw source location
-- Normalized corpus location
-- Metadata format
-- Stable identifiers
+- Supported artifact directories.
+- Required metadata.
+- Artifact identifier rules.
+- Duplicate identifier behavior.
+- Invalid or unreadable artifact behavior.
 
-Expected flow:
+### Relationship Mapping
 
-Raw Facebook Export
+Define how Abbey maps:
 
-↓
+- Corpus to experiment.
+- Experiment to observation.
+- Observation to evidence.
+- Evidence to hypothesis.
+- Hypothesis to validation.
 
-Normalized Corpus
+Relationships should be derived from artifact metadata rather than filenames alone.
 
-↓
+### Chain Status
 
-Research Artifacts
+Define deterministic states for:
 
----
+- Complete chains.
+- Incomplete chains.
+- Broken references.
+- Orphaned artifacts.
+- Duplicate artifacts.
+- Invalid metadata.
 
-### Validate Corpus Normalization
+### Command Output
 
-Confirm:
+Design expected output for:
 
-- Posts have stable identifiers.
-- Dates are preserved.
-- Original text is retained.
-- Processing steps are reproducible.
+abbey research status
 
----
+The command should report:
 
-# Phase 2 — Experiment Alignment
+- Corpus artifacts.
+- Experiment artifacts.
+- Formal research chains.
+- Chain completeness.
+- Broken or missing relationships.
+- Migration progress where it can be determined safely.
 
-## Objective
+### Scope Boundary
 
-Align existing Experiment 001 research with the formal artifact model.
+The command must remain:
 
-Tasks:
+- Read-only.
+- Deterministic.
+- Project-aware.
+- Independent of Voice Analysis-specific conclusions.
 
-- Link EXP-001 to CORPUS-001.
-- Document relationship between experiment artifacts and formal artifacts.
-- Preserve original experiment history.
+The command must not:
 
----
-
-# Phase 3 — Artifact Migration
-
-## Objective
-
-Promote existing research outputs into formal artifacts.
-
-Priority order:
-
-1. Deadpan Delivery
-2. Preference for Concise Writing
-3. Implicit Reader Participation
-4. Literal Reframing
-5. Recurring Narrative Elements
-
----
-
-# Phase 4 — Validation Expansion
-
-## Objective
-
-Test whether hypotheses represent stable writing characteristics.
-
-Review:
-
-- Multiple time periods
-- Multiple writing formats
-- Counterexamples
+- Generate observations.
+- Create hypotheses.
+- Assign confidence.
+- Interpret evidence.
+- Modify research artifacts.
 
 ---
 
-# Phase 5 — Voice Model Development
+# Future Phases
 
-## Objective
+## Research Validation
 
-Create the first Voice Model only after sufficient validation.
+After status reporting is implemented:
 
-Requirements:
+- Add deterministic artifact validation.
+- Detect missing metadata.
+- Detect broken parent references.
+- Detect duplicate identifiers.
+- Evaluate a reusable `abbey research validate` workflow.
 
-- Multiple validated hypotheses
-- Supporting evidence
-- Documented exceptions
-- Confidence levels
+## Artifact Scaffolding
 
----
+Only after status and validation workflows are stable:
 
-# Future Automation Opportunities
+- Evaluate `abbey research scaffold`.
+- Generate empty artifact structure.
+- Preserve human control of research conclusions.
 
-Potential Abbey research commands:
+## Voice Analysis Expansion
 
-- Artifact creation
-- Artifact validation
-- Artifact dependency graph
-- Research status reporting
-- Corpus analysis workflows
+After tooling is stable:
+
+- Continue formal artifact migration.
+- Review additional time periods.
+- Review additional writing formats.
+- Search systematically for counterexamples.
+- Increase or reduce hypothesis confidence based on evidence.
+
+## Voice Model Development
+
+Create the first Voice Model only after:
+
+- Multiple hypotheses have broader validation.
+- Counterexamples are documented.
+- Confidence levels are meaningful.
+- Shared higher-level characteristics can be justified.

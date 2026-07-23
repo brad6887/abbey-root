@@ -40,7 +40,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Standardize documentation across Abbey-style repositories.
 - [ ] Adopt repository-defined AI session guidance across other Abbey-style repositories.
 - [ ] Create framework migration guide.
-- Improve abbey next NEXT.md parsing and validation.
+- [ ] Improve `abbey next` NEXT.md parsing and validation.
   - Document required NEXT.md structure.
   - Support normal Markdown heading/body formatting.
   - Add clear errors for missing required sections.
@@ -48,11 +48,11 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## Abbey Session Workflow Improvements
 
-- Improve session capture workflow by creating session updates and journal entries through a guided process.
-- Validate required metadata for new or modified session updates while reporting pre-existing historical debt without blocking unrelated commits.
-- Fix `abbey journal` argument handling so `--title` and reserved commands like `help` behave consistently.
-- Add session-aware state to reduce manual slug and filename management.
-- Add reliable artifact export workflow for generated research documents and other Abbey artifacts.
+- [ ] Improve session capture workflow by creating session updates and journal entries through a guided process.
+- [ ] Validate required metadata for new or modified session updates while reporting pre-existing historical debt without blocking unrelated commits.
+- [ ] Fix `abbey journal` argument handling so `--title` and reserved commands like `help` behave consistently.
+- [ ] Add session-aware state to reduce manual slug and filename management.
+- [ ] Add reliable artifact export workflow for generated research documents and other Abbey artifacts.
 
 ---
 
@@ -101,7 +101,8 @@ The backlog is intentionally broad and serves as the project's working inventory
   - Validate check-mode behavior for package installation followed by service management.
 
 ---
-### Project-Aware Recommendations
+
+## Project-Aware Recommendations
 
 - [x] Create `abbey next`.
 - [x] Build deterministic project recommendation engine.
@@ -217,10 +218,24 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ### Abbey Research
 
+#### Status and Visibility
+
+- [ ] Design deterministic `abbey research status` reporting using the completed Voice Analysis artifact chains as reference implementations.
+  - Define artifact discovery rules.
+  - Define metadata-driven relationship mapping.
+  - Define complete, incomplete, broken, and orphaned chain states.
+  - Document expected read-only command output.
+  - Review the design before implementation.
+
+#### Validation and Workflow
+
 - [ ] Complete deterministic research Markdown normalization using universally safe operations.
 - [ ] Add normalization safety tests proving semantic content is preserved.
 - [ ] Orchestrate research generation, normalization, sanitization, and validation without coupling the workflow to Voice Analysis.
 - [ ] Evaluate a configurable Abbey Research validation framework.
+
+#### Provenance and Methodology
+
 - [ ] Add research artifact provenance metadata for the model, prompt version, and corpus fingerprint.
 - [ ] Test AI-generated observations against additional Voice Analysis research patterns.
 - [ ] Refine the Voice Analysis methodology based on artifact validation results.
@@ -230,7 +245,6 @@ The backlog is intentionally broad and serves as the project's working inventory
 ## Self-Documenting Platform
 
 - [x] Generate toolkit command reference.
-
 - [ ] Generate project metrics.
 - [ ] Generate documentation index.
 - [ ] Generate host inventory.
@@ -444,7 +458,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## Request Intake Framework
 
-Create a lightweight request tracking process for Abbey Root.
+- [ ] Create a lightweight request tracking process for Abbey Root.
 
 Initial approach:
 

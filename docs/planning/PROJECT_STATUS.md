@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-07-20
+Last Updated: 2026-07-22
 
 ---
 
@@ -74,7 +74,7 @@ Completed
 
 # Immediate Priorities
 
-- Refine `abbey review` through practical usage.
+- Design deterministic `abbey research status` reporting using the completed Voice Analysis artifact chains.
 - Expand onboarding documentation.
 - Continue CLI standardization.
 - Evaluate shared CLI libraries.
@@ -175,7 +175,7 @@ Completed
 
 ## Current Focus
 
-- Refine `abbey review` through practical pre-commit usage.
+- Design deterministic research status reporting.
 - Project-aware workflows.
 - Documentation automation.
 - Self-documenting development.
@@ -302,7 +302,7 @@ Completed
 
 ## Near Term
 
-- Refine `abbey review` through practical pre-commit usage.
+- Design deterministic `abbey research status` reporting.
 - Expand onboarding documentation.
 - Improve `abbey-doctor`.
 - Continue metadata-driven documentation.
