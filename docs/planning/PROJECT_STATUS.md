@@ -74,7 +74,7 @@ Completed
 
 # Immediate Priorities
 
-- Design deterministic `abbey research status` reporting using the completed Voice Analysis artifact chains.
+- Implement the controlled Abbey Research observation-candidate workflow defined in `ABBEY_RESEARCH_ARTIFACT_CREATION.md`.
 - Expand onboarding documentation.
 - Continue CLI standardization.
 - Evaluate shared CLI libraries.

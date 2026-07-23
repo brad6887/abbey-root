@@ -1,6 +1,6 @@
 # Abbey Root Next
 
-Last Reviewed: 2026-07-22
+Last Reviewed: 2026-07-23
 
 # Current Theme
 
@@ -8,33 +8,32 @@ Last Reviewed: 2026-07-22
 
 # Primary Objective
 
-Design a deterministic Abbey Research status workflow using the completed Voice Analysis artifact chains as reference implementations.
+Implement the first controlled Abbey Research artifact-creation workflow using the completed Voice Analysis chains as reference fixtures.
 
 # Definition of Done
 
-The research status design phase is complete when:
+The first implementation phase is complete when:
 
-- Existing research artifacts can be discovered deterministically.
-- Corpus, experiment, observation, evidence, hypothesis, and validation relationships are defined.
-- Complete, incomplete, broken, and orphaned artifact chains are distinguishable.
-- Expected `abbey research status` output is documented.
-- Research status reporting remains read-only and does not generate conclusions.
-- The design is reviewed before implementation begins.
+- `abbey research create --type observation` orchestrates generation, normalization, sanitization, and validation.
+- Each run records model, prompt, parent, input, and fingerprint provenance before generation.
+- Raw model output remains immutable and inspectable.
+- Generated candidates remain outside canonical research directories.
+- Failed stages retain their outputs and report a clear state.
+- Regression tests prove source citations survive the complete candidate workflow.
 
 ## Current Objective
 
-Design a deterministic Abbey Research status workflow using the completed Voice Analysis artifact chains as reference implementations.
+Implement Phase 1 of the approved Abbey Research artifact-creation architecture.
 
 ## Definition of Done
 
-The research status design phase is complete when:
+The implementation is complete when:
 
-- Existing research artifacts can be discovered deterministically.
-- Corpus, experiment, observation, evidence, hypothesis, and validation relationships are defined.
-- Complete, incomplete, broken, and orphaned artifact chains are distinguishable.
-- Expected `abbey research status` output is documented.
-- Research status reporting remains read-only and does not generate conclusions.
-- The design is reviewed before implementation begins.
+- The observation candidate workflow has one safe entry point.
+- Run workspaces and manifests are deterministic and inspectable.
+- Existing component commands are reused rather than duplicated.
+- Canonical promotion is explicitly out of scope for this phase.
+- Focused regression tests and existing Abbey Research tests pass.
 
 ---
 
@@ -80,7 +79,7 @@ Three complete formal artifact chains now exist:
 - HYP-003
 - VAL-003
 
-These migrations demonstrated that the artifact lifecycle is repeatable:
+These reference fixtures demonstrate the expected artifact lifecycle:
 
 Observation
 
@@ -98,106 +97,94 @@ Validation
 
 ---
 
-# Current Phase — Research Status Design
+# Current Phase — Artifact Creation Phase 1
 
 ## Objective
 
-Define how Abbey discovers and reports the current state of formal research artifacts.
+Implement a controlled observation-candidate workflow before automating canonical promotion or downstream research stages.
 
-## Design Questions
+## Implementation Scope
 
-### Artifact Discovery
+### Run Initialization
 
-Define:
+Create a dedicated run workspace and record:
 
-- Supported artifact directories.
-- Required metadata.
-- Artifact identifier rules.
-- Duplicate identifier behavior.
-- Invalid or unreadable artifact behavior.
+- Project.
+- Artifact type.
+- Corpus and experiment.
+- Model and prompt version.
+- Input paths and fingerprints.
+- Initial run state.
 
-### Relationship Mapping
+### Candidate Pipeline
 
-Define how Abbey maps:
+Orchestrate the existing:
 
-- Corpus to experiment.
-- Experiment to observation.
-- Observation to evidence.
-- Evidence to hypothesis.
-- Hypothesis to validation.
+- `abbey research run`
+- `abbey research normalize --type observation`
+- `abbey research sanitize`
+- Observation validation
 
-Relationships should be derived from artifact metadata rather than filenames alone.
+### Safety Boundary
 
-### Chain Status
+The creation command must:
 
-Define deterministic states for:
+- Preserve raw output.
+- Retain failed candidates.
+- Refuse canonical output paths.
+- Avoid assigning an OBS identifier.
+- Report the run state and review-ready candidate path.
 
-- Complete chains.
-- Incomplete chains.
-- Broken references.
-- Orphaned artifacts.
-- Duplicate artifacts.
-- Invalid metadata.
+### Tests
 
-### Command Output
+Prove:
 
-Design expected output for:
-
-abbey research status
-
-The command should report:
-
-- Corpus artifacts.
-- Experiment artifacts.
-- Formal research chains.
-- Chain completeness.
-- Broken or missing relationships.
-- Migration progress where it can be determined safely.
-
-### Scope Boundary
-
-The command must remain:
-
-- Read-only.
-- Deterministic.
-- Project-aware.
-- Independent of Voice Analysis-specific conclusions.
-
-The command must not:
-
-- Generate observations.
-- Create hypotheses.
-- Assign confidence.
-- Interpret evidence.
-- Modify research artifacts.
+- Provenance is written before generation.
+- Source identifiers survive the pipeline.
+- Failure states preserve artifacts.
+- Existing outputs are protected.
+- Voice Analysis conclusions are not hard-coded into orchestration.
 
 ---
 
 # Future Phases
 
-## Research Validation
+## Canonical Promotion
 
-After status reporting is implemented:
+After observation candidate orchestration is stable:
 
-- Add deterministic artifact validation.
-- Detect missing metadata.
-- Detect broken parent references.
-- Detect duplicate identifiers.
-- Evaluate a reusable `abbey research validate` workflow.
+- Add explicit human review records.
+- Allocate canonical identifiers at promotion time.
+- Add `abbey research promote`.
+- Protect canonical directories from every other creation command.
 
-## Artifact Scaffolding
+## Evidence Creation
 
-Only after status and validation workflows are stable:
+After promotion is safe:
 
-- Evaluate `abbey research scaffold`.
-- Generate empty artifact structure.
-- Preserve human control of research conclusions.
+- Add evidence-specific candidate structure.
+- Verify corpus identifiers, dates, and exact quotations.
+- Verify score ranges and summary arithmetic.
+- Validate against EVID-001, EVID-002, and EVID-003.
+
+## Hypothesis and Validation Creation
+
+After evidence creation is validated:
+
+- Add stage-specific candidate schemas.
+- Require promoted parent artifacts.
+- Preserve human authority over confidence and outcome.
+
+## Research Status
+
+The deterministic `abbey research status` architecture is complete.
+
+Implementation remains useful, but artifact creation is the current human-directed priority.
 
 ## Voice Analysis Expansion
 
-After tooling is stable:
+After creation, promotion, and validation tooling is stable:
 
-- Continue formal artifact migration.
 - Review additional time periods.
 - Review additional writing formats.
 - Search systematically for counterexamples.

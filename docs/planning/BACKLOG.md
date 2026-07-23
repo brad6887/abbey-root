@@ -220,7 +220,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 #### Status and Visibility
 
-- [ ] Design deterministic `abbey research status` reporting using the completed Voice Analysis artifact chains as reference implementations.
+- [x] Design deterministic `abbey research status` reporting using the completed Voice Analysis artifact chains as reference implementations.
   - Define artifact discovery rules.
   - Define metadata-driven relationship mapping.
   - Define complete, incomplete, broken, and orphaned chain states.
@@ -229,6 +229,11 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 #### Validation and Workflow
 
+- [x] Design a staged canonical research artifact-creation workflow with explicit human review and promotion boundaries.
+- [ ] Implement `abbey research create --type observation` with run manifests, immutable raw output, and review-ready candidates.
+- [ ] Implement explicit review records and canonical artifact promotion.
+- [ ] Add evidence candidate generation with deterministic source identifier, date, quotation, score, and summary verification.
+- [ ] Add hypothesis and validation candidate workflows that require promoted parent artifacts.
 - [ ] Complete deterministic research Markdown normalization using universally safe operations.
 - [ ] Add normalization safety tests proving semantic content is preserved.
 - [ ] Orchestrate research generation, normalization, sanitization, and validation without coupling the workflow to Voice Analysis.
