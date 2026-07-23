@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "validation_id": "VAL-004",
+  "hypothesis": "HYP-004",
+  "review_manifest": "docs/research/voice-analysis/reviews/REVIEW-004.json",
+  "canonical_supporting_ids": [
+    "FB-001085",
+    "FB-002517",
+    "FB-000363",
+    "FB-002210",
+    "FB-001386",
+    "FB-001354",
+    "FB-001221",
+    "FB-000664",
+    "FB-000565",
+    "FB-002324",
+    "FB-000368",
+    "FB-002138",
+    "FB-002064",
+    "FB-001583",
+    "FB-001455"
+  ],
+  "canonical_comparison_ids": [
+    "FB-000785",
+    "FB-000052",
+    "FB-000357",
+    "FB-002275",
+    "FB-002282",
+    "FB-001990",
+    "FB-002051"
+  ],
+  "expected": {
+    "candidate_count": 165,
+    "rejected_count": 4,
+    "holdout_count": 139
+  },
+  "core_codes": [
+    "SD-S",
+    "IR-S"
+  ],
+  "thresholds": {
+    "minimum_core_rate": 0.3,
+    "minimum_distancing_count": 10,
+    "minimum_renaming_count": 10,
+    "minimum_passing_bands": 3,
+    "minimum_comparison_count": 20
+  },
+  "chronological_bands": [
+    {
+      "band_id": "2009-2011",
+      "start_year": 2009,
+      "end_year": 2011
+    },
+    {
+      "band_id": "2012-2014",
+      "start_year": 2012,
+      "end_year": 2014
+    },
+    {
+      "band_id": "2015-2017",
+      "start_year": 2015,
+      "end_year": 2017
+    },
+    {
+      "band_id": "2018-2021",
+      "start_year": 2018,
+      "end_year": 2021
+    }
+  ]
+}

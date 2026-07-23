@@ -111,7 +111,7 @@ assert_contains \
 assert_contains \
   "status reports formal artifact count" \
   "$output" \
-  "Formal artifacts:     17"
+  "Formal artifacts:     18"
 
 assert_contains \
   "status reports first complete chain" \
@@ -129,19 +129,19 @@ assert_contains \
   "OBS-003 → EVID-003 → HYP-003 → VAL-003"
 
 assert_contains \
-  "status reports three complete chains" \
+  "status reports fourth complete chain" \
   "$output" \
-  "Complete chains:      3"
+  "OBS-004 → EVID-004 → HYP-004 → VAL-004"
 
 assert_contains \
-  "status reports draft fourth observation" \
+  "status reports four complete chains" \
   "$output" \
-  "WARN OBS-004 → EVID-004 → HYP-004"
+  "Complete chains:      4"
 
 assert_contains \
-  "status reports one incomplete chain" \
+  "status reports no incomplete chains" \
   "$output" \
-  "Incomplete chains:    1"
+  "Incomplete chains:    0"
 
 assert_contains \
   "status reports legacy provenance" \
@@ -263,6 +263,9 @@ cp "$ROOT/tools/research/normalize_quoted_language_classification.py" \
 
 cp "$ROOT/tools/research/build_quoted_language_review_manifest.py" \
   "$fixture_root/tools/research/build_quoted_language_review_manifest.py"
+
+cp "$ROOT/tools/research/calculate_quoted_language_validation.py" \
+  "$fixture_root/tools/research/calculate_quoted_language_validation.py"
 
 cat > "$fixture_root/config/abbey.conf" <<'CONFIG'
 OLLAMA_URL="http://localhost:11434"
@@ -643,6 +646,84 @@ assert_contains \
   "quoted-language classification requires complete batch" \
   "$output" \
   "PASS candidates: 2"
+
+cat > "$fixture_root/working/validation-definition.json" <<'JSON'
+{
+  "schema_version": 1,
+  "validation_id": "VAL-TEST",
+  "hypothesis": "HYP-TEST",
+  "canonical_supporting_ids": [],
+  "canonical_comparison_ids": [],
+  "expected": {
+    "candidate_count": 2,
+    "rejected_count": 0,
+    "holdout_count": 2
+  },
+  "core_codes": ["SD-S", "IR-S"],
+  "thresholds": {
+    "minimum_core_rate": 0.5,
+    "minimum_distancing_count": 1,
+    "minimum_renaming_count": 0,
+    "minimum_passing_bands": 1,
+    "minimum_comparison_count": 1
+  },
+  "chronological_bands": [
+    {
+      "band_id": "2020",
+      "start_year": 2020,
+      "end_year": 2020
+    }
+  ]
+}
+JSON
+
+cat > "$fixture_root/working/validation-review.json" <<JSON
+{
+  "schema_version": 1,
+  "corpus": {"sha256": "$corpus_hash"},
+  "items": [
+    {
+      "evidence_role": "supporting",
+      "decision": "retain",
+      "note": "Retained. Classification: SD-S.",
+      "citations": [
+        {"source_id": "FB-000001", "text": "Alpha"}
+      ]
+    },
+    {
+      "evidence_role": "comparison",
+      "decision": "retain",
+      "note": "Comparison. Classification: TP-C.",
+      "citations": [
+        {"source_id": "FB-000002", "text": "Beta"}
+      ]
+    }
+  ]
+}
+JSON
+
+set +e
+output="$(
+  python3 \
+    "$fixture_root/tools/research/calculate_quoted_language_validation.py" \
+    --definition "$fixture_root/working/validation-definition.json" \
+    --review "$fixture_root/working/validation-review.json" \
+    --corpus "$fixture_root/working/discovery/corpus.csv" \
+    --output "$fixture_root/working/validation-result.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "quoted-language deterministic validation succeeds" \
+  "$status" \
+  0
+
+assert_contains \
+  "quoted-language deterministic validation reports PASS" \
+  "$output" \
+  "Result:      PASS"
 
 printf '\nPassed: %d\n' "$passed"
 printf 'Failed: %d\n' "$failed"
