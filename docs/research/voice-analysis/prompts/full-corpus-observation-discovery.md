@@ -18,7 +18,7 @@ Use this exact structure:
     "artifact_id": "facebook-clean-corpus",
     "sha256": "CORPUS_SHA256"
   },
-  "model": "gpt-oss:20b",
+  "model": "MODEL_VALUE",
   "prompt": "full-corpus-observation-discovery-v1",
   "candidates": [
     {
@@ -27,12 +27,10 @@ Use this exact structure:
       "description": "A descriptive statement of the visible pattern.",
       "citations": [
         {
-          "source_id": "FB-000000",
-          "text": "The complete, exact post text."
+          "source_id": "FB-000000"
         },
         {
-          "source_id": "FB-000000",
-          "text": "The complete, exact post text."
+          "source_id": "FB-000000"
         }
       ],
       "scope_note": "A cautious statement limited to this batch.",
@@ -50,8 +48,8 @@ Requirements:
 - Every pattern must describe form, tone, structure, or rhetorical behavior
   visible in the writing itself.
 - Use two to four representative posts per candidate.
-- Copy each cited post in full and exactly, preserving capitalization,
-  punctuation, URLs, and whitespace within the text.
+- Return only each cited post's source identifier. The workflow will attach
+  corpus-authoritative text after generation.
 - Cite only source identifiers present in the supplied batch.
 - Prefer patterns that recur across non-adjacent posts.
 - Include meaningful variations or counterexamples in each boundary note.
@@ -68,4 +66,4 @@ Requirements:
 Run metadata:
 
 BATCH_ID: BATCH_ID_VALUE
-CORPUS_SHA256: b5dc53ffc11c19a18fd0b2fe9450ff91de03a24f905cd503d21c6a2daabdf07e
+CORPUS_SHA256: CORPUS_SHA256_VALUE

@@ -49,6 +49,16 @@ Usage:
     --corpus FILE \
     --batch FILE
 
+  abbey research discover \
+    --model MODEL \
+    --prompt FILE \
+    --corpus FILE \
+    --batch-manifest FILE \
+    --output-dir DIR \
+    [--max-tokens N] \
+    [--resume] \
+    [--validate-only]
+
   abbey research status
 
 Options:
@@ -94,6 +104,15 @@ Examples:
     --manifest working/research/voice-analysis/discovery.json \
     --corpus /path/to/clean_corpus.csv \
     --batch working/research/voice-analysis/batch-001.md
+
+  abbey research discover \
+    --model gpt-oss:20b \
+    --prompt docs/research/voice-analysis/prompts/full-corpus-observation-discovery.md \
+    --corpus /path/to/clean_corpus.csv \
+    --batch-manifest working/research/voice-analysis/batches/manifest.json \
+    --output-dir working/research/voice-analysis/discovery-run \
+    --max-tokens 10000 \
+    --resume
 
   abbey research status
 HELP
@@ -1030,6 +1049,13 @@ validate_discovery() {
     --batch "$batch_file"
 }
 
+discover_observations() {
+  python3 \
+    "$ABBEY_ROOT/tools/research/run_observation_discovery.py" \
+    --runner "$ABBEY_ROOT/tools/bin/abbey-research" \
+    "$@"
+}
+
 
 status_research() {
   if [[ $# -gt 0 ]]; then
@@ -1092,6 +1118,11 @@ case "$command" in
   validate-discovery)
     shift
     validate_discovery "$@"
+    ;;
+
+  discover)
+    shift
+    discover_observations "$@"
     ;;
 
   status)

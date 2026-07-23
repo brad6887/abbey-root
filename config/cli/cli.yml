@@ -209,10 +209,18 @@ commands:
       validate-review:
         description: Validate a machine-readable review manifest and exact corpus citations.
         usage: abbey research validate-review --manifest FILE --corpus FILE
+      validate-discovery:
+        description: Validate a batch discovery manifest and exact corpus citations.
+        usage: abbey research validate-discovery --manifest FILE --corpus FILE --batch FILE
+      discover:
+        description: Run resumable observation discovery across deterministic corpus batches.
+        usage: abbey research discover --model MODEL --prompt FILE --corpus FILE --batch-manifest FILE --output-dir DIR [--resume]
     examples:
       - abbey research --help
       - abbey research run --help
       - abbey research validate-review --manifest FILE --corpus FILE
+      - abbey research validate-discovery --manifest FILE --corpus FILE --batch FILE
+      - abbey research discover --model MODEL --prompt FILE --corpus FILE --batch-manifest FILE --output-dir DIR --resume
       - abbey research status
 
   lab:

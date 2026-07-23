@@ -88,6 +88,11 @@ assert_contains \
   "$output" \
   "abbey research validate-discovery"
 
+assert_contains \
+  "--help shows discovery workflow usage" \
+  "$output" \
+  "abbey research discover"
+
 set +e
 output="$("$TOOL" status 2>&1)"
 status=$?
@@ -236,6 +241,9 @@ cp "$ROOT/scripts/abbey_research_status.py" \
 
 cp "$ROOT/tools/research/validate_discovery_manifest.py" \
   "$fixture_root/tools/research/validate_discovery_manifest.py"
+
+cp "$ROOT/tools/research/run_observation_discovery.py" \
+  "$fixture_root/tools/research/run_observation_discovery.py"
 
 cat > "$fixture_root/config/abbey.conf" <<'CONFIG'
 OLLAMA_URL="http://localhost:11434"
@@ -429,6 +437,115 @@ assert_contains \
   "normalize reports overwrite protection" \
   "$output" \
   "Use --force to replace it."
+
+mkdir -p \
+  "$fixture_root/working/discovery/batches" \
+  "$fixture_root/working/discovery/output/results"
+
+cat > "$fixture_root/working/discovery/corpus.csv" <<'CSV'
+source_id,datetime,year,status,content_type,post_type,word_count,text
+1,2020-01-01T00:00:00,2020,clean,authored_text,short_post,1,Alpha
+2,2020-01-02T00:00:00,2020,clean,authored_text,short_post,1,Beta
+CSV
+
+cat > "$fixture_root/working/discovery/batches/batch-001.md" <<'MARKDOWN'
+# Voice-Eligible Chronological Batch
+
+1. [FB-000001] 2020-01-01T00:00:00
+
+Alpha
+
+2. [FB-000002] 2020-01-02T00:00:00
+
+Beta
+MARKDOWN
+
+cat > "$fixture_root/working/discovery/batches/manifest.json" <<'JSON'
+{
+  "batches": [
+    {
+      "batch": 1,
+      "path": "batch-001.md"
+    }
+  ]
+}
+JSON
+
+printf '# Test prompt\n' \
+  > "$fixture_root/working/discovery/prompt.md"
+
+corpus_hash="$(
+  sha256sum "$fixture_root/working/discovery/corpus.csv" \
+    | awk '{print $1}'
+)"
+
+cat > \
+  "$fixture_root/working/discovery/output/results/batch-001.json" <<JSON
+{
+  "schema_version": 1,
+  "batch_id": "batch-001",
+  "status": "candidate_discovery_human_review_required",
+  "corpus": {
+    "artifact_id": "test-corpus",
+    "sha256": "$corpus_hash"
+  },
+  "model": "test-model",
+  "prompt": "test-prompt",
+  "candidates": [
+    {
+      "candidate_id": "B001-C01",
+      "label": "Brief labels",
+      "description": "Posts contain brief labels.",
+      "citations": [
+        {"source_id": "FB-000001", "text": "Alpha"},
+        {"source_id": "FB-000002", "text": "Beta"}
+      ],
+      "scope_note": "Limited to this fixture.",
+      "boundary_note": "Only two fixture posts are available."
+    }
+  ]
+}
+JSON
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+    "$fixture_root/tools/bin/abbey-research" discover \
+    --model test-model \
+    --prompt "$fixture_root/working/discovery/prompt.md" \
+    --corpus "$fixture_root/working/discovery/corpus.csv" \
+    --batch-manifest \
+      "$fixture_root/working/discovery/batches/manifest.json" \
+    --output-dir "$fixture_root/working/discovery/output" \
+    --validate-only \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "discovery validate-only exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "discovery validate-only reports one passing batch" \
+  "$output" \
+  "PASS batches:    1"
+
+if [[ -f \
+  "$fixture_root/working/discovery/output/candidate-index.json" ]]; then
+  pass "discovery creates candidate index"
+else
+  fail "discovery creates candidate index"
+fi
+
+if [[ -f \
+  "$fixture_root/working/discovery/output/review-scaffold.json" ]]; then
+  pass "discovery creates review scaffold"
+else
+  fail "discovery creates review scaffold"
+fi
 
 printf '\nPassed: %d\n' "$passed"
 printf 'Failed: %d\n' "$failed"
