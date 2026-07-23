@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "evaluation_id": "VOICE-MODEL-001-EVAL-001",
+  "voice_model": "VOICE-MODEL-001",
+  "status": "failed_two_runs",
+  "scenario_count": 8,
+  "dimensions": [
+    "context_fit",
+    "characteristic_fidelity",
+    "restraint",
+    "clarity",
+    "originality"
+  ],
+  "score_range": {
+    "minimum": 0,
+    "maximum": 2
+  },
+  "passing": {
+    "minimum_total": 64,
+    "minimum_scenario": 6,
+    "minimum_originality": 2,
+    "required_scores": [
+      {
+        "scenario_id": "EVAL-006",
+        "dimension": "context_fit",
+        "score": 2
+      },
+      {
+        "scenario_id": "EVAL-006",
+        "dimension": "clarity",
+        "score": 2
+      },
+      {
+        "scenario_id": "EVAL-007",
+        "dimension": "context_fit",
+        "score": 2
+      },
+      {
+        "scenario_id": "EVAL-007",
+        "dimension": "clarity",
+        "score": 2
+      }
+    ],
+    "behavioral_requirements": [
+      "EVAL-004 does not invent prior history.",
+      "EVAL-005 does not classify an ordinary title as stance marking."
+    ]
+  },
+  "scenarios": [
+    {
+      "scenario_id": "EVAL-001",
+      "task": "Write a Facebook-style post about a smart light bulb that requires a firmware update before it can turn off.",
+      "targets": ["VM-C01", "VM-C02"]
+    },
+    {
+      "scenario_id": "EVAL-002",
+      "task": "Write a Facebook-style post reacting to a weather application that sends a rain alert after the user is already soaked.",
+      "targets": ["VM-C02", "VM-C04"]
+    },
+    {
+      "scenario_id": "EVAL-003",
+      "context": "An earlier fictional post established that Project Lantern is an attempt to train a porch light to recognize sarcasm.",
+      "task": "Write a later Facebook-style update in which Project Lantern reaches a new but unhelpful milestone.",
+      "targets": ["VM-C02", "VM-C03"]
+    },
+    {
+      "scenario_id": "EVAL-004",
+      "task": "Write a standalone Facebook-style post about assembling a new desk.",
+      "targets": ["VM-C02"],
+      "prohibited": ["VM-C03", "invented_prior_history"]
+    },
+    {
+      "scenario_id": "EVAL-005",
+      "task": "Write a Facebook-style post saying that the writer listened to an album named Midnight Arithmetic.",
+      "targets": [],
+      "boundary": "Ordinary title punctuation must not be claimed as VM-C04."
+    },
+    {
+      "scenario_id": "EVAL-006",
+      "task": "Write a brief message informing friends that a planned gathering is postponed because a family member is ill.",
+      "targets": ["clarity", "restraint"],
+      "prohibited": ["forced_VM-C01", "forced_VM-C04"]
+    },
+    {
+      "scenario_id": "EVAL-007",
+      "task": "Write a two-sentence maintenance notice explaining that a database restart will make an internal application unavailable for five minutes.",
+      "targets": ["factual_clarity"],
+      "prohibited": ["forced_facebook_voice"]
+    },
+    {
+      "scenario_id": "EVAL-008",
+      "task": "Edit the supplied invented smart-toaster draft for compression and meaningful quoted stance.",
+      "targets": ["VM-C02", "VM-C04"]
+    }
+  ]
+}

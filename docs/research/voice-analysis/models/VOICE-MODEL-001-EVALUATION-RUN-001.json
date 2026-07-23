@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "evaluation_run_id": "VOICE-MODEL-001-EVAL-RUN-001",
+  "voice_model_version": 1,
+  "worker_model": "gpt-oss:20b",
+  "status": "failed",
+  "total_score": 71,
+  "maximum_score": 80,
+  "items": [
+    {
+      "scenario_id": "EVAL-001",
+      "response": "My smart light bulb refuses to turn off unless I run a firmware update. Turns out the 'off' button is just a reminder to press Update #1.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 1, "restraint": 2, "clarity": 1, "originality": 2},
+      "total": 8,
+      "note": "Concise deadpan response, but it visibly uses quoted stance while declaring VM-C04 omitted, and Update #1 is unclear."
+    },
+    {
+      "scenario_id": "EVAL-002",
+      "response": "Just got a 'RAIN ALERT' from my weather app, and I’m already soaked. Good timing.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Applies compression and marked stance clearly."
+    },
+    {
+      "scenario_id": "EVAL-003",
+      "response": "Project Lantern’s sarcasm detector now ignores all compliments—our new milestone in recognizing sarcasm.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Uses only supplied callback history and advances it."
+    },
+    {
+      "scenario_id": "EVAL-004",
+      "response": "Took apart my new desk. Step 1: unscrew the leg brackets. Step 2: fit the tabletop. Step 3: tighten everything and admire the minimalism.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 1, "restraint": 2, "clarity": 1, "originality": 2},
+      "total": 8,
+      "note": "Avoids invented history but changes assembling into taking apart and reads as instructions rather than a status."
+    },
+    {
+      "scenario_id": "EVAL-005",
+      "response": "I just finished listening to Midnight Arithmetic; pretty good album.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Correctly avoids treating an ordinary title as stance marking."
+    },
+    {
+      "scenario_id": "EVAL-006",
+      "response": "Hey everyone, the gathering is postponed due to a family member’s illness. We’ll reschedule soon.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Clear and restrained; humor and marked stance are correctly omitted."
+    },
+    {
+      "scenario_id": "EVAL-007",
+      "response": "Notice: Database restart scheduled at 2:00 AM. Service will be unavailable for five minutes.",
+      "scores": {"context_fit": 1, "characteristic_fidelity": 1, "restraint": 2, "clarity": 1, "originality": 2},
+      "total": 7,
+      "note": "Invents a 2:00 AM schedule that the scenario did not supply, failing required factual clarity."
+    },
+    {
+      "scenario_id": "EVAL-008",
+      "response": "The smart toaster claims it will toast bread in 'exactly' five minutes; I'm skeptical of that claim.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 0, "originality": 2},
+      "total": 8,
+      "note": "Uses compression and stance, but replaces the original incorrect-toast premise with an invented five-minute claim."
+    }
+  ],
+  "failed_requirements": [
+    "EVAL-007 did not score 2 for Context Fit.",
+    "EVAL-007 did not score 2 for Clarity."
+  ],
+  "model_changes_required": [
+    "Prohibit invented factual details.",
+    "Require factual preservation during editing.",
+    "Require applied/omitted lists to match visible output."
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "artifact_id": "VOICE-MODEL-001",
+  "artifact_type": "voice_model",
+  "version": 2,
+  "status": "draft_application_evaluation_failed",
+  "title": "Bounded Facebook Voice Model",
+  "scope": {
+    "corpus": "CORPUS-001",
+    "experiment": "EXP-001",
+    "formats": ["facebook_post"],
+    "primary_period": {
+      "start_year": 2009,
+      "end_year": 2021
+    },
+    "extended_support": {
+      "characteristic_id": "VM-C03",
+      "end_year": 2024
+    },
+    "eligible_view_posts": 1342,
+    "generalization": "not_established"
+  },
+  "characteristics": [
+    {
+      "characteristic_id": "VM-C01",
+      "name": "Deadpan Contrast",
+      "confidence": "medium",
+      "scope": "absurd_or_exaggerated_facebook_posts",
+      "claim": "Unusual premises are often presented through literal, procedural, or ordinary language so contrast contributes to humor.",
+      "traceability": {
+        "observation": "OBS-001",
+        "evidence": "EVID-001",
+        "hypothesis": "HYP-001",
+        "validation": "VAL-001"
+      },
+      "application": [
+        "Present an unusual premise as an ordinary fact or task.",
+        "Prefer one concrete operational detail.",
+        "Let contrast land before explanation."
+      ],
+      "avoid": [
+        "Explaining the joke immediately.",
+        "Using deadpan delivery universally.",
+        "Applying humor to sensitive contexts without justification."
+      ]
+    },
+    {
+      "characteristic_id": "VM-C02",
+      "name": "Semantic Compression",
+      "confidence": "medium",
+      "scope": "facebook_writing_2009_through_2020",
+      "claim": "Ideas are often compressed by relying on recoverable shared context and reader inference.",
+      "traceability": {
+        "observation": "OBS-002",
+        "evidence": "EVID-002",
+        "hypothesis": "HYP-002",
+        "validation": "VAL-002"
+      },
+      "application": [
+        "Remove explanation a reader can reliably infer.",
+        "Keep causal and contrast relationships recoverable.",
+        "Stop after the idea lands."
+      ],
+      "avoid": [
+        "Removing information required for accuracy or safety.",
+        "Equating compression with fragments alone.",
+        "Forcing every output into a one-liner."
+      ]
+    },
+    {
+      "characteristic_id": "VM-C03",
+      "name": "Selective Continuity",
+      "confidence": "medium",
+      "scope": "recurring_facebook_elements_2009_through_2024",
+      "claim": "Distinctive premises, frames, personas, phrases, or failures sometimes persist across independent posts.",
+      "traceability": {
+        "observation": "OBS-003",
+        "evidence": "EVID-003",
+        "hypothesis": "HYP-003",
+        "validation": "VAL-003"
+      },
+      "application": [
+        "Reuse an established element only when prior context exists.",
+        "Advance or vary the element.",
+        "Keep callbacks compact when history is recoverable."
+      ],
+      "avoid": [
+        "Inventing shared history.",
+        "Treating repeated ordinary topics as continuity.",
+        "Requiring callbacks in standalone writing."
+      ]
+    },
+    {
+      "characteristic_id": "VM-C04",
+      "name": "Quoted Stance Marking",
+      "confidence": "medium",
+      "scope": "quote_bearing_facebook_posts_2009_through_2021",
+      "claim": "Quotation marks sometimes signal disputed, nonliteral, inadequate, provisional, or deliberately renamed wording.",
+      "traceability": {
+        "observation": "OBS-004",
+        "evidence": "EVID-004",
+        "hypothesis": "HYP-004",
+        "validation": "VAL-004"
+      },
+      "application": [
+        "Mark a term only when surrounding context establishes stance.",
+        "Use comic renaming as a compact alternative to critique.",
+        "Keep the marked phrase's function recoverable."
+      ],
+      "avoid": [
+        "Treating ordinary titles or quotations as stance marking.",
+        "Adding scare quotes decoratively.",
+        "Overusing quotation marks."
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "interaction_id": "VM-I01",
+      "characteristics": ["VM-C01", "VM-C02"],
+      "status": "provisional",
+      "claim": "Compression may strengthen deadpan contrast by withholding explanation."
+    },
+    {
+      "interaction_id": "VM-I02",
+      "characteristics": ["VM-C02", "VM-C03"],
+      "status": "provisional",
+      "claim": "Callbacks may remain compressed because prior posts supply context."
+    },
+    {
+      "interaction_id": "VM-I03",
+      "characteristics": ["VM-C01", "VM-C04"],
+      "status": "provisional",
+      "claim": "Marked replacement labels may combine stance marking with deadpan contrast."
+    }
+  ],
+  "application_constraints": [
+    "Use only characteristics naturally supported by the task.",
+    "Preserve clarity, factual accuracy, safety, and audience needs.",
+    "Do not invent shared context.",
+    "Do not reproduce corpus posts or distinctive source phrases.",
+    "Do not invent factual details that the task does not supply.",
+    "Preserve factual propositions when editing unless changes are authorized.",
+    "Report every visibly used characteristic as applied.",
+    "Do not generalize the model beyond tested Facebook scope without new validation."
+  ],
+  "unsupported_domains": [
+    "technical_documentation",
+    "professional_communication",
+    "academic_writing",
+    "long_form_writing",
+    "unfamiliar_audiences",
+    "sensitive_or_high_stakes_communication"
+  ],
+  "parent_artifacts": [
+    "VAL-001",
+    "VAL-002",
+    "VAL-003",
+    "VAL-004"
+  ]
+}

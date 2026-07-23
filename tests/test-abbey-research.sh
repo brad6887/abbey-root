@@ -149,6 +149,32 @@ assert_contains \
   "INFO OBS-001 → OBSERVATION004-deadpan-delivery"
 
 set +e
+output="$(
+  python3 "$ROOT/tools/research/validate_voice_model.py" \
+    --model \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001.json" \
+    --evaluation \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-EVALUATION.json" \
+    --run \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-EVALUATION-RUN-001.json" \
+    --run \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-EVALUATION-RUN-002.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "Voice Model validation exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "Voice Model validation reports PASS" \
+  "$output" \
+  "Result: PASS"
+
+set +e
 output="$("$TOOL" run 2>&1)"
 status=$?
 set -e

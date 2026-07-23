@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "evaluation_run_id": "VOICE-MODEL-001-EVAL-RUN-002",
+  "voice_model_version": 2,
+  "worker_model": "gpt-oss:20b",
+  "status": "failed",
+  "total_score": 65,
+  "maximum_score": 80,
+  "items": [
+    {
+      "scenario_id": "EVAL-001",
+      "response": "My new smart bulb just told me I need a firmware update before it can shut itself down. Guess that’s why I still have lights on at midnight.",
+      "scores": {"context_fit": 1, "characteristic_fidelity": 2, "restraint": 2, "clarity": 1, "originality": 2},
+      "total": 8,
+      "note": "Applies the target characteristics but invents midnight."
+    },
+    {
+      "scenario_id": "EVAL-002",
+      "response": "Just got soaked, then the weather app pings “rain ahead” as if it's my personal weather forecast reminder.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Applies compression and quoted stance without changing the supplied event."
+    },
+    {
+      "scenario_id": "EVAL-003",
+      "response": "Project Lantern now trains the porch light to spot sarcasm, yet it still refuses to react when I say Oh great.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Uses supplied callback history and adds a scenario-compatible unhelpful milestone."
+    },
+    {
+      "scenario_id": "EVAL-004",
+      "response": "Assembled a new desk like a puzzle; result is something that holds my laptop and makes me look professional.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Standalone, compressed, and does not invent prior history."
+    },
+    {
+      "scenario_id": "EVAL-005",
+      "response": "I just listened to Midnight Arithmetic and it's oddly soothing.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Does not misclassify the ordinary title as stance marking."
+    },
+    {
+      "scenario_id": "EVAL-006",
+      "response": "Hey everyone, the get‑together is postponed because my aunt’s not feeling well.",
+      "scores": {"context_fit": 1, "characteristic_fidelity": 1, "restraint": 2, "clarity": 1, "originality": 2},
+      "total": 7,
+      "note": "Invents that the family member is an aunt, violating sensitive-context factual preservation."
+    },
+    {
+      "scenario_id": "EVAL-007",
+      "response": "The database will restart in 15 minutes; expect internal application downtime for five minutes.",
+      "scores": {"context_fit": 0, "characteristic_fidelity": 1, "restraint": 2, "clarity": 0, "originality": 2},
+      "total": 5,
+      "note": "Invents a restart time, failing the technical factual-clarity requirement."
+    },
+    {
+      "scenario_id": "EVAL-008",
+      "response": "Just upgraded my smart toaster; now it proudly states, “I need a firmware update before I even start burning bread” to remind me of its own limits.",
+      "scores": {"context_fit": 1, "characteristic_fidelity": 1, "restraint": 1, "clarity": 0, "originality": 2},
+      "total": 5,
+      "note": "Replaces the supplied incorrect-toast premise with invented upgrade and firmware facts."
+    }
+  ],
+  "failed_requirements": [
+    "Total score was below 64 only narrowly avoided, but mandatory requirements still failed.",
+    "EVAL-006 did not score 2 for Context Fit or Clarity.",
+    "EVAL-007 scored below 6.",
+    "EVAL-007 did not score 2 for Context Fit or Clarity.",
+    "EVAL-008 scored below 6."
+  ],
+  "decision": "Do not approve free-generation application.",
+  "next_requirement": "Use a fact-locked transformation workflow with deterministic factual-preservation checks."
+}
