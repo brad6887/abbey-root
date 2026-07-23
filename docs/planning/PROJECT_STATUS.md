@@ -232,7 +232,7 @@ Completed
 - Local model experimentation.
 - `abbey ai`.
 - Metadata-driven AI decision framework with reusable decision definitions, structured history, and cross-model comparison validated through practical use.
-- `abbey research run` provides a reusable Ollama research runner with preserved raw output; AI-assisted normalization, `abbey research sanitize`, and deterministic artifact validation support canonical artifacts before human review; `abbey research validate-review` verifies machine-readable human-review decisions, corpus fingerprints, source identifiers, and complete exact citation text; the reusable Voice Analysis research artifact framework defines artifact types, metadata, lifecycle, provenance, evidence-chain traceability, and review-manifest scope; broader deterministic Markdown normalization and end-to-end orchestration remain in development.
+- `abbey research run` provides a reusable Ollama research runner with preserved raw output; AI-assisted normalization, `abbey research sanitize`, and deterministic artifact validation support canonical artifacts before human review; `abbey research validate-review` verifies machine-readable human-review decisions, corpus fingerprints, source identifiers, and complete exact citation text; deterministic stratified sampling, human-reviewed annotation, and Wilson intervals now support measured prevalence claims; the reusable Voice Analysis research artifact framework defines artifact types, metadata, lifecycle, provenance, evidence-chain traceability, and review-manifest scope; broader deterministic Markdown normalization and end-to-end orchestration remain in development.
 - AI benchmark planning.
 - AI technology review process.
 

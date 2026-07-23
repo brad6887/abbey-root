@@ -2,7 +2,7 @@
 artifact_id: EVID-001
 artifact_type: evidence
 title: Evidence Supporting Deadpan Delivery
-version: 3
+version: 4
 status: draft
 
 source:
@@ -60,6 +60,8 @@ Every retained source identifier was checked against the frozen corpus. Human re
 
 The model retrieved candidates rather than scoring a representative sample. The counts below establish recurring cross-period evidence but do not measure how frequently the technique occurs.
 
+A separate prevalence phase used a deterministic stratified hash sample drawn at approximately 10% from each of the eleven chronological batches. All 140 sampled posts received premise and delivery labels, followed by human review.
+
 ## Reviewed Result
 
 | Classification | Retained | Provisional |
@@ -68,6 +70,34 @@ The model retrieved candidates rather than scoring a representative sample. The 
 | Contradictory | 13 | 1 |
 
 The reviewed candidates span 2009 through 2021. No supporting example after 2021 was retained from the sparse 2022-2026 portion of the corpus; that does not establish absence.
+
+## Prevalence Result
+
+Sample:
+
+- Population: 1,342 unflagged eligible posts.
+- Sample size: 140.
+- Sample SHA-256: `0aedfe7eda30391d46f687e50246b1e3721908e774d5f4d53e63e8423b29b84d`.
+- Reviewed annotation SHA-256: `2a439267aae399e0fb9efff8c71400f67749991ebff2d283c76f9bdbac532ce8`.
+
+Counts:
+
+| Classification | Count |
+|---|---:|
+| Absurd-humorous premise | 16 |
+| Deadpan delivery | 11 |
+| Overt or explanatory delivery | 5 |
+| Other humor | 48 |
+| Non-humor | 76 |
+
+Rates:
+
+- Overall deadpan rate: 7.86% of all sampled posts.
+- Overall 95% Wilson interval: 4.44% to 13.52%.
+- Conditional deadpan rate: 68.75% of sampled absurd-premise posts.
+- Conditional 95% Wilson interval: 44.40% to 85.84%.
+
+Before annotation, "frequently" was defined as supported only when the lower conditional 95% Wilson bound was at least 20%. The observed lower bound was 44.40%, so the scoped frequency claim is supported.
 
 ## Representative Supporting Evidence
 
@@ -234,7 +264,7 @@ The broader evidence supports deadpan delivery as a recurring but selective char
 
 The strongest examples apply practical, procedural, technical, or emotionally neutral language to fictional technology, impossible events, and absurd premises. The contradictory examples demonstrate that the author also uses overt emphasis, explanation, emotional narration, and escalating punctuation for absurd material.
 
-The evidence does not establish a frequency rate, coverage outside Facebook, or continuity after 2021. EVID-001 therefore remains draft.
+The evidence now supports frequency within sampled Facebook posts that contain a discernible absurd-humorous premise. It does not establish frequency outside Facebook, and the conditional denominator contains only sixteen posts. EVID-001 therefore remains draft.
 
 ## Revision History
 
@@ -246,3 +276,6 @@ Expanded to the reviewed 1,375-post unflagged voice-eligible view, added cross-p
 
 Version 3:
 Applied the residual location-metadata exclusion, updated the derived view to 1,469 eligible and 1,342 unflagged posts, and confirmed that no retained citation was removed.
+
+Version 4:
+Added a deterministic 140-post prevalence sample, human-reviewed premise and delivery annotations, overall and conditional rates, Wilson intervals, and a predeclared frequency threshold.
