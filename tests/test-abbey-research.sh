@@ -111,7 +111,7 @@ assert_contains \
 assert_contains \
   "status reports formal artifact count" \
   "$output" \
-  "Formal artifacts:     16"
+  "Formal artifacts:     17"
 
 assert_contains \
   "status reports first complete chain" \
@@ -136,7 +136,7 @@ assert_contains \
 assert_contains \
   "status reports draft fourth observation" \
   "$output" \
-  "WARN OBS-004 → EVID-004"
+  "WARN OBS-004 → EVID-004 → HYP-004"
 
 assert_contains \
   "status reports one incomplete chain" \
