@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "evaluation_id": "VOICE-FACT-EXTRACTION-EVAL-001",
+  "voice_model": "VOICE-MODEL-001",
+  "purpose": "Evaluate upstream extraction of generation-ready fact locks from new writing requests.",
+  "requests": [
+    {
+      "request_id": "REQ-001",
+      "request_type": "ordinary_facebook_post",
+      "request": "Write a Facebook-style post about my smart coffee mug notifying me that the coffee is cold after I already finished drinking it.",
+      "style_targets": ["VM-C02", "VM-C04"],
+      "style_prohibitions": [],
+      "format_constraints": {}
+    },
+    {
+      "request_id": "REQ-002",
+      "request_type": "edit",
+      "request": "Edit this draft for compression and meaningful quoted stance without changing its facts.",
+      "source_text": "I bought a robot vacuum that was marketed as \"smart.\" It gets stuck under the same chair every time, and I am disappointed.",
+      "style_targets": ["VM-C02", "VM-C04"],
+      "style_prohibitions": [],
+      "format_constraints": {}
+    },
+    {
+      "request_id": "REQ-003",
+      "request_type": "callback",
+      "context": "An earlier fictional post established that Project Umbrella is an attempt to teach an umbrella to predict wind direction.",
+      "request": "Write a later Facebook-style update in which Project Umbrella reaches one new but useless milestone.",
+      "style_targets": ["VM-C02", "VM-C03"],
+      "style_prohibitions": [],
+      "format_constraints": {}
+    },
+    {
+      "request_id": "REQ-004",
+      "request_type": "sensitive_message",
+      "request": "Write a brief message telling friends that Saturday dinner is canceled because a family member needs rest. Do not identify the family member or give medical details.",
+      "style_targets": [],
+      "style_prohibitions": ["VM-C01", "VM-C04"],
+      "format_constraints": {}
+    },
+    {
+      "request_id": "REQ-005",
+      "request_type": "factual_notice",
+      "request": "Write an exactly two-sentence notice explaining that a cache refresh will make the internal dashboard unavailable for three minutes.",
+      "style_targets": [],
+      "style_prohibitions": ["VM-C01", "VM-C02", "VM-C03", "VM-C04"],
+      "format_constraints": {"sentence_count": 2}
+    }
+  ]
+}

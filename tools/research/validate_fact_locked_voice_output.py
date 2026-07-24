@@ -14,6 +14,18 @@ from typing import Any
 CHARACTERISTICS = {"VM-C01", "VM-C02", "VM-C03", "VM-C04"}
 
 
+def lexical_text(value: str) -> str:
+    """Normalize quote punctuation for lexical-anchor comparison only."""
+    return re.sub(r"\s+", " ", re.sub(r"[\"'‘’“”]", "", value.casefold())).strip()
+
+
+def contains_anchor(response: str, phrase: str) -> bool:
+    return (
+        phrase.casefold() in response.casefold()
+        or lexical_text(phrase) in lexical_text(response)
+    )
+
+
 def load_json(path: Path) -> Any:
     try:
         text = path.read_text(encoding="utf-8").strip()
@@ -72,17 +84,29 @@ def validate(spec: Any, output: Any) -> tuple[list[str], list[dict[str, Any]]]:
             scenario_failures.append("added_facts must be empty")
 
         for fact in scenario["immutable_facts"]:
-            alternatives = fact.get("required_any", [])
-            if not any(phrase.casefold() in response_folded for phrase in alternatives):
-                scenario_failures.append(
-                    f"{fact['fact_id']} lacks a required lexical anchor"
-                )
+            if "required_all" in fact:
+                groups = fact["required_all"]
+                if not all(
+                    any(contains_anchor(response, phrase) for phrase in group)
+                    for group in groups
+                ):
+                    scenario_failures.append(
+                        f"{fact['fact_id']} lacks a required lexical-anchor group"
+                    )
+            else:
+                alternatives = fact.get("required_any", [])
+                if not any(
+                    contains_anchor(response, phrase) for phrase in alternatives
+                ):
+                    scenario_failures.append(
+                        f"{fact['fact_id']} lacks a required lexical anchor"
+                    )
         for literal in scenario.get("protected_literals", []):
             if literal not in response:
                 scenario_failures.append(f"protected literal absent: {literal}")
         response_alternatives = scenario.get("required_response_any", [])
         if response_alternatives and not any(
-            phrase.casefold() in response_folded for phrase in response_alternatives
+            contains_anchor(response, phrase) for phrase in response_alternatives
         ):
             scenario_failures.append("response lacks a required scenario-level anchor")
         for pattern in scenario.get("forbidden_patterns", []):

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "review_id": "VOICE-FACT-LOCK-PROPOSAL-001-REVIEW-006",
+  "fact_lock_id": "VOICE-FACT-LOCK-001",
+  "proposal_sha256": "d206b4d98dae728d67395506a9a2c94ca6d60d7731350661a5c4f76bdb6fadcb",
+  "decision": "approve",
+  "items": [
+    {
+      "scenario_id": "REQ-001",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "The mug, cold-coffee notification, and after-drinking sequence are preserved."
+    },
+    {
+      "scenario_id": "REQ-002",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "All four source-text propositions and both style targets are preserved."
+    },
+    {
+      "scenario_id": "REQ-003",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "The established compound premise is preserved with grouped anchors and invention is limited to one harmless useless milestone."
+    },
+    {
+      "scenario_id": "REQ-004",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "Cancellation and cause are preserved while identity, medical detail, and unsuitable style are prohibited."
+    },
+    {
+      "scenario_id": "REQ-005",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "Refresh, dashboard unavailability, three-minute duration, two-sentence format, and no-style boundary are preserved."
+    }
+  ]
+}

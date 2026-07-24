@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "workflow": "fact_locked_voice_application",
+  "fact_lock_id": "VOICE-FACT-LOCK-002",
+  "model": "gpt-oss:20b",
+  "items": [
+    {
+      "scenario_id": "REQ-001",
+      "response": "My smart coffee mug just notifies the user that the coffee is 'cold'—after I already finished drinking it.",
+      "used_fact_ids": [
+        "F001",
+        "F002"
+      ],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": [
+        "VM-C02",
+        "VM-C04"
+      ],
+      "omitted": [],
+      "rationale": "Applied semantic compression and quoted stance marking."
+    },
+    {
+      "scenario_id": "REQ-002",
+      "response": "I bought a robot vacuum that was marketed as \"smart\", yet it gets stuck under the same chair every time. I'm disappointed.",
+      "used_fact_ids": [
+        "F001",
+        "F002",
+        "F003",
+        "F004"
+      ],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": [
+        "VM-C02",
+        "VM-C04"
+      ],
+      "omitted": [],
+      "rationale": "Compressed content with quoted stance marking."
+    },
+    {
+      "scenario_id": "REQ-003",
+      "response": "Project Umbrella, the attempt to teach an umbrella to predict wind direction, reaches one new but useless milestone: it can now change color in response to temperature – a tiny win with no practical use.",
+      "used_fact_ids": [
+        "F001",
+        "F002"
+      ],
+      "added_facts": [],
+      "creative_slot_uses": [
+        {
+          "slot_id": "S001",
+          "content": "it can now change color in response to temperature"
+        }
+      ],
+      "applied": [
+        "VM-C02",
+        "VM-C03"
+      ],
+      "omitted": [],
+      "rationale": "Applied compression, selective continuity, and included creative slot content."
+    },
+    {
+      "scenario_id": "REQ-004",
+      "response": "Saturday dinner is canceled because a family member needs rest.",
+      "used_fact_ids": [
+        "F001",
+        "F002"
+      ],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": [],
+      "omitted": [],
+      "rationale": "No applied characteristics per restrictions."
+    },
+    {
+      "scenario_id": "REQ-005",
+      "response": "Please note that a cache refresh will occur, and the internal dashboard will be unavailable during the refresh. The downtime will last three minutes.",
+      "used_fact_ids": [
+        "F001",
+        "F002",
+        "F003"
+      ],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": [],
+      "omitted": [],
+      "rationale": "Two sentences per requirement; no characteristics applied."
+    }
+  ]
+}

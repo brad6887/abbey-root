@@ -221,6 +221,72 @@ assert_contains \
   "Result: VALID"
 
 set +e
+output="$(
+  python3 "$ROOT/tools/research/validate_voice_fact_lock_proposal.py" \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-FACT-LOCK-PROPOSAL-001-REVISION-009.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "voice fact-lock proposal validation exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "voice fact-lock proposal validation reports PASS" \
+  "$output" \
+  "Result: PASS"
+
+set +e
+output="$(
+  python3 "$ROOT/tools/research/validate_fact_locked_voice_output.py" \
+    --spec \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-FACT-LOCK-002.json" \
+    --output \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001-RUN-001.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "extracted fact-lock generation validation exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "extracted fact-lock generation reports PASS" \
+  "$output" \
+  "Result: PASS"
+
+set +e
+output="$(
+  python3 "$ROOT/tools/research/validate_fact_locked_voice_verification.py" \
+    --spec \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-FACT-LOCK-002.json" \
+    --verification \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001-RUN-001-VERIFICATION.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "extracted fact-lock semantic verification exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "extracted fact-lock semantic verification reports VALID" \
+  "$output" \
+  "Result: VALID"
+
+set +e
 output="$("$TOOL" run 2>&1)"
 status=$?
 set -e
@@ -311,6 +377,30 @@ mkdir -p \
   "$fixture_root/scripts" \
   "$fixture_root/config" \
   "$fixture_root/working"
+
+set +e
+output="$(
+  python3 "$ROOT/tools/research/approve_voice_fact_lock.py" \
+    --proposal \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-FACT-LOCK-PROPOSAL-001-REVISION-009.json" \
+    --review \
+      "$ROOT/docs/research/voice-analysis/reviews/VOICE-FACT-LOCK-PROPOSAL-001-REVIEW-008.json" \
+    --output \
+      "$fixture_root/working/approved-fact-lock.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "voice fact-lock approval promotion exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "voice fact-lock approval promotion reports PASS" \
+  "$output" \
+  "Result: PASS"
 
 cp "$TOOL" \
   "$fixture_root/tools/bin/abbey-research"

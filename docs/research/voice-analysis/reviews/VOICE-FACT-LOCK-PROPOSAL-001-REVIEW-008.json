@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "review_id": "VOICE-FACT-LOCK-PROPOSAL-001-REVIEW-008",
+  "fact_lock_id": "VOICE-FACT-LOCK-002",
+  "proposal_sha256": "7e3d9c7ab545ceab9d8a1d38e4f471aa698a9de74c36bff7024b4139b3950733",
+  "decision": "approve",
+  "items": [
+    {
+      "scenario_id": "REQ-001",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "Grouped anchors require the mug, explicit cold-coffee notification, and after-drinking sequence without authorizing notification modality."
+    },
+    {
+      "scenario_id": "REQ-002",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "All source-text propositions and natural disappointment alternatives are preserved."
+    },
+    {
+      "scenario_id": "REQ-003",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "The compound callback premise, supplied number, and one bounded harmless useless milestone are preserved."
+    },
+    {
+      "scenario_id": "REQ-004",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "Cancellation and cause are preserved with explicit relationship and medical-detail prohibitions."
+    },
+    {
+      "scenario_id": "REQ-005",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "Refresh, dashboard unavailability, duration, two-sentence format, and style prohibitions are preserved."
+    }
+  ]
+}

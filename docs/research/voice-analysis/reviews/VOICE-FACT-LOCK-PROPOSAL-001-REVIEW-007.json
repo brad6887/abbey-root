@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "review_id": "VOICE-FACT-LOCK-PROPOSAL-001-REVIEW-007",
+  "proposal": "VOICE-FACT-LOCK-001.json",
+  "decision": "revise_after_generation_failure",
+  "items": [
+    {
+      "scenario_id": "REQ-001",
+      "facts": "revise",
+      "constraints": "revise",
+      "note": "Use required_all for the cold-coffee notification with groups for the smart coffee mug, explicit notification language, and coffee is cold or coffee's cold. Add natural timing alternatives such as after I finished drinking and after I already finished. Do not allow a device buzz to substitute for the supplied notification."
+    },
+    {
+      "scenario_id": "REQ-002",
+      "facts": "revise",
+      "constraints": "approve",
+      "note": "Add I'm disappointed as an alternative to I am disappointed."
+    },
+    {
+      "scenario_id": "REQ-003",
+      "facts": "approve",
+      "constraints": "revise",
+      "note": "The request supplies one milestone, so allowed_numbers must contain the strings one and 1."
+    },
+    {
+      "scenario_id": "REQ-004",
+      "facts": "approve",
+      "constraints": "revise",
+      "note": "Replace the case-insensitive capitalized-name regex, which matches ordinary words, with explicit relationship terms and medical-detail terms."
+    },
+    {
+      "scenario_id": "REQ-005",
+      "facts": "approve",
+      "constraints": "approve",
+      "note": "The generated notice passed."
+    }
+  ]
+}

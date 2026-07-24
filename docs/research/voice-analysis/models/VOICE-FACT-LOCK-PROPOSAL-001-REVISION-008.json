@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "manifest_id": "VOICE-FACT-LOCK-PROPOSAL-001",
+  "evaluation_id": "VOICE-FACT-EXTRACTION-EVAL-001",
+  "voice_model": "VOICE-MODEL-001",
+  "status": "proposed_human_review_required",
+  "requests": [
+    {
+      "scenario_id": "REQ-001",
+      "task": "Write a Facebook-style post about my smart coffee mug notifying me that the coffee is cold after I already finished drinking it.",
+      "immutable_facts": [
+        {
+          "fact_id": "F001",
+          "proposition": "The user has a smart coffee mug.",
+          "required_any": [
+            "smart coffee mug"
+          ]
+        },
+        {
+          "fact_id": "F002",
+          "proposition": "The smart coffee mug notifies the user that the coffee is cold.",
+          "required_any": [
+            "notifies the user that the coffee is cold"
+          ]
+        },
+        {
+          "fact_id": "F003",
+          "proposition": "The notification occurs after the user finished drinking the coffee.",
+          "required_any": [
+            "after I already finished drinking it"
+          ]
+        }
+      ],
+      "protected_literals": [],
+      "allowed_numbers": [],
+      "forbidden_patterns": [],
+      "creative_slots": [],
+      "required_applied": [
+        "VM-C02",
+        "VM-C04"
+      ],
+      "prohibited_applied": [],
+      "extraction_notes": []
+    },
+    {
+      "scenario_id": "REQ-002",
+      "task": "Edit this draft for compression and meaningful quoted stance without changing its facts.",
+      "immutable_facts": [
+        {
+          "fact_id": "F001",
+          "proposition": "The user bought a robot vacuum.",
+          "required_any": [
+            "bought a robot vacuum"
+          ]
+        },
+        {
+          "fact_id": "F002",
+          "proposition": "The robot vacuum was marketed as \"smart\".",
+          "required_any": [
+            "marketed as \"smart\""
+          ]
+        },
+        {
+          "fact_id": "F003",
+          "proposition": "The robot vacuum gets stuck under the same chair every time.",
+          "required_any": [
+            "gets stuck under the same chair every time"
+          ]
+        },
+        {
+          "fact_id": "F004",
+          "proposition": "The user is disappointed.",
+          "required_any": [
+            "I am disappointed"
+          ]
+        }
+      ],
+      "protected_literals": [],
+      "allowed_numbers": [],
+      "forbidden_patterns": [],
+      "creative_slots": [],
+      "required_applied": [
+        "VM-C02",
+        "VM-C04"
+      ],
+      "prohibited_applied": [],
+      "extraction_notes": []
+    },
+    {
+      "scenario_id": "REQ-003",
+      "task": "Write a later Facebook-style update in which Project Umbrella reaches one new but useless milestone.",
+      "immutable_facts": [
+        {
+          "fact_id": "F001",
+          "proposition": "Project Umbrella is an attempt to teach an umbrella to predict wind direction.",
+          "required_all": [
+            [
+              "Project Umbrella"
+            ],
+            [
+              "attempt to teach"
+            ],
+            [
+              "an umbrella"
+            ],
+            [
+              "predict wind direction"
+            ]
+          ]
+        },
+        {
+          "fact_id": "F002",
+          "proposition": "Project Umbrella reaches one new but useless milestone.",
+          "required_any": [
+            "reaches one new but useless milestone"
+          ]
+        }
+      ],
+      "protected_literals": [
+        "Project Umbrella"
+      ],
+      "allowed_numbers": [],
+      "forbidden_patterns": [],
+      "creative_slots": [
+        {
+          "slot_id": "S001",
+          "description": "Invent one harmless new capability or event for Project Umbrella that constitutes progress but has no practical value.",
+          "minimum": 1,
+          "maximum": 1
+        }
+      ],
+      "required_applied": [
+        "VM-C02",
+        "VM-C03"
+      ],
+      "prohibited_applied": [],
+      "extraction_notes": []
+    },
+    {
+      "scenario_id": "REQ-004",
+      "task": "Write a brief message telling friends that Saturday dinner is canceled because a family member needs rest. Do not identify the family member or give medical details.",
+      "immutable_facts": [
+        {
+          "fact_id": "F001",
+          "proposition": "Saturday dinner is canceled.",
+          "required_any": [
+            "Saturday dinner is canceled"
+          ]
+        },
+        {
+          "fact_id": "F002",
+          "proposition": "The cancellation is because a family member needs rest.",
+          "required_any": [
+            "canceled because a family member needs rest"
+          ]
+        }
+      ],
+      "protected_literals": [],
+      "allowed_numbers": [],
+      "forbidden_patterns": [
+        "(?i)\\b[A-Z][a-z]+\\s[A-Z][a-z]+\\b",
+        "(?i)(diagnosis|illness|condition|symptom)"
+      ],
+      "creative_slots": [],
+      "required_applied": [],
+      "prohibited_applied": [
+        "VM-C01",
+        "VM-C04"
+      ],
+      "extraction_notes": []
+    },
+    {
+      "scenario_id": "REQ-005",
+      "task": "Write an exactly two-sentence notice explaining that a cache refresh will make the internal dashboard unavailable for three minutes.",
+      "immutable_facts": [
+        {
+          "fact_id": "F001",
+          "proposition": "A cache refresh will occur.",
+          "required_any": [
+            "cache refresh"
+          ]
+        },
+        {
+          "fact_id": "F002",
+          "proposition": "The internal dashboard will be unavailable during the cache refresh.",
+          "required_any": [
+            "internal dashboard will be unavailable"
+          ]
+        },
+        {
+          "fact_id": "F003",
+          "proposition": "The duration of the unavailability is three minutes.",
+          "required_any": [
+            "three minutes"
+          ]
+        }
+      ],
+      "protected_literals": [],
+      "allowed_numbers": [
+        "three",
+        "3"
+      ],
+      "forbidden_patterns": [],
+      "creative_slots": [],
+      "required_applied": [],
+      "prohibited_applied": [
+        "VM-C01",
+        "VM-C02",
+        "VM-C03",
+        "VM-C04"
+      ],
+      "required_sentence_count": 2,
+      "extraction_notes": []
+    }
+  ],
+  "source_request_sha256": "5eccdbad8df16e10117d77d28e0f1b4ef1aecee9dc99529c4822f5e76d535a41"
+}
