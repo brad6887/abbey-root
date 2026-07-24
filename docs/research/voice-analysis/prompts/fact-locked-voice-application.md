@@ -14,7 +14,7 @@ The fact lock is authoritative. Treat each scenario as a closed world:
   outcomes, physical events, or system behavior.
 - Use a creative slot only when one is present, and describe any use in
   `creative_slot_uses`.
-- Protected literals must appear exactly.
+- Protected literals must appear exactly, including ordinary spaces and ASCII hyphen-minus characters; do not substitute typographic spaces or hyphens.
 - Voice characteristics may change expression, emphasis, rhythm, and framing;
   they may not change the facts.
 - Follow each scenario's task, required characteristics, prohibited
@@ -31,11 +31,11 @@ Return only one raw JSON object:
 {
   "schema_version": 1,
   "workflow": "fact_locked_voice_application",
-  "fact_lock_id": "VOICE-MODEL-001-FACT-LOCK-001",
+  "fact_lock_id": "SUPPLIED_FACT_LOCK_ID",
   "model": "RUNTIME_MODEL_VALUE",
   "items": [
     {
-      "scenario_id": "EVAL-001",
+      "scenario_id": "SUPPLIED_SCENARIO_ID",
       "response": "Generated scenario response.",
       "used_fact_ids": ["F001", "F002", "F003"],
       "added_facts": [],
@@ -52,10 +52,6 @@ Return only one raw JSON object:
   ]
 }
 
-Return all eight scenarios exactly once and in scenario order. Every
-`used_fact_ids` list must contain all and only the scenario's fact IDs.
-`added_facts` must be empty. Do not score your own work.
+Copy the supplied fact lock's `fact_lock_id` exactly. Return every supplied scenario exactly once and in the source order, without assuming a fixed scenario count. Copy each supplied scenario's `scenario_id` exactly. Every `used_fact_ids` list must contain all and only that scenario's fact IDs, in source order. `added_facts` must be empty. Do not score your own work.
 
-Use `creative_slot_uses: []` when the scenario has no slot or no slot is used.
-For Project Lantern, use its required slot for one genuinely new but unhelpful
-capability or event; merely restating continued failure is not a milestone.
+Use every creative slot only within its description and cardinality. Record each use under its exact `slot_id` in `creative_slot_uses`; use `creative_slot_uses: []` when no slot is present or no slot is used.

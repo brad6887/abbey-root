@@ -13,7 +13,7 @@ def main():
     if not isinstance(value,dict): raise SystemExit("Voice application normalization failed: JSON root must be an object.")
     for item in value.get("items", []):
         if isinstance(item, dict) and isinstance(item.get("response"), str):
-            item["response"] = item["response"].replace('\\"', '"')
+            item["response"] = item["response"].replace('\\"', '"').replace("\u00a0", " ").replace("\u2011", "-")
     value["model"]=args.model
     args.input.write_text(json.dumps(value,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
 if __name__ == "__main__": main()

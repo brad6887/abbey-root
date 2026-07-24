@@ -1352,6 +1352,31 @@ PYTHON_VOICE_NORMALIZE_TEST
 pass "voice normalization removes literal quote escapes and preserves other backslashes"
 rm -rf "$voice_normalize_fixture"
 
+voice_prompt="$ROOT/docs/research/voice-analysis/prompts/fact-locked-voice-application.md"
+if ! grep -Fq 'without assuming a fixed scenario count' "$voice_prompt" || grep -Fq 'Return all eight scenarios' "$voice_prompt" || grep -Fq 'Project Lantern' "$voice_prompt"; then fail "voice prompt is generic"; else pass "voice prompt is generic"; fi
+one_fixture="$(mktemp -d)"
+python3 - "$one_fixture" <<'PYTHON_ONE_SCENARIO'
+import json, pathlib, sys
+root=pathlib.Path(sys.argv[1])
+lock={"schema_version":1,"fact_lock_id":"CUSTOM-LOCK-001","review_id":"CUSTOM-REVIEW-001","status":"approved_human_reviewed","voice_model":"VOICE-MODEL-001","scenarios":[{"scenario_id":"CUSTOM-REQ-001","task":"Write a Facebook-style post.","required_applied":[],"prohibited_applied":[],"immutable_facts":[{"fact_id":"CUSTOM-F001","proposition":"A lamp is on.","required_any":["lamp is on"]}],"protected_literals":[],"allowed_numbers":[],"forbidden_patterns":[],"creative_slots":[]}]}
+output={"schema_version":1,"workflow":"fact_locked_voice_application","fact_lock_id":"CUSTOM-LOCK-001","model":"placeholder","items":[{"scenario_id":"CUSTOM-REQ-001","response":"The lamp is on.","used_fact_ids":["CUSTOM-F001"],"added_facts":[],"creative_slot_uses":[],"applied":[],"omitted":[],"rationale":"Direct statement."}]}
+(root/'lock.json').write_text(json.dumps(lock)); (root/'output.json').write_text(json.dumps(output))
+PYTHON_ONE_SCENARIO
+python3 "$ROOT/tools/research/validate_voice_application_inputs.py" --model "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001.json" --fact-lock "$one_fixture/lock.json" >/dev/null && python3 "$ROOT/tools/research/normalize_voice_application.py" --input "$one_fixture/output.json" --model test-model >/dev/null && python3 "$ROOT/tools/research/validate_fact_locked_voice_output.py" --spec "$one_fixture/lock.json" --output "$one_fixture/output.json" >/dev/null && pass "one-scenario lock reaches input, normalizer, and validator path" || fail "one-scenario lock reaches input, normalizer, and validator path"
+rm -rf "$one_fixture"
+
+typography_fixture="$(mktemp -d)"
+printf '%s\n' '{"schema_version":1,"workflow":"fact_locked_voice_application","fact_lock_id":"TYPO-001","items":[{"scenario_id":"REQ-001","response":"Abbey Root fact‑locked — café"}]}' > "$typography_fixture/input.json"
+python3 "$ROOT/tools/research/normalize_voice_application.py" --input "$typography_fixture/input.json" --model test-model >/dev/null
+python3 - "$typography_fixture/input.json" <<'PYTHON_TYPOGRAPHY_TEST'
+import json, sys
+response=json.load(open(sys.argv[1], encoding="utf-8"))["items"][0]["response"]
+assert "Abbey Root fact-locked" in response
+assert "— café" in response
+PYTHON_TYPOGRAPHY_TEST
+pass "voice normalization fixes NBSP and non-breaking hyphen only"
+rm -rf "$typography_fixture"
+
 printf '\nPassed: %d\n' "$passed"
 printf 'Failed: %d\n' "$failed"
 
