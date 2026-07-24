@@ -59,6 +59,18 @@ Usage:
     [--resume] \
     [--validate-only]
 
+  abbey research fact-lock propose \
+    --model MODEL \
+    --suite FILE \
+    --output FILE \
+    [--max-tokens N] \
+    [--force]
+
+  abbey research fact-lock validate \
+    --suite FILE \
+    --proposal FILE \
+    [--normalized-output FILE]
+
   abbey research status
 
 Options:
@@ -113,6 +125,17 @@ Examples:
     --output-dir working/research/voice-analysis/discovery-run \
     --max-tokens 10000 \
     --resume
+
+  abbey research fact-lock propose \
+    --model gpt-oss:20b \
+    --suite working/research/voice-analysis/request-suite.json \
+    --output working/research/voice-analysis/fact-lock-proposal.json \
+    --max-tokens 16000
+
+  abbey research fact-lock validate \
+    --suite working/research/voice-analysis/request-suite.json \
+    --proposal working/research/voice-analysis/fact-lock-proposal.json \
+    --normalized-output working/research/voice-analysis/fact-lock-proposal-normalized.json
 
   abbey research status
 HELP
@@ -1057,6 +1080,255 @@ discover_observations() {
 }
 
 
+fact_lock_usage() {
+  cat <<'HELP'
+Abbey Research Fact Lock
+
+Usage:
+  abbey research fact-lock propose \
+    --model MODEL \
+    --suite FILE \
+    --output FILE \
+    [--max-tokens N] \
+    [--force]
+
+  abbey research fact-lock validate \
+    --suite FILE \
+    --proposal FILE \
+    [--normalized-output FILE]
+
+Commands:
+  propose   Generate a human-review-required fact-lock proposal.
+  validate  Validate and optionally normalize a proposal.
+
+Proposal does not approve a fact lock. Human review and explicit approval
+remain separate workflow boundaries.
+HELP
+}
+
+
+propose_fact_lock() {
+  local model=""
+  local suite_file=""
+  local output_file=""
+  local max_tokens="16000"
+  local force="false"
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --model)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --model requires a model name." >&2
+          exit 1
+        fi
+        model="$2"
+        shift 2
+        ;;
+
+      --suite)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --suite requires a file." >&2
+          exit 1
+        fi
+        suite_file="$2"
+        shift 2
+        ;;
+
+      --output)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --output requires a file." >&2
+          exit 1
+        fi
+        output_file="$2"
+        shift 2
+        ;;
+
+      --max-tokens)
+        if [[ ! "${2:-}" =~ ^[1-9][0-9]*$ ]]; then
+          echo "Option --max-tokens requires a positive integer." >&2
+          exit 1
+        fi
+        max_tokens="$2"
+        shift 2
+        ;;
+
+      --force)
+        force="true"
+        shift
+        ;;
+
+      -h|--help|help)
+        fact_lock_usage
+        exit 0
+        ;;
+
+      *)
+        echo "Unknown option for fact-lock propose: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$model" ]]; then
+    echo "Missing required option: --model" >&2
+    exit 1
+  fi
+  if [[ -z "$suite_file" ]]; then
+    echo "Missing required option: --suite" >&2
+    exit 1
+  fi
+  if [[ -z "$output_file" ]]; then
+    echo "Missing required option: --output" >&2
+    exit 1
+  fi
+  if [[ ! -f "$suite_file" ]]; then
+    echo "Request suite not found:" >&2
+    echo "$suite_file" >&2
+    exit 1
+  fi
+
+  local prompt_file
+  prompt_file="$ABBEY_ROOT/docs/research/voice-analysis/prompts/propose-voice-fact-lock.md"
+
+  local -a run_args=(
+    --model "$model"
+    --prompt "$prompt_file"
+    --input "$suite_file"
+    --output "$output_file"
+    --max-tokens "$max_tokens"
+  )
+  if [[ "$force" == "true" ]]; then
+    run_args+=(--force)
+  fi
+
+  run_research "${run_args[@]}"
+
+  echo
+  echo "Human review required."
+  echo "Validate the proposal before review:"
+  echo "  abbey research fact-lock validate \\"
+  echo "    --suite $suite_file \\"
+  echo "    --proposal $output_file"
+}
+
+
+validate_fact_lock_proposal() {
+  local suite_file=""
+  local proposal_file=""
+  local normalized_output=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --suite)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --suite requires a file." >&2
+          exit 1
+        fi
+        suite_file="$2"
+        shift 2
+        ;;
+
+      --proposal)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --proposal requires a file." >&2
+          exit 1
+        fi
+        proposal_file="$2"
+        shift 2
+        ;;
+
+      --normalized-output)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --normalized-output requires a file." >&2
+          exit 1
+        fi
+        normalized_output="$2"
+        shift 2
+        ;;
+
+      -h|--help|help)
+        fact_lock_usage
+        exit 0
+        ;;
+
+      *)
+        echo "Unknown option for fact-lock validate: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$suite_file" ]]; then
+    echo "Missing required option: --suite" >&2
+    exit 1
+  fi
+  if [[ -z "$proposal_file" ]]; then
+    echo "Missing required option: --proposal" >&2
+    exit 1
+  fi
+  if [[ ! -f "$suite_file" ]]; then
+    echo "Request suite not found:" >&2
+    echo "$suite_file" >&2
+    exit 1
+  fi
+  if [[ ! -f "$proposal_file" ]]; then
+    echo "Fact-lock proposal not found:" >&2
+    echo "$proposal_file" >&2
+    exit 1
+  fi
+  if [[ -n "$normalized_output" && -e "$normalized_output" ]]; then
+    echo "Normalized output already exists:" >&2
+    echo "$normalized_output" >&2
+    exit 1
+  fi
+
+  local -a validate_args=(
+    --suite "$suite_file"
+    --proposal "$proposal_file"
+  )
+  if [[ -n "$normalized_output" ]]; then
+    mkdir -p "$(dirname "$normalized_output")"
+    validate_args+=(--normalized-output "$normalized_output")
+  fi
+
+  python3 \
+    "$ABBEY_ROOT/tools/research/validate_voice_fact_lock_proposal.py" \
+    "${validate_args[@]}"
+
+  echo
+  echo "Validation does not approve this proposal."
+  echo "Human review is still required."
+}
+
+
+fact_lock_research() {
+  local command="${1:-help}"
+
+  case "$command" in
+    propose)
+      shift
+      propose_fact_lock "$@"
+      ;;
+
+    validate)
+      shift
+      validate_fact_lock_proposal "$@"
+      ;;
+
+    help|-h|--help)
+      fact_lock_usage
+      ;;
+
+    *)
+      echo "Unknown fact-lock command: $command" >&2
+      echo >&2
+      fact_lock_usage >&2
+      exit 1
+      ;;
+  esac
+}
+
+
 status_research() {
   if [[ $# -gt 0 ]]; then
     case "$1" in
@@ -1123,6 +1395,11 @@ case "$command" in
   discover)
     shift
     discover_observations "$@"
+    ;;
+
+  fact-lock)
+    shift
+    fact_lock_research "$@"
     ;;
 
   status)

@@ -93,6 +93,73 @@ assert_contains \
   "$output" \
   "abbey research discover"
 
+assert_contains \
+  "--help shows fact-lock proposal usage" \
+  "$output" \
+  "abbey research fact-lock propose"
+
+assert_contains \
+  "--help shows fact-lock validation usage" \
+  "$output" \
+  "abbey research fact-lock validate"
+
+set +e
+output="$("$TOOL" fact-lock --help 2>&1)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock help exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "fact-lock help preserves approval boundary" \
+  "$output" \
+  "Proposal does not approve a fact lock."
+
+set +e
+output="$("$TOOL" fact-lock propose 2>&1)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock propose requires a model" \
+  "$status" \
+  1
+
+assert_contains \
+  "fact-lock propose reports missing model" \
+  "$output" \
+  "Missing required option: --model"
+
+set +e
+output="$(
+  "$TOOL" fact-lock validate \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-FACT-LOCK-PROPOSAL-001-REVISION-009.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock validate exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "fact-lock validate reports PASS" \
+  "$output" \
+  "Result: PASS"
+
+assert_contains \
+  "fact-lock validate preserves human review" \
+  "$output" \
+  "Human review is still required."
+
 set +e
 output="$("$TOOL" status 2>&1)"
 status=$?

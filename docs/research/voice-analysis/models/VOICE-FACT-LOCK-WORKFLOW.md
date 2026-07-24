@@ -26,23 +26,38 @@ validation.
 
 ## Proposal
 
-Run the local worker with:
+The supported public command is:
 
-- `propose-voice-fact-lock.md`
-- a request-suite JSON document
+```text
+abbey research fact-lock propose \
+  --model gpt-oss:20b \
+  --suite working/research/voice-analysis/request-suite.json \
+  --output working/research/voice-analysis/fact-lock-proposal.json \
+  --max-tokens 16000
+```
+
+The command fixes `propose-voice-fact-lock.md` as the prompt and supplies the
+request-suite JSON document to the existing Abbey research runner.
 
 The proposal must remain in
 `proposed_human_review_required` status.
 
-Validate and normalize it with:
+Validate and optionally normalize it with:
 
 ```text
-validate_voice_fact_lock_proposal.py
+abbey research fact-lock validate \
+  --suite working/research/voice-analysis/request-suite.json \
+  --proposal working/research/voice-analysis/fact-lock-proposal.json \
+  --normalized-output working/research/voice-analysis/fact-lock-proposal-normalized.json
 ```
 
-This checks source-request coverage, schema completeness, fact IDs, anchor
+The public command delegates to `validate_voice_fact_lock_proposal.py`. It
+checks source-request coverage, schema completeness, fact IDs, anchor
 structure, regex validity, creative slots, style boundaries, sentence-count
 constraints, and number types.
+
+Both commands state that the result still requires human review. Neither
+command can approve or apply a lock.
 
 ## Human Review and Revision
 
