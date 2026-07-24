@@ -1,3 +1,17 @@
+---
+title: Voice Analysis Corpus Foundation
+date: 2026-07-20
+session: voice-analysis-corpus-foundation
+status: complete
+reviewed: false
+type: session-update
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - corpus
+---
+
 # Voice Analysis Corpus Foundation
 
 ## Objective

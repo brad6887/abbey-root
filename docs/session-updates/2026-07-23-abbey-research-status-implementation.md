@@ -1,4 +1,3 @@
-```markdown
 ---
 title: Abbey Research Status Implementation
 date: 2026-07-22
@@ -208,4 +207,3 @@ The following architecture cases were intentionally deferred to a focused refine
 ## Suggested Next Step
 
 Create a focused `abbey research status` refinement session that adds synthetic fixtures and deterministic reporting for invalid, incomplete, duplicate, and broken artifact states.
-```

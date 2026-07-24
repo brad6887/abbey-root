@@ -1,3 +1,18 @@
+---
+title: Fact-Locked Voice Application CLI
+date: 2026-07-24
+session: fact-locked-voice-application-cli
+status: complete
+reviewed: false
+type: session-update
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - fact-lock
+  - cli
+---
+
 # Fact-Locked Voice Application CLI
 
 ## Objective
