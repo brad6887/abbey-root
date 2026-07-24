@@ -2,7 +2,7 @@
 artifact_id: VOICE-MODEL-001
 artifact_type: voice_model
 title: Bounded Facebook Voice Model
-version: 2
+version: 3
 status: draft
 
 source:
@@ -289,6 +289,10 @@ When using this model to assist new writing:
    explicitly authorizes changing them.
 10. If a generated response visibly uses a characteristic, report it as
     applied rather than claiming it was omitted.
+11. Apply the model through a proposition-level fact lock that separates
+    immutable facts from authorized creative slots.
+12. Reject output that fails deterministic checks, semantic verification, or
+    human proposition review.
 
 ## Traceability
 
@@ -310,13 +314,24 @@ Added factual-preservation, edit-preservation, and self-report consistency
 constraints after the first application evaluation invented a maintenance
 time and changed the factual premise of an editing task.
 
+Version 3:
+Added the fact-locked application workflow after two free-generation runs
+failed factual-preservation requirements. The same eight scenarios then
+passed deterministic validation, separate semantic verification, human fact
+review, and the application rubric.
+
 ## Version Status
 
-Version 2 is a bounded research draft.
+Version 3 is a bounded research draft with a validated fact-locked application
+workflow.
 
-Two controlled application runs failed mandatory factual-preservation checks.
-The model should not be used as a free-generation writing prompt until an
-application workflow can lock supplied facts and verify edits
-deterministically.
+Two free-generation runs failed mandatory factual-preservation checks. A third
+run passed at 78 of 80 only after immutable propositions, authorized creative
+slots, deterministic checks, semantic verification, and human review were
+made part of the workflow.
+
+The model remains unapproved as a free-generation prompt. Its application
+approval is limited to the tested Facebook scope and requires the complete
+fact-locked workflow.
 
 It should not yet be treated as a cross-format author model.

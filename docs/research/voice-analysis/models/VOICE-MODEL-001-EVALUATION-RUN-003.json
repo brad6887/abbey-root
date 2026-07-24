@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "evaluation_run_id": "VOICE-MODEL-001-EVAL-RUN-003",
+  "evaluation_id": "VOICE-MODEL-001-EVAL-001",
+  "voice_model_version": 3,
+  "worker_model": "gpt-oss:20b",
+  "workflow": "fact_locked_voice_application",
+  "fact_lock_id": "VOICE-MODEL-001-FACT-LOCK-001",
+  "status": "passed",
+  "total_score": 78,
+  "maximum_score": 80,
+  "gates": {
+    "deterministic_validation": "pass",
+    "semantic_verification": "pass",
+    "human_fact_review": "pass"
+  },
+  "items": [
+    {
+      "scenario_id": "EVAL-001",
+      "response": "Smart light bulb requires firmware update before it can turn off. #SmartBulb #FirmwareUpdate",
+      "used_fact_ids": ["F001", "F002", "F003"],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": ["VM-C01", "VM-C02"],
+      "omitted": [],
+      "rationale": "Applied deadpan contrast and semantic compression to convey facts concisely.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 1, "clarity": 2, "originality": 2},
+      "total": 9,
+      "note": "Preserves all facts and applies the targets; the two hashtags are a minor excess."
+    },
+    {
+      "scenario_id": "EVAL-002",
+      "response": "Wow, the app sent me a \\\"rain alert\\\" after I was already soaked.",
+      "used_fact_ids": ["F001", "F002"],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": ["VM-C02", "VM-C04"],
+      "omitted": [],
+      "rationale": "Used semantic compression and quoted stance to express reaction.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 1, "clarity": 2, "originality": 2},
+      "total": 9,
+      "note": "Compresses the supplied contrast and gives the alert meaningful quoted stance, but the worker emitted visible quote-escape artifacts."
+    },
+    {
+      "scenario_id": "EVAL-003",
+      "response": "Project Lantern is an attempt to train a porch light to recognize sarcasm. Project Lantern has reached a new but unhelpful milestone: the porch light now knows that saying 'just lighting up' triggers an automatic shutdown.",
+      "used_fact_ids": ["F001", "F002", "F003"],
+      "added_facts": [],
+      "creative_slot_uses": [
+        {
+          "slot_id": "S001",
+          "content": "the porch light now knows that saying 'just lighting up' triggers an automatic shutdown"
+        }
+      ],
+      "applied": ["VM-C02", "VM-C03"],
+      "omitted": [],
+      "rationale": "Compressed update while including unhelpful milestone via creative slot.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Uses supplied continuity and confines the invented milestone to the authorized creative slot."
+    },
+    {
+      "scenario_id": "EVAL-004",
+      "response": "I am putting together a new desk. It's surprisingly satisfying.",
+      "used_fact_ids": ["F001"],
+      "added_facts": [],
+      "creative_slot_uses": [
+        {
+          "slot_id": "S001",
+          "content": "It's surprisingly satisfying"
+        }
+      ],
+      "applied": ["VM-C02"],
+      "omitted": [],
+      "rationale": "Applied semantic compression and added a subjective reaction.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Preserves the ongoing assembly state and does not invent prior history."
+    },
+    {
+      "scenario_id": "EVAL-005",
+      "response": "I listened to Midnight Arithmetic.",
+      "used_fact_ids": ["F001", "F002"],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": [],
+      "omitted": ["VM-C04"],
+      "rationale": "Stated only the supplied facts without additional commentary.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Preserves the ordinary title without misclassifying it as stance marking."
+    },
+    {
+      "scenario_id": "EVAL-006",
+      "response": "Our gathering has been postponed because a family member is ill.",
+      "used_fact_ids": ["F001", "F002"],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": [],
+      "omitted": ["VM-C01", "VM-C04"],
+      "rationale": "Provided a brief sensitive message, avoiding prohibited characteristics.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Clear, restrained, and does not narrow the family relationship or illness."
+    },
+    {
+      "scenario_id": "EVAL-007",
+      "response": "The database will restart. An internal application will be unavailable for five minutes.",
+      "used_fact_ids": ["F001", "F002", "F003"],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": [],
+      "omitted": ["VM-C01", "VM-C02", "VM-C03", "VM-C04"],
+      "rationale": "Delivered factual maintenance notice in exactly two sentences.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Meets the two-sentence format without inventing a schedule or adding Facebook styling."
+    },
+    {
+      "scenario_id": "EVAL-008",
+      "response": "I bought a smart toaster that was called 'smart' and advanced; it makes toast incorrectly and I am disappointed.",
+      "used_fact_ids": ["F001", "F002", "F003", "F004"],
+      "added_facts": [],
+      "creative_slot_uses": [],
+      "applied": ["VM-C02", "VM-C04"],
+      "omitted": [],
+      "rationale": "Edited text for compression and meaningful quoted stance while preserving propositions.",
+      "scores": {"context_fit": 2, "characteristic_fidelity": 2, "restraint": 2, "clarity": 2, "originality": 2},
+      "total": 10,
+      "note": "Compresses the draft and preserves every locked proposition."
+    }
+  ],
+  "failed_requirements": [],
+  "decision": "Approve VOICE-MODEL-001 only through the fact-locked application workflow within the tested Facebook scope. Free generation remains unapproved."
+}

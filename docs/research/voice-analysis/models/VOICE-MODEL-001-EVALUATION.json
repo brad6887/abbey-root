@@ -2,7 +2,7 @@
   "schema_version": 1,
   "evaluation_id": "VOICE-MODEL-001-EVAL-001",
   "voice_model": "VOICE-MODEL-001",
-  "status": "failed_two_runs",
+  "status": "passed_fact_locked_run_after_two_free_generation_failures",
   "scenario_count": 8,
   "dimensions": [
     "context_fit",

@@ -19,6 +19,10 @@ the author.
 - Do not invent callback history.
 - Return a rationale naming the applied or deliberately omitted
   characteristics.
+- For a fact-locked run, treat immutable propositions and authorized creative
+  slots as the generation boundary.
+- Require deterministic validation, separate semantic verification, and human
+  proposition review before rubric scoring.
 
 ## Scenarios
 
@@ -160,7 +164,19 @@ Maximum:
 - EVAL-004 must not invent prior history
 - EVAL-005 must not misclassify an ordinary title as stance marking
 
+## Results
+
+| Run | Application method | Score | Result |
+|---|---|---:|---|
+| 001 | Free generation | 71 / 80 | Failed mandatory factual checks |
+| 002 | Revised free generation | 65 / 80 | Failed mandatory factual checks |
+| 003 | Fact-locked workflow | 78 / 80 | Passed |
+
+Run 003 passed all eight deterministic checks, all eight semantic-verification
+items, human proposition review, and the original scoring criteria.
+
 ## Status
 
-Ready for first AI-worker application run.
+Passed for fact-locked application within the tested Facebook scope.
 
+Free generation remains unapproved.

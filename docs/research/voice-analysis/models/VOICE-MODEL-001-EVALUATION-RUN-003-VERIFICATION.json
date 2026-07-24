@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "workflow": "fact_locked_voice_verification",
+  "fact_lock_id": "VOICE-MODEL-001-FACT-LOCK-001",
+  "items": [
+    {"scenario_id": "EVAL-001", "all_facts_present": true, "unsupported_claims": [], "creative_slots_valid": true, "result": "pass"},
+    {"scenario_id": "EVAL-002", "all_facts_present": true, "unsupported_claims": [], "creative_slots_valid": true, "result": "pass"},
+    {"scenario_id": "EVAL-003", "all_facts_present": true, "unsupported_claims": [], "creative_slots_valid": true, "result": "pass"},
+    {"scenario_id": "EVAL-004", "all_facts_present": true, "unsupported_claims": [], "creative_slots_valid": true, "result": "pass"},
+    {"scenario_id": "EVAL-005", "all_facts_present": true, "unsupported_claims": [], "creative_slots_valid": true, "result": "pass"},
+    {"scenario_id": "EVAL-006", "all_facts_present": true, "unsupported_claims": [], "creative_slots_valid": true, "result": "pass"},
+    {"scenario_id": "EVAL-007", "all_facts_present": true, "unsupported_claims": [], "creative_slots_valid": true, "result": "pass"},
+    {"scenario_id": "EVAL-008", "all_facts_present": true, "unsupported_claims": [], "creative_slots_valid": true, "result": "pass"}
+  ],
+  "result": "pass"
+}

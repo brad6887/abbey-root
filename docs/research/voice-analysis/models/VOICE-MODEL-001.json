@@ -2,8 +2,8 @@
   "schema_version": 1,
   "artifact_id": "VOICE-MODEL-001",
   "artifact_type": "voice_model",
-  "version": 2,
-  "status": "draft_application_evaluation_failed",
+  "version": 3,
+  "status": "draft_fact_locked_application_evaluation_passed",
   "title": "Bounded Facebook Voice Model",
   "scope": {
     "corpus": "CORPUS-001",
@@ -142,6 +142,8 @@
     "Do not invent factual details that the task does not supply.",
     "Preserve factual propositions when editing unless changes are authorized.",
     "Report every visibly used characteristic as applied.",
+    "Apply the model through a proposition-level fact lock and reject outputs that fail deterministic, semantic, or human fact review.",
+    "Do not treat a fact-locked evaluation pass as approval for free generation.",
     "Do not generalize the model beyond tested Facebook scope without new validation."
   ],
   "unsupported_domains": [

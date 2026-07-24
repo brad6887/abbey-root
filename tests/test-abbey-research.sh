@@ -159,6 +159,8 @@ output="$(
       "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-EVALUATION-RUN-001.json" \
     --run \
       "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-EVALUATION-RUN-002.json" \
+    --run \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-EVALUATION-RUN-003.json" \
     2>&1
 )"
 status=$?
@@ -173,6 +175,50 @@ assert_contains \
   "Voice Model validation reports PASS" \
   "$output" \
   "Result: PASS"
+
+set +e
+output="$(
+  python3 "$ROOT/tools/research/validate_fact_locked_voice_output.py" \
+    --spec \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-FACT-LOCK.json" \
+    --output \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-EVALUATION-RUN-003.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-locked Voice Model output validation exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "fact-locked Voice Model output validation reports PASS" \
+  "$output" \
+  "Result: PASS"
+
+set +e
+output="$(
+  python3 "$ROOT/tools/research/validate_fact_locked_voice_verification.py" \
+    --spec \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-FACT-LOCK.json" \
+    --verification \
+      "$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-EVALUATION-RUN-003-VERIFICATION.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock semantic verification validation exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "fact-lock semantic verification validation reports VALID" \
+  "$output" \
+  "Result: VALID"
 
 set +e
 output="$("$TOOL" run 2>&1)"

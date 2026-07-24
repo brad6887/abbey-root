@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "fact_lock_id": "VOICE-MODEL-001-FACT-LOCK-001",
+  "evaluation_id": "VOICE-MODEL-001-EVAL-001",
+  "voice_model": "VOICE-MODEL-001",
+  "purpose": "Constrain voice application to supplied propositions while permitting stylistic transformation.",
+  "rules": [
+    "Every immutable fact must be represented.",
+    "No factual proposition may be added unless an explicit creative slot permits it.",
+    "Protected literals must be preserved exactly.",
+    "Numbers, times, names, causes, relationships, outcomes, and system behavior are closed-world unless explicitly supplied.",
+    "A stylistic implication must not contradict or narrow an immutable fact."
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "EVAL-001",
+      "task": "Write a Facebook-style post about the supplied facts.",
+      "required_applied": ["VM-C01", "VM-C02"],
+      "prohibited_applied": [],
+      "immutable_facts": [
+        {"fact_id": "F001", "proposition": "The object is a smart light bulb.", "required_any": ["smart light bulb", "smart bulb"]},
+        {"fact_id": "F002", "proposition": "The bulb requires a firmware update.", "required_any": ["firmware update", "update its firmware", "update the firmware"]},
+        {"fact_id": "F003", "proposition": "The update is required before the bulb can turn off.", "required_any": ["turn off", "turning off", "shut down", "shutting down"]}
+      ],
+      "protected_literals": [],
+      "allowed_numbers": [],
+      "forbidden_patterns": ["\\b(?:refus\\w*|decid\\w*|insist\\w*|want\\w*)\\b", "\\b(?:a\\.?m\\.?|p\\.?m\\.?)\\b", "\\bmidnight\\b", "\\bv\\d+(?:\\.\\d+)*\\b", "\\b(?:right now|currently|today|tonight|tomorrow|shortly|soon|later|immediately)\\b"],
+      "creative_slots": []
+    },
+    {
+      "scenario_id": "EVAL-002",
+      "task": "Write a Facebook-style reaction to the supplied facts.",
+      "required_applied": ["VM-C02", "VM-C04"],
+      "prohibited_applied": [],
+      "immutable_facts": [
+        {"fact_id": "F001", "proposition": "A weather application sent a rain alert.", "required_any": ["rain alert", "rain notification"]},
+        {"fact_id": "F002", "proposition": "The alert arrived after the writer was already soaked.", "required_any": ["already soaked", "already wet", "soaked first"]}
+      ],
+      "protected_literals": [],
+      "allowed_numbers": [],
+      "forbidden_patterns": ["\\b(?:a\\.?m\\.?|p\\.?m\\.?)\\b", "\\b(?:minutes?|hours?|days?)\\b", "\\b(?:right now|currently|today|tonight|tomorrow|shortly|soon|later|immediately)\\b"],
+      "creative_slots": []
+    },
+    {
+      "scenario_id": "EVAL-003",
+      "task": "Write a later Facebook-style update reporting a new but unhelpful milestone.",
+      "required_applied": ["VM-C02", "VM-C03"],
+      "prohibited_applied": [],
+      "required_response_any": ["unhelpful", "not useful", "helps no one", "for no useful reason", "but not"],
+      "immutable_facts": [
+        {"fact_id": "F001", "proposition": "The project is named Project Lantern.", "required_any": ["Project Lantern"]},
+        {"fact_id": "F002", "proposition": "Project Lantern is an attempt to train a porch light to recognize sarcasm.", "required_any": ["porch light"]},
+        {"fact_id": "F003", "proposition": "The update reports a new but unhelpful milestone.", "required_any": ["sarcasm", "sarcastic"]}
+      ],
+      "protected_literals": ["Project Lantern"],
+      "allowed_numbers": [],
+      "forbidden_patterns": ["\\b(?:still can(?:not|'t)|has not|hasn't)\\b", "\\b(?:right now|currently|today|tonight|tomorrow|shortly|soon|later|immediately)\\b"],
+      "creative_slots": [
+        {
+          "slot_id": "S001",
+          "description": "One fictional, harmless, new capability or event that qualifies as progress but is unhelpful.",
+          "minimum": 1,
+          "maximum": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "EVAL-004",
+      "task": "Write a standalone Facebook-style post about the supplied fact.",
+      "required_applied": ["VM-C02"],
+      "prohibited_applied": ["VM-C03"],
+      "immutable_facts": [
+        {"fact_id": "F001", "proposition": "The writer is currently in the process of assembling a new desk.", "required_any": ["assembling a new desk", "building a new desk", "putting together a new desk"]}
+      ],
+      "protected_literals": [],
+      "allowed_numbers": [],
+      "forbidden_patterns": ["\\bagain\\b", "\\banother\\b", "\\blast time\\b", "\\busual(?:ly)?\\b", "\\bonce again\\b", "\\b(?:assembled|built|finished|completed)\\b", "\\b(?:right now|currently|today|tonight|tomorrow|shortly|soon|later|immediately)\\b"],
+      "creative_slots": [
+        {
+          "slot_id": "S001",
+          "description": "A subjective reaction to the present assembly, without adding prior history or concrete events.",
+          "maximum": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "EVAL-005",
+      "task": "Write a Facebook-style post stating only the supplied facts.",
+      "required_applied": [],
+      "prohibited_applied": ["VM-C04"],
+      "immutable_facts": [
+        {"fact_id": "F001", "proposition": "The writer listened to an album.", "required_any": ["listened"]},
+        {"fact_id": "F002", "proposition": "The album is titled Midnight Arithmetic.", "required_any": ["Midnight Arithmetic"]}
+      ],
+      "protected_literals": ["Midnight Arithmetic"],
+      "allowed_numbers": [],
+      "forbidden_patterns": ["\\bloved?\\b", "\\bhated?\\b", "\\bgreat\\b", "\\bterrible\\b", "\\bfavorite\\b", "\\b(?:right now|currently|today|tonight|tomorrow|shortly|soon|later|immediately)\\b"],
+      "creative_slots": []
+    },
+    {
+      "scenario_id": "EVAL-006",
+      "task": "Write a brief, sensitive message informing friends of the supplied facts.",
+      "required_applied": [],
+      "prohibited_applied": ["VM-C01", "VM-C04"],
+      "immutable_facts": [
+        {"fact_id": "F001", "proposition": "A planned gathering is postponed.", "required_any": ["postponed", "postpone"]},
+        {"fact_id": "F002", "proposition": "The reason is that a family member is ill.", "required_any": ["family member", "someone in the family"]}
+      ],
+      "protected_literals": [],
+      "allowed_numbers": [],
+      "forbidden_patterns": ["\\b(?:aunt|uncle|mother|father|mom|dad|sister|brother|cousin|grandmother|grandfather)\\b", "\\b(?:diagnos\\w*|hospital\\w*|covid|flu)\\b", "\\b(?:right now|currently|today|tonight|tomorrow|shortly|soon|later|immediately|next week|next month)\\b"],
+      "creative_slots": []
+    },
+    {
+      "scenario_id": "EVAL-007",
+      "task": "Write a factual maintenance notice in exactly two sentences.",
+      "required_applied": [],
+      "prohibited_applied": ["VM-C01", "VM-C02", "VM-C03", "VM-C04"],
+      "required_sentence_count": 2,
+      "immutable_facts": [
+        {"fact_id": "F001", "proposition": "A database will restart.", "required_any": ["database restart", "database will restart", "restarting the database"]},
+        {"fact_id": "F002", "proposition": "An internal application will be unavailable.", "required_any": ["internal application", "internal app"]},
+        {"fact_id": "F003", "proposition": "The unavailability will last five minutes.", "required_any": ["five minutes", "5 minutes"]}
+      ],
+      "protected_literals": [],
+      "allowed_numbers": ["5", "five"],
+      "forbidden_patterns": ["\\b(?:a\\.?m\\.?|p\\.?m\\.?)\\b", "\\b(?:midnight|noon|right now|currently|today|tonight|tomorrow|shortly|soon|later|immediately)\\b"],
+      "creative_slots": []
+    },
+    {
+      "scenario_id": "EVAL-008",
+      "task": "Edit the source text for compression and meaningful quoted stance while preserving its propositions.",
+      "required_applied": ["VM-C02", "VM-C04"],
+      "prohibited_applied": [],
+      "source_text": "I bought a smart toaster because it was described as smart and advanced. It makes toast incorrectly, and I am disappointed.",
+      "immutable_facts": [
+        {"fact_id": "F001", "proposition": "The writer bought a smart toaster.", "required_any": ["smart toaster"]},
+        {"fact_id": "F002", "proposition": "The toaster was described as smart and advanced.", "required_any": ["advanced"]},
+        {"fact_id": "F003", "proposition": "The toaster makes toast incorrectly.", "required_any": ["toast incorrectly", "incorrect toast", "wrong toast", "toast wrong"]},
+        {"fact_id": "F004", "proposition": "The writer is disappointed.", "required_any": ["disappointed", "disappointment"]}
+      ],
+      "protected_literals": [],
+      "allowed_numbers": [],
+      "forbidden_patterns": ["\\bfirmware\\b", "\\bupdate\\b", "\\bupgrade\\b", "\\bburn(?:ed|t|ing)?\\b", "\\braw\\b", "\\b(?:right now|currently|today|tonight|tomorrow|shortly|soon|later|immediately)\\b"],
+      "creative_slots": []
+    }
+  ]
+}
