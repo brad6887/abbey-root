@@ -75,6 +75,11 @@ Usage:
     --suite FILE \
     --proposal FILE
 
+  abbey research fact-lock review-init \
+    --suite FILE \
+    --proposal FILE \
+    --output FILE
+
   abbey research status
 
 Options:
@@ -144,6 +149,11 @@ Examples:
   abbey research fact-lock review \
     --suite working/research/voice-analysis/request-suite.json \
     --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json
+
+  abbey research fact-lock review-init \
+    --suite working/research/voice-analysis/request-suite.json \
+    --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json \
+    --output working/research/voice-analysis/fact-lock-review.json
 
   abbey research status
 HELP
@@ -1109,10 +1119,17 @@ Usage:
     --suite FILE \
     --proposal FILE
 
+  abbey research fact-lock review-init \
+    --suite FILE \
+    --proposal FILE \
+    --output FILE
+
 Commands:
   propose   Generate a human-review-required fact-lock proposal.
   validate  Validate and optionally normalize a proposal.
   review    Print a deterministic, read-only human-review summary.
+  review-init
+            Create a blank, hash-bound review manifest.
 
 Proposal does not approve a fact lock. Human review and explicit approval
 remain separate workflow boundaries.
@@ -1376,6 +1393,83 @@ review_fact_lock_proposal() {
 }
 
 
+init_fact_lock_review() {
+  local suite_file=""
+  local proposal_file=""
+  local output_file=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --suite)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --suite requires a file." >&2
+          exit 1
+        fi
+        suite_file="$2"
+        shift 2
+        ;;
+
+      --proposal)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --proposal requires a file." >&2
+          exit 1
+        fi
+        proposal_file="$2"
+        shift 2
+        ;;
+
+      --output)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --output requires a file." >&2
+          exit 1
+        fi
+        output_file="$2"
+        shift 2
+        ;;
+
+      -h|--help|help)
+        fact_lock_usage
+        exit 0
+        ;;
+
+      *)
+        echo "Unknown option for fact-lock review-init: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$suite_file" ]]; then
+    echo "Missing required option: --suite" >&2
+    exit 1
+  fi
+  if [[ -z "$proposal_file" ]]; then
+    echo "Missing required option: --proposal" >&2
+    exit 1
+  fi
+  if [[ -z "$output_file" ]]; then
+    echo "Missing required option: --output" >&2
+    exit 1
+  fi
+  if [[ ! -f "$suite_file" ]]; then
+    echo "Request suite not found:" >&2
+    echo "$suite_file" >&2
+    exit 1
+  fi
+  if [[ ! -f "$proposal_file" ]]; then
+    echo "Fact-lock proposal not found:" >&2
+    echo "$proposal_file" >&2
+    exit 1
+  fi
+
+  python3 \
+    "$ABBEY_ROOT/tools/research/init_voice_fact_lock_review.py" \
+    --suite "$suite_file" \
+    --proposal "$proposal_file" \
+    --output "$output_file"
+}
+
+
 fact_lock_research() {
   local command="${1:-help}"
 
@@ -1393,6 +1487,11 @@ fact_lock_research() {
     review)
       shift
       review_fact_lock_proposal "$@"
+      ;;
+
+    review-init)
+      shift
+      init_fact_lock_review "$@"
       ;;
 
     help|-h|--help)

@@ -85,6 +85,32 @@ The summary is read-only. It does not create a review manifest, modify inputs,
 approve a proposal, or promote a lock. The proposal JSON remains the source of
 truth.
 
+## Review Scaffold
+
+Initialize a blank review manifest from the exact normalized proposal:
+
+```text
+abbey research fact-lock review-init \
+  --suite working/research/voice-analysis/request-suite.json \
+  --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json \
+  --output working/research/voice-analysis/fact-lock-review.json
+```
+
+The scaffold records:
+
+- the proposal manifest ID,
+- canonical proposal SHA-256,
+- canonical source-request SHA-256,
+- one item per scenario in proposal order,
+- null review and future fact-lock IDs,
+- an `undecided` overall decision,
+- `undecided` facts and constraints decisions,
+- and blank human notes.
+
+The command validates the proposal and any recorded source hash before writing.
+It protects an existing output and never preselects approval or revision. The
+unchanged scaffold cannot pass the approval tool.
+
 ## Human Review and Revision
 
 Review every scenario for:

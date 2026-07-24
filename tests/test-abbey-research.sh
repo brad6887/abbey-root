@@ -108,6 +108,11 @@ assert_contains \
   "$output" \
   "abbey research fact-lock review"
 
+assert_contains \
+  "--help shows fact-lock review-init usage" \
+  "$output" \
+  "abbey research fact-lock review-init"
+
 set +e
 output="$("$TOOL" fact-lock --help 2>&1)"
 status=$?
@@ -215,6 +220,93 @@ if [[ "$review_hash_before" == "$review_hash_after" ]]; then
 else
   fail "fact-lock review does not modify proposal"
 fi
+
+review_init_root="$(mktemp -d)"
+review_scaffold="$review_init_root/review.json"
+
+set +e
+output="$(
+  "$TOOL" fact-lock review-init \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal "$review_proposal" \
+    --output "$review_scaffold" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock review-init exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "fact-lock review-init reports undecided boundary" \
+  "$output" \
+  "All review decisions are undecided."
+
+scaffold_check="$(
+  python3 - "$review_proposal" "$review_scaffold" <<'PYTHON'
+import hashlib
+import json
+import sys
+
+proposal = json.load(open(sys.argv[1], encoding="utf-8"))
+review = json.load(open(sys.argv[2], encoding="utf-8"))
+encoded = json.dumps(
+    proposal,
+    sort_keys=True,
+    separators=(",", ":"),
+    ensure_ascii=False,
+).encode("utf-8")
+expected_hash = hashlib.sha256(encoded).hexdigest()
+
+safe = (
+    review.get("review_id") is None
+    and review.get("fact_lock_id") is None
+    and review.get("decision") == "undecided"
+    and review.get("proposal_sha256") == expected_hash
+    and len(review.get("items", [])) == len(proposal.get("requests", []))
+    and all(
+        item.get("facts") == "undecided"
+        and item.get("constraints") == "undecided"
+        and item.get("note") == ""
+        for item in review.get("items", [])
+    )
+)
+print("SAFE" if safe else "UNSAFE")
+PYTHON
+)"
+
+assert_contains \
+  "fact-lock review-init creates safe blank scaffold" \
+  "$scaffold_check" \
+  "SAFE"
+
+set +e
+output="$(
+  "$TOOL" fact-lock review-init \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal "$review_proposal" \
+    --output "$review_scaffold" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock review-init protects existing output" \
+  "$status" \
+  1
+
+assert_contains \
+  "fact-lock review-init reports existing output" \
+  "$output" \
+  "output already exists:"
+
+rm -r "$review_init_root"
 
 set +e
 output="$("$TOOL" status 2>&1)"
