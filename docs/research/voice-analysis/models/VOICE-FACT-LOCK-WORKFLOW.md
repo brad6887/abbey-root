@@ -59,6 +59,32 @@ constraints, and number types.
 Both commands state that the result still requires human review. Neither
 command can approve or apply a lock.
 
+## Review Summary
+
+After validation and normalization, print the deterministic review summary:
+
+```text
+abbey research fact-lock review \
+  --suite working/research/voice-analysis/request-suite.json \
+  --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json
+```
+
+The command validates before displaying:
+
+- suite and proposal SHA-256 hashes,
+- recorded source-hash agreement,
+- scenario and aggregate constraint counts,
+- every immutable proposition and anchor mode,
+- protected literals and numeric content,
+- required and prohibited characteristics,
+- sentence-count and forbidden-pattern constraints,
+- creative-slot boundaries and cardinality,
+- and scenario-specific review-attention flags.
+
+The summary is read-only. It does not create a review manifest, modify inputs,
+approve a proposal, or promote a lock. The proposal JSON remains the source of
+truth.
+
 ## Human Review and Revision
 
 Review every scenario for:

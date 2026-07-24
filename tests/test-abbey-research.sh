@@ -103,6 +103,11 @@ assert_contains \
   "$output" \
   "abbey research fact-lock validate"
 
+assert_contains \
+  "--help shows fact-lock review usage" \
+  "$output" \
+  "abbey research fact-lock review"
+
 set +e
 output="$("$TOOL" fact-lock --help 2>&1)"
 status=$?
@@ -159,6 +164,57 @@ assert_contains \
   "fact-lock validate preserves human review" \
   "$output" \
   "Human review is still required."
+
+review_proposal="$ROOT/docs/research/voice-analysis/models/VOICE-FACT-LOCK-PROPOSAL-001-REVISION-009.json"
+review_hash_before="$(sha256sum "$review_proposal" | awk '{print $1}')"
+
+set +e
+output="$(
+  "$TOOL" fact-lock review \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal "$review_proposal" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock review exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "fact-lock review reports proposal hash" \
+  "$output" \
+  "Proposal SHA-256:"
+
+assert_contains \
+  "fact-lock review reports scenario detail" \
+  "$output" \
+  "REQ-003: callback"
+
+assert_contains \
+  "fact-lock review highlights authorized invention" \
+  "$output" \
+  "Review attention: supplied callback context, authorized invention"
+
+assert_contains \
+  "fact-lock review requires human decision" \
+  "$output" \
+  "HUMAN REVIEW REQUIRED"
+
+assert_contains \
+  "fact-lock review states read-only boundary" \
+  "$output" \
+  "This command did not create, modify, approve, or promote any artifact."
+
+review_hash_after="$(sha256sum "$review_proposal" | awk '{print $1}')"
+if [[ "$review_hash_before" == "$review_hash_after" ]]; then
+  pass "fact-lock review does not modify proposal"
+else
+  fail "fact-lock review does not modify proposal"
+fi
 
 set +e
 output="$("$TOOL" status 2>&1)"
