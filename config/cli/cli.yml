@@ -215,6 +215,9 @@ commands:
       discover:
         description: Run resumable observation discovery across deterministic corpus batches.
         usage: abbey research discover --model MODEL --prompt FILE --corpus FILE --batch-manifest FILE --output-dir DIR [--resume]
+      voice:
+        description: Apply VOICE-MODEL-001 through an approved Facebook fact lock.
+        usage: abbey research voice apply --model MODEL --fact-lock FILE --output FILE --report FILE
     examples:
       - abbey research --help
       - abbey research run --help

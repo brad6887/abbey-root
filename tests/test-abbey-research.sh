@@ -1315,6 +1315,43 @@ assert_contains \
   "$output" \
   "Result:      PASS"
 
+
+voice_fixture="$(mktemp -d)"
+voice_lock="$ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001-FACT-LOCK.json"
+mkdir -p "$voice_fixture"
+printf 'old-output\n' > "$voice_fixture/output.json"
+printf 'old-report\n' > "$voice_fixture/report.json"
+set +e
+output="$($TOOL voice apply --model test-model --fact-lock "$voice_lock" --output "$voice_fixture/output.json" --report "$voice_fixture/new-report.json" 2>&1)"; status=$?
+set -e
+assert_status "voice apply rejects existing output without force" "$status" 1
+assert_contains "voice apply reports existing output" "$output" "Output file already exists"
+set +e
+output="$($TOOL voice apply --model test-model --fact-lock "$voice_lock" --output "$voice_fixture/new-output.json" --report "$voice_fixture/report.json" 2>&1)"; status=$?
+set -e
+assert_status "voice apply rejects existing report without force" "$status" 1
+assert_contains "voice apply reports existing report" "$output" "Report file already exists"
+set +e
+output="$($TOOL voice apply --model test-model --fact-lock "$voice_lock" --output "$voice_fixture/output.json" --report "$voice_fixture/report.json" --force 2>&1)"; status=$?
+set -e
+assert_status "voice apply force reaches generation" "$status" 1
+if [[ "$(cat "$voice_fixture/output.json")" == "old-output"* && "$(cat "$voice_fixture/report.json")" == "old-report"* ]]; then pass "generation failure preserves existing output and report"; else fail "generation failure preserves existing output and report"; fi
+rm -rf "$voice_fixture"
+
+voice_normalize_fixture="$(mktemp -d)"
+printf '%s\n' '{"schema_version":1,"workflow":"fact_locked_voice_application","fact_lock_id":"VOICE-MODEL-001-FACT-LOCK-001","model":"VOICE-MODEL-001","items":[{"scenario_id":"REQ-002","response":"marketed as \\\"smart\\\"; keep C:\\temp\\file"}]}' > "$voice_normalize_fixture/input.json"
+python3 "$ROOT/tools/research/normalize_voice_application.py" --input "$voice_normalize_fixture/input.json" --model gpt-oss:20b
+python3 - "$voice_normalize_fixture/input.json" <<'PYTHON_VOICE_NORMALIZE_TEST'
+import json, sys
+value=json.load(open(sys.argv[1], encoding="utf-8"))
+response=value["items"][0]["response"]
+assert 'marketed as "smart"' in response
+assert "\\temp\\file" in response
+assert value["model"] == "gpt-oss:20b"
+PYTHON_VOICE_NORMALIZE_TEST
+pass "voice normalization removes literal quote escapes and preserves other backslashes"
+rm -rf "$voice_normalize_fixture"
+
 printf '\nPassed: %d\n' "$passed"
 printf 'Failed: %d\n' "$failed"
 

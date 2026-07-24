@@ -1810,6 +1810,32 @@ fact_lock_research() {
 }
 
 
+voice_apply() {
+  local model="" fact_lock_file="" output_file="" report_file="" force="false"
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --model) model="${2:-}"; shift 2;;
+      --fact-lock) fact_lock_file="${2:-}"; shift 2;;
+      --output) output_file="${2:-}"; shift 2;;
+      --report) report_file="${2:-}"; shift 2;;
+      --force) force="true"; shift;;
+      -h|--help|help) echo "Usage: abbey research voice apply --model MODEL --fact-lock FILE --output FILE --report FILE [--force]"; return 0;;
+      *) echo "Unknown option for voice apply: $1" >&2; return 1;;
+    esac
+  done
+  [[ -n "$model" && -n "$fact_lock_file" && -n "$output_file" && -n "$report_file" ]] || { echo "Missing required option." >&2; return 1; }
+  [[ -f "$fact_lock_file" ]] || { echo "Fact lock not found: $fact_lock_file" >&2; return 1; }
+  if [[ "$force" != true && -e "$output_file" ]]; then echo "Output file already exists: $output_file" >&2; echo "Use --force to replace it." >&2; return 1; fi
+  if [[ "$force" != true && -e "$report_file" ]]; then echo "Report file already exists: $report_file" >&2; echo "Use --force to replace it." >&2; return 1; fi
+  python3 "$ABBEY_ROOT/tools/research/validate_voice_application_inputs.py" --model "$ABBEY_ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001.json" --fact-lock "$fact_lock_file" >/dev/null || return 1
+  local -a run_args=(--model "$model" --prompt "$ABBEY_ROOT/docs/research/voice-analysis/prompts/fact-locked-voice-application.md" --input "$ABBEY_ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001.json" --input "$fact_lock_file" --output "$output_file" --max-tokens 10000)
+  [[ "$force" == true ]] && run_args+=(--force)
+  run_research "${run_args[@]}" || return 1
+  python3 "$ABBEY_ROOT/tools/research/normalize_voice_application.py" --input "$output_file" --model "$model"
+  python3 "$ABBEY_ROOT/tools/research/validate_fact_locked_voice_output.py" --spec "$fact_lock_file" --output "$output_file" --report "$report_file"
+}
+
+
 status_research() {
   if [[ $# -gt 0 ]]; then
     case "$1" in
@@ -1881,6 +1907,9 @@ case "$command" in
   fact-lock)
     shift
     fact_lock_research "$@"
+    ;;
+  voice)
+    shift; [[ "${1:-}" == apply ]] || { echo "Unknown voice command" >&2; exit 1; }; shift; voice_apply "$@"
     ;;
 
   status)

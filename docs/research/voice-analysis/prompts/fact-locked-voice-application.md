@@ -6,6 +6,10 @@ document.
 The fact lock is authoritative. Treat each scenario as a closed world:
 
 - Preserve every immutable proposition.
+- For every fact with `required_any`, include at least one literal phrase from that list.
+- For every fact with `required_all`, include at least one literal phrase from every group.
+- These lexical anchors are deterministic checks for the propositions; anchors do not replace the underlying facts.
+- JSON serialization may escape quotation marks, but parsed human-facing response text must not contain visible backslashes before quotation marks.
 - Do not add factual details, including names, times, causes, relationships,
   outcomes, physical events, or system behavior.
 - Use a creative slot only when one is present, and describe any use in
@@ -28,7 +32,7 @@ Return only one raw JSON object:
   "schema_version": 1,
   "workflow": "fact_locked_voice_application",
   "fact_lock_id": "VOICE-MODEL-001-FACT-LOCK-001",
-  "model": "MODEL_VALUE",
+  "model": "RUNTIME_MODEL_VALUE",
   "items": [
     {
       "scenario_id": "EVAL-001",
