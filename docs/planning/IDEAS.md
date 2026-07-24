@@ -52,16 +52,14 @@ Candidate for graduating from the Museum into its own permanent section of BradC
 
 ### The Jeep Incident
 
-Locate the 1980s photograph of the Jeep buried in mud.
+One of the earliest examples of confidence exceeding experience: at 15, Brad
+buried a Jeep in mud and required outside assistance to recover it.
 
-Potential museum exhibit documenting one of the earliest examples of confidence exceeding experience.
+Current status:
 
-Possible museum plaque:
-
-- Year: circa 1980s
-- Original Plan: "This'll be fun."
-- Actual Result: Required outside assistance.
-- Lesson Learned: Confidence is not traction.
+- Completed as the Museum's second exhibit.
+- Published at `https://bradcooke.com/museum/the-jeep-incident/`.
+- Includes two surviving photographs of the incident.
 
 ### Future Philosophy
 
