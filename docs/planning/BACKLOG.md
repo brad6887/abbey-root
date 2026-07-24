@@ -50,7 +50,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Improve session capture workflow by creating session updates and journal entries through a guided process.
 - [ ] Validate required metadata for new or modified session updates while reporting pre-existing historical debt without blocking unrelated commits.
-- [ ] Fix `abbey journal` argument handling so `--title` and reserved commands like `help` behave consistently.
+- [x] Fix `abbey journal` argument handling so `--title` and reserved commands like `help` behave consistently.
 - [ ] Add session-aware state to reduce manual slug and filename management.
 - [ ] Add reliable artifact export workflow for generated research documents and other Abbey artifacts.
 
@@ -146,7 +146,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add `abbey site deploy-check`.
 - [ ] Reduce noise in `abbey site publish` previews.
 - [ ] Display the Abbey Root commit hash in `abbey site publish`.
-- [ ] Add live-site verification to `abbey site publish`.
+- [x] Add live-site verification to `abbey site publish`.
 - [ ] Add project metrics to `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Add network health checks to `abbey-doctor`.

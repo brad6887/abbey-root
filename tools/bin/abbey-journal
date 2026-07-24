@@ -7,21 +7,77 @@
 #
 # Usage:
 #   abbey journal <journal title>
+#   abbey journal --title "Journal Title"
+#   abbey journal --help
 #
 set -euo pipefail
 
 REPO_DIR="${ABBEY_ROOT:-$HOME/git/abbey-root}"
 JOURNAL_DIR="$REPO_DIR/content/journal"
 
-DATE="$(date +%F)"
-YEAR="$(date +%Y)"
-TITLE="${*:-}"
+print_help() {
+  cat <<'HELP'
+Abbey Journal
 
-if [[ -z "$TITLE" ]]; then
-  echo "Usage: abbey journal <journal title>"
-  echo "Example: abbey journal Completing the Journal Platform"
+Usage:
+  abbey journal <journal title>
+  abbey journal --title "Journal Title"
+  abbey journal --help
+
+Creates or opens a dated Abbey Root journal entry.
+
+Examples:
+  abbey journal Completing the Journal Platform
+  abbey journal --title "Completing the Journal Platform"
+HELP
+}
+
+case "${1:-}" in
+  -h|--help|help)
+    print_help
+    exit 0
+    ;;
+esac
+
+if (($# == 0)); then
+  print_help
   exit 1
 fi
+
+case "$1" in
+  --title)
+    shift
+
+    if (($# == 0)) || [[ -z "${1:-}" ]]; then
+      echo "FAIL --title requires a value."
+      echo
+      print_help
+      exit 1
+    fi
+
+    if (($# > 1)); then
+      echo "FAIL Unexpected arguments after --title."
+      echo "Quote multi-word titles as one argument."
+      exit 1
+    fi
+
+    TITLE="$1"
+    ;;
+
+  -*)
+    echo "FAIL Unknown option: $1"
+    echo
+    print_help
+    exit 1
+    ;;
+
+  *)
+    TITLE="$*"
+    ;;
+esac
+
+DATE="$(date +%F)"
+YEAR="$(date +%Y)"
 
 SLUG="$(echo "$TITLE" \
   | tr '[:upper:]' '[:lower:]' \

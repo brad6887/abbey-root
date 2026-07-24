@@ -31,6 +31,9 @@ LOG_DIR="$ABBEY_ROOT/logs"
 LOG_FILE="$LOG_DIR/abbey-site.log"
 PRODUCTION_REPO="${ABBEY_SITE_PRODUCTION_REPO:-$HOME/git/brad6887.github.io}"
 EXPECTED_CNAME="bradcooke.com"
+LIVE_SITE_URL="${ABBEY_SITE_LIVE_URL:-https://$EXPECTED_CNAME/}"
+LIVE_SITE_VERIFY_ATTEMPTS="${ABBEY_SITE_VERIFY_ATTEMPTS:-10}"
+LIVE_SITE_VERIFY_DELAY="${ABBEY_SITE_VERIFY_DELAY:-10}"
 
 command="${1:-status}"
 shift || true
@@ -112,6 +115,73 @@ validate_cname() {
   echo "OK   CNAME preserved: $EXPECTED_CNAME"
 }
 
+verify_live_site() {
+  local attempt
+  local curl_status
+  local http_code
+
+  if ! command -v curl >/dev/null 2>&1; then
+    echo "WARN Live-site verification unavailable: curl not found"
+    return 1
+  fi
+
+  if ! [[ "$LIVE_SITE_VERIFY_ATTEMPTS" =~ ^[1-9][0-9]*$ ]]; then
+    echo "WARN Invalid ABBEY_SITE_VERIFY_ATTEMPTS: $LIVE_SITE_VERIFY_ATTEMPTS"
+    return 1
+  fi
+
+  if ! [[ "$LIVE_SITE_VERIFY_DELAY" =~ ^[0-9]+$ ]]; then
+    echo "WARN Invalid ABBEY_SITE_VERIFY_DELAY: $LIVE_SITE_VERIFY_DELAY"
+    return 1
+  fi
+
+  echo
+  echo "Live-site verification"
+  echo "----------------------"
+  echo "URL: $LIVE_SITE_URL"
+
+  for ((attempt = 1; attempt <= LIVE_SITE_VERIFY_ATTEMPTS; attempt++)); do
+    http_code="$(
+      curl \
+        -L \
+        -sS \
+        -o /dev/null \
+        -w '%{http_code}' \
+        --connect-timeout 5 \
+        --max-time 15 \
+        "$LIVE_SITE_URL" \
+        2>/dev/null
+    )"
+    curl_status=$?
+
+    if ((curl_status == 0)) && [[ "$http_code" =~ ^2[0-9][0-9]$ ]]; then
+      echo \
+        "OK   Live site verified: HTTP $http_code" \
+        "(attempt $attempt/$LIVE_SITE_VERIFY_ATTEMPTS)"
+      return 0
+    fi
+
+    if ((curl_status != 0)); then
+      echo \
+        "INFO Verification attempt $attempt/$LIVE_SITE_VERIFY_ATTEMPTS" \
+        "could not reach the live site."
+    else
+      echo \
+        "INFO Verification attempt $attempt/$LIVE_SITE_VERIFY_ATTEMPTS" \
+        "returned HTTP ${http_code:-unknown}."
+    fi
+
+    if ((attempt < LIVE_SITE_VERIFY_ATTEMPTS)); then
+      sleep "$LIVE_SITE_VERIFY_DELAY"
+    fi
+  done
+
+  echo \
+    "WARN Live-site verification did not succeed after" \
+    "$LIVE_SITE_VERIFY_ATTEMPTS attempts."
+  return 1
+}
+
 site_pid() {
   pgrep -f "npm run dev|astro dev" | head -n 1
 }
@@ -177,6 +247,7 @@ The publish workflow:
   6. Copies the generated site.
   7. Shows the production Git diff.
   8. Commits and pushes after confirmation.
+  9. Verifies the live site after a successful push.
 
 Environment:
   ABBEY_SITE_PRODUCTION_REPO
@@ -184,6 +255,24 @@ Environment:
 
       Default:
       ~/git/brad6887.github.io
+
+  ABBEY_SITE_LIVE_URL
+      Override the URL checked after a successful push.
+
+      Default:
+      https://bradcooke.com/
+
+  ABBEY_SITE_VERIFY_ATTEMPTS
+      Number of live-site verification attempts.
+
+      Default:
+      10
+
+  ABBEY_SITE_VERIFY_DELAY
+      Seconds between verification attempts.
+
+      Default:
+      10
 HELP
         return 0
         ;;
@@ -273,7 +362,18 @@ HELP
 
   echo
   echo "OK   BradCooke.com publish pushed successfully."
-  echo "INFO GitHub Pages may take a few minutes to update."
+
+  if verify_live_site; then
+    echo
+    echo "OK   Publish and live-site verification complete."
+    return 0
+  fi
+
+  echo
+  echo "WARN Production push completed, but live-site verification failed."
+  echo "INFO GitHub Pages may still be deploying the update."
+  echo "INFO Recheck manually: $LIVE_SITE_URL"
+  return 2
 }
 
 site_start() {
