@@ -125,10 +125,37 @@ Review every scenario for:
 - privacy and factual prohibitions,
 - and exact style and format constraints.
 
-Record `approve` or `revise` for facts and constraints separately. When
-revision is required, run `revise-voice-fact-lock.md` with the request suite,
-rejected proposal, and review record. Validate and review the complete
-replacement proposal again.
+Record `approve` or `revise` for facts and constraints separately and add a
+nonblank note for every scenario. Validate the completed review with:
+
+```text
+abbey research fact-lock review-validate \
+  --suite working/research/voice-analysis/request-suite.json \
+  --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json \
+  --review working/research/voice-analysis/fact-lock-review.json
+```
+
+The validator checks the canonical suite and proposal hashes, proposal
+manifest ID, exact scenario coverage and order, completed item decisions,
+notes, overall decision, and decision-specific ID rules. It does not revise,
+approve, or promote anything.
+
+When the overall decision is `revise`, create a replacement proposal with:
+
+```text
+abbey research fact-lock revise \
+  --model gpt-oss:20b \
+  --suite working/research/voice-analysis/request-suite.json \
+  --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json \
+  --review working/research/voice-analysis/fact-lock-review.json \
+  --output working/research/voice-analysis/fact-lock-proposal-revised.json \
+  --max-tokens 16000
+```
+
+The command refuses a review whose decision is not `revise`, fixes the
+generalized revision prompt, and supplies the suite, rejected proposal, and
+review record to the Abbey research runner. The replacement remains
+`proposed_human_review_required`; validate it and begin a new complete review.
 
 ## Approval
 
@@ -138,15 +165,22 @@ normalized proposal.
 Promote it with:
 
 ```text
-approve_voice_fact_lock.py
+abbey research fact-lock approve \
+  --suite working/research/voice-analysis/request-suite.json \
+  --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json \
+  --review working/research/voice-analysis/fact-lock-review.json \
+  --output working/research/voice-analysis/fact-lock-approved.json
 ```
 
-The command rejects:
+The public command first requires a completed review whose overall decision is
+`approve`, then delegates promotion to `approve_voice_fact_lock.py`. It
+rejects:
 
 - a mismatched proposal hash,
 - incomplete review coverage,
 - any scenario whose facts or constraints are not approved,
 - a non-approval decision,
+- missing review or fact-lock IDs,
 - and an existing output path.
 
 Promotion changes only artifact metadata and the `requests` key to
@@ -202,6 +236,7 @@ five requests.
 
 ## Boundary
 
-This evaluation demonstrates a working review-gated process. It does not
-approve fully automatic fact extraction. Human review is a required control,
-and multiple revisions may be necessary.
+The proposal-through-approval workflow is functional through public Abbey
+commands and has exercised both revision and approval branches. This
+evaluation does not approve fully automatic fact extraction. Human review is a
+required control, and multiple revisions may be necessary.

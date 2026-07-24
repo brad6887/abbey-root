@@ -80,6 +80,26 @@ Usage:
     --proposal FILE \
     --output FILE
 
+  abbey research fact-lock review-validate \
+    --suite FILE \
+    --proposal FILE \
+    --review FILE
+
+  abbey research fact-lock revise \
+    --model MODEL \
+    --suite FILE \
+    --proposal FILE \
+    --review FILE \
+    --output FILE \
+    [--max-tokens N] \
+    [--force]
+
+  abbey research fact-lock approve \
+    --suite FILE \
+    --proposal FILE \
+    --review FILE \
+    --output FILE
+
   abbey research status
 
 Options:
@@ -154,6 +174,24 @@ Examples:
     --suite working/research/voice-analysis/request-suite.json \
     --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json \
     --output working/research/voice-analysis/fact-lock-review.json
+
+  abbey research fact-lock review-validate \
+    --suite working/research/voice-analysis/request-suite.json \
+    --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json \
+    --review working/research/voice-analysis/fact-lock-review.json
+
+  abbey research fact-lock revise \
+    --model gpt-oss:20b \
+    --suite working/research/voice-analysis/request-suite.json \
+    --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json \
+    --review working/research/voice-analysis/fact-lock-review.json \
+    --output working/research/voice-analysis/fact-lock-proposal-revised.json
+
+  abbey research fact-lock approve \
+    --suite working/research/voice-analysis/request-suite.json \
+    --proposal working/research/voice-analysis/fact-lock-proposal-normalized.json \
+    --review working/research/voice-analysis/fact-lock-review.json \
+    --output working/research/voice-analysis/fact-lock-approved.json
 
   abbey research status
 HELP
@@ -1124,12 +1162,36 @@ Usage:
     --proposal FILE \
     --output FILE
 
+  abbey research fact-lock review-validate \
+    --suite FILE \
+    --proposal FILE \
+    --review FILE
+
+  abbey research fact-lock revise \
+    --model MODEL \
+    --suite FILE \
+    --proposal FILE \
+    --review FILE \
+    --output FILE \
+    [--max-tokens N] \
+    [--force]
+
+  abbey research fact-lock approve \
+    --suite FILE \
+    --proposal FILE \
+    --review FILE \
+    --output FILE
+
 Commands:
   propose   Generate a human-review-required fact-lock proposal.
   validate  Validate and optionally normalize a proposal.
   review    Print a deterministic, read-only human-review summary.
   review-init
             Create a blank, hash-bound review manifest.
+  review-validate
+            Validate a completed approve or revise review.
+  revise    Generate a replacement proposal from a revise review.
+  approve   Promote a proposal only through a validated approval review.
 
 Proposal does not approve a fact lock. Human review and explicit approval
 remain separate workflow boundaries.
@@ -1470,6 +1532,231 @@ init_fact_lock_review() {
 }
 
 
+validate_completed_fact_lock_review() {
+  local suite_file=""
+  local proposal_file=""
+  local review_file=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --suite)
+        suite_file="${2:-}"
+        shift 2
+        ;;
+      --proposal)
+        proposal_file="${2:-}"
+        shift 2
+        ;;
+      --review)
+        review_file="${2:-}"
+        shift 2
+        ;;
+      -h|--help|help)
+        fact_lock_usage
+        exit 0
+        ;;
+      *)
+        echo "Unknown option for fact-lock review-validate: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$suite_file" ]]; then
+    echo "Missing required option: --suite" >&2
+    exit 1
+  fi
+  if [[ -z "$proposal_file" ]]; then
+    echo "Missing required option: --proposal" >&2
+    exit 1
+  fi
+  if [[ -z "$review_file" ]]; then
+    echo "Missing required option: --review" >&2
+    exit 1
+  fi
+
+  python3 \
+    "$ABBEY_ROOT/tools/research/validate_voice_fact_lock_review.py" \
+    --suite "$suite_file" \
+    --proposal "$proposal_file" \
+    --review "$review_file"
+}
+
+
+revise_fact_lock() {
+  local model=""
+  local suite_file=""
+  local proposal_file=""
+  local review_file=""
+  local output_file=""
+  local max_tokens="16000"
+  local force="false"
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --model)
+        model="${2:-}"
+        shift 2
+        ;;
+      --suite)
+        suite_file="${2:-}"
+        shift 2
+        ;;
+      --proposal)
+        proposal_file="${2:-}"
+        shift 2
+        ;;
+      --review)
+        review_file="${2:-}"
+        shift 2
+        ;;
+      --output)
+        output_file="${2:-}"
+        shift 2
+        ;;
+      --max-tokens)
+        if [[ ! "${2:-}" =~ ^[1-9][0-9]*$ ]]; then
+          echo "Option --max-tokens requires a positive integer." >&2
+          exit 1
+        fi
+        max_tokens="$2"
+        shift 2
+        ;;
+      --force)
+        force="true"
+        shift
+        ;;
+      -h|--help|help)
+        fact_lock_usage
+        exit 0
+        ;;
+      *)
+        echo "Unknown option for fact-lock revise: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$model" ]]; then
+    echo "Missing required option: --model" >&2
+    exit 1
+  fi
+  if [[ -z "$suite_file" ]]; then
+    echo "Missing required option: --suite" >&2
+    exit 1
+  fi
+  if [[ -z "$proposal_file" ]]; then
+    echo "Missing required option: --proposal" >&2
+    exit 1
+  fi
+  if [[ -z "$review_file" ]]; then
+    echo "Missing required option: --review" >&2
+    exit 1
+  fi
+  if [[ -z "$output_file" ]]; then
+    echo "Missing required option: --output" >&2
+    exit 1
+  fi
+
+  python3 \
+    "$ABBEY_ROOT/tools/research/validate_voice_fact_lock_review.py" \
+    --suite "$suite_file" \
+    --proposal "$proposal_file" \
+    --review "$review_file" \
+    --require-decision revise
+
+  local prompt_file
+  prompt_file="$ABBEY_ROOT/docs/research/voice-analysis/prompts/revise-voice-fact-lock.md"
+  local -a run_args=(
+    --model "$model"
+    --prompt "$prompt_file"
+    --input "$suite_file"
+    --input "$proposal_file"
+    --input "$review_file"
+    --output "$output_file"
+    --max-tokens "$max_tokens"
+  )
+  if [[ "$force" == "true" ]]; then
+    run_args+=(--force)
+  fi
+  run_research "${run_args[@]}"
+
+  echo
+  echo "Replacement proposal created. It is not approved."
+  echo "Validate and review the complete replacement proposal."
+}
+
+
+approve_fact_lock() {
+  local suite_file=""
+  local proposal_file=""
+  local review_file=""
+  local output_file=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --suite)
+        suite_file="${2:-}"
+        shift 2
+        ;;
+      --proposal)
+        proposal_file="${2:-}"
+        shift 2
+        ;;
+      --review)
+        review_file="${2:-}"
+        shift 2
+        ;;
+      --output)
+        output_file="${2:-}"
+        shift 2
+        ;;
+      -h|--help|help)
+        fact_lock_usage
+        exit 0
+        ;;
+      *)
+        echo "Unknown option for fact-lock approve: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$suite_file" ]]; then
+    echo "Missing required option: --suite" >&2
+    exit 1
+  fi
+  if [[ -z "$proposal_file" ]]; then
+    echo "Missing required option: --proposal" >&2
+    exit 1
+  fi
+  if [[ -z "$review_file" ]]; then
+    echo "Missing required option: --review" >&2
+    exit 1
+  fi
+  if [[ -z "$output_file" ]]; then
+    echo "Missing required option: --output" >&2
+    exit 1
+  fi
+
+  python3 \
+    "$ABBEY_ROOT/tools/research/validate_voice_fact_lock_review.py" \
+    --suite "$suite_file" \
+    --proposal "$proposal_file" \
+    --review "$review_file" \
+    --require-decision approve
+
+  python3 \
+    "$ABBEY_ROOT/tools/research/approve_voice_fact_lock.py" \
+    --proposal "$proposal_file" \
+    --review "$review_file" \
+    --output "$output_file"
+
+  echo
+  echo "Approved fact lock: $output_file"
+}
+
+
 fact_lock_research() {
   local command="${1:-help}"
 
@@ -1492,6 +1779,21 @@ fact_lock_research() {
     review-init)
       shift
       init_fact_lock_review "$@"
+      ;;
+
+    review-validate)
+      shift
+      validate_completed_fact_lock_review "$@"
+      ;;
+
+    revise)
+      shift
+      revise_fact_lock "$@"
+      ;;
+
+    approve)
+      shift
+      approve_fact_lock "$@"
       ;;
 
     help|-h|--help)

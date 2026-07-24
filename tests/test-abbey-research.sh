@@ -113,6 +113,21 @@ assert_contains \
   "$output" \
   "abbey research fact-lock review-init"
 
+assert_contains \
+  "--help shows fact-lock review-validate usage" \
+  "$output" \
+  "abbey research fact-lock review-validate"
+
+assert_contains \
+  "--help shows fact-lock revise usage" \
+  "$output" \
+  "abbey research fact-lock revise"
+
+assert_contains \
+  "--help shows fact-lock approve usage" \
+  "$output" \
+  "abbey research fact-lock approve"
+
 set +e
 output="$("$TOOL" fact-lock --help 2>&1)"
 status=$?
@@ -305,6 +320,204 @@ assert_contains \
   "fact-lock review-init reports existing output" \
   "$output" \
   "output already exists:"
+
+set +e
+output="$(
+  "$TOOL" fact-lock review-validate \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal "$review_proposal" \
+    --review "$review_scaffold" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock review-validate rejects undecided scaffold" \
+  "$status" \
+  1
+
+assert_contains \
+  "fact-lock review-validate reports undecided decision" \
+  "$output" \
+  "review decision must equal approve or revise"
+
+approval_review="$review_init_root/approval-review.json"
+revision_review="$review_init_root/revision-review.json"
+
+python3 - \
+  "$review_scaffold" \
+  "$approval_review" \
+  "$revision_review" <<'PYTHON'
+import copy
+import json
+import sys
+
+scaffold = json.load(open(sys.argv[1], encoding="utf-8"))
+
+approval = copy.deepcopy(scaffold)
+approval["review_id"] = "REVIEW-TEST-APPROVE"
+approval["fact_lock_id"] = "FACT-LOCK-TEST"
+approval["decision"] = "approve"
+for item in approval["items"]:
+    item["facts"] = "approve"
+    item["constraints"] = "approve"
+    item["note"] = "Reviewed facts and constraints."
+
+revision = copy.deepcopy(scaffold)
+revision["review_id"] = "REVIEW-TEST-REVISE"
+revision["decision"] = "revise"
+for item in revision["items"]:
+    item["facts"] = "approve"
+    item["constraints"] = "approve"
+    item["note"] = "Reviewed facts and constraints."
+revision["items"][0]["facts"] = "revise"
+revision["items"][0]["note"] = "Revise the first scenario facts."
+
+with open(sys.argv[2], "w", encoding="utf-8") as stream:
+    json.dump(approval, stream, indent=2)
+    stream.write("\n")
+with open(sys.argv[3], "w", encoding="utf-8") as stream:
+    json.dump(revision, stream, indent=2)
+    stream.write("\n")
+PYTHON
+
+set +e
+output="$(
+  "$TOOL" fact-lock review-validate \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal "$review_proposal" \
+    --review "$approval_review" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock approval review validates" \
+  "$status" \
+  0
+
+assert_contains \
+  "fact-lock approval review reports decision" \
+  "$output" \
+  "Decision: approve"
+
+set +e
+output="$(
+  "$TOOL" fact-lock review-validate \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal "$review_proposal" \
+    --review "$revision_review" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock revision review validates" \
+  "$status" \
+  0
+
+assert_contains \
+  "fact-lock revision review reports decision" \
+  "$output" \
+  "Decision: revise"
+
+approved_lock="$review_init_root/approved-lock.json"
+set +e
+output="$(
+  "$TOOL" fact-lock approve \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal "$review_proposal" \
+    --review "$approval_review" \
+    --output "$approved_lock" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock approve branch exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "fact-lock approve branch reports output" \
+  "$output" \
+  "Approved fact lock:"
+
+approved_check="$(
+  python3 - "$approved_lock" <<'PYTHON'
+import json
+import sys
+
+lock = json.load(open(sys.argv[1], encoding="utf-8"))
+safe = (
+    lock.get("status") == "approved_human_reviewed"
+    and lock.get("fact_lock_id") == "FACT-LOCK-TEST"
+    and lock.get("review_id") == "REVIEW-TEST-APPROVE"
+    and len(lock.get("scenarios", [])) == 5
+)
+print("SAFE" if safe else "UNSAFE")
+PYTHON
+)"
+
+assert_contains \
+  "fact-lock approve branch preserves approved metadata" \
+  "$approved_check" \
+  "SAFE"
+
+set +e
+output="$(
+  "$TOOL" fact-lock approve \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal "$review_proposal" \
+    --review "$revision_review" \
+    --output "$review_init_root/rejected-lock.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock approve rejects revision review" \
+  "$status" \
+  1
+
+assert_contains \
+  "fact-lock approve requires approval decision" \
+  "$output" \
+  "review decision must equal approve"
+
+set +e
+output="$(
+  "$TOOL" fact-lock revise \
+    --model gpt-oss:20b \
+    --suite \
+      "$ROOT/docs/research/voice-analysis/evaluations/VOICE-FACT-EXTRACTION-EVAL-001.json" \
+    --proposal "$review_proposal" \
+    --review "$approval_review" \
+    --output "$review_init_root/rejected-revision.json" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "fact-lock revise rejects approval review" \
+  "$status" \
+  1
+
+assert_contains \
+  "fact-lock revise requires revision decision" \
+  "$output" \
+  "review decision must equal revise"
 
 rm -r "$review_init_root"
 

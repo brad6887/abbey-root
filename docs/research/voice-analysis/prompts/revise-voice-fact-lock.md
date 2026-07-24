@@ -44,8 +44,8 @@ Apply these rules:
 Return only the complete raw JSON proposal with:
 
 - `schema_version: 1`
-- `manifest_id: VOICE-FACT-LOCK-PROPOSAL-001`
-- `evaluation_id: VOICE-FACT-EXTRACTION-EVAL-001`
-- `voice_model: VOICE-MODEL-001`
+- the same `manifest_id` as the supplied proposal
+- the same `evaluation_id` as the supplied suite and proposal
+- the same `voice_model` as the supplied suite and proposal
 - `status: proposed_human_review_required`
-- all five requests exactly once and in order
+- every supplied request exactly once and in source order
