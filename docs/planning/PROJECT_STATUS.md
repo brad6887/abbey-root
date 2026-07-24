@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-07-22
+Last Updated: 2026-07-24
 
 ---
 
@@ -198,6 +198,8 @@ Completed
 - Documentation publishing workflow.
 - Production Astro site published to GitHub Pages at bradcooke.com through `abbey site publish`.
 - Museum of Dumb Ideas established with OmeletYouFinish.com as its first completed exhibit.
+- Museum of Dumb Ideas expanded with the Jeep Incident as its second completed
+  exhibit and a reusable photographic artifact gallery.
 - Canonical plant source-to-publication workflow.
 - Doctor Robert generated into the Astro site as the Plant Model reference implementation.
 - Helter Skelter generated into the Astro site as the second validated Plant Model profile.

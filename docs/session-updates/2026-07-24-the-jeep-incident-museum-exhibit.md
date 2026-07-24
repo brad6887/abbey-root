@@ -3,7 +3,7 @@ title: "The Jeep Incident Museum Exhibit"
 description: "Added the Jeep Incident as the Museum of Dumb Ideas' second complete exhibit."
 date: 2026-07-24
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root
@@ -67,8 +67,10 @@ for exhibits with photographic artifacts.
 - `git status` and `git diff` reviewed.
 - `abbey doctor` reported four unreachable home-lab hosts from the temporary
   Mac workspace; all repository and documentation checks passed.
-- `abbey end` correctly reported the session incomplete because the working
-  tree remains intentionally uncommitted for Brad's review.
+- Brad approved the reviewed source changes.
+- Source commit `567b1e1` was pushed to Abbey Root.
+- Production commit `fc2f9dc` was pushed through `abbey site publish`.
+- The live exhibit, journal entry, and both image URLs returned HTTP 200.
 
 ## Lessons Learned
 
