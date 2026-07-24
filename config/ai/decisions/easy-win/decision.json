@@ -1,0 +1,16 @@
+{
+  "name": "Easy Win",
+  "description": "Identify low-risk, one-session work that delivers durable value and meaningfully reduces the backlog.",
+  "category": "planning",
+  "model": "gpt-oss:20b",
+  "documents": [
+    "docs/planning/PROJECT_STATUS.md",
+    "docs/planning/NEXT.md",
+    "docs/planning/BACKLOG.md",
+    "docs/planning/ROADMAP.md"
+  ],
+  "options": {
+    "temperature": 0,
+    "num_ctx": 32768
+  }
+}

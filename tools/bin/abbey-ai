@@ -687,6 +687,8 @@ if "priority_reason" in result:
 benefit_fields = [
     ("Frequency", "estimated_frequency"),
     ("Effort", "estimated_effort"),
+    ("Risk", "risk_level"),
+    ("Session Fit", "session_fit"),
     ("Score", "time_saving_score"),
     ("Confidence", "confidence"),
 ]
@@ -714,6 +716,8 @@ if available_benefit_fields:
 
 list_sections = [
     ("Recurring Work Eliminated", "recurring_work_eliminated"),
+    ("Durable Value", "durable_value"),
+    ("Backlog Reduction", "backlog_reduction"),
     ("Blocking Items", "blocking_items"),
 ]
 

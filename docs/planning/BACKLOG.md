@@ -209,7 +209,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 ### Abbey AI
 
 - [x] Add discoverable `abbey ai decide` help and decision listing generated from decision-definition metadata.
-- [ ] Add `abbey ai decide easy-win` to identify low-risk, one-session work that delivers durable value and meaningfully reduces the backlog.
+- [x] Add `abbey ai decide easy-win` to identify low-risk, one-session work that delivers durable value and meaningfully reduces the backlog.
 - [ ] Implement `abbey ai evaluate` across installed local models.
 - [ ] Validate decision metadata before execution.
 - [ ] Add decision and engine versioning to decision-history artifacts.

@@ -133,6 +133,10 @@ JSON
 }
 JSON
 
+  cp -R \
+    "$ABBEY_ROOT/config/ai/decisions/easy-win" \
+    "$fixture_root/config/ai/decisions/easy-win"
+
   printf '%s\n' "$fixture_root"
 }
 
@@ -177,6 +181,16 @@ assert_contains \
   "--help lists second metadata decision" \
   "$output" \
   "Beta Decision"
+
+assert_contains \
+  "--help discovers easy-win decision metadata" \
+  "$output" \
+  "easy-win"
+
+assert_contains \
+  "--help describes easy-win selection boundary" \
+  "$output" \
+  "low-risk, one-session work"
 
 assert_not_contains \
   "--help ignores invalid JSON" \
