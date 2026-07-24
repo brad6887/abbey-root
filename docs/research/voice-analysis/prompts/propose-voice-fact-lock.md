@@ -8,6 +8,10 @@ explicitly supplied by each request, context, or source text.
 
 For each request:
 
+- Copy the suite's `evaluation_id` and `voice_model` exactly into the proposal.
+- Copy each `request_id` exactly into the corresponding `scenario_id`.
+- Number facts from `F001` within each scenario. Restart at `F001` for every
+  new scenario and use consecutive IDs without gaps.
 - Preserve names, titles, numbers, relationships, causes, timing, grammatical
   state, and system behavior.
 - Treat supplied `context` and `source_text` as factual sources. Every explicit
@@ -27,6 +31,9 @@ For each request:
   Do not pretend the unspecified content is already an immutable fact.
 - State every creative slot's narrow boundary and cardinality. A request for
   `one` new item requires `minimum: 1` and `maximum: 1`.
+- Represent every creative slot with exactly `slot_id`, `description`,
+  `minimum`, and `maximum`. `minimum` and `maximum` are integers at the slot
+  root, not inside another object.
 - Copy `style_targets` into `required_applied` exactly, including order.
 - Copy `style_prohibitions` into `prohibited_applied` exactly, including order.
 - Copy a sentence-count constraint when supplied.
@@ -45,17 +52,18 @@ For each request:
   unhelpful milestone. Put only the unspecified milestone content in the
   creative slot.
 
-Return only one raw JSON object:
+Return only one syntactically valid raw JSON object. Do not wrap it in a
+Markdown code fence and do not add commentary:
 
 {
   "schema_version": 1,
   "manifest_id": "VOICE-FACT-LOCK-PROPOSAL-001",
-  "evaluation_id": "VOICE-FACT-EXTRACTION-EVAL-001",
-  "voice_model": "VOICE-MODEL-001",
+  "evaluation_id": "<copy the supplied suite evaluation_id exactly>",
+  "voice_model": "<copy the supplied suite voice_model exactly>",
   "status": "proposed_human_review_required",
   "requests": [
     {
-      "scenario_id": "REQ-001",
+      "scenario_id": "<copy the supplied request_id exactly>",
       "task": "The requested writing task.",
       "immutable_facts": [
         {
@@ -67,7 +75,14 @@ Return only one raw JSON object:
       "protected_literals": [],
       "allowed_numbers": [],
       "forbidden_patterns": [],
-      "creative_slots": [],
+      "creative_slots": [
+        {
+          "slot_id": "CS001",
+          "description": "A narrow description of the one authorized invention.",
+          "minimum": 1,
+          "maximum": 1
+        }
+      ],
       "required_applied": [],
       "prohibited_applied": [],
       "extraction_notes": []

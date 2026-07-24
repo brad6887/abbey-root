@@ -31,6 +31,10 @@ Apply these rules:
 
   `"required_all": [["Project Name"], ["attempt to teach"], ["predict wind"]]`
 
+- Every direct child of `required_all` is one array of alternative strings.
+  Do not wrap a group in another array. For example,
+  `[["Project Name"], ["attempt", "trying"]]` is valid, while
+  `[[["Project Name"]], [["attempt", "trying"]]]` is invalid.
 - Every fact has exactly one of `required_any` or `required_all`.
 - Creative-slot descriptions must state exactly what may be invented and any
   factual boundary it must obey.
@@ -41,7 +45,8 @@ Apply these rules:
 - Every `allowed_numbers` value must be a JSON string.
 - Do not approve your own revision.
 
-Return only the complete raw JSON proposal with:
+Return only the complete syntactically valid raw JSON proposal. Do not wrap it
+in a Markdown code fence and do not add commentary. The proposal must have:
 
 - `schema_version: 1`
 - the same `manifest_id` as the supplied proposal
