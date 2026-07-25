@@ -25,4 +25,22 @@ else
   warn "No Git remote configured"
 fi
 
+for identity_key in user.name user.email; do
+  identity_config="$(
+    git -C "$ABBEY_ROOT" config --show-origin --get "$identity_key" 2>/dev/null \
+      || true
+  )"
+
+  if [ -z "$identity_config" ]; then
+    fail "Git $identity_key is not configured"
+    continue
+  fi
+
+  identity_origin="${identity_config%%$'\t'*}"
+  identity_value="${identity_config#*$'\t'}"
+
+  ok "Git $identity_key configured: $identity_value"
+  ok "Git $identity_key source: $identity_origin"
+done
+
 echo
