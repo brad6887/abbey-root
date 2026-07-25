@@ -53,6 +53,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Fix `abbey journal` argument handling so `--title` and reserved commands like `help` behave consistently.
 - [ ] Add session-aware state to reduce manual slug and filename management.
 - [ ] Add reliable artifact export workflow for generated research documents and other Abbey artifacts.
+- [ ] Investigate why `abbey end` incorrectly requires a journal entry for reconciliation-only commits and add regression coverage.
 
 ---
 
@@ -64,12 +65,14 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Validate the `edge01` commissioning workflow and procedures.
 - [x] Deploy Technitium DNS on `edge01` as the authoritative `home.arpa` service and validate it from `ubuntu-dev01`.
 - [ ] Complete extended validation and lab-wide rollout of internal DNS.
+- [ ] Establish reliable internal access to public proxied services through Abbey DNS.
 - [ ] Finalize the infrastructure naming strategy and add friendly DNS service records.
 - [ ] Enhance `abbey-status` with Docker health, disk usage, and service summaries.
 - [ ] Create `abbey infrastructure review`.
 - [ ] Manage infrastructure systemd units and automation scripts from the Abbey repository.
 - [ ] Deploy infrastructure services through Ansible.
 - [ ] Automate restore validation for backups.
+- [ ] Formalize Umami database backup automation after validating the documented manual `pg_dump` procedure.
 - [ ] Implement infrastructure patch management workflow.
 - [ ] Define recurring infrastructure maintenance windows.
 - [ ] Expand infrastructure monitoring dashboards.

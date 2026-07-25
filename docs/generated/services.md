@@ -12,13 +12,13 @@ Generated automatically by Ansible.
 | Ollama | http://192.168.1.87:11434 | RTX 4060 AI Server | ollama |
 | Portainer Agent | http://192.168.1.87:9001 | AI Worker Docker Agent | portainer-agent |
 
-## rocky-ansible01
+## edge01
 
-### Automation
+### Infrastructure
 
 | Service | URL | Description | Container |
 |---------|-----|-------------|-----------|
-| Rocky Ansible | N/A | Ansible Control Node | N/A |
+| Technitium DNS | http://192.168.1.221:5380 | Internal DNS server | N/A |
 
 ## ubuntu-dev01
 
@@ -42,6 +42,7 @@ Generated automatically by Ansible.
 | Service | URL | Description | Container |
 |---------|-----|-------------|-----------|
 | Uptime Kuma | http://192.168.1.86:3001 | Service Monitoring | uptime-kuma |
+| Umami | http://192.168.1.86:3002 | Web Analytics | umami |
 
 ### Development
 
@@ -50,14 +51,4 @@ Generated automatically by Ansible.
 | GitHub | https://github.com | Repositories | N/A |
 | BradCooke.com | https://bradcooke.com | Website | N/A |
 | ChatGPT | https://chatgpt.com | AI Assistant | N/A |
-
-### Planned Services
-
-| Service | URL | Description | Container |
-|---------|-----|-------------|-----------|
-| Grafana | N/A | Metrics | N/A |
-| Prometheus | N/A | Monitoring | N/A |
-| Watchtower | N/A | Docker Updates | N/A |
-| Immich | N/A | Photos | N/A |
-| n8n | N/A | Automation | N/A |
 

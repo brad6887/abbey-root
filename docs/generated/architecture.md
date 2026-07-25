@@ -6,10 +6,10 @@ Generated automatically by Ansible.
 
 | Item | Count |
 |------|------:|
-| Hosts | 3 |
+| Hosts | 4 |
 | Docker Hosts | 2 |
-| Homepage Servers | 3 |
-| Inventory Groups | 3 |
+| Homepage Servers | 4 |
+| Inventory Groups | 4 |
 
 ---
 
@@ -21,7 +21,7 @@ Generated automatically by Ansible.
 | Source Control | Git / GitHub |
 | Configuration Management | Ansible |
 | Documentation | Generated from inventory and host variables |
-| Managed Hosts | 3 |
+| Managed Hosts | 4 |
 
 ---
 
@@ -64,6 +64,42 @@ AI experimentation and Docker services
 
 ---
 
+### edge01
+
+**Description**
+
+Internal DNS and edge services
+
+**IP Address**
+
+192.168.1.221
+
+**Purpose**
+
+- Internal DNS
+- Foundational network services
+- Edge infrastructure
+
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | No |
+| Homepage Visible | Yes |
+
+**Inventory Groups**
+
+- edge_services
+
+**Services Provided**
+
+#### Infrastructure
+
+- Technitium DNS
+
+
+---
+
 ### rocky-ansible01
 
 **Description**
@@ -90,12 +126,6 @@ Ansible control node
 **Inventory Groups**
 
 - automation
-
-**Services Provided**
-
-#### Automation
-
-- Rocky Ansible
 
 
 ---
@@ -142,20 +172,13 @@ Infrastructure and Docker services
 #### Monitoring
 
 - Uptime Kuma
+- Umami
 
 #### Development
 
 - GitHub
 - BradCooke.com
 - ChatGPT
-
-#### Planned Services
-
-- Grafana
-- Prometheus
-- Watchtower
-- Immich
-- n8n
 
 
 ---

@@ -10,7 +10,9 @@ Generated automatically by Ansible.
 | docker.yml | Installs and configures Docker on Docker-capable hosts. |
 | docs.yml | Generates Abbey Root project documentation. |
 | facts.yml | Gathers and displays Ansible facts from managed hosts. |
+| lab-check.yml | No documentation found |
 | site.yml | Runs the main Abbey Root configuration and deployment workflow. |
+| umami.yml | No documentation found |
 | update.yml | Applies package updates to managed hosts. |
 | validate.yml | No documentation found |
 
@@ -27,4 +29,5 @@ Generated automatically by Ansible.
 | labtest | Deploys an Ansible-managed nginx test container. |
 | motd | Manages the message of the day shown after login. |
 | time | Configures system timezone and time synchronization. |
+| umami | Deploys Umami and PostgreSQL as a private Docker Compose project on `ubuntu-dev01`. |
 | update | No README found |

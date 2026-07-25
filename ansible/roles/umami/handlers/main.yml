@@ -1,0 +1,7 @@
+---
+- name: Redeploy Umami
+  ansible.builtin.command:
+    cmd: docker compose up -d
+    chdir: "{{ umami_compose_dir }}"
+  when: not ansible_check_mode
+  changed_when: true

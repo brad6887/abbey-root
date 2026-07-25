@@ -12,3 +12,4 @@ Generated automatically by Ansible.
 | ubuntu-dev01 | nginx-proxy-manager | Nginx Proxy Manager | http://192.168.1.86:81 |
 | ubuntu-dev01 | nginx-labtest | Nginx Lab Test | http://192.168.1.86:8088 |
 | ubuntu-dev01 | uptime-kuma | Uptime Kuma | http://192.168.1.86:3001 |
+| ubuntu-dev01 | umami | Umami | http://192.168.1.86:3002 |

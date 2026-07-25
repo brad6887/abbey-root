@@ -35,6 +35,13 @@
   roles:
     - homepage
 
+- name: Manage Umami
+  hosts: ubuntu-dev01
+  become: true
+
+  roles:
+    - umami
+
 - name: Manage labtest container
   hosts: ubuntu-dev01
   become: true

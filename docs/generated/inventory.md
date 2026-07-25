@@ -12,6 +12,10 @@ Generated automatically by Ansible.
 
 - rocky-ansible01
 
+### edge_services
+
+- edge01
+
 ### infrastructure
 
 - ubuntu-dev01
@@ -20,5 +24,6 @@ Generated automatically by Ansible.
 ## All Hosts
 
 - ai-worker01
+- edge01
 - rocky-ansible01
 - ubuntu-dev01

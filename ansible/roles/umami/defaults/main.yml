@@ -1,0 +1,14 @@
+---
+umami_owner: bcooke
+umami_group: bcooke
+
+umami_compose_dir: /home/bcooke/docker/umami
+
+umami_image: ghcr.io/umami-software/umami:latest
+umami_database_image: postgres:15-alpine
+umami_restart_policy: unless-stopped
+
+umami_database_name: umami
+umami_database_user: umami
+umami_publish_address: 192.168.1.86
+umami_publish_port: 3002

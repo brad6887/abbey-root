@@ -1,0 +1,47 @@
+---
+# Managed by Ansible - Abbey Root
+
+services:
+  umami:
+    image: {{ umami_image }}
+    container_name: umami
+    init: true
+    restart: {{ umami_restart_policy }}
+    ports:
+      - "{{ umami_publish_address }}:{{ umami_publish_port }}:3000"
+    environment:
+      DATABASE_URL: {{ ("postgresql://" ~ umami_database_user ~ ":" ~ (umami_database_password | urlencode | replace("/", "%2F")) ~ "@db:5432/" ~ umami_database_name) | to_json }}
+      APP_SECRET: {{ umami_app_secret | replace("$", "$$") | to_json }}
+      DISABLE_TELEMETRY: "1"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl --fail http://localhost:3000/api/heartbeat || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  db:
+    image: {{ umami_database_image }}
+    restart: {{ umami_restart_policy }}
+    environment:
+      POSTGRES_DB: {{ umami_database_name | to_json }}
+      POSTGRES_USER: {{ umami_database_user | to_json }}
+      POSTGRES_PASSWORD: {{ umami_database_password | replace("$", "$$") | to_json }}
+      TZ: UTC
+      PGTZ: UTC
+    volumes:
+      - umami-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  umami-db-data:

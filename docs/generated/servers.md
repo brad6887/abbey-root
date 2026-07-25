@@ -17,8 +17,9 @@
 | Host | IP Address | Groups | Docker | Homepage | Services |
 |------|------------|--------|--------|----------|----------|
 | ai-worker01 | 192.168.1.87 | ai | Yes | Yes | 3 |
-| rocky-ansible01 | 192.168.1.88 | automation | No | Yes | 1 |
-| ubuntu-dev01 | 192.168.1.86 | infrastructure | Yes | Yes | 14 |
+| edge01 | 192.168.1.221 | edge_services | No | Yes | 1 |
+| rocky-ansible01 | 192.168.1.88 | automation | No | Yes | 0 |
+| ubuntu-dev01 | 192.168.1.86 | infrastructure | Yes | Yes | 10 |
 
 ---
 
@@ -68,6 +69,44 @@ AI experimentation and Docker services
 
 ---
 
+### edge01
+
+**Description**
+
+Internal DNS and edge services
+
+**IP Address**
+
+192.168.1.221
+
+**Inventory Groups**
+
+- edge_services
+
+**Purpose**
+
+- Internal DNS
+- Foundational network services
+- Edge infrastructure
+
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | No |
+| Homepage Server Entry | Yes |
+| Homepage Services | 1 |
+
+**Homepage Services**
+
+#### Infrastructure
+
+- **Technitium DNS**
+  - Description: Internal DNS server
+  - URL: http://192.168.1.221:5380
+
+---
+
 ### rocky-ansible01
 
 **Description**
@@ -94,15 +133,8 @@ Ansible control node
 |------------|-------|
 | Docker Host | No |
 | Homepage Server Entry | Yes |
-| Homepage Services | 1 |
+| Homepage Services | 0 |
 
-**Homepage Services**
-
-#### Automation
-
-- **Rocky Ansible**
-  - Description: Ansible Control Node
-  - URL: 
 
 ---
 
@@ -131,7 +163,7 @@ Infrastructure and Docker services
 |------------|-------|
 | Docker Host | Yes |
 | Homepage Server Entry | Yes |
-| Homepage Services | 14 |
+| Homepage Services | 10 |
 
 **Homepage Services**
 
@@ -159,6 +191,9 @@ Infrastructure and Docker services
 - **Uptime Kuma**
   - Description: Service Monitoring
   - URL: http://192.168.1.86:3001
+- **Umami**
+  - Description: Web Analytics
+  - URL: http://192.168.1.86:3002
 #### Development
 
 - **GitHub**
@@ -170,22 +205,5 @@ Infrastructure and Docker services
 - **ChatGPT**
   - Description: AI Assistant
   - URL: https://chatgpt.com
-#### Planned Services
-
-- **Grafana**
-  - Description: Metrics
-  - URL: 
-- **Prometheus**
-  - Description: Monitoring
-  - URL: 
-- **Watchtower**
-  - Description: Docker Updates
-  - URL: 
-- **Immich**
-  - Description: Photos
-  - URL: 
-- **n8n**
-  - Description: Automation
-  - URL: 
 
 ---
