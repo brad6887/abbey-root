@@ -107,6 +107,7 @@ Completed
 - Tailscale-based remote access through `ubuntu-dev01` is documented in the remote-access architecture, validated by Abbey Doctor, and supported by inventory-driven reachability checks for managed hosts.
 - Technitium DNS deployed on `edge01` as the authoritative `home.arpa` service, with forward resolution, reverse resolution, and upstream forwarding validated from `ubuntu-dev01`.
 - Homepage recovery is managed through the authoritative Ansible role, with `edge01` integrated into managed inventory and the operational dashboard.
+- Umami and PostgreSQL are deployed on `ubuntu-dev01` through a dedicated Ansible role with encrypted secrets, private database networking, health checks, check-mode safety, idempotency validation, and documented backup and recovery procedures.
 
 ## Current Work
 
@@ -197,6 +198,7 @@ Completed
 - Previous/next navigation.
 - Documentation publishing workflow.
 - Production Astro site published to GitHub Pages at bradcooke.com through `abbey site publish`.
+- BradCooke.com publishes production-domain-restricted analytics to the self-hosted Umami service, with the live tracker, public script, HTTPS path, and a real external pageview validated.
 - Museum of Dumb Ideas established with OmeletYouFinish.com as its first completed exhibit.
 - Museum of Dumb Ideas expanded with the Jeep Incident as its second completed
   exhibit and a reusable photographic artifact gallery.

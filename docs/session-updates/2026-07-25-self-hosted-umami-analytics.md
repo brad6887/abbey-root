@@ -1,9 +1,9 @@
 ---
 title: "Self-Hosted Umami Analytics"
-description: "Deployed an Ansible-managed Umami analytics service, established its public HTTPS boundary, and prepared BradCooke.com tracking for publication."
+description: "Deployed an Ansible-managed Umami analytics service and published validated BradCooke.com tracking through its public HTTPS boundary."
 date: 2026-07-25
 status: complete
-reviewed: false
+reviewed: true
 session: self-hosted-umami-analytics
 tags:
   - Abbey Root
@@ -38,8 +38,8 @@ unrelated-host traffic.
   production-domain-restricted tracker per generated page.
 - Operational deployment, backup, restore, update, and dependency guidance is
   captured without disclosing secrets.
-- Tracker publication and the first real production pageview remain explicit
-  follow-up work rather than being claimed as complete.
+- The tracker is published and a real production pageview is confirmed in
+  Umami.
 
 ## Summary
 
@@ -56,9 +56,10 @@ and management ports remain unforwarded.
 
 Registered BradCooke.com in Umami and added the supplied website tracker to the
 shared Astro layout with a domain restriction for `bradcooke.com` and
-`www.bradcooke.com`. The production build contains exactly one tracker on each
-of 106 generated pages. The site change has not been published, so no real
-production pageview is claimed.
+`www.bradcooke.com`. Abbey Root source commit `3bcd098` was published through
+production commit `2e0c7b3`. The live homepage contains the exact tracker, its
+script returns HTTP 200, and a real cellular visit was recorded in Umami as one
+visitor.
 
 ## Accomplishments
 
@@ -122,12 +123,21 @@ production pageview is claimed.
   reliable internal access to public proxy hostnames through Abbey DNS, and the
   reconciliation-only `abbey end` journal false positive.
 
+### Publication and Live Validation
+
+- Published BradCooke.com from Abbey Root source commit `3bcd098`.
+- Successfully pushed production site commit `2e0c7b3`.
+- Confirmed the live homepage contains the exact Umami tracker.
+- Confirmed `https://analytics.bradcooke.com/script.js` returns HTTP 200.
+- Reconfirmed the public HTTPS heartbeat and HTTP-to-HTTPS redirect.
+- Confirmed a real cellular visit appeared in Umami as one visitor.
+
 ## Impact
 
 Abbey Root now has a self-hosted, Ansible-managed analytics platform with a
 narrow public boundary and documented operational procedures. BradCooke.com is
-prepared to use that platform without tracking local development hosts, but the
-source-site publication boundary remains explicit and un-crossed.
+now publishing production-domain-restricted analytics to that platform, and
+the complete path has been validated with a real external visit.
 
 ## Security Boundary
 
@@ -175,6 +185,11 @@ address or secret value is recorded in the repository documentation.
 - Astro production build: 106 pages generated successfully.
 - Generated HTML tracker audit: exactly one expected tracker per page with the
   exact URL, website ID, and domain restriction.
+- Abbey Root source commit `3bcd098`: published successfully.
+- Production site commit `2e0c7b3`: pushed successfully.
+- Live BradCooke.com homepage: exact tracker confirmed.
+- Public tracker script: HTTP 200.
+- Real cellular visit: recorded in Umami as one visitor.
 - `git diff --check`: passed during implementation review.
 
 ## Lessons Learned
@@ -203,16 +218,21 @@ from an untested restore procedure and future automation. Backup scheduling
 should wait until restore is validated safely without risking the live
 database.
 
+The first production push exposed a dangerous publication-workflow defect. The
+local production checkout was behind `origin/main`, so `git push` failed, but
+`abbey site publish` continued, printed a false success message, and accepted
+an HTTP 200 response from the previously deployed site as verification. The
+failed local commit was preserved on `recovery/umami-publish-34351a5`,
+production `main` was safely reset to current `origin/main`, a fresh dry run
+passed, and the second publication successfully pushed `2e0c7b3`. Publication
+must fail immediately on push failure and verify the expected deployed
+revisions rather than general site availability.
+
 ## Next Steps
 
-- Complete final source review and commit the active session when explicitly
-  authorized.
-- Preview BradCooke.com publication with `abbey site publish --dry-run` from a
-  clean source repository.
-- Publish the tracker only after reviewing the dry-run and receiving explicit
-  authorization.
-- Confirm the live BradCooke.com page loads the tracker and produces the first
-  real Umami production pageview.
+- Commit and push this final reconciliation when explicitly authorized.
+- Fix `abbey site publish` push-failure handling and revision-aware deployment
+  verification in a separate focused session.
 - Establish reliable internal access to public proxied services through Abbey
   DNS without depending on AT&T NAT loopback.
 - Validate the documented Umami restore procedure in a safe non-production
@@ -224,7 +244,7 @@ database.
 
 ## Notes
 
-The BradCooke.com tracker source change is validated but not published. No real
-production pageview is claimed. No commit, push, site publication, container
-redeployment, or live external-system change occurred during Document and
-Capture.
+The BradCooke.com tracker is published and a real production pageview is
+confirmed. The recovery branch remains preserved. This final reconciliation
+does not modify production history, republish the site, redeploy containers, or
+change live external systems.

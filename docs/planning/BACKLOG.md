@@ -72,7 +72,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Manage infrastructure systemd units and automation scripts from the Abbey repository.
 - [ ] Deploy infrastructure services through Ansible.
 - [ ] Automate restore validation for backups.
-- [ ] Formalize Umami database backup automation after validating the documented manual `pg_dump` procedure.
+- [ ] Validate the documented Umami restore procedure in a safe non-production recovery test before formalizing database backup automation.
 - [ ] Implement infrastructure patch management workflow.
 - [ ] Define recurring infrastructure maintenance windows.
 - [ ] Expand infrastructure monitoring dashboards.
@@ -150,6 +150,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Reduce noise in `abbey site publish` previews.
 - [ ] Display the Abbey Root commit hash in `abbey site publish`.
 - [x] Add live-site verification to `abbey site publish`.
+- [ ] Make `abbey site publish` fail immediately when `git push` fails and verify the expected deployed source and production revisions instead of accepting any HTTP 2xx response.
 - [ ] Add project metrics to `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Add network health checks to `abbey-doctor`.
