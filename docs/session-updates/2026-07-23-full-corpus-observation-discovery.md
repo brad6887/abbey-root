@@ -3,7 +3,7 @@ title: Full-Corpus Observation Discovery
 date: 2026-07-23
 session: full-corpus-observation-discovery
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root
@@ -103,4 +103,3 @@ Batch manifests failed: 0
 Start with the highest-priority new cluster, quoted language as a comic
 framing device. Build a complete corpus candidate set and decide whether it
 warrants OBS-004.
-

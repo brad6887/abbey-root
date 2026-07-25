@@ -4,7 +4,7 @@ artifact_type: session-update
 title: Recurring Narrative Evidence Expansion
 version: 1
 status: completed
-reviewed: false
+reviewed: true
 
 created:
   date: 2026-07-23

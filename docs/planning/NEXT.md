@@ -1,6 +1,6 @@
 # Abbey Root Next
 
-Last Reviewed: 2026-07-23
+Last Reviewed: 2026-07-25
 
 # Current Theme
 
@@ -56,7 +56,7 @@ Completed:
 
 ## Artifact Workflow Validation
 
-Three complete formal artifact chains now exist:
+Four complete formal artifact chains now exist:
 
 ### Deadpan Delivery
 
@@ -78,6 +78,13 @@ Three complete formal artifact chains now exist:
 - EVID-003
 - HYP-003
 - VAL-003
+
+### Quoted Language
+
+- OBS-004
+- EVID-004
+- HYP-004
+- VAL-004
 
 These reference fixtures demonstrate the expected artifact lifecycle:
 
@@ -177,9 +184,9 @@ After evidence creation is validated:
 
 ## Research Status
 
-The deterministic `abbey research status` architecture is complete.
+The initial deterministic, read-only `abbey research status` implementation is complete for the current repository happy path.
 
-Implementation remains useful, but artifact creation is the current human-directed priority.
+Refinement for invalid, incomplete, duplicate, and broken artifact states remains deferred. Artifact creation is the current human-directed priority.
 
 ## Voice Analysis Expansion
 

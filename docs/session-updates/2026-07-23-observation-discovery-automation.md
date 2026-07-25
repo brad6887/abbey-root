@@ -3,7 +3,7 @@ title: Observation Discovery Automation
 date: 2026-07-23
 session: observation-discovery-automation
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root
@@ -104,4 +104,3 @@ Failed: 0
 Use the generated review scaffold as the input to a separate interactive
 review command. That command should enforce complete decisions while leaving
 the decisions themselves to the reviewer.
-

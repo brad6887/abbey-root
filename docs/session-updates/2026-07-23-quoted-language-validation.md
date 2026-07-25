@@ -3,7 +3,7 @@ title: Quoted Language Validation
 date: 2026-07-23
 session: quoted-language-validation
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root

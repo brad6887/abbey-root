@@ -4,7 +4,7 @@ artifact_type: session-update
 title: Mobile Upload Location Metadata Filter
 version: 1
 status: completed
-reviewed: false
+reviewed: true
 
 created:
   date: 2026-07-23

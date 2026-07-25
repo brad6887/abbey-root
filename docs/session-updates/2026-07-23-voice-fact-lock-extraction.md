@@ -3,7 +3,7 @@ title: Voice Fact-Lock Extraction
 date: 2026-07-23
 session: voice-fact-lock-extraction
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root

@@ -3,7 +3,7 @@ title: Fact-Lock Review Init CLI
 date: 2026-07-24
 session: fact-lock-review-init-cli
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root

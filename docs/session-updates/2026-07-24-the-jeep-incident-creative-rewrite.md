@@ -3,7 +3,7 @@ title: "The Jeep Incident Creative Rewrite"
 description: "Rewrote the Jeep Incident exhibit around Brad's specific story while preserving the established museum presentation."
 date: 2026-07-24
 status: completed
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

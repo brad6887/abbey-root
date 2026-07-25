@@ -3,7 +3,7 @@ title: Quoted Language Evidence
 date: 2026-07-23
 session: quoted-language-evidence
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root
@@ -107,4 +107,3 @@ No hypothesis or validation was created.
 Define HYP-004 around the narrowest supported claim: quotation marks function
 as a stance marker that signals nonliteral, disputed, or deliberately renamed
 wording. Keep direct quotation and reported speech outside the core claim.
-

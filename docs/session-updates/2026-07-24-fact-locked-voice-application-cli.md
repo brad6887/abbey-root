@@ -3,7 +3,7 @@ title: Fact-Locked Voice Application CLI
 date: 2026-07-24
 session: fact-locked-voice-application-cli
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root

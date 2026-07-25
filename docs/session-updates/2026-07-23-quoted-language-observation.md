@@ -3,7 +3,7 @@ title: Quoted Language Observation
 date: 2026-07-23
 session: quoted-language-observation
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root

@@ -3,7 +3,7 @@ title: "Platform-Aware Abbey Doctor"
 description: "Made Abbey Doctor system and reachability checks portable across macOS and Linux."
 date: 2026-07-23
 status: completed
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

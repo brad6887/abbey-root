@@ -3,7 +3,7 @@ title: "Abbey Easy Wins"
 description: "Completed live-site publish verification and corrected Abbey Journal argument handling."
 date: 2026-07-24
 status: complete
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

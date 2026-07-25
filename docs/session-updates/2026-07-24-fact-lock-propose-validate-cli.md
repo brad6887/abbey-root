@@ -3,7 +3,7 @@ title: Fact-Lock Propose and Validate CLI
 date: 2026-07-24
 session: fact-lock-propose-validate-cli
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root

@@ -3,7 +3,7 @@ title: Fact-Locked Voice Application
 date: 2026-07-23
 session: fact-locked-voice-application
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root

@@ -3,7 +3,7 @@ title: "Abbey AI Risk-Reducer Decision"
 description: "Added a structured decision strategy for selecting bounded work that materially reduces operational or workflow risk."
 date: 2026-07-25
 status: complete
-reviewed: false
+reviewed: true
 session: abbey-ai-risk-reducer-decision
 tags:
   - Abbey Root

@@ -205,6 +205,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add inventory summarization assistance.
 - [ ] Add draft publishing assembly from canonical source material.
 - [ ] Audit Experiment 001 evidence documents for mismatched source identifiers, dates, and quoted posts before using them in hypotheses or the Voice Model.
+- [x] Implement a fact-locked Voice Model application workflow that locks immutable propositions, rejects unsupported factual changes, and reruns the eight evaluation scenarios.
+- [x] Design and evaluate an upstream fact-extraction step that converts new writing requests into reviewable fact-lock manifests.
 
 ### Abbey AI
 
@@ -215,6 +217,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add decision and engine versioning to decision-history artifacts.
 - [ ] Add consensus reporting across multiple models.
 - [x] Add `abbey ai decide risk-reducer` to identify bounded work that materially reduces operational or workflow risk.
+- [ ] Evaluate `abbey ai decide risk-reducer` through normal use before expanding its rubric.
+- [ ] Fix the documented macOS portability failures in the Abbey AI test suite.
 - [ ] Expand the AI decision library with additional engineering workflows.
 
 ### Abbey Research
@@ -227,14 +231,19 @@ The backlog is intentionally broad and serves as the project's working inventory
   - Define complete, incomplete, broken, and orphaned chain states.
   - Document expected read-only command output.
   - Review the design before implementation.
+- [ ] Refine `abbey research status` for invalid, incomplete, duplicate, and broken-relationship states, with synthetic fixtures and architecture-defined severity and exit-code behavior.
 
 #### Validation and Workflow
 
 - [x] Design a staged canonical research artifact-creation workflow with explicit human review and promotion boundaries.
 - [ ] Implement `abbey research create --type observation` with run manifests, immutable raw output, and review-ready candidates.
 - [ ] Implement explicit review records and canonical artifact promotion.
+- [ ] Add a separate interactive discovery-review command that consumes the generated scaffold and requires complete human decisions.
+- [x] Design and evaluate a read-only `abbey research fact-lock review` experience before exposing approval.
+- [x] Implement `abbey research fact-lock review-init` to create an empty, hash-bound review-manifest scaffold without pre-approval.
 - [ ] Add evidence candidate generation with deterministic source identifier, date, quotation, score, and summary verification.
 - [ ] Add hypothesis and validation candidate workflows that require promoted parent artifacts.
+- [x] Build VAL-004 by deriving the exact holdout from REVIEW-004 and EVID-004 and evaluating the thresholds defined by HYP-004.
 - [ ] Complete deterministic research Markdown normalization using universally safe operations.
 - [ ] Add normalization safety tests proving semantic content is preserved.
 - [ ] Orchestrate research generation, normalization, sanitization, and validation without coupling the workflow to Voice Analysis.
@@ -243,6 +252,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 #### Provenance and Methodology
 
 - [ ] Add research artifact provenance metadata for the model, prompt version, and corpus fingerprint.
+- [x] Build and review the complete corpus candidate set for quoted language as a comic framing device and decide whether it warrants OBS-004.
 - [ ] Test AI-generated observations against additional Voice Analysis research patterns.
 - [ ] Refine the Voice Analysis methodology based on artifact validation results.
 
@@ -443,6 +453,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## Abbey Doctor
 
+- [ ] Validate the unchanged Abbey Doctor path on a managed Linux host.
 - [ ] Add verbose mode.
 - [ ] Add quiet mode.
 - [ ] Add metadata-driven required document list.

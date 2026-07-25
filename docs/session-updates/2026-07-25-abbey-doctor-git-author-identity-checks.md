@@ -3,7 +3,7 @@ title: "Abbey Doctor Git Author Identity Checks"
 description: "Added Git author identity and effective configuration source checks to Abbey Doctor."
 date: 2026-07-25
 status: pending
-reviewed: false
+reviewed: true
 session: primary
 tags:
   - Abbey Root

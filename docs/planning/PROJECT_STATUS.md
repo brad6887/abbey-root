@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-07-24
+Last Updated: 2026-07-25
 
 ---
 
@@ -149,19 +149,20 @@ Completed
 
 ## Current Capabilities
 
-- `abbey doctor`
+- `abbey doctor` uses centralized, platform-aware checks supporting macOS and Linux, validates effective Git author name and email, and reports their configuration sources
 - `abbey status`
 - `abbey session`
 - `abbey end`
 - `abbey review` as a deterministic, read-only pre-commit reviewer that summarizes current-session work and recommends the next workflow step
 - `abbey version`
-- `abbey journal`
+- `abbey journal` handles help and invalid options safely and supports explicit `--title` input
 - `abbey ai`
 - Metadata-driven `abbey ai decide` discovery and help
 - `abbey session update` generation from the standard repository template
 - `abbey lab`
+- `abbey research status` deterministically discovers formal research artifacts, resolves their relationships, and reports complete chains and legacy provenance without modifying repository state
 - `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, reports conflicts between recent session evidence and planning documents, and generates Definitions of Done from the selected recommendation using tailored criteria where available and a deterministic fallback otherwise
-- `abbey site publish [--dry-run]`
+- `abbey site publish [--dry-run]` performs bounded post-push live-site verification that follows redirects and requires a final HTTP 2xx response
 - Metadata-driven CLI help
 - Generated CLI reference
 - `abbey plant validate <slug>`
@@ -175,7 +176,6 @@ Completed
 
 ## Current Focus
 
-- Design deterministic research status reporting.
 - Project-aware workflows.
 - Documentation automation.
 - Self-documenting development.
@@ -234,7 +234,25 @@ Completed
 - Local model experimentation.
 - `abbey ai`.
 - Metadata-driven AI decision framework with reusable decision definitions, structured history, and cross-model comparison validated through practical use.
+- `abbey ai decide easy-win` identifies low-risk, one-session work with durable value and meaningful backlog reduction.
+- `abbey ai decide risk-reducer` identifies bounded, one-session work that materially reduces a concrete operational or workflow risk while requiring repository review.
 - `abbey research run` provides a reusable Ollama research runner with preserved raw output; AI-assisted normalization, `abbey research sanitize`, and deterministic artifact validation support canonical artifacts before human review; `abbey research validate-review` verifies machine-readable human-review decisions, corpus fingerprints, source identifiers, and complete exact citation text; deterministic stratified sampling, human-reviewed annotation, and Wilson intervals now support measured prevalence claims; the reusable Voice Analysis research artifact framework defines artifact types, metadata, lifecycle, provenance, evidence-chain traceability, and review-manifest scope; broader deterministic Markdown normalization and end-to-end orchestration remain in development.
+- Deterministic corpus filtering excludes anchored `Mobile uploads Place:` location metadata while preserving authored content and the existing Voice Analysis evidence conclusions.
+- The full-corpus observation-discovery workflow reviews deterministic corpus batches without automatic promotion and validates each machine-readable manifest’s corpus identity, batch membership, source identifiers, and exact citation text.
+- `abbey research discover` provides repository-owned, resumable batch discovery with raw-output preservation, deterministic validation, validated-result reuse, candidate aggregation, and a pending human-review scaffold.
+- The complete 165-candidate quoted-language review passed exact-citation validation and produced draft EVID-004.
+- The fourth formal research chain reached VAL-004 and was provisionally supported within the tested 2009–2021 Facebook population.
+- The first bounded Facebook Voice Model was created and evaluated as a research draft; both free-generation runs altered supplied facts, so it is not approved for free generation.
+- VOICE-MODEL-001 version 3 is approved for fact-locked application within the tested Facebook scope, with deterministic validation, semantic verification, and human proposition review required.
+- The review-gated upstream fact-lock extraction workflow is operational; fully automatic extraction remains unapproved, and semantic verification remains advisory.
+- `abbey research fact-lock propose` and `validate` are operational, review-gated capabilities that neither approve nor apply fact locks.
+- `abbey research fact-lock review` provides validated, read-only human-review summaries without approving or modifying artifacts.
+- `abbey research fact-lock review-init` creates validated, hash-bound, all-undecided review scaffolds without approval or promotion.
+- Public `abbey research fact-lock` commands validate completed reviews, route rejected proposals through revision, and promote only exact hash-bound, human-approved proposals.
+- `abbey research voice apply` operationalizes approved Facebook-scoped fact locks with deterministic output validation.
+- The deterministic voice-eligible Facebook corpus workflow, chronological batching, and human-reviewed cross-period deadpan analysis expanded EVID-001 and VAL-001 to Version 2 with Medium confidence within Facebook; frequency, post-2021 continuity, and writing-format diversity remain limited.
+- EVID-002 and VAL-002 were expanded across the full voice-eligible Facebook corpus; the result remains `Provisionally Supported`, with confidence increased from Low to Medium within Facebook writing.
+- EVID-003 and VAL-003 were expanded to Version 2 across recurring Facebook narrative clusters, remaining `Provisionally Supported` with Medium confidence.
 - AI benchmark planning.
 - AI technology review process.
 
@@ -296,7 +314,7 @@ Completed
 - Designing `abbey init`.
 - Reducing manually maintained documentation.
 - AI project awareness.
-- Reducing publish-preview noise and adding automatic live-site verification.
+- Reducing publish-preview noise.
 
 ---
 
@@ -304,7 +322,7 @@ Completed
 
 ## Near Term
 
-- Design deterministic `abbey research status` reporting.
+- Implement the controlled Abbey Research observation-candidate workflow defined in `ABBEY_RESEARCH_ARTIFACT_CREATION.md`.
 - Expand onboarding documentation.
 - Improve `abbey-doctor`.
 - Continue metadata-driven documentation.

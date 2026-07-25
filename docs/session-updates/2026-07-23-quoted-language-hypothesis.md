@@ -3,7 +3,7 @@ title: Quoted Language Hypothesis
 date: 2026-07-23
 session: quoted-language-hypothesis
 status: complete
-reviewed: false
+reviewed: true
 type: session-update
 tags:
   - abbey-root
@@ -72,4 +72,3 @@ VAL-004 remains intentionally absent.
 
 Build VAL-004 by deriving the exact holdout set from REVIEW-004 and EVID-004,
 then calculate every threshold deterministically.
-
