@@ -150,7 +150,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add project metrics to `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Add network health checks to `abbey-doctor`.
-- [ ] Add Git author identity checks to `abbey-doctor`.
+- [x] Add Git author identity checks to `abbey-doctor`.
 - [ ] Verify bridge-ports references an existing interface.
 - [ ] Report negotiated Ethernet link speed.
 - [ ] Verify gateway connectivity.
@@ -456,9 +456,9 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add role-aware checks.
 - [ ] Add JSON output.
 - [ ] Add restore-test tracking.
-- [ ] Check whether Git `user.name` is configured.
-- [ ] Check whether Git `user.email` is configured.
-- [ ] Report the effective Git configuration source.
+- [x] Check whether Git `user.name` is configured.
+- [x] Check whether Git `user.email` is configured.
+- [x] Report the effective Git configuration source.
 
 ---
 
