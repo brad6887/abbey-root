@@ -214,6 +214,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Validate decision metadata before execution.
 - [ ] Add decision and engine versioning to decision-history artifacts.
 - [ ] Add consensus reporting across multiple models.
+- [x] Add `abbey ai decide risk-reducer` to identify bounded work that materially reduces operational or workflow risk.
 - [ ] Expand the AI decision library with additional engineering workflows.
 
 ### Abbey Research

@@ -1,0 +1,141 @@
+{
+  "type": "object",
+  "required": [
+    "recommendation",
+    "summary",
+    "priority_reason",
+    "failure_mode",
+    "estimated_effort",
+    "risk_level",
+    "session_fit",
+    "risk_reduction",
+    "residual_risk",
+    "backlog_reduction",
+    "blocking_items",
+    "evidence",
+    "recommendation_confidence",
+    "implementation_confidence",
+    "repository_review_required",
+    "alternatives",
+    "assumptions"
+  ],
+  "properties": {
+    "recommendation": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "priority_reason": {
+      "type": "string"
+    },
+    "failure_mode": {
+      "type": "string"
+    },
+    "estimated_effort": {
+      "type": "string",
+      "enum": [
+        "small",
+        "medium"
+      ]
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium"
+      ]
+    },
+    "session_fit": {
+      "type": "string"
+    },
+    "risk_reduction": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "residual_risk": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "backlog_reduction": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "blocking_items": {
+      "type": "array",
+      "maxItems": 0,
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "document",
+          "item"
+        ],
+        "properties": {
+          "document": {
+            "type": "string"
+          },
+          "item": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "recommendation_confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "implementation_confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 0.5
+    },
+    "repository_review_required": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "item",
+          "reason_not_selected"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "reason_not_selected": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

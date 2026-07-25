@@ -137,6 +137,10 @@ JSON
     "$ABBEY_ROOT/config/ai/decisions/easy-win" \
     "$fixture_root/config/ai/decisions/easy-win"
 
+  cp -R \
+    "$ABBEY_ROOT/config/ai/decisions/risk-reducer" \
+    "$fixture_root/config/ai/decisions/risk-reducer"
+
   printf '%s\n' "$fixture_root"
 }
 
@@ -191,6 +195,55 @@ assert_contains \
   "--help describes easy-win selection boundary" \
   "$output" \
   "low-risk, one-session work"
+
+assert_contains \
+  "--help discovers risk-reducer decision metadata" \
+  "$output" \
+  "risk-reducer"
+
+assert_contains \
+  "--help describes risk-reducer selection boundary" \
+  "$output" \
+  "smallest practical, one-session change"
+
+assert_contains \
+  "risk-reducer prompt prohibits invented implementation details" \
+  "$(cat "$ABBEY_ROOT/config/ai/decisions/risk-reducer/prompt.md")" \
+  "Do not name implementation"
+
+assert_contains \
+  "risk-reducer prompt requires repository review" \
+  "$(cat "$ABBEY_ROOT/config/ai/decisions/risk-reducer/prompt.md")" \
+  "List the repository review required before implementation."
+
+assert_contains \
+  "risk-reducer prompt caps implementation confidence" \
+  "$(cat "$ABBEY_ROOT/config/ai/decisions/risk-reducer/prompt.md")" \
+  "implementation confidence must not exceed 0.5"
+
+risk_reducer_schema="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/risk-reducer/schema.json"
+)"
+
+assert_contains \
+  "risk-reducer schema separates recommendation confidence" \
+  "$risk_reducer_schema" \
+  '"recommendation_confidence"'
+
+assert_contains \
+  "risk-reducer schema separates implementation confidence" \
+  "$risk_reducer_schema" \
+  '"implementation_confidence"'
+
+assert_contains \
+  "risk-reducer schema caps implementation confidence" \
+  "$risk_reducer_schema" \
+  '"maximum": 0.5'
+
+assert_contains \
+  "risk-reducer schema requires repository review" \
+  "$risk_reducer_schema" \
+  '"repository_review_required"'
 
 assert_not_contains \
   "--help ignores invalid JSON" \

@@ -684,6 +684,12 @@ if "priority_reason" in result:
     print("---------------")
     print(result["priority_reason"])
 
+if "failure_mode" in result:
+    print()
+    print("Failure Mode")
+    print("------------")
+    print(result["failure_mode"])
+
 benefit_fields = [
     ("Frequency", "estimated_frequency"),
     ("Effort", "estimated_effort"),
@@ -691,6 +697,8 @@ benefit_fields = [
     ("Session Fit", "session_fit"),
     ("Score", "time_saving_score"),
     ("Confidence", "confidence"),
+    ("Recommendation Confidence", "recommendation_confidence"),
+    ("Implementation Confidence", "implementation_confidence"),
 ]
 
 available_benefit_fields = [
@@ -709,16 +717,23 @@ if available_benefit_fields:
 
         if field == "time_saving_score":
             value = f"{value}/10"
-        elif field == "confidence" and isinstance(value, (int, float)):
+        elif field in {
+            "confidence",
+            "recommendation_confidence",
+            "implementation_confidence",
+        } and isinstance(value, (int, float)):
             value = f"{value:.0%}"
 
-        print(f"{label + ':':<12} {value}")
+        print(f"{label + ':':<28} {value}")
 
 list_sections = [
     ("Recurring Work Eliminated", "recurring_work_eliminated"),
     ("Durable Value", "durable_value"),
+    ("Risk Reduction", "risk_reduction"),
+    ("Residual Risk", "residual_risk"),
     ("Backlog Reduction", "backlog_reduction"),
     ("Blocking Items", "blocking_items"),
+    ("Repository Review Required", "repository_review_required"),
 ]
 
 for heading, field in list_sections:
