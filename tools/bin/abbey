@@ -74,6 +74,11 @@ case "$command" in
     "$ABBEY_ROOT/tools/bin/abbey-lab" "$@"
     ;;
 
+  ssh)
+    shift
+    "$ABBEY_ROOT/tools/bin/abbey-ssh" "$@"
+    ;;
+
   version)
     shift
     "$ABBEY_ROOT/tools/bin/abbey-version" "$@"

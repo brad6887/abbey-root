@@ -238,6 +238,24 @@ commands:
     examples:
       - abbey lab check
 
+  ssh:
+    category: lab
+    description: Audit and synchronize SSH public keys across managed Abbey nodes.
+    usage: abbey ssh <command>
+    hidden: false
+    subcommands:
+      audit:
+        description: Report node public-key authorization across managed hosts.
+        usage: abbey ssh audit [--limit HOST_OR_GROUP]
+      sync:
+        description: Synchronize Abbey node public keys through a managed authorized_keys block.
+        usage: abbey ssh sync [--check] [--limit HOST_OR_GROUP]
+    examples:
+      - abbey ssh audit
+      - abbey ssh sync --check
+      - abbey ssh sync
+      - abbey ssh sync --limit edge01
+
   version:
     category: core
     description: Show project version and framework information.

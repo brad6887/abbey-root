@@ -1,0 +1,200 @@
+#!/usr/bin/env bash
+#
+# Abbey Root Tool: abbey-ssh
+#
+# Purpose:
+#   Audit and synchronize SSH public keys across managed Abbey nodes.
+#
+
+set -u
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
+ANSIBLE_DIR="$ABBEY_ROOT/ansible"
+INVENTORY_FILE="$ANSIBLE_DIR/inventory/hosts.yml"
+AUDIT_PLAYBOOK="$ANSIBLE_DIR/playbooks/ssh-audit.yml"
+SYNC_PLAYBOOK="$ANSIBLE_DIR/playbooks/ssh-sync.yml"
+CONTROL_HOST="rocky-ansible01"
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  abbey ssh audit [--limit HOST_OR_GROUP]
+  abbey ssh sync [--check] [--limit HOST_OR_GROUP]
+  abbey ssh help
+
+Commands:
+  audit    Report which Abbey node keys are authorized on each node
+  sync     Synchronize all Abbey node public keys to managed nodes
+  help     Show this help
+
+Options:
+  --check              Preview synchronization changes
+  --limit TARGET       Restrict destination nodes to a host or inventory group
+
+Security:
+  Only public keys are collected and synchronized.
+  Private keys remain on their originating nodes.
+  Existing authorized_keys entries outside the Abbey-managed block are kept.
+USAGE
+}
+
+fail() {
+  printf 'FAIL %s\n' "$*" >&2
+  exit 1
+}
+
+require_control_host() {
+  local current_host
+
+  current_host="$(hostname -s)"
+
+  if [[ "$current_host" != "$CONTROL_HOST" ]]; then
+    echo "FAIL Abbey SSH synchronization must run on $CONTROL_HOST."
+    echo
+    echo "Current host: $current_host"
+    echo "Connect to the Ansible control node and run the command again."
+    exit 1
+  fi
+}
+
+require_environment() {
+  command -v ansible-playbook >/dev/null 2>&1 ||
+    fail "Required command not found: ansible-playbook"
+
+  [[ -f "$INVENTORY_FILE" ]] ||
+    fail "Inventory file not found: $INVENTORY_FILE"
+}
+
+print_header() {
+  echo "========================================"
+  echo " Abbey Root SSH"
+  echo "========================================"
+  echo
+  echo "Date: $(date)"
+  echo "Control host: $(hostname -s)"
+  echo "Inventory: $INVENTORY_FILE"
+  echo
+}
+
+run_playbook() {
+  local playbook="$1"
+  shift
+
+  (
+    cd "$ANSIBLE_DIR" || exit 1
+    ANSIBLE_CONFIG="$ANSIBLE_DIR/ansible.cfg" \
+      ansible-playbook \
+        -i "$INVENTORY_FILE" \
+        "$playbook" \
+        "$@"
+  )
+}
+
+ssh_audit() {
+  local target="all"
+
+  while (($#)); do
+    case "$1" in
+      --limit)
+        (($# >= 2)) || fail "--limit requires a value"
+        target="$2"
+        shift 2
+        ;;
+      -h|--help)
+        usage
+        return 0
+        ;;
+      *)
+        fail "Unknown audit option: $1"
+        ;;
+    esac
+  done
+
+  require_control_host
+  require_environment
+  [[ -f "$AUDIT_PLAYBOOK" ]] ||
+    fail "Audit playbook not found: $AUDIT_PLAYBOOK"
+
+  print_header
+  echo "Mode: audit"
+  echo "Targets: $target"
+  echo
+
+  run_playbook \
+    "$AUDIT_PLAYBOOK" \
+    -e "abbey_ssh_targets=$target"
+}
+
+ssh_sync() {
+  local target="all"
+  local check_mode=false
+  local -a playbook_args=()
+
+  while (($#)); do
+    case "$1" in
+      --check)
+        check_mode=true
+        shift
+        ;;
+      --limit)
+        (($# >= 2)) || fail "--limit requires a value"
+        target="$2"
+        shift 2
+        ;;
+      -h|--help)
+        usage
+        return 0
+        ;;
+      *)
+        fail "Unknown sync option: $1"
+        ;;
+    esac
+  done
+
+  require_control_host
+  require_environment
+  [[ -f "$SYNC_PLAYBOOK" ]] ||
+    fail "Synchronization playbook not found: $SYNC_PLAYBOOK"
+
+  if [[ "$check_mode" == "true" ]]; then
+    playbook_args+=(--check --diff)
+  fi
+
+  print_header
+  echo "Mode: sync"
+  echo "Targets: $target"
+  echo "Check mode: $check_mode"
+  echo
+
+  run_playbook \
+    "$SYNC_PLAYBOOK" \
+    -e "abbey_ssh_targets=$target" \
+    "${playbook_args[@]}"
+}
+
+command="${1:-help}"
+shift || true
+
+case "$command" in
+  audit)
+    ssh_audit "$@"
+    ;;
+
+  sync)
+    ssh_sync "$@"
+    ;;
+
+  help|-h|--help)
+    usage
+    ;;
+
+  *)
+    echo "Unknown SSH command: $command"
+    echo
+    usage
+    exit 2
+    ;;
+esac

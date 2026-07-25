@@ -1,0 +1,55 @@
+---
+- name: Collect Abbey node SSH public keys
+  hosts: all
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Read node ED25519 public key
+      ansible.builtin.slurp:
+        src: "/home/{{ admin_user }}/.ssh/id_ed25519.pub"
+      register: abbey_ssh_public_key_file
+
+    - name: Record node public key
+      ansible.builtin.set_fact:
+        abbey_ssh_public_key: >-
+          {{ abbey_ssh_public_key_file.content | b64decode | trim }}
+
+- name: Audit Abbey-managed SSH trust
+  hosts: "{{ abbey_ssh_targets | default('all') }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Read authorized keys
+      ansible.builtin.slurp:
+        src: "/home/{{ admin_user }}/.ssh/authorized_keys"
+      register: abbey_authorized_keys_file
+      failed_when: false
+
+    - name: Record authorized keys
+      ansible.builtin.set_fact:
+        abbey_authorized_keys_content: >-
+          {{
+            (
+              abbey_authorized_keys_file.content
+              | default('')
+              | b64decode
+            )
+            if not (abbey_authorized_keys_file.failed | default(false))
+            else ''
+          }}
+
+    - name: Report node key authorization
+      ansible.builtin.debug:
+        msg: >-
+          {{ item }}:
+          {{
+            'present'
+            if hostvars[item].abbey_ssh_public_key
+               in abbey_authorized_keys_content
+            else 'missing'
+          }}
+      loop: "{{ groups['all'] | sort }}"
+      loop_control:
+        label: "{{ item }}"

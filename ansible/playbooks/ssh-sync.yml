@@ -1,0 +1,39 @@
+---
+- name: Collect Abbey node SSH public keys
+  hosts: all
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Read node ED25519 public key
+      ansible.builtin.slurp:
+        src: "/home/{{ admin_user }}/.ssh/id_ed25519.pub"
+      register: abbey_ssh_public_key_file
+
+    - name: Record node public key
+      ansible.builtin.set_fact:
+        abbey_ssh_public_key: >-
+          {{ abbey_ssh_public_key_file.content | b64decode | trim }}
+
+- name: Synchronize Abbey node SSH public keys
+  hosts: "{{ abbey_ssh_targets | default('all') }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Ensure SSH directory exists
+      ansible.builtin.file:
+        path: "/home/{{ admin_user }}/.ssh"
+        state: directory
+        mode: "0700"
+
+    - name: Install Abbey-managed node keys
+      ansible.builtin.blockinfile:
+        path: "/home/{{ admin_user }}/.ssh/authorized_keys"
+        create: true
+        mode: "0600"
+        marker: "# {mark} ABBEY MANAGED NODE KEYS"
+        block: |
+          {% for abbey_host in groups['all'] | sort %}
+          {{ hostvars[abbey_host].abbey_ssh_public_key }}
+          {% endfor %}
