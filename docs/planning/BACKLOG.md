@@ -217,6 +217,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add decision and engine versioning to decision-history artifacts.
 - [ ] Add consensus reporting across multiple models.
 - [x] Add `abbey ai decide risk-reducer` to identify bounded work that materially reduces operational or workflow risk.
+- [x] Add `abbey ai decide workflow-friction` to identify costly recurring manual work and classify the bounded Abbey improvement it warrants.
 - [ ] Evaluate `abbey ai decide risk-reducer` through normal use before expanding its rubric.
 - [ ] Fix the documented macOS portability failures in the Abbey AI test suite.
 - [ ] Expand the AI decision library with additional engineering workflows.

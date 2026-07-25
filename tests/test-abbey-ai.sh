@@ -141,6 +141,10 @@ JSON
     "$ABBEY_ROOT/config/ai/decisions/risk-reducer" \
     "$fixture_root/config/ai/decisions/risk-reducer"
 
+  cp -R \
+    "$ABBEY_ROOT/config/ai/decisions/workflow-friction" \
+    "$fixture_root/config/ai/decisions/workflow-friction"
+
   printf '%s\n' "$fixture_root"
 }
 
@@ -244,6 +248,109 @@ assert_contains \
   "risk-reducer schema requires repository review" \
   "$risk_reducer_schema" \
   '"repository_review_required"'
+
+assert_contains \
+  "--help discovers workflow-friction decision metadata" \
+  "$output" \
+  "workflow-friction"
+
+assert_contains \
+  "--help describes workflow-friction selection boundary" \
+  "$output" \
+  "most costly recurring manual step"
+
+workflow_friction_prompt="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/workflow-friction/prompt.md"
+)"
+
+assert_contains \
+  "workflow-friction prompt prioritizes recurring friction" \
+  "$workflow_friction_prompt" \
+  "not a one-off annoyance"
+
+assert_contains \
+  "workflow-friction prompt distinguishes evidence from assumptions" \
+  "$workflow_friction_prompt" \
+  "Distinguish evidence from assumptions explicitly."
+
+assert_contains \
+  "workflow-friction prompt prohibits invented implementation details" \
+  "$workflow_friction_prompt" \
+  "Do not name implementation"
+
+assert_contains \
+  "workflow-friction prompt separates confidence values" \
+  "$workflow_friction_prompt" \
+  "implementation confidence must not exceed 0.5"
+
+assert_contains \
+  "workflow-friction prompt requires repository review" \
+  "$workflow_friction_prompt" \
+  "List the repository review required before implementation."
+
+assert_contains \
+  "workflow-friction prompt requires improvement classification" \
+  "$workflow_friction_prompt" \
+  "Classify the bounded improvement as exactly one of:"
+
+workflow_friction_schema="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/workflow-friction/schema.json"
+)"
+
+assert_contains \
+  "workflow-friction schema requires recurrence evidence" \
+  "$workflow_friction_schema" \
+  '"recurrence_evidence"'
+
+assert_contains \
+  "workflow-friction schema requires bounded improvement" \
+  "$workflow_friction_schema" \
+  '"bounded_improvement"'
+
+assert_contains \
+  "workflow-friction schema separates recommendation confidence" \
+  "$workflow_friction_schema" \
+  '"recommendation_confidence"'
+
+assert_contains \
+  "workflow-friction schema caps implementation confidence" \
+  "$workflow_friction_schema" \
+  '"maximum": 0.5'
+
+assert_contains \
+  "workflow-friction schema requires repository review" \
+  "$workflow_friction_schema" \
+  '"repository_review_required"'
+
+assert_contains \
+  "workflow-friction schema classifies an Abbey command" \
+  "$workflow_friction_schema" \
+  '"abbey-command"'
+
+assert_contains \
+  "workflow-friction schema classifies a standardized workflow" \
+  "$workflow_friction_schema" \
+  '"standardized-workflow"'
+
+assert_contains \
+  "workflow-friction schema classifies a local fix" \
+  "$workflow_friction_schema" \
+  '"local-fix"'
+
+assert_contains \
+  "shared report presents recurring workflow" \
+  "$(cat "$ABBEY_AI")" \
+  '("Recurring Workflow", "recurring_workflow")'
+
+assert_contains \
+  "shared report presents improvement classification" \
+  "$(cat "$ABBEY_AI")" \
+  '("Classification", "improvement_classification")'
+
+assert_contains \
+  "shared report presents recurrence evidence" \
+  "$(cat "$ABBEY_AI")" \
+  '("Recurrence Evidence", "recurrence_evidence")'
 
 assert_not_contains \
   "--help ignores invalid JSON" \

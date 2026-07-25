@@ -690,6 +690,21 @@ if "failure_mode" in result:
     print("------------")
     print(result["failure_mode"])
 
+detail_sections = [
+    ("Recurring Workflow", "recurring_workflow"),
+    ("Friction Point", "friction_point"),
+    ("Bounded Improvement", "bounded_improvement"),
+    ("Human Boundary", "human_boundary"),
+    ("Classification Reason", "classification_reason"),
+]
+
+for heading, field in detail_sections:
+    if field in result:
+        print()
+        print(heading)
+        print("-" * len(heading))
+        print(result[field])
+
 benefit_fields = [
     ("Frequency", "estimated_frequency"),
     ("Effort", "estimated_effort"),
@@ -699,6 +714,7 @@ benefit_fields = [
     ("Confidence", "confidence"),
     ("Recommendation Confidence", "recommendation_confidence"),
     ("Implementation Confidence", "implementation_confidence"),
+    ("Classification", "improvement_classification"),
 ]
 
 available_benefit_fields = [
@@ -727,6 +743,8 @@ if available_benefit_fields:
         print(f"{label + ':':<28} {value}")
 
 list_sections = [
+    ("Recurrence Evidence", "recurrence_evidence"),
+    ("Cumulative Cost", "cumulative_cost"),
     ("Recurring Work Eliminated", "recurring_work_eliminated"),
     ("Durable Value", "durable_value"),
     ("Risk Reduction", "risk_reduction"),
