@@ -3,7 +3,7 @@ title: "Abbey AI Workflow-Friction Decision"
 description: "Added a structured decision strategy for finding costly recurring workflow friction and choosing a proportionate Abbey improvement."
 date: 2026-07-25
 status: complete
-reviewed: false
+reviewed: true
 session: abbey-ai-workflow-friction-decision
 tags:
   - Abbey Root
