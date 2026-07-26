@@ -3,7 +3,7 @@ title: "Abbey End Reconciliation Certification"
 description: "Corrected Abbey End certification for reconciliation-only commits and added focused regression coverage."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: abbey-end-reconciliation-certification
 tags:
   - Abbey Root
