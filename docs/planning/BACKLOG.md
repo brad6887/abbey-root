@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 76 complete · 274 pending · 350 total
+> **Backlog Status:** 77 complete · 273 pending · 350 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -147,7 +147,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Standardize tool output formatting and colors.
 - [ ] Standardize artifact-creation command output so commands report the path of every generated file.
 - [ ] Add automated toolkit regression testing.
-- [ ] Add regression tests for `abbey plant validate`.
+- [x] Add regression tests for `abbey plant validate`.
 - [ ] Expand `abbey site` commands.
 - [ ] Add `abbey site preview`.
 - [ ] Add `abbey site deploy-check`.
