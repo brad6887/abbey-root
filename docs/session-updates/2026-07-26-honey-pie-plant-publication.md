@@ -3,7 +3,7 @@ title: "Honey Pie Plant Publication"
 description: "Prepared and published Honey Pie from a new canonical Plant Model workspace as a complete Orchid Rescue profile."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: honey-pie-plant-publication
 tags:
   - Abbey Root

@@ -3,7 +3,7 @@ title: "Generated Backlog Statistics"
 description: "Added deterministic backlog completion statistics and integrated freshness checks into the Abbey session workflow."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: generated-backlog-statistics
 tags:
   - Abbey Root

@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 76 complete · 272 pending · 348 total
+> **Backlog Status:** 76 complete · 274 pending · 350 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -195,6 +195,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Evaluate future `abbey end` enhancements through practical usage.
 - [x] Implement `abbey review`.
 - [x] Add generated backlog completion statistics with workflow freshness checks.
+- [ ] Evaluate generated backlog status and workflow messages through normal Abbey sessions before broader planning-refresh automation.
 - [ ] Restrict **Required Reconciliation** to changes directly required by the reviewed session.
 - [ ] Report unrelated planning inconsistencies as **Planning Drift** rather than **Required Reconciliation**.
 - [ ] Consider separating **Planning Drift** from **Incidental Drift**.
@@ -228,6 +229,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Add `abbey ai decide risk-reducer` to identify bounded work that materially reduces operational or workflow risk.
 - [x] Add `abbey ai decide workflow-friction` to identify costly recurring manual work and classify the bounded Abbey improvement it warrants.
 - [x] Add `abbey ai decide backlog-leverage` to identify one focused session whose outcome clears or materially advances the largest coherent set of backlog items.
+- [ ] Evaluate `abbey ai decide backlog-leverage` through normal use in the canonical Ubuntu environment and confirm that its coverage map remains conservative.
 - [ ] Validate `abbey ai decide workflow-friction` through normal use from the canonical Ubuntu environment and assess its classification and recurrence-evidence rubric before expansion.
 - [ ] Evaluate `abbey ai decide risk-reducer` through normal use before expanding its rubric.
 - [ ] Fix the documented macOS portability failures in the Abbey AI test suite.

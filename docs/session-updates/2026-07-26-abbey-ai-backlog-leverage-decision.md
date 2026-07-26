@@ -3,7 +3,7 @@ title: "Abbey AI Backlog-Leverage Decision"
 description: "Added a structured Abbey AI decision for finding the focused session that clears the largest coherent set of backlog items."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: abbey-ai-backlog-leverage-decision
 tags:
   - Abbey Root

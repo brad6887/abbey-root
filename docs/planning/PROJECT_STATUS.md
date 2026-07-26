@@ -162,6 +162,7 @@ Completed
 - `abbey session update` generation from the standard repository template
 - `abbey session capture` creates or resumes the session update and journal entry together, while `abbey review` strictly validates changed session metadata and reports untouched historical metadata debt without blocking unrelated work
 - `abbey lab`
+- `abbey ssh audit` and `abbey ssh sync` provide validated, idempotent SSH key auditing and managed synchronization while preserving unrelated authorized keys
 - `abbey research status` deterministically discovers formal research artifacts, resolves their relationships, and reports complete chains and legacy provenance without modifying repository state
 - `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, reports conflicts between recent session evidence and planning documents, and generates Definitions of Done from the selected recommendation using tailored criteria where available and a deterministic fallback otherwise
 - `abbey backlog refresh` maintains deterministic complete, pending, and total statistics in a bounded generated block, with read-only freshness checks in `abbey review` and `abbey end`
@@ -205,9 +206,11 @@ Completed
 - Museum of Dumb Ideas expanded with the Jeep Incident as its second completed
   exhibit and a reusable photographic artifact gallery.
 - Canonical plant source-to-publication workflow.
+- Orchid Rescue routes complete profiles by collection ID, directs draft entries to a shared Coming Soon page, and excludes drafts from generated profile routes.
 - Doctor Robert generated into the Astro site as the Plant Model reference implementation.
 - Helter Skelter generated into the Astro site as the second validated Plant Model profile.
-- Bungalow Bill completed as a validated canonical Plant Model workspace, ready for future Astro publication.
+- Bungalow Bill generated into the Astro site as the third Orchid Rescue profile.
+- Honey Pie generated into the Astro site as the fourth complete Orchid Rescue profile from a canonical Plant Model workspace.
 
 ## Current Work
 
@@ -241,6 +244,7 @@ Completed
 - `abbey ai decide easy-win` identifies low-risk, one-session work with durable value and meaningful backlog reduction.
 - `abbey ai decide risk-reducer` identifies bounded, one-session work that materially reduces a concrete operational or workflow risk while requiring repository review.
 - `abbey ai decide workflow-friction` identifies costly recurring manual work, separates evidence from assumptions, and classifies bounded improvements as Abbey commands, standardized workflows, or local fixes.
+- `abbey ai decide backlog-leverage` identifies one focused session whose shared outcome completes or materially advances the largest coherent set of documented backlog items.
 - `abbey research run` provides a reusable Ollama research runner with preserved raw output; AI-assisted normalization, `abbey research sanitize`, and deterministic artifact validation support canonical artifacts before human review; `abbey research validate-review` verifies machine-readable human-review decisions, corpus fingerprints, source identifiers, and complete exact citation text; deterministic stratified sampling, human-reviewed annotation, and Wilson intervals now support measured prevalence claims; the reusable Voice Analysis research artifact framework defines artifact types, metadata, lifecycle, provenance, evidence-chain traceability, and review-manifest scope; broader deterministic Markdown normalization and end-to-end orchestration remain in development.
 - Deterministic corpus filtering excludes anchored `Mobile uploads Place:` location metadata while preserving authored content and the existing Voice Analysis evidence conclusions.
 - The full-corpus observation-discovery workflow reviews deterministic corpus batches without automatic promotion and validates each machine-readable manifest’s corpus identity, batch membership, source identifiers, and exact citation text.

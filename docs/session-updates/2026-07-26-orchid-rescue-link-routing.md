@@ -3,7 +3,7 @@ title: "Orchid Rescue Link Routing"
 description: "Routed complete Orchid Rescue entries to their profiles and incomplete entries to one shared Coming Soon page."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: orchid-rescue-link-routing
 tags:
   - Abbey Root

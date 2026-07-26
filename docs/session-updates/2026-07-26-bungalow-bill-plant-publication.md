@@ -3,7 +3,7 @@ title: "Bungalow Bill Plant Publication"
 description: "Published Bungalow Bill from its canonical Plant Model workspace as a complete Orchid Rescue profile."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: bungalow-bill-plant-publication
 tags:
   - Abbey Root
