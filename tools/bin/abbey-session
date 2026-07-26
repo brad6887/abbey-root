@@ -46,6 +46,8 @@ Usage:
                            Generate an upload-ready session context file
   abbey session update [options] <slug>
                            Create a new session update from the standard template
+  abbey session capture [options] <slug>
+                           Create the session update and journal entry together
   abbey session review [file]
                            Review a selected session update, or the oldest unreviewed one
   abbey session help       Show this help
@@ -54,18 +56,20 @@ Context options:
   --stdout                 Write context to standard output
   --output FILE            Write context to a selected file
 
-Update options:
+Update and capture options:
   --title TITLE            Override the title derived from the slug
-  -h, --help               Show update command help
+  -h, --help               Show command help
 
 The context command is read-only and failure-tolerant. Generated default files
 are written under working/session-context/.
+
+The capture command creates missing session documentation without overwriting
+existing files. It can be rerun safely to complete a partial capture.
 
 The review command runs Codex in a read-only sandbox. It recommends
 documentation and planning changes but does not modify repository files.
 HELP
 }
-
 latest_journal() {
   find "$ABBEY_ROOT/content/journal" \
     -type f \
@@ -498,59 +502,72 @@ The command refuses to overwrite an existing file.
 HELP
 }
 
-session_update() {
-  local slug=""
-  local title=""
+session_capture_help() {
+  cat <<'HELP'
+Abbey Session Capture
+
+Usage:
+  abbey session capture [--title TITLE] <slug>
+
+Create the session update and journal entry for one Abbey session.
+
+Options:
+  --title TITLE            Override the title derived from the slug
+  -h, --help               Show this help
+
+Examples:
+  abbey session capture guided-session-capture-workflow
+  abbey session capture \
+    --title "Guided Session Capture Workflow" \
+    guided-session-capture-workflow
+
+Existing files are preserved. Rerunning the command creates whichever session
+artifact is missing and reports artifacts that already exist.
+HELP
+}
+
+session_update_title() {
+  local path="$1"
+
+  python3 - "$path" <<'PYTITLE'
+import re
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+text = path.read_text(encoding="utf-8")
+
+if not text.startswith("---\n"):
+    raise SystemExit(1)
+
+frontmatter = text.split("---\n", 2)[1]
+
+for line in frontmatter.splitlines():
+    match = re.match(r"^title:\s*(.*?)\s*$", line)
+    if not match:
+        continue
+
+    value = match.group(1)
+
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+        value = value[1:-1]
+
+    if value:
+        print(value)
+        raise SystemExit(0)
+
+raise SystemExit(1)
+PYTITLE
+}
+
+create_session_update_file() {
+  local slug="$1"
+  local title="$2"
   local date_value
   local update_dir
   local update_file
   local relative_file
   local temporary_file
-
-  while [[ $# -gt 0 ]]; do
-    case "$1" in
-      --title)
-        if [[ $# -lt 2 || -z "$2" ]]; then
-          echo "ERROR --title requires a value."
-          return 1
-        fi
-
-        title="$2"
-        shift 2
-        ;;
-
-      help|-h|--help)
-        session_update_help
-        return 0
-        ;;
-
-      -*)
-        echo "ERROR Unknown session update option: $1"
-        return 1
-        ;;
-
-      *)
-        if [[ -n "$slug" ]]; then
-          echo "ERROR Only one session update slug may be supplied."
-          return 1
-        fi
-
-        slug="$1"
-        shift
-        ;;
-    esac
-  done
-
-  if [[ -z "$slug" ]]; then
-    session_update_help
-    return 1
-  fi
-
-  validate_session_slug "$slug" || return 1
-
-  if [[ -z "$title" ]]; then
-    title="$(slug_title "$slug")"
-  fi
 
   date_value="$(date '+%Y-%m-%d')"
   update_dir="$ABBEY_ROOT/docs/session-updates"
@@ -620,15 +637,166 @@ TODO
 EOF
 
   mv "$temporary_file" "$update_file"
+  trap - RETURN
   chmod 0644 "$update_file"
 
+  SESSION_UPDATE_RELATIVE_FILE="$relative_file"
+}
+
+session_update() {
+  local slug=""
+  local title=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --title)
+        if [[ $# -lt 2 || -z "$2" ]]; then
+          echo "ERROR --title requires a value."
+          return 1
+        fi
+
+        title="$2"
+        shift 2
+        ;;
+
+      help|-h|--help)
+        session_update_help
+        return 0
+        ;;
+
+      -*)
+        echo "ERROR Unknown session update option: $1"
+        return 1
+        ;;
+
+      *)
+        if [[ -n "$slug" ]]; then
+          echo "ERROR Only one session update slug may be supplied."
+          return 1
+        fi
+
+        slug="$1"
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "$slug" ]]; then
+    session_update_help
+    return 1
+  fi
+
+  validate_session_slug "$slug" || return 1
+
+  if [[ -z "$title" ]]; then
+    title="$(slug_title "$slug")"
+  fi
+
+  create_session_update_file "$slug" "$title" || return 1
+
   echo "Session update created:"
-  echo "$relative_file"
+  echo "$SESSION_UPDATE_RELATIVE_FILE"
   echo
   echo "Next:"
   echo "  Edit the session update, then run 'abbey review'."
 }
 
+session_capture() {
+  local slug=""
+  local title=""
+  local title_supplied=false
+  local date_value
+  local update_file
+  local relative_update
+  local existing_title
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --title)
+        if [[ $# -lt 2 || -z "$2" ]]; then
+          echo "ERROR --title requires a value."
+          return 1
+        fi
+
+        title="$2"
+        title_supplied=true
+        shift 2
+        ;;
+
+      help|-h|--help)
+        session_capture_help
+        return 0
+        ;;
+
+      -*)
+        echo "ERROR Unknown session capture option: $1"
+        return 1
+        ;;
+
+      *)
+        if [[ -n "$slug" ]]; then
+          echo "ERROR Only one session slug may be supplied."
+          return 1
+        fi
+
+        slug="$1"
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "$slug" ]]; then
+    session_capture_help
+    return 1
+  fi
+
+  validate_session_slug "$slug" || return 1
+
+  date_value="$(date '+%Y-%m-%d')"
+  update_file="$ABBEY_ROOT/docs/session-updates/${date_value}-${slug}.md"
+  relative_update="${update_file#$ABBEY_ROOT/}"
+
+  if [[ -f "$update_file" ]]; then
+    if ! existing_title="$(session_update_title "$update_file")"; then
+      echo "ERROR Unable to read the title from the existing session update:"
+      echo "$relative_update"
+      return 1
+    fi
+
+    if [[ "$title_supplied" == true && "$title" != "$existing_title" ]]; then
+      echo "ERROR Existing session update title does not match --title."
+      echo "Existing:  $existing_title"
+      echo "Requested: $title"
+      return 1
+    fi
+
+    title="$existing_title"
+
+    echo "Session update already exists:"
+    echo "$relative_update"
+  else
+    if [[ -z "$title" ]]; then
+      title="$(slug_title "$slug")"
+    fi
+
+    create_session_update_file "$slug" "$title" || return 1
+
+    echo "Session update created:"
+    echo "$SESSION_UPDATE_RELATIVE_FILE"
+  fi
+
+  echo
+
+  "$ABBEY_ROOT/tools/bin/abbey-journal" \
+    --no-edit \
+    --title "$title"
+
+  echo
+  echo "Session capture ready."
+  echo
+  echo "Next:"
+  echo "  Complete the session update and journal entry, then run 'abbey review'."
+}
 
 session_review() {
   local requested_session="${1:-}"
@@ -847,6 +1015,11 @@ case "$command" in
   update)
     shift
     session_update "$@"
+    ;;
+
+  capture)
+    shift
+    session_capture "$@"
     ;;
 
   review)

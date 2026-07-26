@@ -8,6 +8,7 @@
 # Usage:
 #   abbey journal <journal title>
 #   abbey journal --title "Journal Title"
+#   abbey journal --no-edit --title "Journal Title"
 #   abbey journal --help
 #
 set -euo pipefail
@@ -22,68 +23,103 @@ Abbey Journal
 Usage:
   abbey journal <journal title>
   abbey journal --title "Journal Title"
+  abbey journal --no-edit --title "Journal Title"
   abbey journal --help
 
 Creates or opens a dated Abbey Root journal entry.
 
+Options:
+  --title TITLE            Supply the complete journal title
+  --no-edit                Create or report the entry without opening an editor
+  -h, --help               Show this help
+
 Examples:
   abbey journal Completing the Journal Platform
   abbey journal --title "Completing the Journal Platform"
+  abbey journal --no-edit --title "Guided Session Capture Workflow"
 HELP
 }
 
-case "${1:-}" in
-  -h|--help|help)
-    print_help
-    exit 0
-    ;;
-esac
+TITLE=""
+NO_EDIT=false
+EXPLICIT_TITLE=false
+POSITIONAL=()
 
-if (($# == 0)); then
-  print_help
-  exit 1
-fi
+while (($# > 0)); do
+  case "$1" in
+    -h|--help|help)
+      print_help
+      exit 0
+      ;;
 
-case "$1" in
-  --title)
-    shift
+    --no-edit)
+      NO_EDIT=true
+      shift
+      ;;
 
-    if (($# == 0)) || [[ -z "${1:-}" ]]; then
-      echo "FAIL --title requires a value."
+    --title)
+      if [[ "$EXPLICIT_TITLE" == true ]]; then
+        echo "FAIL --title may only be supplied once."
+        exit 1
+      fi
+
+      if (($# < 2)) || [[ -z "${2:-}" || "${2:-}" == -* ]]; then
+        echo "FAIL --title requires a value."
+        echo
+        print_help
+        exit 1
+      fi
+
+      TITLE="$2"
+      EXPLICIT_TITLE=true
+      shift 2
+      ;;
+
+    -*)
+      echo "FAIL Unknown option: $1"
       echo
       print_help
       exit 1
-    fi
+      ;;
 
-    if (($# > 1)); then
-      echo "FAIL Unexpected arguments after --title."
-      echo "Quote multi-word titles as one argument."
-      exit 1
-    fi
+    *)
+      POSITIONAL+=("$1")
+      shift
+      ;;
+  esac
+done
 
-    TITLE="$1"
-    ;;
+if [[ "$EXPLICIT_TITLE" == true && "${#POSITIONAL[@]}" -gt 0 ]]; then
+  echo "FAIL Unexpected arguments after --title."
+  echo "Quote multi-word titles as one argument."
+  exit 1
+fi
 
-  -*)
-    echo "FAIL Unknown option: $1"
-    echo
+if [[ "$EXPLICIT_TITLE" == false ]]; then
+  if [[ "${#POSITIONAL[@]}" -eq 0 ]]; then
     print_help
     exit 1
-    ;;
+  fi
 
-  *)
-    TITLE="$*"
-    ;;
-esac
+  TITLE="${POSITIONAL[*]}"
+fi
 
 DATE="$(date +%F)"
 YEAR="$(date +%Y)"
 
-SLUG="$(echo "$TITLE" \
-  | tr '[:upper:]' '[:lower:]' \
-  | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')"
+SLUG="$(
+  printf '%s\n' "$TITLE" |
+    tr '[:upper:]' '[:lower:]' |
+    sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//'
+)"
+
+if [[ -z "$SLUG" ]]; then
+  echo "FAIL Journal title does not produce a valid filename."
+  exit 1
+fi
 
 FILE="$JOURNAL_DIR/$YEAR/$DATE-$SLUG.md"
+RELATIVE_FILE="${FILE#$REPO_DIR/}"
 
 mkdir -p "$JOURNAL_DIR/$YEAR"
 
@@ -117,6 +153,19 @@ TODO
 - TODO
 
 EOF
+
+  echo "Journal entry created:"
+  echo "$RELATIVE_FILE"
+else
+  echo "Journal entry already exists:"
+  echo "$RELATIVE_FILE"
+fi
+
+if [[ "$NO_EDIT" == true ]]; then
+  echo
+  echo "Next:"
+  echo "  Edit the journal entry, then run 'abbey review'."
+  exit 0
 fi
 
 vi "$FILE"

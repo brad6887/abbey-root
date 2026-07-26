@@ -160,6 +160,7 @@ Completed
 - `abbey ai`
 - Metadata-driven `abbey ai decide` discovery and help
 - `abbey session update` generation from the standard repository template
+- `abbey session capture` creates or resumes the session update and journal entry together, while `abbey review` strictly validates changed session metadata and reports untouched historical metadata debt without blocking unrelated work
 - `abbey lab`
 - `abbey research status` deterministically discovers formal research artifacts, resolves their relationships, and reports complete chains and legacy provenance without modifying repository state
 - `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, reports conflicts between recent session evidence and planning documents, and generates Definitions of Done from the selected recommendation using tailored criteria where available and a deterministic fallback otherwise

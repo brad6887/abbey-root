@@ -195,6 +195,46 @@ assert_contains \
   "$(cat "$editor_log")" \
   "$title_file"
 
+rm -f "$editor_log"
+
+run_journal --no-edit --title "Noninteractive Journal"
+
+no_edit_file="$fixture_root/content/journal/$(date +%Y)/$(date +%F)-noninteractive-journal.md"
+
+assert_status \
+  "--no-edit exits successfully" \
+  "$status" \
+  0
+
+assert_file_exists \
+  "--no-edit creates the expected journal file" \
+  "$no_edit_file"
+
+assert_contains \
+  "--no-edit reports the created path" \
+  "$output" \
+  "Journal entry created:"
+
+assert_file_absent \
+  "--no-edit does not open the editor" \
+  "$editor_log"
+
+run_journal --no-edit --title "Noninteractive Journal"
+
+assert_status \
+  "--no-edit rerun exits successfully" \
+  "$status" \
+  0
+
+assert_contains \
+  "--no-edit rerun reports the existing entry" \
+  "$output" \
+  "Journal entry already exists:"
+
+assert_file_absent \
+  "--no-edit rerun does not open the editor" \
+  "$editor_log"
+
 run_journal --title
 
 assert_status \

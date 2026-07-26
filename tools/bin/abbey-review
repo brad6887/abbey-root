@@ -6,6 +6,7 @@ set -euo pipefail
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+review_status=0
 
 ok() {
   echo "OK   $*"
@@ -154,6 +155,27 @@ else
   warn "No journal entry found in current changes"
 fi
 
+section "Session Update Metadata"
+
+metadata_args=()
+
+while IFS= read -r session_update_path; do
+  [[ -n "$session_update_path" ]] || continue
+  metadata_args+=(--changed "$session_update_path")
+done <<<"$session_updates"
+
+metadata_status=0
+metadata_output="$(
+  python3 "$ABBEY_ROOT/scripts/abbey_session_metadata.py"     --root "$ABBEY_ROOT"     "${metadata_args[@]}" 2>&1
+)" || metadata_status=$?
+
+printf '%s
+' "$metadata_output"
+
+if ((metadata_status != 0)); then
+  review_status=1
+fi
+
 section "Planning Review"
 
 planning_recommended=false
@@ -275,3 +297,5 @@ elif (( staged_count > 0 )); then
 else
   echo "Continue the Abbey session workflow."
 fi
+
+exit "$review_status"

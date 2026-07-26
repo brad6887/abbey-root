@@ -78,6 +78,10 @@ commands:
         description: Create a session update from the standard repository template.
         usage: abbey session update [--title TITLE] <slug>
 
+      capture:
+        description: Create or resume the session update and journal entry together.
+        usage: abbey session capture [--title TITLE] <slug>
+
       review:
         description: Review a selected session update or the oldest unreviewed update with Codex.
         usage: abbey session review [file]
@@ -86,6 +90,7 @@ commands:
       - abbey session
       - abbey session context
       - abbey session update abbey-ai-decision-help
+      - abbey session capture guided-session-capture-workflow
       - abbey session review
       - abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 

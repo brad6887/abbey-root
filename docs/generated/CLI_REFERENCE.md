@@ -180,6 +180,8 @@ abbey session [command]
 
 **Subcommands**
 
+- `capture` - Create or resume the session update and journal entry together.
+  - `abbey session capture [--title TITLE] <slug>`
 - `context` - Generate an upload-ready session context file.
   - `abbey session context [--stdout | --output FILE]`
 - `review` - Review a selected session update or the oldest unreviewed update with Codex.
@@ -195,6 +197,7 @@ abbey session [command]
 abbey session
 abbey session context
 abbey session update abbey-ai-decision-help
+abbey session capture guided-session-capture-workflow
 abbey session review
 abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 ```
