@@ -6,7 +6,7 @@ export async function getStaticPaths() {
   const plants = await getCollection("plants");
 
   const orchids = plants.filter(
-    (plant) => plant.data.type === "orchid"
+    (plant) => plant.data.type === "orchid" && !plant.data.draft
   );
 
   return orchids.map((plant) => ({

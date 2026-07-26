@@ -33,7 +33,13 @@ const orchids = plants
         {orchids.map((orchid) => (
           <article class="plant-card">
             <h3>
-              <a href={`/orchid-rescue/${orchid.slug}/`}>
+              <a
+                href={
+                  orchid.data.draft
+                    ? "/orchid-rescue/coming-soon/"
+                    : `/orchid-rescue/${orchid.id.replace(/\.md$/, "")}/`
+                }
+              >
                 {orchid.data.title}
               </a>
             </h3>

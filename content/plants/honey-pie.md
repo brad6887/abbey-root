@@ -4,6 +4,7 @@ type: orchid
 status: In progress
 species: Phalaenopsis
 featured: true
+draft: true
 ---
 
 Honey Pie is one of the original orchid rescues in this journal.
