@@ -1,0 +1,43 @@
+name: Honey Pie
+slug: honey-pie
+
+plant:
+  type: orchid
+  genus: Phalaenopsis
+  species: null
+  hybrid: true
+
+rescue:
+  date: 2026-06-14
+  source: Kroger
+  location:
+    city: null
+    state: Texas
+    country: USA
+
+status:
+  current: blooming
+  current_location:
+    city: Fort Worth
+    state: Texas
+    country: USA
+  updated: 2026-07-26
+
+care:
+  potting_medium: orchid bark
+  container: ventilated ceramic orchid pot
+
+photos:
+  hero: photos/Honey_Pie - 1.jpeg
+  current: photos/Honey_Pie - 13.JPG
+  metadata: photo-metadata.md
+
+documents:
+  story: story.md
+  history: history.md
+
+tags:
+  - orchid
+  - phalaenopsis
+  - grocery-store
+  - blooming
