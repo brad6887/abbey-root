@@ -113,6 +113,22 @@ commands:
     examples:
       - abbey next
 
+  backlog:
+    category: workflow
+    description: Maintain generated backlog completion statistics.
+    usage: abbey backlog <command>
+    hidden: false
+    subcommands:
+      refresh:
+        description: Refresh generated complete, pending, and total counts.
+        usage: abbey backlog refresh
+      check:
+        description: Verify that generated backlog statistics are current.
+        usage: abbey backlog check
+    examples:
+      - abbey backlog refresh
+      - abbey backlog check
+
   journal:
     category: workflow
     description: Create or open an Abbey Root journal entry.

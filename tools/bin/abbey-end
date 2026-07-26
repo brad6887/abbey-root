@@ -106,6 +106,16 @@ fi
 
 section "Validation"
 
+if [[ -x "$ABBEY_ROOT/tools/bin/abbey-backlog" ]]; then
+  if "$ABBEY_ROOT/tools/bin/abbey-backlog" check >/dev/null 2>&1; then
+    ok "Generated backlog statistics are current"
+  else
+    fail "Generated backlog statistics are stale, malformed, or missing"
+  fi
+else
+  fail "Abbey Backlog command not found"
+fi
+
 doctor_output=""
 doctor_status=0
 

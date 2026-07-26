@@ -158,6 +158,20 @@ Maintains the inventory of known work that has not yet been scheduled.
 
 The backlog represents possibilities rather than commitments.
 
+### Generated Status
+
+The top of the backlog contains a generated status block bounded by:
+
+```markdown
+<!-- BEGIN GENERATED BACKLOG STATUS -->
+<!-- END GENERATED BACKLOG STATUS -->
+```
+
+`abbey backlog refresh` derives complete, pending, and total counts from
+Markdown task-list items throughout the document. The command owns only the
+bounded block and must not rewrite the human-maintained backlog. Use
+`abbey backlog check` to verify the block without modifying the document.
+
 ### Recommended Sections
 
 - High Priority

@@ -1,0 +1,153 @@
+#!/usr/bin/env bash
+# COMMAND: backlog
+# DESCRIPTION: Maintain generated Abbey backlog statistics
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+BACKLOG_FILE="${ABBEY_BACKLOG_FILE:-$ABBEY_ROOT/docs/planning/BACKLOG.md}"
+
+BEGIN_MARKER="<!-- BEGIN GENERATED BACKLOG STATUS -->"
+END_MARKER="<!-- END GENERATED BACKLOG STATUS -->"
+
+usage() {
+  cat <<'HELP'
+Abbey Backlog
+
+Usage:
+  abbey backlog refresh
+  abbey backlog check
+  abbey backlog help
+
+Commands:
+  refresh  Update the generated statistics block in BACKLOG.md.
+  check    Verify that the generated statistics block is present and current.
+HELP
+}
+
+fail() {
+  echo "FAIL $*" >&2
+  exit 1
+}
+
+validate_backlog() {
+  [[ -f "$BACKLOG_FILE" ]] || fail "Backlog not found: $BACKLOG_FILE"
+
+  begin_count="$(grep -Fxc "$BEGIN_MARKER" "$BACKLOG_FILE" || true)"
+  end_count="$(grep -Fxc "$END_MARKER" "$BACKLOG_FILE" || true)"
+
+  if (( begin_count > 1 || end_count > 1 )); then
+    fail "Backlog contains duplicate generated status markers."
+  fi
+
+  if (( begin_count != end_count )); then
+    fail "Backlog contains a malformed generated status block."
+  fi
+}
+
+calculate_counts() {
+  counts="$(
+    awk '
+      /^[[:space:]]*-[[:space:]]+\[[xX]\][[:space:]]+/ { complete++ }
+      /^[[:space:]]*-[[:space:]]+\[[[:space:]]\][[:space:]]+/ { pending++ }
+      END { printf "%d %d", complete + 0, pending + 0 }
+    ' "$BACKLOG_FILE"
+  )"
+  complete="${counts%% *}"
+  pending="${counts##* }"
+  total=$((complete + pending))
+  status_line="> **Backlog Status:** $complete complete · $pending pending · $total total"
+}
+
+render_block() {
+  calculate_counts
+  printf '%s\n' \
+    "$BEGIN_MARKER" \
+    "$status_line" \
+    "$END_MARKER"
+}
+
+check_status() {
+  validate_backlog
+
+  if (( begin_count == 0 )); then
+    fail "Generated backlog status block is missing. Run 'abbey backlog refresh'."
+  fi
+
+  expected_block="$(render_block)"
+  actual_block="$(
+    awk -v begin="$BEGIN_MARKER" -v end="$END_MARKER" '
+      $0 == begin { inside = 1 }
+      inside { print }
+      $0 == end { inside = 0 }
+    ' "$BACKLOG_FILE"
+  )"
+
+  if [[ "$actual_block" != "$expected_block" ]]; then
+    fail "Generated backlog statistics are stale or incorrectly formatted. Run 'abbey backlog refresh'."
+  fi
+
+  echo "OK   Backlog statistics are current."
+}
+
+refresh_status() {
+  validate_backlog
+  calculate_counts
+  temporary_file="$(mktemp)"
+  trap 'rm -f "$temporary_file"' EXIT
+
+  if (( begin_count == 0 )); then
+    awk -v begin="$BEGIN_MARKER" -v status="$status_line" -v end="$END_MARKER" '
+      NR == 1 {
+        print
+        print ""
+        print begin
+        print status
+        print end
+        next
+      }
+      { print }
+    ' "$BACKLOG_FILE" > "$temporary_file"
+  else
+    awk -v begin="$BEGIN_MARKER" -v status="$status_line" -v end="$END_MARKER" '
+      $0 == begin {
+        print begin
+        print status
+        print end
+        inside = 1
+        next
+      }
+      $0 == end {
+        inside = 0
+        next
+      }
+      !inside { print }
+    ' "$BACKLOG_FILE" > "$temporary_file"
+  fi
+
+  if cmp -s "$BACKLOG_FILE" "$temporary_file"; then
+    echo "OK   Backlog statistics are already current."
+    return 0
+  fi
+
+  cp "$temporary_file" "$BACKLOG_FILE"
+  echo "OK   Refreshed backlog statistics."
+}
+
+case "${1:-help}" in
+  refresh)
+    [[ $# -eq 1 ]] || fail "Usage: abbey backlog refresh"
+    refresh_status
+    ;;
+  check)
+    [[ $# -eq 1 ]] || fail "Usage: abbey backlog check"
+    check_status
+    ;;
+  help|-h|--help)
+    usage
+    ;;
+  *)
+    fail "Unknown backlog command: $1"
+    ;;
+esac

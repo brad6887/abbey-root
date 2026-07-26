@@ -160,6 +160,13 @@ planning_recommended=false
 review_backlog=false
 review_project_status=false
 
+if "$ABBEY_ROOT/tools/bin/abbey-backlog" check >/dev/null 2>&1; then
+  ok "Generated backlog statistics are current"
+else
+  warn "Generated backlog statistics are stale, malformed, or missing"
+  echo "     Run: abbey backlog refresh"
+fi
+
 if grep -Eq '^(tools/|config/cli/|scripts/)' <<<"$changed_files"; then
   review_backlog=true
   review_project_status=true

@@ -1,5 +1,9 @@
 # Abbey Root Backlog
 
+<!-- BEGIN GENERATED BACKLOG STATUS -->
+> **Backlog Status:** 74 complete · 274 pending · 348 total
+<!-- END GENERATED BACKLOG STATUS -->
+
 This document contains work that has been identified but is not necessarily scheduled.
 
 Items are captured here until they are either promoted to the roadmap, completed during a development session, or determined to no longer be necessary.
@@ -190,6 +194,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Create `abbey end`.
 - [ ] Evaluate future `abbey end` enhancements through practical usage.
 - [x] Implement `abbey review`.
+- [x] Add generated backlog completion statistics with workflow freshness checks.
 - [ ] Restrict **Required Reconciliation** to changes directly required by the reviewed session.
 - [ ] Report unrelated planning inconsistencies as **Planning Drift** rather than **Required Reconciliation**.
 - [ ] Consider separating **Planning Drift** from **Incidental Drift**.

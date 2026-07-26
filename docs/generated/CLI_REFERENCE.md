@@ -80,6 +80,30 @@ abbey version
 
 ## Workflow
 
+### `abbey backlog`
+
+Maintain generated backlog completion statistics.
+
+**Usage**
+
+```text
+abbey backlog <command>
+```
+
+**Subcommands**
+
+- `check` - Verify that generated backlog statistics are current.
+  - `abbey backlog check`
+- `refresh` - Refresh generated complete, pending, and total counts.
+  - `abbey backlog refresh`
+
+**Examples**
+
+```text
+abbey backlog refresh
+abbey backlog check
+```
+
 ### `abbey end`
 
 Certify that the current Abbey session is complete.
@@ -112,6 +136,38 @@ abbey journal <title>
 abbey journal "Architecture Framework Introduced"
 ```
 
+### `abbey next`
+
+Recommend the next focused Abbey engineering session.
+
+**Usage**
+
+```text
+abbey next
+```
+
+**Examples**
+
+```text
+abbey next
+```
+
+### `abbey review`
+
+Review the current Abbey session before commit.
+
+**Usage**
+
+```text
+abbey review
+```
+
+**Examples**
+
+```text
+abbey review
+```
+
 ### `abbey session`
 
 Start and review Abbey Root work sessions.
@@ -130,12 +186,15 @@ abbey session [command]
   - `abbey session review [file]`
 - `start` - Show Abbey session startup information.
   - `abbey session`
+- `update` - Create a session update from the standard repository template.
+  - `abbey session update [--title TITLE] <slug>`
 
 **Examples**
 
 ```text
 abbey session
 abbey session context
+abbey session update abbey-ai-decision-help
 abbey session review
 abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 ```
@@ -190,6 +249,42 @@ abbey knowledge <command>
 abbey knowledge build
 ```
 
+## Structured research
+
+### `abbey research`
+
+Run structured research workflows and inspect formal research artifacts.
+
+**Usage**
+
+```text
+abbey research <command>
+```
+
+**Subcommands**
+
+- `discover` - Run resumable observation discovery across deterministic corpus batches.
+  - `abbey research discover --model MODEL --prompt FILE --corpus FILE --batch-manifest FILE --output-dir DIR [--resume]`
+- `status` - Report formal research artifact relationships and chain status.
+  - `abbey research status`
+- `validate-discovery` - Validate a batch discovery manifest and exact corpus citations.
+  - `abbey research validate-discovery --manifest FILE --corpus FILE --batch FILE`
+- `validate-review` - Validate a machine-readable review manifest and exact corpus citations.
+  - `abbey research validate-review --manifest FILE --corpus FILE`
+- `voice` - Apply VOICE-MODEL-001 through an approved Facebook fact lock.
+  - `abbey research voice apply --model MODEL --fact-lock FILE --output FILE --report FILE`
+
+**Examples**
+
+```text
+abbey research --help
+abbey research run --help
+abbey research validate-review --manifest FILE --corpus FILE
+abbey research validate-discovery --manifest FILE --corpus FILE --batch FILE
+abbey research discover --model MODEL --prompt FILE --corpus FILE --batch-manifest FILE --output-dir DIR --resume
+abbey research status
+```
+
 ## Lab infrastructure
 
 ### `abbey lab`
@@ -211,6 +306,32 @@ abbey lab <command>
 
 ```text
 abbey lab check
+```
+
+### `abbey ssh`
+
+Audit and synchronize SSH public keys across managed Abbey nodes.
+
+**Usage**
+
+```text
+abbey ssh <command>
+```
+
+**Subcommands**
+
+- `audit` - Report node public-key authorization across managed hosts.
+  - `abbey ssh audit [--limit HOST_OR_GROUP]`
+- `sync` - Synchronize Abbey node public keys through a managed authorized_keys block.
+  - `abbey ssh sync [--check] [--limit HOST_OR_GROUP]`
+
+**Examples**
+
+```text
+abbey ssh audit
+abbey ssh sync --check
+abbey ssh sync
+abbey ssh sync --limit edge01
 ```
 
 ## Website

@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-07-25
+Last Updated: 2026-07-26
 
 ---
 
@@ -163,6 +163,7 @@ Completed
 - `abbey lab`
 - `abbey research status` deterministically discovers formal research artifacts, resolves their relationships, and reports complete chains and legacy provenance without modifying repository state
 - `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, reports conflicts between recent session evidence and planning documents, and generates Definitions of Done from the selected recommendation using tailored criteria where available and a deterministic fallback otherwise
+- `abbey backlog refresh` maintains deterministic complete, pending, and total statistics in a bounded generated block, with read-only freshness checks in `abbey review` and `abbey end`
 - `abbey site publish [--dry-run]` performs bounded post-push live-site verification that follows redirects and requires a final HTTP 2xx response
 - Metadata-driven CLI help
 - Generated CLI reference
