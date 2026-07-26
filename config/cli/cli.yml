@@ -75,12 +75,12 @@ commands:
         usage: abbey session context [--stdout | --output FILE]
 
       update:
-        description: Create a session update from the standard repository template.
-        usage: abbey session update [--title TITLE] <slug>
+        description: Create a session update with a title-derived or explicitly overridden slug.
+        usage: abbey session update --title TITLE [--slug SLUG]
 
       capture:
-        description: Create or resume the session update and journal entry together.
-        usage: abbey session capture [--title TITLE] <slug>
+        description: Create or resume session artifacts using one resolved slug.
+        usage: abbey session capture --title TITLE [--slug SLUG]
 
       review:
         description: Review a selected session update or the oldest unreviewed update with Codex.
@@ -89,8 +89,8 @@ commands:
     examples:
       - abbey session
       - abbey session context
-      - abbey session update abbey-ai-decision-help
-      - abbey session capture guided-session-capture-workflow
+      - abbey session update --title "Abbey AI Decision Help"
+      - abbey session capture --title "Guided Session Capture Workflow"
       - abbey session review
       - abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 

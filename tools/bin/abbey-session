@@ -8,7 +8,8 @@
 # Usage:
 #   abbey session
 #   abbey session context
-#   abbey session update <slug>
+#   abbey session update --title <title> [--slug <slug>]
+#   abbey session capture --title <title> [--slug <slug>]
 #   abbey session review
 #
 set -euo pipefail
@@ -44,9 +45,9 @@ Usage:
   abbey session            Show Abbey session startup information
   abbey session context [options]
                            Generate an upload-ready session context file
-  abbey session update [options] <slug>
+  abbey session update [options] [<slug>]
                            Create a new session update from the standard template
-  abbey session capture [options] <slug>
+  abbey session capture [options] [<slug>]
                            Create the session update and journal entry together
   abbey session review [file]
                            Review a selected session update, or the oldest unreviewed one
@@ -57,7 +58,8 @@ Context options:
   --output FILE            Write context to a selected file
 
 Update and capture options:
-  --title TITLE            Override the title derived from the slug
+  --title TITLE            Set the session title and derive the default slug
+  --slug SLUG              Override the title-derived slug
   -h, --help               Show command help
 
 The context command is read-only and failure-tolerant. Generated default files
@@ -463,6 +465,19 @@ print(" ".join(title_words))
 PYTITLE
 }
 
+title_slug() {
+  local title="$1"
+
+  python3 - "$title" <<'PYSLUG'
+import re
+import sys
+
+title = sys.argv[1].lower()
+slug = re.sub(r"[^a-z0-9]+", "-", title).strip("-")
+print(slug)
+PYSLUG
+}
+
 validate_session_slug() {
   local slug="$1"
 
@@ -484,6 +499,7 @@ session_update_help() {
 Abbey Session Update
 
 Usage:
+  abbey session update --title TITLE [--slug SLUG]
   abbey session update [--title TITLE] <slug>
 
 Create a new session update under:
@@ -491,12 +507,16 @@ Create a new session update under:
   docs/session-updates/YYYY-MM-DD-<slug>.md
 
 Options:
-  --title TITLE            Override the title derived from the slug
+  --title TITLE            Set the title and derive the default slug
+  --slug SLUG              Override the title-derived slug
   -h, --help               Show this help
 
 Examples:
+  abbey session update --title "Abbey AI Decision Help"
   abbey session update abbey-ai-decision-help
-  abbey session update --title "Abbey AI Decision Help" abbey-ai-decision-help
+  abbey session update \
+    --title "Abbey AI Decision Help" \
+    --slug custom-decision-session
 
 The command refuses to overwrite an existing file.
 HELP
@@ -507,19 +527,22 @@ session_capture_help() {
 Abbey Session Capture
 
 Usage:
+  abbey session capture --title TITLE [--slug SLUG]
   abbey session capture [--title TITLE] <slug>
 
 Create the session update and journal entry for one Abbey session.
 
 Options:
-  --title TITLE            Override the title derived from the slug
+  --title TITLE            Set the title and derive the default slug
+  --slug SLUG              Override the title-derived slug
   -h, --help               Show this help
 
 Examples:
-  abbey session capture guided-session-capture-workflow
+  abbey session capture --title "Guided Session Capture Workflow"
   abbey session capture \
     --title "Guided Session Capture Workflow" \
-    guided-session-capture-workflow
+    --slug custom-capture-session
+  abbey session capture guided-session-capture-workflow
 
 Existing files are preserved. Rerunning the command creates whichever session
 artifact is missing and reports artifacts that already exist.
@@ -592,7 +615,7 @@ description: "TODO: Add a concise description of this session."
 date: $date_value
 status: pending
 reviewed: false
-session: primary
+session: $slug
 tags:
   - Abbey Root
 ---
@@ -646,6 +669,7 @@ EOF
 session_update() {
   local slug=""
   local title=""
+  local slug_supplied=false
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -656,6 +680,22 @@ session_update() {
         fi
 
         title="$2"
+        shift 2
+        ;;
+
+      --slug)
+        if [[ $# -lt 2 || -z "$2" ]]; then
+          echo "ERROR --slug requires a value."
+          return 1
+        fi
+
+        if [[ "$slug_supplied" == true ]]; then
+          echo "ERROR Only one session update slug may be supplied."
+          return 1
+        fi
+
+        slug="$2"
+        slug_supplied=true
         shift 2
         ;;
 
@@ -670,19 +710,29 @@ session_update() {
         ;;
 
       *)
-        if [[ -n "$slug" ]]; then
+        if [[ "$slug_supplied" == true ]]; then
           echo "ERROR Only one session update slug may be supplied."
           return 1
         fi
 
         slug="$1"
+        slug_supplied=true
         shift
         ;;
     esac
   done
 
   if [[ -z "$slug" ]]; then
-    session_update_help
+    if [[ -z "$title" ]]; then
+      session_update_help
+      return 1
+    fi
+
+    slug="$(title_slug "$title")"
+  fi
+
+  if [[ -z "$slug" ]]; then
+    echo "ERROR Session title does not produce a valid slug."
     return 1
   fi
 
@@ -696,6 +746,7 @@ session_update() {
 
   echo "Session update created:"
   echo "$SESSION_UPDATE_RELATIVE_FILE"
+  echo "Session slug: $slug"
   echo
   echo "Next:"
   echo "  Edit the session update, then run 'abbey review'."
@@ -705,6 +756,7 @@ session_capture() {
   local slug=""
   local title=""
   local title_supplied=false
+  local slug_supplied=false
   local date_value
   local update_file
   local relative_update
@@ -723,6 +775,22 @@ session_capture() {
         shift 2
         ;;
 
+      --slug)
+        if [[ $# -lt 2 || -z "$2" ]]; then
+          echo "ERROR --slug requires a value."
+          return 1
+        fi
+
+        if [[ "$slug_supplied" == true ]]; then
+          echo "ERROR Only one session slug may be supplied."
+          return 1
+        fi
+
+        slug="$2"
+        slug_supplied=true
+        shift 2
+        ;;
+
       help|-h|--help)
         session_capture_help
         return 0
@@ -734,19 +802,29 @@ session_capture() {
         ;;
 
       *)
-        if [[ -n "$slug" ]]; then
+        if [[ "$slug_supplied" == true ]]; then
           echo "ERROR Only one session slug may be supplied."
           return 1
         fi
 
         slug="$1"
+        slug_supplied=true
         shift
         ;;
     esac
   done
 
   if [[ -z "$slug" ]]; then
-    session_capture_help
+    if [[ -z "$title" ]]; then
+      session_capture_help
+      return 1
+    fi
+
+    slug="$(title_slug "$title")"
+  fi
+
+  if [[ -z "$slug" ]]; then
+    echo "ERROR Session title does not produce a valid slug."
     return 1
   fi
 
@@ -785,11 +863,13 @@ session_capture() {
     echo "$SESSION_UPDATE_RELATIVE_FILE"
   fi
 
+  echo "Session slug: $slug"
   echo
 
   "$ABBEY_ROOT/tools/bin/abbey-journal" \
     --no-edit \
-    --title "$title"
+    --title "$title" \
+    --slug "$slug"
 
   echo
   echo "Session capture ready."

@@ -124,6 +124,26 @@ Examples:
 
 Secondary objectives are acceptable, but the session should have one clear focus.
 
+## 5. Capture Session Artifacts
+
+Create the session update and journal from the human-readable session title:
+
+```bash
+abbey session capture --title "Session-Aware Slug Workflow"
+```
+
+Abbey derives one deterministic slug, stores it in the session update's
+`session:` metadata, and uses it for both artifact filenames. Use `--slug` only
+when the derived value needs an explicit human override:
+
+```bash
+abbey session capture \
+  --title "Session-Aware Slug Workflow" \
+  --slug custom-session-slug
+```
+
+Existing positional-slug usage remains supported for backward compatibility.
+
 ---
 
 # During the Session

@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 79 complete · 272 pending · 351 total
+> **Backlog Status:** 80 complete · 271 pending · 351 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -55,7 +55,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Improve session capture workflow by creating session updates and journal entries through a guided process.
 - [x] Validate required metadata for new or modified session updates while reporting pre-existing historical debt without blocking unrelated commits.
 - [x] Fix `abbey journal` argument handling so `--title` and reserved commands like `help` behave consistently.
-- [ ] Add session-aware state to reduce manual slug and filename management.
+- [x] Add session-aware state to reduce manual slug and filename management.
 - [ ] Add reliable artifact export workflow for generated research documents and other Abbey artifacts.
 - [x] Investigate why `abbey end` incorrectly requires a journal entry for reconciliation-only commits and add regression coverage.
 

@@ -195,6 +195,42 @@ assert_contains \
   "$(cat "$editor_log")" \
   "$title_file"
 
+run_journal \
+  --no-edit \
+  --title "Explicit Journal Slug" \
+  --slug manually-selected-journal
+
+slug_file="$fixture_root/content/journal/$(date +%Y)/$(date +%F)-manually-selected-journal.md"
+
+assert_status \
+  "--slug exits successfully" \
+  "$status" \
+  0
+
+assert_file_exists \
+  "--slug controls the journal filename" \
+  "$slug_file"
+
+assert_contains \
+  "--slug preserves the supplied title" \
+  "$(cat "$slug_file")" \
+  'title: "Explicit Journal Slug"'
+
+run_journal \
+  --no-edit \
+  --title "Invalid Journal Slug" \
+  --slug Invalid_Slug
+
+assert_status \
+  "invalid --slug fails" \
+  "$status" \
+  1
+
+assert_contains \
+  "invalid --slug explains the problem" \
+  "$output" \
+  "FAIL Invalid journal slug: Invalid_Slug"
+
 rm -f "$editor_log"
 
 run_journal --no-edit --title "Noninteractive Journal"

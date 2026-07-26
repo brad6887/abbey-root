@@ -71,7 +71,7 @@ assert_status \
 assert_contains \
   "--help shows usage" \
   "$output" \
-  "abbey session update [--title TITLE] <slug>"
+  "abbey session update --title TITLE [--slug SLUG]"
 
 set +e
 output="$(
@@ -125,6 +125,11 @@ assert_contains \
   "sets update as unreviewed" \
   "$created_content" \
   "reviewed: false"
+
+assert_contains \
+  "stores positional slug as session state" \
+  "$created_content" \
+  "session: abbey-ai-decision-help"
 
 assert_contains \
   "includes objective section" \
@@ -190,6 +195,67 @@ assert_contains \
   "custom title is preserved" \
   "$custom_content" \
   'title: "Custom Session Title"'
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+    "$fixture_root/tools/bin/abbey-session" \
+      update --title "Automatic Slug Session" 2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "title-only update exits successfully" \
+  "$status" \
+  0
+
+automatic_file="$fixture_root/docs/session-updates/${date_value}-automatic-slug-session.md"
+
+if [[ -f "$automatic_file" ]]; then
+  pass "title-only update derives filename slug"
+else
+  fail "title-only update derives filename slug"
+fi
+
+assert_contains \
+  "title-only update reports resolved slug" \
+  "$output" \
+  "Session slug: automatic-slug-session"
+
+assert_contains \
+  "title-only update stores resolved slug" \
+  "$(cat "$automatic_file")" \
+  "session: automatic-slug-session"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+    "$fixture_root/tools/bin/abbey-session" \
+      update \
+      --title "Explicit Slug Session" \
+      --slug manual-session-slug 2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "explicit slug override exits successfully" \
+  "$status" \
+  0
+
+override_file="$fixture_root/docs/session-updates/${date_value}-manual-session-slug.md"
+
+if [[ -f "$override_file" ]]; then
+  pass "explicit slug override controls filename"
+else
+  fail "explicit slug override controls filename"
+fi
+
+assert_contains \
+  "explicit slug override is stored as session state" \
+  "$(cat "$override_file")" \
+  "session: manual-session-slug"
 
 set +e
 output="$(

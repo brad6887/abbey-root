@@ -8,6 +8,7 @@
 # Usage:
 #   abbey journal <journal title>
 #   abbey journal --title "Journal Title"
+#   abbey journal --title "Journal Title" --slug custom-slug
 #   abbey journal --no-edit --title "Journal Title"
 #   abbey journal --help
 #
@@ -23,6 +24,7 @@ Abbey Journal
 Usage:
   abbey journal <journal title>
   abbey journal --title "Journal Title"
+  abbey journal --title "Journal Title" --slug custom-slug
   abbey journal --no-edit --title "Journal Title"
   abbey journal --help
 
@@ -30,12 +32,14 @@ Creates or opens a dated Abbey Root journal entry.
 
 Options:
   --title TITLE            Supply the complete journal title
+  --slug SLUG              Override the title-derived filename slug
   --no-edit                Create or report the entry without opening an editor
   -h, --help               Show this help
 
 Examples:
   abbey journal Completing the Journal Platform
   abbey journal --title "Completing the Journal Platform"
+  abbey journal --title "Completing the Journal Platform" --slug journal-platform
   abbey journal --no-edit --title "Guided Session Capture Workflow"
 HELP
 }
@@ -43,6 +47,8 @@ HELP
 TITLE=""
 NO_EDIT=false
 EXPLICIT_TITLE=false
+SLUG=""
+EXPLICIT_SLUG=false
 POSITIONAL=()
 
 while (($# > 0)); do
@@ -72,6 +78,24 @@ while (($# > 0)); do
 
       TITLE="$2"
       EXPLICIT_TITLE=true
+      shift 2
+      ;;
+
+    --slug)
+      if [[ "$EXPLICIT_SLUG" == true ]]; then
+        echo "FAIL --slug may only be supplied once."
+        exit 1
+      fi
+
+      if (($# < 2)) || [[ -z "${2:-}" || "${2:-}" == -* ]]; then
+        echo "FAIL --slug requires a value."
+        echo
+        print_help
+        exit 1
+      fi
+
+      SLUG="$2"
+      EXPLICIT_SLUG=true
       shift 2
       ;;
 
@@ -107,14 +131,22 @@ fi
 DATE="$(date +%F)"
 YEAR="$(date +%Y)"
 
-SLUG="$(
-  printf '%s\n' "$TITLE" |
-    tr '[:upper:]' '[:lower:]' |
-    sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//'
-)"
+if [[ "$EXPLICIT_SLUG" == false ]]; then
+  SLUG="$(
+    printf '%s\n' "$TITLE" |
+      tr '[:upper:]' '[:lower:]' |
+      sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//'
+  )"
+fi
 
 if [[ -z "$SLUG" ]]; then
   echo "FAIL Journal title does not produce a valid filename."
+  exit 1
+fi
+
+if [[ ! "$SLUG" =~ ^[a-z0-9]+([a-z0-9-]*[a-z0-9])?$ || "$SLUG" == *--* ]]; then
+  echo "FAIL Invalid journal slug: $SLUG"
+  echo "Use lowercase letters, numbers, and single hyphens."
   exit 1
 fi
 

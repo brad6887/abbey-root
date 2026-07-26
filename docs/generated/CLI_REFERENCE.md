@@ -180,24 +180,24 @@ abbey session [command]
 
 **Subcommands**
 
-- `capture` - Create or resume the session update and journal entry together.
-  - `abbey session capture [--title TITLE] <slug>`
+- `capture` - Create or resume session artifacts using one resolved slug.
+  - `abbey session capture --title TITLE [--slug SLUG]`
 - `context` - Generate an upload-ready session context file.
   - `abbey session context [--stdout | --output FILE]`
 - `review` - Review a selected session update or the oldest unreviewed update with Codex.
   - `abbey session review [file]`
 - `start` - Show Abbey session startup information.
   - `abbey session`
-- `update` - Create a session update from the standard repository template.
-  - `abbey session update [--title TITLE] <slug>`
+- `update` - Create a session update with a title-derived or explicitly overridden slug.
+  - `abbey session update --title TITLE [--slug SLUG]`
 
 **Examples**
 
 ```text
 abbey session
 abbey session context
-abbey session update abbey-ai-decision-help
-abbey session capture guided-session-capture-workflow
+abbey session update --title "Abbey AI Decision Help"
+abbey session capture --title "Guided Session Capture Workflow"
 abbey session review
 abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 ```

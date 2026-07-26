@@ -121,6 +121,11 @@ assert_contains \
   "$output" \
   "Journal entry created:"
 
+assert_contains \
+  "capture stores resolved slug as session state" \
+  "$(cat "$session_file")" \
+  "session: guided-session-capture-workflow"
+
 session_before="$(cat "$session_file")"
 journal_before="$(cat "$journal_file")"
 
@@ -179,6 +184,59 @@ assert_contains \
   "conflicting title explains mismatch" \
   "$output" \
   "Existing session update title does not match --title"
+
+run_capture --title "Automatic Session Slug"
+
+automatic_session="$fixture_root/docs/session-updates/${date_value}-automatic-session-slug.md"
+automatic_journal="$fixture_root/content/journal/${year_value}/${date_value}-automatic-session-slug.md"
+
+assert_status \
+  "title-only capture exits successfully" \
+  "$status" \
+  0
+
+assert_file_exists \
+  "title-only capture derives session filename" \
+  "$automatic_session"
+
+assert_file_exists \
+  "title-only capture reuses slug for journal filename" \
+  "$automatic_journal"
+
+assert_contains \
+  "title-only capture reports resolved slug" \
+  "$output" \
+  "Session slug: automatic-session-slug"
+
+assert_contains \
+  "title-only capture stores resolved slug" \
+  "$(cat "$automatic_session")" \
+  "session: automatic-session-slug"
+
+run_capture \
+  --title "Override Session Slug" \
+  --slug manually-selected-slug
+
+override_session="$fixture_root/docs/session-updates/${date_value}-manually-selected-slug.md"
+override_journal="$fixture_root/content/journal/${year_value}/${date_value}-manually-selected-slug.md"
+
+assert_status \
+  "explicit capture slug exits successfully" \
+  "$status" \
+  0
+
+assert_file_exists \
+  "explicit capture slug controls session filename" \
+  "$override_session"
+
+assert_file_exists \
+  "explicit capture slug controls journal filename" \
+  "$override_journal"
+
+assert_contains \
+  "explicit capture slug is stored as session state" \
+  "$(cat "$override_session")" \
+  "session: manually-selected-slug"
 
 echo
 echo "Passed: $passed"
