@@ -177,6 +177,13 @@ Potential inputs include:
 
 Future versions should generate a draft session update for review.
 
+`abbey end` normally requires the latest commit to contain both a session
+update and a journal entry. A reconciliation-only commit is the narrow
+exception: when the commit modifies existing session updates and every
+committed update is both `status: complete` and `reviewed: true`, no new
+journal entry is required. New, incomplete, or unreviewed session updates
+continue to require a journal entry.
+
 ---
 
 ## 2. Review the Session Update

@@ -32,6 +32,74 @@ section() {
   printf '%*s\n' "${#1}" '' | tr ' ' '-'
 }
 
+is_reconciliation_only_commit() {
+  local commit_hash="$1"
+  local session_files="$2"
+  local added_session_files
+  local file
+  local frontmatter
+  local status
+  local reviewed
+
+  [[ -n "$session_files" ]] || return 1
+
+  added_session_files="$(
+    git -C "$ABBEY_ROOT" diff-tree \
+      --no-commit-id \
+      --name-only \
+      --diff-filter=A \
+      -r "$commit_hash" 2>/dev/null |
+      grep -E '^docs/session-updates/[^/]+\.md$' || true
+  )"
+
+  [[ -z "$added_session_files" ]] || return 1
+
+  while IFS= read -r file; do
+    [[ -n "$file" ]] || continue
+
+    if ! frontmatter="$(
+      git -C "$ABBEY_ROOT" show "$commit_hash:$file" 2>/dev/null
+    )"; then
+      return 1
+    fi
+
+    status="$(
+      awk -F':[[:space:]]*' '
+        /^---[[:space:]]*$/ {
+          delimiter_count += 1
+          if (delimiter_count == 2) {
+            exit
+          }
+          next
+        }
+        delimiter_count == 1 && $1 == "status" {
+          print $2
+          exit
+        }
+      ' <<<"$frontmatter"
+    )"
+    reviewed="$(
+      awk -F':[[:space:]]*' '
+        /^---[[:space:]]*$/ {
+          delimiter_count += 1
+          if (delimiter_count == 2) {
+            exit
+          }
+          next
+        }
+        delimiter_count == 1 && $1 == "reviewed" {
+          print $2
+          exit
+        }
+      ' <<<"$frontmatter"
+    )"
+
+    [[ "$status" == "complete" && "$reviewed" == "true" ]] || return 1
+  done <<<"$session_files"
+
+  return 0
+}
+
 echo "========================================"
 echo " Abbey End"
 echo "========================================"
@@ -75,6 +143,7 @@ fi
 section "Session Documentation"
 
 commit_files=""
+session_updates=""
 if [[ -n "$latest_commit_hash" ]]; then
   commit_files="$(
     git -C "$ABBEY_ROOT" diff-tree \
@@ -84,10 +153,13 @@ if [[ -n "$latest_commit_hash" ]]; then
   )"
 fi
 
-if grep -Eq '^docs/session-updates/[^/]+\.md$' <<<"$commit_files"; then
+session_updates="$(
+  grep -E '^docs/session-updates/[^/]+\.md$' <<<"$commit_files" || true
+)"
+
+if [[ -n "$session_updates" ]]; then
   session_update="$(
-    grep -E '^docs/session-updates/[^/]+\.md$' <<<"$commit_files" |
-      head -1
+    head -1 <<<"$session_updates"
   )"
   ok "Session update committed: $session_update"
 else
@@ -100,6 +172,8 @@ if grep -Eq '^content/journal/.+\.md$' <<<"$commit_files"; then
       head -1
   )"
   ok "Journal entry committed: $journal_entry"
+elif is_reconciliation_only_commit "$latest_commit_hash" "$session_updates"; then
+  ok "Journal entry not required for reconciliation-only commit"
 else
   fail "Latest commit does not contain a journal entry"
 fi

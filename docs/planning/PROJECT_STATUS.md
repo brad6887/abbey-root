@@ -153,7 +153,9 @@ Completed
 - `abbey doctor` uses centralized, platform-aware checks supporting macOS and Linux, validates effective Git author name and email, and reports their configuration sources
 - `abbey status`
 - `abbey session`
-- `abbey end`
+- `abbey end` certifies normal session commits with a journal and recognizes
+  completed, reviewed reconciliation-only commits without requiring a new
+  journal entry
 - `abbey review` as a deterministic, read-only pre-commit reviewer that summarizes current-session work and recommends the next workflow step
 - `abbey version`
 - `abbey journal` handles help and invalid options safely and supports explicit `--title` input
