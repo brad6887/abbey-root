@@ -1,218 +1,141 @@
 # Abbey Root Ideas
 
-## BradCooke.com Plant Image Enhancements
+## Formatting Cleanup Notes
 
-Only if demonstrated need warrants them, evaluate optimized web image derivatives and file-size review, optional captions and lazy loading, and a reusable plant photo gallery.
+This file is the normalized Markdown structure for the IDEAS.md cleanup.
 
-## Generated Lab Health Documentation
+## Abbey Expansion Ideas
 
-Explore whether summarized lab-health information should be published as generated project documentation.
+### Kali Linux Security Node
 
-Other exploratory possibilities include health scoring, Uptime Kuma integration, historical health-trend collection, and automatic issue creation.
+Add a Kali Linux VM as a controlled Abbey-managed security testing
+worker.
 
-## Historical Session Review Enhancements
+Kali provides specialized security tooling while Abbey remains the
+source of truth for:
 
-Explore generating reconciliation instructions directly from `abbey session review` and evaluating a dedicated historical-review mode.
+-   Approved targets
+-   Scan profiles
+-   Raw evidence
+-   Findings
+-   Assessments
+-   Remediation tracking
 
-## Museum of Dumb Ideas
+Potential commands:
 
-An established section of BradCooke.com dedicated to humorous projects, questionable decisions, abandoned ideas, and stories that are too good not to tell.
+    abbey security inventory
+    abbey security scan TARGET --profile PROFILE
+    abbey security report
+    abbey security assess --latest
 
-The goal isn't to celebrate failure—it's to document the creative process and remind people that not every idea has to become a serious project. Some ideas are funny. Some are terrible. Occasionally one accidentally becomes something worthwhile.
+### Edge01 Service Role
 
-The Museum has the feel of an actual museum, with exhibits, artifact descriptions, curator's notes, and a healthy dose of self-deprecating humor.
+Develop edge01 into a small production-like service host.
 
-Possible future wings:
+Responsibilities:
 
-- Hall of Purchased Domains
-- Half-Baked Projects
-- Surprisingly Good Ideas
-- Questionable Experiments
-- Retired Exhibits
+-   Reverse proxy
+-   Stable services
+-   Monitoring
+-   Dashboards
+-   Public Abbey Root site
 
-Current and potential exhibits:
+Keep ubuntu-dev01 focused on development and experimentation.
 
-### OmeletYouFinish.com
+### Self-Hosted Abbey Root Website
 
-Purchased the domain after the idea of creating an omelet-themed travel blog. Fortunately, common sense returned before development began.
+Use the unused Abbey Root domain as a self-hosted proving ground while
+keeping BradCooke.com on GitHub Pages.
 
-Current status:
+Goals:
 
-- Completed as the Museum's first exhibit.
-- Published at `https://bradcooke.com/museum/omelet-you-finish/`.
-- `https://omeletyoufinish.com/` permanently redirects to the exhibit.
+-   Test deployment workflows
+-   Test monitoring
+-   Test security scanning
+-   Provide a public Abbey presence
 
-### Bread Pitt
+### Mini-Enterprise Direction
 
-Originally a joke name for a sourdough starter.
+Grow Abbey through operational maturity:
 
-Unexpectedly evolved into an ongoing project documenting the starter's growth using Brad Pitt's filmography instead of days.
+-   Service catalog
+-   Environment separation
+-   Configuration management
+-   Identity management
+-   Secrets management
+-   Monitoring
+-   Backup tracking
+-   Deployment history
+-   Incident workflow
 
-Candidate for graduating from the Museum into its own permanent section of BradCooke.com.
+### Voice Analysis Project
 
-### The Jeep Incident
+Continue toward a usable first voice model.
 
-One of the earliest examples of confidence exceeding experience: at 15, Brad
-buried a Jeep in mud and required outside assistance to recover it.
+Remaining work:
 
-Current status:
+-   Human review of fact lock
+-   More scenarios
+-   Context modes
+-   Real-world validation
 
-- Completed as the Museum's second exhibit.
-- Published at `https://bradcooke.com/museum/the-jeep-incident/`.
-- Includes two surviving photographs of the incident.
+### Abbey Root as Platform
 
-### Future Philosophy
+Abbey Root should become the framework and operating platform.
 
-The Museum should feel like walking through a collection of stories rather than reading a portfolio.
+Projects should eventually live separately:
 
-Visitors should leave thinking:
-"This guy builds serious things... but he also doesn't take himself too seriously."
+-   bradcooke.com
+-   abbey-voice
+-   bread-pitt
+-   abbeyroot-site
 
-## Project Health Dashboard
+### Bread Pitt Project
 
-### Summary
+Create Bread Pitt as an independent Abbey-managed project for:
 
-Teach Abbey to track the types of work performed over time so it can help guide future sessions rather than simply recording them.
+-   Recipes
+-   Bake logs
+-   Starter history
+-   Environmental data
+-   AI-assisted analysis
 
-The goal is **not** time tracking or enforcing quotas. The goal is helping prevent important areas of the project from being neglected while still encouraging exploration.
+Workflow:
 
-### Possible Areas
+    Recipe
+    -> Bake
+    -> Observation
+    -> Analysis
+    -> Lessons learned
 
-- Infrastructure
-- Automation
-- AI
-- Workflow
-- Web Development
-- Documentation
-- Backlog / Maintenance
-- Ideas / Research
+### Raspberry Pi Environmental Monitoring
 
-The list should be configurable rather than hard-coded.
+Use Raspberry Pi devices as Abbey-managed sensor nodes.
 
-### Possible Session Metadata
+Initial goals:
 
-```yaml
-primary: automation
+-   Kitchen temperature and humidity
+-   Bread fermentation context
+-   Data closet monitoring
 
-secondary:
-  - ai
-  - workflow
+Potential future sensors:
 
-session_type: standard
-```
+-   Dough temperature
+-   Plant monitoring
+-   Soil moisture
+-   Refrigerator monitoring
 
-Possible future session types:
+Implementation order:
 
-- standard
-- sidequest
-- maintenance
-- research
+1.  Prepare Raspberry Pi.
+2.  Add sensor support.
+3.  Collect readings.
+4.  Generate summaries.
+5.  Integrate with Bread Pitt.
+6.  Add AI analysis.
 
-### Future Reports
+Core principle:
 
-Examples:
+> Prove the smallest useful workflow first, then turn repeated work into
+> Abbey commands.
 
-- Activity by area
-- Areas not touched recently
-- Monthly trends
-- Project health dashboard
-- Suggested focus for next session
-
-Example output:
-
-- Infrastructure: Healthy
-- Automation: Very Active
-- Documentation: Needs Attention
-- Ideas: Stale (28 days)
-
-### Design Principles
-
-- Encourage balance without enforcing quotas.
-- Preserve the freedom to follow interesting side quests.
-- Use history to suggest—not dictate—future work.
-- Make side quests a first-class part of the engineering process.
-- Keep metadata lightweight so session startup remains fast.
-
-## Abbey Wallboard / Command Center
-
-### Summary
-
-Develop a lightweight web-based Abbey dashboard designed for an always-on display (old iPad, monitor, or TV) that provides a live view of the Abbey Root environment.
-
-The initial goal is passive awareness rather than interaction. Over time, the dashboard could evolve into a secure operations console for common administrative tasks.
-
-### Motivation
-
-Provide a "mission control" view of the lab that makes the current state of Abbey visible at a glance without opening a terminal.
-
-Potential display devices include:
-
-- Old iPad mounted near the desk
-- Secondary monitor
-- Wall-mounted TV
-- Browser on any workstation
-
-### Phase 1 — Wallboard (Read Only)
-
-- Rotating full-screen dashboard pages
-- Current Abbey session
-- Definition of Done
-- Recommended next command
-- Lab health
-- Docker container status
-- AI worker status
-- Backup status
-- Project progress
-- Calendar / daily agenda
-- Optional "fun" screen (orchids, Bread Pitt, weather, dad joke, etc.)
-
-Display should rotate automatically every 15–30 seconds while allowing manual navigation.
-
-### Phase 2 — Command Center
-
-Add authenticated, touch-friendly operational controls for predefined Abbey actions.
-
-Examples:
-
-- Restart Uptime Kuma
-- Restart Homepage
-- Run `abbey doctor`
-- Run `abbey lab check`
-- Refresh dashboard data
-- Start backup
-- Publish website
-
-Actions should execute predefined workflows rather than arbitrary shell commands.
-
-### Architecture Ideas
-
-- Lightweight web application
-- Docker deployment
-- Accessible at `abbey.home.arpa`
-- Optimized for tablet displays
-- Real-time updates via WebSockets or Server-Sent Events
-- Multiple displays supported simultaneously
-
-### Design Principles
-
-- CLI remains the source of truth.
-- Dashboard consumes the same data as Abbey commands.
-- Prefer structured JSON output from Abbey commands over parsing terminal text.
-- Keep the display read-only until operational workflows are mature.
-- Every action should be logged and auditable.
-
-### Future Possibilities
-
-- Event-driven screen changes (show alerts when attention is needed)
-- Notification center
-- Historical graphs
-- AI worker monitoring
-- Deployment status
-- Home lab map
-- Power Infrastructure integration
-- Mobile-friendly command center
-- Voice interface using future Abbey AI capabilities
-
-### Not Yet
-
-Do not implement until the session workflow and review process have stabilized. This feature should build on the existing session metadata rather than complicating it prematurely.
