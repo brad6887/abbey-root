@@ -1,10 +1,251 @@
 ---
-title: bungalow bill
+title: Bungalow Bill
+description: The rescue and recovery story of Bungalow Bill, a Phalaenopsis rescued
+  from neglect.
 type: orchid
-status: In progress
+status: recovering
 species: Phalaenopsis
-featured: false
-draft: true
+acquired: 2026-03-29
+featured: true
+draft: false
+updatedDate: 2026-07-05
+heroImage: /images/plants/bungalow-bill/hero.png
+currentImage: /images/plants/bungalow-bill/current.png
+tags:
+- orchid
+- phalaenopsis
+- rescue
+- clearance
 ---
 
-Recovery notes, care history, photos, and progress updates will be added here as the rescue journal grows.
+## Bungalow Bill
+
+Bungalow Bill started as a $5 clearance orchid with fading flowers and an uncertain future. At first glance, he looked tired but not defeated. The leaves were still firm, the crown looked healthy, and the roots showed enough promise that he came home as another rescue project.
+
+After blooming finished, a closer inspection revealed the original nursery plug hidden inside the root ball. It was removed during repotting, damaged roots were trimmed away, and the plant was settled into fresh orchid bark. From that point on, recovery became an exercise in patience rather than quick fixes.
+
+The older leaves never completely recovered from whatever happened before the rescue, but over the following months the signs that mattered began to appear. Fresh root tips emerged, the newest leaves stayed firm, and the crown remained healthy even when the plant still looked a little rough.
+
+The biggest setback came after the move to Texas. Bungalow Bill handled the transition worse than any of the other orchids in the collection, and the change was obvious in the photos. For a while it looked like months of progress had been lost. Fortunately, the roots and new growth told a different story. Even when the older leaves looked tired, the plant continued investing its energy where it counted.
+
+Bungalow Bill has become a reminder that rescued orchids don't always look healthier before they actually are. Some of the biggest victories happen out of sight, below the bark or in the newest leaf, long before the plant looks impressive again. His story is still being written, one new root and one new leaf at a time.
+
+## 2026-03-29 — Clearance Rescue
+
+### Photos
+
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-01.jpeg)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-02.jpeg)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-03.jpeg)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-04.jpeg)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-05.jpeg)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-06.jpeg)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-07.jpeg)
+
+### What Happened
+
+Purchased from a clearance rack for $5 after confirming the plant appeared structurally healthy despite spent blooms.
+
+Dead flowers were removed after bringing the orchid home, and the plant received its first watering.
+
+### Observations
+
+- Leaves were mostly firm and green.
+- Crown appeared healthy.
+- Root system appeared promising.
+- Potting medium was dry and not swampy.
+- The plant was still carrying unopened buds.
+- Several flowers had already faded.
+
+### Notes
+
+The plant was named **Bungalow Bill** after joining the collection.
+
+Initial assessment suggested a cosmetic rescue rather than a severely declining orchid.
+
+### Lessons
+
+Healthy leaves and a sound crown are better indicators of long-term recovery potential than fading flowers alone.
+
+---
+
+## 2026-04-02 — Flower Spike Evaluation
+
+### Photos
+
+None
+
+### What Happened
+
+Considered removing the flower spike after all blooms had finished.
+
+### Observations
+
+- Flowering had ended.
+- Attention shifted toward vegetative recovery.
+
+### Notes
+
+Decision made to continue post-bloom recovery.
+
+---
+
+## 2026-04-04 — Repotting
+
+### Photos
+
+![Bungalow Bill — 2026-04-04 — Repotting](/images/plants/bungalow-bill/photo-08.jpeg)
+![Bungalow Bill — 2026-04-04 — Repotting](/images/plants/bungalow-bill/photo-09.jpeg)
+
+### What Happened
+
+Repotted into fresh orchid bark after removing the original nursery plug and trimming damaged roots.
+
+### Observations
+
+- Nursery plug was present.
+- Root pruning was performed where needed.
+- Plant was transferred into fresh media.
+
+### Notes
+
+Repotting was performed after flowering rather than immediately after rescue.
+
+### Lessons
+
+Removing the nursery plug reduces the risk of long-term moisture problems.
+
+---
+
+## 2026-04-05 — First Post-Repot Check
+
+### Photos
+
+![Bungalow Bill — 2026-04-05 — First Post-Repot Check](/images/plants/bungalow-bill/photo-10.jpeg)
+
+### What Happened
+
+Performed the first inspection after repotting.
+
+### Observations
+
+- Plant had not yet been watered after repotting.
+- No immediate signs of decline were observed.
+
+---
+
+## 2026-04-12 — Recovery Check
+
+### Photos
+
+![Bungalow Bill — 2026-04-12 — Recovery Check](/images/plants/bungalow-bill/photo-11.jpeg)
+
+### What Happened
+
+Weekly progress inspection.
+
+### Observations
+
+- Plant remained stable following the repot.
+
+---
+
+## 2026-04-15 — Recovery Check
+
+### Photos
+
+![Bungalow Bill — 2026-04-15 — Recovery Check](/images/plants/bungalow-bill/photo-12.jpeg)
+![Bungalow Bill — 2026-04-15 — Recovery Check](/images/plants/bungalow-bill/photo-13.jpeg)
+
+### What Happened
+
+Continued monitoring after repotting.
+
+### Observations
+
+- Recovery continued without major changes.
+
+---
+
+## 2026-06-13 — Early Signs of Improvement
+
+### Photos
+
+![Bungalow Bill — 2026-06-13 — Early Signs of Improvement](/images/plants/bungalow-bill/photo-14.png)
+
+### What Happened
+
+Follow-up inspection approximately two months after repotting.
+
+### Observations
+
+- Plant remained alive and recovering.
+- Newest leaf appeared healthier than the older leaves.
+
+### Notes
+
+Recovery remained slow but encouraging.
+
+---
+
+## 2026-06-28 — New Growth Encouraging
+
+### Photos
+
+![Bungalow Bill — 2026-06-28 — New Growth Encouraging](/images/plants/bungalow-bill/photo-15.png)
+![Bungalow Bill — 2026-06-28 — New Growth Encouraging](/images/plants/bungalow-bill/photo-16.png)
+![Bungalow Bill — 2026-06-28 — New Growth Encouraging](/images/plants/bungalow-bill/photo-17.png)
+
+### What Happened
+
+Another progress review focused on new growth.
+
+### Observations
+
+- Newest (center) leaf appeared firmer, glossier, and more upright than the older leaves.
+- Older outer leaves continued to show the effects of the original stress.
+- The crown remained healthy.
+- Recovery continued gradually.
+
+### Notes
+
+The healthiest growth was now coming from the center of the plant. The older leaves still documented the orchid's difficult start, but the newest leaf suggested the core of the plant was functioning normally.
+
+---
+
+## 2026-07-05 — Root Growth Confirmed
+
+### Photos
+
+![Bungalow Bill — 2026-07-05 — Root Growth Confirmed](/images/plants/bungalow-bill/photo-18.png)
+![Bungalow Bill — 2026-07-05 — Root Growth Confirmed](/images/plants/bungalow-bill/photo-19.png)
+
+### What Happened
+
+Latest documented progress review.
+
+### Observations
+
+- Fresh green root tips were visible.
+- The two newest leaves remained firm.
+- The two oldest leaves remained droopy, consistent with their condition since the day of rescue.
+- Crown remained healthy.
+
+### Notes
+
+The strongest evidence of recovery was new root growth and healthy newer leaves rather than improvement in the oldest foliage.
+
+### Lessons
+
+New roots and healthy new leaves provide a more reliable measure of recovery than older damaged foliage.
+
+---
+
+## Looking Ahead
+
+Future updates should focus on:
+
+- Continued root development.
+- New leaf production.
+- Future flower spike development.
+- Long-term recovery following the initial rescue.
