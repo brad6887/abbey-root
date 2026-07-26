@@ -16,6 +16,7 @@ The purpose of this inventory is to document the major infrastructure components
 | TRENDnet TEG-S380 8-Port 2.5 Gb Switch | Primary lab network switch | In Service |
 | UGREEN USB 3.0 2.5 Gb Ethernet Adapter | AI Worker wired networking | In Service |
 | Raspberry Pi 5 (4 GB) - edge01 | Network services appliance | In Service |
+| Raspberry Pi Zero 2 W - sensor01 | Temperature sensor | In Service |
 | SanDisk Extreme Portable SSD (2 TB) | Proxmox backup storage | In Service |
 | Anker USB-C Hub | USB expansion for Proxmox | In Service |
 | Belkin 12-Outlet Surge Protector | Power protection | In Service |
@@ -194,6 +195,35 @@ Debian 13
 It currently hosts the lab's authoritative DNS service and is undergoing validation using `ubuntu-dev01` before deployment to the remainder of the lab.
 
 Future responsibilities may include additional lightweight infrastructure services such as NTP, monitoring, and other always-on platform services.
+
+---
+
+# Raspberry Pi Zero 2 W - sensor01
+
+## Role
+
+Dedicated temperature sensor for the Abbey Root lab.
+
+## Operating System
+
+Raspberry Pi OS Lite (32-bit)
+
+## Storage
+
+- 32 GB microSD card
+
+## Network
+
+- Hostname: `sensor01`
+- IPv4 Address: `192.168.1.222` (DHCP reservation)
+- Primary connection: Wi-Fi
+- Wi-Fi MAC Address: `88:a2:9e:c3:f7:c7`
+
+## Notes
+
+Deployed as the first Abbey-managed environmental sensor node.
+
+Status: In Service
 
 ---
 
