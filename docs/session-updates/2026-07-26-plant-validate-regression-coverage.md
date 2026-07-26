@@ -3,7 +3,7 @@ title: "Plant Validate Regression Coverage"
 description: "Added focused regression coverage for every current abbey plant validate rule."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: plant-validate-regression-coverage
 tags:
   - Abbey Root
