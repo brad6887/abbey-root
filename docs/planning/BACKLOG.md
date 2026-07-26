@@ -222,6 +222,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add consensus reporting across multiple models.
 - [x] Add `abbey ai decide risk-reducer` to identify bounded work that materially reduces operational or workflow risk.
 - [x] Add `abbey ai decide workflow-friction` to identify costly recurring manual work and classify the bounded Abbey improvement it warrants.
+- [x] Add `abbey ai decide backlog-leverage` to identify one focused session whose outcome clears or materially advances the largest coherent set of backlog items.
 - [ ] Validate `abbey ai decide workflow-friction` through normal use from the canonical Ubuntu environment and assess its classification and recurrence-evidence rubric before expansion.
 - [ ] Evaluate `abbey ai decide risk-reducer` through normal use before expanding its rubric.
 - [ ] Fix the documented macOS portability failures in the Abbey AI test suite.

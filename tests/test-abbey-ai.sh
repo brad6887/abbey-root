@@ -145,6 +145,10 @@ JSON
     "$ABBEY_ROOT/config/ai/decisions/workflow-friction" \
     "$fixture_root/config/ai/decisions/workflow-friction"
 
+  cp -R \
+    "$ABBEY_ROOT/config/ai/decisions/backlog-leverage" \
+    "$fixture_root/config/ai/decisions/backlog-leverage"
+
   printf '%s\n' "$fixture_root"
 }
 
@@ -258,6 +262,89 @@ assert_contains \
   "--help describes workflow-friction selection boundary" \
   "$output" \
   "most costly recurring manual step"
+
+assert_contains \
+  "--help discovers backlog-leverage decision metadata" \
+  "$output" \
+  "backlog-leverage"
+
+assert_contains \
+  "--help describes backlog-leverage selection boundary" \
+  "$output" \
+  "largest coherent set of backlog items"
+
+backlog_leverage_prompt="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/backlog-leverage/prompt.md"
+)"
+
+assert_contains \
+  "backlog-leverage prompt requires one bounded outcome" \
+  "$backlog_leverage_prompt" \
+  "one bounded outcome"
+
+assert_contains \
+  "backlog-leverage prompt prohibits unrelated task bundling" \
+  "$backlog_leverage_prompt" \
+  "Combine independent tasks solely to increase the coverage count."
+
+assert_contains \
+  "backlog-leverage prompt ranks completion above enablement" \
+  "$backlog_leverage_prompt" \
+  "as weaker coverage than completion"
+
+assert_contains \
+  "backlog-leverage prompt requires coverage-count verification" \
+  "$backlog_leverage_prompt" \
+  "confirmed coverage count equals the number"
+
+backlog_leverage_schema="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/backlog-leverage/schema.json"
+)"
+
+assert_contains \
+  "backlog-leverage schema requires confirmed coverage count" \
+  "$backlog_leverage_schema" \
+  '"confirmed_coverage_count"'
+
+assert_contains \
+  "backlog-leverage schema requires coverage map" \
+  "$backlog_leverage_schema" \
+  '"coverage_map"'
+
+assert_contains \
+  "backlog-leverage schema classifies completion" \
+  "$backlog_leverage_schema" \
+  '"completes"'
+
+assert_contains \
+  "backlog-leverage schema classifies material advancement" \
+  "$backlog_leverage_schema" \
+  '"materially-advances"'
+
+assert_contains \
+  "backlog-leverage schema classifies direct enablement" \
+  "$backlog_leverage_schema" \
+  '"directly-enables"'
+
+assert_contains \
+  "shared report presents backlog shared outcome" \
+  "$(cat "$ABBEY_AI")" \
+  '("Shared Outcome", "shared_outcome")'
+
+assert_contains \
+  "shared report presents primary backlog item" \
+  "$(cat "$ABBEY_AI")" \
+  '("Primary Backlog Item", "primary_backlog_item")'
+
+assert_contains \
+  "shared report presents confirmed coverage" \
+  "$(cat "$ABBEY_AI")" \
+  '("Confirmed Coverage", "confirmed_coverage_count")'
+
+assert_contains \
+  "shared report presents backlog coverage map" \
+  "$(cat "$ABBEY_AI")" \
+  'coverage_map = result.get("coverage_map", [])'
 
 workflow_friction_prompt="$(
   cat "$ABBEY_ROOT/config/ai/decisions/workflow-friction/prompt.md"

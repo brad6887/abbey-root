@@ -1,0 +1,134 @@
+{
+  "type": "object",
+  "required": [
+    "recommendation",
+    "summary",
+    "priority_reason",
+    "shared_outcome",
+    "primary_backlog_item",
+    "session_fit",
+    "confirmed_coverage_count",
+    "coverage_map",
+    "blocking_items",
+    "evidence",
+    "confidence",
+    "alternatives",
+    "assumptions"
+  ],
+  "properties": {
+    "recommendation": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "priority_reason": {
+      "type": "string"
+    },
+    "shared_outcome": {
+      "type": "string"
+    },
+    "primary_backlog_item": {
+      "type": "string"
+    },
+    "session_fit": {
+      "type": "string"
+    },
+    "confirmed_coverage_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "coverage_map": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "item",
+          "effect",
+          "relationship",
+          "document"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "effect": {
+            "type": "string",
+            "enum": [
+              "completes",
+              "materially-advances",
+              "directly-enables"
+            ]
+          },
+          "relationship": {
+            "type": "string"
+          },
+          "document": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "blocking_items": {
+      "type": "array",
+      "maxItems": 0,
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "document",
+          "item"
+        ],
+        "properties": {
+          "document": {
+            "type": "string"
+          },
+          "item": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "item",
+          "coverage_count",
+          "reason_not_selected"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "coverage_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "reason_not_selected": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

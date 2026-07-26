@@ -691,6 +691,8 @@ if "failure_mode" in result:
     print(result["failure_mode"])
 
 detail_sections = [
+    ("Shared Outcome", "shared_outcome"),
+    ("Primary Backlog Item", "primary_backlog_item"),
     ("Recurring Workflow", "recurring_workflow"),
     ("Friction Point", "friction_point"),
     ("Bounded Improvement", "bounded_improvement"),
@@ -710,6 +712,7 @@ benefit_fields = [
     ("Effort", "estimated_effort"),
     ("Risk", "risk_level"),
     ("Session Fit", "session_fit"),
+    ("Confirmed Coverage", "confirmed_coverage_count"),
     ("Score", "time_saving_score"),
     ("Confidence", "confidence"),
     ("Recommendation Confidence", "recommendation_confidence"),
@@ -764,6 +767,22 @@ for heading, field in list_sections:
 
         for item in items:
             print(f"- {item}")
+
+coverage_map = result.get("coverage_map", [])
+
+if coverage_map:
+    print()
+    print("Backlog Coverage")
+    print("----------------")
+
+    for item in coverage_map:
+        backlog_item = item.get("item", "unknown")
+        effect = item.get("effect", "unknown")
+        relationship = item.get("relationship", "unknown")
+        document = item.get("document", "unknown")
+        print(f"- [{effect}] {backlog_item}")
+        print(f"  Relationship: {relationship}")
+        print(f"  Evidence: {document}")
 
 evidence = result.get("evidence", [])
 

@@ -1,0 +1,16 @@
+{
+  "name": "Backlog Leverage",
+  "description": "Choose one focused session whose outcome clears or materially advances the largest coherent set of backlog items.",
+  "category": "planning",
+  "model": "gpt-oss:20b",
+  "documents": [
+    "docs/planning/PROJECT_STATUS.md",
+    "docs/planning/NEXT.md",
+    "docs/planning/BACKLOG.md",
+    "docs/planning/ROADMAP.md"
+  ],
+  "options": {
+    "temperature": 0,
+    "num_ctx": 32768
+  }
+}
