@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -9,7 +10,12 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 METADATA_FILE = REPO_ROOT / "config/cli/cli.yml"
-CLI_REFERENCE = REPO_ROOT / "docs/generated/CLI_REFERENCE.md"
+CLI_REFERENCE = Path(
+    os.environ.get(
+        "ABBEY_CLI_REFERENCE",
+        REPO_ROOT / "docs/generated/CLI_REFERENCE.md",
+    )
+)
 
 
 def load_metadata():

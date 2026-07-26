@@ -202,6 +202,32 @@ abbey session review
 abbey session review docs/session-updates/2026-07-10-doctor-robert-plant-publishing-workflow.md
 ```
 
+## Documentation
+
+### `abbey docs`
+
+Generate and verify deterministic project documentation.
+
+**Usage**
+
+```text
+abbey docs <command>
+```
+
+**Subcommands**
+
+- `check` - Verify tracked deterministic documentation without modifying it.
+  - `abbey docs check`
+- `generate` - Regenerate deterministic documentation from authoritative sources.
+  - `abbey docs generate`
+
+**Examples**
+
+```text
+abbey docs generate
+abbey docs check
+```
+
 ## AI and knowledge
 
 ### `abbey ai`

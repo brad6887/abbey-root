@@ -171,6 +171,9 @@ Completed
 - `abbey site publish [--dry-run]` performs bounded post-push live-site verification that follows redirects and requires a final HTTP 2xx response
 - Metadata-driven CLI help
 - Generated CLI reference
+- `abbey docs generate` and `abbey docs check` deterministically manage the
+  CLI reference and legacy command-header reference without mutating files
+  during freshness checks
 - `abbey plant validate <slug>` with focused regression coverage for every
   current validation rule
 - `abbey plant publish <slug>`

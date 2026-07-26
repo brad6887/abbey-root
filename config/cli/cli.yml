@@ -134,6 +134,22 @@ commands:
       - abbey backlog refresh
       - abbey backlog check
 
+  docs:
+    category: docs
+    description: Generate and verify deterministic project documentation.
+    usage: abbey docs <command>
+    hidden: false
+    subcommands:
+      generate:
+        description: Regenerate deterministic documentation from authoritative sources.
+        usage: abbey docs generate
+      check:
+        description: Verify tracked deterministic documentation without modifying it.
+        usage: abbey docs check
+    examples:
+      - abbey docs generate
+      - abbey docs check
+
   journal:
     category: workflow
     description: Create or open an Abbey Root journal entry.

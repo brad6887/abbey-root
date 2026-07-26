@@ -1,0 +1,138 @@
+#!/usr/bin/env bash
+# COMMAND: docs
+# DESCRIPTION: Generate and verify deterministic Abbey documentation
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+
+cli_reference="$ABBEY_ROOT/docs/generated/CLI_REFERENCE.md"
+command_reference="$ABBEY_ROOT/docs/generated/abbey-commands.md"
+
+usage() {
+  cat <<'HELP'
+Abbey Docs
+
+Usage:
+  abbey docs generate
+  abbey docs check
+  abbey docs help
+
+Commands:
+  generate    Regenerate deterministic documentation from authoritative sources
+  check       Verify tracked deterministic documentation without modifying it
+
+Managed outputs:
+  docs/generated/CLI_REFERENCE.md
+    Source: config/cli/cli.yml
+
+  docs/generated/abbey-commands.md
+    Source: executable tools/abbey-* command headers
+
+Ansible-derived infrastructure documents remain managed by the existing
+abbey-docs workflow and are intentionally outside this deterministic command.
+HELP
+}
+
+generate_cli_reference() {
+  local output="$1"
+
+  ABBEY_CLI_REFERENCE="$output" \
+    python3 "$ABBEY_ROOT/scripts/abbey_cli.py" markdown
+}
+
+generate_command_reference() {
+  local output="$1"
+
+  ABBEY_COMMAND_DOCS_OUTPUT="$output" \
+    "$ABBEY_ROOT/tools/generate-command-docs.sh"
+}
+
+generate_docs() {
+  generate_cli_reference "$cli_reference"
+  generate_command_reference "$command_reference"
+
+  echo
+  echo "PASS Deterministic documentation generated."
+}
+
+check_output() {
+  local name="$1"
+  local expected="$2"
+  local generated="$3"
+
+  if [[ ! -f "$expected" ]]; then
+    echo "FAIL Missing generated document: ${expected#$ABBEY_ROOT/}"
+    return 1
+  fi
+
+  if cmp -s "$expected" "$generated"; then
+    echo "OK   $name is current"
+    return 0
+  fi
+
+  echo "FAIL $name is stale: ${expected#$ABBEY_ROOT/}"
+  return 1
+}
+
+check_docs() {
+  local temporary_dir
+  local check_status=0
+
+  temporary_dir="$(mktemp -d)"
+  trap 'rm -rf "$temporary_dir"' RETURN
+
+  generate_cli_reference "$temporary_dir/CLI_REFERENCE.md" >/dev/null
+  generate_command_reference "$temporary_dir/abbey-commands.md" >/dev/null
+
+  check_output \
+    "CLI reference" \
+    "$cli_reference" \
+    "$temporary_dir/CLI_REFERENCE.md" || check_status=1
+
+  check_output \
+    "Command reference" \
+    "$command_reference" \
+    "$temporary_dir/abbey-commands.md" || check_status=1
+
+  if ((check_status > 0)); then
+    echo
+    echo "Run: abbey docs generate"
+    return 1
+  fi
+
+  echo
+  echo "PASS Deterministic documentation is current."
+}
+
+command="${1:-help}"
+
+case "$command" in
+  generate)
+    [[ $# -eq 1 ]] || {
+      echo "ERROR generate does not accept arguments."
+      exit 1
+    }
+    generate_docs
+    ;;
+
+  check)
+    [[ $# -eq 1 ]] || {
+      echo "ERROR check does not accept arguments."
+      exit 1
+    }
+    check_docs
+    ;;
+
+  help|-h|--help)
+    usage
+    ;;
+
+  *)
+    echo "ERROR Unknown docs command: $command"
+    echo
+    usage
+    exit 1
+    ;;
+esac

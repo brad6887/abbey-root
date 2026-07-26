@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 78 complete · 272 pending · 350 total
+> **Backlog Status:** 79 complete · 271 pending · 350 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -287,7 +287,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Build metadata-driven documentation generation using planning schemas.
 - [ ] Generate planning summaries from session updates.
 - [ ] Generate AI context from planning documents.
-- [ ] Build `abbey docs generate`.
+- [x] Build bounded deterministic `abbey docs generate` and `abbey docs check`
+  orchestration for the CLI and command references.
 - [ ] Make planning documents the primary interface for Abbey toolkit commands.
 - [ ] Expand stable machine-readable planning document schemas.
 - [ ] Build project metadata APIs.

@@ -38,6 +38,21 @@ Generated documentation should never be edited manually.
 
 If generated documentation is incorrect, fix the code that produces it rather than editing the generated file.
 
+The bounded deterministic workflow currently manages:
+
+| Authoritative source | Generated output |
+| --- | --- |
+| `config/cli/cli.yml` | `docs/generated/CLI_REFERENCE.md` |
+| Executable `tools/abbey-*` command headers | `docs/generated/abbey-commands.md` |
+
+Run `abbey docs generate` to refresh both outputs and `abbey docs check` to
+verify them without modifying tracked files.
+
+The infrastructure documents generated from Ansible inventory and host
+variables remain under the existing `abbey-docs` workflow. They are outside
+the bounded deterministic command until their environment-dependent generation
+can be isolated and verified independently.
+
 ⸻
 
 Write Only What Automation Cannot
