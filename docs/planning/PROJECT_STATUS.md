@@ -152,7 +152,8 @@ Completed
 
 - `abbey doctor` uses centralized, platform-aware checks supporting macOS and Linux, validates effective Git author name and email, and reports their configuration sources
 - `abbey status` reports deterministic local counts for toolkit commands,
-  website pages, journal entries, and documentation files
+  website pages, journal entries, and documentation files; an absent open task
+  in `NEXT.md` is informational and does not prevent later checks from running
 - `abbey session`
 - `abbey end` certifies normal session commits with a journal and recognizes
   completed, reviewed reconciliation-only commits without requiring a new
