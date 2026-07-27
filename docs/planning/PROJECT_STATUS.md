@@ -235,6 +235,9 @@ Completed
 - Expand technical content.
 - Improve reusable components.
 - Continue publishing and refining the live BradCooke.com site.
+- Implement the accepted staged BradCooke.com automation architecture,
+  beginning with path-scoped hosted build validation while retaining explicit
+  production publication.
 
 ## Current Capabilities
 - Orchid Rescue plant collection
@@ -243,6 +246,10 @@ Completed
 - Generated plant profiles and selected public images from canonical workspaces
 - Plant histories can generate referenced timeline photographs with stable public filenames while sidecars and unreferenced source material remain private
 - Shared plant-page styling provides consistent presentation for timeline photographs with differing dimensions
+- Accepted publishing automation architecture selects GitHub-hosted build
+  validation and a separate manually approved production workflow while
+  preserving `abbey site publish` as the supported publication path during
+  staged implementation
 
 ---
 
