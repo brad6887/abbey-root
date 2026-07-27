@@ -3,7 +3,7 @@ title: "Abbey Doctor DNS Checks"
 description: "Added portable external and controlled internal DNS validation to Abbey Doctor."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: abbey-doctor-dns-checks
 tags:
   - Abbey Root
@@ -68,6 +68,12 @@ unhealthy on hosts that have not yet adopted the Technitium resolver.
 - `abbey docs check`.
 - `abbey backlog check`.
 - `git diff --check`.
+- Live `abbey doctor` validation on `ubuntu-dev01`:
+  - External DNS resolved `github.com`.
+  - Internal DNS resolved `edge01.home.arpa` to the expected
+    `192.168.1.221` address.
+  - Doctor completed with 31 checks passing, two unrelated role-specific
+    backup warnings, and zero failures.
 
 ## Lessons Learned
 
@@ -81,7 +87,6 @@ Python's standard resolver avoids platform-specific assumptions about `dig`,
 
 ## Next Steps
 
-- Validate the new internal and external checks on `ubuntu-dev01`.
 - Continue broader network-health work only as separately defined backlog
   sessions.
 
