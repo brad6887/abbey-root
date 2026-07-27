@@ -37,7 +37,11 @@ done
 if [[ -n "$next_file" ]]; then
   info "Next session file: ${next_file#$ABBEY_ROOT/}"
 
-  next_task="$(grep -m1 '^- \[ \]' "$next_file" | sed 's/^- \[ \] //')"
+  next_task="$(
+    grep -m1 '^- \[ \]' "$next_file" \
+      | sed 's/^- \[ \] //' \
+      || true
+  )"
 
   if [[ -n "${next_task:-}" ]]; then
     info "Recommended next task: $next_task"
