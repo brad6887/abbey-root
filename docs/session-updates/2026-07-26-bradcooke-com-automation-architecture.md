@@ -3,7 +3,7 @@ title: "BradCooke.com Automation Architecture"
 description: "Selected a staged GitHub-hosted automation architecture for BradCooke.com without weakening explicit production safeguards."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: bradcooke-com-automation-architecture
 tags:
   - Abbey Root
