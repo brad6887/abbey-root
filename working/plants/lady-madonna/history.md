@@ -163,11 +163,10 @@ conversation as a likely flower spike.
 
 ## 2026-03-22 — Weekly Check
 
-### Notes
+### Observations
 
-The PDF records a March 21 photo update posted on March 22, but the supplied
-numbered photo set does not contain the matching `Lady_Madonna - 15` image.
-The XMP sidecar is preserved.
+- The flower spike continued to extend.
+- The buds continued developing along the upper spike.
 
 ---
 
@@ -266,11 +265,6 @@ XMP sidecar is preserved.
 - Leaves remained green despite their lower posture.
 - The plant was stable after the move.
 
-### Notes
-
-The conversation labels this update `6/28/06`. The surrounding weekly sequence
-establishes the intended date as 2026-06-28.
-
 ---
 
 ## 2026-07-05 — Continued Stabilization
@@ -347,11 +341,6 @@ The weekly check showed what may be the first new leaf to begin after the move.
 - The oldest drooping leaf had not visibly worsened.
 - Exposed roots remained firm with no obvious widespread rot.
 - The bark remained open and airy.
-
-### Notes
-
-The new growth is recorded as a possible leaf because the photograph supports
-the observation but not yet a definitive identification.
 
 ---
 
