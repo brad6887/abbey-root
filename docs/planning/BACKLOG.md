@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 83 complete · 268 pending · 351 total
+> **Backlog Status:** 84 complete · 267 pending · 351 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -445,7 +445,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## Automation
 
-- [ ] Add path-scoped GitHub Actions build validation for BradCooke.com pull
+- [x] Add path-scoped GitHub Actions build validation for BradCooke.com pull
   requests and `main` using `npm ci` and the deterministic Astro build.
 - [ ] Add manually dispatched, environment-approved BradCooke.com production
   deployment with least-privilege cross-repository access and safeguards

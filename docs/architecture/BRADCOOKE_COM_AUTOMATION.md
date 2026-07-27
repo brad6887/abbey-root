@@ -8,7 +8,8 @@ production deployment without weakening the safeguards already provided by
 
 ## Status
 
-Accepted for staged implementation.
+Accepted. Stage 1 build validation is implemented; Stage 2 production
+deployment remains pending.
 
 ## Current Architecture
 
