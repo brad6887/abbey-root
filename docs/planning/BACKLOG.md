@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 86 complete · 265 pending · 351 total
+> **Backlog Status:** 86 complete · 266 pending · 352 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -33,6 +33,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## Abbey Framework
 
+- [ ] Begin Bread Pitt domain modeling in its own focused project session.
 - [x] Design and implement the first safe `abbey init`.
 - [ ] Create shared CLI libraries.
 - [ ] Standardize universal CLI commands.
