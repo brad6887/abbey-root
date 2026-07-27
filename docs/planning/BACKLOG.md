@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 82 complete · 269 pending · 351 total
+> **Backlog Status:** 83 complete · 268 pending · 351 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -445,9 +445,13 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## Automation
 
-- [ ] Automate BradCooke.com builds.
-- [ ] Automate deployment.
-- [ ] Evaluate GitHub Actions vs self-hosted automation.
+- [ ] Add path-scoped GitHub Actions build validation for BradCooke.com pull
+  requests and `main` using `npm ci` and the deterministic Astro build.
+- [ ] Add manually dispatched, environment-approved BradCooke.com production
+  deployment with least-privilege cross-repository access and safeguards
+  equivalent to `abbey site publish`.
+- [x] Select staged GitHub-hosted Actions over self-hosted automation for
+  BradCooke.com builds and deployment.
 - [x] Automate plant workspace validation before publishing.
 - [ ] Automate plant image metadata checks.
 - [ ] Automate creation of optimized published image copies.
