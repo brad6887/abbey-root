@@ -3,7 +3,7 @@ title: "Abbey Status Project Metrics"
 description: "Added deterministic local project metrics to abbey status with safe missing-source behavior and regression coverage."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: abbey-status-project-metrics
 tags:
   - Abbey Root
