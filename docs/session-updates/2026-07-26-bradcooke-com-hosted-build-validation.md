@@ -3,7 +3,7 @@ title: "BradCooke.com Hosted Build Validation"
 description: "Implemented credential-free, path-scoped GitHub-hosted Astro build validation for BradCooke.com."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: bradcooke-com-hosted-build-validation
 tags:
   - Abbey Root
