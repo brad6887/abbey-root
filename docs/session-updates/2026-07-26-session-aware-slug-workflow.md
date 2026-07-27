@@ -3,7 +3,7 @@ title: "Session-Aware Slug Workflow"
 description: "Added title-derived session slugs, explicit overrides, and consistent artifact filename state."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: session-aware-slug-workflow
 tags:
   - Abbey Root
