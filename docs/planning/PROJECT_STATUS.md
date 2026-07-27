@@ -250,6 +250,9 @@ Completed
   validation and a separate manually approved production workflow while
   preserving `abbey site publish` as the supported publication path during
   staged implementation
+- Path-scoped GitHub-hosted validation installs the locked BradCooke.com
+  dependency graph, builds the Astro site, and verifies its generated entry
+  point for pull requests and changes to `main` without production credentials
 
 ---
 
