@@ -5,6 +5,7 @@ SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 METRICS_CHECK="$ABBEY_ROOT/tools/status/checks/07-project-metrics.sh"
+PLANNING_CHECK="$ABBEY_ROOT/tools/status/checks/06-planning.sh"
 OUTPUT_LIBRARY="$ABBEY_ROOT/tools/status/lib/output.sh"
 
 passed=0
@@ -42,6 +43,16 @@ run_metrics() {
     ABBEY_ROOT="$fixture_root" \
       bash -c 'source "$1"; source "$2"' \
       _ "$OUTPUT_LIBRARY" "$METRICS_CHECK"
+  )"
+}
+
+run_planning_and_metrics() {
+  local fixture_root="$1"
+
+  output="$(
+    ABBEY_ROOT="$fixture_root" \
+      bash -euo pipefail -c 'source "$1"; source "$2"; source "$3"' \
+      _ "$OUTPUT_LIBRARY" "$PLANNING_CHECK" "$METRICS_CHECK"
   )"
 }
 
@@ -95,6 +106,26 @@ assert_contains "missing toolkit directory fails safely" "$output" "INFO Toolkit
 assert_contains "missing website directory fails safely" "$output" "INFO Website pages: Unavailable"
 assert_contains "missing journal directory fails safely" "$output" "INFO Journal entries: Unavailable"
 assert_contains "missing documentation directory fails safely" "$output" "INFO Documentation files: Unavailable"
+
+no_open_task_root="$test_root/no-open-task"
+mkdir -p \
+  "$no_open_task_root/docs/planning" \
+  "$no_open_task_root/tools/bin" \
+  "$no_open_task_root/site/src/pages" \
+  "$no_open_task_root/content/journal" \
+  "$no_open_task_root/docs/reference"
+printf '%s\n' '- [x] Completed task.' > "$no_open_task_root/docs/planning/NEXT.md"
+
+run_planning_and_metrics "$no_open_task_root"
+
+assert_contains \
+  "completed NEXT file is reported without exiting" \
+  "$output" \
+  "WARN No open next-session task found"
+assert_contains \
+  "project metrics run after a completed NEXT file" \
+  "$output" \
+  "Project Metrics"
 
 echo
 echo "Passed: $passed"
