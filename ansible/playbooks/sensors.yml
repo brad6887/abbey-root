@@ -1,0 +1,7 @@
+---
+- name: Configure Abbey environmental sensor nodes
+  hosts: sensors
+  become: true
+
+  roles:
+    - sensor

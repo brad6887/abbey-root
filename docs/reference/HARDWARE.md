@@ -212,6 +212,13 @@ Raspberry Pi OS Lite (32-bit)
 
 - 32 GB microSD card
 
+## Sensor
+
+- Model: Adafruit SHT41 Trinkey (Product 5912)
+- Measurements: Temperature and relative humidity
+- Connection: USB serial at 115200 baud
+- Firmware: Adafruit preloaded SHT4x serial firmware
+
 ## Network
 
 - Hostname: `sensor01`
@@ -221,7 +228,8 @@ Raspberry Pi OS Lite (32-bit)
 
 ## Notes
 
-Deployed as the first Abbey-managed environmental sensor node.
+Deployed as the first Abbey-managed environmental sensor node. The USB sensor
+will be connected through a micro-USB OTG adapter or hub when it arrives.
 
 Status: In Service
 

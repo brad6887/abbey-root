@@ -1,0 +1,31 @@
+---
+- name: Install USB serial support
+  ansible.builtin.apt:
+    name:
+      - python3-serial
+    state: present
+    update_cache: true
+  when: ansible_os_family == "Debian"
+
+- name: Grant the Abbey administrator serial device access
+  ansible.builtin.user:
+    name: "{{ admin_user }}"
+    groups:
+      - dialout
+    append: true
+
+- name: Create the Abbey sensor application directory
+  ansible.builtin.file:
+    path: /opt/abbey/sensor
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Create the Abbey sensor data directory
+  ansible.builtin.file:
+    path: /var/lib/abbey-sensor
+    state: directory
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: "0750"

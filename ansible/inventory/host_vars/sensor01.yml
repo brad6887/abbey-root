@@ -1,0 +1,15 @@
+---
+host_description: Temperature and humidity sensor
+primary_ip: 192.168.1.222
+
+server_purpose:
+  - Environmental monitoring
+  - Temperature sensing
+  - Humidity sensing
+
+docker_host: false
+homepage_show_server: false
+
+sensor_model: Adafruit SHT41 Trinkey
+sensor_connection: USB serial
+sensor_baud_rate: 115200
