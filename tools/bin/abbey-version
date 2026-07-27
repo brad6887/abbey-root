@@ -3,10 +3,12 @@ set -u
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 export ABBEY_ROOT
 
-project_name="Abbey Root"
+source "$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+project_name="$(abbey_project_name "$ABBEY_ROOT")"
 branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null || echo unknown)"
 commit="$(git -C "$ABBEY_ROOT" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 version="$(git -C "$ABBEY_ROOT" describe --tags --always --dirty 2>/dev/null || echo "$commit")"

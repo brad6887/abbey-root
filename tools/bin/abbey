@@ -3,104 +3,121 @@ set -u
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+ABBEY_TOOLKIT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+ABBEY_ROOT="$ABBEY_TOOLKIT_ROOT"
+
+search_dir="$PWD"
+while [[ "$search_dir" != "/" ]]; do
+  if [[ -f "$search_dir/.abbey/project.yml" ]]; then
+    ABBEY_ROOT="$search_dir"
+    break
+  fi
+  search_dir="$(dirname "$search_dir")"
+done
+
+export ABBEY_TOOLKIT_ROOT
 export ABBEY_ROOT
 
 command="${1:-help}"
 
 case "$command" in
+  init)
+    shift
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-init" "$@"
+    ;;
+
   doctor)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-doctor" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-doctor" "$@"
     ;;
 
   journal)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-journal" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-journal" "$@"
     ;;
 
   ai)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-ai" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-ai" "$@"
     ;;
 
   research)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-research" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-research" "$@"
     ;;
 
   status)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-status" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-status" "$@"
     ;;
 
   session)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-session" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-session" "$@"
     ;;
 
   end)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-end" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-end" "$@"
     ;;
 
   review)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-review" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-review" "$@"
     ;;
 
   next)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-next" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-next" "$@"
     ;;
 
   backlog)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-backlog" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-backlog" "$@"
     ;;
 
   docs)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-docs" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-docs" "$@"
     ;;
 
   knowledge)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-knowledge" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-knowledge" "$@"
     ;;
 
   site)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-site" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-site" "$@"
     ;;
 
   plant)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-plant" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-plant" "$@"
     ;;
 
   lab)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-lab" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-lab" "$@"
     ;;
 
   ssh)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-ssh" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-ssh" "$@"
     ;;
 
   version)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-version" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-version" "$@"
     ;;
 
   context)
     shift
-    "$ABBEY_ROOT/tools/bin/abbey-context" "$@"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-context" "$@"
     ;;    
 
   help|-h|--help)
-    "$ABBEY_ROOT/scripts/abbey_cli.py" help
+    "$ABBEY_TOOLKIT_ROOT/scripts/abbey_cli.py" help
     ;;
 
   *)

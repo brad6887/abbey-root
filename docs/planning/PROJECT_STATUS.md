@@ -131,6 +131,9 @@ Completed
 - Framework documentation.
 - Guide documentation.
 - Power Infrastructure framework adoption.
+- Safe default `abbey init PATH` project bootstrap with dry-run support,
+  optional Git initialization, generated metadata and workflow documents,
+  destination protection, result validation, and no automatic commit or remote.
 
 ## Current Focus
 
@@ -164,6 +167,9 @@ Completed
   journal entry
 - `abbey review` as a deterministic, read-only pre-commit reviewer that summarizes current-session work and recommends the next workflow step
 - `abbey version`
+- `abbey init PATH` creates a minimal independent Abbey project while keeping
+  framework implementation shared; core commands discover the active project
+  through `.abbey/project.yml`
 - `abbey journal` handles help and invalid options safely and supports explicit `--title` input
 - `abbey ai`
 - Metadata-driven `abbey ai decide` discovery and help
@@ -341,13 +347,15 @@ Completed
 - Created onboarding documentation.
 - Adopted the framework within Power Infrastructure.
 - Continued improving project-aware workflows.
+- Implemented and validated the first default Abbey project bootstrap using a
+  temporary Bread Pitt repository.
 
 ---
 
 # Current Challenges
 
 - Completing the end-to-end Abbey workflow.
-- Designing `abbey init`.
+- Validating the default `abbey init` workflow through practical project use.
 - Reducing manually maintained documentation.
 - AI project awareness.
 - Reducing publish-preview noise.

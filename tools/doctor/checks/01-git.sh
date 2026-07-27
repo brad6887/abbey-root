@@ -13,7 +13,7 @@ fi
 branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null)"
 [ -n "$branch" ] && ok "Current branch: $branch" || warn "Unable to determine current branch"
 
-if git -C "$ABBEY_ROOT" diff --quiet && git -C "$ABBEY_ROOT" diff --cached --quiet; then
+if [[ -z "$(git -C "$ABBEY_ROOT" status --porcelain)" ]]; then
   ok "Working tree clean"
 else
   warn "Working tree has uncommitted changes"

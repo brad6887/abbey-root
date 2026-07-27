@@ -13,7 +13,7 @@ count_files() {
 }
 
 TOOLKIT_COMMANDS="$(
-  count_files "$ABBEY_ROOT/tools/bin" -maxdepth 1 -name 'abbey-*' -perm -111
+  count_files "${ABBEY_TOOLKIT_ROOT:-$ABBEY_ROOT}/tools/bin" -maxdepth 1 -name 'abbey-*' -perm -111
 )"
 WEBSITE_PAGES="$(
   count_files "$ABBEY_ROOT/site/src/pages" -name '*.astro'

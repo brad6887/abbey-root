@@ -17,7 +17,15 @@ set -euo pipefail
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 export ABBEY_ROOT
+if [[ -f "$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh" ]]; then
+  source "$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+else
+  abbey_project_name() {
+    printf '%s\n' "Abbey Root"
+  }
+fi
 
 ok() {
   echo "OK   $*"
@@ -101,8 +109,10 @@ pending_session_updates() {
 }
 
 session_start() {
+  local project_name
+  project_name="$(abbey_project_name "$ABBEY_ROOT")"
   echo "========================================"
-  echo " Abbey Root Session"
+  echo " $project_name Session"
   echo "========================================"
   echo
   echo "Date: $(date)"
@@ -263,15 +273,18 @@ session_context_document() {
   local recent_session
   local recent_journal
 
-  generated="$(date --iso-8601=seconds)"
+  generated="$(date '+%Y-%m-%dT%H:%M:%S%z')"
   branch="$(git -C "$ABBEY_ROOT" branch --show-current 2>/dev/null || true)"
   commit="$(git -C "$ABBEY_ROOT" log -1 --format='%H %s' 2>/dev/null || true)"
   origin="$(git -C "$ABBEY_ROOT" remote get-url origin 2>/dev/null || true)"
   recent_session="$(latest_session_update)"
   recent_journal="$(latest_journal)"
 
+  local project_name
+  project_name="$(abbey_project_name "$ABBEY_ROOT")"
+
   cat <<EOF
-# Abbey Root Session Context
+# $project_name Session Context
 
 > Generated session-start snapshot. This file is not an authoritative project
 > document and should not be edited as a source of truth.
@@ -286,7 +299,7 @@ session_context_document() {
 ## Intended Use
 
 This file contains the repository context normally collected at the beginning
-of an Abbey Root work session. Upload the file as the initial project context,
+of an Abbey work session. Upload the file as the initial project context,
 then define one focused objective and its definition of done.
 
 EOF
@@ -343,10 +356,10 @@ EOF
   fi
 
   context_command "Abbey Doctor" \
-    "$ABBEY_ROOT/tools/bin/abbey-doctor"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-doctor"
 
   context_command "Abbey Version" \
-    "$ABBEY_ROOT/tools/bin/abbey-version"
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-version"
 }
 
 session_context() {
@@ -415,7 +428,7 @@ HELP
 
   if [[ -z "$output_file" ]]; then
     timestamp="$(date '+%Y-%m-%d-%H%M%S')"
-    output_file="$context_dir/${timestamp}-abbey-root-context.md"
+    output_file="$context_dir/${timestamp}-abbey-context.md"
   elif [[ "$output_file" != /* ]]; then
     output_file="$PWD/$output_file"
   fi
