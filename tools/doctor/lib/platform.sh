@@ -20,6 +20,28 @@ doctor_ping_host() {
   esac
 }
 
+doctor_resolve_ipv4() {
+  local hostname="$1"
+
+  python3 - "$hostname" <<'PY'
+import socket
+import sys
+
+hostname = sys.argv[1]
+
+try:
+    results = socket.getaddrinfo(hostname, None, family=socket.AF_INET)
+except socket.gaierror:
+    raise SystemExit(1)
+
+addresses = sorted({result[4][0] for result in results})
+if not addresses:
+    raise SystemExit(1)
+
+print("\n".join(addresses))
+PY
+}
+
 doctor_load_average() {
   local load_average=""
 
