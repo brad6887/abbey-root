@@ -235,9 +235,9 @@ Completed
 - Expand technical content.
 - Improve reusable components.
 - Continue publishing and refining the live BradCooke.com site.
-- Implement the accepted staged BradCooke.com automation architecture,
-  beginning with path-scoped hosted build validation while retaining explicit
-  production publication.
+- Evaluate the completed Stage 1 BradCooke.com hosted build validation through
+  normal pull-request use before implementing the separately approved Stage 2
+  production workflow.
 
 ## Current Capabilities
 - Orchid Rescue plant collection
