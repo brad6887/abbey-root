@@ -3,7 +3,7 @@ title: "Abbey Status Planning Fallthrough Fix"
 description: "Prevented the Planning status check from stopping abbey status when NEXT.md has no open task."
 date: 2026-07-26
 status: complete
-reviewed: false
+reviewed: true
 session: abbey-status-planning-fallthrough-fix
 tags:
   - Abbey Root
