@@ -46,6 +46,22 @@ abbey help
 abbey help
 ```
 
+### `abbey init`
+
+Create a new Abbey project from the default template.
+
+**Usage**
+
+```text
+abbey init PATH [--name NAME] [--description TEXT] [--dry-run] [--yes] [--no-git]
+```
+
+**Examples**
+
+```text
+abbey init bread-pitt --name "Bread Pitt" --yes
+```
+
 ### `abbey status`
 
 Show local system, repository, and project metrics.

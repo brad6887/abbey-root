@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 84 complete · 267 pending · 351 total
+> **Backlog Status:** 86 complete · 265 pending · 351 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -14,7 +14,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## High Priority
 
-- [ ] Design `abbey init` project bootstrap command.
+- [x] Design and implement the first safe `abbey init` project bootstrap command.
 - [x] Create `abbey end` session workflow.
 - [ ] Continue refining `abbey session review` through practical usage before adding broader automation.
 - [ ] Continue eliminating manually maintained documentation.
@@ -33,7 +33,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## Abbey Framework
 
-- [ ] Design `abbey init`.
+- [x] Design and implement the first safe `abbey init`.
 - [ ] Create shared CLI libraries.
 - [ ] Standardize universal CLI commands.
 - [ ] Create framework validation.

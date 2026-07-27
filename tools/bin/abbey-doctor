@@ -5,13 +5,15 @@ set -u
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-ABBEY_ROOT="$(cd "$(dirname "$SCRIPT_PATH")/../.." && pwd)"
-DOCTOR_DIR="$ABBEY_ROOT/tools/doctor"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
+DOCTOR_DIR="$ABBEY_TOOLKIT_ROOT/tools/doctor"
 
 source "$DOCTOR_DIR/lib/output.sh"
 source "$DOCTOR_DIR/lib/platform.sh"
+source "$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
 
-print_header "Abbey Root Doctor"
+print_header "$(abbey_project_name "$ABBEY_ROOT") Doctor"
 
 echo "Date: $(date)"
 echo "Host: $(hostname)"

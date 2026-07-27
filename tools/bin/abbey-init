@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Purpose:
+#   Create a new project from the default Abbey template.
+#
+# Usage:
+#   abbey init PATH [--name NAME] [--description TEXT] [--dry-run] [--yes] [--no-git]
+#
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+
+exec python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_init.py" "$@"
