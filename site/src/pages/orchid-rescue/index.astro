@@ -30,23 +30,36 @@ const orchids = plants
       <h2>Current Orchid Rescues</h2>
 
       <div class="plant-grid">
-        {orchids.map((orchid) => (
-          <article class="plant-card">
-            <h3>
-              <a
-                href={
-                  orchid.data.draft
-                    ? "/orchid-rescue/coming-soon/"
-                    : `/orchid-rescue/${orchid.id.replace(/\.md$/, "")}/`
-                }
-              >
-                {orchid.data.title}
-              </a>
-            </h3>
-            <p class="status">{orchid.data.status}</p>
-            {orchid.data.species && <p>{orchid.data.species}</p>}
-          </article>
-        ))}
+        {
+          orchids.map((orchid) => {
+            const href = orchid.data.draft
+              ? "/orchid-rescue/coming-soon/"
+              : `/orchid-rescue/${orchid.id.replace(/\.md$/, "")}/`;
+            const thumbnail =
+              orchid.data.currentImage ?? orchid.data.heroImage ?? null;
+
+            return (
+              <article class:list={["plant-card", { draft: orchid.data.draft }]}>
+                <a href={href} aria-label={orchid.data.title}>
+                  <div class="thumbnail">
+                    {!orchid.data.draft && thumbnail ? (
+                      <img
+                        src={thumbnail}
+                        alt={`${orchid.data.title} orchid`}
+                      />
+                    ) : (
+                      <div class="coming-soon" aria-hidden="true">
+                        <span>Coming Soon</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <h3>{orchid.data.title}</h3>
+                </a>
+              </article>
+            );
+          })
+        }
       </div>
     </section>
   </main>
@@ -62,22 +75,92 @@ const orchids = plants
 
   .plant-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.5rem;
     margin-top: 1.5rem;
   }
 
   .plant-card {
-    border: 1px solid #ddd;
+    min-width: 0;
+  }
+
+  .plant-card a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .thumbnail {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
     border-radius: 0.75rem;
-    padding: 1.25rem;
+    background: var(--color-surface);
+    box-shadow: 0 0.2rem 0.8rem rgb(15 23 42 / 10%);
+    transition:
+      transform 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .plant-card a:hover .thumbnail,
+  .plant-card a:focus-visible .thumbnail {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1.25rem rgb(15 23 42 / 16%);
+  }
+
+  .thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .coming-soon {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    background:
+      radial-gradient(
+        circle at 50% 32%,
+        color-mix(in srgb, var(--color-link) 18%, transparent),
+        transparent 42%
+      ),
+      var(--color-surface);
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .coming-soon span {
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
   }
 
   .plant-card h3 {
-    margin-top: 0;
+    margin: 0.65rem 0 0;
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.3;
+    text-align: center;
   }
 
-  .status {
-    font-weight: 700;
+  .plant-card.draft h3 {
+    color: var(--color-muted);
+    text-transform: capitalize;
+  }
+
+  @media (max-width: 520px) {
+    .page {
+      padding-inline: 1rem;
+    }
+
+    .plant-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem 0.9rem;
+    }
   }
 </style>
