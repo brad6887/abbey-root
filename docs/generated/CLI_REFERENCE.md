@@ -48,7 +48,7 @@ abbey help
 
 ### `abbey status`
 
-Show local system and project status.
+Show local system, repository, and project metrics.
 
 **Usage**
 

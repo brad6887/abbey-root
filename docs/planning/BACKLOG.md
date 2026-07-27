@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 80 complete · 271 pending · 351 total
+> **Backlog Status:** 81 complete · 270 pending · 351 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -155,7 +155,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Display the Abbey Root commit hash in `abbey site publish`.
 - [x] Add live-site verification to `abbey site publish`.
 - [ ] Make `abbey site publish` fail immediately when `git push` fails and verify the expected deployed source and production revisions instead of accepting any HTTP 2xx response.
-- [ ] Add project metrics to `abbey-status`.
+- [x] Add project metrics to `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
 - [ ] Add network health checks to `abbey-doctor`.
 - [x] Add Git author identity checks to `abbey-doctor`.

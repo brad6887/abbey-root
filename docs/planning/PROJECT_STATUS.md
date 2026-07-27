@@ -151,7 +151,8 @@ Completed
 ## Current Capabilities
 
 - `abbey doctor` uses centralized, platform-aware checks supporting macOS and Linux, validates effective Git author name and email, and reports their configuration sources
-- `abbey status`
+- `abbey status` reports deterministic local counts for toolkit commands,
+  website pages, journal entries, and documentation files
 - `abbey session`
 - `abbey end` certifies normal session commits with a journal and recognizes
   completed, reviewed reconciliation-only commits without requiring a new
@@ -365,7 +366,11 @@ Completed
 
 ## Current
 
-- Metrics generated manually.
+- `abbey status` automatically reports:
+  - Toolkit commands.
+  - Website pages.
+  - Journal entries.
+  - Documentation files.
 
 ## Future
 
@@ -376,10 +381,7 @@ Generate automatically:
 - Containers.
 - Ansible roles.
 - Playbooks.
-- Toolkit commands.
-- Website pages.
-- Journal entries.
-- Documentation statistics.
+- Broader documentation statistics.
 - Planning summaries.
 - AI evaluation reports.
 - Framework adoption metrics.

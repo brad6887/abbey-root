@@ -55,7 +55,7 @@ commands:
 
   status:
     category: core
-    description: Show local system and project status.
+    description: Show local system, repository, and project metrics.
     usage: abbey status
     hidden: false
     examples:
