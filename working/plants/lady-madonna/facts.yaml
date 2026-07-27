@@ -1,0 +1,43 @@
+name: Lady Madonna
+slug: lady-madonna
+
+plant:
+  type: orchid
+  genus: Phalaenopsis
+  species: null
+  hybrid: true
+
+rescue:
+  date: null
+  source: Lowe's clearance rack (unconfirmed)
+  location:
+    city: null
+    state: null
+    country: null
+
+status:
+  current: recovering
+  current_location:
+    city: null
+    state: null
+    country: null
+  updated: 2026-07-26
+
+care:
+  potting_medium: orchid bark
+  container: clear orchid pot
+
+photos:
+  hero: photos/Lady_Madonna - 17.jpeg
+  current: photos/Lady_Madonna - 30.JPG
+  metadata: photo-metadata.md
+
+documents:
+  story: story.md
+  history: history.md
+
+tags:
+  - orchid
+  - orchid-rescue
+  - phalaenopsis
+  - recovering
