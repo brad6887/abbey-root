@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 81 complete · 270 pending · 351 total
+> **Backlog Status:** 82 complete · 269 pending · 351 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -478,7 +478,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Add Proxmox VM status.
 - [ ] Add Docker container checks.
 - [ ] Add Homepage/NPM/Uptime Kuma HTTP checks.
-- [ ] Add DNS checks.
+- [x] Add DNS checks.
 - [ ] Add Ansible Vault detection.
 - [ ] Add role-aware checks.
 - [ ] Add JSON output.

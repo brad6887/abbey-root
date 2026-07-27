@@ -150,7 +150,11 @@ Completed
 
 ## Current Capabilities
 
-- `abbey doctor` uses centralized, platform-aware checks supporting macOS and Linux, validates effective Git author name and email, and reports their configuration sources
+- `abbey doctor` uses centralized, platform-aware checks supporting macOS and
+  Linux, validates effective Git author name and email, reports their
+  configuration sources, verifies external DNS resolution on every host, and
+  verifies `edge01.home.arpa` against the inventory-managed address on the
+  controlled `ubuntu-dev01` DNS validation client
 - `abbey status` reports deterministic local counts for toolkit commands,
   website pages, journal entries, and documentation files; an absent open task
   in `NEXT.md` is informational and does not prevent later checks from running
