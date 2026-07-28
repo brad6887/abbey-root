@@ -51,6 +51,15 @@ The backlog is intentionally broad and serves as the project's working inventory
   - Add clear errors for missing required sections.
   - Add `abbey next init` or `abbey next update` to create valid templates.
 
+## External Project Portability
+
+- [ ] Make `abbey session capture` resolve `abbey-journal` from the Abbey toolkit root instead of the active project.
+- [ ] Make `abbey review` resolve `abbey_session_metadata.py` from the Abbey toolkit root.
+- [ ] Make infrastructure-specific `abbey doctor` checks conditional on project capabilities.
+- [ ] Add configurable journal policy for initialized projects, including event-driven or optional journals.
+- [ ] Make `abbey review` suggest validation commands appropriate to the active project type.
+- [ ] Verify `abbey backlog refresh` works correctly in external Abbey projects.
+
 ## Abbey Session Workflow Improvements
 
 - [x] Improve session capture workflow by creating session updates and journal entries through a guided process.
