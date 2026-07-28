@@ -37,6 +37,14 @@ git -C "$project" rev-parse --is-inside-work-tree >/dev/null 2>&1 &&
 [[ -z "$(git -C "$project" log --oneline 2>/dev/null)" ]] &&
   pass "no commit is created" || fail "no commit is created"
 assert_contains "created files are reported" "CREATE README.md" "$output"
+assert_contains \
+  "initialized projects record event-driven journal policy" \
+  "policy: event-driven" \
+  "$(cat "$project/.abbey/project.yml")"
+assert_contains \
+  "initialized projects disable infrastructure checks" \
+  "infrastructure: false" \
+  "$(cat "$project/.abbey/project.yml")"
 
 version_output="$(cd "$project" && "$ABBEY" version)"
 assert_contains "version uses project metadata" "Bread Pitt" "$version_output"
@@ -46,6 +54,23 @@ assert_contains "session uses project metadata" "Bread Pitt Session" "$session_o
 
 context_output="$(cd "$project" && "$ABBEY" session context --stdout)"
 assert_contains "context uses project metadata" "# Bread Pitt Session Context" "$context_output"
+
+doctor_output="$(cd "$project" && "$ABBEY" doctor || true)"
+if grep -Fq "Host Reachability" <<<"$doctor_output"; then
+  fail "doctor skips infrastructure checks for external projects"
+else
+  pass "doctor skips infrastructure checks for external projects"
+fi
+
+backlog_output="$(cd "$project" && "$ABBEY" backlog refresh)"
+assert_contains \
+  "backlog refresh works in an external project" \
+  "OK   Refreshed backlog statistics." \
+  "$backlog_output"
+assert_contains \
+  "external backlog receives generated status" \
+  "<!-- BEGIN GENERATED BACKLOG STATUS -->" \
+  "$(cat "$project/docs/planning/BACKLOG.md")"
 
 mkdir "$test_root/nonempty"
 touch "$test_root/nonempty/existing"
@@ -58,6 +83,13 @@ fi
 no_git="$test_root/no-git"
 "$ABBEY" init "$no_git" --no-git --yes >/dev/null
 [[ ! -d "$no_git/.git" ]] && pass "--no-git skips Git" || fail "--no-git skips Git"
+
+optional="$test_root/optional-journal"
+"$ABBEY" init "$optional" --journal-policy optional --no-git --yes >/dev/null
+assert_contains \
+  "init accepts optional journal policy" \
+  "policy: optional" \
+  "$(cat "$optional/.abbey/project.yml")"
 
 echo
 echo "Passed: $passed"

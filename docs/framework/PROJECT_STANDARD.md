@@ -204,6 +204,20 @@ Examples:
 
 Project-specific capabilities should build on the standard rather than replace it.
 
+Project-owned Abbey behavior is declared in `.abbey/project.yml`. Reusable
+toolkit commands must resolve their implementations from the installed Abbey
+toolkit while reading and writing project artifacts under the active project
+root.
+
+The standard project metadata supports:
+
+* `capabilities.infrastructure`, which enables infrastructure-specific health
+  checks only for projects that own infrastructure.
+* `workflow.journal.policy`, with `required`, `event-driven`, and `optional`
+  policies.
+* `validation.commands`, an ordered list of project-appropriate commands shown
+  by `abbey review`.
+
 ---
 
 # Reference Implementation
@@ -213,4 +227,3 @@ Abbey Root is the reference implementation of the Abbey Project Standard.
 Other repositories adopt the standard while extending it for their own domain.
 
 The goal is that every Abbey-style repository shares the same engineering philosophy, documentation structure, workflow, and developer experience.
-

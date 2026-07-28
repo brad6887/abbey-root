@@ -40,10 +40,11 @@ commands:
   init:
     category: core
     description: Create a new Abbey project from the default template.
-    usage: abbey init PATH [--name NAME] [--description TEXT] [--dry-run] [--yes] [--no-git]
+    usage: abbey init PATH [--name NAME] [--description TEXT] [--journal-policy POLICY] [--dry-run] [--yes] [--no-git]
     hidden: false
     examples:
       - abbey init bread-pitt --name "Bread Pitt" --yes
+      - abbey init notes --journal-policy optional --yes
 
   help:
     category: core

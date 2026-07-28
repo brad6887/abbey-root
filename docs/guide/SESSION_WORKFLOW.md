@@ -144,6 +144,12 @@ abbey session capture \
 
 Existing positional-slug usage remains supported for backward compatibility.
 
+Initialized projects declare their journal policy in `.abbey/project.yml`.
+`required` creates a journal entry for every capture. `event-driven` (the
+default for new projects) and `optional` create the session update without a
+journal unless `--journal` is supplied. `--no-journal` provides an explicit
+one-session override when a required journal is not appropriate.
+
 ---
 
 # During the Session

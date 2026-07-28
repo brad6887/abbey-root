@@ -4,6 +4,7 @@ set -euo pipefail
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+ABBEY_TOOLKIT_ROOT="$ABBEY_ROOT"
 
 passed=0
 failed=0
@@ -63,21 +64,15 @@ fixture_root="$test_root/repo"
 trap 'rm -rf "$test_root"' EXIT
 
 mkdir -p \
-  "$fixture_root/tools/bin" \
   "$fixture_root/docs/session-updates" \
   "$fixture_root/content/journal"
-
-cp "$ABBEY_ROOT/tools/bin/abbey-session" \
-  "$fixture_root/tools/bin/abbey-session"
-
-cp "$ABBEY_ROOT/tools/bin/abbey-journal" \
-  "$fixture_root/tools/bin/abbey-journal"
 
 run_capture() {
   set +e
   output="$(
     ABBEY_ROOT="$fixture_root" \
-      "$fixture_root/tools/bin/abbey-session" \
+      ABBEY_TOOLKIT_ROOT="$ABBEY_TOOLKIT_ROOT" \
+      "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-session" \
       capture "$@" 2>&1
   )"
   status=$?
@@ -237,6 +232,37 @@ assert_contains \
   "explicit capture slug is stored as session state" \
   "$(cat "$override_session")" \
   "session: manually-selected-slug"
+
+mkdir -p "$fixture_root/.abbey"
+cat > "$fixture_root/.abbey/project.yml" <<'YAML'
+schema_version: 1
+project:
+  name: External Project
+workflow:
+  journal:
+    policy: event-driven
+YAML
+
+run_capture --title "External Event Driven"
+
+event_session="$fixture_root/docs/session-updates/${date_value}-external-event-driven.md"
+event_journal="$fixture_root/content/journal/${year_value}/${date_value}-external-event-driven.md"
+
+assert_status "event-driven capture succeeds without a journal" "$status" 0
+assert_file_exists "event-driven capture creates session update" "$event_session"
+[[ ! -e "$event_journal" ]] &&
+  pass "event-driven capture does not create a journal by default" ||
+  fail "event-driven capture does not create a journal by default"
+assert_contains \
+  "event-driven capture explains the journal policy" \
+  "$output" \
+  "Journal entry not created (policy: event-driven)"
+
+run_capture --journal --title "Explicit External Journal"
+
+explicit_journal="$fixture_root/content/journal/${year_value}/${date_value}-explicit-external-journal.md"
+assert_status "event-driven capture accepts --journal" "$status" 0
+assert_file_exists "event-driven --journal uses toolkit journal command" "$explicit_journal"
 
 echo
 echo "Passed: $passed"

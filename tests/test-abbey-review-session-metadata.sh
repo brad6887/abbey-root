@@ -4,6 +4,7 @@ set -euo pipefail
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+ABBEY_TOOLKIT_ROOT="$ABBEY_ROOT"
 
 passed=0
 failed=0
@@ -51,26 +52,29 @@ fixture_root="$test_root/repo"
 trap 'rm -rf "$test_root"' EXIT
 
 mkdir -p \
-  "$fixture_root/tools/bin" \
-  "$fixture_root/scripts" \
+  "$fixture_root/.abbey" \
   "$fixture_root/docs/session-updates" \
   "$fixture_root/docs/planning"
 
-cp "$ABBEY_ROOT/tools/bin/abbey-review" \
-  "$fixture_root/tools/bin/abbey-review"
+cat > "$fixture_root/.abbey/project.yml" <<'YAML'
+schema_version: 1
+project:
+  name: External Review Project
+workflow:
+  journal:
+    policy: optional
+validation:
+  commands:
+    - python -m pytest
+YAML
 
-cp "$ABBEY_ROOT/scripts/abbey_session_metadata.py" \
-  "$fixture_root/scripts/abbey_session_metadata.py"
+cat > "$fixture_root/docs/planning/BACKLOG.md" <<'EOF'
+# Backlog
 
-cat > "$fixture_root/tools/bin/abbey-backlog" <<'EOF'
-#!/usr/bin/env bash
-exit 0
+<!-- BEGIN GENERATED BACKLOG STATUS -->
+> **Backlog Status:** 0 complete · 0 pending · 0 total
+<!-- END GENERATED BACKLOG STATUS -->
 EOF
-
-chmod +x \
-  "$fixture_root/tools/bin/abbey-review" \
-  "$fixture_root/tools/bin/abbey-backlog" \
-  "$fixture_root/scripts/abbey_session_metadata.py"
 
 cat > "$fixture_root/docs/session-updates/2026-07-01-historical-debt.md" <<'EOF'
 ---
@@ -96,7 +100,8 @@ run_review() {
   set +e
   output="$(
     ABBEY_ROOT="$fixture_root" \
-      "$fixture_root/tools/bin/abbey-review" 2>&1
+      ABBEY_TOOLKIT_ROOT="$ABBEY_TOOLKIT_ROOT" \
+      "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-review" 2>&1
   )"
   status=$?
   set -e
@@ -133,6 +138,16 @@ assert_contains \
   "review reports historical debt" \
   "$output" \
   "Pre-existing historical session metadata debt: 1 file(s)"
+
+assert_contains \
+  "optional journal policy does not warn about a missing journal" \
+  "$output" \
+  "OK   Journal entry is optional for this project"
+
+assert_contains \
+  "review suggests the external project's validation command" \
+  "$output" \
+  "python -m pytest"
 
 rm "$fixture_root/docs/session-updates/2026-07-02-valid-change.md"
 

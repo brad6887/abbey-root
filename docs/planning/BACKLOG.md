@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 86 complete · 266 pending · 352 total
+> **Backlog Status:** 92 complete · 266 pending · 358 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -53,12 +53,12 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## External Project Portability
 
-- [ ] Make `abbey session capture` resolve `abbey-journal` from the Abbey toolkit root instead of the active project.
-- [ ] Make `abbey review` resolve `abbey_session_metadata.py` from the Abbey toolkit root.
-- [ ] Make infrastructure-specific `abbey doctor` checks conditional on project capabilities.
-- [ ] Add configurable journal policy for initialized projects, including event-driven or optional journals.
-- [ ] Make `abbey review` suggest validation commands appropriate to the active project type.
-- [ ] Verify `abbey backlog refresh` works correctly in external Abbey projects.
+- [x] Make `abbey session capture` resolve `abbey-journal` from the Abbey toolkit root instead of the active project.
+- [x] Make `abbey review` resolve `abbey_session_metadata.py` from the Abbey toolkit root.
+- [x] Make infrastructure-specific `abbey doctor` checks conditional on project capabilities.
+- [x] Add configurable journal policy for initialized projects, including event-driven or optional journals.
+- [x] Make `abbey review` suggest validation commands appropriate to the active project type.
+- [x] Verify `abbey backlog refresh` works correctly in external Abbey projects.
 
 ## Abbey Session Workflow Improvements
 
