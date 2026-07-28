@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 92 complete · 266 pending · 358 total
+> **Backlog Status:** 92 complete · 267 pending · 359 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -59,6 +59,13 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Add configurable journal policy for initialized projects, including event-driven or optional journals.
 - [x] Make `abbey review` suggest validation commands appropriate to the active project type.
 - [x] Verify `abbey backlog refresh` works correctly in external Abbey projects.
+- [ ] Add configurable journal templates so non-technical Abbey projects can use journal structures appropriate to their content instead of the default session-oriented `Summary / Accomplishments / Lessons Learned / Next Steps` format.
+  - Support selecting a template with `abbey journal --template <name>`.
+  - Allow a project to define its default journal template in Abbey configuration.
+  - Include a built-in project introduction template for entries such as "This Is Bread Pitt."
+  - Preserve the current journal template as the default for existing projects.
+  - Validate configured template names and report useful errors for missing templates.
+  - Add regression coverage for built-in, configured, and explicitly selected templates.
 
 ## Abbey Session Workflow Improvements
 
