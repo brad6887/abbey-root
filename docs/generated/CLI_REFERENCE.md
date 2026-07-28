@@ -53,13 +53,14 @@ Create a new Abbey project from the default template.
 **Usage**
 
 ```text
-abbey init PATH [--name NAME] [--description TEXT] [--dry-run] [--yes] [--no-git]
+abbey init PATH [--name NAME] [--description TEXT] [--journal-policy POLICY] [--dry-run] [--yes] [--no-git]
 ```
 
 **Examples**
 
 ```text
 abbey init bread-pitt --name "Bread Pitt" --yes
+abbey init notes --journal-policy optional --yes
 ```
 
 ### `abbey status`

@@ -30,10 +30,16 @@ def parse_args():
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--yes", action="store_true")
     parser.add_argument("--no-git", action="store_true")
+    parser.add_argument(
+        "--journal-policy",
+        choices=("required", "event-driven", "optional"),
+        default="event-driven",
+        help="control when session capture creates a journal entry",
+    )
     return parser.parse_args()
 
 
-def project_files(name, slug, description):
+def project_files(name, slug, description, journal_policy):
     today = date.today().isoformat()
     metadata = {
         "schema_version": 1,
@@ -43,6 +49,9 @@ def project_files(name, slug, description):
             "description": description,
         },
         "framework": {"name": "Abbey", "schema_version": 1},
+        "capabilities": {"infrastructure": False},
+        "workflow": {"journal": {"policy": journal_policy}},
+        "validation": {"commands": ["git diff --check"]},
         "paths": {
             "planning": "docs/planning",
             "session_updates": "docs/session-updates",
@@ -183,7 +192,7 @@ def main():
         print(f"ERROR: Unsafe destination: {error}", file=sys.stderr)
         return 1
 
-    files = project_files(name, slug, description)
+    files = project_files(name, slug, description, args.journal_policy)
     git_enabled = not args.no_git
 
     print("Abbey Project Initialization")
@@ -191,6 +200,7 @@ def main():
     print(f"Project: {name}")
     print(f"Path:    {destination}")
     print(f"Git:     {'initialize on main' if git_enabled else 'disabled'}")
+    print(f"Journal: {args.journal_policy}")
     print()
 
     if args.dry_run:

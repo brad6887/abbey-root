@@ -19,6 +19,7 @@ SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 export ABBEY_ROOT
+export ABBEY_TOOLKIT_ROOT
 if [[ -f "$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh" ]]; then
   source "$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
 else
@@ -68,6 +69,8 @@ Context options:
 Update and capture options:
   --title TITLE            Set the session title and derive the default slug
   --slug SLUG              Override the title-derived slug
+  --journal                Create a journal entry regardless of project policy
+  --no-journal             Skip the journal entry regardless of project policy
   -h, --help               Show command help
 
 The context command is read-only and failure-tolerant. Generated default files
@@ -774,6 +777,8 @@ session_capture() {
   local update_file
   local relative_update
   local existing_title
+  local journal_override=""
+  local journal_policy
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -802,6 +807,16 @@ session_capture() {
         slug="$2"
         slug_supplied=true
         shift 2
+        ;;
+
+      --journal)
+        journal_override="create"
+        shift
+        ;;
+
+      --no-journal)
+        journal_override="skip"
+        shift
         ;;
 
       help|-h|--help)
@@ -879,10 +894,21 @@ session_capture() {
   echo "Session slug: $slug"
   echo
 
-  "$ABBEY_ROOT/tools/bin/abbey-journal" \
-    --no-edit \
-    --title "$title" \
-    --slug "$slug"
+  journal_policy="$(abbey_project_value "$ABBEY_ROOT" "workflow.journal.policy" "required")"
+
+  if [[ "$journal_override" == "create" || ( "$journal_policy" == "required" && "$journal_override" != "skip" ) ]]; then
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-journal" \
+      --no-edit \
+      --title "$title" \
+      --slug "$slug"
+  else
+    echo "Journal entry not created (policy: $journal_policy)."
+    if [[ "$journal_policy" == "event-driven" ]]; then
+      echo "Use --journal when this session has a publishable event or lesson."
+    elif [[ "$journal_policy" == "optional" ]]; then
+      echo "Use --journal to create an optional journal entry."
+    fi
+  fi
 
   echo
   echo "Session capture ready."

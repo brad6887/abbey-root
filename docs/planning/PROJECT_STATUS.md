@@ -155,9 +155,9 @@ Completed
 
 - `abbey doctor` uses centralized, platform-aware checks supporting macOS and
   Linux, validates effective Git author name and email, reports their
-  configuration sources, verifies external DNS resolution on every host, and
-  verifies `edge01.home.arpa` against the inventory-managed address on the
-  controlled `ubuntu-dev01` DNS validation client
+  configuration sources, and runs infrastructure-specific storage, host,
+  backup, remote-access, and DNS checks only when the active project declares
+  the infrastructure capability
 - `abbey status` reports deterministic local counts for toolkit commands,
   website pages, journal entries, and documentation files; an absent open task
   in `NEXT.md` is informational and does not prevent later checks from running
@@ -169,7 +169,8 @@ Completed
 - `abbey version`
 - `abbey init PATH` creates a minimal independent Abbey project while keeping
   framework implementation shared; core commands discover the active project
-  through `.abbey/project.yml`
+  through `.abbey/project.yml`, which also owns journal policy, project
+  capabilities, and review validation commands
 - `abbey journal` handles help and invalid options safely and supports explicit `--title` input
 - `abbey ai`
 - Metadata-driven `abbey ai decide` discovery and help
@@ -177,14 +178,17 @@ Completed
 - `abbey session capture` derives one deterministic slug from the session title,
   stores it as session metadata, reuses it for the session update and journal
   filenames, supports explicit overrides, and remains backward-compatible with
-  positional slugs
+  positional slugs; journal creation follows the active project's required,
+  event-driven, or optional policy
 - `abbey review` strictly validates changed session metadata and reports
   untouched historical metadata debt without blocking unrelated work
 - `abbey lab`
 - `abbey ssh audit` and `abbey ssh sync` provide validated, idempotent SSH key auditing and managed synchronization while preserving unrelated authorized keys
 - `abbey research status` deterministically discovers formal research artifacts, resolves their relationships, and reports complete chains and legacy provenance without modifying repository state
 - `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, reports conflicts between recent session evidence and planning documents, and generates Definitions of Done from the selected recommendation using tailored criteria where available and a deterministic fallback otherwise
-- `abbey backlog refresh` maintains deterministic complete, pending, and total statistics in a bounded generated block, with read-only freshness checks in `abbey review` and `abbey end`
+- `abbey backlog refresh` maintains deterministic complete, pending, and total
+  statistics in a bounded generated block for Abbey Root and external Abbey
+  projects, with read-only freshness checks in `abbey review` and `abbey end`
 - `abbey site publish [--dry-run]` performs bounded post-push live-site verification that follows redirects and requires a final HTTP 2xx response
 - Metadata-driven CLI help
 - Generated CLI reference

@@ -6,6 +6,7 @@ set -euo pipefail
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 BACKLOG_FILE="${ABBEY_BACKLOG_FILE:-$ABBEY_ROOT/docs/planning/BACKLOG.md}"
 
 BEGIN_MARKER="<!-- BEGIN GENERATED BACKLOG STATUS -->"

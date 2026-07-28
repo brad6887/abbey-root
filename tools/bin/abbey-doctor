@@ -22,6 +22,13 @@ echo
 
 for check in "$DOCTOR_DIR"/checks/*.sh; do
   [ -f "$check" ] || continue
+  case "$(basename "$check")" in
+    03-storage.sh|05-hosts.sh|06-backups.sh|08-remote-access.sh|09-dns.sh)
+      if [[ "$(abbey_project_value "$ABBEY_ROOT" "capabilities.infrastructure" "true")" != "true" ]]; then
+        continue
+      fi
+      ;;
+  esac
   source "$check"
 done
 

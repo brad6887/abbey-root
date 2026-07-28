@@ -6,6 +6,8 @@ set -euo pipefail
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+source "$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
 review_status=0
 
 ok() {
@@ -148,11 +150,17 @@ else
   warn "No session update found in current changes"
 fi
 
+journal_policy="$(abbey_project_value "$ABBEY_ROOT" "workflow.journal.policy" "required")"
+
 if [[ -n "$journal_entries" ]]; then
   ok "Journal entry present"
   sed 's/^/     /' <<<"$journal_entries"
-else
+elif [[ "$journal_policy" == "required" ]]; then
   warn "No journal entry found in current changes"
+elif [[ "$journal_policy" == "event-driven" ]]; then
+  info "No journal entry present; project policy is event-driven"
+else
+  ok "Journal entry is optional for this project"
 fi
 
 section "Session Update Metadata"
@@ -166,7 +174,9 @@ done <<<"$session_updates"
 
 metadata_status=0
 metadata_output="$(
-  python3 "$ABBEY_ROOT/scripts/abbey_session_metadata.py"     --root "$ABBEY_ROOT"     "${metadata_args[@]}" 2>&1
+  python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_session_metadata.py" \
+    --root "$ABBEY_ROOT" \
+    "${metadata_args[@]}" 2>&1
 )" || metadata_status=$?
 
 printf '%s
@@ -182,7 +192,7 @@ planning_recommended=false
 review_backlog=false
 review_project_status=false
 
-if "$ABBEY_ROOT/tools/bin/abbey-backlog" check >/dev/null 2>&1; then
+if "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-backlog" check >/dev/null 2>&1; then
   ok "Generated backlog statistics are current"
 else
   warn "Generated backlog statistics are stale, malformed, or missing"
@@ -271,16 +281,19 @@ elif (( unstaged_count > 0 || untracked_count > 0 )); then
   echo "Validate the current changes."
   echo
   echo "Suggested checks:"
-  echo "    bash -n tools/bin/abbey tools/bin/abbey-review"
-  echo "    git diff --check"
-  echo "    abbey help"
+  validation_commands="$(abbey_project_list "$ABBEY_ROOT" "validation.commands")"
+  if [[ -n "$validation_commands" ]]; then
+    sed 's/^/    /' <<<"$validation_commands"
+  else
+    echo "    git diff --check"
+  fi
   echo
-  if [[ -n "$session_updates" && -n "$journal_entries" ]]; then
+  if [[ -n "$session_updates" && ( -n "$journal_entries" || "$journal_policy" != "required" ) ]]; then
     echo "After validation, stage the completed changes."
   else
     echo "After validation, document and capture the session."
   fi
-elif [[ -z "$session_updates" || -z "$journal_entries" ]]; then
+elif [[ -z "$session_updates" || ( -z "$journal_entries" && "$journal_policy" == "required" ) ]]; then
   echo "Document and capture the session."
   echo
   echo "Create the missing session update or journal entry, then run:"
