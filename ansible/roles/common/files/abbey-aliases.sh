@@ -2,6 +2,7 @@
 
 # Project directories
 alias cda='cd ~/git/abbey-root'
+alias cdb='cd ~/git/bread-pitt'
 alias abbey-site='cd ~/git/abbey-root/site'
 alias abbey-content='cd ~/git/abbey-root/content'
 alias abbey-pages='cd ~/git/abbey-root/content/pages'
