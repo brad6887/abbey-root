@@ -196,11 +196,6 @@ This was a stabilization step, not the full April repot.
 Identified a green shoot in the middle of the plant as likely new growth. A
 second growth to its right had been present since acquisition.
 
-### Notes
-
-The new identification was recorded as an observation rather than treated as
-botanically certain at first sight.
-
 ---
 
 ## 2026-03-29 — New Growth Continues
@@ -225,11 +220,6 @@ botanically certain at first sight.
 ### What Happened
 
 The new basal growth had visibly enlarged.
-
-### Notes
-
-The exported note reads, "the bus is growing," in context referring to the
-basal growth.
 
 ---
 
@@ -350,11 +340,6 @@ at the new home exceeded 100 degrees.
 - The mature pseudobulbs continued supporting the plant.
 - The medium remained open and well drained.
 
-### Notes
-
-The exported conversation labels this entry `6/28/06`. The matching XMP
-sidecars and weekly sequence establish the date as 2026-06-28.
-
 ---
 
 ## 2026-07-05 — Active Lead
@@ -387,12 +372,6 @@ Applied a light feeding while the new lead was actively growing.
 - A small nick at one leaf tip remained stable cosmetic damage.
 - Bark, charcoal, and perlite remained open and showed no sign of staying
   excessively wet.
-
-### Notes
-
-The progression in the notes was now clear: compromised roots in March, root
-cleanup and repot in April, resettling after the move in June, and active
-growth in July.
 
 ---
 
@@ -440,14 +419,3 @@ A bright white root with a green growing tip emerged from the new lead.
 The new root marked the transition from recovery supported by old pseudobulbs
 to self-sustaining new growth. Mother Nature's Son had accepted the repot and
 was actively building the next part of the plant.
-
----
-
-## Looking Ahead
-
-Future updates should capture:
-
-- Expansion and maturation of the new pseudobulb.
-- Additional roots from the new lead.
-- Activation, or continued dormancy, of the nearby growth eye.
-- The first bloom after recovery.
