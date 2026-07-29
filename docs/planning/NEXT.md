@@ -1,6 +1,6 @@
 # Abbey Root Next
 
-Last Reviewed: 2026-07-25
+Last Reviewed: 2026-07-28
 
 # Current Theme
 
@@ -8,32 +8,41 @@ Last Reviewed: 2026-07-25
 
 # Primary Objective
 
-Implement the first controlled Abbey Research artifact-creation workflow using the completed Voice Analysis chains as reference fixtures.
+Validate the completed Abbey Research observation-candidate workflow through a
+real non-canonical research run.
 
 # Definition of Done
 
-The first implementation phase is complete when:
+The workflow-validation session is complete when:
 
-- `abbey research create --type observation` orchestrates generation, normalization, sanitization, and validation.
-- Each run records model, prompt, parent, input, and fingerprint provenance before generation.
-- Raw model output remains immutable and inspectable.
-- Generated candidates remain outside canonical research directories.
-- Failed stages retain their outputs and report a clear state.
-- Regression tests prove source citations survive the complete candidate workflow.
+- One real observation-candidate run completes outside canonical research
+  directories.
+- Its manifest accurately records model, prompt, corpus, experiment, inputs,
+  fingerprints, commands, timestamps, artifacts, and stage results.
+- Raw output remains immutable and inspectable.
+- Source citations survive normalization and sanitization.
+- The candidate passes structural validation and is review-ready.
+- Any workflow defects discovered through real use are fixed and
+  regression-tested.
+- No candidate is promoted into canonical research.
+- The session records whether Phase 2 review-record and promotion design is
+  ready to begin.
 
 ## Current Objective
 
-Implement Phase 1 of the approved Abbey Research artifact-creation architecture.
+Exercise `abbey research create --type observation` with a real,
+non-canonical input.
 
 ## Definition of Done
 
-The implementation is complete when:
+The validation is complete when:
 
-- The observation candidate workflow has one safe entry point.
-- Run workspaces and manifests are deterministic and inspectable.
-- Existing component commands are reused rather than duplicated.
-- Canonical promotion is explicitly out of scope for this phase.
-- Focused regression tests and existing Abbey Research tests pass.
+- A real run reaches `review-ready` or exposes a documented workflow defect.
+- Provenance and output immutability are verified directly from the run
+  workspace.
+- Candidate citations and required observation sections are verified.
+- Any blocking defect is corrected with focused regression coverage.
+- Canonical promotion remains explicitly out of scope.
 
 ---
 
@@ -104,53 +113,51 @@ Validation
 
 ---
 
-# Current Phase — Artifact Creation Phase 1
+# Current Phase — Observation Workflow Validation
 
 ## Objective
 
-Implement a controlled observation-candidate workflow before automating canonical promotion or downstream research stages.
+Validate the completed observation-candidate workflow through normal Abbey
+Research use before designing canonical promotion or downstream research
+stages.
 
 ## Implementation Scope
 
-### Run Initialization
+### Real Candidate Run
 
-Create a dedicated run workspace and record:
+Run `abbey research create --type observation` with:
 
-- Project.
-- Artifact type.
-- Corpus and experiment.
-- Model and prompt version.
-- Input paths and fingerprints.
-- Initial run state.
+- A real non-canonical research prompt.
+- Declared project, corpus, and experiment context.
+- At least one source input containing traceable citations.
+- A configured local model.
 
-### Candidate Pipeline
+### Workspace Inspection
 
-Orchestrate the existing:
+Verify:
 
-- `abbey research run`
-- `abbey research normalize --type observation`
-- `abbey research sanitize`
-- Observation validation
+- Prompt and input snapshots match their recorded fingerprints.
+- Stage commands, timestamps, results, and artifact paths are inspectable.
+- Raw output is read-only.
+- The normalized and sanitized candidate preserves citations.
+- Structural validation produces a review-ready result.
 
 ### Safety Boundary
 
-The creation command must:
+The validation session must:
 
-- Preserve raw output.
-- Retain failed candidates.
-- Refuse canonical output paths.
+- Keep every generated artifact outside canonical research directories.
 - Avoid assigning an OBS identifier.
-- Report the run state and review-ready candidate path.
+- Avoid creating review approval or promotion records.
+- Retain the run workspace if a stage fails.
 
 ### Tests
 
-Prove:
+If normal use exposes a defect:
 
-- Provenance is written before generation.
-- Source identifiers survive the pipeline.
-- Failure states preserve artifacts.
-- Existing outputs are protected.
-- Voice Analysis conclusions are not hard-coded into orchestration.
+- Fix only the demonstrated workflow blocker.
+- Add focused regression coverage.
+- Rerun the Abbey Research suite and `abbey review`.
 
 ---
 

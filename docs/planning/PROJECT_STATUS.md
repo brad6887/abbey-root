@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-07-26
+Last Updated: 2026-07-28
 
 ---
 
@@ -74,7 +74,8 @@ Completed
 
 # Immediate Priorities
 
-- Implement the controlled Abbey Research observation-candidate workflow defined in `ABBEY_RESEARCH_ARTIFACT_CREATION.md`.
+- Validate the completed Abbey Research observation-candidate workflow through
+  a real non-canonical research run.
 - Expand onboarding documentation.
 - Continue CLI standardization.
 - Evaluate shared CLI libraries.
@@ -282,7 +283,12 @@ Completed
 - `abbey ai decide risk-reducer` identifies bounded, one-session work that materially reduces a concrete operational or workflow risk while requiring repository review.
 - `abbey ai decide workflow-friction` identifies costly recurring manual work, separates evidence from assumptions, and classifies bounded improvements as Abbey commands, standardized workflows, or local fixes.
 - `abbey ai decide backlog-leverage` identifies one focused session whose shared outcome completes or materially advances the largest coherent set of documented backlog items.
-- `abbey research run` provides a reusable Ollama research runner with preserved raw output; AI-assisted normalization, `abbey research sanitize`, and deterministic artifact validation support canonical artifacts before human review; `abbey research validate-review` verifies machine-readable human-review decisions, corpus fingerprints, source identifiers, and complete exact citation text; deterministic stratified sampling, human-reviewed annotation, and Wilson intervals now support measured prevalence claims; the reusable Voice Analysis research artifact framework defines artifact types, metadata, lifecycle, provenance, evidence-chain traceability, and review-manifest scope; broader deterministic Markdown normalization and end-to-end orchestration remain in development.
+- `abbey research run` provides a reusable Ollama research runner with preserved raw output; AI-assisted normalization, `abbey research sanitize`, and deterministic artifact validation support canonical artifacts before human review; `abbey research validate-review` verifies machine-readable human-review decisions, corpus fingerprints, source identifiers, and complete exact citation text; deterministic stratified sampling, human-reviewed annotation, and Wilson intervals now support measured prevalence claims; the reusable Voice Analysis research artifact framework defines artifact types, metadata, lifecycle, provenance, evidence-chain traceability, and review-manifest scope; broader deterministic Markdown normalization remains in development.
+- `abbey research create --type observation` provides a controlled,
+  project-neutral candidate workflow with fingerprinted inputs, inspectable run
+  manifests, immutable raw output, retained failure states, staged
+  normalization and sanitization, structural validation, and review-ready
+  output outside canonical research directories.
 - Deterministic corpus filtering excludes anchored `Mobile uploads Place:` location metadata while preserving authored content and the existing Voice Analysis evidence conclusions.
 - The full-corpus observation-discovery workflow reviews deterministic corpus batches without automatic promotion and validates each machine-readable manifest’s corpus identity, batch membership, source identifiers, and exact citation text.
 - `abbey research discover` provides repository-owned, resumable batch discovery with raw-output preservation, deterministic validation, validated-result reuse, candidate aggregation, and a pending human-review scaffold.
@@ -370,7 +376,8 @@ Completed
 
 ## Near Term
 
-- Implement the controlled Abbey Research observation-candidate workflow defined in `ABBEY_RESEARCH_ARTIFACT_CREATION.md`.
+- Validate the completed Abbey Research observation-candidate workflow through
+  a real non-canonical research run.
 - Expand onboarding documentation.
 - Improve `abbey-doctor`.
 - Continue metadata-driven documentation.

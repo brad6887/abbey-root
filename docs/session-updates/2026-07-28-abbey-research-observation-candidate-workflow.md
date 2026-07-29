@@ -89,3 +89,17 @@ Backlog impact:
   sanitization, and validation without coupling the workflow to Voice Analysis.
 - Not advanced: Complete deterministic research Markdown normalization using
   universally safe operations.
+
+## Reconciliation
+
+Session review reconciliation completed on 2026-07-28:
+
+- `PROJECT_STATUS.md` now records the observation-candidate workflow as a
+  durable AI Platform capability and identifies real-input validation as the
+  immediate priority.
+- `NEXT.md` now defines one real non-canonical observation run as the current
+  objective before review-record or promotion design begins.
+- `BACKLOG.md` marks the implementation complete, retains the broader
+  orchestration and normalization items as pending, and records real-input
+  validation as accepted unfinished work.
+- Generated backlog statistics were refreshed.
