@@ -133,6 +133,11 @@ No backlog items have been defined.
 working/session-context/*
 !working/session-context/.gitkeep
 
+# Generated Abbey runtime state
+.abbey/ai/
+.abbey/context/
+.abbey/knowledge/
+
 # Local Abbey configuration
 .abbey/config.conf
 """,

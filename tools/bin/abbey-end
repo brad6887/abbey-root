@@ -5,7 +5,8 @@ set -u
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 
 ok_count=0
 warning_count=0
@@ -180,8 +181,8 @@ fi
 
 section "Validation"
 
-if [[ -x "$ABBEY_ROOT/tools/bin/abbey-backlog" ]]; then
-  if "$ABBEY_ROOT/tools/bin/abbey-backlog" check >/dev/null 2>&1; then
+if [[ -x "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-backlog" ]]; then
+  if "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-backlog" check >/dev/null 2>&1; then
     ok "Generated backlog statistics are current"
   else
     fail "Generated backlog statistics are stale, malformed, or missing"
@@ -193,8 +194,8 @@ fi
 doctor_output=""
 doctor_status=0
 
-if [[ -x "$ABBEY_ROOT/tools/bin/abbey-doctor" ]]; then
-  doctor_output="$("$ABBEY_ROOT/tools/bin/abbey-doctor" 2>&1)" || doctor_status=$?
+if [[ -x "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-doctor" ]]; then
+  doctor_output="$("$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-doctor" 2>&1)" || doctor_status=$?
 
   doctor_failures="$(
     awk '/^Failures:[[:space:]]*/ {print $2}' <<<"$doctor_output" |

@@ -5,7 +5,8 @@ set -euo pipefail
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-ABBEY_ROOT="${ABBEY_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 
 cli_reference="$ABBEY_ROOT/docs/generated/CLI_REFERENCE.md"
 command_reference="$ABBEY_ROOT/docs/generated/abbey-commands.md"
@@ -39,14 +40,14 @@ generate_cli_reference() {
   local output="$1"
 
   ABBEY_CLI_REFERENCE="$output" \
-    python3 "$ABBEY_ROOT/scripts/abbey_cli.py" markdown
+    python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_cli.py" markdown
 }
 
 generate_command_reference() {
   local output="$1"
 
   ABBEY_COMMAND_DOCS_OUTPUT="$output" \
-    "$ABBEY_ROOT/tools/generate-command-docs.sh"
+    "$ABBEY_TOOLKIT_ROOT/tools/generate-command-docs.sh"
 }
 
 generate_docs() {

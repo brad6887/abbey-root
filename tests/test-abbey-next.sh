@@ -19,6 +19,26 @@ fail() {
   failed=$((failed + 1))
 }
 
+replace_in_file() {
+  local old="$1"
+  local new="$2"
+  local file="$3"
+
+  python3 - "$old" "$new" "$file" <<'PYTHON'
+from pathlib import Path
+import sys
+
+old, new, filename = sys.argv[1:]
+path = Path(filename)
+text = path.read_text(encoding="utf-8")
+
+if old not in text:
+    raise SystemExit(f"Expected text not found in {filename}: {old}")
+
+path.write_text(text.replace(old, new, 1), encoding="utf-8")
+PYTHON
+}
+
 create_fixture() {
   local fixture_root
 
@@ -28,9 +48,18 @@ create_fixture() {
   cp "$ABBEY_ROOT"/docs/planning/{PROJECT_STATUS,NEXT,BACKLOG,ROADMAP}.md \
     "$fixture_root/docs/planning/"
 
-  sed -i \
-    's/- \[x\] Create `abbey next`\./- [ ] Create `abbey next`./' \
-    "$fixture_root/docs/planning/BACKLOG.md"
+  for recommendation_item in \
+    'Create `abbey next`' \
+    'Build deterministic project recommendation engine' \
+    'Generate session objectives from planning documents' \
+    'Generate Definitions of Done' \
+    'Explain recommendation reasoning'
+  do
+    replace_in_file \
+      "- [x] $recommendation_item." \
+      "- [ ] $recommendation_item." \
+      "$fixture_root/docs/planning/BACKLOG.md"
+  done
 
   git -C "$fixture_root" init -q
   git -C "$fixture_root" config user.name "Abbey Test"
@@ -109,8 +138,9 @@ assert_not_contains \
   "$output" \
   "- Generate session objectives from planning documents."
 
-sed -i \
-  's/- \[ \] Create `abbey next`\./- [x] Create `abbey next`./' \
+replace_in_file \
+  '- [ ] Create `abbey next`.' \
+  '- [x] Create `abbey next`.' \
   "$fixture_root/docs/planning/BACKLOG.md"
 
 git -C "$fixture_root" add docs/planning/BACKLOG.md

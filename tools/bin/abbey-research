@@ -8,9 +8,12 @@
 #
 set -euo pipefail
 
-ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 
-source "$ABBEY_ROOT/tools/lib/config.sh"
+source "$ABBEY_TOOLKIT_ROOT/tools/lib/config.sh"
 load_abbey_config
 
 usage() {
@@ -1108,7 +1111,7 @@ validate_review() {
   fi
 
   python3 \
-    "$ABBEY_ROOT/tools/research/validate_review_manifest.py" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/validate_review_manifest.py" \
     --manifest "$manifest_file" \
     --corpus "$corpus_file"
 }
@@ -1184,7 +1187,7 @@ validate_discovery() {
   fi
 
   python3 \
-    "$ABBEY_ROOT/tools/research/validate_discovery_manifest.py" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/validate_discovery_manifest.py" \
     --manifest "$manifest_file" \
     --corpus "$corpus_file" \
     --batch "$batch_file"
@@ -1192,8 +1195,8 @@ validate_discovery() {
 
 discover_observations() {
   python3 \
-    "$ABBEY_ROOT/tools/research/run_observation_discovery.py" \
-    --runner "$ABBEY_ROOT/tools/bin/abbey-research" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/run_observation_discovery.py" \
+    --runner "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-research" \
     "$@"
 }
 
@@ -1446,7 +1449,7 @@ validate_fact_lock_proposal() {
   fi
 
   python3 \
-    "$ABBEY_ROOT/tools/research/validate_voice_fact_lock_proposal.py" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/validate_voice_fact_lock_proposal.py" \
     "${validate_args[@]}"
 
   echo
@@ -1511,7 +1514,7 @@ review_fact_lock_proposal() {
   fi
 
   python3 \
-    "$ABBEY_ROOT/tools/research/summarize_voice_fact_lock_review.py" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/summarize_voice_fact_lock_review.py" \
     --suite "$suite_file" \
     --proposal "$proposal_file"
 }
@@ -1587,7 +1590,7 @@ init_fact_lock_review() {
   fi
 
   python3 \
-    "$ABBEY_ROOT/tools/research/init_voice_fact_lock_review.py" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/init_voice_fact_lock_review.py" \
     --suite "$suite_file" \
     --proposal "$proposal_file" \
     --output "$output_file"
@@ -1638,7 +1641,7 @@ validate_completed_fact_lock_review() {
   fi
 
   python3 \
-    "$ABBEY_ROOT/tools/research/validate_voice_fact_lock_review.py" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/validate_voice_fact_lock_review.py" \
     --suite "$suite_file" \
     --proposal "$proposal_file" \
     --review "$review_file"
@@ -1721,7 +1724,7 @@ revise_fact_lock() {
   fi
 
   python3 \
-    "$ABBEY_ROOT/tools/research/validate_voice_fact_lock_review.py" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/validate_voice_fact_lock_review.py" \
     --suite "$suite_file" \
     --proposal "$proposal_file" \
     --review "$review_file" \
@@ -1802,14 +1805,14 @@ approve_fact_lock() {
   fi
 
   python3 \
-    "$ABBEY_ROOT/tools/research/validate_voice_fact_lock_review.py" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/validate_voice_fact_lock_review.py" \
     --suite "$suite_file" \
     --proposal "$proposal_file" \
     --review "$review_file" \
     --require-decision approve
 
   python3 \
-    "$ABBEY_ROOT/tools/research/approve_voice_fact_lock.py" \
+    "$ABBEY_TOOLKIT_ROOT/tools/research/approve_voice_fact_lock.py" \
     --proposal "$proposal_file" \
     --review "$review_file" \
     --output "$output_file"
@@ -1889,12 +1892,12 @@ voice_apply() {
   [[ -f "$fact_lock_file" ]] || { echo "Fact lock not found: $fact_lock_file" >&2; return 1; }
   if [[ "$force" != true && -e "$output_file" ]]; then echo "Output file already exists: $output_file" >&2; echo "Use --force to replace it." >&2; return 1; fi
   if [[ "$force" != true && -e "$report_file" ]]; then echo "Report file already exists: $report_file" >&2; echo "Use --force to replace it." >&2; return 1; fi
-  python3 "$ABBEY_ROOT/tools/research/validate_voice_application_inputs.py" --model "$ABBEY_ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001.json" --fact-lock "$fact_lock_file" >/dev/null || return 1
+  python3 "$ABBEY_TOOLKIT_ROOT/tools/research/validate_voice_application_inputs.py" --model "$ABBEY_ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001.json" --fact-lock "$fact_lock_file" >/dev/null || return 1
   local -a run_args=(--model "$model" --prompt "$ABBEY_ROOT/docs/research/voice-analysis/prompts/fact-locked-voice-application.md" --input "$ABBEY_ROOT/docs/research/voice-analysis/models/VOICE-MODEL-001.json" --input "$fact_lock_file" --output "$output_file" --max-tokens 10000)
   [[ "$force" == true ]] && run_args+=(--force)
   run_research "${run_args[@]}" || return 1
-  python3 "$ABBEY_ROOT/tools/research/normalize_voice_application.py" --input "$output_file" --model "$model"
-  python3 "$ABBEY_ROOT/tools/research/validate_fact_locked_voice_output.py" --spec "$fact_lock_file" --output "$output_file" --report "$report_file"
+  python3 "$ABBEY_TOOLKIT_ROOT/tools/research/normalize_voice_application.py" --input "$output_file" --model "$model"
+  python3 "$ABBEY_TOOLKIT_ROOT/tools/research/validate_fact_locked_voice_output.py" --spec "$fact_lock_file" --output "$output_file" --report "$report_file"
 }
 
 
@@ -1923,7 +1926,7 @@ HELP
     esac
   fi
 
-  python3 "$ABBEY_ROOT/scripts/abbey_research_status.py" \
+  python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_research_status.py" \
     --repo "$ABBEY_ROOT"
 }
 
@@ -1933,7 +1936,7 @@ command="${1:-help}"
 case "$command" in
   create)
     shift
-    python3 "$ABBEY_ROOT/scripts/abbey_research_create.py" "$@"
+    python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_research_create.py" "$@"
     ;;
 
   run)

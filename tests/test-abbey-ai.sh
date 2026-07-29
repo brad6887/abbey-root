@@ -19,6 +19,26 @@ fail() {
   failed=$((failed + 1))
 }
 
+replace_in_file() {
+  local old="$1"
+  local new="$2"
+  local file="$3"
+
+  python3 - "$old" "$new" "$file" <<'PYTHON'
+from pathlib import Path
+import sys
+
+old, new, filename = sys.argv[1:]
+path = Path(filename)
+text = path.read_text(encoding="utf-8")
+
+if old not in text:
+    raise SystemExit(f"Expected text not found in {filename}: {old}")
+
+path.write_text(text.replace(old, new, 1), encoding="utf-8")
+PYTHON
+}
+
 assert_contains() {
   local name="$1"
   local output="$2"
@@ -636,8 +656,9 @@ assert_status \
   "$auto_status" \
   0
 
-sed -i \
-  's/ABBEY_AI_AUTO_BUILD_KNOWLEDGE="true"/ABBEY_AI_AUTO_BUILD_KNOWLEDGE="false"/' \
+replace_in_file \
+  'ABBEY_AI_AUTO_BUILD_KNOWLEDGE="true"' \
+  'ABBEY_AI_AUTO_BUILD_KNOWLEDGE="false"' \
   "$fixture_root/config/abbey.conf"
 
 disabled_hash_before="$(

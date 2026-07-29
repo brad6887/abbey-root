@@ -3,9 +3,12 @@
 # DESCRIPTION: Build, inspect, and maintain Abbey AI knowledge context
 set -euo pipefail
 
-ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 
-source "$ABBEY_ROOT/tools/lib/config.sh"
+source "$ABBEY_TOOLKIT_ROOT/tools/lib/config.sh"
 load_abbey_config
 
 SNAPSHOT="$ABBEY_ROOT/$ABBEY_KNOWLEDGE_FILE"
@@ -77,7 +80,7 @@ section_excerpt() {
 
 knowledge_state() {
   python3 \
-    "$ABBEY_ROOT/scripts/abbey_knowledge_manifest.py" \
+    "$ABBEY_TOOLKIT_ROOT/scripts/abbey_knowledge_manifest.py" \
     state \
     "$ABBEY_ROOT" \
     "$SNAPSHOT" \
@@ -88,7 +91,7 @@ write_metadata() {
   local output_file="$1"
 
   python3 \
-    "$ABBEY_ROOT/scripts/abbey_knowledge_manifest.py" \
+    "$ABBEY_TOOLKIT_ROOT/scripts/abbey_knowledge_manifest.py" \
     write-metadata \
     "$ABBEY_ROOT" \
     "$output_file"
@@ -211,6 +214,7 @@ show_status() {
   local generated="unknown"
   local content_count="unknown"
   local listed_count="unknown"
+  local -a metadata_values=()
 
   set +e
   state="$(knowledge_state)"
@@ -218,7 +222,9 @@ show_status() {
   set -e
 
   if [[ -f "$METADATA" ]]; then
-    readarray -t metadata_values < <(
+    while IFS= read -r metadata_value; do
+      metadata_values+=("$metadata_value")
+    done < <(
       python3 - "$METADATA" <<'PY'
 import json
 import sys
@@ -262,6 +268,7 @@ ensure_snapshot() {
   local quiet="false"
   local state
   local state_rc
+  local state_label
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -296,14 +303,19 @@ ensure_snapshot() {
     return 0
   fi
 
+  state_label="$(
+    printf '%s' "$state" |
+      LC_ALL=C tr '[:upper:]' '[:lower:]'
+  )"
+
   if [[ "$auto_build" != "true" ]]; then
-    echo "WARN Abbey knowledge is ${state,,}." >&2
+    echo "WARN Abbey knowledge is $state_label." >&2
     echo "Run: abbey knowledge build" >&2
     return "$state_rc"
   fi
 
   if [[ "$quiet" != "true" ]]; then
-    echo "INFO Abbey knowledge is ${state,,}; rebuilding."
+    echo "INFO Abbey knowledge is $state_label; rebuilding."
   fi
 
   if [[ "$quiet" == "true" ]]; then

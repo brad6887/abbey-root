@@ -56,13 +56,16 @@ HELP
 ensure_knowledge() {
   local ensure_mode="--no-auto-build"
 
-  case "${ABBEY_AI_AUTO_BUILD_KNOWLEDGE,,}" in
+  case "$(
+    printf '%s' "$ABBEY_AI_AUTO_BUILD_KNOWLEDGE" |
+      LC_ALL=C tr '[:upper:]' '[:lower:]'
+  )" in
     true|1|yes|on)
       ensure_mode="--auto-build"
       ;;
   esac
 
-  "$ABBEY_ROOT/tools/bin/abbey-knowledge" ensure \
+  "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-knowledge" ensure \
     "$ensure_mode" \
     --quiet
 }
@@ -91,7 +94,7 @@ ai_context() {
 }
 
 ai_rebuild() {
-  "$ABBEY_ROOT/tools/bin/abbey-knowledge" build
+  "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-knowledge" build
 }
 
 ai_open() {
@@ -188,9 +191,9 @@ PYJSON
 build_ai_context() {
   local mode="${1:-next}"
 
-  if [[ -x "$ABBEY_ROOT/tools/bin/abbey-context" ]]; then
-    "$ABBEY_ROOT/tools/bin/abbey-context" "$mode" >/dev/null
-    "$ABBEY_ROOT/tools/bin/abbey-context" path
+  if [[ -x "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-context" ]]; then
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-context" "$mode" >/dev/null
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-context" path
   else
     ensure_knowledge
     echo "$KNOWLEDGE_FILE"

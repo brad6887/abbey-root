@@ -12,9 +12,12 @@
 #
 set -euo pipefail
 
-ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 
-source "$ABBEY_ROOT/tools/lib/config.sh"
+source "$ABBEY_TOOLKIT_ROOT/tools/lib/config.sh"
 load_abbey_config
 
 KNOWLEDGE_FILE="$ABBEY_ROOT/$ABBEY_KNOWLEDGE_FILE"
@@ -100,11 +103,12 @@ latest_journals() {
 recent_commits() {
   section "Recent Commits"
 
-  if [[ -d "$ABBEY_ROOT/.git" ]]; then
-    cd "$ABBEY_ROOT"
-    git log --oneline -10
-  else
+  if [[ ! -d "$ABBEY_ROOT/.git" ]]; then
     echo "- Git repository not found"
+  elif git -C "$ABBEY_ROOT" rev-parse --verify HEAD >/dev/null 2>&1; then
+    git -C "$ABBEY_ROOT" log --oneline -10
+  else
+    echo "- No commits yet"
   fi
 }
 
@@ -171,8 +175,8 @@ build_full() {
   {
     write_header
 
-    if [[ -x "$ABBEY_ROOT/tools/bin/abbey-knowledge" ]]; then
-      "$ABBEY_ROOT/tools/bin/abbey-knowledge" ensure \
+    if [[ -x "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-knowledge" ]]; then
+      "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-knowledge" ensure \
         --auto-build \
         --quiet
 

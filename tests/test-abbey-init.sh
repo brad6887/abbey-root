@@ -46,6 +46,41 @@ assert_contains \
   "infrastructure: false" \
   "$(cat "$project/.abbey/project.yml")"
 
+mkdir -p \
+  "$project/.abbey/ai" \
+  "$project/.abbey/context" \
+  "$project/.abbey/knowledge"
+
+touch \
+  "$project/.abbey/ai/history.json" \
+  "$project/.abbey/context/current.md" \
+  "$project/.abbey/knowledge/snapshot.md" \
+  "$project/.abbey/config.conf"
+
+for runtime_file in \
+  .abbey/ai/history.json \
+  .abbey/context/current.md \
+  .abbey/knowledge/snapshot.md \
+  .abbey/config.conf
+do
+  if git -C "$project" check-ignore -q "$runtime_file"; then
+    pass "init ignores $runtime_file"
+  else
+    fail "init ignores $runtime_file"
+  fi
+done
+
+for project_file in \
+  .abbey/project.yml \
+  .abbey/session-guidance.md
+do
+  if git -C "$project" check-ignore -q "$project_file"; then
+    fail "init keeps $project_file trackable"
+  else
+    pass "init keeps $project_file trackable"
+  fi
+done
+
 version_output="$(cd "$project" && "$ABBEY" version)"
 assert_contains "version uses project metadata" "Bread Pitt" "$version_output"
 
