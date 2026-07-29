@@ -65,6 +65,7 @@ create_fixture() {
   fixture_root="$(mktemp -d)"
 
   mkdir -p \
+    "$fixture_root/.abbey" \
     "$fixture_root/tools/bin" \
     "$fixture_root/tools/lib" \
     "$fixture_root/scripts" \
@@ -80,6 +81,10 @@ create_fixture() {
     "$fixture_root/config/ai/decisions/beta" \
     "$fixture_root/config/ai/decisions/broken" \
     "$fixture_root/config/ai/decisions/incomplete"
+
+  cat > "$fixture_root/.abbey/project.yml" <<'YAML'
+name: External Abbey Project
+YAML
 
   cp "$ABBEY_ROOT/tools/bin/abbey-knowledge" \
     "$fixture_root/tools/bin/abbey-knowledge"
@@ -158,6 +163,24 @@ echo
 
 fixture_root="$(create_fixture)"
 trap 'rm -rf "${fixture_root:-}"' EXIT
+
+set +e
+output="$(
+  cd "$fixture_root" &&
+    "$ABBEY_ROOT/tools/bin/abbey" ai decide --help 2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "external project help resolves toolkit libraries" \
+  "$status" \
+  0
+
+assert_contains \
+  "external project help uses project decision metadata" \
+  "$output" \
+  "Alpha Decision"
 
 set +e
 output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_AI" decide --help 2>&1)"
