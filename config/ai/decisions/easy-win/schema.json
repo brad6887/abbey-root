@@ -1,28 +1,30 @@
 {
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "recommendation",
-    "summary",
-    "priority_reason",
     "estimated_effort",
     "risk_level",
     "session_fit",
     "durable_value",
-    "backlog_reduction",
+    "primary_backlog_item",
+    "backlog_parents_closed",
+    "completion_checkboxes",
+    "required_subtasks",
+    "optional_work_excluded",
+    "new_backlog_items_expected",
+    "expected_net_backlog_reduction",
     "blocking_items",
     "evidence",
-    "confidence",
-    "alternatives",
-    "assumptions"
+    "recommendation_confidence",
+    "implementation_confidence",
+    "implementation_approach",
+    "documented_implementation_details",
+    "repository_review_required",
+    "alternatives"
   ],
   "properties": {
     "recommendation": {
-      "type": "string"
-    },
-    "summary": {
-      "type": "string"
-    },
-    "priority_reason": {
       "type": "string"
     },
     "estimated_effort": {
@@ -48,12 +50,47 @@
         "type": "string"
       }
     },
-    "backlog_reduction": {
+    "primary_backlog_item": {
+      "type": "string"
+    },
+    "backlog_parents_closed": {
       "type": "array",
       "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^- \\[ \\] .+$"
+      }
+    },
+    "completion_checkboxes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^- \\[ \\] .+$"
+      }
+    },
+    "required_subtasks": {
+      "type": "array",
       "items": {
         "type": "string"
       }
+    },
+    "optional_work_excluded": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "new_backlog_items_expected": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 0
+    },
+    "expected_net_backlog_reduction": {
+      "type": "integer",
+      "minimum": 1
     },
     "blocking_items": {
       "type": "array",
@@ -81,10 +118,35 @@
         }
       }
     },
-    "confidence": {
+    "recommendation_confidence": {
       "type": "number",
       "minimum": 0,
       "maximum": 1
+    },
+    "implementation_confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 0.25
+    },
+    "implementation_approach": {
+      "type": "string",
+      "enum": [
+        "unknown-pending-repository-review"
+      ]
+    },
+    "documented_implementation_details": {
+      "type": "array",
+      "maxItems": 0,
+      "items": {
+        "type": "string"
+      }
+    },
+    "repository_review_required": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
     },
     "alternatives": {
       "type": "array",
@@ -102,12 +164,6 @@
             "type": "string"
           }
         }
-      }
-    },
-    "assumptions": {
-      "type": "array",
-      "items": {
-        "type": "string"
       }
     }
   }

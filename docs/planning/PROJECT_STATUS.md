@@ -279,7 +279,10 @@ Completed
 - Local model experimentation.
 - `abbey ai`.
 - Metadata-driven AI decision framework with reusable decision definitions, structured history, and cross-model comparison validated through practical use.
-- `abbey ai decide easy-win` identifies low-risk, one-session work with durable value and meaningful backlog reduction.
+- `abbey ai decide easy-win` identifies low-risk, one-session work that fully
+  closes exact pending parent checkboxes, includes their required child scope,
+  excludes optional expansion, expects no new backlog entries, and reports the
+  verified positive net backlog reduction.
 - `abbey ai decide risk-reducer` identifies bounded, one-session work that materially reduces a concrete operational or workflow risk while requiring repository review.
 - `abbey ai decide workflow-friction` identifies costly recurring manual work, separates evidence from assumptions, and classifies bounded improvements as Abbey commands, standardized workflows, or local fixes.
 - `abbey ai decide backlog-leverage` identifies one focused session whose shared outcome completes or materially advances the largest coherent set of documented backlog items.

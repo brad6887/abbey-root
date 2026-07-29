@@ -290,7 +290,221 @@ assert_contains \
 assert_contains \
   "--help describes easy-win selection boundary" \
   "$output" \
-  "low-risk, one-session work"
+  "fully closes existing backlog checkboxes"
+
+easy_win_prompt="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/easy-win/prompt.md"
+)"
+
+assert_contains \
+  "easy-win prompt requires parent checkbox completion" \
+  "$easy_win_prompt" \
+  "Fully complete at least one existing pending parent checkbox"
+
+assert_contains \
+  "easy-win prompt includes all required child work" \
+  "$easy_win_prompt" \
+  "Include every nested child item required to mark that parent complete."
+
+assert_contains \
+  "easy-win prompt rejects material advancement" \
+  "$easy_win_prompt" \
+  "Merely advance, enable, investigate, or partially complete a backlog item."
+
+assert_contains \
+  "easy-win prompt rejects open-ended backlog parents" \
+  "$easy_win_prompt" \
+  "Select an open-ended or recurring parent"
+
+assert_contains \
+  "easy-win prompt requires finite completion criteria" \
+  "$easy_win_prompt" \
+  "explicit nested criteria define a finite state"
+
+assert_contains \
+  "easy-win prompt requires zero new backlog items" \
+  "$easy_win_prompt" \
+  'Set `new_backlog_items_expected` to zero.'
+
+assert_contains \
+  "easy-win prompt verifies net reduction arithmetic" \
+  "$easy_win_prompt" \
+  '`expected_net_backlog_reduction` equals the number of unique parent'
+
+assert_contains \
+  "easy-win prompt prohibits invented implementation details" \
+  "$easy_win_prompt" \
+  "Do not name"
+
+assert_contains \
+  "easy-win prompt prohibits invented commands" \
+  "$easy_win_prompt" \
+  "broad workflow item into a specific command or feature design."
+
+assert_contains \
+  "easy-win prompt requires repository review" \
+  "$easy_win_prompt" \
+  "implementation details as assumptions and list the repository review required"
+
+assert_contains \
+  "easy-win prompt caps implementation confidence" \
+  "$easy_win_prompt" \
+  "keep implementation confidence at"
+
+assert_contains \
+  "easy-win prompt leaves implementation unknown" \
+  "$easy_win_prompt" \
+  '`unknown-pending-repository-review`'
+
+assert_contains \
+  "easy-win prompt prohibits guessed solutions in all output" \
+  "$easy_win_prompt" \
+  "must not fill"
+
+easy_win_schema="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/easy-win/schema.json"
+)"
+
+assert_contains \
+  "easy-win schema requires closed backlog parents" \
+  "$easy_win_schema" \
+  '"backlog_parents_closed"'
+
+assert_contains \
+  "easy-win schema requires exact completion checkboxes" \
+  "$easy_win_schema" \
+  '"completion_checkboxes"'
+
+checkbox_pattern_count="$(
+  grep -Fc '"pattern": "^- \\[ \\] .+$"' \
+    "$ABBEY_ROOT/config/ai/decisions/easy-win/schema.json"
+)"
+
+if [[ "$checkbox_pattern_count" -eq 2 ]]; then
+  pass "easy-win schema enforces pending checkbox syntax in both arrays"
+else
+  fail "easy-win schema enforces pending checkbox syntax in both arrays"
+fi
+
+assert_contains \
+  "easy-win schema requires child scope" \
+  "$easy_win_schema" \
+  '"required_subtasks"'
+
+assert_contains \
+  "easy-win schema requires excluded optional work" \
+  "$easy_win_schema" \
+  '"optional_work_excluded"'
+
+assert_contains \
+  "easy-win schema caps new backlog items at zero" \
+  "$easy_win_schema" \
+  '"maximum": 0'
+
+assert_contains \
+  "easy-win schema requires positive net reduction" \
+  "$easy_win_schema" \
+  '"expected_net_backlog_reduction"'
+
+assert_contains \
+  "easy-win schema separates recommendation confidence" \
+  "$easy_win_schema" \
+  '"recommendation_confidence"'
+
+assert_contains \
+  "easy-win schema separates implementation confidence" \
+  "$easy_win_schema" \
+  '"implementation_confidence"'
+
+assert_contains \
+  "easy-win schema caps implementation confidence" \
+  "$easy_win_schema" \
+  '"maximum": 0.25'
+
+assert_contains \
+  "easy-win schema fixes implementation approach" \
+  "$easy_win_schema" \
+  '"unknown-pending-repository-review"'
+
+assert_contains \
+  "easy-win schema prohibits undocumented implementation details" \
+  "$easy_win_schema" \
+  '"documented_implementation_details"'
+
+assert_contains \
+  "easy-win schema prohibits extra output fields" \
+  "$easy_win_schema" \
+  '"additionalProperties": false'
+
+assert_not_contains \
+  "easy-win schema omits free-form summary" \
+  "$easy_win_schema" \
+  '"summary"'
+
+assert_not_contains \
+  "easy-win schema omits free-form priority reason" \
+  "$easy_win_schema" \
+  '"priority_reason"'
+
+assert_not_contains \
+  "easy-win schema omits speculative assumptions" \
+  "$easy_win_schema" \
+  '"assumptions"'
+
+assert_contains \
+  "easy-win schema requires repository review" \
+  "$easy_win_schema" \
+  '"repository_review_required"'
+
+assert_contains \
+  "shared report presents backlog parents closed" \
+  "$(cat "$ABBEY_AI")" \
+  '("Backlog Parents Closed", "backlog_parents_closed")'
+
+assert_contains \
+  "shared report presents completion checkboxes" \
+  "$(cat "$ABBEY_AI")" \
+  '("Completion Checkboxes", "completion_checkboxes")'
+
+assert_contains \
+  "shared report presents required subtasks" \
+  "$(cat "$ABBEY_AI")" \
+  '("Required Subtasks", "required_subtasks")'
+
+assert_contains \
+  "shared report presents excluded optional work" \
+  "$(cat "$ABBEY_AI")" \
+  '("Optional Work Excluded", "optional_work_excluded")'
+
+assert_contains \
+  "shared report presents new backlog expectation" \
+  "$(cat "$ABBEY_AI")" \
+  '("New Backlog Items Expected", "new_backlog_items_expected")'
+
+assert_contains \
+  "shared report presents expected net reduction" \
+  "$(cat "$ABBEY_AI")" \
+  '("Expected Net Backlog Reduction", "expected_net_backlog_reduction")'
+
+assert_contains \
+  "shared report renders empty easy-win scope explicitly" \
+  "$(cat "$ABBEY_AI")" \
+  '"optional_work_excluded",'
+
+assert_contains \
+  "shared report preserves checkbox formatting" \
+  "$(cat "$ABBEY_AI")" \
+  'and item.startswith("- [")'
+
+assert_contains \
+  "shared report presents unknown implementation approach" \
+  "$(cat "$ABBEY_AI")" \
+  '("Implementation Approach", "implementation_approach")'
+
+assert_contains \
+  "shared report presents documented implementation details" \
+  "$(cat "$ABBEY_AI")" \
+  '("Documented Implementation Details", "documented_implementation_details")'
 
 assert_contains \
   "--help discovers risk-reducer decision metadata" \

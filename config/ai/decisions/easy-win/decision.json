@@ -1,6 +1,6 @@
 {
   "name": "Easy Win",
-  "description": "Identify low-risk, one-session work that delivers durable value and meaningfully reduces the backlog.",
+  "description": "Identify low-risk, one-session work that fully closes existing backlog checkboxes with a positive net reduction.",
   "category": "planning",
   "model": "gpt-oss:20b",
   "documents": [

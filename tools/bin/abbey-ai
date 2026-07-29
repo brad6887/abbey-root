@@ -720,6 +720,7 @@ detail_sections = [
     ("Bounded Improvement", "bounded_improvement"),
     ("Human Boundary", "human_boundary"),
     ("Classification Reason", "classification_reason"),
+    ("Implementation Approach", "implementation_approach"),
 ]
 
 for heading, field in detail_sections:
@@ -739,6 +740,8 @@ benefit_fields = [
     ("Confidence", "confidence"),
     ("Recommendation Confidence", "recommendation_confidence"),
     ("Implementation Confidence", "implementation_confidence"),
+    ("New Backlog Items Expected", "new_backlog_items_expected"),
+    ("Expected Net Backlog Reduction", "expected_net_backlog_reduction"),
     ("Classification", "improvement_classification"),
 ]
 
@@ -775,6 +778,11 @@ list_sections = [
     ("Risk Reduction", "risk_reduction"),
     ("Residual Risk", "residual_risk"),
     ("Backlog Reduction", "backlog_reduction"),
+    ("Backlog Parents Closed", "backlog_parents_closed"),
+    ("Completion Checkboxes", "completion_checkboxes"),
+    ("Required Subtasks", "required_subtasks"),
+    ("Optional Work Excluded", "optional_work_excluded"),
+    ("Documented Implementation Details", "documented_implementation_details"),
     ("Blocking Items", "blocking_items"),
     ("Repository Review Required", "repository_review_required"),
 ]
@@ -782,13 +790,30 @@ list_sections = [
 for heading, field in list_sections:
     items = result.get(field, [])
 
-    if items:
+    if items or field in {
+        "required_subtasks",
+        "optional_work_excluded",
+        "documented_implementation_details",
+    }:
         print()
         print(heading)
         print("-" * len(heading))
 
-        for item in items:
-            print(f"- {item}")
+        if not items:
+            print("- None")
+        else:
+            for item in items:
+                if (
+                    field in {
+                        "backlog_parents_closed",
+                        "completion_checkboxes",
+                    }
+                    and isinstance(item, str)
+                    and item.startswith("- [")
+                ):
+                    print(item)
+                else:
+                    print(f"- {item}")
 
 coverage_map = result.get("coverage_map", [])
 
