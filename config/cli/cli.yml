@@ -122,10 +122,11 @@ commands:
   next:
     category: workflow
     description: Recommend the next focused Abbey engineering session.
-    usage: abbey next
+    usage: abbey next [init]
     hidden: false
     examples:
       - abbey next
+      - abbey next init
 
   backlog:
     category: workflow

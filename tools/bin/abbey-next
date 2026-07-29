@@ -32,59 +32,187 @@ Abbey Next
 
 Usage:
   abbey next
+  abbey next init
   abbey next help
 
 Recommend the next focused Abbey engineering session.
 
 The command reads Abbey planning documents and produces one deterministic,
 explainable recommendation. Human direction in NEXT.md remains authoritative.
+
+The init command creates docs/planning/NEXT.md from the canonical Abbey
+planning structure. It refuses to overwrite an existing file.
 HELP
+}
+
+extract_section_value() {
+  local file="$1"
+  local section_name="$2"
+
+  awk -v section_name="$section_name" '
+    /^#{1,6}[[:space:]]+/ {
+      heading_level = index($0, " ") - 1
+      heading_text = $0
+      sub(/^#{1,6}[[:space:]]+/, "", heading_text)
+
+      if (found && heading_level <= section_level) {
+        exit
+      }
+
+      if (heading_text == section_name) {
+        found = 1
+        section_level = heading_level
+        next
+      }
+
+      if (found) {
+        print heading_text
+        exit
+      }
+    }
+
+    found && NF && $0 != "---" {
+      print
+      exit
+    }
+  ' "$file"
+}
+
+has_section() {
+  local file="$1"
+  local section_name="$2"
+
+  awk -v section_name="$section_name" '
+    /^#{1,6}[[:space:]]+/ {
+      heading_text = $0
+      sub(/^#{1,6}[[:space:]]+/, "", heading_text)
+      if (heading_text == section_name) {
+        found = 1
+        exit
+      }
+    }
+
+    END {
+      exit(found ? 0 : 1)
+    }
+  ' "$file"
+}
+
+initialize_next_document() {
+  local project_name="Abbey Project"
+  local project_library="$ABBEY_ROOT/tools/lib/project.sh"
+
+  if [[ -f "$project_library" ]]; then
+    source "$project_library"
+    project_name="$(abbey_project_name "$ABBEY_ROOT")"
+  fi
+
+  if [[ -e "$next_document" ]]; then
+    fail "Refusing to overwrite existing docs/planning/NEXT.md"
+    exit 1
+  fi
+
+  mkdir -p "$(dirname "$next_document")"
+  cat > "$next_document" <<EOF
+# $project_name Next
+
+Last Reviewed: $(date +%F)
+
+## Current Theme
+
+Define the current project phase.
+
+## Primary Objective
+
+Define one focused project objective.
+
+## Current Priorities
+
+- Identify the highest-value immediate work.
+
+## Success Criteria
+
+- The objective has a measurable Definition of Done.
+- The result is validated and reviewable.
+
+## Future Direction
+
+Record accepted work that follows the current objective.
+
+## Guiding Principle
+
+Keep current execution focused and preserve one authoritative source of truth.
+EOF
+
+  ok "Created docs/planning/NEXT.md"
+  echo "Review the generated placeholders before running:"
+  echo "    abbey next"
+}
+
+validate_next_document() {
+  local required_sections=(
+    "Current Theme"
+    "Primary Objective"
+    "Current Priorities"
+    "Success Criteria"
+    "Future Direction"
+    "Guiding Principle"
+  )
+  local missing_sections=0
+  local required_section
+
+  for required_section in "${required_sections[@]}"; do
+    if ! has_section "$next_document" "$required_section"; then
+      fail "NEXT.md missing required section: $required_section"
+      missing_sections=$((missing_sections + 1))
+    fi
+  done
+
+  if (( missing_sections > 0 )); then
+    echo
+    echo "Unable to generate a recommendation."
+    echo "Add the missing sections to docs/planning/NEXT.md or create a"
+    echo "canonical template in a project without NEXT.md by running:"
+    echo "    abbey next init"
+    exit 1
+  fi
+}
+
+if [[ "${1:-}" == "init" ]]; then
+  if [[ $# -gt 1 ]]; then
+    echo "ERROR Unknown next init option: $2"
+    echo
+    usage
+    exit 1
+  fi
+  initialize_next_document
+  exit 0
+fi
+
+if [[ "${1:-}" =~ ^(help|-h|--help)$ ]]; then
+  usage
+  exit 0
+fi
+
+if [[ $# -gt 0 ]]; then
+  echo "ERROR Unknown next option: $1"
+  echo
+  usage
+  exit 1
+fi
+
+extract_primary_objective() {
+  local file="$1"
+
+  extract_section_value "$file" "Primary Objective"
 }
 
 extract_heading_value() {
   local file="$1"
   local heading="$2"
 
-  awk -v heading="$heading" '
-    $0 == heading {
-      found = 1
-      next
-    }
-
-    found && /^## / {
-      sub(/^## /, "")
-      print
-      exit
-    }
-
-    found && /^# / {
-      exit
-    }
-  ' "$file"
-}
-
-extract_primary_objective() {
-  local file="$1"
-
-  awk '
-    $0 == "# Primary Objective" {
-      found = 1
-      next
-    }
-
-    found && /^# / {
-      exit
-    }
-
-    found && /^---$/ {
-      exit
-    }
-
-    found && NF {
-      print
-      exit
-    }
-  ' "$file"
+  heading="${heading#\# }"
+  extract_section_value "$file" "$heading"
 }
 
 print_definition_of_done() {
@@ -130,18 +258,6 @@ print_definition_of_done() {
   esac
 }
 
-if [[ "${1:-}" =~ ^(help|-h|--help)$ ]]; then
-  usage
-  exit 0
-fi
-
-if [[ $# -gt 0 ]]; then
-  echo "ERROR Unknown next option: $1"
-  echo
-  usage
-  exit 1
-fi
-
 echo "========================================"
 echo " Abbey Next"
 echo "========================================"
@@ -179,6 +295,8 @@ if (( missing_count > 0 )); then
   echo "    abbey next"
   exit 1
 fi
+
+validate_next_document
 
 theme="$(extract_heading_value "$next_document" "# Current Theme")"
 primary_objective="$(extract_primary_objective "$next_document")"

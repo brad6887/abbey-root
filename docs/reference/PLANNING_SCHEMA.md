@@ -142,6 +142,12 @@ Unlike the backlog, this document should remain intentionally small and focused 
 - Future Direction
 - Guiding Principle
 
+Each required section may use any Markdown heading level. Its content may begin
+with normal body text or with a lower-level subheading. `abbey next` validates
+the stable section names, reads the first body line or subheading beneath
+Current Theme and Primary Objective, and reports every missing required section
+before recommendation generation begins.
+
 The theme subheading beneath Current Theme may vary by project phase.
 
 Priority-domain subheadings beneath Current Priorities may vary by project phase.

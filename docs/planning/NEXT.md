@@ -11,7 +11,7 @@ Last Reviewed: 2026-07-28
 Validate the completed Abbey Research observation-candidate workflow through a
 real non-canonical research run.
 
-# Definition of Done
+# Success Criteria
 
 The workflow-validation session is complete when:
 
@@ -113,7 +113,9 @@ Validation
 
 ---
 
-# Current Phase — Observation Workflow Validation
+# Current Priorities
+
+## Current Phase — Observation Workflow Validation
 
 ## Objective
 
@@ -161,7 +163,7 @@ If normal use exposes a defect:
 
 ---
 
-# Future Phases
+# Future Direction
 
 ## Canonical Promotion
 
@@ -212,3 +214,10 @@ Create the first Voice Model only after:
 - Counterexamples are documented.
 - Confidence levels are meaningful.
 - Shared higher-level characteristics can be justified.
+
+---
+
+# Guiding Principle
+
+Validate framework workflows through real, non-canonical use before expanding
+their automation or promoting generated artifacts into authoritative sources.

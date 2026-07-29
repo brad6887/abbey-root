@@ -160,13 +160,14 @@ Recommend the next focused Abbey engineering session.
 **Usage**
 
 ```text
-abbey next
+abbey next [init]
 ```
 
 **Examples**
 
 ```text
 abbey next
+abbey next init
 ```
 
 ### `abbey review`

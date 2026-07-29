@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 93 complete · 267 pending · 360 total
+> **Backlog Status:** 94 complete · 266 pending · 360 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -45,7 +45,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Standardize documentation across Abbey-style repositories.
 - [ ] Adopt repository-defined AI session guidance across other Abbey-style repositories.
 - [ ] Create framework migration guide.
-- [ ] Improve `abbey next` NEXT.md parsing and validation.
+- [x] Improve `abbey next` NEXT.md parsing and validation.
   - Document required NEXT.md structure.
   - Support normal Markdown heading/body formatting.
   - Add clear errors for missing required sections.

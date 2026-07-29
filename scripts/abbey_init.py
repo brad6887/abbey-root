@@ -105,16 +105,24 @@ Project Foundation
 
 Define the first usable {name} project workflow.
 
-## Definition of Done
+## Current Priorities
+
+- Define and validate the first useful project workflow.
+
+## Success Criteria
 
 - The first project workflow is documented.
 - One real example validates the workflow.
 - The result can be reviewed without relying on chat history.
 - The project remains simple to maintain manually.
 
-## Tasks
+## Future Direction
 
-- [ ] Define and validate the first useful project workflow.
+Build on the validated workflow without expanding the initial session.
+
+## Guiding Principle
+
+Keep the project simple, reviewable, and grounded in real use.
 """,
         "docs/planning/BACKLOG.md": f"""# {name} Backlog
 

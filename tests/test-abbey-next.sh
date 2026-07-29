@@ -45,21 +45,61 @@ create_fixture() {
   fixture_root="$(mktemp -d)"
   mkdir -p "$fixture_root/docs/planning"
 
-  cp "$ABBEY_ROOT"/docs/planning/{PROJECT_STATUS,NEXT,BACKLOG,ROADMAP}.md \
-    "$fixture_root/docs/planning/"
+  cat > "$fixture_root/docs/planning/PROJECT_STATUS.md" <<'EOF'
+# Test Project Status
 
-  for recommendation_item in \
-    'Create `abbey next`' \
-    'Build deterministic project recommendation engine' \
-    'Generate session objectives from planning documents' \
-    'Generate Definitions of Done' \
-    'Explain recommendation reasoning'
-  do
-    replace_in_file \
-      "- [x] $recommendation_item." \
-      "- [ ] $recommendation_item." \
-      "$fixture_root/docs/planning/BACKLOG.md"
-  done
+## Current Focus
+
+- Recommendation Engine
+EOF
+
+  cat > "$fixture_root/docs/planning/NEXT.md" <<'EOF'
+# Test Project Next
+
+## Current Theme
+
+### Build with the Framework
+
+## Primary Objective
+
+Build the Abbey Recommendation Engine.
+
+## Current Priorities
+
+- Create and refine `abbey next`.
+
+## Success Criteria
+
+- Recommendations are deterministic and tested.
+
+## Future Direction
+
+Expand project-aware recommendations after the foundation is stable.
+
+## Guiding Principle
+
+Prefer deterministic project evidence.
+EOF
+
+  cat > "$fixture_root/docs/planning/BACKLOG.md" <<'EOF'
+# Test Backlog
+
+## Project-Aware Recommendations
+
+- [ ] Create `abbey next`.
+- [ ] Build deterministic project recommendation engine.
+- [ ] Generate session objectives from planning documents.
+- [ ] Generate Definitions of Done.
+- [ ] Explain recommendation reasoning.
+EOF
+
+  cat > "$fixture_root/docs/planning/ROADMAP.md" <<'EOF'
+# Test Roadmap
+
+## Recommendation Engine
+
+- Build deterministic, explainable project recommendations.
+EOF
 
   git -C "$fixture_root" init -q
   git -C "$fixture_root" config user.name "Abbey Test"
@@ -137,6 +177,65 @@ assert_not_contains \
   "does not use neighboring backlog items as Definition of Done" \
   "$output" \
   "- Generate session objectives from planning documents."
+
+cp "$fixture_root/docs/planning/NEXT.md" "$fixture_root/docs/planning/NEXT.valid.md"
+
+for missing_section in \
+  "Current Theme" \
+  "Primary Objective" \
+  "Current Priorities" \
+  "Success Criteria" \
+  "Future Direction" \
+  "Guiding Principle"; do
+  awk -v section="$missing_section" '
+    BEGIN { skip = 0; level = 0 }
+    /^#{1,6} / {
+      current_level = index($0, " ") - 1
+      heading = $0
+      sub(/^#{1,6} /, "", heading)
+      if (heading == section) {
+        skip = 1
+        level = current_level
+        next
+      }
+      if (skip && current_level <= level) {
+        skip = 0
+      }
+    }
+    !skip { print }
+  ' "$fixture_root/docs/planning/NEXT.valid.md" \
+    > "$fixture_root/docs/planning/NEXT.md"
+
+  set +e
+  output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_NEXT" 2>&1)"
+  status=$?
+  set -e
+
+  if (( status != 0 )); then
+    pass "fails when $missing_section is missing"
+  else
+    fail "fails when $missing_section is missing"
+  fi
+
+  assert_contains \
+    "identifies missing $missing_section section" \
+    "$output" \
+    "FAIL NEXT.md missing required section: $missing_section"
+done
+
+mv "$fixture_root/docs/planning/NEXT.valid.md" \
+  "$fixture_root/docs/planning/NEXT.md"
+
+replace_in_file \
+  '### Build with the Framework' \
+  'Build with the Framework' \
+  "$fixture_root/docs/planning/NEXT.md"
+
+output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_NEXT")"
+assert_contains \
+  "supports normal Markdown theme body text" \
+  "$output" \
+  "Theme: Build with the Framework"
 
 replace_in_file \
   '- [ ] Create `abbey next`.' \
@@ -302,6 +401,48 @@ assert_contains \
   "explains recommendation cannot be generated" \
   "$output" \
   "Unable to generate a recommendation."
+
+init_root="$(mktemp -d)"
+rm -rf "$init_root/docs"
+mkdir -p "$init_root/.abbey"
+cat > "$init_root/.abbey/project.yml" <<'EOF'
+schema_version: 1
+project:
+  name: Abbey Next Test
+EOF
+
+output="$(ABBEY_ROOT="$init_root" "$ABBEY_NEXT" init)"
+assert_contains \
+  "init reports created template" \
+  "$output" \
+  "OK   Created docs/planning/NEXT.md"
+
+for required_section in \
+  "Current Theme" \
+  "Primary Objective" \
+  "Current Priorities" \
+  "Success Criteria" \
+  "Future Direction" \
+  "Guiding Principle"; do
+  if grep -Eq "^#{1,6} ${required_section}$" \
+    "$init_root/docs/planning/NEXT.md"; then
+    pass "init includes $required_section"
+  else
+    fail "init includes $required_section"
+  fi
+done
+
+set +e
+output="$(ABBEY_ROOT="$init_root" "$ABBEY_NEXT" init 2>&1)"
+status=$?
+set -e
+if (( status != 0 )); then
+  pass "init refuses to overwrite NEXT.md"
+else
+  fail "init refuses to overwrite NEXT.md"
+fi
+
+rm -rf "$init_root"
 
 echo
 echo "Summary"

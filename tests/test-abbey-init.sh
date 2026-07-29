@@ -31,6 +31,19 @@ output="$(
 )"
 [[ -f "$project/.abbey/project.yml" ]] && pass "metadata is created" || fail "metadata is created"
 [[ -f "$project/docs/planning/PROJECT_STATUS.md" ]] && pass "planning is created" || fail "planning is created"
+for section_name in \
+  "Current Theme" \
+  "Primary Objective" \
+  "Current Priorities" \
+  "Success Criteria" \
+  "Future Direction" \
+  "Guiding Principle"; do
+  if grep -Eq "^#{1,6} ${section_name}$" "$project/docs/planning/NEXT.md"; then
+    pass "NEXT.md includes $section_name"
+  else
+    fail "NEXT.md includes $section_name"
+  fi
+done
 git -C "$project" rev-parse --is-inside-work-tree >/dev/null 2>&1 &&
   pass "Git is initialized" || fail "Git is initialized"
 [[ -z "$(git -C "$project" remote)" ]] && pass "no remote is created" || fail "no remote is created"
