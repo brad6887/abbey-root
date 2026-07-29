@@ -97,10 +97,8 @@ YAML
     "$fixture_root/scripts/abbey_knowledge_manifest.py"
 
   cat > "$fixture_root/config/abbey.conf" <<'CONFIG'
-OPEN_WEBUI_URL="http://localhost:3000"
+OPEN_WEBUI_URL="http://project.example.test:3000"
 ABBEY_KNOWLEDGE_FILE=".abbey/knowledge/snapshot.md"
-OLLAMA_URL="http://localhost:11434"
-ABBEY_AI_DECISION_MODEL="test-model"
 ABBEY_AI_AUTO_BUILD_KNOWLEDGE="true"
 CONFIG
 
@@ -171,6 +169,35 @@ echo
 
 fixture_root="$(create_fixture)"
 trap 'rm -rf "${fixture_root:-}"' EXIT
+toolkit_root="$ABBEY_ROOT"
+
+config_output="$(
+  ABBEY_ROOT="$fixture_root" \
+    ABBEY_TOOLKIT_ROOT="$toolkit_root" \
+    bash -c '
+      source "$ABBEY_TOOLKIT_ROOT/tools/lib/config.sh"
+      load_abbey_config
+      printf "%s\n%s\n%s\n" \
+        "$OPEN_WEBUI_URL" \
+        "$OLLAMA_URL" \
+        "$ABBEY_AI_DECISION_MODEL"
+    '
+)"
+
+assert_contains \
+  "external project inherits toolkit Ollama URL" \
+  "$config_output" \
+  "http://192.168.1.87:11434"
+
+assert_contains \
+  "external project inherits toolkit decision model" \
+  "$config_output" \
+  "gpt-oss:20b"
+
+assert_contains \
+  "external project tracked config overrides toolkit defaults" \
+  "$config_output" \
+  "http://project.example.test:3000"
 
 set +e
 output="$(

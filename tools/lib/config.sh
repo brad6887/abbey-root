@@ -2,8 +2,21 @@
 
 load_abbey_config() {
   local root="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+  local toolkit_root="${ABBEY_TOOLKIT_ROOT:-$root}"
 
-  # Tracked defaults
+  # Shared toolkit defaults
+  if [[ -f "$toolkit_root/config/abbey.conf" ]]; then
+    # shellcheck disable=SC1090
+    source "$toolkit_root/config/abbey.conf"
+  fi
+
+  # Shared local overrides, ignored by Git
+  if [[ "$toolkit_root" != "$root" && -f "$toolkit_root/.abbey/config.conf" ]]; then
+    # shellcheck disable=SC1090
+    source "$toolkit_root/.abbey/config.conf"
+  fi
+
+  # Project-specific tracked configuration
   if [[ -f "$root/config/abbey.conf" ]]; then
     # shellcheck disable=SC1090
     source "$root/config/abbey.conf"
