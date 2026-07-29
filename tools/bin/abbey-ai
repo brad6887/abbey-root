@@ -19,9 +19,12 @@
 #
 set -euo pipefail
 
-ABBEY_ROOT="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 
-source "$ABBEY_ROOT/tools/lib/config.sh"
+source "$ABBEY_TOOLKIT_ROOT/tools/lib/config.sh"
 load_abbey_config
 
 KNOWLEDGE_FILE="$ABBEY_ROOT/$ABBEY_KNOWLEDGE_FILE"
