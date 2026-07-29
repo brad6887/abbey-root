@@ -80,7 +80,8 @@ create_fixture() {
     "$fixture_root/config/ai/decisions/alpha" \
     "$fixture_root/config/ai/decisions/beta" \
     "$fixture_root/config/ai/decisions/broken" \
-    "$fixture_root/config/ai/decisions/incomplete"
+    "$fixture_root/config/ai/decisions/incomplete" \
+    "$fixture_root/config/ai/decisions/next-project"
 
   cat > "$fixture_root/.abbey/project.yml" <<'YAML'
 name: External Abbey Project
@@ -138,6 +139,13 @@ JSON
 }
 JSON
 
+  cat > "$fixture_root/config/ai/decisions/next-project/decision.json" <<'JSON'
+{
+  "name": "Project-Specific Next Project",
+  "description": "Use the active project's custom decision definition."
+}
+JSON
+
   cp -R \
     "$ABBEY_ROOT/config/ai/decisions/easy-win" \
     "$fixture_root/config/ai/decisions/easy-win"
@@ -181,6 +189,16 @@ assert_contains \
   "external project help uses project decision metadata" \
   "$output" \
   "Alpha Decision"
+
+assert_contains \
+  "external project help inherits toolkit decision metadata" \
+  "$output" \
+  "Time Saver"
+
+assert_contains \
+  "external project decision metadata overrides toolkit metadata" \
+  "$output" \
+  "Project-Specific Next Project"
 
 set +e
 output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_AI" decide --help 2>&1)"
@@ -532,9 +550,9 @@ assert_status \
   0
 
 assert_contains \
-  "missing decisions directory reports none" \
+  "missing project decisions inherit toolkit defaults" \
   "$output" \
-  "None"
+  "Next Project"
 
 
 ABBEY_ROOT="$fixture_root" \

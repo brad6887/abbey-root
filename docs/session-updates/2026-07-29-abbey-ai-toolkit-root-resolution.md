@@ -1,6 +1,6 @@
 ---
 title: "Abbey AI Toolkit Root Resolution"
-description: "Corrected Abbey AI library resolution for commands run from external Abbey projects."
+description: "Corrected Abbey AI library and decision resolution for commands run from external Abbey projects."
 date: 2026-07-29
 status: complete
 reviewed: false
@@ -21,39 +21,43 @@ the distinction between the shared Abbey toolkit and the active project.
 ## Definition of Done
 
 - `abbey-ai` resolves its implementation libraries from the toolkit root.
-- AI configuration, decision metadata, and knowledge remain project-aware.
+- Shared decision metadata resolves from the toolkit, with active-project
+  additions and overrides.
+- AI configuration and knowledge remain project-aware.
 - The command works from Abbey Root and through the dispatcher from an external
   Abbey project.
 - Regression coverage reproduces the external-project path-resolution case.
 
 ## Summary
 
-Separated the toolkit path used to load `tools/lib/config.sh` from the active
-project path used by Abbey AI. The command now follows the portable
-`ABBEY_TOOLKIT_ROOT` pattern already used by commands such as `abbey-doctor`,
-`abbey-status`, and `abbey-version`.
+Separated the toolkit paths used to load `tools/lib/config.sh` and shared
+decision definitions from the active project path used for AI context. The
+command now follows the portable `ABBEY_TOOLKIT_ROOT` pattern already used by
+commands such as `abbey-doctor`, `abbey-status`, and `abbey-version`.
 
 ## Accomplishments
 
 - Derived a fallback toolkit root from the resolved `abbey-ai` script path.
 - Loaded the shared configuration library from `ABBEY_TOOLKIT_ROOT`.
 - Preserved `ABBEY_ROOT` as the active project for configuration, decision
-  discovery, and knowledge paths.
+  overrides, and knowledge paths.
+- Layered decision discovery so project definitions extend or override the
+  toolkit defaults by decision ID.
 - Added an integration-style regression that invokes `abbey ai decide --help`
   through the main dispatcher from an external Abbey project fixture.
 
 ## Impact
 
 External Abbey projects no longer need to contain a duplicate
-`tools/lib/config.sh` for `abbey ai decide` to start. The correction reinforces
-the framework boundary between shared toolkit implementation and project-owned
-content.
+`tools/lib/config.sh` or copy shared decision definitions for `abbey ai decide`
+to work. The correction reinforces the framework boundary between reusable
+toolkit capabilities and project-owned context or customizations.
 
 ## Validation
 
 - `abbey ai decide --help` from the Abbey Root checkout.
-- External-project dispatcher regression passed and loaded project-owned
-  decision metadata.
+- External-project dispatcher regression passed, inherited toolkit decision
+  metadata, and loaded project-owned decision metadata.
 - Existing `tests/test-abbey-ai.sh` assertions through the decision-command
   coverage passed; later knowledge-context assertions remain unavailable on the
   macOS system Bash because the existing script requires Bash 4 lowercase
