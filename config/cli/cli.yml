@@ -249,6 +249,9 @@ commands:
     usage: abbey research <command>
     hidden: false
     subcommands:
+      create:
+        description: Create a controlled, review-ready research candidate.
+        usage: abbey research create --project PROJECT --type observation --corpus CORPUS --experiment EXPERIMENT --model MODEL --prompt FILE [--input FILE ...]
       status:
         description: Report formal research artifact relationships and chain status.
         usage: abbey research status
@@ -266,6 +269,7 @@ commands:
         usage: abbey research voice apply --model MODEL --fact-lock FILE --output FILE --report FILE
     examples:
       - abbey research --help
+      - abbey research create --project voice-analysis --type observation --corpus CORPUS-001 --experiment EXP-001 --model gpt-oss:20b --prompt FILE --input FILE
       - abbey research run --help
       - abbey research validate-review --manifest FILE --corpus FILE
       - abbey research validate-discovery --manifest FILE --corpus FILE --batch FILE

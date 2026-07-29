@@ -69,6 +69,11 @@ assert_contains \
   "abbey research run"
 
 assert_contains \
+  "--help shows create usage" \
+  "$output" \
+  "abbey research create"
+
+assert_contains \
   "--help shows generation budget option" \
   "$output" \
   "--max-tokens N"
@@ -839,6 +844,9 @@ cp "$ROOT/tools/lib/config.sh" \
 cp "$ROOT/scripts/abbey_research_status.py" \
   "$fixture_root/scripts/abbey_research_status.py"
 
+cp "$ROOT/scripts/abbey_research_create.py" \
+  "$fixture_root/scripts/abbey_research_create.py"
+
 cp "$ROOT/tools/research/validate_discovery_manifest.py" \
   "$fixture_root/tools/research/validate_discovery_manifest.py"
 
@@ -866,6 +874,332 @@ printf '# Prompt\n' \
 
 printf '# Existing result\n' \
   > "$fixture_root/working/result.md"
+
+create_fixture="$fixture_root/create-fixture"
+create_runs="$fixture_root/working/research/runs"
+mkdir -p "$create_fixture"
+
+cat > "$create_fixture/stage-tool" <<'STAGE_TOOL'
+#!/usr/bin/env bash
+set -euo pipefail
+
+command="$1"
+shift
+
+if [[ "${FAKE_FAIL_STAGE:-}" == "$command" ]]; then
+  echo "Injected $command failure." >&2
+  exit 9
+fi
+
+output=""
+input=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --output)
+      output="$2"
+      shift 2
+      ;;
+    --input)
+      input="$2"
+      shift 2
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+case "$command" in
+  run)
+    cat > "$output" <<'MARKDOWN'
+# Observation
+
+## Question
+
+Which recurring pattern appears in the supplied material?
+
+## Corpus
+
+The supplied test corpus.
+
+## Method
+
+Review the supplied records for repeated structures.
+
+## Findings
+
+The pattern appears in FB-000001.
+
+## Interpretation
+
+The finding is a candidate requiring human review.
+
+## Questions Raised
+
+Does the pattern appear in a broader sample?
+
+## Status
+
+Candidate.
+MARKDOWN
+    ;;
+  normalize)
+    cp "$input" "$output"
+    ;;
+  sanitize)
+    exec "$REAL_RESEARCH_TOOL" sanitize \
+      --input "$input" \
+      --output "$output"
+    ;;
+  validate)
+    exec "$REAL_RESEARCH_TOOL" validate \
+      --type observation \
+      --input "$input"
+    ;;
+  *)
+    echo "Unexpected command: $command" >&2
+    exit 2
+    ;;
+esac
+STAGE_TOOL
+chmod +x "$create_fixture/stage-tool"
+
+cat > "$create_fixture/prompt.md" <<'MARKDOWN'
+# Prompt
+
+Create one cited observation candidate.
+MARKDOWN
+
+cat > "$create_fixture/input.md" <<'MARKDOWN'
+FB-000001: Example source record.
+MARKDOWN
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_RUN_ID="RUN-TEST-SUCCESS" \
+  ABBEY_RESEARCH_STAGE_TOOL="$create_fixture/stage-tool" \
+  REAL_RESEARCH_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" create \
+    --project test-project \
+    --type observation \
+    --corpus CORPUS-TEST \
+    --experiment EXP-TEST \
+    --model test-model \
+    --prompt "$create_fixture/prompt.md" \
+    --input "$create_fixture/input.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation create succeeds" \
+  "$status" \
+  0
+
+assert_contains \
+  "observation create reports review-ready state" \
+  "$output" \
+  "State:     review-ready"
+
+assert_contains \
+  "observation create preserves source citations" \
+  "$(cat "$create_runs/RUN-TEST-SUCCESS/candidate.md")" \
+  "FB-000001"
+
+manifest_check="$(
+  python3 - "$create_runs/RUN-TEST-SUCCESS/manifest.yaml" <<'PYTHON'
+import json
+import sys
+
+manifest = json.load(open(sys.argv[1], encoding="utf-8"))
+valid = (
+    manifest["state"] == "review-ready"
+    and manifest["artifact_type"] == "observation"
+    and manifest["source"]["corpus"] == "CORPUS-TEST"
+    and len(manifest["inputs"]) == 1
+    and len(manifest["executions"]) == 4
+    and all(item["status"] == "passed" for item in manifest["executions"])
+)
+print("VALID" if valid else "BROKEN")
+PYTHON
+)"
+
+assert_contains \
+  "observation create records complete manifest" \
+  "$manifest_check" \
+  "VALID"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_RUN_ID="RUN-TEST-NO-INPUT" \
+  ABBEY_RESEARCH_STAGE_TOOL="$create_fixture/stage-tool" \
+  REAL_RESEARCH_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" create \
+    --project test-project \
+    --type observation \
+    --corpus CORPUS-TEST \
+    --experiment EXP-TEST \
+    --model test-model \
+    --prompt "$create_fixture/prompt.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation create supports no optional inputs" \
+  "$status" \
+  0
+
+if [[ ! -w "$create_runs/RUN-TEST-SUCCESS/raw.md" ]]; then
+  pass "observation create makes raw output immutable"
+else
+  fail "observation create makes raw output immutable"
+fi
+
+raw_hash_before="$(
+  sha256sum "$create_runs/RUN-TEST-SUCCESS/raw.md" | awk '{print $1}'
+)"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_RUN_ID="RUN-TEST-SUCCESS" \
+  ABBEY_RESEARCH_STAGE_TOOL="$create_fixture/stage-tool" \
+  REAL_RESEARCH_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" create \
+    --project test-project \
+    --type observation \
+    --corpus CORPUS-TEST \
+    --experiment EXP-TEST \
+    --model test-model \
+    --prompt "$create_fixture/prompt.md" \
+    --input "$create_fixture/input.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation create rejects an existing run" \
+  "$status" \
+  1
+
+assert_contains \
+  "observation create reports overwrite protection" \
+  "$output" \
+  "Existing run outputs will not be overwritten."
+
+raw_hash_after="$(
+  sha256sum "$create_runs/RUN-TEST-SUCCESS/raw.md" | awk '{print $1}'
+)"
+
+if [[ "$raw_hash_before" == "$raw_hash_after" ]]; then
+  pass "observation create does not overwrite raw output"
+else
+  fail "observation create does not overwrite raw output"
+fi
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_RUN_ID="RUN-TEST-GENERATION-FAILURE" \
+  ABBEY_RESEARCH_STAGE_TOOL="$create_fixture/stage-tool" \
+  REAL_RESEARCH_TOOL="$fixture_root/tools/bin/abbey-research" \
+  FAKE_FAIL_STAGE="run" \
+    "$fixture_root/tools/bin/abbey-research" create \
+    --project test-project \
+    --type observation \
+    --corpus CORPUS-TEST \
+    --experiment EXP-TEST \
+    --model test-model \
+    --prompt "$create_fixture/prompt.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation create reports generation failure" \
+  "$status" \
+  1
+
+assert_contains \
+  "generation failure records failure state" \
+  "$(cat "$create_runs/RUN-TEST-GENERATION-FAILURE/manifest.yaml")" \
+  '"state": "generation-failed"'
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_RUN_ID="RUN-TEST-STAGE-FAILURE" \
+  ABBEY_RESEARCH_STAGE_TOOL="$create_fixture/stage-tool" \
+  REAL_RESEARCH_TOOL="$fixture_root/tools/bin/abbey-research" \
+  FAKE_FAIL_STAGE="normalize" \
+    "$fixture_root/tools/bin/abbey-research" create \
+    --project test-project \
+    --type observation \
+    --corpus CORPUS-TEST \
+    --experiment EXP-TEST \
+    --model test-model \
+    --prompt "$create_fixture/prompt.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation create reports stage failure" \
+  "$status" \
+  1
+
+assert_contains \
+  "stage failure records normalization state" \
+  "$(cat "$create_runs/RUN-TEST-STAGE-FAILURE/manifest.yaml")" \
+  '"state": "normalization-failed"'
+
+assert_contains \
+  "stage failure preserves raw output" \
+  "$(cat "$create_runs/RUN-TEST-STAGE-FAILURE/raw.md")" \
+  "FB-000001"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_RUN_ID="RUN-TEST-UNSUPPORTED" \
+  ABBEY_RESEARCH_STAGE_TOOL="$create_fixture/stage-tool" \
+  REAL_RESEARCH_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" create \
+    --project test-project \
+    --type evidence \
+    --corpus CORPUS-TEST \
+    --experiment EXP-TEST \
+    --model test-model \
+    --prompt "$create_fixture/prompt.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation create rejects unsupported type" \
+  "$status" \
+  1
+
+assert_contains \
+  "observation create reports supported type" \
+  "$output" \
+  "Supported types: observation"
 
 set +e
 output="$(

@@ -309,6 +309,8 @@ abbey research <command>
 
 **Subcommands**
 
+- `create` - Create a controlled, review-ready research candidate.
+  - `abbey research create --project PROJECT --type observation --corpus CORPUS --experiment EXPERIMENT --model MODEL --prompt FILE [--input FILE ...]`
 - `discover` - Run resumable observation discovery across deterministic corpus batches.
   - `abbey research discover --model MODEL --prompt FILE --corpus FILE --batch-manifest FILE --output-dir DIR [--resume]`
 - `status` - Report formal research artifact relationships and chain status.
@@ -324,6 +326,7 @@ abbey research <command>
 
 ```text
 abbey research --help
+abbey research create --project voice-analysis --type observation --corpus CORPUS-001 --experiment EXP-001 --model gpt-oss:20b --prompt FILE --input FILE
 abbey research run --help
 abbey research validate-review --manifest FILE --corpus FILE
 abbey research validate-discovery --manifest FILE --corpus FILE --batch FILE

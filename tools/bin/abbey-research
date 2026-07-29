@@ -18,6 +18,16 @@ usage() {
 Abbey Research
 
 Usage:
+  abbey research create \
+    --project PROJECT \
+    --type observation \
+    --corpus CORPUS \
+    --experiment EXPERIMENT \
+    --model MODEL \
+    --prompt FILE \
+    [--input FILE ...] \
+    [--max-tokens N]
+
   abbey research run \
     --model MODEL \
     --prompt FILE \
@@ -103,6 +113,9 @@ Usage:
   abbey research status
 
 Options:
+  --project NAME  Research project name
+  --corpus ID     Source corpus identifier
+  --experiment ID Experiment identifier
   --type TYPE     Research artifact type (default: generic)
   --model MODEL   Ollama model to use
   --prompt FILE   Research prompt file
@@ -123,6 +136,15 @@ Canonical normalized structure:
   ## Open Questions
 
 Examples:
+  abbey research create \
+    --project voice-analysis \
+    --type observation \
+    --corpus CORPUS-001 \
+    --experiment EXP-001 \
+    --model gpt-oss:20b \
+    --prompt working/research/PROMPT.md \
+    --input working/research/facebook-posts.md
+
   abbey research run \
     --model gpt-oss:20b \
     --prompt working/research/PROMPT.md \
@@ -203,6 +225,7 @@ run_research() {
   local output_file=""
   local max_tokens="6144"
   local force="false"
+  local artifact_type="generic"
   local -a input_files=()
 
   while [[ $# -gt 0 ]]; do
@@ -308,7 +331,7 @@ run_research() {
 
   local input_file
 
-  for input_file in "${input_files[@]}"; do
+  for input_file in ${input_files[@]+"${input_files[@]}"}; do
     if [[ ! -f "$input_file" ]]; then
       echo "Input file not found:" >&2
       echo "$input_file" >&2
@@ -332,7 +355,7 @@ run_research() {
     "$prompt_file" \
     "$output_file" \
     "$max_tokens" \
-    "${input_files[@]}" <<'PYTHON'
+    ${input_files[@]+"${input_files[@]}"} <<'PYTHON'
 import json
 import sys
 import time
@@ -831,9 +854,20 @@ PYTHON_SANITIZE
 
 validate_research() {
   local input_file=""
+  local artifact_type="generic"
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
+      --type)
+        if [[ -z "${2:-}" ]]; then
+          echo "Option --type requires an artifact type." >&2
+          exit 1
+        fi
+
+        artifact_type="$2"
+        shift 2
+        ;;
+
       --input)
         if [[ -z "${2:-}" ]]; then
           echo "Option --input requires a file." >&2
@@ -869,27 +903,51 @@ validate_research() {
     exit 1
   fi
 
-  python3 - "$input_file" <<'PYTHON_VALIDATE'
+  case "$artifact_type" in
+    generic|observation)
+      ;;
+    *)
+      echo "Unsupported artifact type: $artifact_type" >&2
+      echo "Supported types: generic observation" >&2
+      exit 1
+      ;;
+  esac
+
+  python3 - "$artifact_type" "$input_file" <<'PYTHON_VALIDATE'
 import re
 import sys
 from pathlib import Path
 
-input_path = Path(sys.argv[1])
+artifact_type = sys.argv[1]
+input_path = Path(sys.argv[2])
 content = input_path.read_text(encoding="utf-8")
 
-required_sections = [
-    "Summary",
-    "Observations",
-    "Evidence",
-    "Conclusions",
-    "Limitations",
-    "Open Questions",
-]
+if artifact_type == "observation":
+    required_title = "Observation"
+    required_sections = [
+        "Question",
+        "Corpus",
+        "Method",
+        "Findings",
+        "Interpretation",
+        "Questions Raised",
+        "Status",
+    ]
+else:
+    required_title = "Research Result"
+    required_sections = [
+        "Summary",
+        "Observations",
+        "Evidence",
+        "Conclusions",
+        "Limitations",
+        "Open Questions",
+    ]
 
 failures = []
 
 title_matches = re.findall(
-    r"^# Research Result\s*$",
+    rf"^# {re.escape(required_title)}\s*$",
     content,
     flags=re.MULTILINE,
 )
@@ -897,10 +955,14 @@ title_matches = re.findall(
 if not title_matches:
     failures.append(
         "Missing required title: # Research Result"
+        if artifact_type == "generic"
+        else "Missing required title: # Observation"
     )
 elif len(title_matches) > 1:
     failures.append(
         "Duplicate required title: # Research Result"
+        if artifact_type == "generic"
+        else "Duplicate required title: # Observation"
     )
 
 heading_matches = list(
@@ -1869,6 +1931,11 @@ HELP
 command="${1:-help}"
 
 case "$command" in
+  create)
+    shift
+    python3 "$ABBEY_ROOT/scripts/abbey_research_create.py" "$@"
+    ;;
+
   run)
     shift
     run_research "$@"
