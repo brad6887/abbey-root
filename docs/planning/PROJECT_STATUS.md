@@ -175,6 +175,11 @@ Completed
 - `abbey journal` handles help and invalid options safely and supports explicit `--title` input
 - `abbey ai`
 - Metadata-driven `abbey ai decide` discovery and help
+- `abbey ai decide` resolves shared libraries and decision definitions from the
+  toolkit while preserving active-project configuration, knowledge, additions,
+  and overrides
+- Core Abbey workflows distinguish toolkit implementation from active-project
+  data and are validated for external projects and macOS system Bash 3.2
 - `abbey session update` generation from the standard repository template
 - `abbey session capture` derives one deterministic slug from the session title,
   stores it as session metadata, reuses it for the session update and journal
@@ -187,6 +192,9 @@ Completed
 - `abbey ssh audit` and `abbey ssh sync` provide validated, idempotent SSH key auditing and managed synchronization while preserving unrelated authorized keys
 - `abbey research status` deterministically discovers formal research artifacts, resolves their relationships, and reports complete chains and legacy provenance without modifying repository state
 - `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, reports conflicts between recent session evidence and planning documents, and generates Definitions of Done from the selected recommendation using tailored criteria where available and a deterministic fallback otherwise
+- `abbey next` validates the canonical six-section `NEXT.md` contract, while
+  `abbey next init` safely creates a valid project-aware template without
+  overwriting an existing file
 - `abbey backlog refresh` maintains deterministic complete, pending, and total
   statistics in a bounded generated block for Abbey Root and external Abbey
   projects, with read-only freshness checks in `abbey review` and `abbey end`
@@ -362,15 +370,14 @@ Completed
 - Created onboarding documentation.
 - Adopted the framework within Power Infrastructure.
 - Continued improving project-aware workflows.
-- Implemented and validated the first default Abbey project bootstrap using a
-  temporary Bread Pitt repository.
+- Validated Abbey project bootstrap and core external-project workflows through
+  real use in Bread Pitt, including knowledge, context, and AI decision runs.
 
 ---
 
 # Current Challenges
 
 - Completing the end-to-end Abbey workflow.
-- Validating the default `abbey init` workflow through practical project use.
 - Reducing manually maintained documentation.
 - AI project awareness.
 - Reducing publish-preview noise.

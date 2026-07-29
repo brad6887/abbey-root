@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 94 complete · 266 pending · 360 total
+> **Backlog Status:** 95 complete · 269 pending · 364 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -59,6 +59,9 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Add configurable journal policy for initialized projects, including event-driven or optional journals.
 - [x] Make `abbey review` suggest validation commands appropriate to the active project type.
 - [x] Verify `abbey backlog refresh` works correctly in external Abbey projects.
+- [ ] Review toolkit/project-root handling in `abbey-site`, `abbey-lab`, and `abbey-ssh`.
+- [ ] Make `abbey status` capability-aware for external projects.
+- [ ] Review Abbey-specific wording in external-project knowledge, context, and AI output.
 - [ ] Add configurable journal templates so non-technical Abbey projects can use journal structures appropriate to their content instead of the default session-oriented `Summary / Accomplishments / Lessons Learned / Next Steps` format.
   - Support selecting a template with `abbey journal --template <name>`.
   - Allow a project to define its default journal template in Abbey configuration.
@@ -82,8 +85,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [ ] Make `.bashrc` Ansible-managed.
 - [ ] Configure hostname resolution between lab systems.
-- [ ] Complete the `edge01` commissioning workflow.
-- [ ] Validate the `edge01` commissioning workflow and procedures.
+- [ ] Complete `docs/architecture/EDGE01_COMMISSIONING.md` as a reusable commissioning runbook based on the actual `edge01` deployment.
+- [ ] Validate the completed `edge01` commissioning runbook against the deployed host and record any corrections or missing steps.
 - [x] Deploy Technitium DNS on `edge01` as the authoritative `home.arpa` service and validate it from `ubuntu-dev01`.
 - [ ] Complete extended validation and lab-wide rollout of internal DNS.
 - [ ] Establish reliable internal access to public proxied services through Abbey DNS.
@@ -249,7 +252,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Evaluate `abbey ai decide backlog-leverage` through normal use in the canonical Ubuntu environment and confirm that its coverage map remains conservative.
 - [ ] Validate `abbey ai decide workflow-friction` through normal use from the canonical Ubuntu environment and assess its classification and recurrence-evidence rubric before expansion.
 - [ ] Evaluate `abbey ai decide risk-reducer` through normal use before expanding its rubric.
-- [ ] Fix the documented macOS portability failures in the Abbey AI test suite.
+- [ ] Re-run the complete Abbey AI regression suite on the Linux development host.
+- [x] Fix the documented macOS portability failures in the Abbey AI test suite.
 - [ ] Expand the AI decision library with additional engineering workflows.
 
 ### Abbey Research

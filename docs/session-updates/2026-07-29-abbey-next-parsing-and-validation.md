@@ -3,7 +3,7 @@ title: "Abbey Next Parsing and Validation"
 description: "Completed canonical NEXT.md parsing, validation, and template generation while reducing the Abbey Root backlog by one item."
 date: 2026-07-29
 status: completed
-reviewed: false
+reviewed: true
 session: abbey-next-parsing-and-validation
 tags:
   - Abbey Root

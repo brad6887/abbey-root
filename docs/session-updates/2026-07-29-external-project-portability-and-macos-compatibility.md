@@ -3,7 +3,7 @@ title: "External Project Portability and macOS Compatibility"
 description: "Separated Abbey toolkit code from active-project data, added macOS-compatible shell behavior, and validated core workflows in Bread Pitt."
 date: 2026-07-29
 status: pending
-reviewed: false
+reviewed: true
 session: external-project-portability-and-macos-compatibility
 tags:
   - Abbey Root

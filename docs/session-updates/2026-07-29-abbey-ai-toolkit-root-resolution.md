@@ -3,7 +3,7 @@ title: "Abbey AI Toolkit Root Resolution"
 description: "Corrected Abbey AI library and decision resolution for commands run from external Abbey projects."
 date: 2026-07-29
 status: complete
-reviewed: false
+reviewed: true
 session: abbey-ai-toolkit-root-resolution
 tags:
   - Abbey Root
