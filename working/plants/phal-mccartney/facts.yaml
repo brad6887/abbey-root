@@ -1,0 +1,43 @@
+name: Phal McCartney
+slug: phal-mccartney
+
+plant:
+  type: orchid
+  genus: Phalaenopsis
+  species: null
+  hybrid: true
+
+rescue:
+  date: null
+  source: Publix (recalled, unconfirmed)
+  location:
+    city: null
+    state: Florida
+    country: USA
+
+status:
+  current: thriving
+  current_location:
+    city: Fort Worth
+    state: Texas
+    country: USA
+  updated: 2026-07-26
+
+care:
+  potting_medium: aged compacted sphagnum moss
+  container: original orchid pot
+
+photos:
+  hero: photos/Phal_McCartney - 20.JPG
+  current: photos/Phal_McCartney - 23.JPG
+  metadata: photo-metadata.md
+
+documents:
+  story: story.md
+  history: history.md
+
+tags:
+  - orchid
+  - orchid-rescue
+  - phalaenopsis
+  - thriving
