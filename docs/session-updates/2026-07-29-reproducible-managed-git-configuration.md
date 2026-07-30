@@ -74,6 +74,10 @@ control host with explicit scope.
 - The remaining-host audit showed that `edge01` and `sensor01` lacked GitHub
   host trust. The published GitHub ED25519 key is now installed and audited by
   Ansible so new hosts do not require an interactive first connection.
+- Edge and Sensor public keys were fingerprint-verified and registered with
+  GitHub without transferring private key material.
+- The final inventory-wide audit completed across all five managed hosts with
+  zero changes, failures, or unreachable hosts.
 
 ## Lessons Learned
 
@@ -96,14 +100,13 @@ interactive prompt without weakening host verification.
 
 ## Next Steps
 
-- From `rocky-ansible01`, run `abbey git audit`.
-- Preview all changes with `abbey git sync --check`.
-- Synchronize only after reviewing the host-by-host output.
-- Re-run the audit and validate an ordinary `git pull` on at least two hosts.
+- Use `abbey git audit` after adding a managed host or repository.
+- Register each new host's public key with GitHub before expecting repository
+  access; never distribute a shared private key.
 
 ## Notes
 
-Live infrastructure mutation was intentionally excluded from this implementation
-session. GitHub SSH authentication remains dependent on each host having a
-public key registered with GitHub; the audit reports that boundary instead of
-copying private credentials.
+The rollout was previewed host by host before synchronization. GitHub SSH
+authentication remains dependent on each host having a public key registered
+with GitHub; the audit reports that boundary instead of copying private
+credentials.

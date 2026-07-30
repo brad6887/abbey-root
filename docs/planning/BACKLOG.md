@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 96 complete · 270 pending · 366 total
+> **Backlog Status:** 97 complete · 269 pending · 366 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -498,7 +498,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Manage one reproducible Git identity, fast-forward pull policy, GitHub SSH
   transport, and existing Abbey repository remote configuration through
   Ansible-backed audit and synchronization commands.
-- [ ] Validate `abbey git audit` and `abbey git sync --check` from the Ansible
+- [x] Validate `abbey git audit` and `abbey git sync --check` from the Ansible
   control host against every managed server.
 - [ ] Validate the unchanged Abbey Doctor path on a managed Linux host.
 - [ ] Add verbose mode.

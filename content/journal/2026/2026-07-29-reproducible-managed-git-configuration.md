@@ -27,6 +27,9 @@ SSH GitHub transport, automatic pruning, and fast-forward-only pulls.
 - Used the Rocky canary to make optional, absent repository checkouts safe.
 - Added GitHub's published ED25519 host key after the remaining-host audit
   identified missing non-interactive trust on Edge and Sensor.
+- Fingerprint-verified and registered the Edge and Sensor public keys with
+  GitHub.
+- Completed a clean inventory-wide audit across all five managed hosts.
 
 ## Lessons Learned
 
@@ -45,6 +48,6 @@ SSH GitHub transport, automatic pruning, and fast-forward-only pulls.
 
 ## Next Steps
 
-- Validate the new workflow from `rocky-ansible01` in check mode.
-- Apply it deliberately across the managed inventory and confirm ordinary pulls
-  from multiple hosts.
+- Run the Git audit whenever a managed host or repository is added.
+- Continue using per-host public keys rather than distributing private
+  credentials.

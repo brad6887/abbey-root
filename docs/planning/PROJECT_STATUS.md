@@ -166,7 +166,8 @@ Completed
   identity, fast-forward-only pull policy, automatic pruning, GitHub SSH
   transport and published host-key trust, and normalized remotes for existing
   Abbey Root and Bread Pitt checkouts without cloning, pulling, pushing, or
-  changing working files
+  changing working files; the workflow is deployed and audit-clean across all
+  five managed hosts
 - `abbey session`
 - `abbey end` follows the active project's required, event-driven, or optional
   journal policy and recognizes completed, reviewed reconciliation-only commits
