@@ -1,5 +1,5 @@
 ---
-title: something
+title: Something
 type: orchid
 status: In progress
 species: Phalaenopsis
