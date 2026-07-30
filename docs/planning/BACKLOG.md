@@ -1,14 +1,16 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 98 complete · 270 pending · 368 total
+> **Backlog Status:** 141 complete · 255 pending · 396 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
 
-Items are captured here until they are either promoted to the roadmap, completed during a development session, or determined to no longer be necessary.
+Items are captured here until they are promoted to the roadmap, completed during a development session, or determined to no longer be necessary.
 
-The backlog is intentionally broad and serves as the project's working inventory of ideas, improvements, and future capabilities.
+The backlog is intentionally broad and serves as the project's working inventory of ideas, improvements, and future capabilities. However, each backlog entry should describe a finite, verifiable outcome that can eventually be completed or removed.
+
+Ongoing practices, design principles, and general areas of improvement belong in project guidance, status documentation, or workflow policy. When those practices reveal specific work, that work should be added to the backlog as a concrete, finishable entry.
 
 ---
 
@@ -16,11 +18,10 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 - [x] Design and implement the first safe `abbey init` project bootstrap command.
 - [x] Create `abbey end` session workflow.
-- [ ] Continue refining `abbey session review` through practical usage before adding broader automation.
-- [ ] Continue eliminating manually maintained documentation.
+- [x] Establish `abbey session review` as a practical review workflow.
+- [x] Establish generated documentation as the preferred alternative to manually maintained summaries.
 - [x] Design secure remote access to Abbey Root for working away from home.
 - [ ] Document and photograph the completed data closet layout.
-- [ ] Publish additional BradCooke.com content.
 - [x] Publish Doctor Robert as the reference Plant Model profile.
 - [x] Connect the Plant Model to BradCooke.com.
 - [ ] Add generated Abbey CLI architecture and registered-command summaries to `abbey session context`.
@@ -33,23 +34,28 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## Abbey Framework
 
-- [ ] Begin Bread Pitt domain modeling in its own focused project session.
+- [x] Define and document the initial Bread Pitt domain model in a focused Bread Pitt project session.
 - [x] Design and implement the first safe `abbey init`.
-- [ ] Create shared CLI libraries.
-- [ ] Standardize universal CLI commands.
-- [ ] Create framework validation.
-- [ ] Create framework adoption guide.
-- [ ] Create project templates.
-- [ ] Design framework versioning.
-- [ ] Expand framework documentation.
-- [ ] Standardize documentation across Abbey-style repositories.
-- [ ] Adopt repository-defined AI session guidance across other Abbey-style repositories.
-- [ ] Create framework migration guide.
+- [x] Establish shared Abbey project and configuration libraries for portable core commands.
+- [x] Extract additional shared CLI behavior only when repeated implementations establish a stable reusable contract.
+- [x] Define the standard universal CLI commands and their expected behavior.
+- [ ] Implement and document a canonical framework-level project validation workflow.
+- [ ] Create a framework adoption guide based on the validated Abbey Root, Power Infrastructure, and Bread Pitt workflows.
+- [x] Create the first safe default Abbey project template through `abbey init`.
+- [ ] Define whether Abbey needs multiple selectable project templates after additional project types validate the requirement.
+- [ ] Define and document the Abbey Framework versioning and compatibility policy.
+- [x] Establish the initial Abbey Framework documentation foundation.
+- [x] Define the standard documentation structure for Abbey-style repositories.
+- [ ] Verify and document documentation-standard conformance in Power Infrastructure.
+- [x] Add repository-defined AI session guidance to Abbey Root.
+- [x] Include repository-defined AI session guidance in newly initialized Abbey projects.
+- [ ] Adopt repository-defined AI session guidance in Power Infrastructure.
+- [ ] Create a framework migration guide based on at least one completed migration of an existing repository.
 - [x] Improve `abbey next` NEXT.md parsing and validation.
-  - Document required NEXT.md structure.
-  - Support normal Markdown heading/body formatting.
-  - Add clear errors for missing required sections.
-  - Add `abbey next init` or `abbey next update` to create valid templates.
+- [x] Document the required NEXT.md structure.
+- [x] Support normal Markdown headings and body content in NEXT.md.
+- [x] Report clear errors when required NEXT.md sections are missing.
+- [x] Add `abbey next init` to create a valid NEXT.md template without overwriting an existing file.
 
 ## External Project Portability
 
@@ -62,13 +68,12 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Review toolkit/project-root handling in `abbey-site`, `abbey-lab`, and `abbey-ssh`.
 - [ ] Make `abbey status` capability-aware for external projects.
 - [ ] Review Abbey-specific wording in external-project knowledge, context, and AI output.
-- [ ] Add configurable journal templates so non-technical Abbey projects can use journal structures appropriate to their content instead of the default session-oriented `Summary / Accomplishments / Lessons Learned / Next Steps` format.
-  - Support selecting a template with `abbey journal --template <name>`.
-  - Allow a project to define its default journal template in Abbey configuration.
-  - Include a built-in project introduction template for entries such as "This Is Bread Pitt."
-  - Preserve the current journal template as the default for existing projects.
-  - Validate configured template names and report useful errors for missing templates.
-  - Add regression coverage for built-in, configured, and explicitly selected templates.
+- [ ] Add `abbey journal --template <name>` support.
+- [ ] Allow projects to define a default journal template in Abbey configuration.
+- [ ] Add a built-in project-introduction journal template for entries such as "This Is Bread Pitt."
+- [ ] Preserve the current journal template as the default for existing projects.
+- [ ] Validate configured journal template names and report missing templates clearly.
+- [ ] Add regression coverage for built-in, configured, and explicitly selected journal templates.
 
 ## Abbey Session Workflow Improvements
 
@@ -115,17 +120,16 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Design `abbey operator add`.
 - [ ] Evaluate consolidating the Ansible Control Node onto `ubuntu-dev01`.
 - [ ] Expand `abbey lab` with additional infrastructure diagnostics.
-- [ ] Continue investigating and document resolution of the `ai-worker01` NVIDIA/Ollama reboot hang.
+- [ ] Resolve and document the `ai-worker01` NVIDIA/Ollama reboot hang.
 - [ ] Evaluate running `abbey lab` remotely from development workstations.
 - [ ] Investigate the persistent `systemd-networkd-wait-online.service` warning reported by `abbey lab check`.
-- [ ] Review and refine Ansible playbook and role architecture.
-  - Preserve `site.yml` as the full convergence entry point.
-  - Add focused playbooks for routine service deployments.
-  - Define a true universal host baseline.
-  - Split the current `common` role into packages, Git configuration, and Abbey shell concerns.
-  - Apply roles according to host purpose rather than targeting every host uniformly.
-  - Review time synchronization policy for Debian appliances.
-  - Validate check-mode behavior for package installation followed by service management.
+- [ ] Preserve `site.yml` as the full Ansible convergence entry point.
+- [ ] Add focused Ansible playbooks for routine service deployments.
+- [ ] Define the universal Abbey host baseline.
+- [ ] Split the current `common` role into package, Git configuration, and Abbey shell responsibilities.
+- [ ] Apply Ansible roles according to declared host purpose.
+- [ ] Review and document the time-synchronization policy for Debian appliances.
+- [ ] Validate check-mode behavior when package installation is followed by service management.
 
 ---
 
@@ -138,11 +142,11 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Explain recommendation reasoning.
 - [x] Detect recently completed work.
 - [ ] Move recommendation-specific objectives and completion criteria into structured recommendation metadata.
-- [ ] Continue replacing broad token matching with stronger project-state relationships.
+- [ ] Replace the next identified broad-token recommendation match with a documented project-state relationship and regression fixture.
 - [ ] Expand recommendation-specific Definitions of Done beyond the current Recommendation Engine types.
 - [ ] Add a clean-repository recommendation scenario to the `abbey next` regression suite.
 - [ ] Define and implement stale-`NEXT.md` reporting in `abbey next`: warn when its review date exceeds a defined threshold without discarding or reducing `NEXT.md` authority or changing recommendation scores solely because of age.
-- [ ] Balance neglected project areas.
+- [ ] Add an explicit neglected-project-area factor to the recommendation algorithm with deterministic regression coverage.
 - [ ] Add optional AI recommendation mode.
 
 ## Developer Toolkit
@@ -216,7 +220,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [x] Implement `abbey review`.
 - [x] Add generated backlog completion statistics with workflow freshness checks.
 - [ ] Evaluate generated backlog status and workflow messages through normal Abbey sessions before broader planning-refresh automation.
-- [ ] Restrict **Required Reconciliation** to changes directly required by the reviewed session.
+- [x] Restrict **Required Reconciliation** to changes directly required by the reviewed session.
 - [ ] Report unrelated planning inconsistencies as **Planning Drift** rather than **Required Reconciliation**.
 - [ ] Consider separating **Planning Drift** from **Incidental Drift**.
 - [ ] Consider adding a concise **Reconciliation Scope** summary near the top of `abbey session review` output.
@@ -228,8 +232,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ### AI Integration
 
-- [ ] Detect stale AI knowledge before running `abbey ai`.
-- [ ] Offer to rebuild AI knowledge automatically when project context changes.
+- [x] Detect stale AI knowledge before running `abbey ai`.
+- [x] Offer to rebuild AI knowledge automatically when project context changes.
 - [ ] Add structured content consistency review.
 - [ ] Add photo metadata validation assistance.
 - [ ] Add inventory summarization assistance.
@@ -252,7 +256,7 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Evaluate `abbey ai decide backlog-leverage` through normal use in the canonical Ubuntu environment and confirm that its coverage map remains conservative.
 - [ ] Validate `abbey ai decide workflow-friction` through normal use from the canonical Ubuntu environment and assess its classification and recurrence-evidence rubric before expansion.
 - [ ] Evaluate `abbey ai decide risk-reducer` through normal use before expanding its rubric.
-- [ ] Re-run the complete Abbey AI regression suite on the Linux development host.
+- [x] Re-run the complete Abbey AI regression suite on the Linux development host.
 - [x] Fix the documented macOS portability failures in the Abbey AI test suite.
 - [ ] Expand the AI decision library with additional engineering workflows.
 
@@ -261,11 +265,11 @@ The backlog is intentionally broad and serves as the project's working inventory
 #### Status and Visibility
 
 - [x] Design deterministic `abbey research status` reporting using the completed Voice Analysis artifact chains as reference implementations.
-  - Define artifact discovery rules.
-  - Define metadata-driven relationship mapping.
-  - Define complete, incomplete, broken, and orphaned chain states.
-  - Document expected read-only command output.
-  - Review the design before implementation.
+- [x] Define Abbey Research artifact-discovery rules.
+- [x] Define metadata-driven Abbey Research relationship mapping.
+- [x] Define complete, incomplete, broken, and orphaned research-chain states.
+- [x] Document the expected read-only `abbey research status` output.
+- [x] Review the `abbey research status` design before implementation.
 - [ ] Refine `abbey research status` for invalid, incomplete, duplicate, and broken-relationship states, with synthetic fixtures and architecture-defined severity and exit-code behavior.
 
 #### Validation and Workflow
@@ -297,18 +301,18 @@ The backlog is intentionally broad and serves as the project's working inventory
 ## Self-Documenting Platform
 
 - [x] Generate toolkit command reference.
-- [ ] Generate project metrics.
+- [x] Generate project metrics.
 - [ ] Generate documentation index.
-- [ ] Generate host inventory.
-- [ ] Generate Docker inventory.
-- [ ] Generate service inventory.
-- [ ] Generate Ansible inventory documentation.
+- [x] Generate host inventory.
+- [x] Generate Docker inventory.
+- [x] Generate service inventory.
+- [x] Generate Ansible inventory documentation.
 - [ ] Generate Architecture Decision Record index.
 - [ ] Eliminate manually maintained generated documentation.
 - [ ] Expand metadata-driven documentation generation.
 - [ ] Build metadata-driven documentation generation using planning schemas.
 - [ ] Generate planning summaries from session updates.
-- [ ] Generate AI context from planning documents.
+- [x] Generate project-aware AI context from planning documents.
 - [x] Build bounded deterministic `abbey docs generate` and `abbey docs check`
   orchestration for the CLI and command references.
 - [ ] Isolate Ansible-derived document rendering and add deterministic freshness checks before expanding `abbey docs`.
@@ -367,8 +371,8 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] Create reusable plant profile and timeline components.
 - [x] Prototype the publishing path from `working/plants/` to Astro.
 - [x] Validate the plant publishing workflow before creating additional profiles.
-- [ ] Continue adding Orchid Rescue profiles beyond Doctor Robert and Helter Skelter.
-- [ ] Add Phal McCartney to the documented orchid collection.
+- [ ] Publish the next named Orchid Rescue profile.
+- [x] Add Phal McCartney to the documented orchid collection.
 - [ ] Create a separate future section for bromeliads.
 - [ ] After the remaining plant profiles are published, review selected plant narratives, photograph order and placement, and the relationship between photographs and timeline text.
 
@@ -386,15 +390,15 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ### Styling
 
-- [ ] Move CSS into `site/src/styles/`.
-- [ ] Create `global.css`.
-- [ ] Create `navigation.css`.
-- [ ] Create `layout.css`.
-- [ ] Create `project.css`.
+- [x] Move CSS into `site/src/styles/`.
+- [x] Create `global.css`.
+- [x] Create `navigation.css`.
+- [x] Create `layout.css`.
+- [x] Create `project.css`.
 - [ ] Improve mobile responsiveness.
 - [ ] Add light/dark mode.
 - [x] Create reusable presentation styles for Markdown-generated plant timeline images, including consistent sizing, containment, centering, spacing, aspect-ratio preservation, maximum height, and border radius.
-- [ ] Continue developing reusable styles for broader plant profiles and photo timelines.
+- [ ] Extract the next repeated plant-profile or timeline style into a named reusable stylesheet or component.
 
 ### Publishing
 
@@ -431,23 +435,21 @@ The backlog is intentionally broad and serves as the project's working inventory
 - [ ] AI-assisted publishing.
 - [ ] AI-generated session summaries.
 - [ ] AI-assisted project history.
-- [ ] AI project awareness.
-- [ ] AI-powered "What should I work on next?"
+- [x] Establish project-aware AI context and recommendations.
+- [x] Implement AI-powered "What should I work on next?" recommendations through `abbey next`.
 - [ ] AI documentation review.
 - [ ] AI session recap generation.
-- [ ] AI-aware Abbey toolkit integration.
-- [ ] Define AI knowledge sources.
-- [ ] Track AI knowledge freshness.
-- [ ] Build AI knowledge freshness validation.
-- [ ] Generate project-aware AI context.
-- [ ] Automate AI knowledge rebuilds.
-- [ ] Continue recurring AI technology reviews.
+- [x] Define AI knowledge sources.
+- [x] Track AI knowledge freshness.
+- [x] Build AI knowledge freshness validation.
+- [x] Generate project-aware AI context.
+- [x] Automate AI knowledge rebuilds.
+- [ ] Complete the next scheduled AI technology review and capture its accepted findings.
 - [ ] AI-assisted Plant Model validation.
 - [ ] AI-assisted plant history consistency review.
 - [ ] AI-assisted plant inventory summaries.
 - [ ] AI-assisted selection of milestone photographs.
 - [ ] AI-assisted assembly of draft plant pages from verified source material.
-- [ ] Keep human observations authoritative in AI-assisted workflows.
 
 ### Evaluation
 
@@ -525,18 +527,10 @@ The backlog is intentionally broad and serves as the project's working inventory
 
 ## Request Intake Framework
 
-- [ ] Create a lightweight request tracking process for Abbey Root.
-
-Initial approach:
-
-- Use GitHub Issues.
-- Create issue templates.
-- Define labels for status, type, priority, and framework area.
-- Link requests to session updates.
-- Reference completed issues from commits and session updates.
-
-Future evaluation:
-
-- Evaluate self-hosted issue tracking.
-- Evaluate Gitea.
-- Avoid building a custom ticketing system until the workflow has been proven.
+- [ ] Adopt GitHub Issues as Abbey Root's initial request-tracking system.
+- [ ] Create GitHub issue templates for Abbey Root requests.
+- [ ] Define GitHub labels for request status, type, priority, and framework area.
+- [ ] Document how requests link to Abbey session updates.
+- [ ] Document how completed requests are referenced from commits and session updates.
+- [ ] Evaluate the GitHub Issues workflow after it has been used for a defined trial period.
+- [ ] Decide whether self-hosted issue tracking warrants further investigation after the GitHub Issues trial.
