@@ -21,11 +21,15 @@ ownership are platform-aware.
 - Made managed Git home, group, repository, and SSH paths inventory-driven.
 - Preserved the Linux-only scope of existing Abbey Ansible playbooks.
 - Added regression coverage for Mac inventory and Git workflow routing.
+- Enabled Remote Login, authorized Rocky's verified public key, and validated
+  passwordless control-host access over the LAN.
 
 ## Lessons Learned
 
 - A workstation should share portable policy without inheriting server roles.
 - Separate inventory sources create a clear operational boundary.
+- A Tailscale address is not a management address when the control host is not
+  on the tailnet; reachable addressing must be validated from the controller.
 
 ## Next Steps
 

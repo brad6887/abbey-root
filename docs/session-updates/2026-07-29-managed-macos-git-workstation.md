@@ -41,6 +41,10 @@ Ansible workflow continues to load only the Linux server inventory.
 - Confirmed canonical Mac Abbey Root and Bread Pitt checkouts already use SSH
   origins.
 - Added focused inventory, routing, path, and YAML regression coverage.
+- Enabled macOS Remote Login and authorized Rocky's fingerprint-verified
+  control-host public key.
+- Replaced the unreachable Tailscale inventory address with the proven LAN
+  management address `192.168.1.70`.
 
 ## Impact
 
@@ -52,12 +56,17 @@ of infrastructure, update, SSH-trust, or common Linux playbooks.
 - `tests/test-abbey-git.sh` — 27 passed.
 - Backlog generation and freshness checks passed.
 - YAML parsing, shell syntax, and `git diff --check` passed.
+- Rocky-to-Mac passwordless SSH succeeded as `bradcooke`.
 - Live Rocky-to-Mac check-mode and audit validation remain pending.
 
 ## Lessons Learned
 
 Separate inventory sources provide a smaller safety boundary than adding a
 workstation to the universal Ansible `all` group consumed by Linux playbooks.
+
+Rocky is not a Tailscale node, so the Mac's Tailscale address is not a usable
+control path. The LAN address works, but it must remain reserved to be a durable
+inventory identity.
 
 ## Next Steps
 

@@ -4,5 +4,5 @@ all:
     workstations:
       hosts:
         mac-workstation:
-          ansible_host: 100.119.242.16
+          ansible_host: 192.168.1.70
           ansible_user: bradcooke

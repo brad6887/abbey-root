@@ -1,5 +1,6 @@
 ---
 host_description: macOS development workstation
+management_network: local
 admin_user: bradcooke
 abbey_git_home: /Users/bradcooke
 abbey_git_group: staff
