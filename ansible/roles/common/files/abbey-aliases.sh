@@ -1,7 +1,13 @@
 # Abbey Root shell aliases
 
+# Abbey project helpers apply only when this user has the toolkit checkout.
+if [ ! -d "$HOME/git/abbey-root" ]; then
+  return 0 2>/dev/null || exit 0
+fi
+
 # Project directories
 alias cda='cd ~/git/abbey-root'
+alias ans='cd ~/git/abbey-root/ansible'
 alias cdb='cd ~/git/bread-pitt'
 alias abbey-site='cd ~/git/abbey-root/site'
 alias abbey-content='cd ~/git/abbey-root/content'

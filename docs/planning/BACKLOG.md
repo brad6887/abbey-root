@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 143 complete · 253 pending · 396 total
+> **Backlog Status:** 144 complete · 252 pending · 396 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -88,7 +88,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 
 ## Infrastructure
 
-- [ ] Make `.bashrc` Ansible-managed.
+- [x] Make `.bashrc` Ansible-managed.
 - [ ] Configure hostname resolution between lab systems.
 - [ ] Complete `docs/architecture/EDGE01_COMMISSIONING.md` as a reusable commissioning runbook based on the actual `edge01` deployment.
 - [ ] Validate the completed `edge01` commissioning runbook against the deployed host and record any corrections or missing steps.

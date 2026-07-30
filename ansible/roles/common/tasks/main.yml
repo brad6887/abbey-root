@@ -51,3 +51,60 @@
     owner: root
     group: root
     mode: "0644"
+
+- name: Inspect admin user Bash configuration
+  ansible.builtin.stat:
+    path: "{{ abbey_git_home }}/.bashrc"
+  register: abbey_bashrc
+
+- name: Require an existing admin user Bash configuration
+  ansible.builtin.assert:
+    that:
+      - abbey_bashrc.stat.exists
+      - abbey_bashrc.stat.isreg
+    fail_msg: >-
+      Expected an existing regular Bash configuration at
+      {{ abbey_git_home }}/.bashrc.
+
+- name: Remove legacy Abbey shell helper source block
+  ansible.builtin.replace:
+    path: "{{ abbey_git_home }}/.bashrc"
+    regexp: '(?ms)^# Abbey Root shell helpers\n.*?scripts/bash/functions\.sh"\nfi\n?'
+    replace: ""
+
+- name: Remove legacy inline Abbey directory aliases
+  ansible.builtin.replace:
+    path: "{{ abbey_git_home }}/.bashrc"
+    regexp: '(?m)^#Aliases\n# Abbey Root\nalias cda=.*\nalias ans=.*\n\n?'
+    replace: ""
+
+- name: Remove legacy inline Abbey tool path
+  ansible.builtin.replace:
+    path: "{{ abbey_git_home }}/.bashrc"
+    regexp: '(?m)^# Abbey Root tools\nexport ABBEY_ROOT=.*\nexport PATH=.*\n?'
+    replace: ""
+
+- name: Manage Abbey shell initialization in admin user Bash configuration
+  ansible.builtin.blockinfile:
+    path: "{{ abbey_git_home }}/.bashrc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - Abbey shell"
+    insertafter: EOF
+    owner: "{{ admin_user }}"
+    group: "{{ abbey_git_group }}"
+    mode: "0644"
+    create: false
+    validate: "bash -n %s"
+    block: |
+      if [ -d "$HOME/git/abbey-root" ]; then
+        if [ -r /etc/profile.d/abbey-aliases.sh ]; then
+          . /etc/profile.d/abbey-aliases.sh
+        fi
+
+        if [ -r /etc/profile.d/abbey-functions.sh ]; then
+          . /etc/profile.d/abbey-functions.sh
+        fi
+      fi
+
+      if [ -r "$HOME/.bashrc.local" ]; then
+        . "$HOME/.bashrc.local"
+      fi
