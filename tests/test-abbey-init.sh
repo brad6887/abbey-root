@@ -106,6 +106,26 @@ assert_contains "session uses project metadata" "Bread Pitt Session" "$session_o
 
 context_output="$(cd "$project" && "$ABBEY" session context --stdout)"
 assert_contains "context uses project metadata" "# Bread Pitt Session Context" "$context_output"
+assert_contains \
+  "external context includes CLI architecture" \
+  "## Abbey CLI Architecture" \
+  "$context_output"
+assert_contains \
+  "external context identifies toolkit root" \
+  "Toolkit root (\`ABBEY_TOOLKIT_ROOT\`): \`$ABBEY_ROOT\`" \
+  "$context_output"
+assert_contains \
+  "external context identifies active project root" \
+  "Active project root (\`ABBEY_ROOT\`): \`$project\`" \
+  "$context_output"
+assert_contains \
+  "external context includes registered commands" \
+  "## Registered Commands" \
+  "$context_output"
+assert_contains \
+  "external context includes session context command" \
+  "\`abbey session context\` — Generate an upload-ready session context file." \
+  "$context_output"
 
 doctor_output="$(cd "$project" && "$ABBEY" doctor || true)"
 if grep -Fq "Host Reachability" <<<"$doctor_output"; then

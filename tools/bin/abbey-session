@@ -268,6 +268,28 @@ context_command() {
   echo '```'
 }
 
+
+context_cli_summary() {
+  local output
+
+  if output="$(
+    python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_cli.py" \
+      context \
+      --project-root "$ABBEY_ROOT" 2>&1
+  )"; then
+    printf '%s\n' "$output"
+    return 0
+  fi
+
+  context_section "Abbey CLI Architecture"
+
+  echo "_CLI architecture and registered-command summaries are unavailable._"
+  echo
+  echo '```text'
+  printf '%s\n' "$output"
+  echo '```'
+}
+
 session_context_document() {
   local generated
   local branch
@@ -309,6 +331,8 @@ EOF
 
   context_file "AI Session Guidance" \
     ".abbey/session-guidance.md"
+
+  context_cli_summary
 
   context_command "Repository Status" \
     git -C "$ABBEY_ROOT" status

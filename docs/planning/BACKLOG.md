@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 141 complete · 255 pending · 396 total
+> **Backlog Status:** 142 complete · 254 pending · 396 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -24,7 +24,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Document and photograph the completed data closet layout.
 - [x] Publish Doctor Robert as the reference Plant Model profile.
 - [x] Connect the Plant Model to BradCooke.com.
-- [ ] Add generated Abbey CLI architecture and registered-command summaries to `abbey session context`.
+- [x] Add generated Abbey CLI architecture and registered-command summaries to `abbey session context`.
 - [x] Use unreconciled session updates as recommendation evidence.
 - [x] Suppress work completed in unreconciled session updates.
 - [x] Extract candidate follow-up work from session-update Next Steps.

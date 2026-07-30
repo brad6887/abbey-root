@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-07-29
+Last Updated: 2026-07-30
 
 ---
 
@@ -218,7 +218,12 @@ Completed
 - `abbey session review` validated across varied historical sessions as a read-only, evidence-based reconciliation assistant; historical session reconciliation is complete and refinement remains usage-driven
 - Canonical metadata normalized across historical session updates, making previously invisible sessions discoverable by the reconciliation workflow
 - Abbey context generation, knowledge snapshots, and documentation health checks use `docs/planning/PROJECT_STATUS.md` as the authoritative project status
-- `abbey session context` generates readable, upload-ready repository context for starting AI-assisted sessions, includes version-controlled repository-defined AI guidance when available, and remains failure-tolerant when guidance is absent
+- `abbey session context` generates readable, upload-ready repository context
+  for AI-assisted sessions, includes repository-defined AI guidance, and adds
+  generated CLI architecture and visible registered-command summaries from
+  toolkit-owned `config/cli/cli.yml`; toolkit and active-project roots are
+  reported explicitly, and the workflow remains failure-tolerant in Abbey Root
+  and external Abbey projects
 - External Abbey projects inherit toolkit-owned Abbey AI endpoint and model
   defaults while retaining project-specific tracked and local overrides.
 
