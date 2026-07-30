@@ -23,6 +23,8 @@ ownership are platform-aware.
 - Added regression coverage for Mac inventory and Git workflow routing.
 - Enabled Remote Login, authorized Rocky's verified public key, and validated
   passwordless control-host access over the LAN.
+- Preserved the Mac's GitHub CLI credential helpers after check mode identified
+  them as intentional host-specific configuration.
 
 ## Lessons Learned
 
@@ -30,6 +32,8 @@ ownership are platform-aware.
 - Separate inventory sources create a clear operational boundary.
 - A Tailscale address is not a management address when the control host is not
   on the tailnet; reachable addressing must be validated from the controller.
+- A shared policy should not erase unrelated platform integration merely
+  because the primary repository transport uses SSH.
 
 ## Next Steps
 

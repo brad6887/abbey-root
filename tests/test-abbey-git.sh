@@ -41,6 +41,18 @@ assert_contains \
   "abbey_git_home: /Users/bradcooke" \
   "$(cat "$ABBEY_ROOT/ansible/inventory/host_vars/mac-workstation.yml")"
 assert_contains \
+  "Mac preserves GitHub CLI credentials" \
+  "!/opt/homebrew/bin/gh auth git-credential" \
+  "$(cat "$ABBEY_ROOT/ansible/inventory/host_vars/mac-workstation.yml")"
+assert_contains \
+  "Git template renders host credential helpers" \
+  "abbey_git_credential_helpers" \
+  "$(cat "$ABBEY_ROOT/ansible/roles/git_config/templates/gitconfig.j2")"
+assert_contains \
+  "Mac pins its system Python interpreter" \
+  "ansible_python_interpreter: /usr/bin/python3" \
+  "$(cat "$ABBEY_ROOT/ansible/inventory/host_vars/mac-workstation.yml")"
+assert_contains \
   "Mac is isolated in workstation inventory" \
   "mac-workstation:" \
   "$(cat "$ABBEY_ROOT/ansible/inventory/workstations.yml")"

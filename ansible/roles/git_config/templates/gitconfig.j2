@@ -12,3 +12,9 @@
 
 [url "git@github.com:"]
     insteadOf = https://github.com/
+{% for credential in abbey_git_credential_helpers %}
+
+[credential "{{ credential.url }}"]
+    helper =
+    helper = {{ credential.command }}
+{% endfor %}

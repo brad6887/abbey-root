@@ -57,6 +57,9 @@ of infrastructure, update, SSH-trust, or common Linux playbooks.
 - Backlog generation and freshness checks passed.
 - YAML parsing, shell syntax, and `git diff --check` passed.
 - Rocky-to-Mac passwordless SSH succeeded as `bradcooke`.
+- The first Mac check-mode preview exposed removal of unrelated GitHub CLI
+  credential helpers; Mac inventory now preserves those helpers and pins the
+  system Python interpreter.
 - Live Rocky-to-Mac check-mode and audit validation remain pending.
 
 ## Lessons Learned
@@ -67,6 +70,10 @@ workstation to the universal Ansible `all` group consumed by Linux playbooks.
 Rocky is not a Tailscale node, so the Mac's Tailscale address is not a usable
 control path. The LAN address works, but it must remain reserved to be a durable
 inventory identity.
+
+Platform policy should preserve intentional host-specific integration. Using
+SSH for repository remotes does not justify silently removing GitHub CLI's
+existing HTTPS credential helpers.
 
 ## Next Steps
 

@@ -1,7 +1,13 @@
 ---
 host_description: macOS development workstation
 management_network: local
+ansible_python_interpreter: /usr/bin/python3
 admin_user: bradcooke
 abbey_git_home: /Users/bradcooke
 abbey_git_group: staff
 abbey_git_known_hosts_mode: "0600"
+abbey_git_credential_helpers:
+  - url: https://github.com
+    command: "!/opt/homebrew/bin/gh auth git-credential"
+  - url: https://gist.github.com
+    command: "!/opt/homebrew/bin/gh auth git-credential"
