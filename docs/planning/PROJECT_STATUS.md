@@ -224,6 +224,9 @@ Completed
   toolkit-owned `config/cli/cli.yml`; toolkit and active-project roots are
   reported explicitly, and the workflow remains failure-tolerant in Abbey Root
   and external Abbey projects
+- The obsolete universal `abbey build` workflow has been retired; current
+  help and documentation expose only supported, purpose-specific commands such
+  as `abbey docs`, `abbey review`, and `abbey site build`.
 - External Abbey projects inherit toolkit-owned Abbey AI endpoint and model
   defaults while retaining project-specific tracked and local overrides.
 

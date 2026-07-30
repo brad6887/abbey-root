@@ -3,7 +3,7 @@ title: "Retire Legacy Abbey Build Workflow"
 description: "Removed the obsolete Abbey Root-specific abbey-build wrapper and reconciled current documentation around supported commands."
 date: 2026-07-30
 status: complete
-reviewed: false
+reviewed: true
 session: retire-legacy-abbey-build-workflow
 tags:
   - Abbey Root
