@@ -64,6 +64,10 @@ control host with explicit scope.
 - `tests/test-abbey-portability.sh` — 29 passed.
 - Generated documentation and backlog checks passed.
 - YAML parsing, shell syntax, and `git diff --check` passed.
+- The first live `ubuntu-dev01` canary correctly identified global-policy drift
+  but exposed skipped repository command tasks in Ansible check mode.
+- Check-mode repository reads and explicit change previews were added before
+  permitting live synchronization.
 
 ## Lessons Learned
 
@@ -71,6 +75,10 @@ The earlier Ansible baseline was itself a source of drift: it overwrote the
 global Git configuration with rebase behavior while omitting identity. A
 reproducible workflow needs one declared policy plus a separate, reviewable
 normalization step for existing repositories.
+
+Ansible command tasks do not automatically provide useful check-mode previews.
+Read operations must explicitly run without mutation, while prospective writes
+must be represented separately and marked as predicted changes.
 
 ## Next Steps
 

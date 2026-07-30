@@ -44,6 +44,18 @@ assert_contains \
   "pull alias follows managed policy" \
   "alias gl='git pull --ff-only'" \
   "$(cat "$ABBEY_ROOT/ansible/roles/common/files/abbey-aliases.sh")"
+assert_contains \
+  "sync reads origins during check mode" \
+  "check_mode: false" \
+  "$(cat "$ABBEY_ROOT/ansible/playbooks/tasks/git-sync-repository.yml")"
+assert_contains \
+  "sync previews origin normalization" \
+  "Preview {{ abbey_git_repository.name }} SSH origin" \
+  "$(cat "$ABBEY_ROOT/ansible/playbooks/tasks/git-sync-repository.yml")"
+assert_contains \
+  "sync previews local override removal" \
+  "Preview removal of {{ abbey_git_repository.name }} local policy overrides" \
+  "$(cat "$ABBEY_ROOT/ansible/playbooks/tasks/git-sync-repository.yml")"
 
 python3 - "$ABBEY_ROOT" <<'PY'
 import sys

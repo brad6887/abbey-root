@@ -22,6 +22,8 @@ SSH GitHub transport, automatic pruning, and fast-forward-only pulls.
 - Added `abbey git audit` and previewable `abbey git sync`.
 - Removed the old rebase/autostash policy and aligned the shell pull alias.
 - Protected repository contents and history from the synchronization workflow.
+- Used the first Ubuntu canary to repair check-mode repository previews before
+  any live normalization.
 
 ## Lessons Learned
 
@@ -31,6 +33,8 @@ SSH GitHub transport, automatic pruning, and fast-forward-only pulls.
   remains reproducible without making normal repository changes implicitly.
 - Private-key distribution is not an acceptable shortcut for GitHub access;
   authentication should be audited explicitly.
+- Ansible command tasks need separate read and preview operations to make check
+  mode trustworthy.
 
 ## Next Steps
 

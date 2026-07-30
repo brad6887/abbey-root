@@ -16,7 +16,20 @@
       - remote.origin.url
   register: abbey_git_repository_origin
   changed_when: false
+  check_mode: false
   when: abbey_git_repository_metadata.stat.exists
+
+- name: "Preview {{ abbey_git_repository.name }} SSH origin"
+  ansible.builtin.debug:
+    msg: >-
+      Would set {{ abbey_git_repository.name }} origin from
+      {{ abbey_git_repository_origin.stdout }} to
+      {{ abbey_git_repository.origin }}
+  changed_when: true
+  when:
+    - ansible_check_mode
+    - abbey_git_repository_metadata.stat.exists
+    - abbey_git_repository_origin.stdout != abbey_git_repository.origin
 
 - name: "Set {{ abbey_git_repository.name }} SSH origin"
   ansible.builtin.command:
@@ -29,8 +42,43 @@
       - origin
       - "{{ abbey_git_repository.origin }}"
   when:
+    - not ansible_check_mode
     - abbey_git_repository_metadata.stat.exists
     - abbey_git_repository_origin.stdout != abbey_git_repository.origin
+
+- name: "Read {{ abbey_git_repository.name }} local policy overrides"
+  ansible.builtin.command:
+    argv:
+      - git
+      - -C
+      - "{{ abbey_git_repository.path }}"
+      - config
+      - --local
+      - --get-all
+      - "{{ item }}"
+  loop:
+    - user.name
+    - user.email
+    - pull.rebase
+    - pull.ff
+  register: abbey_git_repository_overrides
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  when: abbey_git_repository_metadata.stat.exists
+
+- name: "Preview removal of {{ abbey_git_repository.name }} local policy overrides"
+  ansible.builtin.debug:
+    msg: >-
+      Would remove {{ abbey_git_repository.name }} local override
+      {{ item.item }}={{ item.stdout }}
+  loop: "{{ abbey_git_repository_overrides.results | default([]) }}"
+  loop_control:
+    label: "{{ item.item }}"
+  changed_when: true
+  when:
+    - ansible_check_mode
+    - item.rc == 0
 
 - name: "Remove {{ abbey_git_repository.name }} local policy overrides"
   ansible.builtin.command:
@@ -41,16 +89,16 @@
       - config
       - --local
       - --unset-all
-      - "{{ item }}"
-  loop:
-    - user.name
-    - user.email
-    - pull.rebase
-    - pull.ff
+      - "{{ item.item }}"
+  loop: "{{ abbey_git_repository_overrides.results | default([]) }}"
+  loop_control:
+    label: "{{ item.item }}"
   register: abbey_git_removed_override
   changed_when: abbey_git_removed_override.rc == 0
   failed_when: abbey_git_removed_override.rc not in [0, 5]
-  when: abbey_git_repository_metadata.stat.exists
+  when:
+    - not ansible_check_mode
+    - item.rc == 0
 
 - name: "Report absent {{ abbey_git_repository.name }} checkout"
   ansible.builtin.debug:
