@@ -4,6 +4,7 @@
   become: true
 
   roles:
+    - git_config
     - common
     - time
     - motd

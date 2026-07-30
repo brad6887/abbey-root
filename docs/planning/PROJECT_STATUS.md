@@ -162,10 +162,14 @@ Completed
 - `abbey status` reports deterministic local counts for toolkit commands,
   website pages, journal entries, and documentation files; an absent open task
   in `NEXT.md` is informational and does not prevent later checks from running
+- `abbey git audit` and `abbey git sync` verify and apply one Ansible-owned Git
+  identity, fast-forward-only pull policy, automatic pruning, GitHub SSH
+  transport, and normalized remotes for existing Abbey Root and Bread Pitt
+  checkouts without cloning, pulling, pushing, or changing working files
 - `abbey session`
-- `abbey end` certifies normal session commits with a journal and recognizes
-  completed, reviewed reconciliation-only commits without requiring a new
-  journal entry
+- `abbey end` follows the active project's required, event-driven, or optional
+  journal policy and recognizes completed, reviewed reconciliation-only commits
+  without requiring a new journal entry
 - `abbey review` as a deterministic, read-only pre-commit reviewer that summarizes current-session work and recommends the next workflow step
 - `abbey version`
 - `abbey init PATH` creates a minimal independent Abbey project while keeping

@@ -33,18 +33,6 @@
   when: ansible_os_family == "RedHat"
 
 ###############################################################################
-# Git Configuration
-###############################################################################
-
-- name: Install Git configuration
-  ansible.builtin.copy:
-    src: gitconfig
-    dest: "/home/{{ ansible_user }}/.gitconfig"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: "0644"
-
-###############################################################################
 # Abbey Shell
 ###############################################################################
 

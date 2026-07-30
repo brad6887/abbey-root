@@ -1,0 +1,58 @@
+---
+- name: "Inspect {{ abbey_git_repository.name }} checkout"
+  ansible.builtin.stat:
+    path: "{{ abbey_git_repository.path }}/.git"
+  register: abbey_git_repository_metadata
+
+- name: "Read {{ abbey_git_repository.name }} origin"
+  ansible.builtin.command:
+    argv:
+      - git
+      - -C
+      - "{{ abbey_git_repository.path }}"
+      - config
+      - --local
+      - --get
+      - remote.origin.url
+  register: abbey_git_repository_origin
+  changed_when: false
+  when: abbey_git_repository_metadata.stat.exists
+
+- name: "Set {{ abbey_git_repository.name }} SSH origin"
+  ansible.builtin.command:
+    argv:
+      - git
+      - -C
+      - "{{ abbey_git_repository.path }}"
+      - remote
+      - set-url
+      - origin
+      - "{{ abbey_git_repository.origin }}"
+  when:
+    - abbey_git_repository_metadata.stat.exists
+    - abbey_git_repository_origin.stdout != abbey_git_repository.origin
+
+- name: "Remove {{ abbey_git_repository.name }} local policy overrides"
+  ansible.builtin.command:
+    argv:
+      - git
+      - -C
+      - "{{ abbey_git_repository.path }}"
+      - config
+      - --local
+      - --unset-all
+      - "{{ item }}"
+  loop:
+    - user.name
+    - user.email
+    - pull.rebase
+    - pull.ff
+  register: abbey_git_removed_override
+  changed_when: abbey_git_removed_override.rc == 0
+  failed_when: abbey_git_removed_override.rc not in [0, 5]
+  when: abbey_git_repository_metadata.stat.exists
+
+- name: "Report absent {{ abbey_git_repository.name }} checkout"
+  ansible.builtin.debug:
+    msg: "{{ abbey_git_repository.name }} is not cloned on this host; skipped."
+  when: not abbey_git_repository_metadata.stat.exists

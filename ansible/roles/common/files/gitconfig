@@ -1,8 +1,0 @@
-[pull]
-    rebase = true
-
-[fetch]
-    prune = true
-
-[rebase]
-    autoStash = true

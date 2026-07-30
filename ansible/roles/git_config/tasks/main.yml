@@ -1,0 +1,8 @@
+---
+- name: Install managed global Git configuration
+  ansible.builtin.template:
+    src: gitconfig.j2
+    dest: "/home/{{ admin_user }}/.gitconfig"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: "0644"

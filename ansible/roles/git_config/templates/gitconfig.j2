@@ -1,0 +1,14 @@
+# Managed by Abbey Root Ansible. Local repository configuration should not
+# override identity or pull policy.
+[user]
+    name = {{ abbey_git_user_name }}
+    email = {{ abbey_git_user_email }}
+
+[pull]
+    ff = only
+
+[fetch]
+    prune = true
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/

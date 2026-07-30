@@ -1,0 +1,69 @@
+---
+- name: Audit managed Git configuration
+  hosts: "{{ abbey_git_targets | default('all') }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Read effective global Git settings
+      ansible.builtin.command:
+        argv:
+          - git
+          - config
+          - --global
+          - --get
+          - "{{ item.key }}"
+      loop:
+        - key: user.name
+          expected: "{{ abbey_git_user_name }}"
+        - key: user.email
+          expected: "{{ abbey_git_user_email }}"
+        - key: pull.ff
+          expected: only
+        - key: fetch.prune
+          expected: "true"
+        - key: url.git@github.com:.insteadof
+          expected: https://github.com/
+      register: abbey_git_global_settings
+      changed_when: false
+      failed_when: false
+
+    - name: Require the managed global Git policy
+      ansible.builtin.assert:
+        that:
+          - item.rc == 0
+          - item.stdout == item.item.expected
+        fail_msg: >-
+          {{ item.item.key }} is {{ item.stdout | default('unset') | trim
+          | default('unset', true) }}; expected {{ item.item.expected }}
+        success_msg: "{{ item.item.key }}={{ item.item.expected }}"
+      loop: "{{ abbey_git_global_settings.results }}"
+      loop_control:
+        label: "{{ item.item.key }}"
+
+    - name: Audit managed repositories
+      ansible.builtin.include_tasks: tasks/git-audit-repository.yml
+      loop: "{{ abbey_git_repositories }}"
+      loop_control:
+        loop_var: abbey_git_repository
+        label: "{{ abbey_git_repository.name }}"
+
+    - name: Verify GitHub SSH authentication
+      ansible.builtin.command:
+        argv:
+          - ssh
+          - -o
+          - BatchMode=yes
+          - -o
+          - ConnectTimeout=10
+          - -T
+          - git@github.com
+      register: abbey_git_github_auth
+      changed_when: false
+      failed_when: >-
+        'successfully authenticated' not in
+        (abbey_git_github_auth.stdout ~ abbey_git_github_auth.stderr)
+
+    - name: Report GitHub SSH authentication
+      ansible.builtin.debug:
+        msg: GitHub SSH authentication succeeded.

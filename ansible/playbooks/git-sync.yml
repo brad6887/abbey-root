@@ -1,0 +1,16 @@
+---
+- name: Synchronize managed Git configuration
+  hosts: "{{ abbey_git_targets | default('all') }}"
+  gather_facts: false
+  become: false
+
+  roles:
+    - git_config
+
+  tasks:
+    - name: Normalize managed repositories
+      ansible.builtin.include_tasks: tasks/git-sync-repository.yml
+      loop: "{{ abbey_git_repositories }}"
+      loop_control:
+        loop_var: abbey_git_repository
+        label: "{{ abbey_git_repository.name }}"

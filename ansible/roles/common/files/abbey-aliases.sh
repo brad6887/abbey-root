@@ -17,7 +17,7 @@ alias adev='cd ~/git/abbey-root/site && npm run dev'
 alias gs='git status'
 alias ga='git add -A'
 alias gp='git push'
-alias gl='git pull --rebase'
+alias gl='git pull --ff-only'
 alias gll='git log --oneline --graph --decorate -20'
 
 # Safer git commit helper:

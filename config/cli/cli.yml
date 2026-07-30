@@ -289,6 +289,23 @@ commands:
     examples:
       - abbey lab check
 
+  git:
+    category: lab
+    description: Audit and synchronize Git configuration across managed hosts.
+    usage: abbey git <command>
+    hidden: false
+    subcommands:
+      audit:
+        description: Verify Git policy, repository remotes, and GitHub SSH access.
+        usage: abbey git audit [--limit HOST_OR_GROUP]
+      sync:
+        description: Install Git policy and normalize existing repository checkouts.
+        usage: abbey git sync [--check] [--limit HOST_OR_GROUP]
+    examples:
+      - abbey git audit
+      - abbey git sync --check
+      - abbey git sync --limit ubuntu-dev01
+
   ssh:
     category: lab
     description: Audit and synchronize SSH public keys across managed Abbey nodes.

@@ -337,6 +337,31 @@ abbey research status
 
 ## Lab infrastructure
 
+### `abbey git`
+
+Audit and synchronize Git configuration across managed hosts.
+
+**Usage**
+
+```text
+abbey git <command>
+```
+
+**Subcommands**
+
+- `audit` - Verify Git policy, repository remotes, and GitHub SSH access.
+  - `abbey git audit [--limit HOST_OR_GROUP]`
+- `sync` - Install Git policy and normalize existing repository checkouts.
+  - `abbey git sync [--check] [--limit HOST_OR_GROUP]`
+
+**Examples**
+
+```text
+abbey git audit
+abbey git sync --check
+abbey git sync --limit ubuntu-dev01
+```
+
 ### `abbey lab`
 
 Inspect and manage Abbey Root lab infrastructure.

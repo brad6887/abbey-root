@@ -1,0 +1,71 @@
+---
+- name: "Inspect {{ abbey_git_repository.name }} checkout"
+  ansible.builtin.stat:
+    path: "{{ abbey_git_repository.path }}/.git"
+  register: abbey_git_repository_metadata
+
+- name: "Read {{ abbey_git_repository.name }} origin"
+  ansible.builtin.command:
+    argv:
+      - git
+      - -C
+      - "{{ abbey_git_repository.path }}"
+      - config
+      - --local
+      - --get
+      - remote.origin.url
+  register: abbey_git_repository_origin
+  changed_when: false
+  when: abbey_git_repository_metadata.stat.exists
+
+- name: "Require {{ abbey_git_repository.name }} SSH origin"
+  ansible.builtin.assert:
+    that:
+      - abbey_git_repository_origin.stdout == abbey_git_repository.origin
+    fail_msg: >-
+      {{ abbey_git_repository.name }} origin is
+      {{ abbey_git_repository_origin.stdout }}; expected
+      {{ abbey_git_repository.origin }}
+    success_msg: >-
+      {{ abbey_git_repository.name }} origin is
+      {{ abbey_git_repository.origin }}
+  when: abbey_git_repository_metadata.stat.exists
+
+- name: "Read {{ abbey_git_repository.name }} local overrides"
+  ansible.builtin.command:
+    argv:
+      - git
+      - -C
+      - "{{ abbey_git_repository.path }}"
+      - config
+      - --local
+      - --get-all
+      - "{{ item }}"
+  loop:
+    - user.name
+    - user.email
+    - pull.rebase
+    - pull.ff
+  register: abbey_git_repository_overrides
+  changed_when: false
+  failed_when: false
+  when: abbey_git_repository_metadata.stat.exists
+
+- name: "Require no {{ abbey_git_repository.name }} local policy overrides"
+  ansible.builtin.assert:
+    that:
+      - item.rc != 0
+    fail_msg: >-
+      {{ abbey_git_repository.name }} has local override
+      {{ item.item }}={{ item.stdout }}
+    success_msg: >-
+      {{ abbey_git_repository.name }} has no local {{ item.item }} override
+  loop: "{{ abbey_git_repository_overrides.results | default([]) }}"
+  loop_control:
+    label: "{{ item.item }}"
+  when: abbey_git_repository_metadata.stat.exists
+
+- name: "Report absent {{ abbey_git_repository.name }} checkout"
+  ansible.builtin.debug:
+    msg: "{{ abbey_git_repository.name }} is not cloned on this host; skipped."
+  when: not abbey_git_repository_metadata.stat.exists

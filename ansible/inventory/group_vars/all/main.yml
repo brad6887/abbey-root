@@ -5,3 +5,13 @@ admin_user: bcooke
 lab_timezone: America/Chicago
 time_sync_package: chrony
 time_sync_service: chronyd
+
+abbey_git_user_name: Brad Cooke
+abbey_git_user_email: brad6887@gmail.com
+abbey_git_repositories:
+  - name: Abbey Root
+    path: "/home/{{ admin_user }}/git/abbey-root"
+    origin: git@github.com:brad6887/abbey-root.git
+  - name: Bread Pitt
+    path: "/home/{{ admin_user }}/git/bread-pitt"
+    origin: git@github.com:brad6887/bread-pitt.git
