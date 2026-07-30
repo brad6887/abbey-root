@@ -68,6 +68,9 @@ control host with explicit scope.
   but exposed skipped repository command tasks in Ansible check mode.
 - Check-mode repository reads and explicit change previews were added before
   permitting live synchronization.
+- The second `rocky-ansible01` canary exposed absent-repository loop results
+  without command return codes; synchronization now treats those skipped
+  results safely and leaves uncloned repositories absent.
 
 ## Lessons Learned
 
@@ -79,6 +82,10 @@ normalization step for existing repositories.
 Ansible command tasks do not automatically provide useful check-mode previews.
 Read operations must explicitly run without mutation, while prospective writes
 must be represented separately and marked as predicted changes.
+
+Registered loop results also retain skipped items. Conditions that inspect
+command return codes must handle absent `rc` fields when a managed repository
+is intentionally not cloned on a host.
 
 ## Next Steps
 

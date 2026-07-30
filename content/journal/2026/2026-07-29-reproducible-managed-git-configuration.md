@@ -24,6 +24,7 @@ SSH GitHub transport, automatic pruning, and fast-forward-only pulls.
 - Protected repository contents and history from the synchronization workflow.
 - Used the first Ubuntu canary to repair check-mode repository previews before
   any live normalization.
+- Used the Rocky canary to make optional, absent repository checkouts safe.
 
 ## Lessons Learned
 
@@ -35,6 +36,8 @@ SSH GitHub transport, automatic pruning, and fast-forward-only pulls.
   authentication should be audited explicitly.
 - Ansible command tasks need separate read and preview operations to make check
   mode trustworthy.
+- Skipped loop results are data too; optional repositories must not be treated
+  like failed command executions.
 
 ## Next Steps
 

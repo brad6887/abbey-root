@@ -78,7 +78,7 @@
   changed_when: true
   when:
     - ansible_check_mode
-    - item.rc == 0
+    - (item.rc | default(1)) == 0
 
 - name: "Remove {{ abbey_git_repository.name }} local policy overrides"
   ansible.builtin.command:
@@ -98,7 +98,7 @@
   failed_when: abbey_git_removed_override.rc not in [0, 5]
   when:
     - not ansible_check_mode
-    - item.rc == 0
+    - (item.rc | default(1)) == 0
 
 - name: "Report absent {{ abbey_git_repository.name }} checkout"
   ansible.builtin.debug:

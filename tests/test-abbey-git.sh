@@ -56,6 +56,10 @@ assert_contains \
   "sync previews local override removal" \
   "Preview removal of {{ abbey_git_repository.name }} local policy overrides" \
   "$(cat "$ABBEY_ROOT/ansible/playbooks/tasks/git-sync-repository.yml")"
+assert_contains \
+  "sync tolerates absent repository results" \
+  "(item.rc | default(1)) == 0" \
+  "$(cat "$ABBEY_ROOT/ansible/playbooks/tasks/git-sync-repository.yml")"
 
 python3 - "$ABBEY_ROOT" <<'PY'
 import sys
