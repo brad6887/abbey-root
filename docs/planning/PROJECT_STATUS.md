@@ -109,6 +109,7 @@ Completed
 - Technitium DNS deployed on `edge01` as the authoritative `home.arpa` service, with forward resolution, reverse resolution, and upstream forwarding validated from `ubuntu-dev01`.
 - Homepage recovery is managed through the authoritative Ansible role, with `edge01` integrated into managed inventory and the operational dashboard.
 - Umami and PostgreSQL are deployed on `ubuntu-dev01` through a dedicated Ansible role with encrypted secrets, private database networking, health checks, check-mode safety, idempotency validation, and documented backup and recovery procedures.
+- Ansible reproducibly manages a bounded Abbey shell configuration across managed Linux hosts while preserving distribution- and host-specific `.bashrc` content and optional `~/.bashrc.local` customization.
 
 ## Current Work
 

@@ -3,7 +3,7 @@ title: "Ansible Managed Bashrc"
 description: "Made the Abbey-owned portion of the managed Linux user's Bash configuration reproducible through Ansible."
 date: 2026-07-30
 status: complete
-reviewed: false
+reviewed: true
 session: ansible-managed-bashrc
 tags:
   - Abbey Root
