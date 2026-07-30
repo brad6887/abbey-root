@@ -3,7 +3,7 @@ title: "Session Context CLI Architecture Summary"
 description: "Added generated Abbey CLI architecture and registered-command summaries to session context using the existing CLI metadata source."
 date: 2026-07-30
 status: complete
-reviewed: false
+reviewed: true
 session: session-context-cli-architecture-summary
 tags:
   - Abbey Root
