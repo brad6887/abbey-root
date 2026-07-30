@@ -54,7 +54,8 @@ Typical Workflow
 ----------------
   abbey
   abbey-git-status
-  abbey-build
+  abbey docs check
+  abbey review
   git add .
   git commit -m "message"
   git push

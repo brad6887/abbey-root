@@ -231,7 +231,7 @@ Generated documentation should be rebuilt through the Abbey CLI whenever practic
 Examples include:
 
 ```bash
-abbey build
+abbey docs generate
 abbey site build
 ```
 

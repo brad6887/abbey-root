@@ -59,17 +59,6 @@ Usage:
 abbey-ansible-update
 ```
 
-## abbey-build
-
-Run the standard Abbey Root build pipeline.
-
-Usage:
-
-```bash
-abbey-build
-abbey-build --help
-```
-
 ## abbey-docs
 
 Generate Abbey Root documentation.

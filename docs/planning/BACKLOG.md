@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 142 complete · 254 pending · 396 total
+> **Backlog Status:** 143 complete · 253 pending · 396 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -165,7 +165,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 
 ### Toolkit Evolution
 
-- [ ] Expand `abbey-build` reporting and validation.
+- [x] Retire the legacy `tools/abbey-build` workflow and remove stale `abbey build` references from current documentation.
 - [ ] Add repository consistency checks.
 - [ ] Create `abbey-tree`.
 - [ ] Standardize tool output formatting and colors.

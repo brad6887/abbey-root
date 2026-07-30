@@ -247,7 +247,7 @@ Examples include:
 - `abbey status`
 - `abbey session`
 - `abbey version`
-- `abbey build`
+- `abbey docs`
 - `abbey validate`
 - `abbey publish`
 - `abbey ai`
