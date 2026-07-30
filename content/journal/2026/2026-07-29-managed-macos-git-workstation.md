@@ -25,6 +25,10 @@ ownership are platform-aware.
   passwordless control-host access over the LAN.
 - Preserved the Mac's GitHub CLI credential helpers after check mode identified
   them as intentional host-specific configuration.
+- Synchronized and audited the Mac without changing repository contents or
+  history.
+- Pulled Abbey Root and Bread Pitt normally from their canonical Mac checkouts.
+- Completed a clean inventory-wide audit across five Linux hosts and the Mac.
 
 ## Lessons Learned
 
@@ -37,6 +41,6 @@ ownership are platform-aware.
 
 ## Next Steps
 
-- Validate Rocky-to-Mac reachability.
-- Preview, synchronize, and audit the Mac Git policy.
-- Complete an inventory-wide six-host audit.
+- Reserve the Mac's LAN management address in DHCP if it is not already fixed.
+- Re-run the Git audit after adding a workstation or changing its management
+  address.

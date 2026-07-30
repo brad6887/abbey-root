@@ -167,7 +167,7 @@ Completed
   transport and published host-key trust, and normalized remotes for existing
   Abbey Root and Bread Pitt checkouts without cloning, pulling, pushing, or
   changing working files; the workflow is deployed and audit-clean across all
-  five managed hosts
+  five Linux hosts and the separately inventoried macOS workstation
 - `abbey session`
 - `abbey end` follows the active project's required, event-driven, or optional
   journal policy and recognizes completed, reviewed reconciliation-only commits

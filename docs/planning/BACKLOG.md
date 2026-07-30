@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 97 complete · 271 pending · 368 total
+> **Backlog Status:** 98 complete · 270 pending · 368 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -500,7 +500,7 @@ The backlog is intentionally broad and serves as the project's working inventory
   Ansible-backed audit and synchronization commands.
 - [x] Validate `abbey git audit` and `abbey git sync --check` from the Ansible
   control host against every managed server.
-- [ ] Add the Mac as a separately inventoried managed workstation and validate
+- [x] Add the Mac as a separately inventoried managed workstation and validate
   the Git workflow without exposing it to Linux-only playbooks.
 - [ ] Confirm or create a DHCP reservation for the Mac at `192.168.1.70`.
 - [ ] Validate the unchanged Abbey Doctor path on a managed Linux host.

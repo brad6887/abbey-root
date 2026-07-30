@@ -2,7 +2,7 @@
 title: "Managed macOS Git Workstation"
 description: "Added platform-aware Mac workstation inventory to the managed Git workflow."
 date: 2026-07-29
-status: pending
+status: complete
 reviewed: false
 session: managed-macos-git-workstation
 tags:
@@ -60,7 +60,10 @@ of infrastructure, update, SSH-trust, or common Linux playbooks.
 - The first Mac check-mode preview exposed removal of unrelated GitHub CLI
   credential helpers; Mac inventory now preserves those helpers and pins the
   system Python interpreter.
-- Live Rocky-to-Mac check-mode and audit validation remain pending.
+- Mac synchronization completed without repository content or history changes.
+- Abbey Root and Bread Pitt pulled normally from their canonical Mac checkouts.
+- The final six-host audit completed with zero changes, failures, or
+  unreachable hosts.
 
 ## Lessons Learned
 
@@ -77,12 +80,14 @@ existing HTTPS credential helpers.
 
 ## Next Steps
 
-- Pull this commit on `rocky-ansible01`.
-- Verify Rocky can reach the Mac over Tailscale SSH.
-- Preview and apply only the Mac Git policy.
-- Run the six-host inventory-wide Git audit.
+- Confirm or create the Mac's `192.168.1.70` DHCP reservation.
+- Run `abbey git audit` after changing Mac network identity or adding a managed
+  workstation.
 
 ## Notes
 
 The Mac's canonical repositories live under `/Users/bradcooke/git`. The Codex
 workspace checkout remains outside the managed repository list.
+
+The final checkout comparison confirmed `/Users/bradcooke/git/abbey-root` is
+the clean, synchronized canonical Mac checkout.
