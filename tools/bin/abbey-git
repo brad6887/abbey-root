@@ -9,6 +9,7 @@ ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 ANSIBLE_DIR="$ABBEY_ROOT/ansible"
 INVENTORY_FILE="$ANSIBLE_DIR/inventory/hosts.yml"
+WORKSTATION_INVENTORY_FILE="$ANSIBLE_DIR/inventory/workstations.yml"
 AUDIT_PLAYBOOK="$ANSIBLE_DIR/playbooks/git-audit.yml"
 SYNC_PLAYBOOK="$ANSIBLE_DIR/playbooks/git-sync.yml"
 CONTROL_HOST="rocky-ansible01"
@@ -54,6 +55,8 @@ require_environment() {
     fail "Required command not found: ansible-playbook"
   [[ -f "$INVENTORY_FILE" ]] ||
     fail "Inventory file not found: $INVENTORY_FILE"
+  [[ -f "$WORKSTATION_INVENTORY_FILE" ]] ||
+    fail "Workstation inventory file not found: $WORKSTATION_INVENTORY_FILE"
 }
 
 run_playbook() {
@@ -65,6 +68,7 @@ run_playbook() {
     ANSIBLE_CONFIG="$ANSIBLE_DIR/ansible.cfg" \
       ansible-playbook \
         -i "$INVENTORY_FILE" \
+        -i "$WORKSTATION_INVENTORY_FILE" \
         "$playbook" \
         "$@"
   )

@@ -2,6 +2,9 @@
 lab_name: Abbey Root
 timezone: America/Chicago
 admin_user: bcooke
+abbey_git_home: "/home/{{ admin_user }}"
+abbey_git_group: "{{ admin_user }}"
+abbey_git_known_hosts_mode: "0644"
 lab_timezone: America/Chicago
 time_sync_package: chrony
 time_sync_service: chronyd
@@ -13,8 +16,8 @@ abbey_git_github_known_host: >-
   AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
 abbey_git_repositories:
   - name: Abbey Root
-    path: "/home/{{ admin_user }}/git/abbey-root"
+    path: "{{ abbey_git_home }}/git/abbey-root"
     origin: git@github.com:brad6887/abbey-root.git
   - name: Bread Pitt
-    path: "/home/{{ admin_user }}/git/bread-pitt"
+    path: "{{ abbey_git_home }}/git/bread-pitt"
     origin: git@github.com:brad6887/bread-pitt.git

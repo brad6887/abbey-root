@@ -33,6 +33,18 @@ assert_contains \
   "abbey_git_user_email: brad6887@gmail.com" \
   "$(cat "$ABBEY_ROOT/ansible/inventory/group_vars/all/main.yml")"
 assert_contains \
+  "managed repository paths use a platform home" \
+  'path: "{{ abbey_git_home }}/git/abbey-root"' \
+  "$(cat "$ABBEY_ROOT/ansible/inventory/group_vars/all/main.yml")"
+assert_contains \
+  "Mac workstation uses its native home" \
+  "abbey_git_home: /Users/bradcooke" \
+  "$(cat "$ABBEY_ROOT/ansible/inventory/host_vars/mac-workstation.yml")"
+assert_contains \
+  "Mac is isolated in workstation inventory" \
+  "mac-workstation:" \
+  "$(cat "$ABBEY_ROOT/ansible/inventory/workstations.yml")"
+assert_contains \
   "managed pull policy is fast-forward only" \
   "ff = only" \
   "$(cat "$ABBEY_ROOT/ansible/roles/git_config/templates/gitconfig.j2")"
@@ -82,6 +94,8 @@ import yaml
 root = Path(sys.argv[1])
 for path in [
     root / "ansible/inventory/group_vars/all/main.yml",
+    root / "ansible/inventory/workstations.yml",
+    root / "ansible/inventory/host_vars/mac-workstation.yml",
     root / "ansible/playbooks/git-audit.yml",
     root / "ansible/playbooks/git-sync.yml",
     root / "ansible/playbooks/tasks/git-audit-repository.yml",
@@ -133,6 +147,10 @@ assert_contains \
 assert_contains \
   "check mode passes Ansible preview options" \
   "--check --diff" \
+  "$playbook_log"
+assert_contains \
+  "Git workflow loads workstation inventory" \
+  "inventory/workstations.yml" \
   "$playbook_log"
 
 TEST_HOSTNAME="ubuntu-dev01"

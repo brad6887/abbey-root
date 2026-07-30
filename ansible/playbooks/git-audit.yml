@@ -55,7 +55,7 @@
           - -F
           - github.com
           - -f
-          - "/home/{{ admin_user }}/.ssh/known_hosts"
+          - "{{ abbey_git_home }}/.ssh/known_hosts"
       register: abbey_git_github_known_host_audit
       changed_when: false
       failed_when: false

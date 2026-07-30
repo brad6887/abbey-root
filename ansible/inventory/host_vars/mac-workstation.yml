@@ -1,0 +1,6 @@
+---
+host_description: macOS development workstation
+admin_user: bradcooke
+abbey_git_home: /Users/bradcooke
+abbey_git_group: staff
+abbey_git_known_hosts_mode: "0600"

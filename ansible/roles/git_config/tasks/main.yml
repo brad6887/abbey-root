@@ -2,30 +2,30 @@
 - name: Install managed global Git configuration
   ansible.builtin.template:
     src: gitconfig.j2
-    dest: "/home/{{ admin_user }}/.gitconfig"
+    dest: "{{ abbey_git_home }}/.gitconfig"
     owner: "{{ admin_user }}"
-    group: "{{ admin_user }}"
+    group: "{{ abbey_git_group }}"
     mode: "0644"
 
 - name: Ensure managed user SSH directory exists
   ansible.builtin.file:
-    path: "/home/{{ admin_user }}/.ssh"
+    path: "{{ abbey_git_home }}/.ssh"
     state: directory
     owner: "{{ admin_user }}"
-    group: "{{ admin_user }}"
+    group: "{{ abbey_git_group }}"
     mode: "0700"
 
 - name: Trust the published GitHub ED25519 host key
   ansible.builtin.known_hosts:
-    path: "/home/{{ admin_user }}/.ssh/known_hosts"
+    path: "{{ abbey_git_home }}/.ssh/known_hosts"
     name: github.com
     key: "{{ abbey_git_github_known_host }}"
     state: present
 
 - name: Protect managed user known hosts
   ansible.builtin.file:
-    path: "/home/{{ admin_user }}/.ssh/known_hosts"
+    path: "{{ abbey_git_home }}/.ssh/known_hosts"
     state: file
     owner: "{{ admin_user }}"
-    group: "{{ admin_user }}"
-    mode: "0644"
+    group: "{{ abbey_git_group }}"
+    mode: "{{ abbey_git_known_hosts_mode }}"
