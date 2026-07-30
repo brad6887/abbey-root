@@ -6,3 +6,26 @@
     owner: "{{ admin_user }}"
     group: "{{ admin_user }}"
     mode: "0644"
+
+- name: Ensure managed user SSH directory exists
+  ansible.builtin.file:
+    path: "/home/{{ admin_user }}/.ssh"
+    state: directory
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: "0700"
+
+- name: Trust the published GitHub ED25519 host key
+  ansible.builtin.known_hosts:
+    path: "/home/{{ admin_user }}/.ssh/known_hosts"
+    name: github.com
+    key: "{{ abbey_git_github_known_host }}"
+    state: present
+
+- name: Protect managed user known hosts
+  ansible.builtin.file:
+    path: "/home/{{ admin_user }}/.ssh/known_hosts"
+    state: file
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: "0644"

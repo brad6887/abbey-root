@@ -25,6 +25,8 @@ SSH GitHub transport, automatic pruning, and fast-forward-only pulls.
 - Used the first Ubuntu canary to repair check-mode repository previews before
   any live normalization.
 - Used the Rocky canary to make optional, absent repository checkouts safe.
+- Added GitHub's published ED25519 host key after the remaining-host audit
+  identified missing non-interactive trust on Edge and Sensor.
 
 ## Lessons Learned
 
@@ -38,6 +40,8 @@ SSH GitHub transport, automatic pruning, and fast-forward-only pulls.
   mode trustworthy.
 - Skipped loop results are data too; optional repositories must not be treated
   like failed command executions.
+- Non-interactive SSH needs managed host identity trust as well as a registered
+  user key.
 
 ## Next Steps
 

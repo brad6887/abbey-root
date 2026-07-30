@@ -8,6 +8,9 @@ time_sync_service: chronyd
 
 abbey_git_user_name: Brad Cooke
 abbey_git_user_email: brad6887@gmail.com
+abbey_git_github_known_host: >-
+  github.com ssh-ed25519
+  AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
 abbey_git_repositories:
   - name: Abbey Root
     path: "/home/{{ admin_user }}/git/abbey-root"

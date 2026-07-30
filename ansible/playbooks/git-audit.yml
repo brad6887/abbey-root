@@ -48,6 +48,28 @@
         loop_var: abbey_git_repository
         label: "{{ abbey_git_repository.name }}"
 
+    - name: Read trusted GitHub SSH host key
+      ansible.builtin.command:
+        argv:
+          - ssh-keygen
+          - -F
+          - github.com
+          - -f
+          - "/home/{{ admin_user }}/.ssh/known_hosts"
+      register: abbey_git_github_known_host_audit
+      changed_when: false
+      failed_when: false
+
+    - name: Require the published GitHub SSH host key
+      ansible.builtin.assert:
+        that:
+          - abbey_git_github_known_host_audit.rc == 0
+          - >-
+            abbey_git_github_known_host in
+            abbey_git_github_known_host_audit.stdout
+        fail_msg: GitHub's managed ED25519 host key is not trusted.
+        success_msg: GitHub's managed ED25519 host key is trusted.
+
     - name: Verify GitHub SSH authentication
       ansible.builtin.command:
         argv:

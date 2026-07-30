@@ -41,6 +41,18 @@ assert_contains \
   "insteadOf = https://github.com/" \
   "$(cat "$ABBEY_ROOT/ansible/roles/git_config/templates/gitconfig.j2")"
 assert_contains \
+  "published GitHub host key is declared" \
+  "AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" \
+  "$(cat "$ABBEY_ROOT/ansible/inventory/group_vars/all/main.yml")"
+assert_contains \
+  "GitHub host trust is Ansible-managed" \
+  "ansible.builtin.known_hosts" \
+  "$(cat "$ABBEY_ROOT/ansible/roles/git_config/tasks/main.yml")"
+assert_contains \
+  "audit verifies managed GitHub host trust" \
+  "Require the published GitHub SSH host key" \
+  "$(cat "$ABBEY_ROOT/ansible/playbooks/git-audit.yml")"
+assert_contains \
   "pull alias follows managed policy" \
   "alias gl='git pull --ff-only'" \
   "$(cat "$ABBEY_ROOT/ansible/roles/common/files/abbey-aliases.sh")"

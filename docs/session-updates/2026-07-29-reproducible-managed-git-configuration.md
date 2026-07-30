@@ -71,6 +71,9 @@ control host with explicit scope.
 - The second `rocky-ansible01` canary exposed absent-repository loop results
   without command return codes; synchronization now treats those skipped
   results safely and leaves uncloned repositories absent.
+- The remaining-host audit showed that `edge01` and `sensor01` lacked GitHub
+  host trust. The published GitHub ED25519 key is now installed and audited by
+  Ansible so new hosts do not require an interactive first connection.
 
 ## Lessons Learned
 
@@ -86,6 +89,10 @@ must be represented separately and marked as predicted changes.
 Registered loop results also retain skipped items. Conditions that inspect
 command return codes must handle absent `rc` fields when a managed repository
 is intentionally not cloned on a host.
+
+SSH transport is not reproducible until both account authorization and server
+identity trust are handled. Managing GitHub's published host key removes the
+interactive prompt without weakening host verification.
 
 ## Next Steps
 
