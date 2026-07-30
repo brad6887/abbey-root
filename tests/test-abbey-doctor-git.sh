@@ -46,6 +46,7 @@ run_git_check() {
 }
 
 configured_repo="$fixture_root/configured"
+inherited_repo="$fixture_root/inherited"
 missing_repo="$fixture_root/missing"
 
 git init -q "$configured_repo"
@@ -74,6 +75,38 @@ assert_contains \
   "user.email source is reported" \
   "$configured_output" \
   "OK   Git user.email source: file:.git/config"
+
+git init -q "$inherited_repo"
+global_config="$fixture_root/global.gitconfig"
+GIT_CONFIG_GLOBAL="$global_config" \
+  GIT_CONFIG_SYSTEM=/dev/null \
+  git config --global user.name "Inherited Abbey Test"
+GIT_CONFIG_GLOBAL="$global_config" \
+  GIT_CONFIG_SYSTEM=/dev/null \
+  git config --global user.email "inherited-abbey@example.invalid"
+
+inherited_output="$(
+  GIT_CONFIG_GLOBAL="$global_config" \
+    GIT_CONFIG_SYSTEM=/dev/null \
+    run_git_check "$inherited_repo"
+)"
+
+assert_contains \
+  "global user.name is inherited" \
+  "$inherited_output" \
+  "OK   Git user.name configured: Inherited Abbey Test"
+assert_contains \
+  "global user.name source is reported" \
+  "$inherited_output" \
+  "OK   Git user.name source: file:$global_config"
+assert_contains \
+  "global user.email is inherited" \
+  "$inherited_output" \
+  "OK   Git user.email configured: inherited-abbey@example.invalid"
+assert_contains \
+  "global user.email source is reported" \
+  "$inherited_output" \
+  "OK   Git user.email source: file:$global_config"
 
 git init -q "$missing_repo"
 

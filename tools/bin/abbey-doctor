@@ -20,11 +20,24 @@ echo "Host: $(hostname)"
 echo "Repo: $ABBEY_ROOT"
 echo
 
+if [[ -f "$ABBEY_ROOT/.abbey/project.yml" ]]; then
+  infrastructure_default="false"
+  internal_dns_default="false"
+else
+  infrastructure_default="true"
+  internal_dns_default="true"
+fi
+
 for check in "$DOCTOR_DIR"/checks/*.sh; do
   [ -f "$check" ] || continue
   case "$(basename "$check")" in
-    03-storage.sh|05-hosts.sh|06-backups.sh|08-remote-access.sh|09-dns.sh)
-      if [[ "$(abbey_project_value "$ABBEY_ROOT" "capabilities.infrastructure" "true")" != "true" ]]; then
+    03-storage.sh|05-hosts.sh|06-backups.sh|08-remote-access.sh)
+      if [[ "$(abbey_project_value "$ABBEY_ROOT" "capabilities.infrastructure" "$infrastructure_default")" != "true" ]]; then
+        continue
+      fi
+      ;;
+    09-dns.sh)
+      if [[ "$(abbey_project_value "$ABBEY_ROOT" "capabilities.internal_dns" "$internal_dns_default")" != "true" ]]; then
         continue
       fi
       ;;

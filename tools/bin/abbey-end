@@ -8,6 +8,8 @@ SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 
+source "$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+
 ok_count=0
 warning_count=0
 failure_count=0
@@ -145,6 +147,9 @@ section "Session Documentation"
 
 commit_files=""
 session_updates=""
+journal_policy="$(
+  abbey_project_value "$ABBEY_ROOT" "workflow.journal.policy" "required"
+)"
 if [[ -n "$latest_commit_hash" ]]; then
   commit_files="$(
     git -C "$ABBEY_ROOT" diff-tree \
@@ -173,10 +178,22 @@ if grep -Eq '^content/journal/.+\.md$' <<<"$commit_files"; then
       head -1
   )"
   ok "Journal entry committed: $journal_entry"
-elif is_reconciliation_only_commit "$latest_commit_hash" "$session_updates"; then
-  ok "Journal entry not required for reconciliation-only commit"
 else
-  fail "Latest commit does not contain a journal entry"
+  case "$journal_policy" in
+    required)
+      if is_reconciliation_only_commit "$latest_commit_hash" "$session_updates"; then
+        ok "Journal entry not required for reconciliation-only commit"
+      else
+        fail "Latest commit does not contain a journal entry (policy: required)"
+      fi
+      ;;
+    event-driven|optional)
+      ok "Journal entry not required (policy: $journal_policy)"
+      ;;
+    *)
+      fail "Unsupported journal policy: $journal_policy"
+      ;;
+  esac
 fi
 
 section "Validation"

@@ -49,7 +49,10 @@ def project_files(name, slug, description, journal_policy):
             "description": description,
         },
         "framework": {"name": "Abbey", "schema_version": 1},
-        "capabilities": {"infrastructure": False},
+        "capabilities": {
+            "infrastructure": False,
+            "internal_dns": False,
+        },
         "workflow": {"journal": {"policy": journal_policy}},
         "validation": {"commands": ["git diff --check"]},
         "paths": {

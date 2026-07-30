@@ -48,15 +48,19 @@ assert_contains() {
 
 create_fixture() {
   local name="$1"
+  local journal_policy="${2:-required}"
   local fixture_root="$test_root/$name"
 
   mkdir -p \
+    "$fixture_root/.abbey" \
     "$fixture_root/tools/bin" \
+    "$fixture_root/tools/lib" \
     "$fixture_root/docs/planning" \
     "$fixture_root/docs/session-updates" \
     "$fixture_root/content/journal/2026"
 
   cp "$ABBEY_END" "$fixture_root/tools/bin/abbey-end"
+  cp "$ABBEY_ROOT/tools/lib/project.sh" "$fixture_root/tools/lib/project.sh"
 
   cat > "$fixture_root/tools/bin/abbey-backlog" <<'SH'
 #!/usr/bin/env bash
@@ -70,6 +74,12 @@ exit 0
 SH
 
   chmod +x "$fixture_root/tools/bin/"*
+
+  cat > "$fixture_root/.abbey/project.yml" <<EOF
+workflow:
+  journal:
+    policy: $journal_policy
+EOF
 
   printf '%s\n' '# Test Backlog' > "$fixture_root/docs/planning/BACKLOG.md"
 
@@ -163,7 +173,21 @@ run_end "$fixture_root"
 assert_status "new session still requires a journal" 1
 assert_contains \
   "new session reports the missing journal" \
-  "FAIL Latest commit does not contain a journal entry"
+  "FAIL Latest commit does not contain a journal entry (policy: required)"
+
+for journal_policy in event-driven optional; do
+  fixture_root="$(create_fixture "$journal_policy-policy" "$journal_policy")"
+  session_file="$fixture_root/docs/session-updates/2026-07-02-$journal_policy.md"
+  write_session_update "$session_file" "$journal_policy Session" complete false
+  git -C "$fixture_root" add "$session_file"
+  git -C "$fixture_root" commit -qm "Add session without journal"
+
+  run_end "$fixture_root"
+  assert_status "$journal_policy policy passes without a journal" 0
+  assert_contains \
+    "$journal_policy policy explains the journal exception" \
+    "OK   Journal entry not required (policy: $journal_policy)"
+done
 
 fixture_root="$(create_fixture unreviewed-change)"
 session_file="$fixture_root/docs/session-updates/2026-07-03-unreviewed.md"
@@ -179,7 +203,7 @@ run_end "$fixture_root"
 assert_status "modified unreviewed session still requires a journal" 1
 assert_contains \
   "modified unreviewed session reports the missing journal" \
-  "FAIL Latest commit does not contain a journal entry"
+  "FAIL Latest commit does not contain a journal entry (policy: required)"
 
 fixture_root="$(create_fixture incomplete-change)"
 session_file="$fixture_root/docs/session-updates/2026-07-04-incomplete.md"
@@ -195,7 +219,7 @@ run_end "$fixture_root"
 assert_status "modified incomplete session still requires a journal" 1
 assert_contains \
   "modified incomplete session reports the missing journal" \
-  "FAIL Latest commit does not contain a journal entry"
+  "FAIL Latest commit does not contain a journal entry (policy: required)"
 
 fixture_root="$(create_fixture normal-session)"
 session_file="$fixture_root/docs/session-updates/2026-07-05-normal.md"

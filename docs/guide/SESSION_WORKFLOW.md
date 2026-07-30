@@ -203,12 +203,15 @@ Potential inputs include:
 
 Future versions should generate a draft session update for review.
 
-`abbey end` normally requires the latest commit to contain both a session
-update and a journal entry. A reconciliation-only commit is the narrow
-exception: when the commit modifies existing session updates and every
-committed update is both `status: complete` and `reviewed: true`, no new
-journal entry is required. New, incomplete, or unreviewed session updates
-continue to require a journal entry.
+`abbey end` requires the latest commit to contain a session update. Journal
+certification follows the active project's `workflow.journal.policy`:
+
+- `required` requires a journal entry, except for a reconciliation-only commit
+  that modifies existing session updates and leaves every committed update
+  both `status: complete` and `reviewed: true`.
+- `event-driven` and `optional` allow certification without a journal entry.
+
+Projects without metadata retain Abbey Root's `required` default.
 
 ---
 

@@ -213,6 +213,8 @@ The standard project metadata supports:
 
 * `capabilities.infrastructure`, which enables infrastructure-specific health
   checks only for projects that own infrastructure.
+* `capabilities.internal_dns`, which independently enables checks for
+  project-owned internal DNS.
 * `workflow.journal.policy`, with `required`, `event-driven`, and `optional`
   policies.
 * `validation.commands`, an ordered list of project-appropriate commands shown

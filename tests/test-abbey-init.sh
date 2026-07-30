@@ -58,6 +58,10 @@ assert_contains \
   "initialized projects disable infrastructure checks" \
   "infrastructure: false" \
   "$(cat "$project/.abbey/project.yml")"
+assert_contains \
+  "initialized projects disable internal DNS checks" \
+  "internal_dns: false" \
+  "$(cat "$project/.abbey/project.yml")"
 
 mkdir -p \
   "$project/.abbey/ai" \
@@ -109,6 +113,11 @@ if grep -Fq "Host Reachability" <<<"$doctor_output"; then
 else
   pass "doctor skips infrastructure checks for external projects"
 fi
+if grep -Fq "Internal DNS" <<<"$doctor_output"; then
+  fail "doctor skips internal DNS checks for external projects"
+else
+  pass "doctor skips internal DNS checks for external projects"
+fi
 
 backlog_output="$(cd "$project" && "$ABBEY" backlog refresh)"
 assert_contains \
@@ -119,6 +128,72 @@ assert_contains \
   "external backlog receives generated status" \
   "<!-- BEGIN GENERATED BACKLOG STATUS -->" \
   "$(cat "$project/docs/planning/BACKLOG.md")"
+
+global_config="$test_root/bread-pitt.gitconfig"
+GIT_CONFIG_GLOBAL="$global_config" \
+  GIT_CONFIG_SYSTEM=/dev/null \
+  git config --global user.name "Bread Pitt Test"
+GIT_CONFIG_GLOBAL="$global_config" \
+  GIT_CONFIG_SYSTEM=/dev/null \
+  git config --global user.email "bread-pitt@example.invalid"
+
+cat > "$project/docs/session-updates/2026-07-29-bread-pitt-certification.md" <<'EOF'
+---
+title: "Bread Pitt Certification"
+description: "Validate final certification in an external Abbey project."
+date: 2026-07-29
+status: complete
+reviewed: false
+session: bread-pitt-certification
+tags:
+  - Abbey
+---
+
+# Bread Pitt Certification
+
+Bread Pitt validates project-aware Abbey Doctor and Abbey End behavior.
+EOF
+
+GIT_CONFIG_GLOBAL="$global_config" \
+  GIT_CONFIG_SYSTEM=/dev/null \
+  git -C "$project" add .
+GIT_CONFIG_GLOBAL="$global_config" \
+  GIT_CONFIG_SYSTEM=/dev/null \
+  git -C "$project" commit -qm "Certify Bread Pitt session"
+
+set +e
+doctor_output="$(
+  cd "$project" &&
+    GIT_CONFIG_GLOBAL="$global_config" \
+    GIT_CONFIG_SYSTEM=/dev/null \
+    "$ABBEY" doctor
+  2>&1
+)"
+doctor_status=$?
+end_output="$(
+  cd "$project" &&
+    GIT_CONFIG_GLOBAL="$global_config" \
+    GIT_CONFIG_SYSTEM=/dev/null \
+    "$ABBEY" end
+  2>&1
+)"
+end_status=$?
+set -e
+
+[[ "$doctor_status" -eq 0 ]] &&
+  pass "abbey doctor succeeds from Bread Pitt" ||
+  fail "abbey doctor succeeds from Bread Pitt"
+assert_contains \
+  "Bread Pitt doctor recognizes inherited Git identity" \
+  "Git user.name configured: Bread Pitt Test" \
+  "$doctor_output"
+[[ "$end_status" -eq 0 ]] &&
+  pass "abbey end succeeds from Bread Pitt" ||
+  fail "abbey end succeeds from Bread Pitt"
+assert_contains \
+  "Bread Pitt end honors event-driven journal policy" \
+  "Journal entry not required (policy: event-driven)" \
+  "$end_output"
 
 mkdir "$test_root/nonempty"
 touch "$test_root/nonempty/existing"
