@@ -250,6 +250,22 @@ assert_file_contains \
   "$facts" \
   "hero: photos/Alpha One.JPG"
 
+interactive_project="$(create_project interactive-selection)"
+interactive_facts="$interactive_project/working/plants/test-plant/facts.yaml"
+
+run_direct_input \
+  "$interactive_project" \
+  $'2\ny\n' \
+  select plant test-plant --role hero
+assert_status "interactive numbered selection succeeds" 0
+assert_contains \
+  "interactive numbered selection reports the selected image" \
+  "Selected: photos/Beta Two.jpeg"
+assert_file_contains \
+  "interactive numbered selection updates metadata" \
+  "$interactive_facts" \
+  'hero: "photos/Beta Two.jpeg"'
+
 run_direct \
   "$project" \
   select plant test-plant --role hero --select 1 --yes
