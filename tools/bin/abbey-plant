@@ -9,6 +9,7 @@
 #   abbey plant validate <slug>
 #   abbey plant publish <slug>
 #   abbey plant hero <slug>
+#   abbey plant index <slug>
 #
 
 set -euo pipefail
@@ -46,16 +47,19 @@ Usage:
   abbey plant validate <slug>
   abbey plant publish <slug>
   abbey plant hero <slug> [--select NUMBER] [--yes]
+  abbey plant index <slug> [--select NUMBER] [--yes]
 
 Commands:
   validate    Validate a plant workspace against the Plant Model
   publish     Generate Astro content and copy selected public images
   hero        Select the plant photograph assigned to the hero role
+  index       Select the photograph used on plant index pages
 USAGE
 }
 
-select_hero() {
-    local slug="${1:-}"
+select_image_role() {
+    local role="$1"
+    local slug="${2:-}"
 
     if [[ -z "$slug" ]]; then
         echo "ERROR: Plant slug is required."
@@ -64,12 +68,20 @@ select_hero() {
         return 2
     fi
 
-    shift
+    shift 2
 
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-image" \
         select plant "$slug" \
-        --role hero \
+        --role "$role" \
         "$@"
+}
+
+select_hero() {
+    select_image_role hero "$@"
+}
+
+select_index() {
+    select_image_role index "$@"
 }
 
 validate_plant() {
@@ -246,6 +258,16 @@ for field in ("photos.hero", "photos.current"):
         print(f"OK|{field} exists: {value}")
     else:
         print(f"FAIL|{field} does not exist: {value}")
+
+index_value = get_value("photos.index")
+
+if index_value:
+    index_path = plant_dir / index_value
+
+    if index_path.is_file():
+        print(f"OK|photos.index exists: {index_value}")
+    else:
+        print(f"FAIL|photos.index does not exist: {index_value}")
 PY
     )"; then
         fail "Unable to execute facts.yaml validation"
@@ -437,6 +459,7 @@ history = read_document(history_path)
 
 hero_image = copy_public_image("photos.hero", "hero")
 current_image = copy_public_image("photos.current", "current")
+index_image = copy_public_image("photos.index", "index")
 
 history, history_images = publish_history_photos(
     history,
@@ -465,6 +488,7 @@ frontmatter = {
     "updatedDate": updated,
     "heroImage": hero_image,
     "currentImage": current_image,
+    "indexImage": index_image,
     "tags": tags,
 }
 
@@ -490,6 +514,8 @@ if hero_image:
     print(f"Published hero image: {hero_image}")
 if current_image:
     print(f"Published current image: {current_image}")
+if index_image:
+    print(f"Published index image: {index_image}")
 PY
 
     echo
@@ -526,6 +552,10 @@ case "$command" in
     hero)
         shift
         select_hero "$@"
+        ;;
+    index)
+        shift
+        select_index "$@"
         ;;
     help|-h|--help)
         usage

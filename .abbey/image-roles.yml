@@ -13,3 +13,5 @@ entities:
     roles:
       hero:
         field: photos.hero
+      index:
+        field: photos.index

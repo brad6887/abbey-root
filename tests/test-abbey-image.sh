@@ -128,6 +128,8 @@ entities:
     roles:
       hero:
         field: photos.hero
+      index:
+        field: photos.index
 YAML
 
   cat > "$plant/facts.yaml" <<'YAML'
@@ -138,6 +140,7 @@ description: Preserve this unrelated value.
 photos:
   hero: photos/Alpha One.JPG
   current: photos/Gamma.png
+  index: null
 YAML
 
   touch \
@@ -409,6 +412,16 @@ assert_file_contains \
   "plant wrapper updates external project metadata" \
   "$wrapper_facts" \
   'hero: "photos/Gamma.png"'
+
+index_project="$(create_project plant-index-wrapper)"
+index_facts="$index_project/working/plants/test-plant/facts.yaml"
+
+run_dispatch   "$index_project"   plant index test-plant --select 2 --yes
+assert_status "plant index wrapper succeeds in external project" 0
+assert_contains   "plant index wrapper delegates to image selector"   "Abbey Image Selection"
+assert_file_contains   "plant index wrapper updates external project metadata"   "$index_facts"   'index: "photos/Beta Two.jpeg"'
+assert_file_contains   "plant index wrapper preserves the hero role"   "$index_facts"   "hero: photos/Alpha One.JPG"
+assert_file_contains   "plant index wrapper preserves the current role"   "$index_facts"   "current: photos/Gamma.png"
 
 generic_project="$(create_project generic-dispatch)"
 generic_facts="$generic_project/working/plants/test-plant/facts.yaml"

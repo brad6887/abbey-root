@@ -231,10 +231,14 @@ commands:
       hero:
         description: Select the photograph assigned to a plant's hero role.
         usage: abbey plant hero <slug>
+      index:
+        description: Select the photograph used on plant index pages.
+        usage: abbey plant index <slug>
     examples:
       - abbey plant validate doctor-robert
       - abbey plant publish doctor-robert
       - abbey plant hero doctor-robert
+      - abbey plant index doctor-robert
 
   knowledge:
     category: ai

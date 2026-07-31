@@ -57,7 +57,8 @@ create_plant() {
     "$plant_dir/inventory.md" \
     "$plant_dir/photo-metadata.md" \
     "$plant_dir/photos/hero.jpg" \
-    "$plant_dir/photos/current.jpg"
+    "$plant_dir/photos/current.jpg" \
+    "$plant_dir/photos/index.jpg"
 
   cat > "$plant_dir/facts.yaml" <<'YAML'
 name: Test Plant
@@ -74,6 +75,13 @@ status:
 photos:
   hero: photos/hero.jpg
   current: photos/current.jpg
+  index: null
+
+documents:
+  story: story.md
+  history: history.md
+
+tags: []
 YAML
 
   printf '%s\n' "$plant_dir"
@@ -95,6 +103,7 @@ empty_field() {
     status.updated) pattern='^  updated:' ;;
     photos.hero) pattern='^  hero:' ;;
     photos.current) pattern='^  current: photos/current.jpg' ;;
+    photos.index) pattern='^  index:' ;;
     *)
       echo "Unknown field: $field" >&2
       return 1
@@ -116,6 +125,16 @@ run_validate() {
 
   set +e
   output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_PLANT" validate "$@" 2>&1)"
+  status=$?
+  set -e
+}
+
+run_publish() {
+  local fixture_root="$1"
+  shift
+
+  set +e
+  output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_PLANT" publish "$@" 2>&1)"
   status=$?
   set -e
 }
@@ -257,6 +276,61 @@ for photo_field in photos.hero photos.current; do
     "missing referenced photo $photo_field is reported" \
     "FAIL $photo_field does not exist: photos/$photo_path.jpg"
 done
+
+plant_dir="$(create_plant valid-index-photo)"
+awk '
+  /^  index:/ { print "  index: photos/index.jpg"; next }
+  { print }
+' "$plant_dir/facts.yaml" > "$plant_dir/facts.yaml.tmp"
+mv "$plant_dir/facts.yaml.tmp" "$plant_dir/facts.yaml"
+
+run_validate "$test_root/valid-index-photo" test-plant
+assert_status "configured index photo passes validation" 0
+assert_contains   "configured index photo is validated"   "OK   photos.index exists: photos/index.jpg"
+
+plant_dir="$(create_plant missing-index-photo)"
+awk '
+  /^  index:/ { print "  index: photos/missing-index.jpg"; next }
+  { print }
+' "$plant_dir/facts.yaml" > "$plant_dir/facts.yaml.tmp"
+mv "$plant_dir/facts.yaml.tmp" "$plant_dir/facts.yaml"
+
+run_validate "$test_root/missing-index-photo" test-plant
+assert_status "missing configured index photo fails" 1
+assert_contains   "missing configured index photo is reported"   "FAIL photos.index does not exist: photos/missing-index.jpg"
+
+plant_dir="$(create_plant publish-index-photo)"
+awk '
+  /^  index:/ { print "  index: photos/index.jpg"; next }
+  { print }
+' "$plant_dir/facts.yaml" > "$plant_dir/facts.yaml.tmp"
+mv "$plant_dir/facts.yaml.tmp" "$plant_dir/facts.yaml"
+
+run_publish "$test_root/publish-index-photo" test-plant
+assert_status "plant publishing with index photo succeeds" 0
+assert_contains   "plant publishing reports the public index image"   "Published index image: /images/plants/test-plant/index.jpg"
+
+published_index="$test_root/publish-index-photo/site/public/images/plants/test-plant/index.jpg"
+generated_content="$test_root/publish-index-photo/content/plants/test-plant.md"
+
+if [[ -f "$published_index" ]]; then
+  pass "plant publishing creates the stable public index image"
+else
+  fail "plant publishing creates the stable public index image"
+fi
+
+if cmp -s "$plant_dir/photos/index.jpg" "$published_index"; then
+  pass "published index image matches its configured source"
+else
+  fail "published index image matches its configured source"
+fi
+
+if grep -Fq   "indexImage: /images/plants/test-plant/index.jpg"   "$generated_content"
+then
+  pass "generated frontmatter contains indexImage"
+else
+  fail "generated frontmatter contains indexImage"
+fi
 
 plant_dir="$(create_plant unreadable-facts)"
 chmod 000 "$plant_dir/facts.yaml"

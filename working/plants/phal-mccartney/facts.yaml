@@ -30,6 +30,7 @@ care:
 photos:
   hero: photos/Phal_McCartney - 20.JPG
   current: photos/Phal_McCartney - 23.JPG
+  index: null
   metadata: photo-metadata.md
 
 documents:

@@ -30,6 +30,7 @@ care:
 photos:
   hero: photos/Bungalow Bill - 19.png
   current: photos/Bungalow Bill - 19.png
+  index: null
   metadata: photo-metadata.md
 
 documents:

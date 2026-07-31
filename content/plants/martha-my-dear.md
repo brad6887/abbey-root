@@ -11,6 +11,7 @@ draft: false
 updatedDate: 2026-07-26
 heroImage: /images/plants/martha-my-dear/hero.jpg
 currentImage: /images/plants/martha-my-dear/current.jpg
+indexImage: /images/plants/martha-my-dear/index.jpg
 tags:
 - orchid
 - orchid-rescue

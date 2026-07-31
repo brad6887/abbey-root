@@ -30,6 +30,7 @@ care:
 photos:
   hero: photos/Revolution - 21.jpeg
   current: photos/Revolution - 35.JPG
+  index: null
   metadata: photo-metadata.md
 
 documents:

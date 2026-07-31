@@ -36,7 +36,10 @@ const orchids = plants
               ? "/orchid-rescue/coming-soon/"
               : `/orchid-rescue/${orchid.id.replace(/\.md$/, "")}/`;
             const thumbnail =
-              orchid.data.currentImage ?? orchid.data.heroImage ?? null;
+              orchid.data.indexImage ??
+              orchid.data.currentImage ??
+              orchid.data.heroImage ??
+              null;
 
             return (
               <article class:list={["plant-card", { draft: orchid.data.draft }]}>

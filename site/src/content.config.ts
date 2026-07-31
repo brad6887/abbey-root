@@ -79,6 +79,7 @@ const plants = defineCollection({
 
     heroImage: z.string().optional(),
     currentImage: z.string().optional(),
+    indexImage: z.string().optional(),
 
     tags: z.array(z.string()).default([]),
   }),
