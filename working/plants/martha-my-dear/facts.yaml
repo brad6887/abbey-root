@@ -1,0 +1,44 @@
+name: Martha My Dear
+slug: martha-my-dear
+description: The story of Martha My Dear, a healthy pink Phalaenopsis rescued from a Sam's Club markdown.
+
+plant:
+  type: orchid
+  genus: Phalaenopsis
+  species: null
+  hybrid: true
+
+rescue:
+  date: 2026-07-19
+  source: Sam's Club
+  location:
+    city: Fort Worth
+    state: Texas
+    country: USA
+
+status:
+  current: blooming
+  current_location:
+    city: Fort Worth
+    state: Texas
+    country: USA
+  updated: 2026-07-26
+
+care:
+  potting_medium: nursery bark
+  container: clear nursery pot
+
+photos:
+  hero: photos/Martha - 1.JPG
+  current: photos/Martha - 5.JPG
+  metadata: photo-metadata.md
+
+documents:
+  story: story.md
+  history: history.md
+
+tags:
+  - orchid
+  - orchid-rescue
+  - phalaenopsis
+  - blooming

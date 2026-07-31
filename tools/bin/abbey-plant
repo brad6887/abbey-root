@@ -396,6 +396,7 @@ def publish_history_photos(markdown, plant_name, slug):
 
 name = get("name")
 slug = get("slug")
+source_description = get("description")
 plant_type = get("plant.type")
 status = get("status.current")
 genus = get("plant.genus")
@@ -423,7 +424,7 @@ species_label = genus
 if species:
     species_label = f"{genus} {species}" if genus else species
 
-description = (
+description = source_description or (
     f"The rescue and recovery story of {name}, "
     f"a {species_label or plant_type} rescued from neglect."
 )
