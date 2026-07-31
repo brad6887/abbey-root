@@ -71,6 +71,7 @@ Example:
 ```yaml
 name: Doctor Robert
 slug: doctor-robert
+description: The rescue and recovery story of Doctor Robert.
 
 plant:
   type: orchid
@@ -117,6 +118,12 @@ tags:
 ---
 
 # Field Definitions
+
+## description
+
+Optional public summary used in generated page metadata.
+
+When omitted, the publisher generates a standard rescue-and-recovery summary.
 
 ## name
 

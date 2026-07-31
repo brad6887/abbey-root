@@ -1,0 +1,83 @@
+# Martha My Dear
+
+## 2026-07-19 — Rescue Day
+
+### Photos
+
+- Martha - 1.JPG
+
+### Observations
+
+Martha My Dear on her first day home from Sam’s Club. She arrived in full
+bloom with firm leaves, a healthy crown, and no obvious signs of dehydration
+or damage.
+
+---
+
+## 2026-07-19 — Oldest Leaf Aging
+
+### Photos
+
+- Martha - 2.JPG
+
+### Observations
+
+Martha’s oldest bottom leaf was yellowing and drying while the remaining
+leaves stayed firm. The dry tissue and healthy crown suggested normal leaf
+aging rather than rot.
+
+---
+
+## 2026-07-19 — Root Check
+
+### Photos
+
+- Martha - 3.JPG
+
+### Observations
+
+The clear nursery pot showed plenty of plump, healthy-looking roots and coarse
+bark. Everything visible looked good, although the center of the root ball
+will remain a mystery until she is repotted.
+
+---
+
+## 2026-07-19 — Oldest Leaf Shed
+
+### Photos
+
+- Martha - 4.JPG
+
+### Observations
+
+Martha naturally dropped her oldest bottom leaf shortly after arriving. The
+dry, papery base and lack of soft tissue suggested normal leaf aging rather
+than rot.
+
+---
+
+## 2026-07-26 — Settling In
+
+### Photos
+
+- Martha - 5.JPG
+
+### Observations
+
+One week after coming home, Martha’s remaining leaves were still firm and
+healthy. Some flowers had begun to fade, but the plant itself continued to
+look strong.
+
+---
+
+## 2026-07-26 — First Soak
+
+### Photos
+
+- Martha - 6.JPG
+
+### Observations
+
+With the bark dry and the visible roots mostly silver, Martha received her
+first thorough soak. The plan remains to leave her undisturbed until flowering
+is finished, then repot and check for a hidden nursery plug.
