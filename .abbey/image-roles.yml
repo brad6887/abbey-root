@@ -1,0 +1,15 @@
+schema_version: 1
+
+entities:
+  plant:
+    root: working/plants
+    images: photos
+    metadata: facts.yaml
+    extensions:
+      - .jpg
+      - .jpeg
+      - .png
+      - .webp
+    roles:
+      hero:
+        field: photos.hero

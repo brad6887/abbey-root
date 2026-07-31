@@ -236,6 +236,8 @@ fi
 
 section "Remote"
 
+behind=0
+ahead=0
 upstream="$(git -C "$ABBEY_ROOT" rev-parse --abbrev-ref '@{upstream}' 2>/dev/null || true)"
 
 if [[ -z "$upstream" ]]; then
