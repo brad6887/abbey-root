@@ -106,7 +106,7 @@ Completed
 - `abbey lab check` refined and validated across managed hosts with expanded host, NVIDIA, and Ollama reporting while retaining read-only, timeout-protected, failure-tolerant operation.
 - Platform-role architecture established around stable responsibilities, with `edge01` designated as the Infrastructure Services Platform.
 - Tailscale-based remote access through `ubuntu-dev01` is documented in the remote-access architecture, validated by Abbey Doctor, and supported by inventory-driven reachability checks for managed hosts.
-- Technitium DNS deployed on `edge01` as the authoritative `home.arpa` service, with forward resolution, reverse resolution, and upstream forwarding validated from `ubuntu-dev01`.
+- Technitium DNS on `edge01` is the authoritative `home.arpa` service; Ansible configures all five managed Linux hosts to use it, forward and reverse records are complete, short-name search-domain resolution is validated lab-wide, and external forwarding remains operational.
 - Homepage recovery is managed through the authoritative Ansible role, with `edge01` integrated into managed inventory and the operational dashboard.
 - Umami and PostgreSQL are deployed on `ubuntu-dev01` through a dedicated Ansible role with encrypted secrets, private database networking, health checks, check-mode safety, idempotency validation, and documented backup and recovery procedures.
 - Ansible reproducibly manages a bounded Abbey shell configuration across managed Linux hosts while preserving distribution- and host-specific `.bashrc` content and optional `~/.bashrc.local` customization.

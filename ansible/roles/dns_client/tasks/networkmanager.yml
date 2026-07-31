@@ -1,0 +1,116 @@
+---
+- name: Identify the active default NetworkManager connection
+  ansible.builtin.command:
+    argv:
+      - nmcli
+      - -g
+      - GENERAL.CONNECTION
+      - device
+      - show
+      - "{{ ansible_default_ipv4.interface }}"
+  register: dns_client_nm_connection
+  changed_when: false
+  check_mode: false
+  failed_when:
+    - dns_client_nm_connection.rc != 0
+      or dns_client_nm_connection.stdout | trim in ["", "--"]
+
+- name: Read current NetworkManager DNS settings
+  ansible.builtin.command:
+    argv:
+      - nmcli
+      - -g
+      - "{{ item }}"
+      - connection
+      - show
+      - "{{ dns_client_nm_connection.stdout | trim }}"
+  loop:
+    - ipv4.dns
+    - ipv4.dns-search
+    - ipv4.ignore-auto-dns
+    - ipv6.ignore-auto-dns
+  register: dns_client_nm_current
+  changed_when: false
+  check_mode: false
+
+- name: Calculate expected NetworkManager DNS settings
+  ansible.builtin.set_fact:
+    dns_client_expected_dns: >-
+      {{
+        ([dns_client_primary_server] + dns_client_additional_servers)
+        | join(',')
+      }}
+    dns_client_nm_needs_change: >-
+      {{
+        dns_client_nm_current.results[0].stdout
+          | trim
+          | replace(' ', '')
+          !=
+        (([dns_client_primary_server] + dns_client_additional_servers)
+          | join(','))
+        or
+        dns_client_nm_current.results[1].stdout | trim
+          != dns_client_search_domain
+        or
+        dns_client_nm_current.results[2].stdout | trim
+          != 'yes'
+        or
+        dns_client_nm_current.results[3].stdout | trim
+          != 'yes'
+      }}
+
+- name: Preview pending NetworkManager DNS changes
+  ansible.builtin.debug:
+    msg:
+      - "Connection: {{ dns_client_nm_connection.stdout | trim }}"
+      - "Current DNS: {{ dns_client_nm_current.results[0].stdout | trim | default('automatic', true) }}"
+      - "Expected DNS: {{ dns_client_expected_dns }}"
+      - "Current search domain: {{ dns_client_nm_current.results[1].stdout | trim | default('automatic', true) }}"
+      - "Expected search domain: {{ dns_client_search_domain }}"
+      - "DNS configuration would change: {{ dns_client_nm_needs_change }}"
+  changed_when: dns_client_nm_needs_change | bool
+  when: ansible_check_mode
+
+- name: Configure NetworkManager DNS settings
+  ansible.builtin.command:
+    argv:
+      - nmcli
+      - connection
+      - modify
+      - "{{ dns_client_nm_connection.stdout | trim }}"
+      - ipv4.dns
+      - "{{ dns_client_expected_dns }}"
+      - ipv4.dns-search
+      - "{{ dns_client_search_domain }}"
+      - ipv4.ignore-auto-dns
+      - "yes"
+      - ipv6.ignore-auto-dns
+      - "yes"
+  register: dns_client_nm_modify
+  when:
+    - dns_client_nm_needs_change | bool
+    - not ansible_check_mode
+  changed_when: true
+
+- name: Reactivate the NetworkManager connection
+  ansible.builtin.command:
+    argv:
+      - nmcli
+      - connection
+      - up
+      - "{{ dns_client_nm_connection.stdout | trim }}"
+      - ifname
+      - "{{ ansible_default_ipv4.interface }}"
+  when: dns_client_nm_modify is changed
+  changed_when: true
+
+- name: Restart systemd-resolved after NetworkManager changes
+  ansible.builtin.service:
+    name: systemd-resolved
+    state: restarted
+  when:
+    - dns_client_nm_modify is changed
+    - >-
+      ansible_facts.services
+      .get('systemd-resolved.service', {})
+      .get('state', '') == 'running'

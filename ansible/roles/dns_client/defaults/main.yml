@@ -1,0 +1,4 @@
+---
+dns_client_primary_server: "{{ abbey_dns_server }}"
+dns_client_additional_servers: "{{ abbey_dns_additional_servers }}"
+dns_client_search_domain: "{{ abbey_dns_search_domain }}"

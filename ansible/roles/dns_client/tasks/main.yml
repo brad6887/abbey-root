@@ -1,0 +1,39 @@
+---
+- name: Validate Abbey DNS client configuration
+  ansible.builtin.assert:
+    that:
+      - dns_client_primary_server | length > 0
+      - dns_client_additional_servers is iterable
+      - dns_client_search_domain | length > 0
+    fail_msg: Abbey DNS client variables are incomplete.
+
+- name: Gather service state
+  ansible.builtin.service_facts:
+
+- name: Determine active DNS configuration backend
+  ansible.builtin.set_fact:
+    dns_client_uses_networkmanager: >-
+      {{
+        ansible_facts.services
+        .get('NetworkManager.service', {})
+        .get('state', '') == 'running'
+      }}
+
+- name: Configure DNS through NetworkManager
+  ansible.builtin.include_tasks: networkmanager.yml
+  when: dns_client_uses_networkmanager
+
+- name: Configure DNS through netplan
+  ansible.builtin.include_tasks: netplan.yml
+  when:
+    - not dns_client_uses_networkmanager
+    - ansible_os_family == "Debian"
+
+- name: Reject unsupported DNS client backend
+  ansible.builtin.fail:
+    msg: >-
+      No supported DNS client backend was found. Expected an active
+      NetworkManager service or a Debian-family netplan host.
+  when:
+    - not dns_client_uses_networkmanager
+    - ansible_os_family != "Debian"

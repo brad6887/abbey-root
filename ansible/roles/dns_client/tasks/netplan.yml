@@ -1,0 +1,60 @@
+---
+- name: Install Abbey DNS netplan configuration
+  ansible.builtin.template:
+    src: 60-abbey-dns.yaml.j2
+    dest: /etc/netplan/60-abbey-dns.yaml
+    owner: root
+    group: root
+    mode: "0600"
+  notify: Apply Abbey DNS netplan
+
+- name: Validate merged netplan configuration
+  ansible.builtin.command:
+    argv:
+      - netplan
+      - generate
+  changed_when: false
+  check_mode: false
+
+- name: Find the generated netplan networkd profile
+  ansible.builtin.find:
+    paths: /run/systemd/network
+    patterns: "*netplan*{{ ansible_default_ipv4.interface }}*.network"
+    file_type: file
+  register: dns_client_netplan_network_files
+
+- name: Require one generated netplan networkd profile
+  ansible.builtin.assert:
+    that:
+      - dns_client_netplan_network_files.matched == 1
+    fail_msg: >-
+      Expected exactly one generated networkd profile for
+      {{ ansible_default_ipv4.interface }}, but found
+      {{ dns_client_netplan_network_files.matched }}.
+
+- name: Record the generated networkd profile name
+  ansible.builtin.set_fact:
+    dns_client_networkd_profile: >-
+      {{
+        dns_client_netplan_network_files.files[0].path
+        | basename
+      }}
+
+- name: Create the networkd profile drop-in directory
+  ansible.builtin.file:
+    path: >-
+      /etc/systemd/network/{{ dns_client_networkd_profile }}.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Prevent IPv6 router advertisements from supplying DNS
+  ansible.builtin.template:
+    src: 60-abbey-dns.network.conf.j2
+    dest: >-
+      /etc/systemd/network/{{ dns_client_networkd_profile }}.d/60-abbey-dns.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Apply Abbey DNS netplan

@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 144 complete · 252 pending · 396 total
+> **Backlog Status:** 146 complete · 250 pending · 396 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -89,11 +89,11 @@ Ongoing practices, design principles, and general areas of improvement belong in
 ## Infrastructure
 
 - [x] Make `.bashrc` Ansible-managed.
-- [ ] Configure hostname resolution between lab systems.
+- [x] Configure hostname resolution between lab systems.
 - [ ] Complete `docs/architecture/EDGE01_COMMISSIONING.md` as a reusable commissioning runbook based on the actual `edge01` deployment.
 - [ ] Validate the completed `edge01` commissioning runbook against the deployed host and record any corrections or missing steps.
 - [x] Deploy Technitium DNS on `edge01` as the authoritative `home.arpa` service and validate it from `ubuntu-dev01`.
-- [ ] Complete extended validation and lab-wide rollout of internal DNS.
+- [x] Complete extended validation and lab-wide rollout of internal DNS.
 - [ ] Establish reliable internal access to public proxied services through Abbey DNS.
 - [ ] Finalize the infrastructure naming strategy and add friendly DNS service records.
 - [ ] Enhance `abbey-status` with Docker health, disk usage, and service summaries.

@@ -9,6 +9,9 @@
 
   roles:
     - common
+    - role: dns_client
+      tags:
+        - dns
     - time
     - motd
     - issue

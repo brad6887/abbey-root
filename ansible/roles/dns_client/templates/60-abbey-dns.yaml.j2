@@ -1,0 +1,16 @@
+# Managed by Ansible. Local changes will be overwritten.
+network:
+  version: 2
+  ethernets:
+    {{ ansible_default_ipv4.interface }}:
+      dhcp4-overrides:
+        use-dns: false
+        use-domains: false
+      nameservers:
+        addresses:
+          - {{ dns_client_primary_server }}
+{% for server in dns_client_additional_servers %}
+          - {{ server }}
+{% endfor %}
+        search:
+          - {{ dns_client_search_domain }}

@@ -2,6 +2,11 @@
 lab_name: Abbey Root
 timezone: America/Chicago
 admin_user: bcooke
+
+# Abbey internal DNS
+abbey_dns_server: "{{ hostvars['edge01']['primary_ip'] }}"
+abbey_dns_additional_servers: []
+abbey_dns_search_domain: home.arpa
 abbey_git_home: "/home/{{ admin_user }}"
 abbey_git_group: "{{ admin_user }}"
 abbey_git_known_hosts_mode: "0644"
