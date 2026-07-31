@@ -30,6 +30,7 @@ care:
 photos:
   hero: photos/Lady_Madonna - 17.jpeg
   current: photos/Lady_Madonna - 30.JPG
+  index: null
   metadata: photo-metadata.md
 
 documents:

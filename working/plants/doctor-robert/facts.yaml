@@ -30,6 +30,7 @@ care:
 photos:
   hero: photos/IMG_C52D2813-DCED-40FD-BBF7-605ACE5D9306.jpeg
   current: photos/Image (4).png
+  index: null
   metadata: photo-metadata.md
 
 documents:

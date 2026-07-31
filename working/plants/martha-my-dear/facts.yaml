@@ -31,6 +31,7 @@ care:
 photos:
   hero: photos/Martha - 1.JPG
   current: photos/Martha - 5.JPG
+  index: "photos/Martha - 5.JPG"
   metadata: photo-metadata.md
 
 documents:

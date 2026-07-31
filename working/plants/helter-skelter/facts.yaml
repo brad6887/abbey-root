@@ -30,6 +30,7 @@ care:
 photos:
   hero: photos/HelterSkelter - 1 of 12.jpeg
   current: photos/HelterSkelter - 12 of 12.png
+  index: null
   metadata: photo-metadata.md
 
 documents:

@@ -30,6 +30,7 @@ care:
 photos:
   hero: null
   current: null
+  index: null
   metadata: photo-metadata.md
 
 documents:

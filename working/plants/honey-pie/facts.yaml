@@ -30,6 +30,7 @@ care:
 photos:
   hero: photos/Honey_Pie - 1.jpeg
   current: photos/Honey_Pie - 13.JPG
+  index: null
   metadata: photo-metadata.md
 
 documents:

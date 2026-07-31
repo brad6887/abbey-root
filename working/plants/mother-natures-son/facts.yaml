@@ -30,6 +30,7 @@ care:
 photos:
   hero: photos/Mother_natures_son - 1.jpg
   current: photos/Mother_natures_son - 33.JPG
+  index: null
   metadata: photo-metadata.md
 
 documents:

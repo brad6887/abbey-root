@@ -482,6 +482,8 @@ abbey plant <command>
 
 - `hero` - Select the photograph assigned to a plant's hero role.
   - `abbey plant hero <slug>`
+- `index` - Select the photograph used on plant index pages.
+  - `abbey plant index <slug>`
 - `publish` - Generate Astro content and copy selected public images.
   - `abbey plant publish <slug>`
 - `validate` - Validate a plant workspace against the Plant Model.
@@ -493,5 +495,6 @@ abbey plant <command>
 abbey plant validate doctor-robert
 abbey plant publish doctor-robert
 abbey plant hero doctor-robert
+abbey plant index doctor-robert
 ```
 
