@@ -31,6 +31,7 @@ the canonical `home.arpa` namespace.
 - Validated short names, fully qualified names, and external DNS from the full
   managed inventory.
 - Confirmed repeated DNS-only Ansible runs are idempotent.
+- Rotated the Wi-Fi credential exposed during troubleshooting.
 
 ## Lessons Learned
 
@@ -43,7 +44,6 @@ Tailscale may still win for some single-label hostnames, so the fully qualified
 
 ## Next Steps
 
-- Rotate the Wi-Fi credential exposed during troubleshooting.
 - Add friendly internal service records after the naming strategy is finalized.
 - Evaluate a second authoritative resolver only when actual redundancy is
   needed.

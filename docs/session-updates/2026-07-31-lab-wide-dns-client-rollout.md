@@ -3,7 +3,7 @@ title: "Lab-Wide DNS Client Rollout"
 description: "Configured reproducible internal DNS client policy across all managed Abbey lab hosts."
 date: 2026-07-31
 status: complete
-reviewed: false
+reviewed: true
 session: lab-wide-dns-client-rollout
 tags:
   - Abbey Root
@@ -62,6 +62,7 @@ The role supports both NetworkManager and netplan without modifying
 - Configured `edge01`.
 - Configured `sensor01`.
 - Added the missing reverse record for `ai-worker01`.
+- Rotated the Wi-Fi credential exposed during troubleshooting.
 - Validated canonical FQDN resolution across every managed host.
 - Validated short-name resolution through the `home.arpa` search domain.
 - Validated external DNS forwarding.
@@ -126,7 +127,6 @@ The following checks passed:
 
 ## Next Steps
 
-- Rotate the Wi-Fi credential exposed during troubleshooting.
 - Establish reliable internal access to public proxied services through Abbey
   DNS.
 - Finalize the infrastructure naming strategy and add friendly DNS service
