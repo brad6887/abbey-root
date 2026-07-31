@@ -8,11 +8,15 @@
 # Usage:
 #   abbey plant validate <slug>
 #   abbey plant publish <slug>
+#   abbey plant hero <slug>
 #
 
 set -euo pipefail
 
-REPO_DIR="${ABBEY_ROOT:-$HOME/git/abbey-root}"
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+REPO_DIR="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 PLANTS_DIR="$REPO_DIR/working/plants"
 CONTENT_DIR="$REPO_DIR/content/plants"
 PUBLIC_PLANTS_DIR="$REPO_DIR/site/public/images/plants"
@@ -41,11 +45,31 @@ usage() {
 Usage:
   abbey plant validate <slug>
   abbey plant publish <slug>
+  abbey plant hero <slug> [--select NUMBER] [--yes]
 
 Commands:
   validate    Validate a plant workspace against the Plant Model
   publish     Generate Astro content and copy selected public images
+  hero        Select the plant photograph assigned to the hero role
 USAGE
+}
+
+select_hero() {
+    local slug="${1:-}"
+
+    if [[ -z "$slug" ]]; then
+        echo "ERROR: Plant slug is required."
+        echo
+        usage
+        return 2
+    fi
+
+    shift
+
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-image" \
+        select plant "$slug" \
+        --role hero \
+        "$@"
 }
 
 validate_plant() {
@@ -498,6 +522,10 @@ case "$command" in
     publish)
         shift
         publish_plant "${1:-}"
+        ;;
+    hero)
+        shift
+        select_hero "$@"
         ;;
     help|-h|--help)
         usage

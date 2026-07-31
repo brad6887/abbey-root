@@ -1,0 +1,517 @@
+#!/usr/bin/env bash
+#
+# Abbey Root Tool: abbey-image
+#
+# Purpose:
+#   Select images for project-defined entity roles.
+#
+# Usage:
+#   abbey image select <entity> <item> --role <role>
+#
+
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
+CONFIG_FILE="$ABBEY_ROOT/.abbey/image-roles.yml"
+
+usage() {
+  cat <<'HELP'
+Abbey Image Selection
+
+Usage:
+  abbey image select <entity> <item> --role <role> [options]
+
+Options:
+  --select NUMBER    Select an image without an interactive number prompt
+  --yes              Apply the selected change without confirmation
+  -h, --help         Show this help
+
+Examples:
+  abbey image select plant martha-my-dear --role hero
+  abbey image select plant martha-my-dear --role hero --select 2 --yes
+
+The active project defines supported entities and roles in:
+
+  .abbey/image-roles.yml
+HELP
+}
+
+select_image() {
+  local entity="${1:-}"
+  local item="${2:-}"
+  local role=""
+  local selected_number=""
+  local assume_yes=false
+
+  if [[ -z "$entity" || -z "$item" ]]; then
+    echo "ERROR Entity and item are required."
+    echo
+    usage
+    return 2
+  fi
+
+  shift 2
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --role)
+        if [[ $# -lt 2 ]]; then
+          echo "ERROR --role requires a value."
+          return 2
+        fi
+        role="$2"
+        shift 2
+        ;;
+      --select)
+        if [[ $# -lt 2 ]]; then
+          echo "ERROR --select requires a number."
+          return 2
+        fi
+        selected_number="$2"
+        shift 2
+        ;;
+      --yes)
+        assume_yes=true
+        shift
+        ;;
+      -h|--help)
+        usage
+        return 0
+        ;;
+      *)
+        echo "ERROR Unknown image selection option: $1"
+        return 2
+        ;;
+    esac
+  done
+
+  if [[ -z "$role" ]]; then
+    echo "ERROR --role is required."
+    return 2
+  fi
+
+  if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo "ERROR Image-role configuration not found:"
+    echo "  $CONFIG_FILE"
+    return 1
+  fi
+
+  python3 - \
+    "$ABBEY_ROOT" \
+    "$CONFIG_FILE" \
+    "$entity" \
+    "$item" \
+    "$role" \
+    "$selected_number" \
+    "$assume_yes" <<'PY'
+import json
+import os
+import re
+import stat
+import sys
+import tempfile
+from pathlib import Path
+
+try:
+    import yaml
+    from yaml.nodes import MappingNode, ScalarNode
+except ImportError:
+    print("ERROR Python module PyYAML is not installed.")
+    sys.exit(1)
+
+
+project_root = Path(sys.argv[1]).resolve()
+config_path = Path(sys.argv[2]).resolve()
+entity_name = sys.argv[3]
+item_name = sys.argv[4]
+role_name = sys.argv[5]
+selected_argument = sys.argv[6]
+assume_yes = sys.argv[7] == "true"
+
+
+class ConfigurationError(Exception):
+    pass
+
+
+def error(message, status=1):
+    print(f"ERROR {message}")
+    sys.exit(status)
+
+
+def require_mapping(value, label):
+    if not isinstance(value, dict):
+        raise ConfigurationError(f"{label} must be a YAML mapping")
+    return value
+
+
+def configured_string(mapping, key, label):
+    value = mapping.get(key)
+    if not isinstance(value, str) or not value.strip():
+        raise ConfigurationError(f"{label}.{key} must be a non-empty string")
+    return value.strip()
+
+
+def resolve_inside(base, relative, label):
+    path = Path(relative)
+
+    if path.is_absolute():
+        raise ConfigurationError(f"{label} must be relative to the project")
+
+    resolved = (base / path).resolve()
+
+    try:
+        common = os.path.commonpath((str(base.resolve()), str(resolved)))
+    except ValueError:
+        raise ConfigurationError(f"{label} resolves outside its allowed root")
+
+    if common != str(base.resolve()):
+        raise ConfigurationError(f"{label} resolves outside its allowed root")
+
+    return resolved
+
+
+def mapping_value(mapping, dotted_path):
+    value = mapping
+
+    for component in dotted_path.split("."):
+        if not isinstance(value, dict) or component not in value:
+            raise ConfigurationError(
+                f"configured metadata field does not exist: {dotted_path}"
+            )
+        value = value[component]
+
+    return value
+
+
+def scalar_node(document, dotted_path):
+    node = document
+
+    for component in dotted_path.split("."):
+        if not isinstance(node, MappingNode):
+            raise ConfigurationError(
+                f"configured metadata field is not inside a mapping: {dotted_path}"
+            )
+
+        match = None
+
+        for key_node, value_node in node.value:
+            if isinstance(key_node, ScalarNode) and key_node.value == component:
+                match = value_node
+                break
+
+        if match is None:
+            raise ConfigurationError(
+                f"configured metadata field does not exist: {dotted_path}"
+            )
+
+        node = match
+
+    if not isinstance(node, ScalarNode):
+        raise ConfigurationError(
+            f"configured metadata field must contain a scalar value: {dotted_path}"
+        )
+
+    if node.start_mark.line != node.end_mark.line:
+        raise ConfigurationError(
+            f"configured metadata field must use a single-line scalar: {dotted_path}"
+        )
+
+    return node
+
+
+if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", entity_name):
+    error(f"Invalid entity name: {entity_name}", 2)
+
+if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", item_name):
+    error(f"Invalid item name: {item_name}", 2)
+
+if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", role_name):
+    error(f"Invalid role name: {role_name}", 2)
+
+try:
+    config = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
+    config = require_mapping(config, "image-role configuration")
+
+    if config.get("schema_version") != 1:
+        raise ConfigurationError("unsupported image-role schema version")
+
+    entities = require_mapping(config.get("entities"), "entities")
+
+    if entity_name not in entities:
+        raise ConfigurationError(f"unsupported image entity: {entity_name}")
+
+    entity = require_mapping(
+        entities[entity_name],
+        f"entities.{entity_name}",
+    )
+
+    entity_root_setting = configured_string(
+        entity,
+        "root",
+        f"entities.{entity_name}",
+    )
+    images_setting = configured_string(
+        entity,
+        "images",
+        f"entities.{entity_name}",
+    )
+    metadata_setting = configured_string(
+        entity,
+        "metadata",
+        f"entities.{entity_name}",
+    )
+
+    roles = require_mapping(
+        entity.get("roles"),
+        f"entities.{entity_name}.roles",
+    )
+
+    if role_name not in roles:
+        raise ConfigurationError(
+            f"unsupported role for {entity_name}: {role_name}"
+        )
+
+    role = require_mapping(
+        roles[role_name],
+        f"entities.{entity_name}.roles.{role_name}",
+    )
+
+    metadata_field = configured_string(
+        role,
+        "field",
+        f"entities.{entity_name}.roles.{role_name}",
+    )
+
+    extensions = entity.get(
+        "extensions",
+        [".jpg", ".jpeg", ".png", ".webp"],
+    )
+
+    if not isinstance(extensions, list) or not extensions:
+        raise ConfigurationError(
+            f"entities.{entity_name}.extensions must be a non-empty list"
+        )
+
+    normalized_extensions = set()
+
+    for extension in extensions:
+        if not isinstance(extension, str) or not extension.strip():
+            raise ConfigurationError(
+                f"entities.{entity_name}.extensions contains an invalid value"
+            )
+
+        extension = extension.strip().lower()
+
+        if not extension.startswith("."):
+            extension = f".{extension}"
+
+        normalized_extensions.add(extension)
+
+    entity_root = resolve_inside(
+        project_root,
+        entity_root_setting,
+        f"entities.{entity_name}.root",
+    )
+    item_root = resolve_inside(
+        entity_root,
+        item_name,
+        f"{entity_name} item",
+    )
+    images_root = resolve_inside(
+        item_root,
+        images_setting,
+        f"entities.{entity_name}.images",
+    )
+    metadata_path = resolve_inside(
+        item_root,
+        metadata_setting,
+        f"entities.{entity_name}.metadata",
+    )
+
+except (OSError, yaml.YAMLError, ConfigurationError) as exc:
+    error(str(exc))
+
+if not item_root.is_dir():
+    error(f"{entity_name} item does not exist: {item_root}")
+
+if not images_root.is_dir():
+    error(f"image directory does not exist: {images_root}")
+
+if not metadata_path.is_file():
+    error(f"metadata file does not exist: {metadata_path}")
+
+images = sorted(
+    (
+        path
+        for path in images_root.iterdir()
+        if path.is_file() and path.suffix.lower() in normalized_extensions
+    ),
+    key=lambda path: path.name.casefold(),
+)
+
+if not images:
+    error(f"no eligible images found in: {images_root}")
+
+try:
+    metadata_text = metadata_path.read_text(encoding="utf-8")
+    metadata = yaml.safe_load(metadata_text) or {}
+    metadata = require_mapping(metadata, "metadata document")
+    current_value = mapping_value(metadata, metadata_field)
+    document_node = yaml.compose(metadata_text)
+    target_node = scalar_node(document_node, metadata_field)
+except (OSError, yaml.YAMLError, ConfigurationError) as exc:
+    error(str(exc))
+
+current_text = current_value if isinstance(current_value, str) else ""
+
+relative_images = [
+    path.relative_to(item_root).as_posix()
+    for path in images
+]
+
+print("Abbey Image Selection")
+print("=====================")
+print(f"Entity:  {entity_name}")
+print(f"Item:    {item_name}")
+print(f"Role:    {role_name}")
+print(f"Current: {current_text or 'not set'}")
+print()
+print("Available Images")
+print("----------------")
+
+for index, (path, relative_path) in enumerate(
+    zip(images, relative_images),
+    start=1,
+):
+    marker = " [current]" if relative_path == current_text else ""
+    print(f"{index:>3}. {path.name}{marker}")
+
+print()
+
+if selected_argument:
+    try:
+        selected_index = int(selected_argument)
+    except ValueError:
+        error("--select must be a number", 2)
+
+    if selected_index < 1 or selected_index > len(images):
+        error(
+            f"--select must be between 1 and {len(images)}",
+            2,
+        )
+else:
+    while True:
+        try:
+            response = input(
+                f"Select image [1-{len(images)}, q to cancel]: "
+            ).strip()
+        except EOFError:
+            print()
+            print("Cancelled. No files changed.")
+            sys.exit(0)
+
+        if response.lower() in {"q", "quit"}:
+            print("Cancelled. No files changed.")
+            sys.exit(0)
+
+        try:
+            selected_index = int(response)
+        except ValueError:
+            print("Enter an image number or q to cancel.")
+            continue
+
+        if 1 <= selected_index <= len(images):
+            break
+
+        print(f"Enter a number between 1 and {len(images)}.")
+
+selected_relative = relative_images[selected_index - 1]
+
+print()
+print(f"Selected: {selected_relative}")
+
+if selected_relative == current_text:
+    print("No change required. The selected image already has this role.")
+    sys.exit(0)
+
+if not assume_yes:
+    try:
+        confirmation = input("Apply this change? [y/N]: ").strip().lower()
+    except EOFError:
+        confirmation = ""
+
+    if confirmation not in {"y", "yes"}:
+        print("Cancelled. No files changed.")
+        sys.exit(0)
+
+lines = metadata_text.splitlines(keepends=True)
+line_number = target_node.start_mark.line
+start_column = target_node.start_mark.column
+end_column = target_node.end_mark.column
+
+original_line = lines[line_number]
+replacement = json.dumps(selected_relative)
+
+lines[line_number] = (
+    original_line[:start_column]
+    + replacement
+    + original_line[end_column:]
+)
+
+updated_text = "".join(lines)
+
+temporary_name = None
+
+try:
+    with tempfile.NamedTemporaryFile(
+        mode="w",
+        encoding="utf-8",
+        dir=str(metadata_path.parent),
+        prefix=f".{metadata_path.name}.",
+        delete=False,
+    ) as handle:
+        temporary_name = handle.name
+        handle.write(updated_text)
+        handle.flush()
+        os.fsync(handle.fileno())
+
+    os.chmod(
+        temporary_name,
+        stat.S_IMODE(metadata_path.stat().st_mode),
+    )
+    os.replace(temporary_name, metadata_path)
+except OSError as exc:
+    if temporary_name:
+        try:
+            os.unlink(temporary_name)
+        except OSError:
+            pass
+
+    error(f"unable to update metadata: {exc}")
+
+print()
+print(f"Updated: {metadata_path}")
+print(f"{metadata_field}: {selected_relative}")
+PY
+}
+
+command="${1:-help}"
+
+case "$command" in
+  select)
+    shift
+    select_image "$@"
+    ;;
+  help|-h|--help)
+    usage
+    ;;
+  *)
+    echo "Unknown image command: $command"
+    echo
+    usage
+    exit 1
+    ;;
+esac

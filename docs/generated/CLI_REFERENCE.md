@@ -447,6 +447,27 @@ abbey site start
 
 ## Content management
 
+### `abbey image`
+
+Select project-defined images for configured content roles.
+
+**Usage**
+
+```text
+abbey image <command>
+```
+
+**Subcommands**
+
+- `select` - Select an image and assign it to a configured entity role.
+  - `abbey image select <entity> <item> --role <role>`
+
+**Examples**
+
+```text
+abbey image select plant martha-my-dear --role hero
+```
+
 ### `abbey plant`
 
 Manage, validate, and publish plant workspaces.
@@ -459,6 +480,8 @@ abbey plant <command>
 
 **Subcommands**
 
+- `hero` - Select the photograph assigned to a plant's hero role.
+  - `abbey plant hero <slug>`
 - `publish` - Generate Astro content and copy selected public images.
   - `abbey plant publish <slug>`
 - `validate` - Validate a plant workspace against the Plant Model.
@@ -469,5 +492,6 @@ abbey plant <command>
 ```text
 abbey plant validate doctor-robert
 abbey plant publish doctor-robert
+abbey plant hero doctor-robert
 ```
 

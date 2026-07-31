@@ -204,6 +204,18 @@ commands:
       - abbey site publish
       - abbey site start
 
+  image:
+    category: content
+    description: Select project-defined images for configured content roles.
+    usage: abbey image <command>
+    hidden: false
+    subcommands:
+      select:
+        description: Select an image and assign it to a configured entity role.
+        usage: abbey image select <entity> <item> --role <role>
+    examples:
+      - abbey image select plant martha-my-dear --role hero
+
   plant:
     category: content
     description: Manage, validate, and publish plant workspaces.
@@ -216,9 +228,13 @@ commands:
       publish:
         description: Generate Astro content and copy selected public images.
         usage: abbey plant publish <slug>
+      hero:
+        description: Select the photograph assigned to a plant's hero role.
+        usage: abbey plant hero <slug>
     examples:
       - abbey plant validate doctor-robert
       - abbey plant publish doctor-robert
+      - abbey plant hero doctor-robert
 
   knowledge:
     category: ai
