@@ -13,3 +13,6 @@ homepage_show_server: false
 sensor_model: Adafruit SHT41 Trinkey
 sensor_connection: USB serial
 sensor_baud_rate: 115200
+sensor_device_serial: "176790500"
+sensor_sample_interval_seconds: 60
+sensor_retention_days: 30

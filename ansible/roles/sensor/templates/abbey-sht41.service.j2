@@ -1,0 +1,17 @@
+[Unit]
+Description=Abbey SHT41 temperature and humidity logger
+After=local-fs.target
+
+[Service]
+Type=simple
+User={{ admin_user }}
+Group={{ admin_user }}
+SupplementaryGroups=dialout
+ExecStart=/usr/bin/python3 {{ sensor_application_directory }}/sht41_logger.py --device-glob '{{ sensor_device_glob }}' --baud-rate {{ sensor_baud_rate }} --interval {{ sensor_sample_interval_seconds }} --retention-days {{ sensor_retention_days }} --data-directory {{ sensor_data_directory }}
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

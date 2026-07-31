@@ -1,0 +1,7 @@
+---
+sensor_device_glob: /dev/serial/by-id/*
+sensor_baud_rate: 115200
+sensor_sample_interval_seconds: 60
+sensor_retention_days: 30
+sensor_application_directory: /opt/abbey/sensor
+sensor_data_directory: /var/lib/abbey-sensor
