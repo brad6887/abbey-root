@@ -28,9 +28,9 @@ care:
   container: original orchid pot
 
 photos:
-  hero: photos/Phal_McCartney - 20.JPG
-  current: photos/Phal_McCartney - 23.JPG
-  index: null
+  hero: "photos/Phal_McCartney - 9.jpeg"
+  current: photos/Phal_McCartney - 9.JPG
+  index: "photos/Phal_McCartney - 9.jpeg"
   metadata: photo-metadata.md
 
 documents:
