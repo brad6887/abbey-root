@@ -99,14 +99,14 @@ select_image() {
     return 1
   fi
 
-  python3 - \
+  python3 /dev/fd/3 \
     "$ABBEY_ROOT" \
     "$CONFIG_FILE" \
     "$entity" \
     "$item" \
     "$role" \
     "$selected_number" \
-    "$assume_yes" <<'PY'
+    "$assume_yes" 3<<'PY'
 import json
 import os
 import re
