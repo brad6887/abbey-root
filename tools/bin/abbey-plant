@@ -165,7 +165,8 @@ try:
 except ValueError:
     error(f"Date must use YYYY-MM-DD: {date_text}", 2)
 
-facts = yaml.safe_load(facts_path.read_text(encoding="utf-8"))
+facts_text = facts_path.read_text(encoding="utf-8")
+facts = yaml.safe_load(facts_text)
 if not isinstance(facts, dict):
     error("facts.yaml must contain a YAML mapping")
 
@@ -227,14 +228,70 @@ photos_dir.mkdir(parents=True, exist_ok=True)
 if photo != destination:
     shutil.copy2(photo, destination)
 
-facts["photos"]["current"] = relative_photo
-facts["status"]["current"] = new_status
-facts["status"]["updated"] = update_date
+def replace_nested_scalar(text, section, key, value):
+    lines = text.splitlines(keepends=True)
+    section_index = None
+
+    for index, line in enumerate(lines):
+        if line.rstrip("\r\n") == f"{section}:":
+            section_index = index
+            break
+
+    if section_index is None:
+        error(f"facts.yaml is missing section: {section}")
+
+    for index in range(section_index + 1, len(lines)):
+        line = lines[index]
+        if line and not line[0].isspace():
+            break
+        if re.match(rf"^  {re.escape(key)}:\s*", line):
+            ending = "\n" if line.endswith("\n") else ""
+            lines[index] = f"  {key}: {value}{ending}"
+            return "".join(lines)
+
+    error(f"facts.yaml is missing field: {section}.{key}")
+
+
+def replace_status_tag(text, old_status, new_status):
+    if old_status == new_status:
+        return text
+
+    lines = text.splitlines(keepends=True)
+    in_tags = False
+
+    for index, line in enumerate(lines):
+        stripped = line.rstrip("\r\n")
+        if stripped == "tags:":
+            in_tags = True
+            continue
+        if in_tags and line and not line[0].isspace():
+            break
+        if in_tags and stripped.strip() == f"- {old_status}":
+            ending = "\n" if line.endswith("\n") else ""
+            indent = line[: len(line) - len(line.lstrip())]
+            lines[index] = f"{indent}- {new_status}{ending}"
+            break
+
+    return "".join(lines)
+
+
+updated_facts = replace_nested_scalar(
+    facts_text, "photos", "current", relative_photo
+)
+updated_facts = replace_nested_scalar(
+    updated_facts, "status", "current", new_status
+)
+updated_facts = replace_nested_scalar(
+    updated_facts, "status", "updated", update_date.isoformat()
+)
+updated_facts = replace_status_tag(
+    updated_facts, current_status, new_status
+)
 
 with tempfile.NamedTemporaryFile(
     "w", encoding="utf-8", dir=facts_path.parent, delete=False
 ) as handle:
-    yaml.safe_dump(facts, handle, sort_keys=False, allow_unicode=True)
+    handle.write(updated_facts)
     facts_temp = Path(handle.name)
 os.replace(facts_temp, facts_path)
 

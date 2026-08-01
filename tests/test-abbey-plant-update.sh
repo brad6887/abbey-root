@@ -32,6 +32,8 @@ printf 'new photo\n' > "$test_root/candidate.jpg"
 cat > "$plant_dir/facts.yaml" <<'YAML'
 name: Test Plant
 slug: test-plant
+description: "Keep this exact formatting."
+
 plant:
   type: orchid
   genus: Phalaenopsis
@@ -48,7 +50,9 @@ photos:
 documents:
   story: story.md
   history: history.md
-tags: []
+tags:
+  - orchid
+  - recovering
 YAML
 
 facts_before="$(shasum -a 256 "$plant_dir/facts.yaml")"
@@ -80,6 +84,9 @@ assert_contains "applied update validates" "FAIL: 0" "$output"
 grep -Fq "current: photos/test-plant-2026-08-01.jpg" "$plant_dir/facts.yaml" && pass "current photo changes" || fail "current photo changes"
 grep -Fq "hero: photos/hero.jpg" "$plant_dir/facts.yaml" && pass "hero photo is preserved" || fail "hero photo is preserved"
 grep -Fq "current: thriving" "$plant_dir/facts.yaml" && pass "optional status changes" || fail "optional status changes"
+grep -Fq 'description: "Keep this exact formatting."' "$plant_dir/facts.yaml" && pass "unrelated facts formatting is preserved" || fail "unrelated facts formatting is preserved"
+grep -Fq "  - thriving" "$plant_dir/facts.yaml" && pass "status tag changes with status" || fail "status tag changes with status"
+if grep -Fq "  - recovering" "$plant_dir/facts.yaml"; then fail "old status tag is removed"; else pass "old status tag is removed"; fi
 grep -Fq "## 2026-08-01 — Weekly Update" "$plant_dir/history.md" && pass "history entry is appended" || fail "history entry is appended"
 grep -Fq "### Care" "$plant_dir/history.md" && pass "care note is appended" || fail "care note is appended"
 grep -Fq "## 2026-07-26 — Baseline" "$plant_dir/history.md" && pass "existing history is preserved" || fail "existing history is preserved"

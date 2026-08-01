@@ -57,7 +57,9 @@ test workspace.
 - Added supported status and ISO date validation.
 - Added duplicate weekly-date and destination collision protection.
 - Ran Plant Model validation automatically after a real update.
-- Added 15 focused regression assertions covering dry-run and apply behavior.
+- Preserved unrelated `facts.yaml` formatting through surgical scalar updates.
+- Kept an existing status tag synchronized when the plant status changes.
+- Added 18 focused regression assertions covering dry-run and apply behavior.
 - Registered the command in authoritative CLI metadata and regenerated the CLI
   reference.
 - Completed a successful 140-page Astro production build.
@@ -70,7 +72,7 @@ makes it safe to prepare or verify an update before committing an observation.
 
 ## Validation
 
-- `bash tests/test-abbey-plant-update.sh`: 15 assertions passed.
+- `bash tests/test-abbey-plant-update.sh`: 18 assertions passed.
 - `bash tests/test-abbey-plant.sh`: 67 assertions passed.
 - Shell syntax validation passed for `tools/bin/abbey-plant`.
 - Martha My Dear dry run completed and reported no files changed.
@@ -89,6 +91,12 @@ without introducing false history.
 Explicit command options are the right first implementation boundary. Photo
 gallery selection and editor-driven narrative entry can be layered on after
 normal plant-day use proves where interaction is actually valuable.
+
+The first real apply exposed two defects that fixture-only validation had not:
+PyYAML rewrote unrelated source formatting, and the old status remained in
+`tags`. Surgical field replacement now preserves the human-maintained file,
+while status-tag replacement keeps the two representations consistent when a
+status tag already exists.
 
 ## Next Steps
 
