@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "purpose": "public image metadata-sanitization proof of concept",
+  "source": {
+    "path": "working/plants/martha-my-dear/photos/martha-my-dear-2026-08-01.jpg",
+    "sha256_before": "da7fd1a2dc0f93a8a5691f522ac5c6d8ba1d52ae5ba7e3e3ef9a61578dacdc92",
+    "sha256_after": "da7fd1a2dc0f93a8a5691f522ac5c6d8ba1d52ae5ba7e3e3ef9a61578dacdc92",
+    "modified": false,
+    "sensitive_metadata_observed": true,
+    "sensitive_values_recorded": false
+  },
+  "derivative": {
+    "path": "site/public/images/plants/martha-my-dear/proof-of-concept/2026-08-01-sanitized.jpg",
+    "sha256": "94d0bf8bb5cd50d4eed8ce7b2ea4eac52864817cb03c7fe63df7bf2c1dc55dea",
+    "width": 4284,
+    "height": 5712,
+    "format": "JPEG",
+    "referenced_by_site": false
+  },
+  "transformation": {
+    "orientation": "normalized from EXIF before metadata removal",
+    "colorspace": "sRGB",
+    "metadata": "omitted during re-encoding",
+    "jpeg_quality": 88,
+    "optimized": true,
+    "progressive": true
+  },
+  "tool": {
+    "name": "Pillow",
+    "version": "12.2.0"
+  },
+  "verification": {
+    "source_hash_unchanged": true,
+    "exif_tag_count": 0,
+    "exif_bytes": 0,
+    "icc_profile_bytes": 0,
+    "comment_bytes": 0,
+    "gps_ifd_present": false,
+    "forbidden_private_metadata_hits": []
+  },
+  "scope": "single-image proof of concept; publish workflow integration is intentionally out of scope"
+}
