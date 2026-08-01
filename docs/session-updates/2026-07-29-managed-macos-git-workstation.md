@@ -3,7 +3,7 @@ title: "Managed macOS Git Workstation"
 description: "Added platform-aware Mac workstation inventory to the managed Git workflow."
 date: 2026-07-29
 status: complete
-reviewed: false
+reviewed: true
 session: managed-macos-git-workstation
 tags:
   - Abbey Root
