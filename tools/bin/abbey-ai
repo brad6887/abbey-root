@@ -806,6 +806,7 @@ for heading, field in list_sections:
                 if (
                     field in {
                         "backlog_parents_closed",
+                        "blocking_items",
                         "completion_checkboxes",
                     }
                     and isinstance(item, str)

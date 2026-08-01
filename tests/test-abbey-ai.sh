@@ -292,6 +292,80 @@ assert_contains \
   "$output" \
   "fully closes existing backlog checkboxes"
 
+assert_contains \
+  "--help discovers blocker decision metadata" \
+  "$output" \
+  "blocker"
+
+assert_contains \
+  "--help describes blocker dependency boundary" \
+  "$output" \
+  "not independently actionable because prerequisite work remains unfinished"
+
+blocker_prompt="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/blocker/prompt.md"
+)"
+
+assert_contains \
+  "blocker prompt requires an exact pending primary item" \
+  "$blocker_prompt" \
+  'Name one exact pending checkbox as `primary_backlog_item`.'
+
+assert_contains \
+  "blocker prompt requires prerequisite checkboxes" \
+  "$blocker_prompt" \
+  "must be completed before the"
+
+assert_contains \
+  "blocker prompt recognizes regression-before-capability failures" \
+  "$blocker_prompt" \
+  "Regression coverage for a capability that planning still records as"
+
+assert_contains \
+  "blocker prompt rejects adjacency-only inference" \
+  "$blocker_prompt" \
+  "Do not infer a dependency solely because checkboxes are near each other."
+
+assert_contains \
+  "blocker prompt requires repository review for uncertain implementation" \
+  "$blocker_prompt" \
+  "repository review needed to confirm it"
+
+blocker_schema="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/blocker/schema.json"
+)"
+
+assert_contains \
+  "blocker schema requires a primary backlog item" \
+  "$blocker_schema" \
+  '"primary_backlog_item"'
+
+assert_contains \
+  "blocker schema requires at least one blocking item" \
+  "$blocker_schema" \
+  '"minItems": 1'
+
+blocker_checkbox_pattern_count="$(
+  grep -Fc '"pattern": "^- \\[ \\] .+$"' \
+    "$ABBEY_ROOT/config/ai/decisions/blocker/schema.json"
+)"
+
+if [[ "$blocker_checkbox_pattern_count" -eq 2 ]]; then
+  pass "blocker schema enforces pending checkbox syntax"
+else
+  fail "blocker schema enforces pending checkbox syntax"
+fi
+
+assert_contains \
+  "blocker schema caps implementation confidence" \
+  "$blocker_schema" \
+  '"maximum": 0.25'
+
+assert_contains \
+  "blocker schema rejects extra output fields" \
+  "$blocker_schema" \
+  '"additionalProperties": false'
+
 easy_win_prompt="$(
   cat "$ABBEY_ROOT/config/ai/decisions/easy-win/prompt.md"
 )"
@@ -495,6 +569,11 @@ assert_contains \
   "shared report preserves checkbox formatting" \
   "$(cat "$ABBEY_AI")" \
   'and item.startswith("- [")'
+
+assert_contains \
+  "shared report preserves blocker checkbox formatting" \
+  "$(cat "$ABBEY_AI")" \
+  '"blocking_items",'
 
 assert_contains \
   "shared report presents unknown implementation approach" \
