@@ -1,5 +1,6 @@
 ---
 title: Fact-Lock Review Init CLI
+description: "Added creation of blank, hash-bound fact-lock review manifests without inferring human decisions."
 date: 2026-07-24
 session: fact-lock-review-init-cli
 status: complete

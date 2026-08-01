@@ -2,8 +2,17 @@
 artifact_id: SESSION-2026-07-22-ABBEY-RESEARCH-STATUS-DESIGN
 artifact_type: session-update
 title: Abbey Research Status Design
+description: "Designed a deterministic, read-only Abbey workflow for reporting formal research artifact relationships and chain status."
 version: 1
 status: draft
+date: 2026-07-22
+reviewed: true
+session: abbey-research-status-design
+tags:
+  - abbey-root
+  - research
+  - cli
+  - architecture
 
 created:
   date: 2026-07-22

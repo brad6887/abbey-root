@@ -1,5 +1,6 @@
 ---
 title: Fact-Locked Voice Application CLI
+description: "Built and smoke-tested the first public Abbey command for applying VOICE-MODEL-001 within the validated Facebook fact-lock scope."
 date: 2026-07-24
 session: fact-locked-voice-application-cli
 status: complete

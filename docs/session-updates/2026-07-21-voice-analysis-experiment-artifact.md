@@ -2,8 +2,17 @@
 artifact_id: SESSION-2026-07-21-VOICE-ANALYSIS-EXPERIMENT-ARTIFACT
 artifact_type: session-update
 title: Voice Analysis Experiment Artifact
+description: "Promoted Experiment 001 from an informal research directory into the formal Voice Analysis artifact model."
 version: 1
 status: draft
+date: 2026-07-21
+reviewed: true
+session: voice-analysis-experiment-artifact
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - experiment
 
 created:
   date: 2026-07-21

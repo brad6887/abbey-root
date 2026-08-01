@@ -2,9 +2,17 @@
 artifact_id: SESSION-2026-07-23-DEADPAN-PREVALENCE-VALIDATION
 artifact_type: session-update
 title: Deadpan Prevalence Validation
+description: "Validated the prevalence claim for deadpan delivery using a representative reviewed sample and explicit statistical thresholds."
 version: 1
 status: completed
 reviewed: true
+date: 2026-07-23
+session: deadpan-prevalence-validation
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - validation
 
 created:
   date: 2026-07-23

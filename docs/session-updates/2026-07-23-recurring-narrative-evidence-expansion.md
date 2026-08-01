@@ -2,9 +2,17 @@
 artifact_id: SESSION-2026-07-23-RECURRING-NARRATIVE-EVIDENCE-EXPANSION
 artifact_type: session-update
 title: Recurring Narrative Evidence Expansion
+description: "Expanded recurring-narrative evidence across the corpus using relationships between posts as the evidence unit."
 version: 1
 status: completed
 reviewed: true
+date: 2026-07-23
+session: recurring-narrative-evidence-expansion
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - evidence
 
 created:
   date: 2026-07-23

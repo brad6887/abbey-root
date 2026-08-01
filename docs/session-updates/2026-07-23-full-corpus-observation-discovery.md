@@ -1,5 +1,6 @@
 ---
 title: Full-Corpus Observation Discovery
+description: "Built and ran an open-ended workflow for discovering new observations across the complete eligible Facebook corpus."
 date: 2026-07-23
 session: full-corpus-observation-discovery
 status: complete

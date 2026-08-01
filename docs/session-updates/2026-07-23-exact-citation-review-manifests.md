@@ -2,9 +2,17 @@
 artifact_id: SESSION-2026-07-23-EXACT-CITATION-REVIEW-MANIFESTS
 artifact_type: session-update
 title: Exact Citation Validation and Review Manifests
+description: "Added deterministic exact-citation validation and machine-readable human-review manifests for Voice Analysis evidence."
 version: 1
 status: completed
 reviewed: true
+date: 2026-07-23
+session: exact-citation-review-manifests
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - deterministic-validation
 
 created:
   date: 2026-07-23

@@ -2,8 +2,17 @@
 artifact_id: SESSION-2026-07-20-voice-analysis-artifact-workflow-validation
 artifact_type: session-update
 title: Validate Voice Analysis Artifact Workflow
+description: "Validated the complete Voice Analysis artifact lifecycle by converting an existing experiment into traceable research artifacts."
 version: 1
 status: draft
+date: 2026-07-20
+reviewed: true
+session: voice-analysis-artifact-workflow-validation
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - validation
 
 created:
   date: 2026-07-20

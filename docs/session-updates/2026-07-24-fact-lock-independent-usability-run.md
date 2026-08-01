@@ -1,5 +1,6 @@
 ---
 title: Fact-Lock Independent Usability Run
+description: "Exercised and refined the public fact-lock proposal and review workflow on an independent four-scenario writing suite."
 date: 2026-07-24
 session: fact-lock-independent-usability-run
 status: complete

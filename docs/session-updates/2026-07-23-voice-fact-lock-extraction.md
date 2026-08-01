@@ -1,5 +1,6 @@
 ---
 title: Voice Fact-Lock Extraction
+description: "Built and validated the upstream process for converting writing requests into reviewed fact locks before Voice Model generation."
 date: 2026-07-23
 session: voice-fact-lock-extraction
 status: complete

@@ -2,9 +2,17 @@
 artifact_id: SESSION-2026-07-23-CONCISE-EXPRESSION-EVIDENCE-EXPANSION
 artifact_type: session-update
 title: Concise Expression Evidence Expansion
+description: "Expanded concise-expression evidence across the voice-eligible corpus and revised the canonical evidence and validation artifacts."
 version: 1
 status: completed
 reviewed: true
+date: 2026-07-23
+session: concise-expression-evidence-expansion
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - evidence
 
 created:
   date: 2026-07-23

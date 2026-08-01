@@ -2,9 +2,17 @@
 artifact_id: SESSION-2026-07-23-MOBILE-UPLOAD-LOCATION-METADATA-FILTER
 artifact_type: session-update
 title: Mobile Upload Location Metadata Filter
+description: "Closed a corpus eligibility gap by deterministically excluding Mobile Uploads location metadata while preserving authored text."
 version: 1
 status: completed
 reviewed: true
+date: 2026-07-23
+session: mobile-upload-location-metadata-filter
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - corpus
 
 created:
   date: 2026-07-23

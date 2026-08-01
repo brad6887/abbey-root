@@ -1,5 +1,6 @@
 ---
 title: Bounded Facebook Voice Model
+description: "Synthesized four validated research chains into a bounded Facebook Voice Model and evaluated its fact-preserving application."
 date: 2026-07-23
 session: bounded-facebook-voice-model
 status: complete

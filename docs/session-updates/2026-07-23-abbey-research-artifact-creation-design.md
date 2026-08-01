@@ -2,9 +2,17 @@
 artifact_id: SESSION-2026-07-23-ABBEY-RESEARCH-ARTIFACT-CREATION-DESIGN
 artifact_type: session-update
 title: Abbey Research Artifact Creation Design
+description: "Designed a controlled candidate-to-canonical process for creating formal research artifacts without manual legacy migration."
 version: 1
 status: completed
 reviewed: true
+date: 2026-07-23
+session: abbey-research-artifact-creation-design
+tags:
+  - abbey-root
+  - research
+  - architecture
+  - artifact-workflow
 
 created:
   date: 2026-07-23

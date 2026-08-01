@@ -1,5 +1,6 @@
 ---
 title: Quoted Language Evidence
+description: "Completed human review of quote-bearing candidates and created canonical evidence for quoted language as stance marking."
 date: 2026-07-23
 session: quoted-language-evidence
 status: complete

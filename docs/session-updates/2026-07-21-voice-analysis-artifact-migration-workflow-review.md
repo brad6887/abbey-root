@@ -2,8 +2,17 @@
 artifact_id: SESSION-2026-07-21-VOICE-ANALYSIS-ARTIFACT-MIGRATION-WORKFLOW-REVIEW
 artifact_type: session-update
 title: Voice Analysis Artifact Migration Workflow Review
+description: "Reviewed the repeatability of the Voice Analysis artifact migration workflow after three formal research conversions."
 version: 1
 status: draft
+date: 2026-07-21
+reviewed: true
+session: voice-analysis-artifact-migration-workflow-review
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - workflow-review
 
 created:
   date: 2026-07-21

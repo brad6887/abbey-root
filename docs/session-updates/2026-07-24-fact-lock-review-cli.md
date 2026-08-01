@@ -1,5 +1,6 @@
 ---
 title: Fact-Lock Review CLI
+description: "Added a human-readable CLI review summary for validated fact-lock proposals without automating approval."
 date: 2026-07-24
 session: fact-lock-review-cli
 status: complete

@@ -4,6 +4,11 @@ description: "Completed repository-wide reconciliation of every Abbey Root histo
 date: 2026-07-20
 status: complete
 reviewed: true
+session: historical-session-reconciliation-completion
+tags:
+  - abbey-session
+  - planning
+  - reconciliation
 ---
 
 # Historical Session Reconciliation Completion

@@ -1,5 +1,6 @@
 ---
 title: Voice Analysis Corpus Foundation
+description: "Established CORPUS-001 as the formal foundation for reproducible Voice Analysis research."
 date: 2026-07-20
 session: voice-analysis-corpus-foundation
 status: complete

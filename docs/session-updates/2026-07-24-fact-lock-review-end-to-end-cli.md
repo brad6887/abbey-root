@@ -1,5 +1,6 @@
 ---
 title: Fact-Lock Review End-to-End CLI
+description: "Completed the public fact-lock review workflow from a filled manifest through validated revision or hash-bound approval."
 date: 2026-07-24
 session: fact-lock-review-end-to-end-cli
 status: complete

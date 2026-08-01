@@ -2,9 +2,17 @@
 artifact_id: SESSION-2026-07-23-VOICE-ELIGIBLE-CORPUS-DEADPAN-PILOT
 artifact_type: session-update
 title: Voice-Eligible Corpus and Deadpan Evidence Expansion
+description: "Established deterministic voice-eligible corpus filtering and expanded human-reviewed deadpan evidence across chronological batches."
 version: 1
 status: completed
 reviewed: true
+date: 2026-07-23
+session: voice-eligible-corpus-deadpan-evidence-expansion
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - corpus
 
 created:
   date: 2026-07-23

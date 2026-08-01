@@ -1,5 +1,6 @@
 ---
 title: Quoted Language Hypothesis
+description: "Converted the quoted-language observation and evidence into a narrow, falsifiable hypothesis with an independent validation design."
 date: 2026-07-23
 session: quoted-language-hypothesis
 status: complete

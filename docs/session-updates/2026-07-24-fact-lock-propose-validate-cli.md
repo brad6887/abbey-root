@@ -1,5 +1,6 @@
 ---
 title: Fact-Lock Propose and Validate CLI
+description: "Exposed the proven fact-lock proposal and deterministic validation workflow through Abbey CLI commands."
 date: 2026-07-24
 session: fact-lock-propose-validate-cli
 status: complete

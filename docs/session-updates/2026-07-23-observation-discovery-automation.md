@@ -1,5 +1,6 @@
 ---
 title: Observation Discovery Automation
+description: "Converted the proven full-corpus discovery process into a repository-owned, resumable Abbey research workflow."
 date: 2026-07-23
 session: observation-discovery-automation
 status: complete

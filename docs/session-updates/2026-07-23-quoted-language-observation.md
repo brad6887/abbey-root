@@ -1,5 +1,6 @@
 ---
 title: Quoted Language Observation
+description: "Reviewed quoted language across the discovery corpus and formalized the warranted observation for further research."
 date: 2026-07-23
 session: quoted-language-observation
 status: complete

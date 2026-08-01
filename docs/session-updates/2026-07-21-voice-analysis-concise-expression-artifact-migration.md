@@ -2,8 +2,17 @@
 artifact_id: SESSION-2026-07-21-VOICE-ANALYSIS-CONCISE-EXPRESSION-ARTIFACT-MIGRATION
 artifact_type: session-update
 title: Voice Analysis Concise Expression Artifact Migration
+description: "Promoted the Experiment 001 concise-writing observation into the formal Voice Analysis artifact lifecycle."
 version: 1
 status: draft
+date: 2026-07-21
+reviewed: true
+session: voice-analysis-concise-expression-artifact-migration
+tags:
+  - abbey-root
+  - research
+  - voice-analysis
+  - artifact-migration
 
 created:
   date: 2026-07-21

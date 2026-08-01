@@ -1,5 +1,6 @@
 ---
 title: Abbey Research Status Implementation
+description: "Implemented deterministic reporting for formal Abbey research artifacts, relationships, and chain completeness."
 date: 2026-07-22
 session: abbey-research-status-implementation
 status: complete

@@ -1,5 +1,6 @@
 ---
 title: Fact-Locked Voice Application
+description: "Built and validated a fact-locked Voice Model application workflow that prevents stylistic transformation from changing supplied facts."
 date: 2026-07-23
 session: fact-locked-voice-application
 status: complete

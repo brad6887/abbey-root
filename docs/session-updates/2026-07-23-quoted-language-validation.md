@@ -1,5 +1,6 @@
 ---
 title: Quoted Language Validation
+description: "Validated the quoted-language hypothesis against an exact holdout excluding canonical evidence and rejected matches."
 date: 2026-07-23
 session: quoted-language-validation
 status: complete
