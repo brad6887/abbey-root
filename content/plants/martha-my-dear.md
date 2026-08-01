@@ -3,12 +3,12 @@ title: Martha My Dear
 description: The story of Martha My Dear, a healthy pink Phalaenopsis rescued from
   a Sam's Club markdown.
 type: orchid
-status: blooming
+status: thriving
 species: Phalaenopsis
 acquired: 2026-07-19
 featured: true
 draft: false
-updatedDate: 2026-07-26
+updatedDate: 2026-08-01
 heroImage: /images/plants/martha-my-dear/hero.jpg
 currentImage: /images/plants/martha-my-dear/current.jpg
 indexImage: /images/plants/martha-my-dear/index.jpg
@@ -16,7 +16,7 @@ tags:
 - orchid
 - orchid-rescue
 - phalaenopsis
-- blooming
+- thriving
 ---
 
 ## Martha My Dear
@@ -130,3 +130,19 @@ look strong.
 With the bark dry and the visible roots mostly silver, Martha received her
 first thorough soak. The plan remains to leave her undisturbed until flowering
 is finished, then repot and check for a hidden nursery plug.
+
+---
+
+## 2026-08-01 — Weekly Update
+
+### Photos
+
+![Martha My Dear — 2026-08-01 — Weekly Update](/images/plants/martha-my-dear/photo-07.jpg)
+
+### Observations
+
+Martha continues to settle in nicely after coming home from Sam's Club. She naturally dropped her oldest bottom leaf this week, but the rest of the plant remains healthy with firm green leaves and several blooms still putting on a good show. The flowers are beginning to wind down, and once the bloom cycle finishes I'll repot her and see if there's a nursery plug hiding in the center. For now, she's been an easy addition to the collection and hasn't needed much beyond normal watering.
+
+### Care
+
+Watered

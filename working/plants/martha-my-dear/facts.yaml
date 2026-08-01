@@ -17,12 +17,12 @@ rescue:
     country: USA
 
 status:
-  current: blooming
+  current: thriving
   current_location:
     city: Fort Worth
     state: Texas
     country: USA
-  updated: 2026-07-26
+  updated: 2026-08-01
 
 care:
   potting_medium: nursery bark
@@ -30,7 +30,7 @@ care:
 
 photos:
   hero: photos/Martha - 1.JPG
-  current: photos/Martha - 5.JPG
+  current: photos/martha-my-dear-2026-08-01.jpg
   index: "photos/Martha - 5.JPG"
   metadata: photo-metadata.md
 
@@ -42,4 +42,4 @@ tags:
   - orchid
   - orchid-rescue
   - phalaenopsis
-  - blooming
+  - thriving
