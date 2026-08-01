@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 148 complete · 249 pending · 397 total
+> **Backlog Status:** 148 complete · 260 pending · 408 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -403,7 +403,9 @@ Ongoing practices, design principles, and general areas of improvement belong in
 
 ### Publishing
 
-- [ ] Generate sitemap.
+- [ ] Establish BradCooke.com search-discovery foundations: configure the
+  production site URL, generate a sitemap and robots file, emit canonical URLs,
+  and define indexing behavior for draft and utility pages.
 - [ ] Generate RSS feed.
 - [ ] Add search.
 - [ ] Define `docs/` vs `content/` publishing boundaries.
@@ -420,6 +422,35 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Generate stable public filenames for published plant images.
 - [ ] Use meaningful filenames for published images where practical.
 - [x] Preserve original plant photographs separately from published derivatives.
+
+### Discovery and Quality
+
+The completed
+[`2026-08-01 Orchid Section Search and Navigation Audit`](../session-updates/2026-08-01-orchid-section-search-and-navigation-audit.md)
+is the supporting evidence for the Orchid Rescue items below.
+
+- [ ] Remove GPS and other private location metadata from generated public plant
+  images while preserving canonical originals and documented provenance.
+- [ ] Improve Orchid Rescue index and profile titles and descriptions from
+  canonical plant facts and rescue narratives.
+- [ ] Generate unique photograph-specific alt text and semantic captions from
+  canonical plant history without breaking stable public image URLs.
+- [ ] Improve Orchid Rescue index-card context and add derived cross-profile
+  navigation.
+- [ ] Perform a site-wide technical SEO audit after the search-discovery
+  foundation is implemented.
+- [ ] Audit structured data and social-sharing metadata across representative
+  BradCooke.com page types.
+- [ ] Audit accessibility across shared templates and representative content
+  pages.
+- [ ] Audit image delivery, page performance, and Core Web Vitals.
+- [ ] Configure and verify Google Search Console ownership, sitemap submission,
+  and indexing after the discovery foundation is published.
+- [ ] Review analytics filtering and measurement practices so owner update checks
+  do not dominate traffic analysis.
+- [ ] Audit content structure and internal linking across projects, journal
+  entries, museum exhibits, Orchid Rescue profiles, and future practical
+  articles.
 
 ---
 
@@ -478,8 +509,10 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Select staged GitHub-hosted Actions over self-hosted automation for
   BradCooke.com builds and deployment.
 - [x] Automate plant workspace validation before publishing.
-- [ ] Automate plant image metadata checks.
-- [ ] Automate creation of optimized published image copies.
+- [ ] Automate plant image metadata checks, including rejection of GPS and other
+  private location metadata in public outputs.
+- [ ] Automate creation of optimized, privacy-safe published image copies while
+  preserving canonical originals.
 - [x] Automate generation of plant profile pages from canonical source material.
 
 ---
