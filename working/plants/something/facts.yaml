@@ -1,0 +1,46 @@
+name: Something
+slug: something
+description: The twice-dehydrated rescue story of Something, a clearance Phalaenopsis from Publix in Naples.
+
+plant:
+  type: orchid
+  genus: Phalaenopsis
+  species: null
+  hybrid: true
+
+rescue:
+  date: 2026-01-05
+  source: Publix clearance section
+  location:
+    city: Naples
+    state: Florida
+    country: USA
+
+status:
+  current: recovering
+  current_location:
+    city: Fort Worth
+    state: Texas
+    country: USA
+  updated: 2026-07-26
+
+care:
+  potting_medium: orchid bark
+  container: ventilated orchid pot inside a decorative container
+
+photos:
+  hero: photos/Something - 1.jpeg
+  current: photos/Something - 21.JPG
+  index: photos/Something - 21.JPG
+  metadata: photo-metadata.md
+
+documents:
+  story: story.md
+  history: history.md
+
+tags:
+  - orchid
+  - orchid-rescue
+  - phalaenopsis
+  - rescue-plant
+  - recovering
