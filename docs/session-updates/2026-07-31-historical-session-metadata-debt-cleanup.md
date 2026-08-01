@@ -3,7 +3,7 @@ title: "Historical Session Metadata Debt Cleanup"
 description: "Normalized required frontmatter across all 30 historically invalid Abbey Root session updates and restored a clean full metadata audit."
 date: 2026-07-31
 status: complete
-reviewed: false
+reviewed: true
 session: historical-session-metadata-debt-cleanup
 tags:
   - abbey-root

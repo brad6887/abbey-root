@@ -3,7 +3,7 @@ title: "Interactive Image Role Selection Fix"
 description: "Validated portable image-role selection through a real plant publish and fixed interactive selection cancelling immediately."
 date: 2026-07-31
 status: complete
-reviewed: false
+reviewed: true
 session: interactive-image-role-selection-fix
 tags:
   - Abbey Root
