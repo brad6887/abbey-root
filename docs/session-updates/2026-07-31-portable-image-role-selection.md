@@ -3,7 +3,7 @@ title: "Portable Image Role Selection"
 description: "Added portable, project-configured image-role selection with the plant hero workflow as its first adopter."
 date: 2026-07-31
 status: complete
-reviewed: false
+reviewed: true
 session: portable-image-role-selection
 tags:
   - Abbey Root

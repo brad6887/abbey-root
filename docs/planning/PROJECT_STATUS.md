@@ -173,7 +173,8 @@ Completed
 - `abbey session`
 - `abbey end` follows the active project's required, event-driven, or optional
   journal policy and recognizes completed, reviewed reconciliation-only commits
-  without requiring a new journal entry
+  without requiring a new journal entry; branches without a configured upstream
+  reach normal completion checks without crashing
 - `abbey review` as a deterministic, read-only pre-commit reviewer that summarizes current-session work and recommends the next workflow step
 - `abbey version`
 - `abbey init PATH` creates a minimal independent Abbey project while keeping
