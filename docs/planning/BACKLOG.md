@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 147 complete · 250 pending · 397 total
+> **Backlog Status:** 148 complete · 249 pending · 397 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -505,7 +505,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
   control host against every managed server.
 - [x] Add the Mac as a separately inventoried managed workstation and validate
   the Git workflow without exposing it to Linux-only playbooks.
-- [ ] Confirm or create a DHCP reservation for the Mac at `192.168.1.70`.
+- [x] Confirm or create a DHCP reservation for the Mac at `192.168.1.70`.
 - [ ] Validate the unchanged Abbey Doctor path on a managed Linux host.
 - [ ] Add verbose mode.
 - [ ] Add quiet mode.

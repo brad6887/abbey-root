@@ -3,7 +3,7 @@ title: "Project-Aware External Session Certification"
 description: "Made final Abbey certification honor external project policy and capabilities."
 date: 2026-07-29
 status: complete
-reviewed: false
+reviewed: true
 session: project-aware-external-session-certification
 tags:
   - Abbey Root

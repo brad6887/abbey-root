@@ -158,8 +158,9 @@ Completed
 - `abbey doctor` uses centralized, platform-aware checks supporting macOS and
   Linux, validates effective Git author name and email, reports their
   configuration sources, and runs infrastructure-specific storage, host,
-  backup, remote-access, and DNS checks only when the active project declares
-  the infrastructure capability
+  backup, and remote-access checks only when the active project declares the
+  infrastructure capability, while internal-DNS checks independently require
+  the internal-DNS capability
 - `abbey status` reports deterministic local counts for toolkit commands,
   website pages, journal entries, and documentation files; an absent open task
   in `NEXT.md` is informational and does not prevent later checks from running
