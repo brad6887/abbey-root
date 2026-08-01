@@ -219,6 +219,9 @@ Completed
   project-configured image-role selection with safe cancellation, atomic
   metadata updates, and external-project support; `abbey plant hero <slug>` is
   the first domain-specific adopter
+- `abbey plant index <slug>` selects a dedicated plant index image, records it
+  as canonical `photos.index` metadata, publishes it at a stable path, and
+  preserves current-image then hero-image fallback when no index image is set
 - Structured content workspace validation and publishing
 - Canonical plant source-to-publication workflow
 - `abbey session review` validated across varied historical sessions as a read-only, evidence-based reconciliation assistant; historical session reconciliation is complete and refinement remains usage-driven

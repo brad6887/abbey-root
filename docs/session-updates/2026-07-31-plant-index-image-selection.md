@@ -3,7 +3,7 @@ title: "Plant Index Image Selection"
 description: "Added independently selectable plant index photographs using the portable image-role framework."
 date: 2026-07-31
 status: complete
-reviewed: false
+reviewed: true
 session: plant-index-image-selection
 tags:
   - Abbey Root
