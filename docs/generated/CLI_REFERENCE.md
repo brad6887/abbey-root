@@ -486,6 +486,8 @@ abbey plant <command>
   - `abbey plant index <slug>`
 - `publish` - Generate Astro content and copy selected public images.
   - `abbey plant publish <slug>`
+- `update` - Add a dated observation and select its current photograph.
+  - `abbey plant update <slug> --photo FILE --narrative TEXT [--care TEXT] [--status STATUS] [--date YYYY-MM-DD] [--dry-run]`
 - `validate` - Validate a plant workspace against the Plant Model.
   - `abbey plant validate <slug>`
 
@@ -496,5 +498,6 @@ abbey plant validate doctor-robert
 abbey plant publish doctor-robert
 abbey plant hero doctor-robert
 abbey plant index doctor-robert
+abbey plant update doctor-robert --photo incoming.jpg --narrative "Firm leaves and active roots." --care "Watered."
 ```
 

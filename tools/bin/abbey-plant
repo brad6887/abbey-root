@@ -10,6 +10,7 @@
 #   abbey plant publish <slug>
 #   abbey plant hero <slug>
 #   abbey plant index <slug>
+#   abbey plant update <slug>
 #
 
 set -euo pipefail
@@ -48,13 +49,205 @@ Usage:
   abbey plant publish <slug>
   abbey plant hero <slug> [--select NUMBER] [--yes]
   abbey plant index <slug> [--select NUMBER] [--yes]
+  abbey plant update <slug> --photo FILE --narrative TEXT [options]
 
 Commands:
   validate    Validate a plant workspace against the Plant Model
   publish     Generate Astro content and copy selected public images
   hero        Select the plant photograph assigned to the hero role
   index       Select the photograph used on plant index pages
+  update      Add a dated observation and select its current photograph
+
+Update options:
+  --photo FILE       Photograph to copy into the plant workspace
+  --narrative TEXT   Short condition narrative
+  --care TEXT        Optional care note
+  --status STATUS    Optional new status
+  --date YYYY-MM-DD  Observation date (default: today)
+  --dry-run          Validate and show the proposed update without writing
 USAGE
+}
+
+update_plant() {
+    local slug="${1:-}"
+
+    if [[ -z "$slug" ]]; then
+        echo "ERROR: Plant slug is required."
+        echo
+        usage
+        return 2
+    fi
+
+    shift
+
+    local photo=""
+    local narrative=""
+    local care=""
+    local status=""
+    local update_date="$(date +%F)"
+    local dry_run=false
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --photo|--narrative|--care|--status|--date)
+                if [[ $# -lt 2 ]]; then
+                    echo "ERROR: $1 requires a value."
+                    return 2
+                fi
+                case "$1" in
+                    --photo) photo="$2" ;;
+                    --narrative) narrative="$2" ;;
+                    --care) care="$2" ;;
+                    --status) status="$2" ;;
+                    --date) update_date="$2" ;;
+                esac
+                shift 2
+                ;;
+            --dry-run)
+                dry_run=true
+                shift
+                ;;
+            *)
+                echo "ERROR: Unknown plant update option: $1"
+                return 2
+                ;;
+        esac
+    done
+
+    if [[ -z "$photo" || -z "$narrative" ]]; then
+        echo "ERROR: --photo and --narrative are required."
+        return 2
+    fi
+
+    python3 - \
+        "$REPO_DIR" "$slug" "$photo" "$narrative" "$care" \
+        "$status" "$update_date" "$dry_run" <<'PY'
+import datetime
+import os
+import re
+import shutil
+import sys
+import tempfile
+from pathlib import Path
+
+import yaml
+
+root = Path(sys.argv[1]).resolve()
+slug = sys.argv[2]
+photo = Path(sys.argv[3]).expanduser().resolve()
+narrative = sys.argv[4].strip()
+care = sys.argv[5].strip()
+requested_status = sys.argv[6].strip().lower()
+date_text = sys.argv[7]
+dry_run = sys.argv[8] == "true"
+plant_dir = root / "working" / "plants" / slug
+facts_path = plant_dir / "facts.yaml"
+history_path = plant_dir / "history.md"
+photos_dir = plant_dir / "photos"
+
+
+def error(message, status=1):
+    print(f"ERROR: {message}")
+    raise SystemExit(status)
+
+
+if not plant_dir.is_dir() or not facts_path.is_file() or not history_path.is_file():
+    error(f"Plant workspace is incomplete: {plant_dir}")
+
+if not photo.is_file():
+    error(f"Photo does not exist: {photo}")
+
+if photo.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
+    error("Photo must be a JPG, PNG, or WebP image")
+
+try:
+    update_date = datetime.date.fromisoformat(date_text)
+except ValueError:
+    error(f"Date must use YYYY-MM-DD: {date_text}", 2)
+
+facts = yaml.safe_load(facts_path.read_text(encoding="utf-8"))
+if not isinstance(facts, dict):
+    error("facts.yaml must contain a YAML mapping")
+
+current_status = str(facts.get("status", {}).get("current", "")).lower()
+valid_statuses = {"recovering", "thriving", "blooming", "dormant", "deceased"}
+new_status = requested_status or current_status
+if new_status not in valid_statuses:
+    error(
+        "Status must be one of: " + ", ".join(sorted(valid_statuses)),
+        2,
+    )
+
+history = history_path.read_text(encoding="utf-8")
+heading = f"## {update_date.isoformat()} — Weekly Update"
+if re.search(rf"^{re.escape(heading)}$", history, re.MULTILINE):
+    error(f"A weekly update already exists for {update_date.isoformat()}")
+
+safe_stem = re.sub(r"[^a-z0-9]+", "-", slug.lower()).strip("-")
+destination_name = f"{safe_stem}-{update_date.isoformat()}{photo.suffix.lower()}"
+destination = photos_dir / destination_name
+if destination.exists() and photo != destination:
+    error(f"Destination photo already exists: {destination}")
+
+relative_photo = f"photos/{destination_name}"
+entry = [
+    heading,
+    "",
+    "### Photos",
+    "",
+    f"- {destination_name}",
+    "",
+    "### Observations",
+    "",
+    narrative,
+]
+if care:
+    entry.extend(["", "### Care", "", care])
+entry_text = "\n".join(entry) + "\n"
+
+print("Plant Weekly Update")
+print("===================")
+print(f"Plant: {facts.get('name', slug)} ({slug})")
+print(f"Date: {update_date.isoformat()}")
+print(f"Photo: {photo}")
+print(f"Current photo: {facts.get('photos', {}).get('current')} -> {relative_photo}")
+print(f"Hero photo: {facts.get('photos', {}).get('hero')} (preserved)")
+print(f"Status: {current_status} -> {new_status}")
+print(f"Care note: {care or '(none)'}")
+
+if dry_run:
+    print("Result: DRY RUN; no files changed")
+    print()
+    print("History entry")
+    print("-------------")
+    print(entry_text.rstrip())
+    raise SystemExit(0)
+
+photos_dir.mkdir(parents=True, exist_ok=True)
+if photo != destination:
+    shutil.copy2(photo, destination)
+
+facts["photos"]["current"] = relative_photo
+facts["status"]["current"] = new_status
+facts["status"]["updated"] = update_date
+
+with tempfile.NamedTemporaryFile(
+    "w", encoding="utf-8", dir=facts_path.parent, delete=False
+) as handle:
+    yaml.safe_dump(facts, handle, sort_keys=False, allow_unicode=True)
+    facts_temp = Path(handle.name)
+os.replace(facts_temp, facts_path)
+
+separator = "" if history.endswith("\n\n") else "\n"
+with history_path.open("a", encoding="utf-8") as handle:
+    handle.write(separator + "---\n\n" + entry_text)
+
+print("Result: update applied")
+PY
+
+    if [[ "$dry_run" == false ]]; then
+        validate_plant "$slug"
+    fi
 }
 
 select_image_role() {
@@ -556,6 +749,10 @@ case "$command" in
     index)
         shift
         select_index "$@"
+        ;;
+    update)
+        shift
+        update_plant "$@"
         ;;
     help|-h|--help)
         usage
