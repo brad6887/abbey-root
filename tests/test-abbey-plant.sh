@@ -306,6 +306,29 @@ awk '
 ' "$plant_dir/facts.yaml" > "$plant_dir/facts.yaml.tmp"
 mv "$plant_dir/facts.yaml.tmp" "$plant_dir/facts.yaml"
 
+if command -v magick >/dev/null 2>&1; then
+  image_command="magick"
+elif command -v convert >/dev/null 2>&1; then
+  image_command="convert"
+else
+  echo "ERROR ImageMagick is required for plant publishing tests."
+  exit 1
+fi
+
+"$image_command"   -size 80x40   xc:white   "$plant_dir/photos/hero.jpg"
+
+cp   "$plant_dir/photos/hero.jpg"   "$plant_dir/photos/current.jpg"
+
+cp   "$plant_dir/photos/hero.jpg"   "$plant_dir/photos/index.jpg"
+
+exiftool   -overwrite_original   -Orientation#=6   -Make="Apple"   -Model="iPhone Test"   -GPSLatitude="32.9"   -GPSLatitudeRef="N"   -GPSLongitude="97.3"   -GPSLongitudeRef="W"   "$plant_dir/photos/index.jpg" >/dev/null
+
+source_index="$plant_dir/photos/index.jpg"
+source_index_hash_before="$(
+  sha256sum "$source_index" |
+    awk '{print $1}'
+)"
+
 run_publish "$test_root/publish-index-photo" test-plant
 assert_status "plant publishing with index photo succeeds" 0
 assert_contains   "plant publishing reports the public index image"   "Published index image: /images/plants/test-plant/index.jpg"
@@ -319,10 +342,109 @@ else
   fail "plant publishing creates the stable public index image"
 fi
 
-if cmp -s "$plant_dir/photos/index.jpg" "$published_index"; then
-  pass "published index image matches its configured source"
+source_index_hash_after="$(
+  sha256sum "$source_index" |
+    awk '{print $1}'
+)"
+
+if [[ "$source_index_hash_before" == "$source_index_hash_after" ]]; then
+  pass "plant publishing preserves the canonical index image"
 else
-  fail "published index image matches its configured source"
+  fail "plant publishing preserves the canonical index image"
+fi
+
+if cmp -s "$source_index" "$published_index"; then
+  fail "published index image is a generated derivative"
+else
+  pass "published index image is a generated derivative"
+fi
+
+published_metadata="$(
+  exiftool     -a     -G1     -s     "$published_index"
+)"
+
+if grep -Eqi   'GPS|Latitude|Longitude|Make|Model|Orientation|Apple|PhotoIdentifier'   <<<"$published_metadata"
+then
+  fail "published index image removes private metadata"
+  printf '%s\n' "$published_metadata"
+else
+  pass "published index image removes private metadata"
+fi
+
+published_dimensions="$(
+  identify     -format '%wx%h'     "$published_index"
+)"
+
+if [[ "$published_dimensions" == "40x80" ]]; then
+  pass "published index image applies EXIF orientation"
+else
+  fail "published index image applies EXIF orientation"
+  printf '     Expected: 40x80\n'
+  printf '     Actual:   %s\n' "$published_dimensions"
+fi
+
+publication_manifest="$test_root/publish-index-photo/generated/plant-publication/test-plant.json"
+
+if [[ -f "$publication_manifest" ]]; then
+  pass "plant publishing creates a non-public publication manifest"
+else
+  fail "plant publishing creates a non-public publication manifest"
+fi
+
+if python3 -   "$publication_manifest"   "$source_index_hash_before"   "$published_index" <<'PY_MANIFEST'
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+manifest_path = Path(sys.argv[1])
+expected_source_hash = sys.argv[2]
+published_path = Path(sys.argv[3])
+
+data = json.loads(
+    manifest_path.read_text(encoding="utf-8")
+)
+
+published_hash = hashlib.sha256(
+    published_path.read_bytes()
+).hexdigest()
+
+index_records = [
+    record
+    for record in data["images"]
+    if record["publication"].get("name") == "index"
+]
+
+assert data["schema_version"] == 1
+assert data["plant"]["slug"] == "test-plant"
+assert data["profile"]["maximum_edge"] == 2400
+assert data["profile"]["colorspace"] == "sRGB"
+assert data["profile"]["metadata_removed"] is True
+assert data["profile"]["jpeg_quality"] == 85
+assert len(index_records) == 1
+
+record = index_records[0]
+
+assert record["source"]["path"] == (
+    "working/plants/test-plant/photos/index.jpg"
+)
+assert record["source"]["sha256"] == expected_source_hash
+assert record["source"]["canonical_original_preserved"] is True
+
+assert record["derivative"]["path"] == (
+    "site/public/images/plants/test-plant/index.jpg"
+)
+assert record["derivative"]["sha256"] == published_hash
+assert record["derivative"]["width"] == 40
+assert record["derivative"]["height"] == 80
+
+assert record["validation"]["private_metadata_detected"] is False
+assert record["validation"]["source_hash_unchanged"] is True
+PY_MANIFEST
+then
+  pass "publication manifest records the index transformation"
+else
+  fail "publication manifest records the index transformation"
 fi
 
 if grep -Fq   "indexImage: /images/plants/test-plant/index.jpg"   "$generated_content"

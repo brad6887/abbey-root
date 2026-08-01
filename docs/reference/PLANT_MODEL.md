@@ -405,6 +405,18 @@ Validation confirms that the canonical workspace satisfies the Plant Model befor
 
 Files under `content/plants/` and `site/public/images/plants/` are generated outputs for migrated plant profiles. Correct canonical source material or the publishing workflow rather than editing generated output directly.
 
+Public plant images are generated derivatives rather than direct copies. Publishing:
+
+- applies the embedded orientation before metadata removal
+- converts images to sRGB
+- limits the longest edge to 2400 pixels
+- removes embedded camera, location, thumbnail, and other metadata
+- verifies the canonical source hash remains unchanged
+- rejects a derivative if potentially private metadata remains
+- records source and derivative hashes in `generated/plant-publication/<slug>.json`
+
+The publication manifest is a machine-generated validation record. It supplements rather than replaces the human-maintained provenance in `photo-metadata.md`.
+
 Working notes, source documents, metadata records, original photographs, and other workspace material remain canonical source material and are not automatically public.
 
 Existing lightweight public profiles may remain under `content/plants/` until a canonical workspace is created and the profile is migrated through this workflow.

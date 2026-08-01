@@ -1,0 +1,354 @@
+{
+  "images": [
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/hero.jpg",
+        "sha256": "1ab4c1e261cae75ffe3ecd8312c12d534cc3594d24244e0cfe8b8c15cd310ea5",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.hero",
+        "name": "hero",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/Martha - 1.JPG",
+        "sha256": "b3666153e4be3bc84e4beefb6ab48642172efd0de286bd0935408be5a92b115c"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/current.jpg",
+        "sha256": "48b436adf95a66d4dd2f9cd8a7347db79c9a54eac611a239e4677f5c6cdd5267",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.current",
+        "name": "current",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/martha-my-dear-2026-08-01.jpg",
+        "sha256": "da7fd1a2dc0f93a8a5691f522ac5c6d8ba1d52ae5ba7e3e3ef9a61578dacdc92"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/index.jpg",
+        "sha256": "14aa75c95d9d4066e68339868f34599c8e5c0e3bf81bf402ccbfd41734f6a602",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.index",
+        "name": "index",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/Martha - 5.JPG",
+        "sha256": "8fe1f86e832ba49d91d7218d8b3773aaba572755a8a91262f195ceb5f5468568"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/photo-01.jpg",
+        "sha256": "1ab4c1e261cae75ffe3ecd8312c12d534cc3594d24244e0cfe8b8c15cd310ea5",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-01",
+        "source_filename": "Martha - 1.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/Martha - 1.JPG",
+        "sha256": "b3666153e4be3bc84e4beefb6ab48642172efd0de286bd0935408be5a92b115c"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/photo-02.jpg",
+        "sha256": "1e12d75941e2b063ae27ef69226534b09586de9499ec77119ce4b003b8ffd5e0",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-02",
+        "source_filename": "Martha - 2.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/Martha - 2.JPG",
+        "sha256": "0c9b3a6027c9f26ab6727378d5b4e6a7a186e3fe1bdb12719ff8cb6f19be534e"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/photo-03.jpg",
+        "sha256": "4fefd5e6e78342802a68fb781482591becf26b57ad98799adc8e08bc4789d805",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-03",
+        "source_filename": "Martha - 3.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/Martha - 3.JPG",
+        "sha256": "b33452ba73c528a66152e837fbb00c16fbc7d4daa1b10642e1f0a48d7c888e0b"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/photo-04.jpg",
+        "sha256": "d44bcb228b04690e8bcd85cbf02446a8ab75f36d05428fa30001c829c4b7a538",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-04",
+        "source_filename": "Martha - 4.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/Martha - 4.JPG",
+        "sha256": "0fd7d3a896c86516f54001f82cec934fb31c10a5201e106e285fc8fda5f8eaaa"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/photo-05.jpg",
+        "sha256": "14aa75c95d9d4066e68339868f34599c8e5c0e3bf81bf402ccbfd41734f6a602",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-05",
+        "source_filename": "Martha - 5.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/Martha - 5.JPG",
+        "sha256": "8fe1f86e832ba49d91d7218d8b3773aaba572755a8a91262f195ceb5f5468568"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/photo-06.jpg",
+        "sha256": "677c989d887260df389a5de39614480ab6e839497a9d908428e1ddefd418027d",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-06",
+        "source_filename": "Martha - 6.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/Martha - 6.JPG",
+        "sha256": "c3aabbc045ca82b757626f58df4bceeaef54166cff027dcb83998822cd497337"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/martha-my-dear/photo-07.jpg",
+        "sha256": "48b436adf95a66d4dd2f9cd8a7347db79c9a54eac611a239e4677f5c6cdd5267",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-07",
+        "source_filename": "martha-my-dear-2026-08-01.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/martha-my-dear/photos/martha-my-dear-2026-08-01.jpg",
+        "sha256": "da7fd1a2dc0f93a8a5691f522ac5c6d8ba1d52ae5ba7e3e3ef9a61578dacdc92"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    }
+  ],
+  "plant": {
+    "slug": "martha-my-dear"
+  },
+  "profile": {
+    "colorspace": "sRGB",
+    "jpeg_quality": 85,
+    "maximum_edge": 2400,
+    "metadata_removed": true
+  },
+  "schema_version": 1
+}

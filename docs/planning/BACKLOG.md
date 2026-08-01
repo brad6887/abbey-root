@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 148 complete · 260 pending · 408 total
+> **Backlog Status:** 149 complete · 259 pending · 408 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -429,7 +429,7 @@ The completed
 [`2026-08-01 Orchid Section Search and Navigation Audit`](../session-updates/2026-08-01-orchid-section-search-and-navigation-audit.md)
 is the supporting evidence for the Orchid Rescue items below.
 
-- [ ] Remove GPS and other private location metadata from generated public plant
+- [x] Remove GPS and other private location metadata from generated public plant
   images while preserving canonical originals and documented provenance.
 - [ ] Improve Orchid Rescue index and profile titles and descriptions from
   canonical plant facts and rescue narratives.

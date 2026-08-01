@@ -1,0 +1,728 @@
+{
+  "images": [
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1572,
+        "path": "site/public/images/plants/bungalow-bill/hero.png",
+        "sha256": "b8b87a88bbc4ae815a926e26fd0d4c9d973af3a71749d4ca6d8de021e5bf6d0d",
+        "width": 1178
+      },
+      "publication": {
+        "field": "photos.hero",
+        "name": "hero",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 19.png",
+        "sha256": "0f2e4461ba3560cdddae4013fe6939a5064da565cda4f8bc8ef78abd43000ac5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1572,
+        "path": "site/public/images/plants/bungalow-bill/current.png",
+        "sha256": "b8b87a88bbc4ae815a926e26fd0d4c9d973af3a71749d4ca6d8de021e5bf6d0d",
+        "width": 1178
+      },
+      "publication": {
+        "field": "photos.current",
+        "name": "current",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 19.png",
+        "sha256": "0f2e4461ba3560cdddae4013fe6939a5064da565cda4f8bc8ef78abd43000ac5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-01.jpeg",
+        "sha256": "a4f9c9f7aa5a98120949b4ee043359cb02add0fec892533f01d49ce4d121191c",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-01",
+        "source_filename": "Bungalow Bill - 1 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 1 of 13.jpeg",
+        "sha256": "2f024080f58c902fdb725225cd2a5a5ad3f69213c57712abf93a9c0f91ad2d6a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-02.jpeg",
+        "sha256": "ba9ef6be2cd939c7ede7b66b5678af74c86f2baa1dba217f883f292b4055f401",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-02",
+        "source_filename": "Bungalow Bill - 2 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 2 of 13.jpeg",
+        "sha256": "1696ee65053fb032d527142200df3b13907cf88b184a50ae698d5bac4eca34e0"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-03.jpeg",
+        "sha256": "115a03ec6f2c467cadab5817a3f9bd41e06912d948176c8296e068125aed6b01",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-03",
+        "source_filename": "Bungalow Bill - 3 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 3 of 13.jpeg",
+        "sha256": "30567e3c944ebda02ac2f238beb5612760d54da63b7361af392d2ed70c75655e"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-04.jpeg",
+        "sha256": "59b213d4522b9f89b8f2d650e56cfaee1f0cfaa4e38178da0b7164ff40f51c12",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-04",
+        "source_filename": "Bungalow Bill - 4 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 4 of 13.jpeg",
+        "sha256": "4b31772b3aa16b457acb468ef7862307109dfec7b9ef931980322d624f2b67de"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-05.jpeg",
+        "sha256": "d823e382cb5b9b455eac05f25853e6ec3e6938ea35c5fee82ec7859e10a7fbd9",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-05",
+        "source_filename": "Bungalow Bill - 5 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 5 of 13.jpeg",
+        "sha256": "1f6a63d6248d5854d212401562de6443c4dfdbc623f03fc278326fc19f6c7afd"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-06.jpeg",
+        "sha256": "9d07a796b23fa375a8d0a95315dc5c6a4f45e10f3b13cc646bc26a86866a12e0",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-06",
+        "source_filename": "Bungalow Bill - 6 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 6 of 13.jpeg",
+        "sha256": "e4f8224713a3ae1002cafad1678825d6c840038f86dc6ff600b19747c3197d5f"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-07.jpeg",
+        "sha256": "af56bd989cde6723edac6f01c65355d6be5c1fe74f031b9bd5a14c13f09071b5",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-07",
+        "source_filename": "Bungalow Bill - 7 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 7 of 13.jpeg",
+        "sha256": "8e0c75aa64ecce21cd8ad35168ebade44b0f3ed99b36e8cbf59565c65a81949a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-08.jpeg",
+        "sha256": "d812158ed7baea40f229b79172d2b71c5e50f0ef0fad2dbf7f8279d2cbf8a0bc",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-08",
+        "source_filename": "Bungalow Bill - 8 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 8 of 13.jpeg",
+        "sha256": "9669db23cf455bdc74b15cc7b5c2fe9faf576022f631e6909c1fae34575d4bd1"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-09.jpeg",
+        "sha256": "77ace85051a0d291553dc99b388a12717b94fb766b68b2ef792cbb62fb28cfb2",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-09",
+        "source_filename": "Bungalow Bill - 9 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 9 of 13.jpeg",
+        "sha256": "180d304c9d76070d53e2b7b335bb61c575fc42a486afb61a97dae10ff4fef728"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-10.jpeg",
+        "sha256": "d824038d0fdc637b3b01fe998f1e8dcd04fa5e42f3f75e98ef79716a1792ce9a",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-10",
+        "source_filename": "Bungalow Bill - 10 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 10 of 13.jpeg",
+        "sha256": "ad9ad8717030b1b6b7db4016b3a53c682583a08437b33f95e52e9146bdd8d7ca"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-11.jpeg",
+        "sha256": "0bfa180b01c3723c4d76ef7256a10dff1c9a00939b2741ed7960bedbe488a472",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-11",
+        "source_filename": "Bungalow Bill - 11 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 11 of 13.jpeg",
+        "sha256": "7311fa05a6f19b515dce622d1c761798ab87cc7ba41ea6b1f95b20636f043d32"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-12.jpeg",
+        "sha256": "dd2102e2e8dd16710d8898f82abe1195d1e215c099346045d1d06b16832cc062",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-12",
+        "source_filename": "Bungalow Bill - 12 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 12 of 13.jpeg",
+        "sha256": "b9f3a3bd9edbcca5af435a087e7b3badcfd73694cdc364933d8db23172e65877"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-13.jpeg",
+        "sha256": "fe31a3229d4b0f07aefedcc3b94b9cd3ed5d9360a6236177b426be8f31e64d33",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-13",
+        "source_filename": "Bungalow Bill - 13 of 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 13 of 13.jpeg",
+        "sha256": "d529aa08cf32ffcbafdacd1f826b96d3c61ce27204a42ac3717a7fd1fba82fe6"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1572,
+        "path": "site/public/images/plants/bungalow-bill/photo-14.png",
+        "sha256": "4175065f6684b359d9c043c32c67518a37b8c72d1eaa7b6e278a2ba7b6d27c48",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-14",
+        "source_filename": "Bungalow Bill - 14.png",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 14.png",
+        "sha256": "a6a1f8ff3a6518ec5af4dc1d52afc3612640973b9890b5de0d9b9a7732979ddf"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1572,
+        "path": "site/public/images/plants/bungalow-bill/photo-15.png",
+        "sha256": "e63bcf3fa0ad2d53c8bfcdb21e7cbd45433c738359a3619e47ea37c88bfa1e15",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-15",
+        "source_filename": "Bungalow Bill - 15.png",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 15.png",
+        "sha256": "3a762a757e6f7244f90d7814940935899da4b60bf71bc7b42d5f8b0fc942bcbf"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1572,
+        "path": "site/public/images/plants/bungalow-bill/photo-16.png",
+        "sha256": "9d132e17fc439261f2935e3da3f058ed270dbcaafedc11da59b93d34ddfb005c",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-16",
+        "source_filename": "Bungalow Bill - 16.png",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 16.png",
+        "sha256": "a4cf3646921e5eb874ab07dd88807a5f21f5fc0ad77745375d8671b6dff93ef2"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1572,
+        "path": "site/public/images/plants/bungalow-bill/photo-17.png",
+        "sha256": "68fa22277dca754c6fa9c020020b04bbd61fb82acdeda1a5d971d1d5e81b720f",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-17",
+        "source_filename": "Bungalow Bill - 17.png",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 17.png",
+        "sha256": "ae3cbf5a8edbe40a911c628711561b6c571a1efc56f6afc0efb39cb92b402fd9"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1572,
+        "path": "site/public/images/plants/bungalow-bill/photo-18.png",
+        "sha256": "fe0cee3156b69e3ec0f0b5b18dc5a84495538e7b0fcd6701c4642bad2dc302d0",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-18",
+        "source_filename": "Bungalow Bill - 18.png",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 18.png",
+        "sha256": "32415257c48cb979b7a2ea70da37397d5df03d50665adc3c8f3eb1e44ccf9200"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1572,
+        "path": "site/public/images/plants/bungalow-bill/photo-19.png",
+        "sha256": "b8b87a88bbc4ae815a926e26fd0d4c9d973af3a71749d4ca6d8de021e5bf6d0d",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-19",
+        "source_filename": "Bungalow Bill - 19.png",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/Bungalow Bill - 19.png",
+        "sha256": "0f2e4461ba3560cdddae4013fe6939a5064da565cda4f8bc8ef78abd43000ac5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    }
+  ],
+  "plant": {
+    "slug": "bungalow-bill"
+  },
+  "profile": {
+    "colorspace": "sRGB",
+    "jpeg_quality": 85,
+    "maximum_edge": 2400,
+    "metadata_removed": true
+  },
+  "schema_version": 1
+}

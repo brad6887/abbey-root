@@ -1,0 +1,898 @@
+{
+  "images": [
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/hero.jpeg",
+        "sha256": "6218e3692367d77c7fd4d061e8259b87289519154f5a852a642e2d7c6eea1065",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.hero",
+        "name": "hero",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 9.jpeg",
+        "sha256": "ddf08182a41cf03623f733144612d98c23552e9761f96fc9c5491d61d04e7890"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/current.jpeg",
+        "sha256": "6218e3692367d77c7fd4d061e8259b87289519154f5a852a642e2d7c6eea1065",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.current",
+        "name": "current",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 9.jpeg",
+        "sha256": "ddf08182a41cf03623f733144612d98c23552e9761f96fc9c5491d61d04e7890"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/index.jpeg",
+        "sha256": "6218e3692367d77c7fd4d061e8259b87289519154f5a852a642e2d7c6eea1065",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.index",
+        "name": "index",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 9.jpeg",
+        "sha256": "ddf08182a41cf03623f733144612d98c23552e9761f96fc9c5491d61d04e7890"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-01.jpeg",
+        "sha256": "64429204026b04b70c41a8e7d58e20780b3b796a063c781db30bd53285bea386",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-01",
+        "source_filename": "Phal_McCartney - 1.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 1.jpeg",
+        "sha256": "a9ac4448dca2d312c912aca51ccac8a50ce65e4acad80c8700a1a267158ef8d0"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-02.jpeg",
+        "sha256": "9975d8da0bd59e2c56e93a3c271921b7b7b9162f6a5fbbdad22275114f3d64e1",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-02",
+        "source_filename": "Phal_McCartney - 2.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 2.jpeg",
+        "sha256": "7b751530349dcbf253795ddfad3f58256b712e1ce8b9bc064edc01856ef8e49e"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-03.jpeg",
+        "sha256": "c42ec59d08b9cb37351ba202ba9699c4841154afe49275b430d5b17e1dfbc5c3",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-03",
+        "source_filename": "Phal_McCartney - 3.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 3.jpeg",
+        "sha256": "255cd2593f2bb159e0369a48d5a9fc39922946f54afe46a8e846a55296910e6a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-04.jpeg",
+        "sha256": "ce7bf02891dde2b78dd2375f328c470aa7bd99c46e9571f8c06816ccd5bb8168",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-04",
+        "source_filename": "Phal_McCartney - 4.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 4.jpeg",
+        "sha256": "44494befbece8512143e3d799ad72b7f5cc1933762481d3293179b48a94f079b"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-05.jpg",
+        "sha256": "cfb207e565bf74ce06a639a097e3d06d9bb9c868cf0b41a8432831c853952a03",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-05",
+        "source_filename": "Phal_McCartney - 5.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 5.jpg",
+        "sha256": "6f6a2ef0f2b1e949301304c029d5e0ed785c44b547a5a8c96db88d47d54a0059"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-06.jpeg",
+        "sha256": "ad57989f06452d1b3a596668e6c8a0ae2fa54141be63b7ab83632f7f65ec3679",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-06",
+        "source_filename": "Phal_McCartney - 6.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 6.jpeg",
+        "sha256": "3d342bfcbb73248c8f6de6c1e11d169eba163ba6b944d5fa4a56b189d2ab5a35"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-07.jpg",
+        "sha256": "7bacc83cd5dac5176bb60d9109dbad1c4b2a21ff9d8b489236c7e36f27f45053",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-07",
+        "source_filename": "Phal_McCartney - 7.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 7.jpg",
+        "sha256": "268a401d9e2f2467b0aa5cf9e314484a00c2f719ecafd699a97117d09f41b08c"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-08.jpeg",
+        "sha256": "e3986e427cc44680101d1db267c51f8b29324e92f0142b3c67ad6b72e3481366",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-08",
+        "source_filename": "Phal_McCartney - 8.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 8.jpeg",
+        "sha256": "7a4080dc31bab06416d02da2d3186ad3239805092a63b8bc53f07039823b6789"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-09.jpeg",
+        "sha256": "6218e3692367d77c7fd4d061e8259b87289519154f5a852a642e2d7c6eea1065",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-09",
+        "source_filename": "Phal_McCartney - 9.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 9.jpeg",
+        "sha256": "ddf08182a41cf03623f733144612d98c23552e9761f96fc9c5491d61d04e7890"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-10.jpeg",
+        "sha256": "b4cedebfbd13467c64de92cce4c641d301fd3b7c8230e44885852cc2576489fe",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-10",
+        "source_filename": "Phal_McCartney - 10.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 10.jpeg",
+        "sha256": "1d7232c64600ee858a8f208129496c8afd647a9eaae5068c4165149829668381"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-11.jpeg",
+        "sha256": "3d4b4dce973e57c3ceeb76b35e1e2db63f4b0b6010a272da2948710f42d79efc",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-11",
+        "source_filename": "Phal_McCartney - 11.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 11.jpeg",
+        "sha256": "6ea5d2051eb65bf01a949738a4ac7c4b2a34920cad14e504f936112db2eb667a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-12.jpeg",
+        "sha256": "239ae8d6595e0c2e78e1b51e76cd5a10e9837e1fec990e3298073b4fc1b96c9b",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-12",
+        "source_filename": "Phal_McCartney - 12.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 12.jpeg",
+        "sha256": "ce2e3db707c7123a1169002663a1ec11992aa47afc9ee3dae376c4d692a6bf5a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-13.jpeg",
+        "sha256": "0b99e8ef6317c1ab83dbfb8e766856fb2bc442dfb6f127aa4182616dc5cb55b6",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-13",
+        "source_filename": "Phal_McCartney - 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 13.jpeg",
+        "sha256": "cf73d6d0f030726533a4db1c28cf836dfe3cdd98078986f1c5d45cc5211a7eed"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/phal-mccartney/photo-14.jpg",
+        "sha256": "43645770795f95636628eea11210e7d37ef117d047461f2c282f609333af1265",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-14",
+        "source_filename": "Phal_McCartney - 14.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 14.jpg",
+        "sha256": "bffc648aef673cfc1ab1a46ccf573bf161647ed9b7fbb7a24cfd8dba966a9d56"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/phal-mccartney/photo-15.jpg",
+        "sha256": "f689e55de38edbdf400657cd9c19a691e9f330b967f666054183592b7de33740",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-15",
+        "source_filename": "Phal_McCartney - 15.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 15.jpg",
+        "sha256": "e1aac81064d0f554255054ebb0558568190894bc33357008439248fd2bc8d737"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/phal-mccartney/photo-16.jpg",
+        "sha256": "89a1b36a6794f74e42a09498e4b67ce7f3ce61d8291013ece643ac3372787bd7",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-16",
+        "source_filename": "Phal_McCartney - 16.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 16.jpg",
+        "sha256": "f0162535b41e66a9b9552df9717974db0f3ed0a458280c76d4a12675ae5c26c0"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/phal-mccartney/photo-17.jpg",
+        "sha256": "8f26ddc8102eb57c2dbcc32ff515d816abfa8ac5160f74ac95cb8532e2b2b2c6",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-17",
+        "source_filename": "Phal_McCartney - 17.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 17.jpg",
+        "sha256": "15a34b1dd43daa444ac1ce298c53338bf933f8cb0f52a2a3b7ad79f2e37dcb79"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/phal-mccartney/photo-18.jpg",
+        "sha256": "763a65323383791faa01edf93c952a4953b089c61f5df05d052d86bd5e557309",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-18",
+        "source_filename": "Phal_McCartney - 18.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 18.jpg",
+        "sha256": "ca74185a57e24f0c4bfd801f11a321991dd53cecd8b51bb6fddc96e0a078e6bc"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/phal-mccartney/photo-19.jpg",
+        "sha256": "acb40346acd9c3db26fcdcff5fb99cc80e2bfc3662907a9faa8efd7e0ce3a1c2",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-19",
+        "source_filename": "Phal_McCartney - 19.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 19.jpg",
+        "sha256": "33eebf19e52253e32cba86c5d3460862b97bd5b524b9b553290757a0fd796d72"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-20.jpg",
+        "sha256": "5de58246aad3be745909c8f369b73d72cabdaa10fdd4703a2c524d44513bb45f",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-20",
+        "source_filename": "Phal_McCartney - 20.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 20.JPG",
+        "sha256": "9851656ba18af5004aadc72bb86f5b9767b15e8af144a3cfc3facd3deea9f42a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-21.jpg",
+        "sha256": "28921e19b4ba449d3ceb61c1f8bf7189e55ef30d180e5695d002f55ceed0bf58",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-21",
+        "source_filename": "Phal_McCartney - 21.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 21.JPG",
+        "sha256": "dbb0766d22c5c6dd2d80c0f6dc1da07bad4fa28fbddb57c3c455f52bfc5a901c"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-22.jpg",
+        "sha256": "ff5e936dad43aa2f972e4d6bd18d4873034e286a8465594d1571b9b7360f2c53",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-22",
+        "source_filename": "Phal_McCartney - 22.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 22.JPG",
+        "sha256": "65efbf6d30d81100690f8d8c2255196d71e6b64622406a0c445108748c930aa6"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-23.jpg",
+        "sha256": "a8f5098b7484cfbd8b3c779db6d3c2641d6442db808dc52893939fb030a62a93",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-23",
+        "source_filename": "Phal_McCartney - 23.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/Phal_McCartney - 23.JPG",
+        "sha256": "639687be2f6e8b161bc77022b1e46600631531d496c6ae8a2420e81e168a4eb9"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    }
+  ],
+  "plant": {
+    "slug": "phal-mccartney"
+  },
+  "profile": {
+    "colorspace": "sRGB",
+    "jpeg_quality": 85,
+    "maximum_edge": 2400,
+    "metadata_removed": true
+  },
+  "schema_version": 1
+}

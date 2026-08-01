@@ -1,0 +1,728 @@
+{
+  "images": [
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/hero.jpeg",
+        "sha256": "a5680896b47c191df1e24e407a65ff8b07c93b296f175274f98ddf44f66cbd01",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.hero",
+        "name": "hero",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 17.jpeg",
+        "sha256": "051113004b2a9a33d482882abc6b430f4d17bdd56f21970c78405623f38eb4ab"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/current.jpg",
+        "sha256": "cc827f402328c280595310ef9e73a55b97bb2c311505b741dad1feb4690771f5",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.current",
+        "name": "current",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 30.JPG",
+        "sha256": "170eaedf1333edaf035cef309330a31d3377969baa8db8f37b1d70d5128865be"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-01.jpeg",
+        "sha256": "b6aee45098e7fc5be49edd9e9b42a70e7802b091cb067f342d4f5a38c9cf1b59",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-01",
+        "source_filename": "Lady_Madonna - 1.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 1.jpeg",
+        "sha256": "40d6346e1f1399874aa77801efec067144f43da9b94ae3f908f1c74bdf0b682c"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-02.jpeg",
+        "sha256": "e5c9803c4ca6f82931102ed7bba6e905c2e2e6091902bc25ce4c8b37e43a866b",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-02",
+        "source_filename": "Lady_Madonna - 3.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 3.jpeg",
+        "sha256": "fe38137b4380440ca7a541d07a89cafb1831d32ea98a012c9e2ba2bbd32d35d0"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-03.jpeg",
+        "sha256": "913b2703c9e96990fbc8e5ed97c9d319a7843955e5752ce6658e85cf47133365",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-03",
+        "source_filename": "Lady_Madonna - 5.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 5.jpeg",
+        "sha256": "4cff48a169a11d1782d4c1b10bd26e4565f6416aed3e386780d8ac2cf8a4582c"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-04.jpeg",
+        "sha256": "ee8de6e3023660ef17110f7e6002cb15e3a43bd5aa79c028bceb4a44e6c8fbdf",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-04",
+        "source_filename": "Lady_Madonna - 6.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 6.jpeg",
+        "sha256": "5c447aeb70e6ced4649091db17d2e5bd2583e52da0bf6d41818ff3aecebf9a62"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-05.jpeg",
+        "sha256": "da5a39f9fd9c8552798fa5c208ad50e48cfe9e64179fce10fe2f90383b819a0e",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-05",
+        "source_filename": "Lady_Madonna - 8.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 8.jpeg",
+        "sha256": "63936b1b172fc8bc7d0608c6e5c66eff7ba7266ded58dd168b9ca60a26645d6a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-06.jpeg",
+        "sha256": "1d8630d514b453b768768f2ecaa20048ee37f1bca0d9ce9e531ebeee31eb06fb",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-06",
+        "source_filename": "Lady_Madonna - 9.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 9.jpeg",
+        "sha256": "bd52b6b5b32f083b6cefbaf0a673523c913a662d0be4c223d961e08eb7095155"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-07.jpg",
+        "sha256": "a74bbd746d55a6e53f14f4644b8446a9aeec64eb7b201c49df338ed1940516fa",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-07",
+        "source_filename": "Lady_Madonna - 11.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 11.jpg",
+        "sha256": "4c0dd7b6155bcdf85b5c8d5e64e482f16558ff301f1d761bdeff9b9443189fe9"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-08.jpeg",
+        "sha256": "caf39645b1c6879a2b52e29967a17f3c215d79f86487e9269e1eace168590777",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-08",
+        "source_filename": "Lady_Madonna - 13.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 13.jpeg",
+        "sha256": "e720a2ffa095bce5e3150dfd621b14dcdfd683a9c2b4937d9a4707db75f35942"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-09.jpeg",
+        "sha256": "5deefd098cc497c0b3c23fb5c096fc026b5080013a9b94e7c32fb6255eb1bee9",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-09",
+        "source_filename": "Lady_Madonna - 16.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 16.jpeg",
+        "sha256": "e2ecda98bf98e7dfac629de38028dd13b7a5eb8aa88c5947eb45139ccd9747c5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-10.jpeg",
+        "sha256": "a5680896b47c191df1e24e407a65ff8b07c93b296f175274f98ddf44f66cbd01",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-10",
+        "source_filename": "Lady_Madonna - 17.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 17.jpeg",
+        "sha256": "051113004b2a9a33d482882abc6b430f4d17bdd56f21970c78405623f38eb4ab"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-11.jpeg",
+        "sha256": "032a75bb2b040635387b76fd9f96c6cbb8f78bac76906b401ec47fc326545c61",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-11",
+        "source_filename": "Lady_Madonna - 18.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 18.jpeg",
+        "sha256": "30b6549d0aa76104f4d7b74f4472dabdc9a4ab618d99bdccfaa71743b37ec584"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/lady-madonna/photo-12.jpg",
+        "sha256": "393f4ef0a9411761f0fa52620e0765102b181717c72c71988a4a8ab44a241adc",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-12",
+        "source_filename": "Lady_Madonna - 19.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 19.jpg",
+        "sha256": "d6607199208e6a5299da018b8be2ec94101e66299b9d340e6947d5fb04d415e5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/lady-madonna/photo-13.jpg",
+        "sha256": "d382a0a97703b1c19eedca8945be2e3f359319bc41750156183215980ba81331",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-13",
+        "source_filename": "Lady_Madonna - 20.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 20.jpg",
+        "sha256": "80d4abc25d8026cfef9193847aff0867b0b6ebd9a97bdd9b88b06ae95f77251f"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/lady-madonna/photo-14.jpg",
+        "sha256": "053767e7d073c8c91f2c04639ca9374fe5826a1fd88113f24096ce14b4bc4c64",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-14",
+        "source_filename": "Lady_Madonna - 23.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 23.jpg",
+        "sha256": "d03d883e05ab3ec5a32899e3ccdeb9971e87ec1e3abb23a827e05d7b7e93cac6"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/lady-madonna/photo-15.jpg",
+        "sha256": "407fc6563f51740eb8696007785d6d73f1f73095f2dfc6d466d54d48ee9bfc72",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-15",
+        "source_filename": "Lady_Madonna - 25.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 25.jpg",
+        "sha256": "ff18f01a2f8f3b59c740140148014e16ea6aeacd12dc0b13b79871ff1923c699"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-16.jpg",
+        "sha256": "1ab82be066cdbb113981ad12f57aa8dc40469bb1a66ba2def0fb3f15f7e018a2",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-16",
+        "source_filename": "Lady_Madonna - 27.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 27.JPG",
+        "sha256": "8c40cebdbaafa50abeefe539cbc6a83aa0ae229e769abe2588fd71e8fc5354e5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-17.jpg",
+        "sha256": "0a571d503ef03fa66a996e2b117295a6c95e63f1934bc2fa1ad86cbfd9ffb51d",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-17",
+        "source_filename": "Lady_Madonna - 28.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 28.JPG",
+        "sha256": "79967de7bd15e9ec223fd0de441671111dffa5af26e4a9e3b09a11a7bcd7eb4f"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-18.jpg",
+        "sha256": "4a3bb50020c07dbc2f4a835387608dea7b0c86fa0231780cd30de4d03d9d9675",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-18",
+        "source_filename": "Lady_Madonna - 29.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 29.JPG",
+        "sha256": "7bb698de0eac84c7839b1a8f01b077a6a0aacb2a6be0510eee6c440d2f7331b9"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-19.jpg",
+        "sha256": "cc827f402328c280595310ef9e73a55b97bb2c311505b741dad1feb4690771f5",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-19",
+        "source_filename": "Lady_Madonna - 30.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 30.JPG",
+        "sha256": "170eaedf1333edaf035cef309330a31d3377969baa8db8f37b1d70d5128865be"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    }
+  ],
+  "plant": {
+    "slug": "lady-madonna"
+  },
+  "profile": {
+    "colorspace": "sRGB",
+    "jpeg_quality": 85,
+    "maximum_edge": 2400,
+    "metadata_removed": true
+  },
+  "schema_version": 1
+}

@@ -1,0 +1,490 @@
+{
+  "images": [
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 1572,
+        "path": "site/public/images/plants/honey-pie/hero.jpeg",
+        "sha256": "4a892a8268532db8cd70ca4c37fb16400e4e0e31533a687c52ac1e500cbe2315",
+        "width": 1178
+      },
+      "publication": {
+        "field": "photos.hero",
+        "name": "hero",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 1.jpeg",
+        "sha256": "22ab1973255ae174a6427ef8287cd8f78f3926326998b5d3a772192ad4c6885f"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/honey-pie/current.jpg",
+        "sha256": "7927d4df49caefbcc3fc010d7c3a84d8e17d0e9059dcf58f8cfb56fb272678f3",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.current",
+        "name": "current",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 13.JPG",
+        "sha256": "7eda079c0500c08ebb0f3a18fb8a6feff08ea8fe215e1b3ed3399d91511b4973"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 1572,
+        "path": "site/public/images/plants/honey-pie/photo-01.jpeg",
+        "sha256": "4a892a8268532db8cd70ca4c37fb16400e4e0e31533a687c52ac1e500cbe2315",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-01",
+        "source_filename": "Honey_Pie - 1.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 1.jpeg",
+        "sha256": "22ab1973255ae174a6427ef8287cd8f78f3926326998b5d3a772192ad4c6885f"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 1572,
+        "path": "site/public/images/plants/honey-pie/photo-02.jpeg",
+        "sha256": "f73920fcc808688de34f88a5b7e3c3d8de3a71442659dc4ec4b5d2b535cdbb9b",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-02",
+        "source_filename": "Honey_Pie - 2.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 2.jpeg",
+        "sha256": "fd2cfb26c657fccf21ef0ba49521ca62210bfca1b079eaba457e32328822da2d"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 1572,
+        "path": "site/public/images/plants/honey-pie/photo-03.jpeg",
+        "sha256": "33d094b0c0f19ebf303698c6022ba576afa73436fa5fa3e3d5a6eef554ba6226",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-03",
+        "source_filename": "Honey_Pie - 3.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 3.jpeg",
+        "sha256": "71b27b9688706b9ea5600241f6ea597283f656c33e277a698f792123d433d41b"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 1572,
+        "path": "site/public/images/plants/honey-pie/photo-04.jpeg",
+        "sha256": "af806acc92f419b3bffe399afba44279decbfceae5fedd0d0b355cfb06af5f4e",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-04",
+        "source_filename": "Honey_Pie - 4.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 4.jpeg",
+        "sha256": "952ed62db3f0ae10f0916d75c32acad6c2edbf207717ea95d08508d4142d9fe9"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 1572,
+        "path": "site/public/images/plants/honey-pie/photo-05.jpeg",
+        "sha256": "f2a8480077ad5185e9d0abcd8502971463c728bb047fa3fd70cd71693fd83a83",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-05",
+        "source_filename": "Honey_Pie - 5.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 5.jpeg",
+        "sha256": "50a93abe44dafc0edbd7ae9220aaccfe18c5641fd4bd8cb000daa198695bae45"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 1572,
+        "path": "site/public/images/plants/honey-pie/photo-06.jpeg",
+        "sha256": "0ec7537d7a6a3d559706dc0e890e33268eb183397b76cb8da922f52a19348626",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-06",
+        "source_filename": "Honey_Pie - 6.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 6.jpeg",
+        "sha256": "f61e3ae077c19210c7afba3de7ac2e488745b004d877b4fbe599305e77acbfcb"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/honey-pie/photo-07.jpg",
+        "sha256": "cd6079a210e528c5722958cfd3a3cdd5ae6669809f08c57fe79106b91d34e824",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-07",
+        "source_filename": "Honey_Pie - 7.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 7.JPG",
+        "sha256": "4aed582cabad860d660823e45994ad259455ca6381c19a5ff96fbf0d6a653a4f"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/honey-pie/photo-08.jpg",
+        "sha256": "d5276a7db08b0a5645567b7af9665d5c16b4bd4087d466a53276daaa016b9a60",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-08",
+        "source_filename": "Honey_Pie - 9.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 9.JPG",
+        "sha256": "86a49224fed4adb36d9447cfec78fd16133fb78e519ef184c64a0e45f7633527"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/honey-pie/photo-09.jpg",
+        "sha256": "be7330c52f226f5c7992726be0a4688e1c20c3024abd3443d02dcacfeeb6d224",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-09",
+        "source_filename": "Honey_Pie - 10.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 10.JPG",
+        "sha256": "45490b5f394d92354666954da05bdbbe7a74d0aeaf0c9d483e854c50a5ebf640"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/honey-pie/photo-10.jpg",
+        "sha256": "1ebd77f357685bad614c0b06a6dbd7a606ca65263606125dd81dcb107fcdb4f4",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-10",
+        "source_filename": "Honey_Pie - 11.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 11.JPG",
+        "sha256": "96d7a4132431866daa0a3d923eaffe67f91c227409c5e1659f74ec09e713b69e"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/honey-pie/photo-11.jpg",
+        "sha256": "7927d4df49caefbcc3fc010d7c3a84d8e17d0e9059dcf58f8cfb56fb272678f3",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-11",
+        "source_filename": "Honey_Pie - 13.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 13.JPG",
+        "sha256": "7eda079c0500c08ebb0f3a18fb8a6feff08ea8fe215e1b3ed3399d91511b4973"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/honey-pie/photo-12.jpg",
+        "sha256": "49de5d974ed1eaa174fea58564a6eef61afbc85c076f92a5722068c4a3b71cb4",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-12",
+        "source_filename": "Honey_Pie - 14.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/honey-pie/photos/Honey_Pie - 14.JPG",
+        "sha256": "1c2f191ba4160fb0f0cc99554ffa9ebdf62a5904a6e4a58f6442e81ab6fd6344"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    }
+  ],
+  "plant": {
+    "slug": "honey-pie"
+  },
+  "profile": {
+    "colorspace": "sRGB",
+    "jpeg_quality": 85,
+    "maximum_edge": 2400,
+    "metadata_removed": true
+  },
+  "schema_version": 1
+}

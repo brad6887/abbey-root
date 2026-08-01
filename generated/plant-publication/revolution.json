@@ -1,0 +1,1000 @@
+{
+  "images": [
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/hero.jpeg",
+        "sha256": "88f85ce77b4b8e60a889c5946338b12e8ea200d50c28362eb1d4f251b859650e",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.hero",
+        "name": "hero",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 21.jpeg",
+        "sha256": "2393e4aab0f891cd38ba5baa9bace442b76e7c7e9d5d051dc9141a063c02dfb9"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/current.jpg",
+        "sha256": "ed4cdb0acbcc6a7bd7e6dfee63ab09754392a372e6f1aa1b28ad0fb702632e90",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.current",
+        "name": "current",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 35.JPG",
+        "sha256": "c4d02a4eb621b450ec3acc74f1098bebe9d353bad40115170255048d23bfbd25"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/index.jpg",
+        "sha256": "26f5800eeca1604f606084c7047adf60ad0d77cb519ea96a9978a886a11cad8c",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.index",
+        "name": "index",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 17.JPG",
+        "sha256": "319758b4ff3226e851cb0a15bf4cbc0b9f4c6b711cedde37bc226a2acc044140"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1600,
+        "path": "site/public/images/plants/revolution/photo-01.png",
+        "sha256": "66f33f36e4dfed7f47a94e5bfe699af908d57d5a3daeb42e731f7078fca870e8",
+        "width": 1200
+      },
+      "publication": {
+        "name": "photo-01",
+        "source_filename": "Revolution - 1.png",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 1.png",
+        "sha256": "6945bf4b52755a3e7edb75cc7b769bbde96fba0197a6ab8418a91e6341ec2ba5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "png",
+        "height": 1600,
+        "path": "site/public/images/plants/revolution/photo-02.png",
+        "sha256": "36808a9aaf8a9b1151c8a9ceaaa1bfa0639edafb5f8c332d9b8cab123b59ed44",
+        "width": 1200
+      },
+      "publication": {
+        "name": "photo-02",
+        "source_filename": "Revolution - 2.png",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 2.png",
+        "sha256": "ca982082f1d62c845215d6e5e39a2e4e129e459d345c3b384c5c71e6a6662d68"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-03.jpeg",
+        "sha256": "c2848e42a0e3bd6eb25b93d03f826e960b9abaadeb14c8378d8ea412d3a28023",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-03",
+        "source_filename": "Revolution - 3.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 3.jpeg",
+        "sha256": "e52996e7b5fd891aed0c8a5bd3f4d785d530c94127efa8dcc209e51916de280a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-04.jpeg",
+        "sha256": "6c40043f11ab7b9d3f39c8c96aa859ae19640b902e561218047658e46ac9fd0b",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-04",
+        "source_filename": "Revolution - 7.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 7.jpeg",
+        "sha256": "6c0a88ade710a38af7e832d3461214b2629d4b0f4715e4a23df74f60575868b9"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-05.jpeg",
+        "sha256": "0d19fe4786876210666e3571568a391bc2e3703fce96a4f12141dd2ba7f03988",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-05",
+        "source_filename": "Revolution - 9.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 9.jpeg",
+        "sha256": "cac774939791d9ea0363624740a270008f87e9956c470e8dc109a7456a1f2a68"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-06.jpeg",
+        "sha256": "668eeeb828b05da3a16ccc1e5e75189622d667b5a94d690e9d0165d7159682a2",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-06",
+        "source_filename": "Revolution - 10.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 10.jpeg",
+        "sha256": "e48a3e4ba7f9e150242e9ab76a0845bd94241d9a16f15d7a6a64f916711155ac"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-07.jpeg",
+        "sha256": "a4b27d3d9010b681ae14d34a77c2e21fef830581b90323fbd864a286a6dcae1b",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-07",
+        "source_filename": "Revolution - 12.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 12.jpeg",
+        "sha256": "fbcf5745ac974f06e02a83c9e99e3ce33db8df7f4a9c82a1daa4d81361c730c0"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-08.jpeg",
+        "sha256": "52349017c7c74c31f32ce743aad7897bae4a65306545c6c16b61d3f8a67df521",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-08",
+        "source_filename": "Revolution - 14.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 14.jpeg",
+        "sha256": "3acbf302ebb23a685d1f427b3159c85bf5fbe4ecb72c1c467137a6422eb13fd8"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-09.jpeg",
+        "sha256": "7edcebe817aaadd68d42af82d513dafd75aed1c12b491d08001f32315f3db5db",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-09",
+        "source_filename": "Revolution - 15.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 15.jpeg",
+        "sha256": "e1802190b54cada37ec6cca22b84c9982a3adf6f10dfb11b6ef2d21356bbf6d8"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-10.jpeg",
+        "sha256": "93a16e85704244b365a932112dcc39a8e334e64fa04cdc0f6519dec177e8a542",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-10",
+        "source_filename": "Revolution - 16.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 16.jpeg",
+        "sha256": "d55e68faf9f4629fac0b8a009108c0e46fa4bc0c0ad339b9f5f58afb3f0caaf2"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-11.jpg",
+        "sha256": "26f5800eeca1604f606084c7047adf60ad0d77cb519ea96a9978a886a11cad8c",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-11",
+        "source_filename": "Revolution - 17.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 17.JPG",
+        "sha256": "319758b4ff3226e851cb0a15bf4cbc0b9f4c6b711cedde37bc226a2acc044140"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-12.jpeg",
+        "sha256": "7985838d939e0e9bd18d3e7baf59eefd18ecf245e5a3650ba23b92595fae3283",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-12",
+        "source_filename": "Revolution - 18.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 18.jpeg",
+        "sha256": "9d1972c5707a60278a9fbbc957ceedaab5241c2b14decaf8933c4ec6c0d0c6d5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-13.jpeg",
+        "sha256": "94707acd7dd7b887d00e9cf535e0497de74e69d957cf035bee1aed14a5b12a82",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-13",
+        "source_filename": "Revolution - 19.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 19.jpeg",
+        "sha256": "46c602b7d74ebd392fb8ae99c3f768f51d350a9ec37d515d868808cf85869ba8"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-14.jpeg",
+        "sha256": "9202dcec27f8f9a62a0be5a63fed9c9c0d6540c258c0963878c73e519ea187e6",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-14",
+        "source_filename": "Revolution - 20.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 20.jpeg",
+        "sha256": "264b4b81d880f3490f04bc78e4fa5e4491bb3155886d317efd3087017ad74718"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-15.jpeg",
+        "sha256": "88f85ce77b4b8e60a889c5946338b12e8ea200d50c28362eb1d4f251b859650e",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-15",
+        "source_filename": "Revolution - 21.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 21.jpeg",
+        "sha256": "2393e4aab0f891cd38ba5baa9bace442b76e7c7e9d5d051dc9141a063c02dfb9"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-16.jpeg",
+        "sha256": "aa459eb513c94a266cb3b19cee40404d79ba4323e6959630ce34e2cdcec6d372",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-16",
+        "source_filename": "Revolution - 22.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 22.jpeg",
+        "sha256": "e24717dea12dbfa81cb28843b88c47a5c141718dec3b46209b0210be3a923223"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-17.jpeg",
+        "sha256": "200c8367ac826b979a85d31a87baa228f488001750481ae0bed34948e6c86f83",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-17",
+        "source_filename": "Revolution - 23.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 23.jpeg",
+        "sha256": "7010ec4ffe12f83e3f0ee28585a1b09b8cab159e66a86e6efdfca9f7946c02f2"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpeg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-18.jpeg",
+        "sha256": "b262a450e15af84c98c54b2e5a6e4f8264066eb8fab9ca2feceabc3b25746122",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-18",
+        "source_filename": "Revolution - 24.jpeg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 24.jpeg",
+        "sha256": "535a4ed611ced25a16a7313f55f6a4f835aa42dd1089503ee2e21eaf210520e5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/revolution/photo-19.jpg",
+        "sha256": "65a45e60ade88b26c837e40a41dfc247d2cedd869c611c953bbf106820d2f6b0",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-19",
+        "source_filename": "Revolution - 25.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 25.jpg",
+        "sha256": "d450fac3df209242a58f0fdfcbb260b4a5834114a45f81c236198364924bc458"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/revolution/photo-20.jpg",
+        "sha256": "db87baa79e71a2baf58eb45db94cefc308e406435213c424c9d7f371650be312",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-20",
+        "source_filename": "Revolution - 28.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 28.jpg",
+        "sha256": "2d59036c25a2458a2b6684c1c8df17bb30cafd222a12757261ff46ea99e917fc"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/revolution/photo-21.jpg",
+        "sha256": "0ef3c8a7b579ea80720fa3162db6abe91329cdcb2c6e4fda8cfa2510f1b62fa9",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-21",
+        "source_filename": "Revolution - 29.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 29.jpg",
+        "sha256": "8008525d10540752e76117e444f06e435c9936cbc4a2dae114fdb5edbfceccee"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/revolution/photo-22.jpg",
+        "sha256": "f0465184ee710db5ac5dea14eb390f2e14cdebf13024f7beecfbf15a7e863982",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-22",
+        "source_filename": "Revolution - 30.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 30.jpg",
+        "sha256": "ca1e08d796da093b8ed115acc49b2c7252bc4f8a1cbfba8b41ebd873f2b3952d"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1572,
+        "path": "site/public/images/plants/revolution/photo-23.jpg",
+        "sha256": "ebefbd3b5de9519ed3066b635ef438db58e5b70bba601c8c9cc5d0b98e01ac1d",
+        "width": 1178
+      },
+      "publication": {
+        "name": "photo-23",
+        "source_filename": "Revolution - 31.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 31.jpg",
+        "sha256": "bea1283b619fdfdbd7244b46864259bb268b3c6877aaef218aed00d1871fc8d1"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 1536,
+        "path": "site/public/images/plants/revolution/photo-24.jpg",
+        "sha256": "1b636fc64480376f6210dafba297944ab3e703e56d7700fd2ffbefc760a466d6",
+        "width": 1152
+      },
+      "publication": {
+        "name": "photo-24",
+        "source_filename": "Revolution - 32.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 32.jpg",
+        "sha256": "6b6f3daf4a2c61bdf7b0aa7c5d8df59c60ba0c4dcedb68ff8e0d39ae770266fd"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-25.jpg",
+        "sha256": "cd94e214f7405ae0ccd2a2b162e33a19bb910854a481e55b7d77d3daec92e633",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-25",
+        "source_filename": "Revolution - 34.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 34.JPG",
+        "sha256": "bcdf5c22d71b348fe01792f27f54f6cb2a817d93e817816fd9f770c9fb8f0152"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-26.jpg",
+        "sha256": "ed4cdb0acbcc6a7bd7e6dfee63ab09754392a372e6f1aa1b28ad0fb702632e90",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-26",
+        "source_filename": "Revolution - 35.JPG",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/Revolution - 35.JPG",
+        "sha256": "c4d02a4eb621b450ec3acc74f1098bebe9d353bad40115170255048d23bfbd25"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    }
+  ],
+  "plant": {
+    "slug": "revolution"
+  },
+  "profile": {
+    "colorspace": "sRGB",
+    "jpeg_quality": 85,
+    "maximum_edge": 2400,
+    "metadata_removed": true
+  },
+  "schema_version": 1
+}

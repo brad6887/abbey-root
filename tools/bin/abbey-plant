@@ -22,6 +22,8 @@ REPO_DIR="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 PLANTS_DIR="$REPO_DIR/working/plants"
 CONTENT_DIR="$REPO_DIR/content/plants"
 PUBLIC_PLANTS_DIR="$REPO_DIR/site/public/images/plants"
+PUBLICATION_MANIFEST_DIR="$REPO_DIR/generated/plant-publication"
+IMAGE_DERIVATIVE_HELPER="$ABBEY_TOOLKIT_ROOT/tools/image/create_public_derivative.py"
 
 ok_count=0
 warn_count=0
@@ -558,6 +560,7 @@ publish_plant() {
     local facts_file="$plant_dir/facts.yaml"
     local output_file="$CONTENT_DIR/$slug.md"
     local public_dir="$PUBLIC_PLANTS_DIR/$slug"
+    local manifest_file="$PUBLICATION_MANIFEST_DIR/$slug.json"
 
     echo "Plant Publishing"
     echo "================"
@@ -570,17 +573,41 @@ publish_plant() {
     echo "Publishing"
     echo "----------"
 
+    if [[ ! -x "$IMAGE_DERIVATIVE_HELPER" ]]; then
+        echo "ERROR: Public image helper is missing or not executable:"
+        echo "  $IMAGE_DERIVATIVE_HELPER"
+        return 1
+    fi
+
+    if ! command -v exiftool >/dev/null 2>&1; then
+        echo "ERROR: ExifTool is required for plant publishing."
+        return 1
+    fi
+
+    if ! command -v magick >/dev/null 2>&1 &&
+       ! command -v convert >/dev/null 2>&1
+    then
+        echo "ERROR: ImageMagick is required for plant publishing."
+        return 1
+    fi
+
     mkdir -p "$CONTENT_DIR"
+    mkdir -p "$PUBLICATION_MANIFEST_DIR"
     rm -rf "$public_dir"
+    rm -f "$manifest_file"
     mkdir -p "$public_dir"
 
     python3 - \
         "$facts_file" \
         "$plant_dir" \
         "$output_file" \
-        "$public_dir" <<'PY'
+        "$public_dir" \
+        "$IMAGE_DERIVATIVE_HELPER" \
+        "$REPO_DIR" \
+        "$manifest_file" <<'PY'
+import json
 import re
-import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -590,6 +617,11 @@ facts_path = Path(sys.argv[1])
 plant_dir = Path(sys.argv[2])
 output_path = Path(sys.argv[3])
 public_dir = Path(sys.argv[4])
+image_helper = Path(sys.argv[5])
+project_root = Path(sys.argv[6]).resolve()
+manifest_path = Path(sys.argv[7])
+
+publication_records = []
 
 with facts_path.open("r", encoding="utf-8") as handle:
     facts = yaml.safe_load(handle)
@@ -621,6 +653,59 @@ def read_document(relative_path):
     return "\n".join(lines).strip()
 
 
+def project_relative(path):
+    resolved = Path(path).resolve()
+
+    try:
+        return str(resolved.relative_to(project_root))
+    except ValueError as error:
+        raise SystemExit(
+            f"ERROR Publication path is outside the active project: {resolved}"
+        ) from error
+
+
+def create_public_derivative(source, destination, publication):
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(image_helper),
+            str(source),
+            str(destination),
+            "--max-edge",
+            "2400",
+            "--quality",
+            "85",
+        ],
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+
+    if result.returncode != 0:
+        detail = result.stderr.strip() or result.stdout.strip()
+        message = f"ERROR Unable to publish image {source}"
+
+        if detail:
+            message += f":\n{detail}"
+
+        raise SystemExit(message)
+
+    try:
+        record = json.loads(result.stdout)
+    except json.JSONDecodeError as error:
+        raise SystemExit(
+            f"ERROR Invalid provenance returned for image: {source}"
+        ) from error
+
+    record["source"]["path"] = project_relative(record["source"]["path"])
+    record["derivative"]["path"] = project_relative(
+        record["derivative"]["path"]
+    )
+    record["publication"] = publication
+    publication_records.append(record)
+
+
 def copy_public_image(field_name, public_name):
     relative_path = get(field_name)
 
@@ -630,7 +715,15 @@ def copy_public_image(field_name, public_name):
     source = plant_dir / relative_path
     destination = public_dir / f"{public_name}{source.suffix.lower()}"
 
-    shutil.copy2(source, destination)
+    create_public_derivative(
+        source,
+        destination,
+        {
+            "type": "role",
+            "name": public_name,
+            "field": field_name,
+        },
+    )
 
     return f"/images/plants/{get('slug')}/{destination.name}"
 
@@ -675,7 +768,15 @@ def publish_history_photos(markdown, plant_name, slug):
             destination = public_dir / (
                 f"photo-{sequence:02d}{source.suffix.lower()}"
             )
-            shutil.copy2(source, destination)
+            create_public_derivative(
+                source,
+                destination,
+                {
+                    "type": "history",
+                    "name": f"photo-{sequence:02d}",
+                    "source_filename": filename,
+                },
+            )
             published[filename] = (
                 f"/images/plants/{slug}/{destination.name}"
             )
@@ -759,7 +860,32 @@ body = f"""---
 
 output_path.write_text(body, encoding="utf-8")
 
+publication_manifest = {
+    "schema_version": 1,
+    "plant": {
+        "slug": slug,
+    },
+    "profile": {
+        "maximum_edge": 2400,
+        "colorspace": "sRGB",
+        "metadata_removed": True,
+        "jpeg_quality": 85,
+    },
+    "images": publication_records,
+}
+
+manifest_path.parent.mkdir(parents=True, exist_ok=True)
+manifest_path.write_text(
+    json.dumps(
+        publication_manifest,
+        indent=2,
+        sort_keys=True,
+    ) + "\n",
+    encoding="utf-8",
+)
+
 print(f"Generated content: {output_path}")
+print(f"Generated publication manifest: {manifest_path}")
 if hero_image:
     print(f"Published hero image: {hero_image}")
 if current_image:
