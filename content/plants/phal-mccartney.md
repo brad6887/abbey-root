@@ -8,8 +8,9 @@ species: Phalaenopsis
 featured: true
 draft: false
 updatedDate: 2026-07-26
-heroImage: /images/plants/phal-mccartney/hero.jpg
-currentImage: /images/plants/phal-mccartney/current.jpg
+heroImage: /images/plants/phal-mccartney/hero.jpeg
+currentImage: /images/plants/phal-mccartney/current.jpeg
+indexImage: /images/plants/phal-mccartney/index.jpeg
 tags:
 - orchid
 - orchid-rescue

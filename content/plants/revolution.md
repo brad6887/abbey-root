@@ -10,6 +10,7 @@ draft: false
 updatedDate: 2026-07-26
 heroImage: /images/plants/revolution/hero.jpeg
 currentImage: /images/plants/revolution/current.jpg
+indexImage: /images/plants/revolution/index.jpg
 tags:
 - orchid
 - orchid-rescue
