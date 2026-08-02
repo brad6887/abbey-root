@@ -559,12 +559,28 @@ The story isn't finished—it's simply entered a quieter chapter.
 
 ---
 
+## 2026-07-12 — Weekly Update
+
+### Photos
+
+![Doctor Robert — 2026-07-12 — Weekly Update](/images/plants/doctor-robert/photo-21.jpg)
+
+### Observations
+
+Doctor Robert received his first fertilizer since the move and continues to show steady recovery. The remaining leaf is thick, glossy, and healthy, while multiple roots are actively growing, giving him a much stronger foundation than he had just a few months ago.
+
+### Care
+
+Fertilized
+
+---
+
 ## 2026-08-02 — Weekly Update
 
 ### Photos
 
-![Doctor Robert — 2026-08-02 — Weekly Update](/images/plants/doctor-robert/photo-21.jpg)
 ![Doctor Robert — 2026-08-02 — Weekly Update](/images/plants/doctor-robert/photo-22.jpg)
+![Doctor Robert — 2026-08-02 — Weekly Update](/images/plants/doctor-robert/photo-23.jpg)
 
 ### Observations
 

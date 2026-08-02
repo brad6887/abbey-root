@@ -521,19 +521,6 @@ The story isn't finished—it's simply entered a quieter chapter.
 
 ---
 
-## 2026-08-02 — Weekly Update
-
-### Photos
-
-- doctor-robert-2026-08-02.jpg
-- doctor-robert-2026-08-02-02.jpg
-
-### Observations
-
-Doctor Robert appears to have reached an important turning point. The suspected new leaf is now clearly visible as folded leaf tissue emerging from the crown, while the remaining mature leaf stays firm and glossy. With a healthy root system still supporting him, he seems to be shifting from rebuilding roots to producing new foliage for the first time since the rescue.
-
----
-
 ## 2026-07-12 — Weekly Update
 
 ### Photos
@@ -547,3 +534,16 @@ Doctor Robert received his first fertilizer since the move and continues to show
 ### Care
 
 Fertilized
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+- doctor-robert-2026-08-02.jpg
+- doctor-robert-2026-08-02-02.jpg
+
+### Observations
+
+Doctor Robert appears to have reached an important turning point. The suspected new leaf is now clearly visible as folded leaf tissue emerging from the crown, while the remaining mature leaf stays firm and glossy. With a healthy root system still supporting him, he seems to be shifting from rebuilding roots to producing new foliage for the first time since the rescue.

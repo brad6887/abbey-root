@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 149 complete · 264 pending · 413 total
+> **Backlog Status:** 149 complete · 265 pending · 414 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -208,6 +208,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Add a supported plant revision workflow for existing dated observations.
 - [ ] Design a reviewable multi-plant prepare, review, apply, and publish workflow.
 - [ ] Add regression coverage for UTC-safe Orchid Rescue date formatting.
+- [ ] Add historical backfill support to `abbey plant update` so older observations are inserted chronologically without replacing the current photo, changing the current status, or moving the plant's latest-updated date backward, with regression coverage for each behavior.
 - [x] Create plant publishing workflow.
 - [ ] Update the Doctor Robert inventory checklist.
 - [ ] Add AI-assisted plant workspace review.

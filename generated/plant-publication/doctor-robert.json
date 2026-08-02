@@ -753,11 +753,45 @@
         "format": "jpg",
         "height": 2400,
         "path": "site/public/images/plants/doctor-robert/photo-21.jpg",
-        "sha256": "63465983731e6336292a21e6b3def34498be9d2f8523cc45d047d5424b248d50",
+        "sha256": "ee53077238b394b20d762dcd7b11512755923c72c45f21098cd89da3bbdf9258",
         "width": 1800
       },
       "publication": {
         "name": "photo-21",
+        "source_filename": "doctor-robert-2026-07-12.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/doctor-robert/photos/doctor-robert-2026-07-12.jpg",
+        "sha256": "9a70b0115ca662f78cc59cbcddc6c88acda09fe1ea7821871bb8ff0947a522c2"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/doctor-robert/photo-22.jpg",
+        "sha256": "63465983731e6336292a21e6b3def34498be9d2f8523cc45d047d5424b248d50",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-22",
         "source_filename": "doctor-robert-2026-08-02.jpg",
         "type": "history"
       },
@@ -786,12 +820,12 @@
       "derivative": {
         "format": "jpg",
         "height": 2400,
-        "path": "site/public/images/plants/doctor-robert/photo-22.jpg",
+        "path": "site/public/images/plants/doctor-robert/photo-23.jpg",
         "sha256": "669bb964ca4dcb01e4c38240eb257ad6117fadc1362aba2d14e29b1ce43dee62",
         "width": 1800
       },
       "publication": {
-        "name": "photo-22",
+        "name": "photo-23",
         "source_filename": "doctor-robert-2026-08-02-02.jpg",
         "type": "history"
       },
