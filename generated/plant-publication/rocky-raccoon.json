@@ -1,0 +1,116 @@
+{
+  "images": [
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/rocky-raccoon/hero.jpg",
+        "sha256": "0b14ca9608f43f1d0d7466eeaa5dbadb8def5cde9c9f4d6b08af6dbc61852416",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.hero",
+        "name": "hero",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/rocky-raccoon/photos/rocky-raccoon-2026-08-02.jpg",
+        "sha256": "4f40d5885314060bd5024114c4db588c5198ff233d93120841d68942dbba6f1a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/rocky-raccoon/current.jpg",
+        "sha256": "0b14ca9608f43f1d0d7466eeaa5dbadb8def5cde9c9f4d6b08af6dbc61852416",
+        "width": 1800
+      },
+      "publication": {
+        "field": "photos.current",
+        "name": "current",
+        "type": "role"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/rocky-raccoon/photos/rocky-raccoon-2026-08-02.jpg",
+        "sha256": "4f40d5885314060bd5024114c4db588c5198ff233d93120841d68942dbba6f1a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/rocky-raccoon/photo-01.jpg",
+        "sha256": "0b14ca9608f43f1d0d7466eeaa5dbadb8def5cde9c9f4d6b08af6dbc61852416",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-01",
+        "source_filename": "rocky-raccoon-2026-08-02.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/rocky-raccoon/photos/rocky-raccoon-2026-08-02.jpg",
+        "sha256": "4f40d5885314060bd5024114c4db588c5198ff233d93120841d68942dbba6f1a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    }
+  ],
+  "plant": {
+    "slug": "rocky-raccoon"
+  },
+  "profile": {
+    "colorspace": "sRGB",
+    "jpeg_quality": 85,
+    "maximum_edge": 2400,
+    "metadata_removed": true
+  },
+  "schema_version": 1
+}

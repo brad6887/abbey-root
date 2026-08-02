@@ -1,0 +1,37 @@
+name: Rocky Raccoon
+slug: rocky-raccoon
+plant:
+  type: orchid
+  genus: Phalaenopsis
+  species: null
+  hybrid: null
+rescue:
+  date: 2026-08-02
+  source: Lowe's clearance rack
+  location:
+    city: Keller
+    state: Texas
+    country: United States
+status:
+  current: recovering
+  current_location:
+    city: Fort Worth
+    state: Texas
+    country: United States
+  updated: 2026-08-02
+care:
+  potting_medium: orchid bark
+  container: clear plastic pot inside decorative white outer container
+photos:
+  hero: photos/rocky-raccoon-2026-08-02.jpg
+  current: photos/rocky-raccoon-2026-08-02.jpg
+  index: null
+  metadata: photo-metadata.md
+documents:
+  story: story.md
+  history: history.md
+tags:
+  - orchid
+  - orchid-rescue
+  - phalaenopsis
+  - rescue-plant
