@@ -12,6 +12,7 @@
 #   abbey plant index <slug>
 #   abbey plant update <slug>
 #   abbey plant rename-exports <directory>
+#   abbey plant update-batch <prepare|apply>
 #
 
 set -euo pipefail
@@ -25,6 +26,7 @@ CONTENT_DIR="$REPO_DIR/content/plants"
 PUBLIC_PLANTS_DIR="$REPO_DIR/site/public/images/plants"
 PUBLICATION_MANIFEST_DIR="$REPO_DIR/generated/plant-publication"
 IMAGE_DERIVATIVE_HELPER="$ABBEY_TOOLKIT_ROOT/tools/image/create_public_derivative.py"
+BATCH_UPDATE_HELPER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_plant_update_batch.py"
 
 ok_count=0
 warn_count=0
@@ -54,6 +56,8 @@ Usage:
   abbey plant index <slug> [--select NUMBER] [--yes]
   abbey plant update <slug> --photo FILE --narrative TEXT [options]
   abbey plant rename-exports <directory> [--dry-run]
+  abbey plant update-batch prepare <directory> --date YYYY-MM-DD [--output FILE]
+  abbey plant update-batch apply <worksheet> [--dry-run]
 
 Commands:
   validate    Validate a plant workspace against the Plant Model
@@ -63,6 +67,8 @@ Commands:
   update      Add a dated observation and select its current photograph
   rename-exports
               Rename exported photos from XMP captions and capture dates
+  update-batch
+              Prepare or apply a reviewable multi-plant update worksheet
 
 Update options:
   --photo FILE       Photograph to copy into the plant workspace
@@ -74,7 +80,20 @@ Update options:
 
 Rename-exports options:
   --dry-run          Validate and preview every rename without writing
+
+Update-batch workflow:
+  prepare            Group renamed photos and create an editable worksheet
+  apply              Validate and apply every completed worksheet update
 USAGE
+}
+
+update_batch() {
+    if [[ ! -f "$BATCH_UPDATE_HELPER" ]]; then
+        echo "ERROR: Plant batch update helper is missing: $BATCH_UPDATE_HELPER"
+        return 1
+    fi
+
+    python3 "$BATCH_UPDATE_HELPER" --root "$REPO_DIR" "$@"
 }
 
 rename_exports() {
@@ -1159,6 +1178,10 @@ case "$command" in
     rename-exports)
         shift
         rename_exports "$@"
+        ;;
+    update-batch)
+        shift
+        update_batch "$@"
         ;;
     help|-h|--help)
         usage

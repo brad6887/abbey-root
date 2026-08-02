@@ -9,6 +9,7 @@ logs/
 
 # Generated upload-ready session context
 working/session-context/
+working/plant-updates/
 
 # macOS metadata
 .DS_Store

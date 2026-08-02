@@ -423,6 +423,50 @@ Existing lightweight public profiles may remain under `content/plants/` until a 
 
 ---
 
+# Batch Update Workflow
+
+Renamed photo exports can be prepared as a reviewable, date-scoped worksheet:
+
+```bash
+abbey plant update-batch prepare ~/incoming/photos --date 2026-08-02
+```
+
+The prepare command matches filenames to plant workspace slugs, groups all
+photos for each plant, and writes:
+
+```text
+working/plant-updates/2026-08-02.yml
+```
+
+Worksheets are local, ignored working artifacts because they record the
+machine-specific incoming directory. The resulting plant workspace changes
+remain the canonical, reviewable repository content.
+
+Plants without matching photos receive a warning and are omitted from the
+worksheet. This represents no update for that plant on that date; it is not a
+validation failure and does not create an empty history entry.
+
+Review the worksheet and provide a narrative for every included plant. A
+single photo is automatically selected as current. When an update contains
+multiple photos, select one explicitly in the worksheet's `current` field.
+Optional care and status values may also be supplied.
+
+Preview and apply the completed worksheet with:
+
+```bash
+abbey plant update-batch apply working/plant-updates/2026-08-02.yml --dry-run
+abbey plant update-batch apply working/plant-updates/2026-08-02.yml
+```
+
+Apply validates the complete worksheet before changing any plant workspace.
+For each included update it copies every listed photo, populates the dated
+history entry's `Photos` section, records the observation and optional care,
+and updates the current photo and status metadata. XMP sidecars remain in the
+incoming directory and publish-time derivative sanitization remains a separate
+workflow.
+
+---
+
 # Design Principles
 
 ## One Source of Truth
