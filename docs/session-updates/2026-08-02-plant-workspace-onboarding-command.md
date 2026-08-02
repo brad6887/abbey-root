@@ -48,6 +48,8 @@ original photograph.
 - Added guarded slug, status, date, required-option, photo-type, and collision validation.
 - Added atomic workspace creation and initial photo import with first-photo role assignment.
 - Added tracked markers so required empty photo and source directories survive Git clones.
+- Follow-up use on `ubuntu-dev01` exposed and fixed omitted XMP sidecars and placeholder-blind validation.
+- Added automatic adjacent-XMP import and non-blocking placeholder warnings for all four scaffold documents.
 - Added regression coverage for creation, structure, initialized facts, imports, invalid input, missing photos, and overwrite refusal.
 - Added the command to authoritative CLI metadata and regenerated CLI documentation.
 - Documented the onboarding workflow in the Plant Model and reconciled its backlog items.
@@ -73,6 +75,8 @@ instructional `README.md` is not plant data and should not be copied into real
 workspaces. Tracked markers are required for empty model directories to survive
 a commit and clone. Atomic creation also makes a multi-file onboarding command safer:
 invalid inputs or failed imports cannot leave behind a partial plant directory.
+Structural validation also needs to expose unfinished scaffold content; file
+presence alone is not enough to describe publication readiness.
 
 ## Next Steps
 

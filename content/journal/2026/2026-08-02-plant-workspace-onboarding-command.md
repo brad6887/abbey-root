@@ -25,12 +25,14 @@ workspace with one Abbey command and get an immediate validation result.
 - Kept unknown botanical, care, source, and location facts explicit instead of guessing.
 - Added focused regression coverage for the successful workflow and its safety boundaries.
 - Created and validated Rocky Raccoon's workspace through the finished command.
+- Used Rocky's real onboarding to add adjacent-XMP import and warnings for untouched scaffold content.
 
 ## Lessons Learned
 
 - A template can remain the source of structure without copying its instructional files into every real workspace.
 - The first real use case is where a command contract becomes concrete: identity and structure belong in onboarding, while richer photo metadata and publication remain later workflows.
 - Validation warnings are useful at onboarding time. Rocky Raccoon is structurally valid, while the missing transferred photograph remains visible work rather than hidden debt.
+- A real run caught what fixture-only validation missed: preserving a photo means preserving its adjacent metadata, and existing files can still be unfinished templates.
 
 ## Next Steps
 

@@ -38,8 +38,13 @@ abbey plant new <slug> --name "Plant Name" --type orchid
 The command accepts `--status` and `--date` for initial state and repeatable
 `--photo` arguments for initial photographs. It creates the canonical files and
 directories without copying template-only instructions, initializes verified
-facts, assigns the first imported photo to the hero and current roles, and runs
-Plant Model validation. It refuses to overwrite an existing workspace.
+facts, imports any adjacent matching XMP sidecar, assigns the first imported
+photo to the hero and current roles, and runs Plant Model validation. It refuses
+to overwrite an existing workspace.
+
+An initialized workspace may pass validation with warnings. Template placeholder
+warnings identify narrative, history, inventory, and photo-metadata documents
+that still require plant-specific content before publication review.
 
 Unknown botanical, care, source, and location facts remain `null` for later
 review rather than being guessed.

@@ -175,6 +175,11 @@ assert_contains \
 assert_contains \
   "new runs plant validation" \
   "PASS Plant model validation completed with warnings."
+for document in story.md history.md inventory.md photo-metadata.md; do
+  assert_contains \
+    "new reports template placeholders in $document" \
+    "WARN $document still contains template placeholders"
+done
 
 new_plant_dir="$test_root/new-valid/working/plants/rocky-raccoon"
 for required_path in \
@@ -212,19 +217,27 @@ else
 fi
 
 initial_photo="$test_root/rocky-raccoon.jpg"
+initial_sidecar="$test_root/rocky-raccoon.xmp"
 printf 'initial photograph fixture\n' > "$initial_photo"
+printf 'initial XMP fixture\n' > "$initial_sidecar"
 run_new "$test_root/new-photo" rocky-raccoon \
   --name "Rocky Raccoon" \
   --type orchid \
   --photo "$initial_photo"
 assert_status "new imports an initial photograph" 0
 assert_contains "new reports the imported photograph" "Photos imported: 1"
+assert_contains "new reports the imported XMP sidecar" "XMP sidecars imported: 1"
 
 photo_plant_dir="$test_root/new-photo/working/plants/rocky-raccoon"
 if cmp -s "$initial_photo" "$photo_plant_dir/photos/rocky-raccoon.jpg"; then
   pass "new preserves the imported photograph"
 else
   fail "new preserves the imported photograph"
+fi
+if cmp -s "$initial_sidecar" "$photo_plant_dir/photos/rocky-raccoon.xmp"; then
+  pass "new preserves the adjacent XMP sidecar"
+else
+  fail "new preserves the adjacent XMP sidecar"
 fi
 if grep -Fq "hero: photos/rocky-raccoon.jpg" "$photo_plant_dir/facts.yaml" && \
    grep -Fq "current: photos/rocky-raccoon.jpg" "$photo_plant_dir/facts.yaml"

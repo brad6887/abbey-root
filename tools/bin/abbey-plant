@@ -437,6 +437,7 @@ for template_file in required_template_files:
         error(f"Plant template is incomplete: {template_file}")
 
 seen_names = set()
+photo_sidecars = {}
 for source in photo_sources:
     if not source.is_file():
         error(f"Photo does not exist: {source}")
@@ -445,6 +446,19 @@ for source in photo_sources:
     if source.name in seen_names:
         error(f"Initial photos have the same filename: {source.name}", 2)
     seen_names.add(source.name)
+
+    sidecars = [
+        candidate
+        for candidate in source.parent.iterdir()
+        if candidate.is_file()
+        and candidate.stem.casefold() == source.stem.casefold()
+        and candidate.suffix.casefold() == ".xmp"
+    ]
+    if len(sidecars) > 1:
+        names = ", ".join(sorted(candidate.name for candidate in sidecars))
+        error(f"Photo has multiple adjacent XMP sidecars: {source.name} ({names})")
+    if sidecars:
+        photo_sidecars[source] = sidecars[0]
 
 with facts_template.open("r", encoding="utf-8") as handle:
     facts = yaml.safe_load(handle)
@@ -482,6 +496,9 @@ try:
 
     for source in photo_sources:
         shutil.copy2(source, temporary / "photos" / source.name)
+        sidecar = photo_sidecars.get(source)
+        if sidecar:
+            shutil.copy2(sidecar, temporary / "photos" / sidecar.name)
 
     (temporary / "facts.yaml").write_text(
         yaml.safe_dump(facts, sort_keys=False),
@@ -511,6 +528,7 @@ print(f"Type: {plant_type}")
 print(f"Status: {status}")
 print(f"Date: {onboarding_date.isoformat()}")
 print(f"Photos imported: {len(photo_sources)}")
+print(f"XMP sidecars imported: {len(photo_sidecars)}")
 print(f"Workspace: {destination}")
 PY
 
@@ -967,6 +985,25 @@ if index_value:
         print(f"OK|photos.index exists: {index_value}")
     else:
         print(f"FAIL|photos.index does not exist: {index_value}")
+
+placeholder_markers = {
+    "story.md": ("\nTODO\n",),
+    "history.md": ("## Entry Template", "Describe the event."),
+    "inventory.md": ("\nName:\n", "\nSpecies:\n"),
+    "photo-metadata.md": ("| example.jpg | YYYY-MM-DD |",),
+}
+
+for filename, markers in placeholder_markers.items():
+    document = plant_dir / filename
+    if not document.is_file():
+        continue
+    try:
+        text = document.read_text(encoding="utf-8")
+    except OSError as exc:
+        print(f"FAIL|Unable to read {filename}: {exc}")
+        continue
+    if any(marker in text for marker in markers):
+        print(f"WARN|{filename} still contains template placeholders")
 PY
     )"; then
         fail "Unable to execute facts.yaml validation"
