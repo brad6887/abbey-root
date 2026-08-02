@@ -531,3 +531,19 @@ The story isn't finished—it's simply entered a quieter chapter.
 ### Observations
 
 Doctor Robert appears to have reached an important turning point. The suspected new leaf is now clearly visible as folded leaf tissue emerging from the crown, while the remaining mature leaf stays firm and glossy. With a healthy root system still supporting him, he seems to be shifting from rebuilding roots to producing new foliage for the first time since the rescue.
+
+---
+
+## 2026-07-12 — Weekly Update
+
+### Photos
+
+- doctor-robert-2026-07-12.jpg
+
+### Observations
+
+Doctor Robert received his first fertilizer since the move and continues to show steady recovery. The remaining leaf is thick, glossy, and healthy, while multiple roots are actively growing, giving him a much stronger foundation than he had just a few months ago.
+
+### Care
+
+Fertilized
