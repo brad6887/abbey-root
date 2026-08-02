@@ -404,3 +404,19 @@ Future updates should focus on:
 The immediate goal is not to force flowering.
 
 The priority is allowing the plant to continue building a healthy clump of mature canes that can support stronger flowering in the future.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+- helter-skelter-2026-08-02.jpg
+
+### Observations
+
+Continuing growth. The newest cane is making progress.
+
+### Care
+
+Watered

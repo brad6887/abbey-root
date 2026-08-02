@@ -36,11 +36,11 @@
     },
     {
       "derivative": {
-        "format": "png",
-        "height": 1572,
-        "path": "site/public/images/plants/helter-skelter/current.png",
-        "sha256": "ea52d2a2b7262998295a985fdd430b9b019b97d6b2126a0cac4d3cfd82d96114",
-        "width": 1178
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/helter-skelter/current.jpg",
+        "sha256": "a1e14060271c8f7c68e2462be3194a01b6dfac8506bfa7ea55fc7a7584aa29b1",
+        "width": 1800
       },
       "publication": {
         "field": "photos.current",
@@ -49,8 +49,8 @@
       },
       "source": {
         "canonical_original_preserved": true,
-        "path": "working/plants/helter-skelter/photos/HelterSkelter - 12 of 12.png",
-        "sha256": "201ddef442185c6a34c29a2c5aa382775e6183f28d20f947e442c3ac2db40dff"
+        "path": "working/plants/helter-skelter/photos/helter-skelter-2026-08-02.jpg",
+        "sha256": "5ef8c93d01ad177701e0fbab693d942eccdca8061a8ca2ce0f5d7d52665923ce"
       },
       "tools": {
         "exiftool": "12.76",
@@ -61,7 +61,7 @@
         "colorspace": "sRGB",
         "maximum_edge": 2400,
         "metadata_removed": true,
-        "quality": null
+        "quality": 85
       },
       "validation": {
         "private_metadata_detected": false,
@@ -107,7 +107,7 @@
         "format": "png",
         "height": 1536,
         "path": "site/public/images/plants/helter-skelter/photo-02.png",
-        "sha256": "c61ce126bf064d03d5922223306acfa2e37b21c0e15dd4e60c97630f1d295c28",
+        "sha256": "a72ab98adb5480af3cb76fa69635d28ee3fc2b4b9417a8ab6f2255baf4793523",
         "width": 1152
       },
       "publication": {
@@ -175,7 +175,7 @@
         "format": "png",
         "height": 1536,
         "path": "site/public/images/plants/helter-skelter/photo-04.png",
-        "sha256": "d6cc136fbb33da19d46f32bfd6dae239fe8fdd38682f6508185b9166a715d784",
+        "sha256": "7665dcebdf97614bfc933fc04a5dde50ee4799462726c6beb43220db2fcb34bc",
         "width": 1152
       },
       "publication": {
@@ -277,7 +277,7 @@
         "format": "png",
         "height": 1536,
         "path": "site/public/images/plants/helter-skelter/photo-07.png",
-        "sha256": "87806b27c3718978e98a00ffd6ab0a6b03d28b18bdcfa8bc6ba834ea38e3544f",
+        "sha256": "d1c49f18cb23d39b7b52a032641cecd1c167e4fbaf2a01a2250636a307661618",
         "width": 1152
       },
       "publication": {
@@ -311,7 +311,7 @@
         "format": "png",
         "height": 1536,
         "path": "site/public/images/plants/helter-skelter/photo-08.png",
-        "sha256": "366f3eb4e7f60e5544dcc4cf86a53a9e6c8a8bb8f2d7dae44124d5d9bd4d6353",
+        "sha256": "c7df103df09c222534c0926216d78e6b1eea4bd7e1fa0b34e7ba7cd65e32b3a6",
         "width": 1152
       },
       "publication": {
@@ -345,7 +345,7 @@
         "format": "png",
         "height": 1572,
         "path": "site/public/images/plants/helter-skelter/photo-09.png",
-        "sha256": "3b9209317d424c892b09ef7146b72e9c3b85ac95b13419dda3fb6f147562b76f",
+        "sha256": "bc8489152fd71bc1dfe16e2bbee5e3fbdb7afb14c6e821f4eeb13074edf6d3f6",
         "width": 1178
       },
       "publication": {
@@ -379,7 +379,7 @@
         "format": "png",
         "height": 1572,
         "path": "site/public/images/plants/helter-skelter/photo-10.png",
-        "sha256": "15770a22c081571756e14d136902fdd5a7de8cf89296709e8328e8e9dac70a87",
+        "sha256": "eb02e2410545d13321e01ad9f642886cc4471975cd38cfa10a0834c20cee143c",
         "width": 1178
       },
       "publication": {
@@ -413,7 +413,7 @@
         "format": "png",
         "height": 1572,
         "path": "site/public/images/plants/helter-skelter/photo-11.png",
-        "sha256": "1dd1a74a69f1762c77fa5940ad80f839df6793993d21ea3fa6e45545cb9f2c85",
+        "sha256": "1063c82f055a02f2c48a1143a1176b3a0e0ef9945520701e4306a3ec28178cbe",
         "width": 1178
       },
       "publication": {
@@ -447,7 +447,7 @@
         "format": "png",
         "height": 1572,
         "path": "site/public/images/plants/helter-skelter/photo-12.png",
-        "sha256": "eaec90fd8da8b5e93df8163db4194d2799b5d421b716600060c0fa18330ff4c0",
+        "sha256": "3cb6a9a2035f7b2a45524f3a08f5b7e2770dde8cb53f561f801a5bec09592f03",
         "width": 1178
       },
       "publication": {
@@ -470,6 +470,40 @@
         "maximum_edge": 2400,
         "metadata_removed": true,
         "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/helter-skelter/photo-13.jpg",
+        "sha256": "a1e14060271c8f7c68e2462be3194a01b6dfac8506bfa7ea55fc7a7584aa29b1",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-13",
+        "source_filename": "helter-skelter-2026-08-02.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/helter-skelter/photos/helter-skelter-2026-08-02.jpg",
+        "sha256": "5ef8c93d01ad177701e0fbab693d942eccdca8061a8ca2ce0f5d7d52665923ce"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
       },
       "validation": {
         "private_metadata_detected": false,

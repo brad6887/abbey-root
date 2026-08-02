@@ -8,7 +8,7 @@ species: Cattleya
 acquired: 2026-02-01
 featured: true
 draft: false
-updatedDate: 2026-07-26
+updatedDate: 2026-08-02
 heroImage: /images/plants/mother-natures-son/hero.jpg
 currentImage: /images/plants/mother-natures-son/current.jpg
 tags:
@@ -419,3 +419,20 @@ A bright white root with a green growing tip emerged from the new lead.
 The new root marked the transition from recovery supported by old pseudobulbs
 to self-sustaining new growth. Mother Nature's Son had accepted the repot and
 was actively building the next part of the plant.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+![Mother Nature's Son — 2026-08-02 — Weekly Update](/images/plants/mother-natures-son/photo-34.jpg)
+![Mother Nature's Son — 2026-08-02 — Weekly Update](/images/plants/mother-natures-son/photo-35.jpg)
+
+### Observations
+
+Quiet and steady recovery. The newest leaf continues to develop.
+
+### Care
+
+Watered

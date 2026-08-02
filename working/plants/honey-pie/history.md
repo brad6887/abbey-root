@@ -191,3 +191,20 @@ Future updates should capture:
 - New leaf growth from the crown.
 - Continued root growth.
 - The first rebloom after leaving Kroger.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+- honey-pie-2026-08-02-01.jpg
+- honey-pie-2026-08-02-02.jpg
+
+### Observations
+
+Blooms still doing well but fading a little
+
+### Care
+
+Watered

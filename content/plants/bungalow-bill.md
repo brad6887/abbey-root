@@ -8,7 +8,7 @@ species: Phalaenopsis
 acquired: 2026-03-29
 featured: true
 draft: false
-updatedDate: 2026-07-26
+updatedDate: 2026-08-02
 heroImage: /images/plants/bungalow-bill/hero.png
 currentImage: /images/plants/bungalow-bill/current.jpg
 tags:
@@ -289,3 +289,19 @@ Bungalow Bill remains stable this week. His newest leaf is firm, glossy, and hea
 ### Observations
 
 Bungalow Bill remains stable this week. The newest leaf is firm and healthy, active root growth continues, and the older rescue-damaged leaves have not worsened. The leaf spotting is also unchanged, so recovery is still moving in the right direction—slowly, but steadily.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+![Bungalow Bill — 2026-08-02 — Weekly Update](/images/plants/bungalow-bill/photo-23.jpg)
+
+### Observations
+
+Bill continues to recover. His leaves are hydrated and firm. I am hoping to see a new leaf soon.
+
+### Care
+
+Watered

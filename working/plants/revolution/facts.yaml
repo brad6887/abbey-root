@@ -21,7 +21,7 @@ status:
     city: Fort Worth
     state: Texas
     country: USA
-  updated: 2026-07-26
+  updated: 2026-08-02
 
 care:
   potting_medium: open bark mix
@@ -29,7 +29,7 @@ care:
 
 photos:
   hero: photos/Revolution - 21.jpeg
-  current: photos/Revolution - 35.JPG
+  current: photos/revolution-2026-08-02-01.jpg
   index: "photos/Revolution - 17.JPG"
   metadata: photo-metadata.md
 

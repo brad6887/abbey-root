@@ -352,3 +352,20 @@ Future updates should capture:
 - Continued extension of active root tips.
 - The long-term fate of the oldest drooping leaf.
 - The first new spike and rebloom after the move.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+- lady-madonna-2026-08-02-01.jpg
+- lady-madonna-2026-08-02-02.jpg
+
+### Observations
+
+Lady remains stable
+
+### Care
+
+Watered

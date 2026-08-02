@@ -228,3 +228,19 @@ settled after the move.
 By late July, Phal McCartney looked settled in Texas and fully back to
 business. The new leaf had broadened, flattened, and matured while the older
 leaves and roots remained healthy.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+- phal-mccartney-2026-08-02.jpg
+
+### Observations
+
+Phal continues his steady vegetative growth. New leaf expanded a little.
+
+### Care
+
+Watered

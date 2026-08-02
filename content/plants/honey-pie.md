@@ -8,7 +8,7 @@ species: Phalaenopsis
 acquired: 2026-06-14
 featured: true
 draft: false
-updatedDate: 2026-07-26
+updatedDate: 2026-08-02
 heroImage: /images/plants/honey-pie/hero.jpeg
 currentImage: /images/plants/honey-pie/current.jpg
 tags:
@@ -239,3 +239,20 @@ Future updates should capture:
 - New leaf growth from the crown.
 - Continued root growth.
 - The first rebloom after leaving Kroger.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+![Honey Pie — 2026-08-02 — Weekly Update](/images/plants/honey-pie/photo-13.jpg)
+![Honey Pie — 2026-08-02 — Weekly Update](/images/plants/honey-pie/photo-14.jpg)
+
+### Observations
+
+Blooms still doing well but fading a little
+
+### Care
+
+Watered

@@ -7,7 +7,7 @@ status: thriving
 species: Phalaenopsis
 featured: true
 draft: false
-updatedDate: 2026-07-26
+updatedDate: 2026-08-02
 heroImage: /images/plants/revolution/hero.jpeg
 currentImage: /images/plants/revolution/current.jpg
 indexImage: /images/plants/revolution/index.jpg
@@ -380,3 +380,20 @@ resources.
 The new leaf continued expanding and Revolution remained stable in the weeks
 after the repot. She had moved from flowering, through a major root-system
 cleanup, and back into active growth.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+![Revolution — 2026-08-02 — Weekly Update](/images/plants/revolution/photo-27.jpg)
+![Revolution — 2026-08-02 — Weekly Update](/images/plants/revolution/photo-28.jpg)
+
+### Observations
+
+Steady recovery. The new leaf continues to grow.
+
+### Care
+
+Watered

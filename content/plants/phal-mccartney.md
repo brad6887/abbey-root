@@ -7,9 +7,9 @@ status: thriving
 species: Phalaenopsis
 featured: true
 draft: false
-updatedDate: 2026-07-26
+updatedDate: 2026-08-02
 heroImage: /images/plants/phal-mccartney/hero.jpeg
-currentImage: /images/plants/phal-mccartney/current.jpeg
+currentImage: /images/plants/phal-mccartney/current.jpg
 indexImage: /images/plants/phal-mccartney/index.jpeg
 tags:
 - orchid
@@ -302,3 +302,19 @@ settled after the move.
 By late July, Phal McCartney looked settled in Texas and fully back to
 business. The new leaf had broadened, flattened, and matured while the older
 leaves and roots remained healthy.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+![Phal McCartney — 2026-08-02 — Weekly Update](/images/plants/phal-mccartney/photo-24.jpg)
+
+### Observations
+
+Phal continues his steady vegetative growth. New leaf expanded a little.
+
+### Care
+
+Watered

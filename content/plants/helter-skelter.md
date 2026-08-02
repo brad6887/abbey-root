@@ -8,9 +8,9 @@ species: Dendrobium
 acquired: 2026-03-01
 featured: true
 draft: false
-updatedDate: 2026-07-05
+updatedDate: 2026-08-02
 heroImage: /images/plants/helter-skelter/hero.jpeg
-currentImage: /images/plants/helter-skelter/current.png
+currentImage: /images/plants/helter-skelter/current.jpg
 tags:
 - orchid
 - orchid-rescue
@@ -449,3 +449,19 @@ Future updates should focus on:
 The immediate goal is not to force flowering.
 
 The priority is allowing the plant to continue building a healthy clump of mature canes that can support stronger flowering in the future.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+![Helter Skelter — 2026-08-02 — Weekly Update](/images/plants/helter-skelter/photo-13.jpg)
+
+### Observations
+
+Continuing growth. The newest cane is making progress.
+
+### Care
+
+Watered

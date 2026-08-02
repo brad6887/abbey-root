@@ -39,7 +39,7 @@
         "format": "jpg",
         "height": 2400,
         "path": "site/public/images/plants/lady-madonna/current.jpg",
-        "sha256": "cc827f402328c280595310ef9e73a55b97bb2c311505b741dad1feb4690771f5",
+        "sha256": "0f20ca9ecedd42e4e1e687205ad086f0fc768bd0b232989aec5282bf43e1ab8a",
         "width": 1800
       },
       "publication": {
@@ -49,8 +49,8 @@
       },
       "source": {
         "canonical_original_preserved": true,
-        "path": "working/plants/lady-madonna/photos/Lady_Madonna - 30.JPG",
-        "sha256": "170eaedf1333edaf035cef309330a31d3377969baa8db8f37b1d70d5128865be"
+        "path": "working/plants/lady-madonna/photos/lady-madonna-2026-08-02-01.jpg",
+        "sha256": "2ef261267cef3a5beab7e2fb1125a1e24a8f16901f3c96c292fcd50d969179ca"
       },
       "tools": {
         "exiftool": "12.76",
@@ -697,6 +697,74 @@
         "canonical_original_preserved": true,
         "path": "working/plants/lady-madonna/photos/Lady_Madonna - 30.JPG",
         "sha256": "170eaedf1333edaf035cef309330a31d3377969baa8db8f37b1d70d5128865be"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-20.jpg",
+        "sha256": "0f20ca9ecedd42e4e1e687205ad086f0fc768bd0b232989aec5282bf43e1ab8a",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-20",
+        "source_filename": "lady-madonna-2026-08-02-01.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/lady-madonna-2026-08-02-01.jpg",
+        "sha256": "2ef261267cef3a5beab7e2fb1125a1e24a8f16901f3c96c292fcd50d969179ca"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/lady-madonna/photo-21.jpg",
+        "sha256": "6eee203cbe946a2a62b54d2c3462c75f36ffcf4fb057f836b73ebb6c56e89d96",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-21",
+        "source_filename": "lady-madonna-2026-08-02-02.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/lady-madonna/photos/lady-madonna-2026-08-02-02.jpg",
+        "sha256": "b33b2e9b8824908128e775b0d801e3994a31846138ef97809b7124b68caf530a"
       },
       "tools": {
         "exiftool": "12.76",

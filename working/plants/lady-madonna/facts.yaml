@@ -21,7 +21,7 @@ status:
     city: null
     state: null
     country: null
-  updated: 2026-07-26
+  updated: 2026-08-02
 
 care:
   potting_medium: orchid bark
@@ -29,7 +29,7 @@ care:
 
 photos:
   hero: photos/Lady_Madonna - 17.jpeg
-  current: photos/Lady_Madonna - 30.JPG
+  current: photos/lady-madonna-2026-08-02-01.jpg
   index: null
   metadata: photo-metadata.md
 

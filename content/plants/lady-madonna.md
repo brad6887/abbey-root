@@ -7,7 +7,7 @@ status: recovering
 species: Phalaenopsis
 featured: true
 draft: false
-updatedDate: 2026-07-26
+updatedDate: 2026-08-02
 heroImage: /images/plants/lady-madonna/hero.jpeg
 currentImage: /images/plants/lady-madonna/current.jpg
 tags:
@@ -402,3 +402,20 @@ Future updates should capture:
 - Continued extension of active root tips.
 - The long-term fate of the oldest drooping leaf.
 - The first new spike and rebloom after the move.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+![Lady Madonna — 2026-08-02 — Weekly Update](/images/plants/lady-madonna/photo-20.jpg)
+![Lady Madonna — 2026-08-02 — Weekly Update](/images/plants/lady-madonna/photo-21.jpg)
+
+### Observations
+
+Lady remains stable
+
+### Care
+
+Watered

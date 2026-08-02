@@ -291,3 +291,20 @@ resources.
 The new leaf continued expanding and Revolution remained stable in the weeks
 after the repot. She had moved from flowering, through a major root-system
 cleanup, and back into active growth.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+- revolution-2026-08-02-01.jpg
+- revolution-2026-08-02-02.jpg
+
+### Observations
+
+Steady recovery. The new leaf continues to grow.
+
+### Care
+
+Watered

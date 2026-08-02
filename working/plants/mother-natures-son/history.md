@@ -367,3 +367,20 @@ A bright white root with a green growing tip emerged from the new lead.
 The new root marked the transition from recovery supported by old pseudobulbs
 to self-sustaining new growth. Mother Nature's Son had accepted the repot and
 was actively building the next part of the plant.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+- mother-natures-son-2026-08-02-01.jpg
+- mother-natures-son-2026-08-02-02.jpg
+
+### Observations
+
+Quiet and steady recovery. The newest leaf continues to develop.
+
+### Care
+
+Watered

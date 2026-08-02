@@ -39,7 +39,7 @@
         "format": "jpg",
         "height": 2400,
         "path": "site/public/images/plants/bungalow-bill/current.jpg",
-        "sha256": "4715a94c8533bcfac1fda1c1e3de831703d57730c91b440bf0e74726253cf738",
+        "sha256": "405487796d9aee606ec182cd0eb50e3e5f9af3b5a4ced4798c2d6947415bdf6f",
         "width": 1800
       },
       "publication": {
@@ -49,8 +49,8 @@
       },
       "source": {
         "canonical_original_preserved": true,
-        "path": "working/plants/bungalow-bill/photos/bungalow-bill-2026-07-26.jpg",
-        "sha256": "ebfb9d6ab40394053a1929737a79eb5931dc9dc41206b27bcdd6a2ab3a539a72"
+        "path": "working/plants/bungalow-bill/photos/bungalow-bill-2026-08-02.jpg",
+        "sha256": "b0eb4a34a990e5e46bc8c8c0abcf26f80d159b4f9f9679529e03ef741279f8a4"
       },
       "tools": {
         "exiftool": "12.76",
@@ -799,6 +799,40 @@
         "canonical_original_preserved": true,
         "path": "working/plants/bungalow-bill/photos/bungalow-bill-2026-07-26.jpg",
         "sha256": "ebfb9d6ab40394053a1929737a79eb5931dc9dc41206b27bcdd6a2ab3a539a72"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/bungalow-bill/photo-23.jpg",
+        "sha256": "405487796d9aee606ec182cd0eb50e3e5f9af3b5a4ced4798c2d6947415bdf6f",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-23",
+        "source_filename": "bungalow-bill-2026-08-02.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/bungalow-bill/photos/bungalow-bill-2026-08-02.jpg",
+        "sha256": "b0eb4a34a990e5e46bc8c8c0abcf26f80d159b4f9f9679529e03ef741279f8a4"
       },
       "tools": {
         "exiftool": "12.76",

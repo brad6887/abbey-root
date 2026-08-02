@@ -21,7 +21,7 @@ status:
     city: Fort Worth
     state: Texas
     country: USA
-  updated: 2026-07-26
+  updated: 2026-08-02
 
 care:
   potting_medium: aged compacted sphagnum moss
@@ -29,7 +29,7 @@ care:
 
 photos:
   hero: "photos/Phal_McCartney - 9.jpeg"
-  current: photos/Phal_McCartney - 9.jpeg
+  current: photos/phal-mccartney-2026-08-02.jpg
   index: "photos/Phal_McCartney - 9.jpeg"
   metadata: photo-metadata.md
 
