@@ -237,12 +237,16 @@ commands:
       update:
         description: Add a dated observation and select its current photograph.
         usage: abbey plant update <slug> --photo FILE --narrative TEXT [--care TEXT] [--status STATUS] [--date YYYY-MM-DD] [--dry-run]
+      rename-exports:
+        description: Rename exported photos from XMP captions and capture dates.
+        usage: abbey plant rename-exports <directory> [--dry-run]
     examples:
       - abbey plant validate doctor-robert
       - abbey plant publish doctor-robert
       - abbey plant hero doctor-robert
       - abbey plant index doctor-robert
       - abbey plant update doctor-robert --photo incoming.jpg --narrative "Firm leaves and active roots." --care "Watered."
+      - abbey plant rename-exports ~/incoming/photos --dry-run
 
   knowledge:
     category: ai
