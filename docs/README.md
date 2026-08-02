@@ -134,6 +134,7 @@ Runbooks describe repeatable operational procedures.
 Examples include:
 
 - Network Interface Migration
+- [Plant Website Updates](runbooks/PLANT_WEBSITE_UPDATES.md)
 
 Runbooks document proven procedures that should be followed consistently.
 
