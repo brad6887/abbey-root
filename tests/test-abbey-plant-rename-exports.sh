@@ -17,6 +17,11 @@ assert_contains() {
   if grep -Fq -- "$expected" <<<"$value"; then pass "$name"; else fail "$name"; fi
 }
 
+assert_not_contains() {
+  local name="$1" unexpected="$2" value="$3"
+  if grep -Fq -- "$unexpected" <<<"$value"; then fail "$name"; else pass "$name"; fi
+}
+
 mkdir -p "$test_root/bin"
 cat > "$test_root/bin/exiftool" <<'SCRIPT'
 #!/usr/bin/env bash
@@ -47,12 +52,14 @@ mkdir -p "$photos"
 touch "$photos/IMG_1001.JPG" "$photos/IMG_1001.xmp"
 touch "$photos/IMG_1002.HEIC" "$photos/IMG_1002.xmp"
 touch "$photos/IMG_2001.jpeg" "$photos/IMG_2001.xmp"
+touch "$photos/._IMG_1001.JPG" "$photos/._IMG_1001.xmp"
 
 run_rename "$photos" --dry-run
 [[ "$status" -eq 0 ]] && pass "dry run succeeds" || fail "dry run succeeds"
 assert_contains "earlier duplicate gets first sequence" "IMG_1002.HEIC -> revolution-2026-08-02-01.heic" "$output"
 assert_contains "later duplicate gets second sequence" "IMG_1001.JPG -> revolution-2026-08-02-02.jpg" "$output"
 assert_contains "single photo has no sequence" "IMG_2001.jpeg -> lady-madonna-2026-08-03.jpeg" "$output"
+assert_not_contains "AppleDouble files are ignored" "._IMG_1001" "$output"
 [[ -f "$photos/IMG_1001.JPG" ]] && pass "dry run preserves files" || fail "dry run preserves files"
 
 run_rename "$photos"
@@ -64,6 +71,7 @@ for file in \
 do
   [[ -f "$photos/$file" ]] && pass "creates $file" || fail "creates $file"
 done
+[[ -f "$photos/._IMG_1001.JPG" && -f "$photos/._IMG_1001.xmp" ]] && pass "AppleDouble files remain untouched" || fail "AppleDouble files remain untouched"
 
 missing="$test_root/missing"
 mkdir -p "$missing"

@@ -145,7 +145,13 @@ if not directory.is_dir():
     error(f"Export directory does not exist: {directory}")
 
 images = sorted(
-    (path for path in directory.iterdir() if path.is_file() and path.suffix.lower() in image_suffixes),
+    (
+        path
+        for path in directory.iterdir()
+        if path.is_file()
+        and not path.name.startswith("._")
+        and path.suffix.lower() in image_suffixes
+    ),
     key=lambda path: (path.name.casefold(), path.name),
 )
 if not images:
@@ -153,7 +159,11 @@ if not images:
 
 xmp_by_stem = defaultdict(list)
 for path in directory.iterdir():
-    if path.is_file() and path.suffix.lower() == ".xmp":
+    if (
+        path.is_file()
+        and not path.name.startswith("._")
+        and path.suffix.lower() == ".xmp"
+    ):
         xmp_by_stem[path.stem.casefold()].append(path)
 
 records = []
