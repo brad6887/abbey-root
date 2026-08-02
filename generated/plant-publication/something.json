@@ -39,7 +39,7 @@
         "format": "jpg",
         "height": 2400,
         "path": "site/public/images/plants/something/current.jpg",
-        "sha256": "bc9cc8a0ca979ebf22381bbfe56a91f44fae4ae16d257d5185f64abb88fa5caa",
+        "sha256": "4a0343ef79b3ea8f2b47fa394681b1e68b5676e4eb552eef997c8f64c3a4dfe5",
         "width": 1800
       },
       "publication": {
@@ -49,8 +49,8 @@
       },
       "source": {
         "canonical_original_preserved": true,
-        "path": "working/plants/something/photos/Something - 21.JPG",
-        "sha256": "2cbed57e289cf591c94afd4e6c8a82c9ebab8ad11b5c2d03f43752ce85c8e54c"
+        "path": "working/plants/something/photos/something-2026-08-02.jpg",
+        "sha256": "e4f20c19eafddac7541836dfb6931be1d70235bd24da159e7ba4e999e58d03dd"
       },
       "tools": {
         "exiftool": "12.76",
@@ -799,6 +799,40 @@
         "canonical_original_preserved": true,
         "path": "working/plants/something/photos/Something - 21.JPG",
         "sha256": "2cbed57e289cf591c94afd4e6c8a82c9ebab8ad11b5c2d03f43752ce85c8e54c"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/something/photo-22.jpg",
+        "sha256": "4a0343ef79b3ea8f2b47fa394681b1e68b5676e4eb552eef997c8f64c3a4dfe5",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-22",
+        "source_filename": "something-2026-08-02.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/something/photos/something-2026-08-02.jpg",
+        "sha256": "e4f20c19eafddac7541836dfb6931be1d70235bd24da159e7ba4e999e58d03dd"
       },
       "tools": {
         "exiftool": "12.76",

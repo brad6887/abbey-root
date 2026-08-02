@@ -219,3 +219,43 @@ Future updates should focus on:
 - New leaf production.
 - Future flower spike development.
 - Long-term recovery following the initial rescue.
+
+---
+
+## 2026-07-12 — Weekly Update
+
+### Photos
+
+- bungalow-bill-2026-07-12.jpg
+
+### Observations
+
+Bungalow Bill remains stable this week. His newest leaf is firm and healthy, the crown is intact, and active green root tips continue to emerge. The older rescue-damaged leaves remain droopy but unchanged, while recovery continues to focus on rebuilding the root system.
+
+### Care
+
+Fertilized.
+
+---
+
+## 2026-07-19 — Weekly Update
+
+### Photos
+
+- bungalow-bill-2026-07-19.jpg
+
+### Observations
+
+Bungalow Bill remains stable this week. His newest leaf is firm, glossy, and healthy, while the older rescue-damaged leaves are still droopy but unchanged. The roots continue to look healthy, and after several steady weeks, I’m feeling more confident that the repot and root cleanup worked.
+
+---
+
+## 2026-07-26 — Weekly Update
+
+### Photos
+
+- bungalow-bill-2026-07-26.jpg
+
+### Observations
+
+Bungalow Bill remains stable this week. The newest leaf is firm and healthy, active root growth continues, and the older rescue-damaged leaves have not worsened. The leaf spotting is also unchanged, so recovery is still moving in the right direction—slowly, but steadily.

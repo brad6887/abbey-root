@@ -36,11 +36,11 @@
     },
     {
       "derivative": {
-        "format": "png",
-        "height": 1572,
-        "path": "site/public/images/plants/doctor-robert/current.png",
-        "sha256": "678fb24674aeaa6f781873f7204965f669aafcebdf874fccaadbfa5335d375f7",
-        "width": 1178
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/doctor-robert/current.jpg",
+        "sha256": "63465983731e6336292a21e6b3def34498be9d2f8523cc45d047d5424b248d50",
+        "width": 1800
       },
       "publication": {
         "field": "photos.current",
@@ -49,8 +49,8 @@
       },
       "source": {
         "canonical_original_preserved": true,
-        "path": "working/plants/doctor-robert/photos/Image (4).png",
-        "sha256": "78136ebf5435d245606fcdb2667c70be145f06aaca73e622e80222bcb8bc42de"
+        "path": "working/plants/doctor-robert/photos/doctor-robert-2026-08-02.jpg",
+        "sha256": "836b90185581e735c6a468584db47ebf9fc84e0db0f4cf7cd85917958ac5c24a"
       },
       "tools": {
         "exiftool": "12.76",
@@ -61,7 +61,7 @@
         "colorspace": "sRGB",
         "maximum_edge": 2400,
         "metadata_removed": true,
-        "quality": null
+        "quality": 85
       },
       "validation": {
         "private_metadata_detected": false,
@@ -742,6 +742,74 @@
         "maximum_edge": 2400,
         "metadata_removed": true,
         "quality": null
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/doctor-robert/photo-21.jpg",
+        "sha256": "63465983731e6336292a21e6b3def34498be9d2f8523cc45d047d5424b248d50",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-21",
+        "source_filename": "doctor-robert-2026-08-02.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/doctor-robert/photos/doctor-robert-2026-08-02.jpg",
+        "sha256": "836b90185581e735c6a468584db47ebf9fc84e0db0f4cf7cd85917958ac5c24a"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/doctor-robert/photo-22.jpg",
+        "sha256": "669bb964ca4dcb01e4c38240eb257ad6117fadc1362aba2d14e29b1ce43dee62",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-22",
+        "source_filename": "doctor-robert-2026-08-02-02.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/doctor-robert/photos/doctor-robert-2026-08-02-02.jpg",
+        "sha256": "e37eda7aa7e65ca3ebdcbeae789d5b8f951f7ce63cfdee6494fd56a705c2d379"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
       },
       "validation": {
         "private_metadata_detected": false,

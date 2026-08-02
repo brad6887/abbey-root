@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import { formatDate } from "../../lib/date";
 
 export async function getStaticPaths() {
   const plants = await getCollection("plants");
@@ -54,7 +55,7 @@ const { Content } = await render(plant);
       {plant.data.acquired && (
         <>
           <dt>Acquired</dt>
-          <dd>{plant.data.acquired.toLocaleDateString()}</dd>
+          <dd>{formatDate(plant.data.acquired)}</dd>
         </>
       )}
     </dl>
@@ -74,7 +75,7 @@ const { Content } = await render(plant);
 
         {plant.data.updatedDate && (
           <p>
-            Last updated: {plant.data.updatedDate.toLocaleDateString()}
+            Last updated: {formatDate(plant.data.updatedDate)}
           </p>
         )}
       </section>

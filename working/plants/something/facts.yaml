@@ -17,12 +17,12 @@ rescue:
     country: USA
 
 status:
-  current: recovering
+  current: thriving
   current_location:
     city: Fort Worth
     state: Texas
     country: USA
-  updated: 2026-07-26
+  updated: 2026-08-02
 
 care:
   potting_medium: orchid bark
@@ -30,7 +30,7 @@ care:
 
 photos:
   hero: photos/Something - 1.jpeg
-  current: photos/Something - 21.JPG
+  current: photos/something-2026-08-02.jpg
   index: photos/Something - 21.JPG
   metadata: photo-metadata.md
 
@@ -43,4 +43,4 @@ tags:
   - orchid-rescue
   - phalaenopsis
   - rescue-plant
-  - recovering
+  - thriving

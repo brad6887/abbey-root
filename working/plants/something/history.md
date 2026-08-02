@@ -240,3 +240,15 @@ orchid needs.
 By late July, Something had active leaf growth, active root growth, and firm
 foliage. After Publix clearance, dehydration, repotting, a move across the
 country, and more dehydration, she was finally looking established.
+
+---
+
+## 2026-08-02 — Weekly Update
+
+### Photos
+
+- something-2026-08-02.jpg
+
+### Observations
+
+Something continues her steady recovery this week, with noticeable growth in both the newest leaf and the active root. The older leaves remain firm and stable, and she has clearly shifted from simply surviving to actively rebuilding her root system and foliage.

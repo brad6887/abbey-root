@@ -21,7 +21,7 @@ status:
     city: Fort Worth
     state: Texas
     country: United States
-  updated: 2026-07-05
+  updated: 2026-08-02
 
 care:
   potting_medium: orchid bark
@@ -29,7 +29,7 @@ care:
 
 photos:
   hero: photos/IMG_C52D2813-DCED-40FD-BBF7-605ACE5D9306.jpeg
-  current: photos/Image (4).png
+  current: photos/doctor-robert-2026-08-02.jpg
   index: null
   metadata: photo-metadata.md
 

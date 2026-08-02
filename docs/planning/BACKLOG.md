@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 149 complete · 259 pending · 408 total
+> **Backlog Status:** 149 complete · 264 pending · 413 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -201,8 +201,13 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Publish Doctor Robert through the Plant Model as its first reference profile.
 - [ ] Create `abbey plant new`.
 - [ ] Create `abbey plant inventory`.
-- [ ] Create plant photo import workflow.
+- [ ] Add configured plant photo inbox discovery that filters AppleDouble, XMP, temporary, and unsupported files.
 - [ ] Create plant photo metadata workflow.
+- [ ] Reject repeated `--photo` options in `abbey plant update` until multi-photo updates are supported.
+- [ ] Add multi-photo `abbey plant update` support with explicit current-photo selection.
+- [ ] Add a supported plant revision workflow for existing dated observations.
+- [ ] Design a reviewable multi-plant prepare, review, apply, and publish workflow.
+- [ ] Add regression coverage for UTC-safe Orchid Rescue date formatting.
 - [x] Create plant publishing workflow.
 - [ ] Update the Doctor Robert inventory checklist.
 - [ ] Add AI-assisted plant workspace review.

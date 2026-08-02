@@ -21,7 +21,7 @@ status:
     city: null
     state: Texas
     country: USA
-  updated: 2026-07-05
+  updated: 2026-07-26
 
 care:
   potting_medium: orchid bark
@@ -29,7 +29,7 @@ care:
 
 photos:
   hero: photos/Bungalow Bill - 19.png
-  current: photos/Bungalow Bill - 19.png
+  current: photos/bungalow-bill-2026-07-26.jpg
   index: null
   metadata: photo-metadata.md
 
