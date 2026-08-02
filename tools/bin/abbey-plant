@@ -6,6 +6,7 @@
 #   Manage, validate, and publish plant workspaces.
 #
 # Usage:
+#   abbey plant new <slug> --name NAME --type TYPE [options]
 #   abbey plant validate <slug>
 #   abbey plant publish <slug>
 #   abbey plant hero <slug>
@@ -27,6 +28,7 @@ PUBLIC_PLANTS_DIR="$REPO_DIR/site/public/images/plants"
 PUBLICATION_MANIFEST_DIR="$REPO_DIR/generated/plant-publication"
 IMAGE_DERIVATIVE_HELPER="$ABBEY_TOOLKIT_ROOT/tools/image/create_public_derivative.py"
 BATCH_UPDATE_HELPER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_plant_update_batch.py"
+PLANT_TEMPLATE_DIR="$PLANTS_DIR/_template"
 
 ok_count=0
 warn_count=0
@@ -50,6 +52,7 @@ fail() {
 usage() {
     cat <<'USAGE'
 Usage:
+  abbey plant new <slug> --name NAME --type TYPE [options]
   abbey plant validate <slug>
   abbey plant publish <slug>
   abbey plant hero <slug> [--select NUMBER] [--yes]
@@ -60,6 +63,7 @@ Usage:
   abbey plant update-batch apply <worksheet> [--dry-run]
 
 Commands:
+  new         Create a plant workspace from the canonical template
   validate    Validate a plant workspace against the Plant Model
   publish     Generate Astro content and copy selected public images
   hero        Select the plant photograph assigned to the hero role
@@ -69,6 +73,13 @@ Commands:
               Rename exported photos from XMP captions and capture dates
   update-batch
               Prepare or apply a reviewable multi-plant update worksheet
+
+New options:
+  --name NAME        Human-readable plant name (required)
+  --type TYPE        Plant type, such as orchid (required)
+  --status STATUS    Initial status (default: recovering)
+  --date YYYY-MM-DD  Rescue and initial-status date (default: today)
+  --photo FILE       Import an initial photograph (repeatable)
 
 Update options:
   --photo FILE       Photograph to copy into the plant workspace
@@ -306,6 +317,204 @@ except BaseException:
 
 print(f"Result: renamed {len(records)} photo pair(s)")
 PY
+}
+
+new_plant() {
+    local slug="${1:-}"
+
+    if [[ -z "$slug" ]]; then
+        echo "ERROR: Plant slug is required."
+        echo
+        usage
+        return 2
+    fi
+
+    shift
+
+    local name=""
+    local plant_type=""
+    local status="recovering"
+    local onboarding_date="$(date +%F)"
+    local photos=()
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --name|--type|--status|--date|--photo)
+                if [[ $# -lt 2 ]]; then
+                    echo "ERROR: $1 requires a value."
+                    return 2
+                fi
+                case "$1" in
+                    --name) name="$2" ;;
+                    --type) plant_type="$2" ;;
+                    --status) status="$2" ;;
+                    --date) onboarding_date="$2" ;;
+                    --photo) photos+=("$2") ;;
+                esac
+                shift 2
+                ;;
+            *)
+                echo "ERROR: Unknown plant new option: $1"
+                return 2
+                ;;
+        esac
+    done
+
+    if [[ -z "$name" || -z "$plant_type" ]]; then
+        echo "ERROR: --name and --type are required."
+        return 2
+    fi
+
+    local python_args=(
+        "$PLANTS_DIR"
+        "$PLANT_TEMPLATE_DIR"
+        "$slug"
+        "$name"
+        "$plant_type"
+        "$status"
+        "$onboarding_date"
+    )
+    local photo
+    for photo in "${photos[@]+"${photos[@]}"}"; do
+        python_args+=("$photo")
+    done
+
+    python3 - "${python_args[@]}" <<'PY'
+import datetime
+import os
+import re
+import shutil
+import sys
+import tempfile
+from pathlib import Path
+
+import yaml
+
+plants_dir = Path(sys.argv[1]).resolve()
+template_dir = Path(sys.argv[2]).resolve()
+slug = sys.argv[3]
+name = sys.argv[4].strip()
+plant_type = sys.argv[5].strip().lower()
+status = sys.argv[6].strip().lower()
+date_text = sys.argv[7]
+photo_sources = [Path(value).expanduser().resolve() for value in sys.argv[8:]]
+destination = plants_dir / slug
+
+
+def error(message, exit_status=1):
+    print(f"ERROR: {message}")
+    raise SystemExit(exit_status)
+
+
+if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+    error("Plant slug must contain lowercase letters, numbers, and single hyphens", 2)
+
+if not name or not plant_type:
+    error("--name and --type must not be empty", 2)
+
+valid_statuses = {"recovering", "thriving", "blooming", "dormant", "deceased"}
+if status not in valid_statuses:
+    error("Status must be one of: " + ", ".join(sorted(valid_statuses)), 2)
+
+try:
+    onboarding_date = datetime.date.fromisoformat(date_text)
+except ValueError:
+    error(f"Date must use YYYY-MM-DD: {date_text}", 2)
+
+if destination.exists():
+    error(f"Plant workspace already exists: {destination}")
+
+facts_template = template_dir / "facts.yaml"
+required_template_files = (
+    facts_template,
+    template_dir / "story.md",
+    template_dir / "history.md",
+    template_dir / "inventory.md",
+    template_dir / "photo-metadata.md",
+)
+for template_file in required_template_files:
+    if not template_file.is_file():
+        error(f"Plant template is incomplete: {template_file}")
+
+seen_names = set()
+for source in photo_sources:
+    if not source.is_file():
+        error(f"Photo does not exist: {source}")
+    if source.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
+        error(f"Photo must be a JPG, PNG, or WebP image: {source}", 2)
+    if source.name in seen_names:
+        error(f"Initial photos have the same filename: {source.name}", 2)
+    seen_names.add(source.name)
+
+with facts_template.open("r", encoding="utf-8") as handle:
+    facts = yaml.safe_load(handle)
+if not isinstance(facts, dict):
+    error("Plant template facts.yaml must contain a YAML mapping")
+
+facts["name"] = name
+facts["slug"] = slug
+facts["plant"]["type"] = plant_type
+facts["rescue"]["date"] = onboarding_date
+facts["status"]["current"] = status
+facts["status"]["updated"] = datetime.date.fromisoformat(date_text)
+
+if photo_sources:
+    initial_photo = f"photos/{photo_sources[0].name}"
+    facts["photos"]["hero"] = initial_photo
+    facts["photos"]["current"] = initial_photo
+
+plants_dir.mkdir(parents=True, exist_ok=True)
+temporary = Path(tempfile.mkdtemp(prefix=f".{slug}-", dir=plants_dir))
+
+try:
+    for filename in (
+        "story.md",
+        "history.md",
+        "inventory.md",
+        "photo-metadata.md",
+    ):
+        shutil.copy2(template_dir / filename, temporary / filename)
+
+    (temporary / "photos").mkdir()
+    (temporary / "sources").mkdir()
+    (temporary / "photos" / ".gitkeep").touch()
+    (temporary / "sources" / ".gitkeep").touch()
+
+    for source in photo_sources:
+        shutil.copy2(source, temporary / "photos" / source.name)
+
+    (temporary / "facts.yaml").write_text(
+        yaml.safe_dump(facts, sort_keys=False),
+        encoding="utf-8",
+    )
+
+    replacements = {
+        "story.md": ("# Plant Story", f"# {name}"),
+        "history.md": ("# Plant History", f"# {name}"),
+        "inventory.md": ("# Plant Inventory", f"# {name} Inventory"),
+        "photo-metadata.md": ("# Photo Metadata", f"# {name} Photo Metadata"),
+    }
+    for filename, (old, new) in replacements.items():
+        path = temporary / filename
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+    os.replace(temporary, destination)
+except BaseException:
+    shutil.rmtree(temporary, ignore_errors=True)
+    raise
+
+print("Plant Workspace Created")
+print("=======================")
+print(f"Plant: {name} ({slug})")
+print(f"Type: {plant_type}")
+print(f"Status: {status}")
+print(f"Date: {onboarding_date.isoformat()}")
+print(f"Photos imported: {len(photo_sources)}")
+print(f"Workspace: {destination}")
+PY
+
+    validate_plant "$slug"
 }
 
 update_plant() {
@@ -1155,6 +1364,10 @@ print_summary() {
 command="${1:-help}"
 
 case "$command" in
+    new)
+        shift
+        new_plant "$@"
+        ;;
     validate)
         shift
         validate_plant "${1:-}"

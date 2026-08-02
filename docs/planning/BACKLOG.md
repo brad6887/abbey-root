@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 149 complete · 265 pending · 414 total
+> **Backlog Status:** 151 complete · 263 pending · 414 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -196,10 +196,10 @@ Ongoing practices, design principles, and general areas of improvement belong in
 
 - [x] Define the Plant Model.
 - [x] Create a reusable plant workspace template.
-- [ ] Review the Plant Model against the reusable template and Doctor Robert reference implementation.
+- [x] Review the Plant Model against the reusable template and Doctor Robert reference implementation.
 - [x] Create `abbey plant validate`.
 - [x] Publish Doctor Robert through the Plant Model as its first reference profile.
-- [ ] Create `abbey plant new`.
+- [x] Create `abbey plant new`.
 - [ ] Create `abbey plant inventory`.
 - [ ] Add configured plant photo inbox discovery that filters AppleDouble, XMP, temporary, and unsupported files.
 - [ ] Create plant photo metadata workflow.

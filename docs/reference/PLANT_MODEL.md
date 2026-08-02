@@ -27,6 +27,23 @@ working/plants/doctor-robert/
 
 The remainder of this document defines the required files, metadata fields, and conventions used by every plant profile.
 
+## Creating a Workspace
+
+Create new workspaces through the Abbey toolkit:
+
+```bash
+abbey plant new <slug> --name "Plant Name" --type orchid
+```
+
+The command accepts `--status` and `--date` for initial state and repeatable
+`--photo` arguments for initial photographs. It creates the canonical files and
+directories without copying template-only instructions, initializes verified
+facts, assigns the first imported photo to the hero and current roles, and runs
+Plant Model validation. It refuses to overwrite an existing workspace.
+
+Unknown botanical, care, source, and location facts remain `null` for later
+review rather than being guessed.
+
 ---
 
 # Directory Structure

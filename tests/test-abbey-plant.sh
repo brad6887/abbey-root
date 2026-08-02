@@ -129,6 +129,27 @@ run_validate() {
   set -e
 }
 
+prepare_template() {
+  local fixture_root="$1"
+  mkdir -p "$fixture_root/working/plants"
+  if [[ ! -d "$fixture_root/working/plants/_template" ]]; then
+    cp -R "$ABBEY_ROOT/working/plants/_template" \
+      "$fixture_root/working/plants/_template"
+  fi
+}
+
+run_new() {
+  local fixture_root="$1"
+  shift
+
+  prepare_template "$fixture_root"
+
+  set +e
+  output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_PLANT" new "$@" 2>&1)"
+  status=$?
+  set -e
+}
+
 run_publish() {
   local fixture_root="$1"
   shift
@@ -142,6 +163,107 @@ run_publish() {
 echo "Abbey Plant Validate Regression Tests"
 echo "====================================="
 echo
+
+run_new "$test_root/new-valid" rocky-raccoon \
+  --name "Rocky Raccoon" \
+  --type orchid \
+  --date 2026-08-02
+assert_status "new creates and validates a plant workspace" 0
+assert_contains \
+  "new reports the created workspace" \
+  "Plant: Rocky Raccoon (rocky-raccoon)"
+assert_contains \
+  "new runs plant validation" \
+  "PASS Plant model validation completed with warnings."
+
+new_plant_dir="$test_root/new-valid/working/plants/rocky-raccoon"
+for required_path in \
+  facts.yaml \
+  story.md \
+  history.md \
+  inventory.md \
+  photo-metadata.md \
+  photos \
+  sources \
+  photos/.gitkeep \
+  sources/.gitkeep
+do
+  if [[ -e "$new_plant_dir/$required_path" ]]; then
+    pass "new creates $required_path"
+  else
+    fail "new creates $required_path"
+  fi
+done
+
+if [[ ! -e "$new_plant_dir/README.md" ]]; then
+  pass "new does not copy template instructions into the plant workspace"
+else
+  fail "new does not copy template instructions into the plant workspace"
+fi
+
+if grep -Fq "name: Rocky Raccoon" "$new_plant_dir/facts.yaml" && \
+   grep -Fq "slug: rocky-raccoon" "$new_plant_dir/facts.yaml" && \
+   grep -Fq "  type: orchid" "$new_plant_dir/facts.yaml" && \
+   grep -Fq "  date: 2026-08-02" "$new_plant_dir/facts.yaml"
+then
+  pass "new initializes verified plant facts"
+else
+  fail "new initializes verified plant facts"
+fi
+
+initial_photo="$test_root/rocky-raccoon.jpg"
+printf 'initial photograph fixture\n' > "$initial_photo"
+run_new "$test_root/new-photo" rocky-raccoon \
+  --name "Rocky Raccoon" \
+  --type orchid \
+  --photo "$initial_photo"
+assert_status "new imports an initial photograph" 0
+assert_contains "new reports the imported photograph" "Photos imported: 1"
+
+photo_plant_dir="$test_root/new-photo/working/plants/rocky-raccoon"
+if cmp -s "$initial_photo" "$photo_plant_dir/photos/rocky-raccoon.jpg"; then
+  pass "new preserves the imported photograph"
+else
+  fail "new preserves the imported photograph"
+fi
+if grep -Fq "hero: photos/rocky-raccoon.jpg" "$photo_plant_dir/facts.yaml" && \
+   grep -Fq "current: photos/rocky-raccoon.jpg" "$photo_plant_dir/facts.yaml"
+then
+  pass "new assigns the first photograph to hero and current roles"
+else
+  fail "new assigns the first photograph to hero and current roles"
+fi
+
+run_new "$test_root/new-photo" rocky-raccoon \
+  --name "Rocky Raccoon" \
+  --type orchid
+assert_status "new refuses to overwrite an existing workspace" 1
+assert_contains \
+  "new reports an existing workspace" \
+  "ERROR: Plant workspace already exists:"
+
+run_new "$test_root/new-missing-name" rocky-raccoon --type orchid
+assert_status "new requires a name" 2
+assert_contains \
+  "new explains required identity options" \
+  "ERROR: --name and --type are required."
+
+run_new "$test_root/new-invalid-slug" "Rocky Raccoon" \
+  --name "Rocky Raccoon" \
+  --type orchid
+assert_status "new rejects an invalid slug" 2
+assert_contains \
+  "new explains the slug contract" \
+  "ERROR: Plant slug must contain lowercase letters, numbers, and single hyphens"
+
+run_new "$test_root/new-missing-photo" rocky-raccoon \
+  --name "Rocky Raccoon" \
+  --type orchid \
+  --photo "$test_root/does-not-exist.jpg"
+assert_status "new rejects a missing initial photograph" 1
+assert_contains \
+  "new reports a missing initial photograph" \
+  "ERROR: Photo does not exist:"
 
 run_validate "$test_root/no-slug"
 assert_status "missing slug returns usage status" 2

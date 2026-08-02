@@ -484,6 +484,8 @@ abbey plant <command>
   - `abbey plant hero <slug>`
 - `index` - Select the photograph used on plant index pages.
   - `abbey plant index <slug>`
+- `new` - Create a plant workspace from the canonical template.
+  - `abbey plant new <slug> --name NAME --type TYPE [--status STATUS] [--date YYYY-MM-DD] [--photo FILE ...]`
 - `publish` - Generate Astro content and copy selected public images.
   - `abbey plant publish <slug>`
 - `rename-exports` - Rename exported photos from XMP captions and capture dates.
@@ -498,6 +500,7 @@ abbey plant <command>
 **Examples**
 
 ```text
+abbey plant new rocky-raccoon --name "Rocky Raccoon" --type orchid --photo incoming.jpg
 abbey plant validate doctor-robert
 abbey plant publish doctor-robert
 abbey plant hero doctor-robert

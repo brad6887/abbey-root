@@ -222,6 +222,9 @@ commands:
     usage: abbey plant <command>
     hidden: false
     subcommands:
+      new:
+        description: Create a plant workspace from the canonical template.
+        usage: abbey plant new <slug> --name NAME --type TYPE [--status STATUS] [--date YYYY-MM-DD] [--photo FILE ...]
       validate:
         description: Validate a plant workspace against the Plant Model.
         usage: abbey plant validate <slug>
@@ -244,6 +247,7 @@ commands:
         description: Prepare or apply a reviewable multi-plant update worksheet.
         usage: abbey plant update-batch <prepare|apply> [options]
     examples:
+      - abbey plant new rocky-raccoon --name "Rocky Raccoon" --type orchid --photo incoming.jpg
       - abbey plant validate doctor-robert
       - abbey plant publish doctor-robert
       - abbey plant hero doctor-robert
