@@ -41,7 +41,11 @@ def plant_slugs(root):
     plants_dir = root / "working" / "plants"
     if not plants_dir.is_dir():
         error(f"Plant workspace directory does not exist: {plants_dir}")
-    return sorted(path.name for path in plants_dir.iterdir() if path.is_dir())
+    return sorted(
+        path.name
+        for path in plants_dir.iterdir()
+        if path.is_dir() and not path.name.startswith("_")
+    )
 
 
 def prepare(args):

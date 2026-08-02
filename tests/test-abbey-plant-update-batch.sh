@@ -53,6 +53,7 @@ run_batch() {
 create_plant doctor-robert "Doctor Robert"
 create_plant something "Something"
 create_plant no-update "No Update"
+mkdir -p "$test_root/working/plants/_template"
 mkdir -p "$test_root/incoming"
 for file in \
   doctor-robert-2026-08-02-01.jpg \
@@ -70,6 +71,7 @@ run_batch prepare "$test_root/incoming" --date 2026-08-02
 [[ "$status" -eq 0 ]] && pass "prepare succeeds" || fail "prepare succeeds"
 assert_contains "prepare reports multi-photo plant" "OK   doctor-robert: 2 photo(s)" "$output"
 assert_contains "prepare warns and skips plant without photos" "WARN no-update: no photos for 2026-08-02; skipped" "$output"
+if grep -Fq '_template' <<<"$output"; then fail "prepare ignores template workspace"; else pass "prepare ignores template workspace"; fi
 assert_contains "prepare reports ignored older photo" "INFO Ignored 1 photo(s) from other dates" "$output"
 [[ -f "$worksheet" ]] && pass "prepare creates default worksheet" || fail "prepare creates default worksheet"
 grep -Fq 'current: something-2026-08-02.jpg' "$worksheet" && pass "single photo becomes current" || fail "single photo becomes current"
