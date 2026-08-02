@@ -103,6 +103,13 @@ def prepare(args):
         if not photos:
             print(f"WARN {slug}: no photos for {date}; skipped")
             continue
+        history_path = root / "working" / "plants" / slug / "history.md"
+        if not history_path.is_file():
+            error(f"Plant history does not exist: {history_path}")
+        history = history_path.read_text(encoding="utf-8")
+        if re.search(rf"^## {re.escape(date)} —", history, re.MULTILINE):
+            print(f"WARN {slug}: history already has an update for {date}; skipped")
+            continue
         print(f"OK   {slug}: {len(photos)} photo(s)")
         updates.append({
             "plant": slug,

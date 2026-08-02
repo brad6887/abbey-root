@@ -446,6 +446,11 @@ Plants without matching photos receive a warning and are omitted from the
 worksheet. This represents no update for that plant on that date; it is not a
 validation failure and does not create an empty history entry.
 
+Plants whose histories already contain an entry for the selected date also
+receive a warning and are omitted, even when matching photos remain in the
+incoming directory. This prevents an already completed observation from
+blocking unrelated updates during apply.
+
 Review the worksheet and provide a narrative for every included plant. A
 single photo is automatically selected as current. When an update contains
 multiple photos, select one explicitly in the worksheet's `current` field.

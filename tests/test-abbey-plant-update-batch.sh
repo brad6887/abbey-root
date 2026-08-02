@@ -53,11 +53,14 @@ run_batch() {
 create_plant doctor-robert "Doctor Robert"
 create_plant something "Something"
 create_plant no-update "No Update"
+create_plant already-updated "Already Updated"
+printf '\n## 2026-08-02 — Weekly Update\n' >> "$test_root/working/plants/already-updated/history.md"
 mkdir -p "$test_root/working/plants/_template"
 mkdir -p "$test_root/incoming"
 for file in \
   doctor-robert-2026-08-02-01.jpg \
   doctor-robert-2026-08-02-02.jpg \
+  already-updated-2026-08-02.jpg \
   something-2026-08-02.jpg
 do
   printf '%s\n' "$file" > "$test_root/incoming/$file"
@@ -71,12 +74,14 @@ run_batch prepare "$test_root/incoming" --date 2026-08-02
 [[ "$status" -eq 0 ]] && pass "prepare succeeds" || fail "prepare succeeds"
 assert_contains "prepare reports multi-photo plant" "OK   doctor-robert: 2 photo(s)" "$output"
 assert_contains "prepare warns and skips plant without photos" "WARN no-update: no photos for 2026-08-02; skipped" "$output"
+assert_contains "prepare warns and skips existing update" "WARN already-updated: history already has an update for 2026-08-02; skipped" "$output"
 if grep -Fq '_template' <<<"$output"; then fail "prepare ignores template workspace"; else pass "prepare ignores template workspace"; fi
 assert_contains "prepare reports ignored older photo" "INFO Ignored 1 photo(s) from other dates" "$output"
 [[ -f "$worksheet" ]] && pass "prepare creates default worksheet" || fail "prepare creates default worksheet"
 grep -Fq 'current: something-2026-08-02.jpg' "$worksheet" && pass "single photo becomes current" || fail "single photo becomes current"
 grep -Fq 'current: null' "$worksheet" && pass "multiple photos require current selection" || fail "multiple photos require current selection"
 if grep -Fq 'plant: no-update' "$worksheet"; then fail "skipped plant is omitted"; else pass "skipped plant is omitted"; fi
+if grep -Fq 'plant: already-updated' "$worksheet"; then fail "existing update is omitted"; else pass "existing update is omitted"; fi
 
 run_batch apply "$worksheet" --dry-run
 [[ "$status" -eq 1 ]] && pass "incomplete worksheet fails" || fail "incomplete worksheet fails"
