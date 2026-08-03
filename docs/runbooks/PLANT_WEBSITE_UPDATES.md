@@ -2,9 +2,10 @@
 
 ## Purpose
 
-Use this runbook to update existing plant profiles on BradCooke.com. It covers
-individual observations, multi-plant batches, manual fact or history
-corrections, validation, publishing, and session completion.
+Use this runbook to create and update plant profiles on BradCooke.com. It
+covers new-plant onboarding, individual observations, multi-plant batches,
+manual fact or history corrections, validation, publishing, and session
+completion.
 
 Canonical plant material lives under `working/plants/<slug>/`. Files under
 `content/plants/`, `generated/plant-publication/`, and
@@ -25,6 +26,141 @@ git status
 
 Begin from a clean working tree. Keep one observation date or one coherent
 correction as the session objective.
+
+---
+
+## New Plant Onboarding
+
+Use this workflow when a plant does not yet have a canonical workspace under
+`working/plants/`. It was validated end to end through Rocky Raccoon's first
+real onboarding and publication.
+
+### 1. Prepare and Verify the Initial Photo
+
+Caption the photo with the plant's final display name and export the original
+image with an adjacent XMP sidecar into the incoming directory:
+
+```text
+IMG_9896.JPG
+IMG_9896.xmp
+```
+
+Preview the metadata-derived rename before changing anything:
+
+```bash
+abbey plant rename-exports ~/incoming/photos --dry-run
+```
+
+The proposed slug must match the intended plant slug. If the caption is wrong,
+correct the XMP description and repeat the dry run:
+
+```bash
+exiftool \
+  -XMP-dc:Description="Plant Name" \
+  ~/incoming/photos/IMG_9896.xmp
+
+abbey plant rename-exports ~/incoming/photos --dry-run
+```
+
+ExifTool retains a recoverable `_original` backup unless explicitly told not
+to. Apply the rename only after the preview is correct:
+
+```bash
+abbey plant rename-exports ~/incoming/photos
+```
+
+### 2. Create the Canonical Workspace
+
+Create the workspace with verified identity and initial-state facts:
+
+```bash
+abbey plant new <slug> \
+  --name "Plant Name" \
+  --type orchid \
+  --status recovering \
+  --date YYYY-MM-DD \
+  --photo ~/incoming/photos/<slug>-YYYY-MM-DD.jpg
+```
+
+The command:
+
+- refuses to overwrite an existing workspace
+- copies the initial photograph into `working/plants/<slug>/photos/`
+- copies an adjacent matching XMP sidecar when present
+- assigns the first photo to the hero and current roles
+- creates the canonical Plant Model documents and required directories
+- validates the created workspace immediately
+
+Confirm that the command reports the expected photo and XMP import counts.
+
+### 3. Complete Verified Facts
+
+Edit:
+
+```text
+working/plants/<slug>/facts.yaml
+```
+
+Record known botanical identity, acquisition source and location, current
+location, care, container, and tags. Use full location names such as `Texas`
+and `United States`. Preserve `null` for facts the tag or direct observation
+does not establish; do not guess a species or hybrid status merely because the
+plant is a retail Phalaenopsis.
+
+Typical rescue tags are:
+
+```yaml
+tags:
+  - orchid
+  - orchid-rescue
+  - phalaenopsis
+  - rescue-plant
+```
+
+### 4. Replace Scaffold Content
+
+Replace every template section with verified plant-specific content:
+
+- `inventory.md` — current leaves, roots, flowers, potting, concerns, and
+  monitored conditions
+- `history.md` — dated acquisition event, initial photo, observations, care
+  already performed, and next steps
+- `story.md` — concise public narrative grounded in the history
+- `photo-metadata.md` — filename, capture date, description, metadata sources,
+  correction history, and ExifTool verification
+
+When later information changes an initial observation, update all affected
+canonical documents together. For example, a newly confirmed yellowing leaf
+belongs in both current inventory and the dated rescue history.
+
+### 5. Validate Readiness
+
+Run validation after each coherent group of edits:
+
+```bash
+abbey plant validate <slug>
+```
+
+Template-placeholder warnings are actionable and should be resolved before
+publication. An optional-field warning may be an honest final state; for
+example, `plant.species: null` is correct when the retail tag did not designate
+a species.
+
+Search directly for stale scaffold markers before publishing:
+
+```bash
+if rg -n 'TODO|Entry Template|example\.jpg|Describe the event' \
+  working/plants/<slug>
+then
+  echo "FAIL placeholder content remains"
+else
+  echo "PASS no placeholder content remains"
+fi
+```
+
+Continue with **Publish and Verify**, then **Capture and Commit the Session**.
+Do not remove or overwrite the incoming originals until canonical source
+preservation and public derivative sanitization have both been verified.
 
 ---
 
@@ -289,6 +425,53 @@ Build the complete site:
 
 ```bash
 abbey site build
+```
+
+Inspect the generated page and publication manifest:
+
+```bash
+slug="<slug>"
+sed -n '1,160p' "content/plants/$slug.md"
+python3 -m json.tool "generated/plant-publication/$slug.json"
+```
+
+For a new import, compare the canonical photograph and XMP sidecar with their
+reviewed incoming sources:
+
+```bash
+photo="<photo>"
+cmp -s \
+  "$HOME/incoming/photos/$photo.jpg" \
+  "working/plants/$slug/photos/$photo.jpg" \
+  && echo "PASS canonical photo preserved"
+
+cmp -s \
+  "$HOME/incoming/photos/$photo.xmp" \
+  "working/plants/$slug/photos/$photo.xmp" \
+  && echo "PASS canonical XMP preserved"
+```
+
+The publication manifest must report `canonical_original_preserved: true`,
+`source_hash_unchanged: true`, and `private_metadata_detected: false` for every
+derivative. Confirm directly that each public image exposes no private fields:
+
+```bash
+for image in "site/public/images/plants/$slug"/*.{jpg,jpeg,png,webp}
+do
+  [[ -e "$image" ]] || continue
+  metadata="$(
+    exiftool -s3 \
+      -GPSLatitude -GPSLongitude -GPSPosition \
+      -SerialNumber -InternalSerialNumber \
+      "$image"
+  )"
+  if [[ -n "$metadata" ]]; then
+    echo "FAIL private metadata found: $image"
+    printf '%s\n' "$metadata"
+  else
+    echo "PASS no private metadata: $image"
+  fi
+done
 ```
 
 Then review:
