@@ -45,3 +45,18 @@ The suspected nursery plug has not been confirmed. The suspicion is based on the
 - Determine whether repotting is needed
 - Establish an appropriate watering and recovery plan
 - Monitor leaf hydration and new growth
+
+---
+
+## 2026-08-03 — Weekly Update
+
+### Photos
+
+- rocky-raccoon-2026-08-03.jpg
+
+### Observations
+
+Rocky Raccoon — Day 2
+Rocky’s leaves are still pretty floppy today, but that isn’t a surprise. He was extremely dry when I brought him home, and one good soak wasn’t going to undo all of that overnight.
+I repotted him yesterday and found the nursery plug we suspected, but the good news is that most of the roots were still in decent shape. For now, I’m leaving him alone to settle into the fresh bark and watching for the leaves to slowly firm up or for new root growth to start.
+I’m documenting the whole process as I go, and a complete orchid rescue guide is coming soon.
