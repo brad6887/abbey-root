@@ -19,6 +19,8 @@
 | ai-worker01 | 192.168.1.87 | ai | Yes | Yes | 3 |
 | edge01 | 192.168.1.221 | edge_services | No | Yes | 1 |
 | rocky-ansible01 | 192.168.1.88 | automation | No | Yes | 0 |
+| sensor01 | 192.168.1.222 | sensors | No | No | 0 |
+| sites01 | 192.168.1.84 | web | No | Yes | 0 |
 | ubuntu-dev01 | 192.168.1.86 | infrastructure | Yes | Yes | 10 |
 
 ---
@@ -126,6 +128,67 @@ Ansible control node
 - Ansible Control Node
 - Git Repository
 - Automation
+
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | No |
+| Homepage Server Entry | Yes |
+| Homepage Services | 0 |
+
+
+---
+
+### sensor01
+
+**Description**
+
+Temperature and humidity sensor
+
+**IP Address**
+
+192.168.1.222
+
+**Inventory Groups**
+
+- sensors
+
+**Purpose**
+
+- Environmental monitoring
+- Temperature sensing
+- Humidity sensing
+
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | No |
+| Homepage Server Entry | No |
+| Homepage Services | 0 |
+
+
+---
+
+### sites01
+
+**Description**
+
+Static website hosting
+
+**IP Address**
+
+192.168.1.84
+
+**Inventory Groups**
+
+- web
+
+**Purpose**
+
+- Static website hosting
+- Production web content
 
 **Capabilities**
 

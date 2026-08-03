@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ static_site.domain }} | Abbey Root</title>
+  <style>
+    body {
+      max-width: 48rem;
+      margin: 5rem auto;
+      padding: 0 1.5rem;
+      font-family: system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+    }
+
+    code {
+      padding: 0.15rem 0.35rem;
+      background: #eee;
+      border-radius: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Abbey Root</p>
+    <h1>{{ static_site.domain }}</h1>
+    <p>
+      Static website hosting is online on <code>{{ inventory_hostname }}</code>.
+    </p>
+    <p>
+      This bootstrap release confirms that nginx, the release directory
+      structure, SELinux labeling, and host firewall are configured.
+    </p>
+  </main>
+</body>
+</html>

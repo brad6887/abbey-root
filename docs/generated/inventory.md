@@ -20,10 +20,20 @@ Generated automatically by Ansible.
 
 - ubuntu-dev01
 
+### sensors
+
+- sensor01
+
+### web
+
+- sites01
+
 
 ## All Hosts
 
 - ai-worker01
 - edge01
 - rocky-ansible01
+- sensor01
+- sites01
 - ubuntu-dev01

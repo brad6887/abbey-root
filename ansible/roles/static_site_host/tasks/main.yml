@@ -1,0 +1,141 @@
+---
+- name: Validate static site host configuration
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == "RedHat"
+      - static_site_host_sites | length > 0
+    fail_msg: >-
+      static_site_host currently supports Red Hat-family hosts and requires at
+      least one site definition.
+
+- name: Validate static site definitions
+  ansible.builtin.assert:
+    that:
+      - static_site.domain | default("") | length > 0
+      - static_site.server_names | default([]) | length > 0
+    fail_msg: "Each static site requires domain and server_names values."
+  loop: "{{ static_site_host_sites }}"
+  loop_control:
+    loop_var: static_site
+    label: "{{ static_site.domain | default('undefined') }}"
+
+- name: Install static site host packages
+  ansible.builtin.dnf:
+    name:
+      - nginx
+      - firewalld
+      - policycoreutils-python-utils
+    state: present
+
+- name: Create static site deployment group
+  ansible.builtin.group:
+    name: "{{ static_site_host_deploy_group }}"
+    state: present
+
+- name: Create static site deployment user
+  ansible.builtin.user:
+    name: "{{ static_site_host_deploy_user }}"
+    group: "{{ static_site_host_deploy_group }}"
+    home: "/home/{{ static_site_host_deploy_user }}"
+    shell: /bin/bash
+    create_home: true
+    state: present
+
+- name: Create static site root
+  ansible.builtin.file:
+    path: "{{ static_site_host_root }}"
+    state: directory
+    owner: "{{ static_site_host_deploy_user }}"
+    group: "{{ static_site_host_deploy_group }}"
+    mode: "0755"
+
+- name: Inspect nginx configuration directory
+  ansible.builtin.stat:
+    path: /etc/nginx/conf.d
+  register: static_site_host_nginx_conf_dir
+
+- name: Configure static sites
+  ansible.builtin.include_tasks: site.yml
+  loop: "{{ static_site_host_sites }}"
+  loop_control:
+    loop_var: static_site
+    label: "{{ static_site.domain }}"
+
+- name: Inspect custom SELinux file contexts
+  ansible.builtin.command:
+    argv:
+      - /usr/sbin/semanage
+      - fcontext
+      - -l
+      - -C
+  register: static_site_host_selinux_contexts
+  changed_when: false
+  when: not ansible_check_mode
+
+- name: Define persistent SELinux context for static content
+  ansible.builtin.command:
+    argv:
+      - /usr/sbin/semanage
+      - fcontext
+      - -a
+      - -t
+      - httpd_sys_content_t
+      - "{{ static_site_host_root }}(/.*)?"
+  when:
+    - not ansible_check_mode
+    - static_site_host_root ~ "(/.*)?" not in static_site_host_selinux_contexts.stdout
+
+- name: Apply SELinux contexts to static content
+  ansible.builtin.command:
+    argv:
+      - /usr/sbin/restorecon
+      - -RFv
+      - "{{ static_site_host_root }}"
+  register: static_site_host_restorecon
+  changed_when: static_site_host_restorecon.stdout | length > 0
+  when: not ansible_check_mode
+
+- name: Enable and start firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    enabled: true
+    state: started
+  when: not ansible_check_mode
+
+- name: Check permanent HTTP firewall service
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/firewall-cmd
+      - --permanent
+      - --query-service=http
+  register: static_site_host_http_firewall
+  changed_when: false
+  failed_when: static_site_host_http_firewall.rc not in [0, 1]
+  when: not ansible_check_mode
+
+- name: Allow permanent HTTP service
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/firewall-cmd
+      - --permanent
+      - --add-service=http
+  changed_when: true
+  notify: Reload firewalld
+  when:
+    - not ansible_check_mode
+    - static_site_host_http_firewall.rc == 1
+
+- name: Validate nginx configuration
+  ansible.builtin.command:
+    argv:
+      - /usr/sbin/nginx
+      - -t
+  changed_when: false
+  when: not ansible_check_mode
+
+- name: Enable and start nginx
+  ansible.builtin.systemd:
+    name: nginx
+    enabled: true
+    state: started
+  when: not ansible_check_mode

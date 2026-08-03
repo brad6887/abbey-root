@@ -1,0 +1,20 @@
+---
+host_description: Static website hosting
+primary_ip: 192.168.1.84
+homepage_icon: nginx.png
+
+server_purpose:
+  - Static website hosting
+  - Production web content
+
+docker_host: false
+homepage_show_server: true
+
+static_site_host_sites:
+  - domain: abbeyroot.com
+    default_server: true
+    server_names:
+      - abbeyroot.com
+      - www.abbeyroot.com
+      - sites01
+      - sites01.home.arpa

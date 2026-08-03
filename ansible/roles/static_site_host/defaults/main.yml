@@ -1,0 +1,6 @@
+---
+static_site_host_root: /srv/www
+static_site_host_deploy_user: abbey-deploy
+static_site_host_deploy_group: abbey-deploy
+static_site_host_initial_release: bootstrap
+static_site_host_sites: []

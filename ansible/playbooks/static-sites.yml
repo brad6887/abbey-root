@@ -1,0 +1,7 @@
+---
+- name: Configure static website hosts
+  hosts: web
+  become: true
+
+  roles:
+    - static_site_host

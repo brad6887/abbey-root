@@ -1,0 +1,63 @@
+---
+- name: Inspect initial release directory
+  ansible.builtin.stat:
+    path: >-
+      {{ static_site_host_root }}/{{ static_site.domain }}/releases/{{
+      static_site_host_initial_release }}
+  register: static_site_host_release_directory
+
+- name: Create static site directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ static_site_host_deploy_user }}"
+    group: "{{ static_site_host_deploy_group }}"
+    mode: "0755"
+  loop:
+    - "{{ static_site_host_root }}/{{ static_site.domain }}"
+    - "{{ static_site_host_root }}/{{ static_site.domain }}/releases"
+    - >-
+      {{ static_site_host_root }}/{{ static_site.domain }}/releases/{{
+      static_site_host_initial_release }}
+
+- name: Deploy initial static site placeholder
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: >-
+      {{ static_site_host_root }}/{{ static_site.domain }}/releases/{{
+      static_site_host_initial_release }}/index.html
+    owner: "{{ static_site_host_deploy_user }}"
+    group: "{{ static_site_host_deploy_group }}"
+    mode: "0644"
+  when:
+    - not ansible_check_mode or static_site_host_release_directory.stat.exists
+
+- name: Inspect current release link
+  ansible.builtin.stat:
+    path: "{{ static_site_host_root }}/{{ static_site.domain }}/current"
+    follow: false
+  register: static_site_host_current_link
+
+- name: Create initial current release link
+  ansible.builtin.file:
+    src: >-
+      {{ static_site_host_root }}/{{ static_site.domain }}/releases/{{
+      static_site_host_initial_release }}
+    dest: "{{ static_site_host_root }}/{{ static_site.domain }}/current"
+    state: link
+    owner: "{{ static_site_host_deploy_user }}"
+    group: "{{ static_site_host_deploy_group }}"
+  when:
+    - not static_site_host_current_link.stat.exists
+    - not ansible_check_mode or static_site_host_release_directory.stat.exists
+
+- name: Deploy nginx virtual host
+  ansible.builtin.template:
+    src: site.conf.j2
+    dest: "/etc/nginx/conf.d/{{ static_site.domain }}.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload nginx
+  when:
+    - not ansible_check_mode or static_site_host_nginx_conf_dir.stat.exists

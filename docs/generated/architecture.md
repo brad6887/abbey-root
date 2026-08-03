@@ -6,10 +6,10 @@ Generated automatically by Ansible.
 
 | Item | Count |
 |------|------:|
-| Hosts | 4 |
+| Hosts | 6 |
 | Docker Hosts | 2 |
-| Homepage Servers | 4 |
-| Inventory Groups | 4 |
+| Homepage Servers | 5 |
+| Inventory Groups | 6 |
 
 ---
 
@@ -21,7 +21,7 @@ Generated automatically by Ansible.
 | Source Control | Git / GitHub |
 | Configuration Management | Ansible |
 | Documentation | Generated from inventory and host variables |
-| Managed Hosts | 4 |
+| Managed Hosts | 6 |
 
 ---
 
@@ -126,6 +126,65 @@ Ansible control node
 **Inventory Groups**
 
 - automation
+
+
+---
+
+### sensor01
+
+**Description**
+
+Temperature and humidity sensor
+
+**IP Address**
+
+192.168.1.222
+
+**Purpose**
+
+- Environmental monitoring
+- Temperature sensing
+- Humidity sensing
+
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | No |
+| Homepage Visible | No |
+
+**Inventory Groups**
+
+- sensors
+
+
+---
+
+### sites01
+
+**Description**
+
+Static website hosting
+
+**IP Address**
+
+192.168.1.84
+
+**Purpose**
+
+- Static website hosting
+- Production web content
+
+**Capabilities**
+
+| Capability | Value |
+|------------|-------|
+| Docker Host | No |
+| Homepage Visible | Yes |
+
+**Inventory Groups**
+
+- web
 
 
 ---

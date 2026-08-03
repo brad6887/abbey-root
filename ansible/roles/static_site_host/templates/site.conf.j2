@@ -1,0 +1,27 @@
+# Managed by Ansible.
+
+server {
+    listen 80{% if static_site.default_server | default(false) %} default_server{% endif %};
+    listen [::]:80{% if static_site.default_server | default(false) %} default_server{% endif %};
+
+    server_name {{ static_site.server_names | join(' ') }};
+
+    root {{ static_site_host_root }}/{{ static_site.domain }}/current;
+    index index.html;
+
+    access_log /var/log/nginx/{{ static_site.domain }}.access.log;
+    error_log /var/log/nginx/{{ static_site.domain }}.error.log;
+
+    server_tokens off;
+    autoindex off;
+
+    location = /healthz {
+        access_log off;
+        default_type text/plain;
+        return 200 "ok\n";
+    }
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

@@ -10,9 +10,9 @@
 
 | Item | Count |
 |------|------:|
-| Hosts | 4 |
+| Hosts | 6 |
 | Docker Hosts | 2 |
-| Homepage Hosts | 4 |
+| Homepage Hosts | 5 |
 
 
 | Homepage Services | 14 |
@@ -26,6 +26,8 @@
 | ai-worker01 | 192.168.1.87 | AI experimentation and Docker services |
 | edge01 | 192.168.1.221 | Internal DNS and edge services |
 | rocky-ansible01 | 192.168.1.88 | Ansible control node |
+| sensor01 | 192.168.1.222 | Temperature and humidity sensor |
+| sites01 | 192.168.1.84 | Static website hosting |
 | ubuntu-dev01 | 192.168.1.86 | Infrastructure and Docker services |
 
 ---
