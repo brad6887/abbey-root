@@ -11,16 +11,16 @@ rescue:
   date: null
   source: Lowe's clearance rack (unconfirmed)
   location:
-    city: null
-    state: null
-    country: null
+    city: Naples
+    state: Florida
+    country: USA
 
 status:
   current: recovering
   current_location:
-    city: null
-    state: null
-    country: null
+    city: Fort Worth
+    state: Florida
+    country: USA
   updated: 2026-08-02
 
 care:

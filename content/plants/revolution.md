@@ -5,6 +5,7 @@ description: The rescue and recovery story of Revolution, a Phalaenopsis rescued
 type: orchid
 status: thriving
 species: Phalaenopsis
+acquired: 2019-01-01
 featured: true
 draft: false
 updatedDate: 2026-08-02

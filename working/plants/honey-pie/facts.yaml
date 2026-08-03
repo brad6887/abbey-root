@@ -11,7 +11,7 @@ rescue:
   date: 2026-06-14
   source: Kroger
   location:
-    city: null
+    city: Fort Worth
     state: Texas
     country: USA
 

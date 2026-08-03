@@ -8,10 +8,10 @@ plant:
   hybrid: true
 
 rescue:
-  date: null
+  date: 2019-01-01
   source: Friend
   location:
-    city: null
+    city: Forth Worth
     state: Texas
     country: USA
 

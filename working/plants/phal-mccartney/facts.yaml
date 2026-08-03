@@ -9,9 +9,9 @@ plant:
 
 rescue:
   date: null
-  source: Publix (recalled, unconfirmed)
+  source: Publix 
   location:
-    city: null
+    city: Naples
     state: Florida
     country: USA
 

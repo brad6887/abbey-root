@@ -11,7 +11,7 @@ rescue:
   date: 2026-02-01
   source: Better-Gro
   location:
-    city: null
+    city: Naples
     state: Florida
     country: USA
 

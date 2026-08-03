@@ -9,16 +9,16 @@ plant:
 
 rescue:
   date: 2026-03-29
-  source: clearance rack
+  source: Lowes clearance rack
   location:
-    city: null
-    state: null
+    city: Naples
+    state: Florida
     country: USA
 
 status:
   current: recovering
   current_location:
-    city: null
+    city: Naples
     state: Texas
     country: USA
   updated: 2026-08-02
