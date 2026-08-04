@@ -1,0 +1,30 @@
+schema_version: 1
+project:
+  name: Abbey Root
+  slug: abbey-root
+  description: Reference implementation of the Abbey Framework.
+framework:
+  name: Abbey
+  schema_version: 1
+capabilities:
+  infrastructure: true
+  internal_dns: true
+workflow:
+  journal:
+    policy: required
+validation:
+  commands:
+    - git diff --check
+paths:
+  planning: docs/planning
+  session_updates: docs/session-updates
+  journal: content/journal
+site:
+  source: site
+  build:
+    method: npm
+    output: dist
+  publish:
+    method: git-rsync
+    target: ~/git/brad6887.github.io
+    domain: bradcooke.com

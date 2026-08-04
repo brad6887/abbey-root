@@ -5,6 +5,7 @@ website/
 .abbey/*
 !.abbey/session-guidance.md
 !.abbey/image-roles.yml
+!.abbey/project.yml
 logs/
 
 # Generated upload-ready session context

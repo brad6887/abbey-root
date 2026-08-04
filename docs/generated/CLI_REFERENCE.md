@@ -413,7 +413,7 @@ abbey ssh sync --limit edge01
 
 ### `abbey site`
 
-Build, run, and publish the BradCooke.com website.
+Build, run, and publish the active project's configured website.
 
 **Usage**
 
@@ -423,9 +423,9 @@ abbey site <command>
 
 **Subcommands**
 
-- `build` - Build the Astro production site.
+- `build` - Build or validate the configured site artifact.
   - `abbey site build`
-- `publish` - Build and publish the site to GitHub Pages.
+- `publish` - Build and publish with explicit project-owned configuration.
   - `abbey site publish [--dry-run]`
 - `restart` - Restart the Astro development server.
   - `abbey site restart`

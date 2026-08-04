@@ -4,6 +4,7 @@ set -euo pipefail
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+ABBEY="$ABBEY_ROOT/tools/bin/abbey"
 ABBEY_SITE="$ABBEY_ROOT/tools/bin/abbey-site"
 
 passed=0
@@ -89,12 +90,15 @@ create_fixture() {
   local fake_bin="$case_dir/fake-bin"
 
   mkdir -p \
+    "$source_repo/.abbey" \
     "$source_repo/tools/bin" \
+    "$source_repo/tools/lib" \
     "$source_repo/site" \
     "$production_repo" \
     "$fake_bin"
 
   cp "$ABBEY_SITE" "$source_repo/tools/bin/abbey-site"
+  cp "$ABBEY_ROOT/tools/lib/project.sh" "$source_repo/tools/lib/project.sh"
   chmod +x "$source_repo/tools/bin/abbey-site"
 
   cat > "$fake_bin/npm" <<'SCRIPT'
@@ -168,7 +172,7 @@ SCRIPT
   git -C "$production_repo" config user.name "Abbey Test"
   git -C "$production_repo" config user.email "abbey-test@example.invalid"
 
-  printf 'bradcooke.com\n' > "$production_repo/CNAME"
+  printf 'example.invalid\n' > "$production_repo/CNAME"
   printf '<html>old fixture</html>\n' > "$production_repo/index.html"
 
   git -C "$production_repo" add .
@@ -177,6 +181,25 @@ SCRIPT
   git init -q --bare "$remote_repo"
   git -C "$production_repo" remote add origin "$remote_repo"
   git -C "$production_repo" push -qu origin HEAD
+
+  cat > "$source_repo/.abbey/project.yml" <<EOF
+schema_version: 1
+project:
+  name: Abbey Site Fixture
+  slug: abbey-site-fixture
+site:
+  source: site
+  build:
+    method: npm
+    output: dist
+  publish:
+    method: git-rsync
+    target: $production_repo
+    domain: example.invalid
+EOF
+
+  git -C "$source_repo" add .abbey/project.yml
+  git -C "$source_repo" commit -qm "Configure fixture publishing"
 
   printf '%s\n' "$case_dir"
 }
@@ -196,8 +219,8 @@ run_publish() {
   last_output="$(
     printf '%b' "$input" |
       env \
-        ABBEY_SITE_PRODUCTION_REPO="$production_repo" \
-        ABBEY_SITE_LIVE_URL="https://example.invalid/" \
+        ABBEY_ROOT="$source_repo" \
+        ABBEY_TOOLKIT_ROOT="$source_repo" \
         ABBEY_SITE_VERIFY_ATTEMPTS=3 \
         ABBEY_SITE_VERIFY_DELAY=0 \
         ABBEY_TEST_CURL_MODE="$curl_mode" \
@@ -214,6 +237,7 @@ echo "==========================="
 echo
 
 case_dir="$(create_fixture success)"
+resolved_case_dir="$(cd "$case_dir" && pwd -P)"
 run_publish "$case_dir" success 'y\ny\n'
 
 assert_status \
@@ -230,6 +254,21 @@ assert_contains \
   "successful verification completes publish workflow" \
   "$last_output" \
   "OK   Publish and live-site verification complete."
+
+assert_contains \
+  "publish reports the resolved target before changes" \
+  "$last_output" \
+  "Target:            $resolved_case_dir/production"
+
+assert_contains \
+  "publish reports the resolved domain" \
+  "$last_output" \
+  "Domain:            example.invalid"
+
+assert_contains \
+  "publish reports the deployment method" \
+  "$last_output" \
+  "Deployment method: git-rsync"
 
 assert_file_value \
   "successful verification calls curl once" \
@@ -270,7 +309,7 @@ assert_status \
 assert_contains \
   "HTTP verification failure preserves push result" \
   "$last_output" \
-  "OK   BradCooke.com publish pushed successfully."
+  "OK   example.invalid publish pushed successfully."
 
 assert_contains \
   "HTTP verification failure is clearly distinguished" \
@@ -357,6 +396,64 @@ assert_contains \
 assert_file_absent \
   "already-current publish does not verify the live site" \
   "$case_dir/curl-count"
+
+bread_root="$test_root/bread-pitt"
+mkdir -p "$bread_root/.abbey" "$bread_root/site"
+cat > "$bread_root/.abbey/project.yml" <<'YAML'
+schema_version: 1
+project:
+  name: Bread Pitt
+  slug: bread-pitt
+site:
+  source: site
+  build:
+    method: static
+YAML
+printf '<html>Bread Pitt</html>\n' > "$bread_root/site/index.html"
+
+set +e
+bread_build_output="$(
+  cd "$bread_root" &&
+    "$ABBEY" site build 2>&1
+)"
+bread_build_status=$?
+set -e
+
+assert_status "Bread Pitt static build succeeds" "$bread_build_status" 0
+assert_contains \
+  "Bread Pitt build resolves the active project" \
+  "Project:           Bread Pitt ($bread_root)" \
+  "$bread_build_output"
+assert_contains \
+  "Bread Pitt build reports direct static artifact" \
+  "OK   Static site artifact ready: $bread_root/site" \
+  "$bread_build_output"
+
+brad_path="$test_root/bradcooke-production-must-not-change"
+mkdir -p "$brad_path"
+printf 'protected\n' > "$brad_path/sentinel"
+
+set +e
+bread_publish_output="$(
+  cd "$bread_root" &&
+    HOME="$test_root" \
+    "$ABBEY" site publish --dry-run 2>&1
+)"
+bread_publish_status=$?
+set -e
+
+assert_status \
+  "Bread Pitt publish fails closed without explicit configuration" \
+  "$bread_publish_status" \
+  1
+assert_contains \
+  "Bread Pitt refusal names the active project" \
+  "Publishing refused: Bread Pitt has no explicit site.publish configuration." \
+  "$bread_publish_output"
+assert_file_value \
+  "Bread Pitt cannot invoke a BradCooke.com publishing path" \
+  "$brad_path/sentinel" \
+  "protected"
 
 echo
 echo "Passed: $passed"

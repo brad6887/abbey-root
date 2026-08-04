@@ -170,16 +170,16 @@ commands:
 
   site:
     category: site
-    description: Build, run, and publish the BradCooke.com website.
+    description: Build, run, and publish the active project's configured website.
     usage: abbey site <command>
     hidden: false
     subcommands:
       build:
-        description: Build the Astro production site.
+        description: Build or validate the configured site artifact.
         usage: abbey site build
 
       publish:
-        description: Build and publish the site to GitHub Pages.
+        description: Build and publish with explicit project-owned configuration.
         usage: abbey site publish [--dry-run]
 
       status:

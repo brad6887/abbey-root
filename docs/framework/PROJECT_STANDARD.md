@@ -219,6 +219,12 @@ The standard project metadata supports:
   policies.
 * `validation.commands`, an ordered list of project-appropriate commands shown
   by `abbey review`.
+* `site.source` and `site.build`, which explicitly define the project-owned
+  source directory and either an `npm` build artifact or a direct `static`
+  artifact.
+* `site.publish`, which must explicitly define the deployment `method`,
+  `target`, and `domain` before `abbey site publish` will make changes. Site
+  publishing never inherits a target or domain from the Abbey toolkit.
 
 ---
 

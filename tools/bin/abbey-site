@@ -3,7 +3,7 @@
 # Abbey Root Tool: abbey-site
 #
 # Purpose:
-#   Build, manage, and publish the BradCooke.com Astro site.
+#   Build, manage, and publish the active Abbey project's site.
 #
 # Usage:
 #   abbey site <command>
@@ -24,14 +24,28 @@ set -u
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-SITE_DIR="$ABBEY_ROOT/site"
-DIST_DIR="$SITE_DIR/dist"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
+PROJECT_LIB="$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+
+# shellcheck source=../lib/project.sh
+source "$PROJECT_LIB"
+
+PROJECT_NAME="$(abbey_project_name "$ABBEY_ROOT")"
+SITE_SOURCE="$(abbey_project_value "$ABBEY_ROOT" site.source "")"
+BUILD_METHOD="$(abbey_project_value "$ABBEY_ROOT" site.build.method "")"
+BUILD_OUTPUT="$(abbey_project_value "$ABBEY_ROOT" site.build.output "")"
+PUBLISH_METHOD="$(abbey_project_value "$ABBEY_ROOT" site.publish.method "")"
+PUBLISH_TARGET="$(abbey_project_value "$ABBEY_ROOT" site.publish.target "")"
+PUBLISH_DOMAIN="$(abbey_project_value "$ABBEY_ROOT" site.publish.domain "")"
+
+SITE_DIR=""
+DIST_DIR=""
+PRODUCTION_REPO=""
+EXPECTED_CNAME="$PUBLISH_DOMAIN"
+LIVE_SITE_URL=""
 LOG_DIR="$ABBEY_ROOT/logs"
 LOG_FILE="$LOG_DIR/abbey-site.log"
-PRODUCTION_REPO="${ABBEY_SITE_PRODUCTION_REPO:-$HOME/git/brad6887.github.io}"
-EXPECTED_CNAME="bradcooke.com"
-LIVE_SITE_URL="${ABBEY_SITE_LIVE_URL:-https://$EXPECTED_CNAME/}"
 LIVE_SITE_VERIFY_ATTEMPTS="${ABBEY_SITE_VERIFY_ATTEMPTS:-10}"
 LIVE_SITE_VERIFY_DELAY="${ABBEY_SITE_VERIFY_DELAY:-10}"
 
@@ -40,8 +54,75 @@ shift || true
 
 print_header() {
   echo "========================================"
-  echo " Abbey Root Site"
+  echo " Abbey Site"
   echo "========================================"
+  echo
+}
+
+resolve_project_path() {
+  python3 - "$ABBEY_ROOT" "$1" <<'PY'
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1]).resolve()
+value = Path(sys.argv[2]).expanduser()
+resolved = (root / value).resolve() if not value.is_absolute() else value.resolve()
+try:
+    resolved.relative_to(root)
+except ValueError:
+    raise SystemExit(f"FAIL Project site path is outside the active project: {resolved}")
+print(resolved)
+PY
+}
+
+resolve_target_path() {
+  python3 - "$1" <<'PY'
+import sys
+from pathlib import Path
+print(Path(sys.argv[1]).expanduser().resolve())
+PY
+}
+
+load_build_configuration() {
+  [[ -f "$ABBEY_ROOT/.abbey/project.yml" ]] ||
+    fail "Active project has no metadata: $ABBEY_ROOT/.abbey/project.yml"
+  [[ -n "$SITE_SOURCE" ]] || fail "Project has no site.source configuration."
+  [[ -n "$BUILD_METHOD" ]] || fail "Project has no site.build.method configuration."
+
+  SITE_DIR="$(resolve_project_path "$SITE_SOURCE")" || exit 1
+  case "$BUILD_METHOD" in
+    npm)
+      [[ -n "$BUILD_OUTPUT" ]] || fail "npm site build requires site.build.output."
+      DIST_DIR="$(resolve_project_path "$SITE_SOURCE/$BUILD_OUTPUT")" || exit 1
+      ;;
+    static)
+      [[ -z "$BUILD_OUTPUT" || "$BUILD_OUTPUT" == "." ]] ||
+        fail "static site build output must be '.' or omitted."
+      DIST_DIR="$SITE_DIR"
+      ;;
+    *) fail "Unsupported site build method: $BUILD_METHOD" ;;
+  esac
+}
+
+load_publish_configuration() {
+  [[ -n "$PUBLISH_METHOD" ]] ||
+    fail "Publishing refused: $PROJECT_NAME has no explicit site.publish configuration."
+  [[ "$PUBLISH_METHOD" == "git-rsync" ]] ||
+    fail "Unsupported site publishing method: $PUBLISH_METHOD"
+  [[ -n "$PUBLISH_TARGET" ]] || fail "site.publish.target is required."
+  [[ -n "$PUBLISH_DOMAIN" ]] || fail "site.publish.domain is required."
+  PRODUCTION_REPO="$(resolve_target_path "$PUBLISH_TARGET")"
+  LIVE_SITE_URL="https://$PUBLISH_DOMAIN/"
+}
+
+print_resolution() {
+  echo "Resolved site configuration"
+  echo "---------------------------"
+  echo "Project:           $PROJECT_NAME ($ABBEY_ROOT)"
+  echo "Source directory:  $SITE_DIR"
+  echo "Target:            ${PRODUCTION_REPO:-$DIST_DIR}"
+  echo "Domain:            ${PUBLISH_DOMAIN:-not configured}"
+  echo "Deployment method: ${PUBLISH_METHOD:-none}"
   echo
 }
 
@@ -80,7 +161,7 @@ require_site_directory() {
 
 require_clean_source_repo() {
   if [[ -n "$(git -C "$ABBEY_ROOT" status --porcelain)" ]]; then
-    echo "FAIL Abbey Root has uncommitted changes."
+    echo "FAIL $PROJECT_NAME has uncommitted changes."
     echo
     git -C "$ABBEY_ROOT" status --short
     echo
@@ -200,10 +281,20 @@ site_status() {
 
 site_build() {
   print_header
+  load_build_configuration
+  print_resolution
   require_site_directory
-
-  cd "$SITE_DIR" || exit 1
-  npm run build
+  case "$BUILD_METHOD" in
+    npm)
+      require_command npm
+      (cd "$SITE_DIR" && npm run build)
+      ;;
+    static)
+      [[ -f "$DIST_DIR/index.html" ]] || fail "Static site index not found: $DIST_DIR/index.html"
+      echo "OK   Static site artifact ready: $DIST_DIR"
+      ;;
+  esac
+  return 0
 }
 
 publish_rsync() {
@@ -239,29 +330,18 @@ Usage:
 
 The publish workflow:
 
-  1. Requires a clean Abbey Root repository.
-  2. Requires a clean production repository.
-  3. Builds the Astro site.
-  4. Shows the rsync changes.
-  5. Preserves the production CNAME.
-  6. Copies the generated site.
-  7. Shows the production Git diff.
-  8. Commits and pushes after confirmation.
-  9. Verifies the live site after a successful push.
+  1. Resolves the active Abbey project from the current working directory.
+  2. Requires explicit project-owned build and publish configuration.
+  3. Requires clean source and production repositories.
+  4. Builds or validates the configured site artifact.
+  5. Shows the rsync changes.
+  6. Preserves the production CNAME.
+  7. Copies the generated site.
+  8. Shows the production Git diff.
+  9. Commits and pushes after confirmation.
+  10. Verifies the live site after a successful push.
 
 Environment:
-  ABBEY_SITE_PRODUCTION_REPO
-      Override the production checkout path.
-
-      Default:
-      ~/git/brad6887.github.io
-
-  ABBEY_SITE_LIVE_URL
-      Override the URL checked after a successful push.
-
-      Default:
-      https://bradcooke.com/
-
   ABBEY_SITE_VERIFY_ATTEMPTS
       Number of live-site verification attempts.
 
@@ -286,23 +366,24 @@ HELP
 
   print_header
 
+  load_build_configuration
+  load_publish_configuration
+  print_resolution
+
   require_command git
-  require_command npm
   require_command rsync
   require_site_directory
   require_clean_source_repo
   require_production_repo
   validate_cname
 
-  echo "Source repository:     $ABBEY_ROOT"
-  echo "Production repository: $PRODUCTION_REPO"
-  echo
-
-  echo "Building Astro site..."
-  (
-    cd "$SITE_DIR" || exit 1
-    npm run build
-  ) || fail "Astro build failed"
+  if [[ "$BUILD_METHOD" == "npm" ]]; then
+    require_command npm
+    echo "Building configured site..."
+    (cd "$SITE_DIR" && npm run build) || fail "Site build failed"
+  else
+    echo "Validating configured static artifact..."
+  fi
 
   [[ -f "$DIST_DIR/index.html" ]] ||
     fail "Generated index.html not found"
@@ -355,13 +436,13 @@ HELP
     return 0
   fi
 
-  commit_message="Publish BradCooke.com from Abbey Root $(git -C "$ABBEY_ROOT" rev-parse --short HEAD)"
+  commit_message="Publish $PUBLISH_DOMAIN from $PROJECT_NAME $(git -C "$ABBEY_ROOT" rev-parse --short HEAD)"
 
   git -C "$PRODUCTION_REPO" commit -m "$commit_message"
   git -C "$PRODUCTION_REPO" push
 
   echo
-  echo "OK   BradCooke.com publish pushed successfully."
+  echo "OK   $PUBLISH_DOMAIN publish pushed successfully."
 
   if verify_live_site; then
     echo
@@ -380,6 +461,7 @@ site_start() {
   local pid
 
   print_header
+  load_build_configuration
   require_site_directory
 
   pid="$(site_pid || true)"
@@ -451,16 +533,16 @@ case "$command" in
 
   help|-h|--help)
     cat <<'HELP'
-Abbey Root Site Tool
+Abbey Site Tool
 
 Usage:
-  abbey site status              Show Astro dev server status
-  abbey site build               Run the Astro production build
-  abbey site publish             Build and publish to GitHub Pages
+  abbey site status              Show site development server status
+  abbey site build               Build or validate the configured site artifact
+  abbey site publish             Publish using explicit project configuration
   abbey site publish --dry-run   Preview publication without changing production
-  abbey site start               Start Astro dev server if stopped
-  abbey site stop                Stop Astro dev server
-  abbey site restart             Restart Astro dev server
+  abbey site start               Start the configured development server
+  abbey site stop                Stop the development server
+  abbey site restart             Restart the development server
 HELP
     ;;
 
