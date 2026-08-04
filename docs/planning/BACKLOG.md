@@ -56,6 +56,15 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Support normal Markdown headings and body content in NEXT.md.
 - [x] Report clear errors when required NEXT.md sections are missing.
 - [x] Add `abbey next init` to create a valid NEXT.md template without overwriting an existing file.
+- [ ] Make `abbey site build` and `abbey site publish` project-aware and fail closed
+  - Detect the active Abbey project from the current working directory.
+  - Load site build and publishing configuration from that project.
+  - Support projects with direct static artifacts such as Bread Pitt's `site/` directory.
+  - Refuse to publish when the active project has no explicit publishing configuration.
+  - Never fall back to Abbey Root or `bradcooke.com` from an external project.
+  - Display the resolved project, source directory, target, domain, and deployment method before making changes.
+  - Add regression coverage proving Bread Pitt cannot invoke the BradCooke.com publishing path.
+  - Validate both Abbey Root and Bread Pitt publishing workflows independently.
 
 ## External Project Portability
 
