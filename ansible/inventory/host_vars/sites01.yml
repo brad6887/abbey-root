@@ -18,3 +18,7 @@ static_site_host_sites:
       - www.abbeyroot.com
       - sites01
       - sites01.home.arpa
+
+  - domain: breadpitt.sites01.home.arpa
+    server_names:
+      - breadpitt.sites01.home.arpa

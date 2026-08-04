@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 151 complete · 263 pending · 414 total
+> **Backlog Status:** 151 complete · 265 pending · 416 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -183,6 +183,28 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Add automated toolkit regression testing.
 - [x] Add regression tests for `abbey plant validate`.
 - [ ] Expand `abbey site` commands.
+- [ ] Implement fail-closed internal static-site release deployment
+  - Load the source directory, build output, staging hostname, target host,
+    remote release root, and deployment method from the active project's
+    explicit configuration.
+  - Refuse to deploy when the active project has no internal staging target.
+  - Display the resolved project, source, artifact, host, domain, release
+    directory, and deployment method before making changes.
+  - Build and validate the static artifact before transferring it.
+  - Create uniquely identified, immutable release directories.
+  - Verify transfer integrity and required release files before activation.
+  - Validate remote extraction dependencies before beginning deployment.
+  - Never change the active `current` symlink when transfer, extraction, or
+    validation fails.
+  - Atomically activate a validated release while preserving the previous
+    release for rollback.
+  - Provide an explicit rollback operation.
+  - Apply correct ownership and SELinux contexts to deployed content.
+  - Validate the staging health endpoint, home page, representative nested
+    route, and static assets after activation.
+  - Add regression coverage proving a failed release cannot replace the active
+    site and one project cannot deploy into another project's release tree.
+  - Validate independent staging deployments for Abbey Root and Bread Pitt.
 - [ ] Add `abbey site preview`.
 - [ ] Add `abbey site deploy-check`.
 - [ ] Reduce noise in `abbey site publish` previews.
