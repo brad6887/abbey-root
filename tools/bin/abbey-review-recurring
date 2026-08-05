@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# COMMAND: review-recurring
+# DESCRIPTION: Discover recurring Abbey review definitions
+
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+
+exec python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_review_recurring.py" "$@"

@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 154 complete · 264 pending · 418 total
+> **Backlog Status:** 156 complete · 262 pending · 418 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -382,8 +382,8 @@ Ongoing practices, design principles, and general areas of improvement belong in
 ## Recurring Reviews
 
 - [x] Define recurring review registry architecture.
-- [ ] Implement recurring review definition storage.
-- [ ] Implement recurring review discovery.
+- [x] Implement recurring review definition storage.
+- [x] Implement recurring review discovery.
 - [ ] Surface due reviews during `abbey session`.
 - [ ] Support AI news reviews.
 - [ ] Support documentation audits.

@@ -34,7 +34,10 @@ Abbey Review
 
 Usage:
   abbey review
+  abbey review recurring
   abbey review help
+
+  recurring    Discover recurring review definitions.
 
 Review the current working session before commit.
 
@@ -47,6 +50,10 @@ HELP
 if [[ "${1:-}" =~ ^(help|-h|--help)$ ]]; then
   usage
   exit 0
+fi
+
+if [[ "${1:-}" == "recurring" ]]; then
+  exec "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-review-recurring"
 fi
 
 if [[ $# -gt 0 ]]; then

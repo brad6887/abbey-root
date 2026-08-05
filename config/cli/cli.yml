@@ -114,10 +114,11 @@ commands:
   review:
     category: workflow
     description: Review the current Abbey session before commit.
-    usage: abbey review
+    usage: abbey review [recurring]
     hidden: false
     examples:
       - abbey review
+      - abbey review recurring
 
   next:
     category: workflow

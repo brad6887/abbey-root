@@ -179,6 +179,24 @@ A separate registry index should only be introduced if future scale requires it.
 
 ---
 
+## Storage Decision
+
+Recurring review definitions are stored under:
+
+```text
+docs/reviews/recurring/
+```
+
+Each review definition is an individual Markdown document with YAML frontmatter.
+
+Completed review occurrences remain separate review artifacts under:
+
+```text
+docs/reviews/
+```
+
+---
+
 ## Future Integration
 
 Future Abbey commands may consume the registry to provide workflow awareness.
@@ -206,7 +224,6 @@ Automation should provide awareness and guidance without preventing normal work.
 - How should review frequency be calculated?
 - How should completed reviews be associated with sessions and commits?
 - Should external projects be able to define their own recurring reviews?
-- Should recurring review definitions be stored under `docs/reviews/recurring/`?
 
 ---
 
