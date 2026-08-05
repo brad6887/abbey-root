@@ -90,6 +90,14 @@ The primary Ansible convergence entry point is:
 ansible/playbooks/site.yml
 ```
 
+Ansible commands should be executed from the Ansible project directory:
+
+```
+cd ansible
+```
+
+Inventory and role paths are managed through the Ansible project configuration.
+
 Current managed configuration includes:
 
 - common host configuration
@@ -109,6 +117,22 @@ The service provides:
 - internal host resolution
 - reverse DNS
 - external DNS forwarding
+
+Deployment:
+
+Technitium DNS is deployed as a native systemd-managed service.
+
+Service:
+
+```
+dns.service
+```
+
+Application location:
+
+```
+/opt/technitium/dns
+```
 
 Configuration:
 
