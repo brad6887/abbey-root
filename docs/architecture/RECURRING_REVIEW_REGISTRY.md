@@ -169,6 +169,16 @@ A recurring review may create backlog items when findings require implementation
 
 ---
 
+## Review Definition Storage
+
+Recurring review definitions should be stored as individual Markdown documents with YAML frontmatter.
+
+The review definition documents are the authoritative source for recurring review metadata.
+
+A separate registry index should only be introduced if future scale requires it.
+
+---
+
 ## Future Integration
 
 Future Abbey commands may consume the registry to provide workflow awareness.
@@ -196,6 +206,7 @@ Automation should provide awareness and guidance without preventing normal work.
 - How should review frequency be calculated?
 - How should completed reviews be associated with sessions and commits?
 - Should external projects be able to define their own recurring reviews?
+- Should recurring review definitions be stored under `docs/reviews/recurring/`?
 
 ---
 
