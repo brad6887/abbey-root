@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Discover Abbey recurring review definitions."""
+"""Discover Abbey recurring review definitions and occurrences."""
 
 from pathlib import Path
 import sys
@@ -54,6 +54,37 @@ def validate_definition(path: Path, metadata: dict[str, Any]) -> list[str]:
 
     return errors
 
+def discover_occurrences(root: Path) -> dict[str, dict[str, Any]]:
+    """Discover completed recurring review occurrences."""
+
+    occurrence_dir = root / "docs" / "reviews" / "occurrences"
+
+    occurrences = {}
+
+    if not occurrence_dir.exists():
+        return occurrences
+
+    for path in sorted(occurrence_dir.glob("*.md")):
+        metadata = read_frontmatter(path)
+
+        if metadata is None:
+            continue
+
+        review = metadata.get("review")
+
+        if not review:
+            continue
+
+        current = occurrences.get(review)
+
+        if current is None or metadata.get("date", "") > current["date"]:
+            occurrences[review] = {
+                "file": path,
+                "date": metadata.get("date", ""),
+                "status": metadata.get("status", ""),
+            }
+
+    return occurrences
 
 def discover_reviews(root: Path) -> int:
     """Discover and display recurring review definitions."""
@@ -73,6 +104,8 @@ def discover_reviews(root: Path) -> int:
         return 0
 
     files = sorted(review_dir.glob("*.md"))
+
+    occurrences = discover_occurrences(root)
 
     if not files:
         print("No recurring reviews found.")
@@ -107,9 +140,15 @@ def discover_reviews(root: Path) -> int:
         print(f"  Frequency:  {metadata['frequency']}")
         print(f"  Status:     {metadata['status']}")
         print(f"  File:       {path}")
+        occurrence = occurrences.get(path.stem)
+
+        if occurrence:
+            print("  Last Occurrence:")
+            print(f"    File:     {occurrence['file'].name}")
+            print(f"    Date:     {occurrence['date']}")
+            print(f"    Status:   {occurrence['status']}")
 
     return status
-
 
 def main() -> int:
     root = Path(__file__).resolve().parents[1]

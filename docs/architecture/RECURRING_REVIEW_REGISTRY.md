@@ -179,21 +179,52 @@ A separate registry index should only be introduced if future scale requires it.
 
 ---
 
+## Review Occurrence Storage
+
+Review occurrences represent completed executions of recurring review definitions.
+
+Occurrence artifacts are stored separately from recurring definitions:
+
+docs/reviews/occurrences/
+
+Each occurrence is an individual Markdown document with YAML frontmatter.
+
+The occurrence artifact records:
+
+- review definition reference
+- execution date
+- completion status
+- findings
+- resulting actions
+- evidence references
+
+Recurring definitions remain stable while occurrences accumulate over time.
+
+Example:
+
+docs/reviews/
+├── recurring/
+│   └── documentation-audit.md
+└── occurrences/
+    └── 2026-08-06-documentation-audit.md
+
+---
+
 ## Storage Decision
 
 Recurring review definitions are stored under:
 
-```text
 docs/reviews/recurring/
-```
 
 Each review definition is an individual Markdown document with YAML frontmatter.
 
-Completed review occurrences remain separate review artifacts under:
+Completed review occurrences are stored under:
 
-```text
-docs/reviews/
-```
+docs/reviews/occurrences/
+
+Review occurrences are separate artifacts from review definitions. Definitions describe the recurring responsibility; occurrences record completed executions and evidence.
+
+A separate registry index should only be introduced if future scale requires it.
 
 ---
 
@@ -224,6 +255,8 @@ Automation should provide awareness and guidance without preventing normal work.
 - How should review frequency be calculated?
 - How should completed reviews be associated with sessions and commits?
 - Should external projects be able to define their own recurring reviews?
+- Should occurrence artifacts require a standard template?
+- Should occurrence discovery calculate next due dates automatically?
 
 ---
 
