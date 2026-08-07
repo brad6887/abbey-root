@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Discover Abbey recurring review definitions, occurrences, and due state."""
+"""Discover Abbey recurring review definitions, occurrences, due state, and review implementations."""
 
 import argparse
 import calendar
 from datetime import date, timedelta
 import os
 from pathlib import Path
+import subprocess
 import sys
 from typing import Any
 
@@ -119,6 +120,15 @@ def next_due_date(last_date: date, frequency: str) -> date:
     raise ValueError(f"unsupported frequency: {frequency}")
 
 
+def relative_path(path: Path, root: Path) -> str:
+    """Return a repository-relative path when possible."""
+
+    try:
+        return str(path.relative_to(root))
+    except ValueError:
+        return str(path)
+
+
 def discover_occurrences(root: Path) -> dict[str, dict[str, Any]]:
     """Discover latest completed recurring review occurrences."""
 
@@ -150,6 +160,25 @@ def discover_occurrences(root: Path) -> dict[str, dict[str, Any]]:
             }
 
     return occurrences
+
+
+def unreviewed_session_updates(root: Path) -> list[Path]:
+    """Return session updates whose reviewed metadata is false."""
+
+    session_dir = root / "docs" / "session-updates"
+
+    if not session_dir.exists():
+        return []
+
+    updates = []
+
+    for path in sorted(session_dir.glob("*.md")):
+        metadata = read_frontmatter(path)
+
+        if metadata is not None and metadata.get("reviewed") is False:
+            updates.append(path)
+
+    return updates
 
 
 def discover_reviews(root: Path) -> int:
@@ -297,15 +326,161 @@ def show_due_reviews(root: Path) -> int:
     return status
 
 
+def run_documentation_audit(root: Path) -> int:
+    """Run the Documentation Audit recurring review."""
+
+    print("========================================")
+    print(" Documentation Audit")
+    print("========================================")
+    print()
+    print(f"Repo: {root}")
+
+    findings = 0
+
+    print()
+    print("Generated Documentation")
+    print("-----------------------")
+
+    docs_command = (
+        Path(__file__).resolve().parents[1]
+        / "tools"
+        / "bin"
+        / "abbey-docs"
+    )
+
+    result = subprocess.run(
+        [str(docs_command), "check"],
+        cwd=root,
+        env={
+            **os.environ,
+            "ABBEY_ROOT": str(root),
+        },
+        text=True,
+    )
+
+    if result.returncode != 0:
+        findings += 1
+
+    print()
+    print("Architecture")
+    print("------------")
+
+    architecture_dir = root / "docs" / "architecture"
+    architecture_files = sorted(architecture_dir.glob("*.md"))
+
+    if architecture_files:
+        print(f"INFO Architecture documents: {len(architecture_files)}")
+    else:
+        print("WARN No architecture documents found")
+        findings += 1
+
+    print()
+    print("Planning")
+    print("--------")
+
+    planning_files = [
+        "docs/planning/PROJECT_STATUS.md",
+        "docs/planning/NEXT.md",
+        "docs/planning/BACKLOG.md",
+    ]
+
+    for relative_file in planning_files:
+        path = root / relative_file
+
+        if path.is_file():
+            print(f"OK   {relative_file}")
+        else:
+            print(f"WARN Missing planning document: {relative_file}")
+            findings += 1
+
+    print()
+    print("Session Documentation")
+    print("---------------------")
+
+    updates = unreviewed_session_updates(root)
+
+    if updates:
+        print(f"INFO Unreviewed session updates: {len(updates)}")
+        print(
+            "INFO Oldest unreviewed: "
+            f"{relative_path(updates[0], root)}"
+        )
+    else:
+        print("OK   Unreviewed session updates: none")
+
+    print()
+    print("Result")
+    print("------")
+    print("OK   Documentation audit completed")
+    print(f"INFO Findings: {findings}")
+
+    return 0
+
+
+def run_review(root: Path, review_name: str) -> int:
+    """Run a supported recurring review implementation."""
+
+    review_path = (
+        root
+        / "docs"
+        / "reviews"
+        / "recurring"
+        / f"{review_name}.md"
+    )
+
+    if not review_path.is_file():
+        print(f"ERROR Recurring review not found: {review_name}")
+        return 1
+
+    metadata = read_frontmatter(review_path)
+
+    if metadata is None:
+        print(f"ERROR Invalid recurring review definition: {review_path.name}")
+        return 1
+
+    errors = validate_definition(review_path, metadata)
+
+    if errors:
+        print(f"ERROR Invalid recurring review definition: {review_path.name}")
+        for error in errors:
+            print(f"      {error}")
+        return 1
+
+    if metadata["status"] != "active":
+        print(f"ERROR Recurring review is not active: {review_name}")
+        return 1
+
+    if review_name == "documentation-audit":
+        return run_documentation_audit(root)
+
+    print(f"ERROR No implementation available for recurring review: {review_name}")
+    return 1
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Discover Abbey recurring reviews."
+        description="Discover and run Abbey recurring reviews."
     )
+
+    parser.add_argument(
+        "command",
+        nargs="?",
+        choices=["run"],
+        help="Recurring review action.",
+    )
+
+    parser.add_argument(
+        "review",
+        nargs="?",
+        help="Recurring review name.",
+    )
+
     parser.add_argument(
         "--root",
         type=Path,
         help="Abbey project root.",
     )
+
     parser.add_argument(
         "--due",
         action="store_true",
@@ -324,6 +499,17 @@ def main() -> int:
         root = Path(os.environ["ABBEY_ROOT"]).resolve()
     else:
         root = Path(__file__).resolve().parents[1]
+
+    if args.command == "run":
+        if not args.review:
+            print("ERROR A recurring review name is required.")
+            return 1
+
+        return run_review(root, args.review)
+
+    if args.review:
+        print("ERROR A review name requires the run command.")
+        return 1
 
     if args.due:
         return show_due_reviews(root)

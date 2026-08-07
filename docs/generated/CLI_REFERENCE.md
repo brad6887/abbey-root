@@ -172,18 +172,21 @@ abbey next init
 
 ### `abbey review`
 
-Review the current Abbey session before commit.
+Review the current Abbey session and recurring review workflows.
 
 **Usage**
 
 ```text
-abbey review
+abbey review [recurring [--due | run REVIEW]]
 ```
 
 **Examples**
 
 ```text
 abbey review
+abbey review recurring
+abbey review recurring --due
+abbey review recurring run documentation-audit
 ```
 
 ### `abbey session`

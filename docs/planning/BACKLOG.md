@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 158 complete · 261 pending · 419 total
+> **Backlog Status:** 159 complete · 260 pending · 419 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -387,7 +387,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Define recurring review occurrence storage.
 - [x] Surface due reviews during `abbey session`.
 - [ ] Support AI news reviews.
-- [ ] Support documentation audits.
+- [x] Support documentation audits.
 - [ ] Support infrastructure reviews.
 - [ ] Support dependency reviews.
 - [ ] Support backup verification.

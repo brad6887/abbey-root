@@ -53,7 +53,8 @@ if [[ "${1:-}" =~ ^(help|-h|--help)$ ]]; then
 fi
 
 if [[ "${1:-}" == "recurring" ]]; then
-  exec "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-review-recurring"
+  shift
+  exec "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-review-recurring" "$@"
 fi
 
 if [[ $# -gt 0 ]]; then
