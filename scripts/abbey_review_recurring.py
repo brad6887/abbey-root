@@ -326,93 +326,116 @@ def show_due_reviews(root: Path) -> int:
     return status
 
 
-def run_documentation_audit(root: Path) -> int:
-    """Run the Documentation Audit recurring review."""
+def run_infrastructure_review(root: Path) -> int:
+    """Run the Infrastructure Review recurring review."""
 
     print("========================================")
-    print(" Documentation Audit")
+    print(" Infrastructure Review")
     print("========================================")
     print()
     print(f"Repo: {root}")
-
-    findings = 0
-
     print()
-    print("Generated Documentation")
-    print("-----------------------")
+    print("Abbey Doctor")
+    print("------------")
 
-    docs_command = (
+    doctor_command = (
         Path(__file__).resolve().parents[1]
         / "tools"
         / "bin"
-        / "abbey-docs"
+        / "abbey-doctor"
     )
 
     result = subprocess.run(
-        [str(docs_command), "check"],
+        [str(doctor_command)],
         cwd=root,
         env={
             **os.environ,
             "ABBEY_ROOT": str(root),
         },
         text=True,
+        capture_output=True,
     )
 
-    if result.returncode != 0:
-        findings += 1
+    print(result.stdout, end="")
 
-    print()
-    print("Architecture")
-    print("------------")
+    if result.stderr:
+        print(result.stderr, end="", file=sys.stderr)
 
-    architecture_dir = root / "docs" / "architecture"
-    architecture_files = sorted(architecture_dir.glob("*.md"))
+    if result.returncode not in (0, 1, 2):
+        print()
+        print("Result")
+        print("------")
+        print(
+            "ERROR Infrastructure review could not complete "
+            f"(abbey doctor exit code {result.returncode})"
+        )
+        return 1
 
-    if architecture_files:
-        print(f"INFO Architecture documents: {len(architecture_files)}")
-    else:
-        print("WARN No architecture documents found")
-        findings += 1
+    ignored_warning_patterns = (
+        "Working tree has uncommitted changes",
+        "Backup storage check skipped",
+        "Backup freshness check skipped",
+    )
 
-    print()
-    print("Planning")
-    print("--------")
-
-    planning_files = [
-        "docs/planning/PROJECT_STATUS.md",
-        "docs/planning/NEXT.md",
-        "docs/planning/BACKLOG.md",
+    warning_lines = [
+        line
+        for line in result.stdout.splitlines()
+        if line.startswith("WARN ")
     ]
 
-    for relative_file in planning_files:
-        path = root / relative_file
+    failure_lines = [
+        line
+        for line in result.stdout.splitlines()
+        if line.startswith("FAIL ")
+    ]
 
-        if path.is_file():
-            print(f"OK   {relative_file}")
-        else:
-            print(f"WARN Missing planning document: {relative_file}")
-            findings += 1
+    ignored_warnings = [
+        line
+        for line in warning_lines
+        if any(pattern in line for pattern in ignored_warning_patterns)
+    ]
+
+    actionable_warnings = [
+        line
+        for line in warning_lines
+        if line not in ignored_warnings
+    ]
+
+    findings = len(actionable_warnings) + len(failure_lines)
 
     print()
-    print("Session Documentation")
+    print("Review Interpretation")
     print("---------------------")
 
-    updates = unreviewed_session_updates(root)
+    if ignored_warnings:
+        print(f"INFO Expected or non-infrastructure warnings ignored: {len(ignored_warnings)}")
 
-    if updates:
-        print(f"INFO Unreviewed session updates: {len(updates)}")
-        print(
-            "INFO Oldest unreviewed: "
-            f"{relative_path(updates[0], root)}"
-        )
-    else:
-        print("OK   Unreviewed session updates: none")
+    if actionable_warnings:
+        print(f"WARN Actionable infrastructure warnings: {len(actionable_warnings)}")
+        for line in actionable_warnings:
+            print(f"     {line[5:]}")
+
+    if failure_lines:
+        print(f"WARN Infrastructure failures: {len(failure_lines)}")
+        for line in failure_lines:
+            print(f"     {line[5:]}")
+
+    if findings == 0:
+        print("OK   No actionable infrastructure findings")
 
     print()
     print("Result")
     print("------")
-    print("OK   Documentation audit completed")
+    print("OK   Infrastructure review completed")
     print(f"INFO Findings: {findings}")
+    print(f"INFO Ignored warnings: {len(ignored_warnings)}")
+
+    if failure_lines:
+        print("INFO Infrastructure status: unhealthy")
+    elif actionable_warnings:
+        print("INFO Infrastructure status: healthy with findings")
+    else:
+        print("INFO Infrastructure status: healthy")
 
     return 0
 
@@ -452,6 +475,9 @@ def run_review(root: Path, review_name: str) -> int:
 
     if review_name == "documentation-audit":
         return run_documentation_audit(root)
+
+    if review_name == "infrastructure-review":
+        return run_infrastructure_review(root)
 
     print(f"ERROR No implementation available for recurring review: {review_name}")
     return 1
