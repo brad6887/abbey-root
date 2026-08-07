@@ -180,6 +180,17 @@ session_start() {
     ok "Unreviewed session updates: none"
   fi
 
+  section "Recurring Reviews"
+
+  if python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_review_recurring.py" \
+    --root "$ABBEY_ROOT" \
+    --due
+  then
+    :
+  else
+    warn "Recurring review evaluation encountered errors"
+  fi
+
   section "Journal"
 
   local journal
