@@ -245,6 +245,14 @@ The standard project metadata supports:
   `target`, and `domain` before `abbey site publish` will make changes. Site
   publishing never inherits a target or domain from the Abbey toolkit.
 
+Project-aware image selection uses `.abbey/image-roles.yml` from the active
+project. `abbey image` validates `.abbey/project.yml`, reports its resolved
+project, configuration source, image source, and metadata target before a
+selection can change metadata, and fails when local image-role configuration
+is absent or malformed. It may use the toolkit's image-role configuration only
+when the active project explicitly declares
+`configuration.allow_toolkit_defaults: true`.
+
 ---
 
 # Reference Implementation

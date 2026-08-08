@@ -15,7 +15,10 @@ SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
-CONFIG_FILE="$ABBEY_ROOT/.abbey/image-roles.yml"
+PROJECT_LIB="$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+PROJECT_RESOLVER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_project.py"
+
+source "$PROJECT_LIB"
 
 usage() {
   cat <<'HELP'
@@ -36,7 +39,51 @@ Examples:
 The active project defines supported entities and roles in:
 
   .abbey/image-roles.yml
+
+The command fails when local configuration is absent unless the project
+explicitly enables toolkit defaults in .abbey/project.yml.
 HELP
+}
+
+resolve_image_config() {
+  local project_config="$ABBEY_ROOT/.abbey/image-roles.yml"
+  local toolkit_config="$ABBEY_TOOLKIT_ROOT/.abbey/image-roles.yml"
+  local defaults_enabled
+
+  python3 "$PROJECT_RESOLVER" \
+    --toolkit-root "$ABBEY_TOOLKIT_ROOT" \
+    show \
+    --project "$ABBEY_ROOT" \
+    >/dev/null || return 1
+
+  if [[ -f "$project_config" ]]; then
+    CONFIG_FILE="$project_config"
+    CONFIG_SOURCE="active project"
+    return 0
+  fi
+
+  defaults_enabled="$(
+    abbey_project_value \
+      "$ABBEY_ROOT" \
+      "configuration.allow_toolkit_defaults" \
+      "false"
+  )"
+
+  if [[ "$defaults_enabled" == "true" && -f "$toolkit_config" ]]; then
+    CONFIG_FILE="$toolkit_config"
+    CONFIG_SOURCE="toolkit default"
+    return 0
+  fi
+
+  echo "ERROR Image-role configuration not found for the active project:"
+  echo "  $project_config"
+  if [[ "$defaults_enabled" != "true" ]]; then
+    echo "Toolkit defaults are disabled by .abbey/project.yml."
+  else
+    echo "Configured toolkit default is unavailable:"
+    echo "  $toolkit_config"
+  fi
+  return 1
 }
 
 select_image() {
@@ -93,20 +140,10 @@ select_image() {
     return 2
   fi
 
-  if [[ ! -f "$CONFIG_FILE" ]]; then
-    echo "ERROR Image-role configuration not found:"
-    echo "  $CONFIG_FILE"
-    return 1
-  fi
+  resolve_image_config || return 1
 
-  python3 /dev/fd/3 \
-    "$ABBEY_ROOT" \
-    "$CONFIG_FILE" \
-    "$entity" \
-    "$item" \
-    "$role" \
-    "$selected_number" \
-    "$assume_yes" 3<<'PY'
+  local python_script
+  python_script="$(cat <<'PY'
 import json
 import os
 import re
@@ -130,6 +167,8 @@ item_name = sys.argv[4]
 role_name = sys.argv[5]
 selected_argument = sys.argv[6]
 assume_yes = sys.argv[7] == "true"
+config_source = sys.argv[8]
+toolkit_root = Path(sys.argv[9]).resolve()
 
 
 class ConfigurationError(Exception):
@@ -374,10 +413,16 @@ relative_images = [
 
 print("Abbey Image Selection")
 print("=====================")
-print(f"Entity:  {entity_name}")
-print(f"Item:    {item_name}")
-print(f"Role:    {role_name}")
-print(f"Current: {current_text or 'not set'}")
+print(f"Active project:       {project_root}")
+print(f"Toolkit root:         {toolkit_root}")
+print(f"Configuration:        {config_path}")
+print(f"Configuration source: {config_source}")
+print(f"Image source:         {images_root}")
+print(f"Metadata target:      {metadata_path}")
+print(f"Entity:               {entity_name}")
+print(f"Item:                 {item_name}")
+print(f"Role:                 {role_name}")
+print(f"Current:              {current_text or 'not set'}")
 print()
 print("Available Images")
 print("----------------")
@@ -496,6 +541,18 @@ print()
 print(f"Updated: {metadata_path}")
 print(f"{metadata_field}: {selected_relative}")
 PY
+)"
+
+  python3 -c "$python_script" \
+    "$ABBEY_ROOT" \
+    "$CONFIG_FILE" \
+    "$entity" \
+    "$item" \
+    "$role" \
+    "$selected_number" \
+    "$assume_yes" \
+    "$CONFIG_SOURCE" \
+    "$ABBEY_TOOLKIT_ROOT"
 }
 
 command="${1:-help}"

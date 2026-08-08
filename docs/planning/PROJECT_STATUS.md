@@ -222,9 +222,11 @@ Completed
   current validation rule
 - `abbey plant publish <slug>`
 - `abbey image select <entity> <item> --role <role>` provides portable,
-  project-configured image-role selection with safe cancellation, atomic
-  metadata updates, and external-project support; `abbey plant hero <slug>` is
-  the first domain-specific adopter
+  project-configured image-role selection with active-project validation,
+  fail-closed local configuration, explicit-only toolkit fallback, resolved
+  preflight reporting, safe cancellation, atomic metadata updates, and
+  cross-project isolation; `abbey plant hero <slug>` is the first
+  domain-specific adopter
 - `abbey plant index <slug>` selects a dedicated plant index image, records it
   as canonical `photos.index` metadata, publishes it at a stable path, and
   preserves current-image then hero-image fallback when no index image is set

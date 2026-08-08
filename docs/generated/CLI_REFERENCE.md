@@ -474,7 +474,7 @@ abbey site start
 
 ### `abbey image`
 
-Select project-defined images for configured content roles.
+Select images through fail-closed, project-owned content roles.
 
 **Usage**
 

@@ -222,7 +222,7 @@ commands:
 
   image:
     category: content
-    description: Select project-defined images for configured content roles.
+    description: Select images through fail-closed, project-owned content roles.
     usage: abbey image <command>
     hidden: false
     subcommands:

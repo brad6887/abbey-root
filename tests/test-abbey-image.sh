@@ -110,6 +110,8 @@ project:
 framework:
   name: Abbey
   schema_version: 1
+configuration:
+  allow_toolkit_defaults: false
 YAML
 
   cat > "$root/.abbey/image-roles.yml" <<'YAML'
@@ -150,7 +152,7 @@ YAML
     "$plant/photos/Ignore.xmp" \
     "$plant/photos/notes.txt"
 
-  printf '%s\n' "$root"
+  (cd "$root" && pwd -P)
 }
 
 run_direct() {
@@ -213,6 +215,14 @@ assert_contains \
 
 missing_config_root="$test_root/missing-config"
 mkdir -p "$missing_config_root/.abbey"
+cat > "$missing_config_root/.abbey/project.yml" <<'YAML'
+schema_version: 1
+project:
+  name: Missing Image Configuration
+  slug: missing-image-configuration
+configuration:
+  allow_toolkit_defaults: false
+YAML
 
 run_direct \
   "$missing_config_root" \
@@ -220,7 +230,10 @@ run_direct \
 assert_status "missing image-role configuration fails" 1
 assert_contains \
   "missing configuration path is reported" \
-  ".abbey/image-roles.yml"
+  "$missing_config_root/.abbey/image-roles.yml"
+assert_contains \
+  "missing configuration reports disabled toolkit defaults" \
+  "Toolkit defaults are disabled"
 
 project="$(create_project valid-selection)"
 facts="$project/working/plants/test-plant/facts.yaml"
@@ -233,6 +246,21 @@ assert_status "interactive cancellation succeeds" 0
 assert_contains \
   "current image is identified" \
   "1. Alpha One.JPG [current]"
+assert_contains \
+  "preflight reports the active project" \
+  "Active project:       $project"
+assert_contains \
+  "preflight reports project configuration" \
+  "Configuration:        $project/.abbey/image-roles.yml"
+assert_contains \
+  "preflight reports project configuration source" \
+  "Configuration source: active project"
+assert_contains \
+  "preflight reports the image source" \
+  "Image source:         $project/working/plants/test-plant/photos"
+assert_contains \
+  "preflight reports the metadata target" \
+  "Metadata target:      $project/working/plants/test-plant/facts.yaml"
 assert_contains \
   "eligible JPEG image is listed" \
   "2. Beta Two.jpeg"
@@ -439,6 +467,67 @@ assert_file_not_contains \
   "generic dispatcher does not modify the current image role" \
   "$generic_facts" \
   'current: "photos/Beta Two.jpeg"'
+
+isolated_project="$(create_project isolated-configuration)"
+rm "$isolated_project/.abbey/image-roles.yml"
+
+run_dispatch \
+  "$isolated_project" \
+  image select plant test-plant --role hero --select 2 --yes
+assert_status "project without image configuration fails closed" 1
+assert_contains \
+  "missing local configuration identifies the active project" \
+  "$isolated_project/.abbey/image-roles.yml"
+assert_not_contains \
+  "project does not inherit the Abbey Root image configuration" \
+  "$ABBEY_TOOLKIT_ROOT/.abbey/image-roles.yml"
+assert_file_contains \
+  "failed cross-project selection preserves metadata" \
+  "$isolated_project/working/plants/test-plant/facts.yaml" \
+  "hero: photos/Alpha One.JPG"
+
+fallback_project="$(create_project explicit-toolkit-default)"
+rm "$fallback_project/.abbey/image-roles.yml"
+python3 - "$fallback_project/.abbey/project.yml" <<'PY'
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+text = path.read_text(encoding="utf-8")
+path.write_text(
+    text.replace("allow_toolkit_defaults: false", "allow_toolkit_defaults: true"),
+    encoding="utf-8",
+)
+PY
+
+run_dispatch \
+  "$fallback_project" \
+  image select plant test-plant --role hero --select 2 --yes
+assert_status "explicitly enabled toolkit image defaults succeed" 0
+assert_contains \
+  "toolkit fallback source is reported" \
+  "Configuration source: toolkit default"
+assert_contains \
+  "toolkit fallback path is reported" \
+  "Configuration:        $ABBEY_TOOLKIT_ROOT/.abbey/image-roles.yml"
+assert_file_contains \
+  "toolkit fallback updates only the active project" \
+  "$fallback_project/working/plants/test-plant/facts.yaml" \
+  'hero: "photos/Beta Two.jpeg"'
+
+invalid_project="$(create_project invalid-project-metadata)"
+cat > "$invalid_project/.abbey/project.yml" <<'YAML'
+schema_version: 1
+project: [invalid
+YAML
+
+run_direct \
+  "$invalid_project" \
+  select plant test-plant --role hero
+assert_status "malformed project metadata fails before image selection" 1
+assert_contains \
+  "malformed project metadata identifies the project marker" \
+  "$invalid_project/.abbey/project.yml"
 
 printf '\nPassed: %d\n' "$passed"
 printf 'Failed: %d\n' "$failed"
