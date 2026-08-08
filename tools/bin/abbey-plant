@@ -108,6 +108,13 @@ update_batch() {
 }
 
 rename_exports() {
+    if [[ -x "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-media" ]]; then
+        "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-media" rename-exports "$@"
+        return $?
+    fi
+
+    # Compatibility fallback for partial toolkit installations predating
+    # abbey media. The toolkit-owned media command is authoritative.
     local directory="${1:-}"
 
     if [[ -z "$directory" ]]; then

@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+#
+# Purpose:
+#   Run project-configured media preparation workflows.
+#
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
+PROJECT_LIB="$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+PROJECT_RESOLVER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_project.py"
+RENAME_HELPER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_media_rename_exports.py"
+
+source "$PROJECT_LIB"
+
+usage() {
+  cat <<'HELP'
+Abbey Media
+
+Usage:
+  abbey media rename-exports <directory> [--dry-run]
+
+Commands:
+  rename-exports    Rename image/XMP pairs from captions and capture dates
+
+Options:
+  --dry-run         Validate and preview every rename without writing
+
+The active project defines this workflow in .abbey/media.yml. Review a dry run
+before applying a real export batch.
+HELP
+}
+
+resolve_media_config() {
+  local project_config="$ABBEY_ROOT/.abbey/media.yml"
+  local toolkit_config="$ABBEY_TOOLKIT_ROOT/.abbey/media.yml"
+  local defaults_enabled
+
+  python3 "$PROJECT_RESOLVER" \
+    --toolkit-root "$ABBEY_TOOLKIT_ROOT" \
+    show \
+    --project "$ABBEY_ROOT" \
+    >/dev/null || return 1
+
+  if [[ -f "$project_config" ]]; then
+    MEDIA_CONFIG="$project_config"
+    MEDIA_CONFIG_SOURCE="active project"
+    return 0
+  fi
+
+  defaults_enabled="$(
+    abbey_project_value \
+      "$ABBEY_ROOT" \
+      "configuration.allow_toolkit_defaults" \
+      "false"
+  )"
+  if [[ "$defaults_enabled" == "true" && -f "$toolkit_config" ]]; then
+    MEDIA_CONFIG="$toolkit_config"
+    MEDIA_CONFIG_SOURCE="toolkit default"
+    return 0
+  fi
+
+  echo "ERROR: Media configuration not found for the active project:"
+  echo "  $project_config"
+  if [[ "$defaults_enabled" != "true" ]]; then
+    echo "Toolkit defaults are disabled by .abbey/project.yml."
+  else
+    echo "Configured toolkit default is unavailable:"
+    echo "  $toolkit_config"
+  fi
+  return 1
+}
+
+rename_exports() {
+  local directory="${1:-}"
+  local dry_run=false
+  local -a helper_args
+
+  if [[ -z "$directory" ]]; then
+    echo "ERROR: Export directory is required."
+    echo
+    usage
+    return 2
+  fi
+  shift
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --dry-run)
+        dry_run=true
+        shift
+        ;;
+      *)
+        echo "ERROR: Unknown media rename-exports option: $1"
+        return 2
+        ;;
+    esac
+  done
+
+  if ! command -v exiftool >/dev/null 2>&1; then
+    echo "ERROR: ExifTool is required to rename exported media."
+    return 1
+  fi
+
+  resolve_media_config || return 1
+
+  helper_args=(
+    "$RENAME_HELPER"
+    --project-root "$ABBEY_ROOT"
+    --config "$MEDIA_CONFIG"
+    --config-source "$MEDIA_CONFIG_SOURCE"
+    --directory "$directory"
+  )
+  if [[ "$dry_run" == "true" ]]; then
+    helper_args+=(--dry-run)
+  fi
+  python3 "${helper_args[@]}"
+}
+
+command="${1:-help}"
+case "$command" in
+  rename-exports)
+    shift
+    rename_exports "$@"
+    ;;
+  help|-h|--help)
+    usage
+    ;;
+  *)
+    echo "Unknown media command: $command"
+    echo
+    usage
+    exit 1
+    ;;
+esac

@@ -227,6 +227,12 @@ Completed
   preflight reporting, safe cancellation, atomic metadata updates, and
   cross-project isolation; `abbey plant hero <slug>` is the first
   domain-specific adopter
+- `abbey media rename-exports <directory> [--dry-run]` provides
+  project-configured caption and capture-date naming for image/XMP pairs,
+  validates complete batches before staged renames, records deterministic
+  original-to-published mappings in a generated manifest, and supports plant
+  and Bread Pitt-style workflows; `abbey plant rename-exports` remains a
+  compatibility wrapper
 - `abbey plant index <slug>` selects a dedicated plant index image, records it
   as canonical `photos.index` metadata, publishes it at a stable path, and
   preserves current-image then hero-image fallback when no index image is set

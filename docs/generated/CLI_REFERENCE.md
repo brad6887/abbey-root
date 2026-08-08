@@ -493,6 +493,28 @@ abbey image <command>
 abbey image select plant martha-my-dear --role hero
 ```
 
+### `abbey media`
+
+Prepare project media through safe, configured workflows.
+
+**Usage**
+
+```text
+abbey media <command>
+```
+
+**Subcommands**
+
+- `rename-exports` - Rename image/XMP pairs from captions and capture dates.
+  - `abbey media rename-exports <directory> [--dry-run]`
+
+**Examples**
+
+```text
+abbey media rename-exports ~/incoming/photos --dry-run
+abbey media rename-exports ~/incoming/photos
+```
+
 ### `abbey plant`
 
 Manage, validate, and publish plant workspaces.
@@ -513,7 +535,7 @@ abbey plant <command>
   - `abbey plant new <slug> --name NAME --type TYPE [--status STATUS] [--date YYYY-MM-DD] [--photo FILE ...]`
 - `publish` - Generate Astro content and copy selected public images.
   - `abbey plant publish <slug>`
-- `rename-exports` - Rename exported photos from XMP captions and capture dates.
+- `rename-exports` - Compatibility wrapper for project-aware media export renaming.
   - `abbey plant rename-exports <directory> [--dry-run]`
 - `update` - Add a dated observation and select its current photograph.
   - `abbey plant update <slug> --photo FILE --narrative TEXT [--care TEXT] [--status STATUS] [--date YYYY-MM-DD] [--dry-run]`

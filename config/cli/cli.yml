@@ -232,6 +232,19 @@ commands:
     examples:
       - abbey image select plant martha-my-dear --role hero
 
+  media:
+    category: content
+    description: Prepare project media through safe, configured workflows.
+    usage: abbey media <command>
+    hidden: false
+    subcommands:
+      rename-exports:
+        description: Rename image/XMP pairs from captions and capture dates.
+        usage: abbey media rename-exports <directory> [--dry-run]
+    examples:
+      - abbey media rename-exports ~/incoming/photos --dry-run
+      - abbey media rename-exports ~/incoming/photos
+
   plant:
     category: content
     description: Manage, validate, and publish plant workspaces.
@@ -257,7 +270,7 @@ commands:
         description: Add a dated observation and select its current photograph.
         usage: abbey plant update <slug> --photo FILE --narrative TEXT [--care TEXT] [--status STATUS] [--date YYYY-MM-DD] [--dry-run]
       rename-exports:
-        description: Rename exported photos from XMP captions and capture dates.
+        description: Compatibility wrapper for project-aware media export renaming.
         usage: abbey plant rename-exports <directory> [--dry-run]
       update-batch:
         description: Prepare or apply a reviewable multi-plant update worksheet.

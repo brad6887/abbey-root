@@ -253,6 +253,17 @@ is absent or malformed. It may use the toolkit's image-role configuration only
 when the active project explicitly declares
 `configuration.allow_toolkit_defaults: true`.
 
+Project-aware media preparation uses `.abbey/media.yml` from the active
+project. `abbey media rename-exports` validates the complete image/XMP batch
+before changing files, derives filenames from configured caption and capture
+date metadata, uses staged renames to keep each pair synchronized, and writes
+an original-to-published filename manifest after success. Intake directories
+may live outside the project because they commonly originate in temporary
+export locations, but the workflow configuration remains project-owned. The
+plant-specific rename command is a compatibility wrapper for this shared media
+workflow. Toolkit media defaults require the same explicit project opt-in as
+other project-aware configuration.
+
 ---
 
 # Reference Implementation
