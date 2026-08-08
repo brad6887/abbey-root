@@ -241,9 +241,14 @@ commands:
       rename-exports:
         description: Rename image/XMP pairs from captions and capture dates.
         usage: abbey media rename-exports <directory> [--dry-run]
+      publish:
+        description: Generate privacy-safe public derivatives from a named workflow.
+        usage: abbey media publish <workflow> [--dry-run]
     examples:
       - abbey media rename-exports ~/incoming/photos --dry-run
       - abbey media rename-exports ~/incoming/photos
+      - abbey media publish starter_gallery --dry-run
+      - abbey media publish starter_gallery
 
   plant:
     category: content
