@@ -505,6 +505,8 @@ abbey media <command>
 
 **Subcommands**
 
+- `publish` - Generate privacy-safe public derivatives from a named workflow.
+  - `abbey media publish <workflow> [--dry-run]`
 - `rename-exports` - Rename image/XMP pairs from captions and capture dates.
   - `abbey media rename-exports <directory> [--dry-run]`
 
@@ -513,6 +515,8 @@ abbey media <command>
 ```text
 abbey media rename-exports ~/incoming/photos --dry-run
 abbey media rename-exports ~/incoming/photos
+abbey media publish starter_gallery --dry-run
+abbey media publish starter_gallery
 ```
 
 ### `abbey plant`

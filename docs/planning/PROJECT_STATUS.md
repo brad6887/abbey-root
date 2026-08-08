@@ -233,6 +233,11 @@ Completed
   original-to-published mappings in a generated manifest, and supports plant
   and Bread Pitt-style workflows; `abbey plant rename-exports` remains a
   compatibility wrapper
+- `abbey media publish <workflow> [--dry-run]` generates project-configured,
+  privacy-safe public derivatives from prepared intake manifests, verifies
+  derivative provenance and source integrity, installs outputs and a
+  deterministic publication manifest transactionally, and leaves unchanged
+  reruns untouched across Abbey Root and Bread Pitt-style projects
 - `abbey plant index <slug>` selects a dedicated plant index image, records it
   as canonical `photos.index` metadata, publishes it at a stable path, and
   preserves current-image then hero-image fallback when no index image is set

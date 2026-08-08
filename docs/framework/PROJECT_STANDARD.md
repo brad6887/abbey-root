@@ -264,6 +264,29 @@ plant-specific rename command is a compatibility wrapper for this shared media
 workflow. Toolkit media defaults require the same explicit project opt-in as
 other project-aware configuration.
 
+Named workflows under `.abbey/media.yml` `publish` connect prepared intake
+manifests to privacy-safe public derivatives. `abbey media publish <workflow>`
+requires project-contained source, destination, intake-manifest, and
+publication-manifest paths; reports the complete resolved context; and invokes
+the shared derivative helper for orientation, resizing, metadata removal, and
+verification. It validates returned source and derivative fingerprints,
+dimensions, metadata-removal status, and source-integrity status before
+committing any output. Derivatives and the deterministic publication manifest
+are installed through one rollback-capable transaction, and an unchanged rerun
+does not rewrite current files.
+
+```yaml
+publish:
+  starter_gallery:
+    source: media/prepared
+    destination: site/public/images/starter
+    intake_manifest: media/prepared/.abbey-rename-manifest.json
+    manifest: generated/media/starter-gallery.json
+    output_format: jpg
+    max_edge: 2000
+    quality: 85
+```
+
 ---
 
 # Reference Implementation

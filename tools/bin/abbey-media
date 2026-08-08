@@ -12,6 +12,8 @@ ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 PROJECT_LIB="$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
 PROJECT_RESOLVER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_project.py"
 RENAME_HELPER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_media_rename_exports.py"
+PUBLISH_HELPER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_media_publish.py"
+DERIVATIVE_HELPER="${ABBEY_MEDIA_DERIVATIVE_HELPER:-$ABBEY_TOOLKIT_ROOT/tools/image/create_public_derivative.py}"
 
 source "$PROJECT_LIB"
 
@@ -21,12 +23,14 @@ Abbey Media
 
 Usage:
   abbey media rename-exports <directory> [--dry-run]
+  abbey media publish <workflow> [--dry-run]
 
 Commands:
   rename-exports    Rename image/XMP pairs from captions and capture dates
+  publish           Generate privacy-safe derivatives from a named workflow
 
 Options:
-  --dry-run         Validate and preview every rename without writing
+  --dry-run         Validate and preview the requested workflow without writing
 
 The active project defines this workflow in .abbey/media.yml. Review a dry run
 before applying a real export batch.
@@ -119,11 +123,62 @@ rename_exports() {
   python3 "${helper_args[@]}"
 }
 
+publish_media() {
+  local workflow="${1:-}"
+  local dry_run=false
+  local -a helper_args
+
+  if [[ -z "$workflow" ]]; then
+    echo "ERROR: Media publication workflow is required."
+    echo
+    usage
+    return 2
+  fi
+  shift
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --dry-run)
+        dry_run=true
+        shift
+        ;;
+      *)
+        echo "ERROR: Unknown media publish option: $1"
+        return 2
+        ;;
+    esac
+  done
+
+  resolve_media_config || return 1
+  if [[ ! -x "$DERIVATIVE_HELPER" ]]; then
+    echo "ERROR: Public image derivative helper is missing or not executable:"
+    echo "  $DERIVATIVE_HELPER"
+    return 1
+  fi
+
+  helper_args=(
+    "$PUBLISH_HELPER"
+    --project-root "$ABBEY_ROOT"
+    --config "$MEDIA_CONFIG"
+    --config-source "$MEDIA_CONFIG_SOURCE"
+    --workflow "$workflow"
+    --derivative-helper "$DERIVATIVE_HELPER"
+  )
+  if [[ "$dry_run" == "true" ]]; then
+    helper_args+=(--dry-run)
+  fi
+  python3 "${helper_args[@]}"
+}
+
 command="${1:-help}"
 case "$command" in
   rename-exports)
     shift
     rename_exports "$@"
+    ;;
+  publish)
+    shift
+    publish_media "$@"
     ;;
   help|-h|--help)
     usage
