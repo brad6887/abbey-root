@@ -241,6 +241,9 @@ The standard project metadata supports:
 * `site.source` and `site.build`, which explicitly define the project-owned
   source directory and either an `npm` build artifact or a direct `static`
   artifact.
+* `site.validation`, which may define a project-owned `public_root`, a list of
+  deterministic `media_manifests`, and a list of generated `required_routes`.
+  A public root is required whenever media manifests are configured.
 * `site.publish`, which must explicitly define the deployment `method`,
   `target`, and `domain` before `abbey site publish` will make changes. Site
   publishing never inherits a target or domain from the Abbey toolkit.
@@ -274,6 +277,31 @@ dimensions, metadata-removal status, and source-integrity status before
 committing any output. Derivatives and the deterministic publication manifest
 are installed through one rollback-capable transaction, and an unchanged rerun
 does not rewrite current files.
+
+`abbey site validate` is the read-only boundary between generated media and a
+publishable site artifact. It verifies that every configured publication
+manifest belongs to the active project, every recorded source and derivative
+exists with matching fingerprints, every public derivative remains inside the
+configured public root, and recorded image format, dimensions, metadata
+removal, privacy, and source-integrity results remain valid. It also rejects
+duplicate derivative destinations and requires each configured route to exist
+in the built artifact. `abbey site build` and `abbey site publish` run the same
+validation automatically and refuse to continue on failure.
+
+```yaml
+site:
+  source: site
+  build:
+    method: npm
+    output: dist
+  validation:
+    public_root: site/public
+    media_manifests:
+      - generated/media/starter-gallery.json
+    required_routes:
+      - /
+      - /starter/
+```
 
 ```yaml
 publish:

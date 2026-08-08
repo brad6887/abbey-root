@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 160 complete · 259 pending · 419 total
+> **Backlog Status:** 161 complete · 258 pending · 419 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -56,7 +56,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Support normal Markdown headings and body content in NEXT.md.
 - [x] Report clear errors when required NEXT.md sections are missing.
 - [x] Add `abbey next init` to create a valid NEXT.md template without overwriting an existing file.
-- [ ] Make `abbey site build` and `abbey site publish` project-aware and fail closed
+- [x] Make `abbey site build` and `abbey site publish` project-aware and fail closed
   - Detect the active Abbey project from the current working directory.
   - Load site build and publishing configuration from that project.
   - Support projects with direct static artifacts such as Bread Pitt's `site/` directory.

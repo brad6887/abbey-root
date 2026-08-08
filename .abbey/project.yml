@@ -26,6 +26,11 @@ site:
   build:
     method: npm
     output: dist
+  validation:
+    public_root: site/public
+    media_manifests: []
+    required_routes:
+      - /
   publish:
     method: git-rsync
     target: ~/git/brad6887.github.io

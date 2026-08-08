@@ -11,6 +11,7 @@
 # Commands:
 #   status        Show development server status.
 #   build         Build the website.
+#   validate      Validate configured media manifests and generated routes.
 #   publish       Build and publish the site to GitHub Pages.
 #   start         Start the development server.
 #   stop          Stop the development server.
@@ -27,6 +28,7 @@ SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 PROJECT_LIB="$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+SITE_VALIDATOR="$ABBEY_TOOLKIT_ROOT/scripts/abbey_site_validate.py"
 
 # shellcheck source=../lib/project.sh
 source "$PROJECT_LIB"
@@ -287,14 +289,31 @@ site_build() {
   case "$BUILD_METHOD" in
     npm)
       require_command npm
-      (cd "$SITE_DIR" && npm run build)
+      (cd "$SITE_DIR" && npm run build) || fail "Site build failed"
       ;;
     static)
       [[ -f "$DIST_DIR/index.html" ]] || fail "Static site index not found: $DIST_DIR/index.html"
       echo "OK   Static site artifact ready: $DIST_DIR"
       ;;
   esac
+  run_site_validation
   return 0
+}
+
+run_site_validation() {
+  [[ -f "$SITE_VALIDATOR" ]] || fail "Site validator not found: $SITE_VALIDATOR"
+  python3 "$SITE_VALIDATOR" \
+    --project-root "$ABBEY_ROOT" \
+    --site-output "$DIST_DIR" || fail "Site artifact validation failed"
+}
+
+site_validate() {
+  print_header
+  load_build_configuration
+  print_resolution
+  require_site_directory
+  [[ -d "$DIST_DIR" ]] || fail "Site output not found: $DIST_DIR"
+  run_site_validation
 }
 
 publish_rsync() {
@@ -387,6 +406,8 @@ HELP
 
   [[ -f "$DIST_DIR/index.html" ]] ||
     fail "Generated index.html not found"
+
+  run_site_validation
 
   echo
   echo "Publish preview"
@@ -510,6 +531,10 @@ case "$command" in
     site_build
     ;;
 
+  validate)
+    site_validate
+    ;;
+
   publish)
     site_publish "$@"
     ;;
@@ -538,6 +563,7 @@ Abbey Site Tool
 Usage:
   abbey site status              Show site development server status
   abbey site build               Build or validate the configured site artifact
+  abbey site validate            Validate media manifests and generated routes
   abbey site publish             Publish using explicit project configuration
   abbey site publish --dry-run   Preview publication without changing production
   abbey site start               Start the configured development server
