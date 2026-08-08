@@ -102,6 +102,11 @@ case "$command" in
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-image" "$@"
     ;;
 
+  media)
+    shift
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-media" "$@"
+    ;;
+
   plant)
     shift
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-plant" "$@"
