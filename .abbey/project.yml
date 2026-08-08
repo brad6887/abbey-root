@@ -6,6 +6,8 @@ project:
 framework:
   name: Abbey
   schema_version: 1
+configuration:
+  allow_toolkit_defaults: false
 capabilities:
   infrastructure: true
   internal_dns: true

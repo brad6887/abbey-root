@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-07-31
+Last Updated: 2026-08-08
 
 ---
 
@@ -177,6 +177,11 @@ Completed
   reach normal completion checks without crashing
 - `abbey review` as a deterministic, read-only pre-commit reviewer that summarizes current-session work and recommends the next workflow step
 - `abbey version`
+- `abbey project show [--project PATH] [--config PATH]` reports normalized
+  toolkit, active-project, and configuration context through the shared
+  project resolver; malformed metadata, missing projects, and paths escaping
+  the active project fail closed, and newly initialized projects explicitly
+  disable toolkit configuration defaults
 - `abbey init PATH` creates a minimal independent Abbey project while keeping
   framework implementation shared; core commands discover the active project
   through `.abbey/project.yml`, which also owns journal policy, project

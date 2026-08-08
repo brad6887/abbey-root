@@ -6,14 +6,11 @@ SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_TOOLKIT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 ABBEY_ROOT="$ABBEY_TOOLKIT_ROOT"
 
-search_dir="$PWD"
-while [[ "$search_dir" != "/" ]]; do
-  if [[ -f "$search_dir/.abbey/project.yml" ]]; then
-    ABBEY_ROOT="$search_dir"
-    break
-  fi
-  search_dir="$(dirname "$search_dir")"
-done
+source "$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+resolved_project_root="$(abbey_find_project_root "$PWD" || true)"
+if [[ -n "$resolved_project_root" ]]; then
+  ABBEY_ROOT="$resolved_project_root"
+fi
 
 export ABBEY_TOOLKIT_ROOT
 export ABBEY_ROOT
@@ -21,6 +18,11 @@ export ABBEY_ROOT
 command="${1:-help}"
 
 case "$command" in
+  project)
+    shift
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-project" "$@"
+    ;;
+
   init)
     shift
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-init" "$@"

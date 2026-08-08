@@ -49,6 +49,7 @@ def project_files(name, slug, description, journal_policy):
             "description": description,
         },
         "framework": {"name": "Abbey", "schema_version": 1},
+        "configuration": {"allow_toolkit_defaults": False},
         "capabilities": {
             "infrastructure": False,
             "internal_dns": False,

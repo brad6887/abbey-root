@@ -1,5 +1,48 @@
 #!/usr/bin/env bash
 
+abbey_find_project_root() {
+  local start="${1:-$PWD}"
+  local search_dir
+
+  if [[ ! -d "$start" ]]; then
+    return 1
+  fi
+
+  search_dir="$(cd "$start" && pwd -P)"
+  while :; do
+    if [[ -f "$search_dir/.abbey/project.yml" ]]; then
+      printf '%s\n' "$search_dir"
+      return 0
+    fi
+    [[ "$search_dir" == "/" ]] && break
+    search_dir="$(dirname "$search_dir")"
+  done
+
+  return 1
+}
+
+abbey_project_path() {
+  local root="$1"
+  local configured_path="$2"
+
+  python3 - "$root" "$configured_path" <<'PY'
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1]).resolve()
+candidate = (root / sys.argv[2]).resolve()
+try:
+    candidate.relative_to(root)
+except ValueError:
+    print(
+        f"ERROR: Configured path escapes the active project: {sys.argv[2]}",
+        file=sys.stderr,
+    )
+    raise SystemExit(1)
+print(candidate)
+PY
+}
+
 abbey_project_name() {
   local root="${1:-$ABBEY_ROOT}"
   local metadata="$root/.abbey/project.yml"

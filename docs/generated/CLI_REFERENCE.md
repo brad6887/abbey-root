@@ -63,6 +63,28 @@ abbey init bread-pitt --name "Bread Pitt" --yes
 abbey init notes --journal-policy optional --yes
 ```
 
+### `abbey project`
+
+Show the resolved active project and configuration context.
+
+**Usage**
+
+```text
+abbey project show [--project PATH] [--config PATH]
+```
+
+**Subcommands**
+
+- `show` - Show project, toolkit, and configuration resolution.
+  - `abbey project show [--project PATH] [--config PATH]`
+
+**Examples**
+
+```text
+abbey project show
+abbey project show --config .abbey/image-roles.yml
+```
+
 ### `abbey status`
 
 Show local system, repository, and project metrics.

@@ -82,6 +82,24 @@ Project-specific commands should exist only where required by each project's mis
 - Help should encourage discovery.
 - Prefer stable interfaces over clever shortcuts.
 
+## Project Context
+
+The Abbey toolkit and the active Abbey project are separate runtime concepts:
+
+- `ABBEY_TOOLKIT_ROOT` locates shared command implementations and toolkit
+  metadata.
+- `ABBEY_ROOT` locates the active project's configuration and artifacts.
+
+The shared project library discovers `.abbey/project.yml` by walking upward
+from the working directory. Project-aware commands must validate that metadata
+and fail when required local configuration is absent or unsafe. They must not
+substitute the toolkit repository for a missing active project.
+
+Use `abbey project show` to inspect the resolved context. An explicit
+`--project` path selects an exact Abbey project root for diagnostics. Optional
+project-relative configuration paths are normalized and rejected if they
+escape the project root.
+
 ## Open Questions
 
 - Which commands belong in both Abbey and Power?
