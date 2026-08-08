@@ -194,6 +194,10 @@ commands:
         description: Build or validate the configured site artifact.
         usage: abbey site build
 
+      validate:
+        description: Validate configured media manifests and generated routes.
+        usage: abbey site validate
+
       publish:
         description: Build and publish with explicit project-owned configuration.
         usage: abbey site publish [--dry-run]
@@ -216,6 +220,7 @@ commands:
 
     examples:
       - abbey site build
+      - abbey site validate
       - abbey site publish --dry-run
       - abbey site publish
       - abbey site start

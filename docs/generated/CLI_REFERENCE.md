@@ -460,11 +460,14 @@ abbey site <command>
   - `abbey site status`
 - `stop` - Stop the Astro development server.
   - `abbey site stop`
+- `validate` - Validate configured media manifests and generated routes.
+  - `abbey site validate`
 
 **Examples**
 
 ```text
 abbey site build
+abbey site validate
 abbey site publish --dry-run
 abbey site publish
 abbey site start

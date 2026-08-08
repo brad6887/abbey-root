@@ -47,6 +47,7 @@ assert_contains() {
   else
     fail "$name"
     echo "     Expected: $expected"
+    echo "     Output:   $output"
   fi
 }
 
@@ -91,6 +92,7 @@ create_fixture() {
 
   mkdir -p \
     "$source_repo/.abbey" \
+    "$source_repo/scripts" \
     "$source_repo/tools/bin" \
     "$source_repo/tools/lib" \
     "$source_repo/site" \
@@ -98,8 +100,9 @@ create_fixture() {
     "$fake_bin"
 
   cp "$ABBEY_SITE" "$source_repo/tools/bin/abbey-site"
+  cp "$ABBEY_ROOT/scripts/abbey_site_validate.py" "$source_repo/scripts/abbey_site_validate.py"
   cp "$ABBEY_ROOT/tools/lib/project.sh" "$source_repo/tools/lib/project.sh"
-  chmod +x "$source_repo/tools/bin/abbey-site"
+  chmod +x "$source_repo/tools/bin/abbey-site" "$source_repo/scripts/abbey_site_validate.py"
 
   cat > "$fake_bin/npm" <<'SCRIPT'
 #!/usr/bin/env bash
@@ -398,7 +401,12 @@ assert_file_absent \
   "$case_dir/curl-count"
 
 bread_root="$test_root/bread-pitt"
-mkdir -p "$bread_root/.abbey" "$bread_root/site"
+mkdir -p \
+  "$bread_root/.abbey" \
+  "$bread_root/generated/media" \
+  "$bread_root/media/prepared" \
+  "$bread_root/site/gallery" \
+  "$bread_root/site/images"
 cat > "$bread_root/.abbey/project.yml" <<'YAML'
 schema_version: 1
 project:
@@ -408,8 +416,49 @@ site:
   source: site
   build:
     method: static
+  validation:
+    public_root: site
+    media_manifests:
+      - generated/media/gallery.json
+    required_routes:
+      - /
+      - /gallery/
 YAML
 printf '<html>Bread Pitt</html>\n' > "$bread_root/site/index.html"
+printf '<html>Gallery</html>\n' > "$bread_root/site/gallery/index.html"
+printf '%s' 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=' |
+  base64 --decode > "$bread_root/media/prepared/loaf.png"
+cp "$bread_root/media/prepared/loaf.png" "$bread_root/site/images/loaf.png"
+bread_image_hash="$(shasum -a 256 "$bread_root/site/images/loaf.png" | awk '{print $1}')"
+resolved_bread_root="$(cd "$bread_root" && pwd -P)"
+cat > "$bread_root/generated/media/gallery.json" <<JSON
+{
+  "schema_version": 1,
+  "project": "Bread Pitt",
+  "workflow": "gallery",
+  "destination": "site/images",
+  "profile": {"output_format": "png", "metadata_removed": true},
+  "items": [{
+    "source": {
+      "path": "media/prepared/loaf.png",
+      "sha256": "$bread_image_hash",
+      "canonical_original_preserved": true
+    },
+    "derivative": {
+      "path": "site/images/loaf.png",
+      "sha256": "$bread_image_hash",
+      "format": "png",
+      "width": 1,
+      "height": 1
+    },
+    "transformation": {"metadata_removed": true},
+    "validation": {
+      "private_metadata_detected": false,
+      "source_hash_unchanged": true
+    }
+  }]
+}
+JSON
 
 set +e
 bread_build_output="$(
@@ -422,12 +471,97 @@ set -e
 assert_status "Bread Pitt static build succeeds" "$bread_build_status" 0
 assert_contains \
   "Bread Pitt build resolves the active project" \
-  "Project:           Bread Pitt ($bread_root)" \
-  "$bread_build_output"
+  "$bread_build_output" \
+  "Project:           Bread Pitt ($resolved_bread_root)"
 assert_contains \
   "Bread Pitt build reports direct static artifact" \
-  "OK   Static site artifact ready: $bread_root/site" \
-  "$bread_build_output"
+  "$bread_build_output" \
+  "OK   Static site artifact ready: $resolved_bread_root/site"
+assert_contains \
+  "Bread Pitt build validates its publication manifest" \
+  "$bread_build_output" \
+  "OK   Media manifest: generated/media/gallery.json"
+assert_contains \
+  "Bread Pitt build validates configured routes" \
+  "$bread_build_output" \
+  "OK   Required route: /gallery/"
+
+set +e
+bread_validate_output="$(
+  cd "$bread_root" &&
+    "$ABBEY" site validate 2>&1
+)"
+bread_validate_status=$?
+set -e
+
+assert_status "Bread Pitt standalone site validation succeeds" "$bread_validate_status" 0
+assert_contains \
+  "standalone validation reports manifest, derivative, and route totals" \
+  "$bread_validate_output" \
+  "OK   Site validation passed: 1 manifest(s), 1 derivative(s), 2 route(s)."
+
+cp "$bread_root/generated/media/gallery.json" "$bread_root/generated/media/foreign.json"
+python3 - "$bread_root/generated/media/foreign.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+data = json.loads(path.read_text())
+data["project"] = "Abbey Root"
+path.write_text(json.dumps(data))
+PY
+python3 - "$bread_root/.abbey/project.yml" <<'PY'
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+text = path.read_text()
+path.write_text(text.replace(
+    "      - generated/media/gallery.json\n",
+    "      - generated/media/gallery.json\n      - generated/media/foreign.json\n",
+))
+PY
+
+set +e
+foreign_validate_output="$(
+  cd "$bread_root" &&
+    "$ABBEY" site validate 2>&1
+)"
+foreign_validate_status=$?
+set -e
+
+assert_status \
+  "cross-project publication manifest fails closed" \
+  "$foreign_validate_status" \
+  1
+assert_contains \
+  "cross-project refusal identifies the manifest owner" \
+  "$foreign_validate_output" \
+  "belongs to 'Abbey Root', not 'Bread Pitt'"
+
+python3 - "$bread_root/.abbey/project.yml" <<'PY'
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+path.write_text(path.read_text().replace("      - generated/media/foreign.json\n", ""))
+PY
+mv "$bread_root/site/images/loaf.png" "$bread_root/site/images/loaf.missing"
+
+set +e
+stale_validate_output="$(
+  cd "$bread_root" &&
+    "$ABBEY" site validate 2>&1
+)"
+stale_validate_status=$?
+set -e
+
+assert_status "stale publication manifest fails closed" "$stale_validate_status" 1
+assert_contains \
+  "stale manifest refusal identifies the missing derivative" \
+  "$stale_validate_output" \
+  "derivative does not exist"
 
 brad_path="$test_root/bradcooke-production-must-not-change"
 mkdir -p "$brad_path"
@@ -436,7 +570,6 @@ printf 'protected\n' > "$brad_path/sentinel"
 set +e
 bread_publish_output="$(
   cd "$bread_root" &&
-    HOME="$test_root" \
     "$ABBEY" site publish --dry-run 2>&1
 )"
 bread_publish_status=$?
@@ -448,8 +581,8 @@ assert_status \
   1
 assert_contains \
   "Bread Pitt refusal names the active project" \
-  "Publishing refused: Bread Pitt has no explicit site.publish configuration." \
-  "$bread_publish_output"
+  "$bread_publish_output" \
+  "Publishing refused: Bread Pitt has no explicit site.publish configuration."
 assert_file_value \
   "Bread Pitt cannot invoke a BradCooke.com publishing path" \
   "$brad_path/sentinel" \

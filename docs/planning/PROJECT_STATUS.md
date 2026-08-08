@@ -238,6 +238,11 @@ Completed
   derivative provenance and source integrity, installs outputs and a
   deterministic publication manifest transactionally, and leaves unchanged
   reruns untouched across Abbey Root and Bread Pitt-style projects
+- `abbey site validate` provides a read-only publication gate for
+  project-owned media manifests and required routes; it verifies active-project
+  ownership, safe public destinations, source and derivative fingerprints,
+  image facts, privacy flags, and generated route artifacts, and runs
+  automatically during `abbey site build` and `abbey site publish`
 - `abbey plant index <slug>` selects a dedicated plant index image, records it
   as canonical `photos.index` metadata, publishes it at a stable path, and
   preserves current-image then hero-image fallback when no index image is set
