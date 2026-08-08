@@ -62,6 +62,10 @@ assert_contains \
   "initialized projects disable internal DNS checks" \
   "internal_dns: false" \
   "$(cat "$project/.abbey/project.yml")"
+assert_contains \
+  "initialized projects disable toolkit configuration defaults" \
+  "allow_toolkit_defaults: false" \
+  "$(cat "$project/.abbey/project.yml")"
 
 mkdir -p \
   "$project/.abbey/ai" \
@@ -105,6 +109,7 @@ session_output="$(cd "$project" && "$ABBEY" session)"
 assert_contains "session uses project metadata" "Bread Pitt Session" "$session_output"
 
 context_output="$(cd "$project" && "$ABBEY" session context --stdout)"
+canonical_project="$(cd "$project" && pwd -P)"
 assert_contains "context uses project metadata" "# Bread Pitt Session Context" "$context_output"
 assert_contains \
   "external context includes CLI architecture" \
@@ -116,7 +121,7 @@ assert_contains \
   "$context_output"
 assert_contains \
   "external context identifies active project root" \
-  "Active project root (\`ABBEY_ROOT\`): \`$project\`" \
+  "Active project root (\`ABBEY_ROOT\`): \`$canonical_project\`" \
   "$context_output"
 assert_contains \
   "external context includes registered commands" \

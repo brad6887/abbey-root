@@ -148,11 +148,12 @@ context_path="$(
   2>&1
 )"
 context_path_rc=$?
+canonical_project="$(cd "$project" && pwd -P)"
 
 printf '%s\n' "$context_path" >> "$log_file"
 
 if (( context_path_rc == 0 )) &&
-   [[ "$context_path" == "$project/.abbey/context/current.md" ]]; then
+   [[ "$context_path" == "$canonical_project/.abbey/context/current.md" ]]; then
   pass "nested context path resolves to project root"
 else
   fail "nested context path resolves to project root"

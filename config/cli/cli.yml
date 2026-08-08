@@ -37,6 +37,19 @@ categories:
     description: Content management commands
 
 commands:
+  project:
+    category: core
+    description: Show the resolved active project and configuration context.
+    usage: abbey project show [--project PATH] [--config PATH]
+    hidden: false
+    subcommands:
+      show:
+        description: Show project, toolkit, and configuration resolution.
+        usage: abbey project show [--project PATH] [--config PATH]
+    examples:
+      - abbey project show
+      - abbey project show --config .abbey/image-roles.yml
+
   init:
     category: core
     description: Create a new Abbey project from the default template.

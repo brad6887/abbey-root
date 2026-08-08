@@ -209,8 +209,27 @@ toolkit commands must resolve their implementations from the installed Abbey
 toolkit while reading and writing project artifacts under the active project
 root.
 
+The `.abbey/project.yml` file is also the canonical Abbey project marker.
+Project-aware commands discover it by walking upward from the current working
+directory, or use an explicitly supplied project root when supported. They do
+not infer the active project from the toolkit installation directory.
+
+Project discovery and configuration follow these safety rules:
+
+* A discovered marker must contain valid schema-version-1 project metadata.
+* Project-relative configuration paths must remain inside the active project.
+* Missing project configuration fails closed for commands that require it.
+* Toolkit defaults are unavailable unless the project explicitly declares
+  `configuration.allow_toolkit_defaults: true`.
+* `abbey project show` reports the active project, project root, toolkit root,
+  project configuration, and toolkit-default policy before project-aware
+  workflows are run.
+
 The standard project metadata supports:
 
+* `configuration.allow_toolkit_defaults`, which defaults to `false` and must
+  be explicitly enabled before a command may use toolkit-owned configuration
+  as a project default.
 * `capabilities.infrastructure`, which enables infrastructure-specific health
   checks only for projects that own infrastructure.
 * `capabilities.internal_dns`, which independently enables checks for
