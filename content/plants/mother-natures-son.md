@@ -9,8 +9,8 @@ acquired: 2026-02-01
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/mother-natures-son/hero.jpg
-currentImage: /images/plants/mother-natures-son/current.jpg
+heroImage: /images/plants/mother-natures-son/hero.jpg?v=2b4b7b45c930
+currentImage: /images/plants/mother-natures-son/current.jpg?v=77e7ef4433cf
 tags:
 - orchid
 - orchid-rescue
@@ -56,7 +56,7 @@ quietly becoming a plant that no longer needed one.
 
 ### Photos
 
-![Mother Nature's Son — 2026-02-01 — Acquired](/images/plants/mother-natures-son/photo-01.jpg)
+![Mother Nature's Son — 2026-02-01 — Acquired](/images/plants/mother-natures-son/photo-01.jpg?v=2b4b7b45c930)
 
 ### What Happened
 
@@ -79,7 +79,7 @@ begins the assessment on February 2.
 
 ### Photos
 
-![Mother Nature's Son — 2026-02-03 — Packaging Removed](/images/plants/mother-natures-son/photo-02.jpeg)
+![Mother Nature's Son — 2026-02-03 — Packaging Removed](/images/plants/mother-natures-son/photo-02.jpeg?v=57992f059e9c)
 
 ### What Happened
 
@@ -97,7 +97,7 @@ Removed the mesh packaging and inspected the plant in its nursery setup.
 
 ### Photos
 
-![Mother Nature's Son — 2026-02-11 — Early Check](/images/plants/mother-natures-son/photo-03.jpeg)
+![Mother Nature's Son — 2026-02-11 — Early Check](/images/plants/mother-natures-son/photo-03.jpeg?v=7fa7f8ed7b83)
 
 ### What Happened
 
@@ -115,7 +115,7 @@ Completed the first documented follow-up after acclimation.
 
 ### Photos
 
-![Mother Nature's Son — 2026-02-19 — Top-Heavy in the Nursery Pot](/images/plants/mother-natures-son/photo-04.jpeg)
+![Mother Nature's Son — 2026-02-19 — Top-Heavy in the Nursery Pot](/images/plants/mother-natures-son/photo-04.jpeg?v=18e5737cd9c5)
 
 ### What Happened
 
@@ -131,7 +131,7 @@ The immediate problem was stability rather than a documented foliage decline.
 
 ### Photos
 
-![Mother Nature's Son — 2026-02-22 — Continued Monitoring](/images/plants/mother-natures-son/photo-05.jpg)
+![Mother Nature's Son — 2026-02-22 — Continued Monitoring](/images/plants/mother-natures-son/photo-05.jpg?v=98bda8ebb60e)
 
 ### Observations
 
@@ -144,8 +144,8 @@ The immediate problem was stability rather than a documented foliage decline.
 
 ### Photos
 
-![Mother Nature's Son — 2026-02-28 — Stabilized With Charcoal](/images/plants/mother-natures-son/photo-06.jpeg)
-![Mother Nature's Son — 2026-02-28 — Stabilized With Charcoal](/images/plants/mother-natures-son/photo-07.jpeg)
+![Mother Nature's Son — 2026-02-28 — Stabilized With Charcoal](/images/plants/mother-natures-son/photo-06.jpeg?v=a2b9fec06612)
+![Mother Nature's Son — 2026-02-28 — Stabilized With Charcoal](/images/plants/mother-natures-son/photo-07.jpeg?v=005e9fab7605)
 
 ### What Happened
 
@@ -162,7 +162,7 @@ This was a stabilization step, not the full April repot.
 
 ### Photos
 
-![Mother Nature's Son — 2026-03-07 — Weekly Check](/images/plants/mother-natures-son/photo-08.jpeg)
+![Mother Nature's Son — 2026-03-07 — Weekly Check](/images/plants/mother-natures-son/photo-08.jpeg?v=28ed75479a03)
 
 ### Observations
 
@@ -175,7 +175,7 @@ This was a stabilization step, not the full April repot.
 
 ### Photos
 
-![Mother Nature's Son — 2026-03-16 — One Week Later](/images/plants/mother-natures-son/photo-09.jpg)
+![Mother Nature's Son — 2026-03-16 — One Week Later](/images/plants/mother-natures-son/photo-09.jpg?v=b71440608ea8)
 
 ### Observations
 
@@ -188,8 +188,8 @@ This was a stabilization step, not the full April repot.
 
 ### Photos
 
-![Mother Nature's Son — 2026-03-23 — New Basal Growth Identified](/images/plants/mother-natures-son/photo-10.jpg)
-![Mother Nature's Son — 2026-03-23 — New Basal Growth Identified](/images/plants/mother-natures-son/photo-11.jpeg)
+![Mother Nature's Son — 2026-03-23 — New Basal Growth Identified](/images/plants/mother-natures-son/photo-10.jpg?v=db2cef521bea)
+![Mother Nature's Son — 2026-03-23 — New Basal Growth Identified](/images/plants/mother-natures-son/photo-11.jpeg?v=0778c24f498a)
 
 ### What Happened
 
@@ -202,7 +202,7 @@ second growth to its right had been present since acquisition.
 
 ### Photos
 
-![Mother Nature's Son — 2026-03-29 — New Growth Continues](/images/plants/mother-natures-son/photo-12.jpeg)
+![Mother Nature's Son — 2026-03-29 — New Growth Continues](/images/plants/mother-natures-son/photo-12.jpeg?v=4d3037c13f9c)
 
 ### Observations
 
@@ -215,7 +215,7 @@ second growth to its right had been present since acquisition.
 
 ### Photos
 
-![Mother Nature's Son — 2026-04-03 — Basal Shoot Enlarges](/images/plants/mother-natures-son/photo-13.jpeg)
+![Mother Nature's Son — 2026-04-03 — Basal Shoot Enlarges](/images/plants/mother-natures-son/photo-13.jpeg?v=d952ca542e53)
 
 ### What Happened
 
@@ -227,8 +227,8 @@ The new basal growth had visibly enlarged.
 
 ### Photos
 
-![Mother Nature's Son — 2026-04-05 — Growth Check](/images/plants/mother-natures-son/photo-14.jpeg)
-![Mother Nature's Son — 2026-04-05 — Growth Check](/images/plants/mother-natures-son/photo-15.jpeg)
+![Mother Nature's Son — 2026-04-05 — Growth Check](/images/plants/mother-natures-son/photo-14.jpeg?v=12d2fd2e6ee9)
+![Mother Nature's Son — 2026-04-05 — Growth Check](/images/plants/mother-natures-son/photo-15.jpeg?v=75fd353ba841)
 
 ### Observations
 
@@ -241,13 +241,13 @@ The new basal growth had visibly enlarged.
 
 ### Photos
 
-![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-16.jpeg)
-![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-17.jpeg)
-![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-18.jpeg)
-![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-19.jpeg)
-![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-20.jpeg)
-![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-21.jpeg)
-![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-22.jpeg)
+![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-16.jpeg?v=771c19dfd89b)
+![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-17.jpeg?v=bf7af8aeaea9)
+![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-18.jpeg?v=1ca7fd1efd21)
+![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-19.jpeg?v=9e1f20ab2d39)
+![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-20.jpeg?v=17d8da7f3037)
+![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-21.jpeg?v=70a155fb3e7b)
+![Mother Nature's Son — 2026-04-12 — Root Cleanup and Repot](/images/plants/mother-natures-son/photo-22.jpeg?v=495790a00f46)
 
 ### What Happened
 
@@ -272,7 +272,7 @@ had to be preserved rather than stripped indiscriminately.
 
 ### Photos
 
-![Mother Nature's Son — 2026-04-15 — Post-Repot Check](/images/plants/mother-natures-son/photo-23.jpeg)
+![Mother Nature's Son — 2026-04-15 — Post-Repot Check](/images/plants/mother-natures-son/photo-23.jpeg?v=4862412131c1)
 
 ### Observations
 
@@ -285,7 +285,7 @@ had to be preserved rather than stripped indiscriminately.
 
 ### Photos
 
-![Mother Nature's Son — 2026-04-18 — Early Repot Recovery](/images/plants/mother-natures-son/photo-24.jpeg)
+![Mother Nature's Son — 2026-04-18 — Early Repot Recovery](/images/plants/mother-natures-son/photo-24.jpeg?v=f934dbc38b3b)
 
 ### Observations
 
@@ -299,7 +299,7 @@ had to be preserved rather than stripped indiscriminately.
 
 ### Photos
 
-![Mother Nature's Son — 2026-06-13 — Settled After the Move](/images/plants/mother-natures-son/photo-25.jpg)
+![Mother Nature's Son — 2026-06-13 — Settled After the Move](/images/plants/mother-natures-son/photo-25.jpg?v=1a47faefbcac)
 
 ### What Happened
 
@@ -316,8 +316,8 @@ at the new home exceeded 100 degrees.
 
 ### Photos
 
-![Mother Nature's Son — 2026-06-21 — Indoor Growth Continues](/images/plants/mother-natures-son/photo-26.jpg)
-![Mother Nature's Son — 2026-06-21 — Indoor Growth Continues](/images/plants/mother-natures-son/photo-27.jpg)
+![Mother Nature's Son — 2026-06-21 — Indoor Growth Continues](/images/plants/mother-natures-son/photo-26.jpg?v=6fd744ce1670)
+![Mother Nature's Son — 2026-06-21 — Indoor Growth Continues](/images/plants/mother-natures-son/photo-27.jpg?v=19bc9bd195ec)
 
 ### Observations
 
@@ -331,8 +331,8 @@ at the new home exceeded 100 degrees.
 
 ### Photos
 
-![Mother Nature's Son — 2026-06-28 — Steady Recovery](/images/plants/mother-natures-son/photo-28.jpg)
-![Mother Nature's Son — 2026-06-28 — Steady Recovery](/images/plants/mother-natures-son/photo-29.jpg)
+![Mother Nature's Son — 2026-06-28 — Steady Recovery](/images/plants/mother-natures-son/photo-28.jpg?v=425d95eced2e)
+![Mother Nature's Son — 2026-06-28 — Steady Recovery](/images/plants/mother-natures-son/photo-29.jpg?v=9a805914bff7)
 
 ### Observations
 
@@ -346,7 +346,7 @@ at the new home exceeded 100 degrees.
 
 ### Photos
 
-![Mother Nature's Son — 2026-07-05 — Active Lead](/images/plants/mother-natures-son/photo-30.jpg)
+![Mother Nature's Son — 2026-07-05 — Active Lead](/images/plants/mother-natures-son/photo-30.jpg?v=143ef91d27f5)
 
 ### Observations
 
@@ -359,7 +359,7 @@ at the new home exceeded 100 degrees.
 
 ### Photos
 
-![Mother Nature's Son — 2026-07-12 — Fertilized During Active Growth](/images/plants/mother-natures-son/photo-31.jpg)
+![Mother Nature's Son — 2026-07-12 — Fertilized During Active Growth](/images/plants/mother-natures-son/photo-31.jpg?v=9fb45ed56271)
 
 ### What Happened
 
@@ -379,7 +379,7 @@ Applied a light feeding while the new lead was actively growing.
 
 ### Photos
 
-![Mother Nature's Son — 2026-07-19 — Lead Gains Height](/images/plants/mother-natures-son/photo-32.jpg)
+![Mother Nature's Son — 2026-07-19 — Lead Gains Height](/images/plants/mother-natures-son/photo-32.jpg?v=37edf0545cee)
 
 ### Observations
 
@@ -400,7 +400,7 @@ The next expected milestone was a new root from the active lead.
 
 ### Photos
 
-![Mother Nature's Son — 2026-07-26 — New Root From the Active Lead](/images/plants/mother-natures-son/photo-33.jpg)
+![Mother Nature's Son — 2026-07-26 — New Root From the Active Lead](/images/plants/mother-natures-son/photo-33.jpg?v=fbf4b0b0e590)
 
 ### What Happened
 
@@ -426,8 +426,8 @@ was actively building the next part of the plant.
 
 ### Photos
 
-![Mother Nature's Son — 2026-08-02 — Weekly Update](/images/plants/mother-natures-son/photo-34.jpg)
-![Mother Nature's Son — 2026-08-02 — Weekly Update](/images/plants/mother-natures-son/photo-35.jpg)
+![Mother Nature's Son — 2026-08-02 — Weekly Update](/images/plants/mother-natures-son/photo-34.jpg?v=a68715fda48f)
+![Mother Nature's Son — 2026-08-02 — Weekly Update](/images/plants/mother-natures-son/photo-35.jpg?v=e6b96feca75a)
 
 ### Observations
 
@@ -443,7 +443,7 @@ Watered
 
 ### Photos
 
-![Mother Nature's Son — 2026-08-09 — Weekly Update](/images/plants/mother-natures-son/photo-36.jpg)
+![Mother Nature's Son — 2026-08-09 — Weekly Update](/images/plants/mother-natures-son/photo-36.jpg?v=77e7ef4433cf)
 
 ### Observations
 

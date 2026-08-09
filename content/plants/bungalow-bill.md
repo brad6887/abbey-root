@@ -9,8 +9,8 @@ acquired: 2026-03-29
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/bungalow-bill/hero.png
-currentImage: /images/plants/bungalow-bill/current.jpg
+heroImage: /images/plants/bungalow-bill/hero.png?v=b8b87a88bbc4
+currentImage: /images/plants/bungalow-bill/current.jpg?v=b98d6ebfa973
 tags:
 - orchid
 - phalaenopsis
@@ -34,13 +34,13 @@ Bungalow Bill has become a reminder that rescued orchids don't always look healt
 
 ### Photos
 
-![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-01.jpeg)
-![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-02.jpeg)
-![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-03.jpeg)
-![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-04.jpeg)
-![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-05.jpeg)
-![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-06.jpeg)
-![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-07.jpeg)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-01.jpeg?v=a4f9c9f7aa5a)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-02.jpeg?v=ba9ef6be2cd9)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-03.jpeg?v=115a03ec6f2c)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-04.jpeg?v=59b213d4522b)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-05.jpeg?v=d823e382cb5b)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-06.jpeg?v=9d07a796b23f)
+![Bungalow Bill — 2026-03-29 — Clearance Rescue](/images/plants/bungalow-bill/photo-07.jpeg?v=af56bd989cde)
 
 ### What Happened
 
@@ -94,8 +94,8 @@ Decision made to continue post-bloom recovery.
 
 ### Photos
 
-![Bungalow Bill — 2026-04-04 — Repotting](/images/plants/bungalow-bill/photo-08.jpeg)
-![Bungalow Bill — 2026-04-04 — Repotting](/images/plants/bungalow-bill/photo-09.jpeg)
+![Bungalow Bill — 2026-04-04 — Repotting](/images/plants/bungalow-bill/photo-08.jpeg?v=d812158ed7ba)
+![Bungalow Bill — 2026-04-04 — Repotting](/images/plants/bungalow-bill/photo-09.jpeg?v=77ace85051a0)
 
 ### What Happened
 
@@ -121,7 +121,7 @@ Removing the nursery plug reduces the risk of long-term moisture problems.
 
 ### Photos
 
-![Bungalow Bill — 2026-04-05 — First Post-Repot Check](/images/plants/bungalow-bill/photo-10.jpeg)
+![Bungalow Bill — 2026-04-05 — First Post-Repot Check](/images/plants/bungalow-bill/photo-10.jpeg?v=d824038d0fdc)
 
 ### What Happened
 
@@ -138,7 +138,7 @@ Performed the first inspection after repotting.
 
 ### Photos
 
-![Bungalow Bill — 2026-04-12 — Recovery Check](/images/plants/bungalow-bill/photo-11.jpeg)
+![Bungalow Bill — 2026-04-12 — Recovery Check](/images/plants/bungalow-bill/photo-11.jpeg?v=0bfa180b01c3)
 
 ### What Happened
 
@@ -154,8 +154,8 @@ Weekly progress inspection.
 
 ### Photos
 
-![Bungalow Bill — 2026-04-15 — Recovery Check](/images/plants/bungalow-bill/photo-12.jpeg)
-![Bungalow Bill — 2026-04-15 — Recovery Check](/images/plants/bungalow-bill/photo-13.jpeg)
+![Bungalow Bill — 2026-04-15 — Recovery Check](/images/plants/bungalow-bill/photo-12.jpeg?v=dd2102e2e8dd)
+![Bungalow Bill — 2026-04-15 — Recovery Check](/images/plants/bungalow-bill/photo-13.jpeg?v=fe31a3229d4b)
 
 ### What Happened
 
@@ -171,7 +171,7 @@ Continued monitoring after repotting.
 
 ### Photos
 
-![Bungalow Bill — 2026-06-13 — Early Signs of Improvement](/images/plants/bungalow-bill/photo-14.png)
+![Bungalow Bill — 2026-06-13 — Early Signs of Improvement](/images/plants/bungalow-bill/photo-14.png?v=4175065f6684)
 
 ### What Happened
 
@@ -192,9 +192,9 @@ Recovery remained slow but encouraging.
 
 ### Photos
 
-![Bungalow Bill — 2026-06-28 — New Growth Encouraging](/images/plants/bungalow-bill/photo-15.png)
-![Bungalow Bill — 2026-06-28 — New Growth Encouraging](/images/plants/bungalow-bill/photo-16.png)
-![Bungalow Bill — 2026-06-28 — New Growth Encouraging](/images/plants/bungalow-bill/photo-17.png)
+![Bungalow Bill — 2026-06-28 — New Growth Encouraging](/images/plants/bungalow-bill/photo-15.png?v=e63bcf3fa0ad)
+![Bungalow Bill — 2026-06-28 — New Growth Encouraging](/images/plants/bungalow-bill/photo-16.png?v=9d132e17fc43)
+![Bungalow Bill — 2026-06-28 — New Growth Encouraging](/images/plants/bungalow-bill/photo-17.png?v=68fa22277dca)
 
 ### What Happened
 
@@ -217,8 +217,8 @@ The healthiest growth was now coming from the center of the plant. The older lea
 
 ### Photos
 
-![Bungalow Bill — 2026-07-05 — Root Growth Confirmed](/images/plants/bungalow-bill/photo-18.png)
-![Bungalow Bill — 2026-07-05 — Root Growth Confirmed](/images/plants/bungalow-bill/photo-19.png)
+![Bungalow Bill — 2026-07-05 — Root Growth Confirmed](/images/plants/bungalow-bill/photo-18.png?v=fe0cee3156b6)
+![Bungalow Bill — 2026-07-05 — Root Growth Confirmed](/images/plants/bungalow-bill/photo-19.png?v=b8b87a88bbc4)
 
 ### What Happened
 
@@ -256,7 +256,7 @@ Future updates should focus on:
 
 ### Photos
 
-![Bungalow Bill — 2026-07-12 — Weekly Update](/images/plants/bungalow-bill/photo-20.jpg)
+![Bungalow Bill — 2026-07-12 — Weekly Update](/images/plants/bungalow-bill/photo-20.jpg?v=00d11556138e)
 
 ### Observations
 
@@ -272,7 +272,7 @@ Fertilized.
 
 ### Photos
 
-![Bungalow Bill — 2026-07-19 — Weekly Update](/images/plants/bungalow-bill/photo-21.jpg)
+![Bungalow Bill — 2026-07-19 — Weekly Update](/images/plants/bungalow-bill/photo-21.jpg?v=07604d6fc867)
 
 ### Observations
 
@@ -284,7 +284,7 @@ Bungalow Bill remains stable this week. His newest leaf is firm, glossy, and hea
 
 ### Photos
 
-![Bungalow Bill — 2026-07-26 — Weekly Update](/images/plants/bungalow-bill/photo-22.jpg)
+![Bungalow Bill — 2026-07-26 — Weekly Update](/images/plants/bungalow-bill/photo-22.jpg?v=4715a94c8533)
 
 ### Observations
 
@@ -296,7 +296,7 @@ Bungalow Bill remains stable this week. The newest leaf is firm and healthy, act
 
 ### Photos
 
-![Bungalow Bill — 2026-08-02 — Weekly Update](/images/plants/bungalow-bill/photo-23.jpg)
+![Bungalow Bill — 2026-08-02 — Weekly Update](/images/plants/bungalow-bill/photo-23.jpg?v=405487796d9a)
 
 ### Observations
 
@@ -312,8 +312,8 @@ Watered
 
 ### Photos
 
-![Bungalow Bill — 2026-08-09 — Weekly Update](/images/plants/bungalow-bill/photo-24.jpg)
-![Bungalow Bill — 2026-08-09 — Weekly Update](/images/plants/bungalow-bill/photo-25.jpg)
+![Bungalow Bill — 2026-08-09 — Weekly Update](/images/plants/bungalow-bill/photo-24.jpg?v=b98d6ebfa973)
+![Bungalow Bill — 2026-08-09 — Weekly Update](/images/plants/bungalow-bill/photo-25.jpg?v=25cbf063a4cd)
 
 ### Observations
 

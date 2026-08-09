@@ -410,22 +410,30 @@ abbey plant publish <slug>
 Publish several plants:
 
 ```bash
-for plant in plant-one plant-two plant-three
-do
-  abbey plant publish "$plant" || break
-done
+abbey plant publish-batch plant-one plant-two plant-three
 ```
 
 Publishing validates the workspace, generates website content and publication
 manifests, creates sanitized public image derivatives, and removes private
 camera and location metadata from those public derivatives. Canonical source
-images remain unchanged.
+images remain unchanged. Batch publishing processes plants serially and stops
+on the first failure. Each plant is staged and committed as one unit, and a
+per-plant lock prevents overlapping publication of the same plant. Republishing
+removes only derivatives recorded in the prior manifest, so unrelated public
+artifacts in the plant directory are preserved.
+
+Published image URLs include a short content hash. The stable filenames remain
+human-readable while browsers and the CDN request a fresh image whenever its
+contents change.
 
 Build the complete site:
 
 ```bash
 abbey site build
 ```
+
+Site commands discover npm from a standard NVM installation when npm is not
+already on `PATH`, including non-interactive SSH sessions.
 
 Inspect the generated page and publication manifest:
 

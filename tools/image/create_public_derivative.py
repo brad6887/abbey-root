@@ -189,7 +189,14 @@ def create_derivative(source, destination, max_edge, quality):
         if destination.suffix.lower() in {".jpg", ".jpeg", ".webp"}:
             command.extend(["-quality", str(quality)])
         elif destination.suffix.lower() == ".png":
-            command.extend(["-define", "png:compression-level=9"])
+            command.extend(
+                [
+                    "-define",
+                    "png:compression-level=9",
+                    "-define",
+                    "png:exclude-chunks=date,time",
+                ]
+            )
 
         command.append(str(temporary))
 

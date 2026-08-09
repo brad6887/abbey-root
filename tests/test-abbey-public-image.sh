@@ -146,6 +146,23 @@ else
   fail "provenance accurately describes the derivative"
 fi
 
+public_png="$test_root/public.png"
+second_public_png="$test_root/public-second.png"
+"$HELPER" "$source_image" "$public_png" --max-edge 60 >/dev/null
+sleep 1
+"$HELPER" "$source_image" "$second_public_png" --max-edge 60 >/dev/null
+if cmp -s "$public_png" "$second_public_png"; then
+  pass "PNG derivatives are deterministic"
+else
+  fail "PNG derivatives are deterministic"
+fi
+
+if exiftool -s3 -ModifyDate "$public_png" | grep -q .; then
+  fail "PNG derivatives omit generated timestamps"
+else
+  pass "PNG derivatives omit generated timestamps"
+fi
+
 bad_source="$test_root/not-an-image.jpg"
 bad_destination="$test_root/bad-public.jpg"
 printf 'not an image\n' > "$bad_source"

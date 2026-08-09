@@ -9,6 +9,7 @@
 #   abbey plant new <slug> --name NAME --type TYPE [options]
 #   abbey plant validate <slug>
 #   abbey plant publish <slug>
+#   abbey plant publish-batch <slug> [slug ...]
 #   abbey plant hero <slug>
 #   abbey plant index <slug>
 #   abbey plant update <slug>
@@ -55,6 +56,7 @@ Usage:
   abbey plant new <slug> --name NAME --type TYPE [options]
   abbey plant validate <slug>
   abbey plant publish <slug>
+  abbey plant publish-batch <slug> [slug ...]
   abbey plant hero <slug> [--select NUMBER] [--yes]
   abbey plant index <slug> [--select NUMBER] [--yes]
   abbey plant update <slug> --photo FILE --narrative TEXT [options]
@@ -66,6 +68,8 @@ Commands:
   new         Create a plant workspace from the canonical template
   validate    Validate a plant workspace against the Plant Model
   publish     Generate Astro content and copy selected public images
+  publish-batch
+              Publish several plants serially in one validated workflow
   hero        Select the plant photograph assigned to the hero role
   index       Select the photograph used on plant index pages
   update      Add a dated observation and select its current photograph
@@ -1052,6 +1056,13 @@ publish_plant() {
     local output_file="$CONTENT_DIR/$slug.md"
     local public_dir="$PUBLIC_PLANTS_DIR/$slug"
     local manifest_file="$PUBLICATION_MANIFEST_DIR/$slug.json"
+    local staging_dir
+    local staged_output
+    local staged_public_dir
+    local staged_manifest
+    local publish_status
+    local lock_dir="$PUBLIC_PLANTS_DIR/.${slug}.publish.lock"
+    local lock_cleanup
 
     echo "Plant Publishing"
     echo "================"
@@ -1083,19 +1094,30 @@ publish_plant() {
     fi
 
     mkdir -p "$CONTENT_DIR"
+    mkdir -p "$PUBLIC_PLANTS_DIR"
     mkdir -p "$PUBLICATION_MANIFEST_DIR"
-    rm -rf "$public_dir"
-    rm -f "$manifest_file"
-    mkdir -p "$public_dir"
+    if ! mkdir "$lock_dir" 2>/dev/null; then
+        echo "ERROR: Plant publication is already in progress: $slug"
+        return 1
+    fi
+    printf -v lock_cleanup 'rm -rf -- %q' "$lock_dir"
+    trap "$lock_cleanup" EXIT INT TERM
+    staging_dir="$(mktemp -d "$PUBLIC_PLANTS_DIR/.${slug}.publish.XXXXXX")"
+    staged_output="$staging_dir/content.md"
+    staged_public_dir="$staging_dir/public"
+    staged_manifest="$staging_dir/manifest.json"
+    mkdir -p "$staged_public_dir"
 
+    set +e
     python3 - \
         "$facts_file" \
         "$plant_dir" \
-        "$output_file" \
-        "$public_dir" \
+        "$staged_output" \
+        "$staged_public_dir" \
         "$IMAGE_DERIVATIVE_HELPER" \
         "$REPO_DIR" \
-        "$manifest_file" <<'PY'
+        "$staged_manifest" \
+        "$public_dir" <<'PY'
 import json
 import re
 import subprocess
@@ -1111,6 +1133,7 @@ public_dir = Path(sys.argv[4])
 image_helper = Path(sys.argv[5])
 project_root = Path(sys.argv[6]).resolve()
 manifest_path = Path(sys.argv[7])
+final_public_dir = Path(sys.argv[8])
 
 publication_records = []
 
@@ -1191,10 +1214,11 @@ def create_public_derivative(source, destination, publication):
 
     record["source"]["path"] = project_relative(record["source"]["path"])
     record["derivative"]["path"] = project_relative(
-        record["derivative"]["path"]
+        final_public_dir / destination.name
     )
     record["publication"] = publication
     publication_records.append(record)
+    return record
 
 
 def copy_public_image(field_name, public_name):
@@ -1206,7 +1230,7 @@ def copy_public_image(field_name, public_name):
     source = plant_dir / relative_path
     destination = public_dir / f"{public_name}{source.suffix.lower()}"
 
-    create_public_derivative(
+    record = create_public_derivative(
         source,
         destination,
         {
@@ -1216,7 +1240,8 @@ def copy_public_image(field_name, public_name):
         },
     )
 
-    return f"/images/plants/{get('slug')}/{destination.name}"
+    version = record["derivative"]["sha256"][:12]
+    return f"/images/plants/{get('slug')}/{destination.name}?v={version}"
 
 
 def publish_history_photos(markdown, plant_name, slug):
@@ -1259,7 +1284,7 @@ def publish_history_photos(markdown, plant_name, slug):
             destination = public_dir / (
                 f"photo-{sequence:02d}{source.suffix.lower()}"
             )
-            create_public_derivative(
+            record = create_public_derivative(
                 source,
                 destination,
                 {
@@ -1268,8 +1293,9 @@ def publish_history_photos(markdown, plant_name, slug):
                     "source_filename": filename,
                 },
             )
+            version = record["derivative"]["sha256"][:12]
             published[filename] = (
-                f"/images/plants/{slug}/{destination.name}"
+                f"/images/plants/{slug}/{destination.name}?v={version}"
             )
 
         alt_text = (
@@ -1384,9 +1410,105 @@ if current_image:
 if index_image:
     print(f"Published index image: {index_image}")
 PY
+    publish_status=$?
+    set -e
+
+    if ((publish_status != 0)); then
+        rm -rf "$staging_dir"
+        return "$publish_status"
+    fi
+
+    python3 - \
+        "$REPO_DIR" \
+        "$public_dir" \
+        "$manifest_file" \
+        "$output_file" \
+        "$staged_public_dir" \
+        "$staged_manifest" \
+        "$staged_output" <<'PY_COMMIT'
+import json
+import os
+import shutil
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1]).resolve()
+public_dir = Path(sys.argv[2]).resolve()
+manifest_path = Path(sys.argv[3]).resolve()
+output_path = Path(sys.argv[4]).resolve()
+staged_public_dir = Path(sys.argv[5]).resolve()
+staged_manifest = Path(sys.argv[6]).resolve()
+staged_output = Path(sys.argv[7]).resolve()
+
+
+def managed_derivatives(path):
+    if not path.is_file():
+        return []
+    data = json.loads(path.read_text(encoding="utf-8"))
+    managed = []
+    for record in data.get("images", []):
+        relative = record.get("derivative", {}).get("path")
+        if not relative:
+            continue
+        candidate = (root / relative).resolve()
+        try:
+            candidate.relative_to(public_dir)
+        except ValueError as error:
+            raise SystemExit(
+                f"ERROR Manifest derivative is outside the plant public directory: {candidate}"
+            ) from error
+        managed.append(candidate)
+    return managed
+
+
+public_dir.mkdir(parents=True, exist_ok=True)
+for old_derivative in managed_derivatives(manifest_path):
+    if old_derivative.is_file() or old_derivative.is_symlink():
+        old_derivative.unlink()
+
+for staged_derivative in staged_public_dir.iterdir():
+    os.replace(staged_derivative, public_dir / staged_derivative.name)
+
+output_path.parent.mkdir(parents=True, exist_ok=True)
+manifest_path.parent.mkdir(parents=True, exist_ok=True)
+os.replace(staged_output, output_path)
+os.replace(staged_manifest, manifest_path)
+shutil.rmtree(staged_public_dir.parent)
+PY_COMMIT
 
     echo
     echo "PASS Plant published successfully."
+    rm -rf "$lock_dir"
+    trap - EXIT INT TERM
+}
+
+publish_batch() {
+    if [[ $# -eq 0 ]]; then
+        echo "ERROR: At least one plant slug is required."
+        echo
+        usage
+        return 2
+    fi
+
+    local total="$#"
+    local index=0
+    local slug
+
+    echo "Plant Batch Publishing"
+    echo "======================"
+    echo "Plants: $total"
+    echo "Mode: serialized"
+
+    for slug in "$@"; do
+        ((index += 1))
+        echo
+        echo "[$index/$total] Publishing $slug"
+        echo
+        "$0" publish "$slug"
+    done
+
+    echo
+    echo "PASS Published $total plant(s) serially."
 }
 
 print_summary() {
@@ -1419,6 +1541,10 @@ case "$command" in
     publish)
         shift
         publish_plant "${1:-}"
+        ;;
+    publish-batch)
+        shift
+        publish_batch "$@"
         ;;
     hero)
         shift

@@ -8,9 +8,9 @@ species: Phalaenopsis
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/phal-mccartney/hero.jpeg
-currentImage: /images/plants/phal-mccartney/current.jpg
-indexImage: /images/plants/phal-mccartney/index.jpeg
+heroImage: /images/plants/phal-mccartney/hero.jpeg?v=6218e3692367
+currentImage: /images/plants/phal-mccartney/current.jpg?v=8f41a4964aee
+indexImage: /images/plants/phal-mccartney/index.jpeg?v=6218e3692367
 tags:
 - orchid
 - orchid-rescue
@@ -78,8 +78,8 @@ course. Some artistic decisions are apparently non-negotiable.
 
 ### Photos
 
-![Phal McCartney — 2026-01-05 — Two Flower Spikes](/images/plants/phal-mccartney/photo-01.jpeg)
-![Phal McCartney — 2026-01-05 — Two Flower Spikes](/images/plants/phal-mccartney/photo-02.jpeg)
+![Phal McCartney — 2026-01-05 — Two Flower Spikes](/images/plants/phal-mccartney/photo-01.jpeg?v=64429204026b)
+![Phal McCartney — 2026-01-05 — Two Flower Spikes](/images/plants/phal-mccartney/photo-02.jpeg?v=9975d8da0bd5)
 
 ### Observations
 
@@ -92,8 +92,8 @@ flower spikes growing and the promise of a very impressive spring show.
 
 ### Photos
 
-![Phal McCartney — 2026-01-10 — Spikes and Aerial Roots Growing](/images/plants/phal-mccartney/photo-03.jpeg)
-![Phal McCartney — 2026-01-10 — Spikes and Aerial Roots Growing](/images/plants/phal-mccartney/photo-04.jpeg)
+![Phal McCartney — 2026-01-10 — Spikes and Aerial Roots Growing](/images/plants/phal-mccartney/photo-03.jpeg?v=c42ec59d08b9)
+![Phal McCartney — 2026-01-10 — Spikes and Aerial Roots Growing](/images/plants/phal-mccartney/photo-04.jpeg?v=ce7bf02891dd)
 
 ### Observations
 
@@ -107,7 +107,7 @@ and below it at the same time.
 
 ### Photos
 
-![Phal McCartney — 2026-02-11 — Spikes Lined With Buds](/images/plants/phal-mccartney/photo-05.jpg)
+![Phal McCartney — 2026-02-11 — Spikes Lined With Buds](/images/plants/phal-mccartney/photo-05.jpg?v=cfb207e565bf)
 
 ### Observations
 
@@ -120,7 +120,7 @@ preparing for a very crowded stage.
 
 ### Photos
 
-![Phal McCartney — 2026-02-19 — First Buds Opening](/images/plants/phal-mccartney/photo-06.jpeg)
+![Phal McCartney — 2026-02-19 — First Buds Opening](/images/plants/phal-mccartney/photo-06.jpeg?v=ad57989f0645)
 
 ### Observations
 
@@ -133,7 +133,7 @@ started.
 
 ### Photos
 
-![Phal McCartney — 2026-02-22 — First Preview](/images/plants/phal-mccartney/photo-07.jpg)
+![Phal McCartney — 2026-02-22 — First Preview](/images/plants/phal-mccartney/photo-07.jpg?v=7bacc83cd5da)
 
 ### Observations
 
@@ -146,7 +146,7 @@ preview of what Phal McCartney had been working toward.
 
 ### Photos
 
-![Phal McCartney — 2026-02-28 — Flowers Opening](/images/plants/phal-mccartney/photo-08.jpeg)
+![Phal McCartney — 2026-02-28 — Flowers Opening](/images/plants/phal-mccartney/photo-08.jpeg?v=e3986e427cc4)
 
 ### Observations
 
@@ -160,7 +160,7 @@ one leaf along the way.
 
 ### Photos
 
-![Phal McCartney — 2026-03-07 — Nearly Full Bloom](/images/plants/phal-mccartney/photo-09.jpeg)
+![Phal McCartney — 2026-03-07 — Nearly Full Bloom](/images/plants/phal-mccartney/photo-09.jpeg?v=6218e3692367)
 
 ### Observations
 
@@ -173,7 +173,7 @@ turned completely yellow and was getting ready to bow out.
 
 ### Photos
 
-![Phal McCartney — 2026-03-22 — Full Bloom](/images/plants/phal-mccartney/photo-10.jpeg)
+![Phal McCartney — 2026-03-22 — Full Bloom](/images/plants/phal-mccartney/photo-10.jpeg?v=b4cedebfbd13)
 
 ### Observations
 
@@ -186,7 +186,7 @@ flowers. This was the peak of the tour.
 
 ### Photos
 
-![Phal McCartney — 2026-03-29 — Full Bloom Continues](/images/plants/phal-mccartney/photo-11.jpeg)
+![Phal McCartney — 2026-03-29 — Full Bloom Continues](/images/plants/phal-mccartney/photo-11.jpeg?v=3d4b4dce973e)
 
 ### Observations
 
@@ -198,7 +198,7 @@ The dense display of purple-and-white flowers continued into another week.
 
 ### Photos
 
-![Phal McCartney — 2026-04-05 — Sustained Full Bloom](/images/plants/phal-mccartney/photo-12.jpeg)
+![Phal McCartney — 2026-04-05 — Sustained Full Bloom](/images/plants/phal-mccartney/photo-12.jpeg?v=239ae8d6595e)
 
 ### Observations
 
@@ -211,7 +211,7 @@ run.
 
 ### Photos
 
-![Phal McCartney — 2026-04-12 — Final Documented Week in Bloom](/images/plants/phal-mccartney/photo-13.jpeg)
+![Phal McCartney — 2026-04-12 — Final Documented Week in Bloom](/images/plants/phal-mccartney/photo-13.jpeg?v=0b99e8ef6317)
 
 ### Observations
 
@@ -224,8 +224,8 @@ week before the move from Florida.
 
 ### Photos
 
-![Phal McCartney — 2026-06-21 — First Photo After the Move](/images/plants/phal-mccartney/photo-14.jpg)
-![Phal McCartney — 2026-06-21 — First Photo After the Move](/images/plants/phal-mccartney/photo-15.jpg)
+![Phal McCartney — 2026-06-21 — First Photo After the Move](/images/plants/phal-mccartney/photo-14.jpg?v=43645770795f)
+![Phal McCartney — 2026-06-21 — First Photo After the Move](/images/plants/phal-mccartney/photo-15.jpg?v=f689e55de38e)
 
 ### Observations
 
@@ -240,9 +240,9 @@ growing.
 
 ### Photos
 
-![Phal McCartney — 2026-06-28 — Recovery Underway](/images/plants/phal-mccartney/photo-16.jpg)
-![Phal McCartney — 2026-06-28 — Recovery Underway](/images/plants/phal-mccartney/photo-17.jpg)
-![Phal McCartney — 2026-06-28 — Recovery Underway](/images/plants/phal-mccartney/photo-18.jpg)
+![Phal McCartney — 2026-06-28 — Recovery Underway](/images/plants/phal-mccartney/photo-16.jpg?v=89a1b36a6794)
+![Phal McCartney — 2026-06-28 — Recovery Underway](/images/plants/phal-mccartney/photo-17.jpg?v=8f26ddc8102e)
+![Phal McCartney — 2026-06-28 — Recovery Underway](/images/plants/phal-mccartney/photo-18.jpg?v=763a65323383)
 
 ### Observations
 
@@ -255,7 +255,7 @@ continued to grow and flatten.
 
 ### Photos
 
-![Phal McCartney — 2026-07-05 — New Leaf Broadens](/images/plants/phal-mccartney/photo-19.jpg)
+![Phal McCartney — 2026-07-05 — New Leaf Broadens](/images/plants/phal-mccartney/photo-19.jpg?v=acb40346acd9)
 
 ### Observations
 
@@ -268,8 +268,8 @@ regular care in Texas.
 
 ### Photos
 
-![Phal McCartney — 2026-07-12 — Back to Business](/images/plants/phal-mccartney/photo-20.jpg)
-![Phal McCartney — 2026-07-12 — Back to Business](/images/plants/phal-mccartney/photo-21.jpg)
+![Phal McCartney — 2026-07-12 — Back to Business](/images/plants/phal-mccartney/photo-20.jpg?v=5de58246aad3)
+![Phal McCartney — 2026-07-12 — Back to Business](/images/plants/phal-mccartney/photo-21.jpg?v=28921e19b4ba)
 
 ### Observations
 
@@ -282,7 +282,7 @@ and the aerial roots remained healthy.
 
 ### Photos
 
-![Phal McCartney — 2026-07-19 — Leaf Maturing](/images/plants/phal-mccartney/photo-22.jpg)
+![Phal McCartney — 2026-07-19 — Leaf Maturing](/images/plants/phal-mccartney/photo-22.jpg?v=ff5e936dad43)
 
 ### Observations
 
@@ -295,7 +295,7 @@ settled after the move.
 
 ### Photos
 
-![Phal McCartney — 2026-07-26 — Fully Settled in Texas](/images/plants/phal-mccartney/photo-23.jpg)
+![Phal McCartney — 2026-07-26 — Fully Settled in Texas](/images/plants/phal-mccartney/photo-23.jpg?v=a8f5098b7484)
 
 ### Observations
 
@@ -309,7 +309,7 @@ leaves and roots remained healthy.
 
 ### Photos
 
-![Phal McCartney — 2026-08-02 — Weekly Update](/images/plants/phal-mccartney/photo-24.jpg)
+![Phal McCartney — 2026-08-02 — Weekly Update](/images/plants/phal-mccartney/photo-24.jpg?v=722800c0f1ff)
 
 ### Observations
 
@@ -325,11 +325,11 @@ Watered
 
 ### Photos
 
-![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-25.jpg)
-![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-26.jpg)
-![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-27.jpg)
-![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-28.jpg)
-![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-29.jpg)
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-25.jpg?v=10bab866eeaa)
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-26.jpg?v=75a4a9553c8d)
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-27.jpg?v=23c4d98e824d)
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-28.jpg?v=887726bc9c1b)
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-29.jpg?v=8f41a4964aee)
 
 ### Observations
 

@@ -9,8 +9,8 @@ acquired: 2026-08-02
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/rocky-raccoon/hero.jpg
-currentImage: /images/plants/rocky-raccoon/current.jpg
+heroImage: /images/plants/rocky-raccoon/hero.jpg?v=0b14ca9608f4
+currentImage: /images/plants/rocky-raccoon/current.jpg?v=41d6a4785da0
 tags:
 - orchid
 - orchid-rescue
@@ -42,7 +42,7 @@ The initial photograph was taken at Lowe's before any care or treatment was perf
 
 ### Photos
 
-![Rocky Raccoon — 2026-08-02 — The Rescue](/images/plants/rocky-raccoon/photo-01.jpg)
+![Rocky Raccoon — 2026-08-02 — The Rescue](/images/plants/rocky-raccoon/photo-01.jpg?v=0b14ca9608f4)
 
 ### What Happened
 
@@ -84,7 +84,7 @@ The suspected nursery plug has not been confirmed. The suspicion is based on the
 
 ### Photos
 
-![Rocky Raccoon — 2026-08-03 — Weekly Update](/images/plants/rocky-raccoon/photo-02.jpg)
+![Rocky Raccoon — 2026-08-03 — Weekly Update](/images/plants/rocky-raccoon/photo-02.jpg?v=9160031a298d)
 
 ### Observations
 
@@ -99,7 +99,7 @@ I’m documenting the whole process as I go, and a complete orchid rescue guide 
 
 ### Photos
 
-![Rocky Raccoon — 2026-08-09 — Weekly Update](/images/plants/rocky-raccoon/photo-03.jpg)
+![Rocky Raccoon — 2026-08-09 — Weekly Update](/images/plants/rocky-raccoon/photo-03.jpg?v=41d6a4785da0)
 
 ### Observations
 

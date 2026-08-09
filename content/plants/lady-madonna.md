@@ -8,8 +8,8 @@ species: Phalaenopsis
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/lady-madonna/hero.jpeg
-currentImage: /images/plants/lady-madonna/current.jpg
+heroImage: /images/plants/lady-madonna/hero.jpeg?v=a5680896b47c
+currentImage: /images/plants/lady-madonna/current.jpg?v=81c7466d34db
 tags:
 - orchid
 - orchid-rescue
@@ -70,8 +70,8 @@ she was close to dead at the time.
 
 ### Photos
 
-![Lady Madonna — 2026-01-05 — First Documented Assessment and Naming](/images/plants/lady-madonna/photo-01.jpeg)
-![Lady Madonna — 2026-01-05 — First Documented Assessment and Naming](/images/plants/lady-madonna/photo-02.jpeg)
+![Lady Madonna — 2026-01-05 — First Documented Assessment and Naming](/images/plants/lady-madonna/photo-01.jpeg?v=b6aee45098e7)
+![Lady Madonna — 2026-01-05 — First Documented Assessment and Naming](/images/plants/lady-madonna/photo-02.jpeg?v=e5c9803c4ca6)
 
 ### What Happened
 
@@ -93,7 +93,7 @@ Beatles-themed name **Lady Madonna**.
 
 ### Photos
 
-![Lady Madonna — 2026-01-10 — Root and Foliage Check](/images/plants/lady-madonna/photo-03.jpeg)
+![Lady Madonna — 2026-01-10 — Root and Foliage Check](/images/plants/lady-madonna/photo-03.jpeg?v=913b2703c9e9)
 
 ### Observations
 
@@ -107,7 +107,7 @@ Beatles-themed name **Lady Madonna**.
 
 ### Photos
 
-![Lady Madonna — 2026-01-16 — New Spike Appears](/images/plants/lady-madonna/photo-04.jpeg)
+![Lady Madonna — 2026-01-16 — New Spike Appears](/images/plants/lady-madonna/photo-04.jpeg?v=ee8de6e30236)
 
 ### What Happened
 
@@ -135,7 +135,7 @@ conversation as a likely flower spike.
 
 ### Photos
 
-![Lady Madonna — 2026-01-24 — Recovery Continues](/images/plants/lady-madonna/photo-05.jpeg)
+![Lady Madonna — 2026-01-24 — Recovery Continues](/images/plants/lady-madonna/photo-05.jpeg?v=da5a39f9fd9c)
 
 ### Observations
 
@@ -149,7 +149,7 @@ conversation as a likely flower spike.
 
 ### Photos
 
-![Lady Madonna — 2026-02-11 — Bud Development](/images/plants/lady-madonna/photo-06.jpeg)
+![Lady Madonna — 2026-02-11 — Bud Development](/images/plants/lady-madonna/photo-06.jpeg?v=1d8630d514b4)
 
 ### Observations
 
@@ -171,7 +171,7 @@ conversation as a likely flower spike.
 
 ### Photos
 
-![Lady Madonna — 2026-02-22 — Full-Plant Check](/images/plants/lady-madonna/photo-07.jpg)
+![Lady Madonna — 2026-02-22 — Full-Plant Check](/images/plants/lady-madonna/photo-07.jpg?v=a74bbd746d55)
 
 ### Observations
 
@@ -193,7 +193,7 @@ conversation as a likely flower spike.
 
 ### Photos
 
-![Lady Madonna — 2026-03-07 — Bloom Preparation](/images/plants/lady-madonna/photo-08.jpeg)
+![Lady Madonna — 2026-03-07 — Bloom Preparation](/images/plants/lady-madonna/photo-08.jpeg?v=caf39645b1c6)
 
 ### Observations
 
@@ -224,7 +224,7 @@ conversation as a likely flower spike.
 
 ### Photos
 
-![Lady Madonna — 2026-03-29 — Buds Near Opening](/images/plants/lady-madonna/photo-09.jpeg)
+![Lady Madonna — 2026-03-29 — Buds Near Opening](/images/plants/lady-madonna/photo-09.jpeg?v=5deefd098cc4)
 
 ### Observations
 
@@ -237,7 +237,7 @@ conversation as a likely flower spike.
 
 ### Photos
 
-![Lady Madonna — 2026-04-05 — First Documented Open Flowers](/images/plants/lady-madonna/photo-10.jpeg)
+![Lady Madonna — 2026-04-05 — First Documented Open Flowers](/images/plants/lady-madonna/photo-10.jpeg?v=a5680896b47c)
 
 ### What Happened
 
@@ -255,7 +255,7 @@ Lady Madonna's recovery reached its first documented bloom.
 
 ### Photos
 
-![Lady Madonna — 2026-04-12 — Bloom Display](/images/plants/lady-madonna/photo-11.jpeg)
+![Lady Madonna — 2026-04-12 — Bloom Display](/images/plants/lady-madonna/photo-11.jpeg?v=032a75bb2b04)
 
 ### Observations
 
@@ -268,7 +268,7 @@ Lady Madonna's recovery reached its first documented bloom.
 
 ### Photos
 
-![Lady Madonna — 2026-06-14 — Post-Move Setback](/images/plants/lady-madonna/photo-12.jpg)
+![Lady Madonna — 2026-06-14 — Post-Move Setback](/images/plants/lady-madonna/photo-12.jpg?v=393f4ef0a941)
 
 ### What Happened
 
@@ -287,7 +287,7 @@ roughly two weeks.
 
 ### Photos
 
-![Lady Madonna — 2026-06-21 — Settling In](/images/plants/lady-madonna/photo-13.jpg)
+![Lady Madonna — 2026-06-21 — Settling In](/images/plants/lady-madonna/photo-13.jpg?v=d382a0a97703)
 
 ### Observations
 
@@ -307,7 +307,7 @@ XMP sidecar is preserved.
 
 ### Photos
 
-![Lady Madonna — 2026-06-28 — Root Recovery](/images/plants/lady-madonna/photo-14.jpg)
+![Lady Madonna — 2026-06-28 — Root Recovery](/images/plants/lady-madonna/photo-14.jpg?v=053767e7d073)
 
 ### Observations
 
@@ -321,7 +321,7 @@ XMP sidecar is preserved.
 
 ### Photos
 
-![Lady Madonna — 2026-07-05 — Continued Stabilization](/images/plants/lady-madonna/photo-15.jpg)
+![Lady Madonna — 2026-07-05 — Continued Stabilization](/images/plants/lady-madonna/photo-15.jpg?v=407fc6563f51)
 
 ### Observations
 
@@ -335,8 +335,8 @@ XMP sidecar is preserved.
 
 ### Photos
 
-![Lady Madonna — 2026-07-12 — Fertilized and Active Roots Confirmed](/images/plants/lady-madonna/photo-16.jpg)
-![Lady Madonna — 2026-07-12 — Fertilized and Active Roots Confirmed](/images/plants/lady-madonna/photo-17.jpg)
+![Lady Madonna — 2026-07-12 — Fertilized and Active Roots Confirmed](/images/plants/lady-madonna/photo-16.jpg?v=1ab82be066cd)
+![Lady Madonna — 2026-07-12 — Fertilized and Active Roots Confirmed](/images/plants/lady-madonna/photo-17.jpg?v=0a571d503ef0)
 
 ### What Happened
 
@@ -362,7 +362,7 @@ older leaves.
 
 ### Photos
 
-![Lady Madonna — 2026-07-19 — Stable Rebuilding Phase](/images/plants/lady-madonna/photo-18.jpg)
+![Lady Madonna — 2026-07-19 — Stable Rebuilding Phase](/images/plants/lady-madonna/photo-18.jpg?v=4a3bb50020c0)
 
 ### Observations
 
@@ -378,7 +378,7 @@ older leaves.
 
 ### Photos
 
-![Lady Madonna — 2026-07-26 — Possible New Leaf](/images/plants/lady-madonna/photo-19.jpg)
+![Lady Madonna — 2026-07-26 — Possible New Leaf](/images/plants/lady-madonna/photo-19.jpg?v=cc827f402328)
 
 ### What Happened
 
@@ -409,8 +409,8 @@ Future updates should capture:
 
 ### Photos
 
-![Lady Madonna — 2026-08-02 — Weekly Update](/images/plants/lady-madonna/photo-20.jpg)
-![Lady Madonna — 2026-08-02 — Weekly Update](/images/plants/lady-madonna/photo-21.jpg)
+![Lady Madonna — 2026-08-02 — Weekly Update](/images/plants/lady-madonna/photo-20.jpg?v=0f20ca9ecedd)
+![Lady Madonna — 2026-08-02 — Weekly Update](/images/plants/lady-madonna/photo-21.jpg?v=6eee203cbe94)
 
 ### Observations
 
@@ -426,7 +426,7 @@ Watered
 
 ### Photos
 
-![Lady Madonna — 2026-08-09 — Weekly Update](/images/plants/lady-madonna/photo-22.jpg)
+![Lady Madonna — 2026-08-09 — Weekly Update](/images/plants/lady-madonna/photo-22.jpg?v=81c7466d34db)
 
 ### Observations
 

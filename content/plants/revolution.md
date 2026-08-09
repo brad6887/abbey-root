@@ -9,9 +9,9 @@ acquired: 2019-01-01
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/revolution/hero.jpeg
-currentImage: /images/plants/revolution/current.jpg
-indexImage: /images/plants/revolution/index.jpg
+heroImage: /images/plants/revolution/hero.jpeg?v=88f85ce77b4b
+currentImage: /images/plants/revolution/current.jpg?v=f369794e43b1
+indexImage: /images/plants/revolution/index.jpg?v=26f5800eeca1
 tags:
 - orchid
 - orchid-rescue
@@ -94,9 +94,9 @@ and eventually deciding when she is ready to put on another show.
 
 ### Photos
 
-![Revolution — Before 2026-01-05 — Before Tracking](/images/plants/revolution/photo-01.png)
-![Revolution — Before 2026-01-05 — Before Tracking](/images/plants/revolution/photo-02.png)
-![Revolution — Before 2026-01-05 — Before Tracking](/images/plants/revolution/photo-03.jpeg)
+![Revolution — Before 2026-01-05 — Before Tracking](/images/plants/revolution/photo-01.png?v=66f33f36e4df)
+![Revolution — Before 2026-01-05 — Before Tracking](/images/plants/revolution/photo-02.png?v=36808a9aaf8a)
+![Revolution — Before 2026-01-05 — Before Tracking](/images/plants/revolution/photo-03.jpeg?v=c2848e42a0e3)
 
 ### Observations
 
@@ -111,8 +111,8 @@ multiple homes and growing environments.
 
 ### Photos
 
-![Revolution — 2026-01-05 — Crowded Roots and New Spikes](/images/plants/revolution/photo-04.jpeg)
-![Revolution — 2026-01-05 — Crowded Roots and New Spikes](/images/plants/revolution/photo-05.jpeg)
+![Revolution — 2026-01-05 — Crowded Roots and New Spikes](/images/plants/revolution/photo-04.jpeg?v=6c40043f11ab)
+![Revolution — 2026-01-05 — Crowded Roots and New Spikes](/images/plants/revolution/photo-05.jpeg?v=0d19fe478687)
 
 ### Observations
 
@@ -126,7 +126,7 @@ Repotting would have to wait until flowering finished.
 
 ### Photos
 
-![Revolution — 2026-01-10 — Root-System Check](/images/plants/revolution/photo-06.jpeg)
+![Revolution — 2026-01-10 — Root-System Check](/images/plants/revolution/photo-06.jpeg?v=668eeeb828b0)
 
 ### Observations
 
@@ -139,7 +139,7 @@ the pot, Revolution continued supporting active growth above it.
 
 ### Photos
 
-![Revolution — 2026-01-16 — Bud Development](/images/plants/revolution/photo-07.jpeg)
+![Revolution — 2026-01-16 — Bud Development](/images/plants/revolution/photo-07.jpeg?v=a4b27d3d9010)
 
 ### Observations
 
@@ -152,7 +152,7 @@ to swell.
 
 ### Photos
 
-![Revolution — 2026-01-21 — Spikes Making Progress](/images/plants/revolution/photo-08.jpeg)
+![Revolution — 2026-01-21 — Spikes Making Progress](/images/plants/revolution/photo-08.jpeg?v=52349017c7c7)
 
 ### Observations
 
@@ -164,7 +164,7 @@ The spikes continued extending and the buds were becoming more prominent.
 
 ### Photos
 
-![Revolution — 2026-01-23 — Getting Close](/images/plants/revolution/photo-09.jpeg)
+![Revolution — 2026-01-23 — Getting Close](/images/plants/revolution/photo-09.jpeg?v=7edcebe817aa)
 
 ### Observations
 
@@ -177,7 +177,7 @@ flower of the season.
 
 ### Photos
 
-![Revolution — 2026-02-11 — First Flowers Opening](/images/plants/revolution/photo-10.jpeg)
+![Revolution — 2026-02-11 — First Flowers Opening](/images/plants/revolution/photo-10.jpeg?v=93a16e857042)
 
 ### Observations
 
@@ -190,7 +190,7 @@ the spikes.
 
 ### Photos
 
-![Revolution — 2026-02-14 — Valentine’s Day Bloom](/images/plants/revolution/photo-11.jpg)
+![Revolution — 2026-02-14 — Valentine’s Day Bloom](/images/plants/revolution/photo-11.jpg?v=26f5800eeca1)
 
 ### Observations
 
@@ -203,7 +203,7 @@ that characterize Revolution’s display.
 
 ### Photos
 
-![Revolution — 2026-02-22 — Bloom Display Building](/images/plants/revolution/photo-12.jpeg)
+![Revolution — 2026-02-22 — Bloom Display Building](/images/plants/revolution/photo-12.jpeg?v=7985838d939e)
 
 ### Observations
 
@@ -216,7 +216,7 @@ them.
 
 ### Photos
 
-![Revolution — 2026-02-28 — Nearly Full Bloom](/images/plants/revolution/photo-13.jpeg)
+![Revolution — 2026-02-28 — Nearly Full Bloom](/images/plants/revolution/photo-13.jpeg?v=94707acd7dd7)
 
 ### Observations
 
@@ -228,7 +228,7 @@ The display continued filling out as more buds opened across the spikes.
 
 ### Photos
 
-![Revolution — 2026-03-07 — Full Display](/images/plants/revolution/photo-14.jpeg)
+![Revolution — 2026-03-07 — Full Display](/images/plants/revolution/photo-14.jpeg?v=9202dcec27f8)
 
 ### Observations
 
@@ -241,7 +241,7 @@ spikes and only a few buds remaining.
 
 ### Photos
 
-![Revolution — 2026-03-22 — Peak Bloom](/images/plants/revolution/photo-15.jpeg)
+![Revolution — 2026-03-22 — Peak Bloom](/images/plants/revolution/photo-15.jpeg?v=88f85ce77b4b)
 
 ### Observations
 
@@ -254,7 +254,7 @@ bloom displays I had seen from Revolution.
 
 ### Photos
 
-![Revolution — 2026-03-29 — Still Blooming Strong](/images/plants/revolution/photo-16.jpeg)
+![Revolution — 2026-03-29 — Still Blooming Strong](/images/plants/revolution/photo-16.jpeg?v=aa459eb513c9)
 
 ### Observations
 
@@ -266,7 +266,7 @@ A week later, Revolution was still holding an impressive number of flowers.
 
 ### Photos
 
-![Revolution — 2026-04-05 — Late Bloom](/images/plants/revolution/photo-17.jpeg)
+![Revolution — 2026-04-05 — Late Bloom](/images/plants/revolution/photo-17.jpeg?v=200c8367ac82)
 
 ### Observations
 
@@ -279,7 +279,7 @@ bloom cycle.
 
 ### Photos
 
-![Revolution — 2026-04-12 — The Final Stretch](/images/plants/revolution/photo-18.jpeg)
+![Revolution — 2026-04-12 — The Final Stretch](/images/plants/revolution/photo-18.jpeg?v=b262a450e15a)
 
 ### Observations
 
@@ -292,7 +292,7 @@ Once flowering finished, the crowded root system could finally be addressed.
 
 ### Photos
 
-![Revolution — 2026-06-08 — Ready for Repotting](/images/plants/revolution/photo-19.jpg)
+![Revolution — 2026-06-08 — Ready for Repotting](/images/plants/revolution/photo-19.jpg?v=65a45e60ade8)
 
 ### Observations
 
@@ -305,8 +305,8 @@ material. Repotting could no longer be postponed.
 
 ### Photos
 
-![Revolution — 2026-06-13 — Repot Day](/images/plants/revolution/photo-20.jpg)
-![Revolution — 2026-06-13 — Repot Day](/images/plants/revolution/photo-21.jpg)
+![Revolution — 2026-06-13 — Repot Day](/images/plants/revolution/photo-20.jpg?v=db87baa79e71)
+![Revolution — 2026-06-13 — Repot Day](/images/plants/revolution/photo-21.jpg?v=0ef3c8a7b579)
 
 ### Observations
 
@@ -321,7 +321,7 @@ Revolution was placed into a fresh, more open bark mix.
 
 ### Photos
 
-![Revolution — 2026-06-21 — Settling In](/images/plants/revolution/photo-22.jpg)
+![Revolution — 2026-06-21 — Settling In](/images/plants/revolution/photo-22.jpg?v=f0465184ee71)
 
 ### Observations
 
@@ -334,7 +334,7 @@ The goal now was a quiet recovery followed by fresh root and leaf growth.
 
 ### Photos
 
-![Revolution — 2026-07-05 — Recovery Continues](/images/plants/revolution/photo-23.jpg)
+![Revolution — 2026-07-05 — Recovery Continues](/images/plants/revolution/photo-23.jpg?v=ebefbd3b5de9)
 
 ### Observations
 
@@ -347,7 +347,7 @@ major setback.
 
 ### Photos
 
-![Revolution — 2026-07-12 — New Leaf Growth](/images/plants/revolution/photo-24.jpg)
+![Revolution — 2026-07-12 — New Leaf Growth](/images/plants/revolution/photo-24.jpg?v=1b636fc64480)
 
 ### Observations
 
@@ -360,7 +360,7 @@ Revolution had returned to active vegetative growth.
 
 ### Photos
 
-![Revolution — 2026-07-19 — Steady Progress](/images/plants/revolution/photo-25.jpg)
+![Revolution — 2026-07-19 — Steady Progress](/images/plants/revolution/photo-25.jpg?v=cd94e214f740)
 
 ### Observations
 
@@ -374,7 +374,7 @@ resources.
 
 ### Photos
 
-![Revolution — 2026-07-26 — Back in Growth Mode](/images/plants/revolution/photo-26.jpg)
+![Revolution — 2026-07-26 — Back in Growth Mode](/images/plants/revolution/photo-26.jpg?v=ed4cdb0acbcc)
 
 ### Observations
 
@@ -388,8 +388,8 @@ cleanup, and back into active growth.
 
 ### Photos
 
-![Revolution — 2026-08-02 — Weekly Update](/images/plants/revolution/photo-27.jpg)
-![Revolution — 2026-08-02 — Weekly Update](/images/plants/revolution/photo-28.jpg)
+![Revolution — 2026-08-02 — Weekly Update](/images/plants/revolution/photo-27.jpg?v=fc8937939392)
+![Revolution — 2026-08-02 — Weekly Update](/images/plants/revolution/photo-28.jpg?v=b55e8b1bf12a)
 
 ### Observations
 
@@ -405,7 +405,7 @@ Watered
 
 ### Photos
 
-![Revolution — 2026-08-09 — Weekly Update](/images/plants/revolution/photo-29.jpg)
+![Revolution — 2026-08-09 — Weekly Update](/images/plants/revolution/photo-29.jpg?v=f369794e43b1)
 
 ### Observations
 

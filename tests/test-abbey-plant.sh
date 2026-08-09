@@ -160,6 +160,16 @@ run_publish() {
   set -e
 }
 
+run_publish_batch() {
+  local fixture_root="$1"
+  shift
+
+  set +e
+  output="$(ABBEY_ROOT="$fixture_root" "$ABBEY_PLANT" publish-batch "$@" 2>&1)"
+  status=$?
+  set -e
+}
+
 echo "Abbey Plant Validate Regression Tests"
 echo "====================================="
 echo
@@ -582,11 +592,79 @@ else
   fail "publication manifest records the index transformation"
 fi
 
-if grep -Fq   "indexImage: /images/plants/test-plant/index.jpg"   "$generated_content"
+if grep -Eq   '^indexImage: /images/plants/test-plant/index\.jpg\?v=[0-9a-f]{12}$'   "$generated_content"
 then
-  pass "generated frontmatter contains indexImage"
+  pass "generated frontmatter contains a versioned indexImage"
 else
-  fail "generated frontmatter contains indexImage"
+  fail "generated frontmatter contains a versioned indexImage"
+fi
+
+if grep -Eq   '^currentImage: /images/plants/test-plant/current\.jpg\?v=[0-9a-f]{12}$'   "$generated_content"
+then
+  pass "generated frontmatter cache-busts the current image"
+else
+  fail "generated frontmatter cache-busts the current image"
+fi
+
+proof_file="$test_root/publish-index-photo/site/public/images/plants/test-plant/proof/reference.txt"
+mkdir -p "$(dirname "$proof_file")"
+printf 'preserve me\n' > "$proof_file"
+run_publish "$test_root/publish-index-photo" test-plant
+assert_status "repeat plant publishing succeeds" 0
+if [[ -f "$proof_file" ]] && grep -Fq 'preserve me' "$proof_file"; then
+  pass "plant publishing preserves unmanaged public artifacts"
+else
+  fail "plant publishing preserves unmanaged public artifacts"
+fi
+
+lock_dir="$test_root/publish-index-photo/site/public/images/plants/.test-plant.publish.lock"
+mkdir "$lock_dir"
+run_publish "$test_root/publish-index-photo" test-plant
+assert_status "plant publishing rejects an overlapping publication" 1
+assert_contains "plant publishing explains the overlapping publication" "publication is already in progress"
+rmdir "$lock_dir"
+
+published_content_hash_before="$(sha256sum "$generated_content" | awk '{print $1}')"
+printf 'not an image\n' > "$plant_dir/photos/current.jpg"
+run_publish "$test_root/publish-index-photo" test-plant
+assert_status "failed derivative generation fails publication" 1
+published_content_hash_after="$(sha256sum "$generated_content" | awk '{print $1}')"
+if [[ "$published_content_hash_before" == "$published_content_hash_after" ]]; then
+  pass "failed publication preserves the previous generated page"
+else
+  fail "failed publication preserves the previous generated page"
+fi
+if find "$test_root/publish-index-photo/site/public/images/plants" \
+  -maxdepth 1 -type d -name '.test-plant.publish.*' | grep -q .
+then
+  fail "failed publication removes its staging directory"
+else
+  pass "failed publication removes its staging directory"
+fi
+cp "$plant_dir/photos/hero.jpg" "$plant_dir/photos/current.jpg"
+
+batch_root="$test_root/publish-batch"
+first_plant="$(create_plant publish-batch)"
+"$image_command" -size 80x40 xc:white "$first_plant/photos/hero.jpg"
+cp "$first_plant/photos/hero.jpg" "$first_plant/photos/current.jpg"
+cp "$first_plant/photos/hero.jpg" "$first_plant/photos/index.jpg"
+second_plant="$batch_root/working/plants/second-plant"
+cp -R "$first_plant" "$second_plant"
+awk '
+  /^name: Test Plant$/ { print "name: Second Plant"; next }
+  /^slug: test-plant$/ { print "slug: second-plant"; next }
+  { print }
+' "$second_plant/facts.yaml" > "$second_plant/facts.yaml.tmp"
+mv "$second_plant/facts.yaml.tmp" "$second_plant/facts.yaml"
+
+run_publish_batch "$batch_root" test-plant second-plant
+assert_status "batch publishing succeeds" 0
+assert_contains "batch publishing reports serialized mode" "Mode: serialized"
+assert_contains "batch publishing reports completion" "PASS Published 2 plant(s) serially."
+if [[ -f "$batch_root/content/plants/test-plant.md" && -f "$batch_root/content/plants/second-plant.md" ]]; then
+  pass "batch publishing generates every requested plant"
+else
+  fail "batch publishing generates every requested plant"
 fi
 
 plant_dir="$(create_plant unreadable-facts)"

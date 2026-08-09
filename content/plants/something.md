@@ -9,9 +9,9 @@ acquired: 2026-01-05
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/something/hero.jpeg
-currentImage: /images/plants/something/current.jpg
-indexImage: /images/plants/something/index.jpg
+heroImage: /images/plants/something/hero.jpeg?v=8a840aa1950c
+currentImage: /images/plants/something/current.jpg?v=ce8b72e322bf
+indexImage: /images/plants/something/index.jpg?v=bc9cc8a0ca97
 tags:
 - orchid
 - orchid-rescue
@@ -51,9 +51,9 @@ dehydration, Something has earned the right to take things at her own pace.
 
 ### Photos
 
-![Something — 2026-01-05 — Fresh from Publix](/images/plants/something/photo-01.jpeg)
-![Something — 2026-01-05 — Fresh from Publix](/images/plants/something/photo-02.jpeg)
-![Something — 2026-01-05 — Fresh from Publix](/images/plants/something/photo-03.jpeg)
+![Something — 2026-01-05 — Fresh from Publix](/images/plants/something/photo-01.jpeg?v=8a840aa1950c)
+![Something — 2026-01-05 — Fresh from Publix](/images/plants/something/photo-02.jpeg?v=214242b6a761)
+![Something — 2026-01-05 — Fresh from Publix](/images/plants/something/photo-03.jpeg?v=4dececff4e2b)
 
 ### Observations
 
@@ -67,7 +67,7 @@ the plant had not received the same level of attention.
 
 ### Photos
 
-![Something — 2026-01-07 — A Good Soak Helps](/images/plants/something/photo-04.jpeg)
+![Something — 2026-01-07 — A Good Soak Helps](/images/plants/something/photo-04.jpeg?v=faf1516e718d)
 
 ### Observations
 
@@ -80,7 +80,7 @@ Something had apparently decided that water was worth trying.
 
 ### Photos
 
-![Something — 2026-01-10 — Early Recovery](/images/plants/something/photo-05.jpeg)
+![Something — 2026-01-10 — Early Recovery](/images/plants/something/photo-05.jpeg?v=387285f6bf22)
 
 ### Observations
 
@@ -94,7 +94,7 @@ life.
 
 ### Photos
 
-![Something — 2026-02-28 — Changing Priorities](/images/plants/something/photo-06.jpeg)
+![Something — 2026-02-28 — Changing Priorities](/images/plants/something/photo-06.jpeg?v=0735b1b56e70)
 
 ### Observations
 
@@ -107,7 +107,7 @@ Less time performing, more time rebuilding.
 
 ### Photos
 
-![Something — 2026-03-07 — Settling In](/images/plants/something/photo-07.jpeg)
+![Something — 2026-03-07 — Settling In](/images/plants/something/photo-07.jpeg?v=e4a2e840edd3)
 
 ### Observations
 
@@ -120,7 +120,7 @@ pot.
 
 ### Photos
 
-![Something — 2026-03-22 — Quiet Progress](/images/plants/something/photo-08.jpeg)
+![Something — 2026-03-22 — Quiet Progress](/images/plants/something/photo-08.jpeg?v=6dca032c9864)
 
 ### Observations
 
@@ -133,7 +133,7 @@ recovering.
 
 ### Photos
 
-![Something — 2026-03-29 — Still Here, Still Improving](/images/plants/something/photo-09.jpeg)
+![Something — 2026-03-29 — Still Here, Still Improving](/images/plants/something/photo-09.jpeg?v=356f2f2cd454)
 
 ### Observations
 
@@ -146,7 +146,7 @@ comfortable in its new home.
 
 ### Photos
 
-![Something — 2026-04-05 — Looking More Like Herself](/images/plants/something/photo-10.jpeg)
+![Something — 2026-04-05 — Looking More Like Herself](/images/plants/something/photo-10.jpeg?v=876df5721734)
 
 ### Observations
 
@@ -159,7 +159,7 @@ orchid with actual plans.
 
 ### Photos
 
-![Something — 2026-04-12 — Recovery Continues](/images/plants/something/photo-11.jpeg)
+![Something — 2026-04-12 — Recovery Continues](/images/plants/something/photo-11.jpeg?v=8078baa6d6de)
 
 ### Observations
 
@@ -172,7 +172,7 @@ her rough start.
 
 ### Photos
 
-![Something — 2026-04-17 — Something New](/images/plants/something/photo-12.jpeg)
+![Something — 2026-04-17 — Something New](/images/plants/something/photo-12.jpeg?v=16fbaa70d91f)
 
 ### Observations
 
@@ -185,7 +185,7 @@ moved from survival mode into growth mode.
 
 ### Photos
 
-![Something — 2026-06-13 — Texas Took Its Toll](/images/plants/something/photo-13.jpg)
+![Something — 2026-06-13 — Texas Took Its Toll](/images/plants/something/photo-13.jpg?v=5f7ecf1c4b4a)
 
 ### Observations
 
@@ -199,7 +199,7 @@ instructions.
 
 ### Photos
 
-![Something — 2026-06-21 — Rehydrating Again](/images/plants/something/photo-14.jpg)
+![Something — 2026-06-21 — Rehydrating Again](/images/plants/something/photo-14.jpg?v=decf389d7c52)
 
 ### Observations
 
@@ -212,7 +212,7 @@ started her second recovery, because apparently one comeback was not enough.
 
 ### Photos
 
-![Something — 2026-06-28 — Root Inspection, Sort Of](/images/plants/something/photo-15.jpg)
+![Something — 2026-06-28 — Root Inspection, Sort Of](/images/plants/something/photo-15.jpg?v=63dfb262aa27)
 
 ### Observations
 
@@ -226,7 +226,7 @@ still do not get the full story.
 
 ### Photos
 
-![Something — 2026-07-05 — Back on Track](/images/plants/something/photo-16.jpg)
+![Something — 2026-07-05 — Back on Track](/images/plants/something/photo-16.jpg?v=b89d9e092594)
 
 ### Observations
 
@@ -239,7 +239,7 @@ was recovering from her second dehydration adventure.
 
 ### Photos
 
-![Something — 2026-07-05 — A New Root Appears](/images/plants/something/photo-17.jpg)
+![Something — 2026-07-05 — A New Root Appears](/images/plants/something/photo-17.jpg?v=3ec9772e9b19)
 
 ### Observations
 
@@ -252,7 +252,7 @@ Something was officially doing something.
 
 ### Photos
 
-![Something — 2026-07-12 — Growth Continues](/images/plants/something/photo-18.jpg)
+![Something — 2026-07-12 — Growth Continues](/images/plants/something/photo-18.jpg?v=cdc59b755e63)
 
 ### Observations
 
@@ -265,8 +265,8 @@ much less dramatic stretch of her recovery.
 
 ### Photos
 
-![Something — 2026-07-19 — Steady Growth Wins](/images/plants/something/photo-19.jpg)
-![Something — 2026-07-19 — Steady Growth Wins](/images/plants/something/photo-20.jpg)
+![Something — 2026-07-19 — Steady Growth Wins](/images/plants/something/photo-19.jpg?v=04916a5669e5)
+![Something — 2026-07-19 — Steady Growth Wins](/images/plants/something/photo-20.jpg?v=cf418fd04f4b)
 
 ### Observations
 
@@ -280,7 +280,7 @@ orchid needs.
 
 ### Photos
 
-![Something — 2026-07-26 — Quietly Thriving](/images/plants/something/photo-21.jpg)
+![Something — 2026-07-26 — Quietly Thriving](/images/plants/something/photo-21.jpg?v=bc9cc8a0ca97)
 
 ### Observations
 
@@ -294,7 +294,7 @@ country, and more dehydration, she was finally looking established.
 
 ### Photos
 
-![Something — 2026-08-02 — Weekly Update](/images/plants/something/photo-22.jpg)
+![Something — 2026-08-02 — Weekly Update](/images/plants/something/photo-22.jpg?v=4a0343ef79b3)
 
 ### Observations
 
@@ -306,7 +306,7 @@ Something continues her steady recovery this week, with noticeable growth in bot
 
 ### Photos
 
-![Something — 2026-08-09 — Weekly Update](/images/plants/something/photo-23.jpg)
+![Something — 2026-08-09 — Weekly Update](/images/plants/something/photo-23.jpg?v=ce8b72e322bf)
 
 ### Observations
 

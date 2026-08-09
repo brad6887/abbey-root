@@ -9,8 +9,8 @@ acquired: 2026-03-01
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/helter-skelter/hero.jpeg
-currentImage: /images/plants/helter-skelter/current.jpg
+heroImage: /images/plants/helter-skelter/hero.jpeg?v=e05397d7f144
+currentImage: /images/plants/helter-skelter/current.jpg?v=91e728eac591
 tags:
 - orchid
 - orchid-rescue
@@ -61,7 +61,7 @@ Over the following months, it acclimated successfully, survived the move from Fl
 
 ### Photos
 
-![Helter Skelter — 2026-03-01 — Acquisition](/images/plants/helter-skelter/photo-01.jpeg)
+![Helter Skelter — 2026-03-01 — Acquisition](/images/plants/helter-skelter/photo-01.jpeg?v=e05397d7f144)
 
 ### What Happened
 
@@ -89,7 +89,7 @@ The first priority was to remove the plastic sleeve, allow better airflow, and e
 
 ### Photos
 
-![Helter Skelter — 2026-03-01 — Initial Root Inspection](/images/plants/helter-skelter/photo-02.png)
+![Helter Skelter — 2026-03-01 — Initial Root Inspection](/images/plants/helter-skelter/photo-02.png?v=ff8259bde7d2)
 
 ### What Happened
 
@@ -119,7 +119,7 @@ Rather than treating it like a damaged Phalaenopsis, care would need to reflect 
 
 ### Photos
 
-![Helter Skelter — 2026-03-07 — Early Acclimation](/images/plants/helter-skelter/photo-03.jpeg)
+![Helter Skelter — 2026-03-07 — Early Acclimation](/images/plants/helter-skelter/photo-03.jpeg?v=2ca92d021b37)
 
 ### What Happened
 
@@ -144,7 +144,7 @@ The goal at this point was consistency rather than correction.
 
 ### Photos
 
-![Helter Skelter — 2026-03-15 — Continued Stability](/images/plants/helter-skelter/photo-04.png)
+![Helter Skelter — 2026-03-15 — Continued Stability](/images/plants/helter-skelter/photo-04.png?v=c61a056f0dc1)
 
 ### What Happened
 
@@ -167,7 +167,7 @@ Helter Skelter was beginning to establish a pattern that would continue througho
 
 ### Photos
 
-![Helter Skelter — 2026-03-22 — Healthy Progress](/images/plants/helter-skelter/photo-05.jpeg)
+![Helter Skelter — 2026-03-22 — Healthy Progress](/images/plants/helter-skelter/photo-05.jpeg?v=a578ae38775c)
 
 ### What Happened
 
@@ -192,7 +192,7 @@ Sometimes the best response is simply to identify what the plant needs and avoid
 
 ### Photos
 
-![Helter Skelter — 2026-03-29 — Steady Growth](/images/plants/helter-skelter/photo-06.jpeg)
+![Helter Skelter — 2026-03-29 — Steady Growth](/images/plants/helter-skelter/photo-06.jpeg?v=279a80996ea2)
 
 ### What Happened
 
@@ -217,7 +217,7 @@ While other plants required close monitoring, this one seemed satisfied with con
 
 ### Photos
 
-![Helter Skelter — 2026-04-12 — Building Strength](/images/plants/helter-skelter/photo-07.png)
+![Helter Skelter — 2026-04-12 — Building Strength](/images/plants/helter-skelter/photo-07.png?v=b9c4dda826a3)
 
 ### What Happened
 
@@ -242,7 +242,7 @@ For a young Dendrobium, building a stronger framework of canes was more importan
 
 ### Photos
 
-![Helter Skelter — 2026-04-17 — Final Florida Update](/images/plants/helter-skelter/photo-08.png)
+![Helter Skelter — 2026-04-17 — Final Florida Update](/images/plants/helter-skelter/photo-08.png?v=81adcbc398e2)
 
 ### What Happened
 
@@ -290,7 +290,7 @@ A strong root system and healthy cane structure can give a Dendrobium enough res
 
 ### Photos
 
-![Helter Skelter — 2026-06-13 — First Texas Update](/images/plants/helter-skelter/photo-09.png)
+![Helter Skelter — 2026-06-13 — First Texas Update](/images/plants/helter-skelter/photo-09.png?v=2f2e2c277ad2)
 
 ### What Happened
 
@@ -315,7 +315,7 @@ Helter Skelter was beginning to look less like an individual plant with a few ca
 
 ### Photos
 
-![Helter Skelter — 2026-06-21 — New Basal Growth](/images/plants/helter-skelter/photo-10.png)
+![Helter Skelter — 2026-06-21 — New Basal Growth](/images/plants/helter-skelter/photo-10.png?v=ecaeec5ce85a)
 
 ### What Happened
 
@@ -355,7 +355,7 @@ Each healthy cane also creates another potential future bloom site.
 
 ### Photos
 
-![Helter Skelter — 2026-06-28 — Growth Accelerates](/images/plants/helter-skelter/photo-11.png)
+![Helter Skelter — 2026-06-28 — Growth Accelerates](/images/plants/helter-skelter/photo-11.png?v=f70773dbd854)
 
 ### What Happened
 
@@ -393,7 +393,7 @@ That was not considered a setback. The plant appeared to be using its energy to 
 
 ### Photos
 
-![Helter Skelter — 2026-07-05 — A Developing Clump](/images/plants/helter-skelter/photo-12.png)
+![Helter Skelter — 2026-07-05 — A Developing Clump](/images/plants/helter-skelter/photo-12.png?v=14cae2ff423d)
 
 ### What Happened
 
@@ -456,7 +456,7 @@ The priority is allowing the plant to continue building a healthy clump of matur
 
 ### Photos
 
-![Helter Skelter — 2026-08-02 — Weekly Update](/images/plants/helter-skelter/photo-13.jpg)
+![Helter Skelter — 2026-08-02 — Weekly Update](/images/plants/helter-skelter/photo-13.jpg?v=a1e14060271c)
 
 ### Observations
 
@@ -472,7 +472,7 @@ Watered
 
 ### Photos
 
-![Helter Skelter — 2026-08-09 — Weekly Update](/images/plants/helter-skelter/photo-14.jpg)
+![Helter Skelter — 2026-08-09 — Weekly Update](/images/plants/helter-skelter/photo-14.jpg?v=91e728eac591)
 
 ### Observations
 

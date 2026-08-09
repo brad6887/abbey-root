@@ -588,6 +588,33 @@ assert_file_value \
   "$brad_path/sentinel" \
   "protected"
 
+nvm_case_dir="$(create_fixture nvm-discovery)"
+nvm_home="$nvm_case_dir/home"
+nvm_bin="$nvm_home/.nvm/versions/node/v24.18.0/bin"
+mkdir -p "$nvm_bin"
+mv "$nvm_case_dir/fake-bin/npm" "$nvm_bin/npm"
+
+set +e
+nvm_build_output="$(
+  env \
+    HOME="$nvm_home" \
+    ABBEY_ROOT="$nvm_case_dir/source" \
+    ABBEY_TOOLKIT_ROOT="$nvm_case_dir/source" \
+    PATH="/usr/bin:/bin" \
+    "$nvm_case_dir/source/tools/bin/abbey-site" build 2>&1
+)"
+nvm_build_status=$?
+set -e
+
+assert_status \
+  "site build discovers npm installed through NVM" \
+  "$nvm_build_status" \
+  0
+assert_contains \
+  "NVM discovery reports the selected npm runtime" \
+  "$nvm_build_output" \
+  "INFO Using npm from NVM: $nvm_bin/npm"
+
 echo
 echo "Passed: $passed"
 echo "Failed: $failed"

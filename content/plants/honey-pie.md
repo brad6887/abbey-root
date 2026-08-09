@@ -9,8 +9,8 @@ acquired: 2026-06-14
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/honey-pie/hero.jpeg
-currentImage: /images/plants/honey-pie/current.jpg
+heroImage: /images/plants/honey-pie/hero.jpeg?v=4a892a826853
+currentImage: /images/plants/honey-pie/current.jpg?v=1360fc1e190e
 tags:
 - orchid
 - phalaenopsis
@@ -52,7 +52,7 @@ Kroger may have been the entire rescue.
 
 ### Photos
 
-![Honey Pie — 2026-06-14 — Brought Home and Named](/images/plants/honey-pie/photo-01.jpeg)
+![Honey Pie — 2026-06-14 — Brought Home and Named](/images/plants/honey-pie/photo-01.jpeg?v=4a892a826853)
 
 ### What Happened
 
@@ -85,8 +85,8 @@ bringing home.
 
 ### Photos
 
-![Honey Pie — 2026-06-21 — First Weekly Check](/images/plants/honey-pie/photo-02.jpeg)
-![Honey Pie — 2026-06-21 — First Weekly Check](/images/plants/honey-pie/photo-03.jpeg)
+![Honey Pie — 2026-06-21 — First Weekly Check](/images/plants/honey-pie/photo-02.jpeg?v=f73920fcc808)
+![Honey Pie — 2026-06-21 — First Weekly Check](/images/plants/honey-pie/photo-03.jpeg?v=33d094b0c0f1)
 
 ### What Happened
 
@@ -104,8 +104,8 @@ Completed the first documented weekly health check.
 
 ### Photos
 
-![Honey Pie — 2026-06-28 — Active Root Growth](/images/plants/honey-pie/photo-04.jpeg)
-![Honey Pie — 2026-06-28 — Active Root Growth](/images/plants/honey-pie/photo-05.jpeg)
+![Honey Pie — 2026-06-28 — Active Root Growth](/images/plants/honey-pie/photo-04.jpeg?v=af806acc92f4)
+![Honey Pie — 2026-06-28 — Active Root Growth](/images/plants/honey-pie/photo-05.jpeg?v=f2a8480077ad)
 
 ### What Happened
 
@@ -128,7 +128,7 @@ sidecars and weekly sequence establish the date as 2026-06-28.
 
 ### Photos
 
-![Honey Pie — 2026-07-05 — Bloom Fade Begins](/images/plants/honey-pie/photo-06.jpeg)
+![Honey Pie — 2026-07-05 — Bloom Fade Begins](/images/plants/honey-pie/photo-06.jpeg?v=0ec7537d7a6a)
 
 ### What Happened
 
@@ -146,8 +146,8 @@ The oldest flowers began a gradual, natural fade.
 
 ### Photos
 
-![Honey Pie — 2026-07-12 — Fertilized During Bloom Transition](/images/plants/honey-pie/photo-07.jpg)
-![Honey Pie — 2026-07-12 — Fertilized During Bloom Transition](/images/plants/honey-pie/photo-08.jpg)
+![Honey Pie — 2026-07-12 — Fertilized During Bloom Transition](/images/plants/honey-pie/photo-07.jpg?v=cd6079a210e5)
+![Honey Pie — 2026-07-12 — Fertilized During Bloom Transition](/images/plants/honey-pie/photo-08.jpg?v=d5276a7db08b)
 
 ### What Happened
 
@@ -172,8 +172,8 @@ growth, but remained in excellent condition.
 
 ### Photos
 
-![Honey Pie — 2026-07-19 — Long Bloom Continues](/images/plants/honey-pie/photo-09.jpg)
-![Honey Pie — 2026-07-19 — Long Bloom Continues](/images/plants/honey-pie/photo-10.jpg)
+![Honey Pie — 2026-07-19 — Long Bloom Continues](/images/plants/honey-pie/photo-09.jpg?v=be7330c52f22)
+![Honey Pie — 2026-07-19 — Long Bloom Continues](/images/plants/honey-pie/photo-10.jpg?v=1ebd77f35768)
 
 ### What Happened
 
@@ -200,8 +200,8 @@ alone unless it became soft, hollow, or mushy.
 
 ### Photos
 
-![Honey Pie — 2026-07-26 — Oldest Leaf Begins to Yellow](/images/plants/honey-pie/photo-11.jpg)
-![Honey Pie — 2026-07-26 — Oldest Leaf Begins to Yellow](/images/plants/honey-pie/photo-12.jpg)
+![Honey Pie — 2026-07-26 — Oldest Leaf Begins to Yellow](/images/plants/honey-pie/photo-11.jpg?v=7927d4df49ca)
+![Honey Pie — 2026-07-26 — Oldest Leaf Begins to Yellow](/images/plants/honey-pie/photo-12.jpg?v=49de5d974ed1)
 
 ### What Happened
 
@@ -246,8 +246,8 @@ Future updates should capture:
 
 ### Photos
 
-![Honey Pie — 2026-08-02 — Weekly Update](/images/plants/honey-pie/photo-13.jpg)
-![Honey Pie — 2026-08-02 — Weekly Update](/images/plants/honey-pie/photo-14.jpg)
+![Honey Pie — 2026-08-02 — Weekly Update](/images/plants/honey-pie/photo-13.jpg?v=8f2a44d62908)
+![Honey Pie — 2026-08-02 — Weekly Update](/images/plants/honey-pie/photo-14.jpg?v=9e855e7a03fb)
 
 ### Observations
 
@@ -263,7 +263,7 @@ Watered
 
 ### Photos
 
-![Honey Pie — 2026-08-09 — Weekly Update](/images/plants/honey-pie/photo-15.jpg)
+![Honey Pie — 2026-08-09 — Weekly Update](/images/plants/honey-pie/photo-15.jpg?v=1360fc1e190e)
 
 ### Observations
 

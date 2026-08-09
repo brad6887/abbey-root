@@ -9,9 +9,9 @@ acquired: 2026-07-19
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/martha-my-dear/hero.jpg
-currentImage: /images/plants/martha-my-dear/current.jpg
-indexImage: /images/plants/martha-my-dear/index.jpg
+heroImage: /images/plants/martha-my-dear/hero.jpg?v=1ab4c1e261ca
+currentImage: /images/plants/martha-my-dear/current.jpg?v=462d72f278e4
+indexImage: /images/plants/martha-my-dear/index.jpg?v=14aa75c95d9d
 tags:
 - orchid
 - orchid-rescue
@@ -53,7 +53,7 @@ stays that way.
 
 ### Photos
 
-![Martha My Dear — 2026-07-19 — Rescue Day](/images/plants/martha-my-dear/photo-01.jpg)
+![Martha My Dear — 2026-07-19 — Rescue Day](/images/plants/martha-my-dear/photo-01.jpg?v=1ab4c1e261ca)
 
 ### Observations
 
@@ -67,7 +67,7 @@ or damage.
 
 ### Photos
 
-![Martha My Dear — 2026-07-19 — Oldest Leaf Aging](/images/plants/martha-my-dear/photo-02.jpg)
+![Martha My Dear — 2026-07-19 — Oldest Leaf Aging](/images/plants/martha-my-dear/photo-02.jpg?v=1e12d75941e2)
 
 ### Observations
 
@@ -81,7 +81,7 @@ aging rather than rot.
 
 ### Photos
 
-![Martha My Dear — 2026-07-19 — Root Check](/images/plants/martha-my-dear/photo-03.jpg)
+![Martha My Dear — 2026-07-19 — Root Check](/images/plants/martha-my-dear/photo-03.jpg?v=4fefd5e6e783)
 
 ### Observations
 
@@ -95,7 +95,7 @@ will remain a mystery until she is repotted.
 
 ### Photos
 
-![Martha My Dear — 2026-07-19 — Oldest Leaf Shed](/images/plants/martha-my-dear/photo-04.jpg)
+![Martha My Dear — 2026-07-19 — Oldest Leaf Shed](/images/plants/martha-my-dear/photo-04.jpg?v=d44bcb228b04)
 
 ### Observations
 
@@ -109,7 +109,7 @@ than rot.
 
 ### Photos
 
-![Martha My Dear — 2026-07-26 — Settling In](/images/plants/martha-my-dear/photo-05.jpg)
+![Martha My Dear — 2026-07-26 — Settling In](/images/plants/martha-my-dear/photo-05.jpg?v=14aa75c95d9d)
 
 ### Observations
 
@@ -123,7 +123,7 @@ look strong.
 
 ### Photos
 
-![Martha My Dear — 2026-07-26 — First Soak](/images/plants/martha-my-dear/photo-06.jpg)
+![Martha My Dear — 2026-07-26 — First Soak](/images/plants/martha-my-dear/photo-06.jpg?v=677c989d8872)
 
 ### Observations
 
@@ -137,7 +137,7 @@ is finished, then repot and check for a hidden nursery plug.
 
 ### Photos
 
-![Martha My Dear — 2026-08-01 — Weekly Update](/images/plants/martha-my-dear/photo-07.jpg)
+![Martha My Dear — 2026-08-01 — Weekly Update](/images/plants/martha-my-dear/photo-07.jpg?v=48b436adf95a)
 
 ### Observations
 
@@ -153,7 +153,7 @@ Watered
 
 ### Photos
 
-![Martha My Dear — 2026-08-09 — Weekly Update](/images/plants/martha-my-dear/photo-08.jpg)
+![Martha My Dear — 2026-08-09 — Weekly Update](/images/plants/martha-my-dear/photo-08.jpg?v=462d72f278e4)
 
 ### Observations
 

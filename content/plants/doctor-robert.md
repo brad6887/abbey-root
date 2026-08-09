@@ -9,8 +9,8 @@ acquired: 2026-03-01
 featured: true
 draft: false
 updatedDate: 2026-08-09
-heroImage: /images/plants/doctor-robert/hero.jpeg
-currentImage: /images/plants/doctor-robert/current.jpg
+heroImage: /images/plants/doctor-robert/hero.jpeg?v=a9c6e0f921dd
+currentImage: /images/plants/doctor-robert/current.jpg?v=d241bd4c2792
 tags:
 - orchid
 - orchid-rescue
@@ -62,25 +62,25 @@ That orchid eventually became **Doctor Robert**.
 
 ### Photos
 
-![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-01.jpg)
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-01.jpg?v=e6ee2ebc9a70)
 
 Photo of the Lowe's where Doctor Robert was discovered.
 
-![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-02.jpg)
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-02.jpg?v=01bd6bfb0911)
 
 Clearance rack containing several heavily discounted orchids.
 
 Doctor Robert is among them.
 
-![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-03.jpg)
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-03.jpg?v=f7886254073f)
 
 Another view of the clearance orchids, giving a better perspective of the display.
 
-![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-04.jpeg)
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-04.jpeg?v=a9c6e0f921dd)
 
 Doctor Robert by himself on the clearance shelf.
 
-![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-05.jpeg)
+![Doctor Robert — 2026-03-01 — The Rescue](/images/plants/doctor-robert/photo-05.jpeg?v=995d24a064c8)
 
 Another angle of Doctor Robert before purchase.
 
@@ -95,8 +95,8 @@ Another angle of Doctor Robert before purchase.
 
 ### Photos
 
-![Doctor Robert — 2026-03-01 — Initial Inspection](/images/plants/doctor-robert/photo-06.jpeg)
-![Doctor Robert — 2026-03-01 — Initial Inspection](/images/plants/doctor-robert/photo-07.jpeg)
+![Doctor Robert — 2026-03-01 — Initial Inspection](/images/plants/doctor-robert/photo-06.jpeg?v=25ffcb32ccc0)
+![Doctor Robert — 2026-03-01 — Initial Inspection](/images/plants/doctor-robert/photo-07.jpeg?v=1ee08ce74a4a)
 
 ### What Happened
 
@@ -122,7 +122,7 @@ Before doing anything else, I wanted to know whether the plant had a realistic c
 
 ### Photos
 
-![Doctor Robert — 2026-03-02 — Repotting](/images/plants/doctor-robert/photo-08.jpeg)
+![Doctor Robert — 2026-03-02 — Repotting](/images/plants/doctor-robert/photo-08.jpeg?v=77a4e57809a5)
 
 ### What Happened
 
@@ -151,7 +151,7 @@ Now the hard part would be waiting to see how the orchid responded.
 
 ### Photos
 
-![Doctor Robert — 2026-03-07 — Settling In](/images/plants/doctor-robert/photo-09.jpeg)
+![Doctor Robert — 2026-03-07 — Settling In](/images/plants/doctor-robert/photo-09.jpeg?v=1af1a2737f11)
 
 ### What Happened
 
@@ -177,7 +177,7 @@ This is the stage where patience becomes more important than constantly trying t
 
 ### Photos
 
-![Doctor Robert — 2026-03-22 — Waiting for a Response](/images/plants/doctor-robert/photo-10.jpeg)
+![Doctor Robert — 2026-03-22 — Waiting for a Response](/images/plants/doctor-robert/photo-10.jpeg?v=44adcda6a14e)
 
 ### What Happened
 
@@ -203,7 +203,7 @@ One of the hardest parts of rescuing orchids is learning patience. After address
 
 ### Photos
 
-![Doctor Robert — 2026-03-29 — First Signs of Progress](/images/plants/doctor-robert/photo-11.jpeg)
+![Doctor Robert — 2026-03-29 — First Signs of Progress](/images/plants/doctor-robert/photo-11.jpeg?v=5f2f57bdcecb)
 
 ### What Happened
 
@@ -231,8 +231,8 @@ Recovery doesn't always happen in obvious leaps. Sometimes the biggest victory i
 
 ### Photos
 
-![Doctor Robert — 2026-04-05 — Mixed Signals](/images/plants/doctor-robert/photo-12.jpeg)
-![Doctor Robert — 2026-04-05 — Mixed Signals](/images/plants/doctor-robert/photo-13.jpeg)
+![Doctor Robert — 2026-04-05 — Mixed Signals](/images/plants/doctor-robert/photo-12.jpeg?v=e43ee197f101)
+![Doctor Robert — 2026-04-05 — Mixed Signals](/images/plants/doctor-robert/photo-13.jpeg?v=7e27be5957ad)
 
 ### What Happened
 
@@ -258,7 +258,7 @@ I reminded myself that the older leaves reflected the orchid's past, not its fut
 
 ### Photos
 
-![Doctor Robert — 2026-04-06 — The Turning Point](/images/plants/doctor-robert/photo-14.jpeg)
+![Doctor Robert — 2026-04-06 — The Turning Point](/images/plants/doctor-robert/photo-14.jpeg?v=22710f439422)
 
 ### What Happened
 
@@ -288,7 +288,7 @@ Sometimes the smallest changes are the most important. New growth is one of the 
 
 ### Photos
 
-![Doctor Robert — 2026-04-08 — The First New Leaf](/images/plants/doctor-robert/photo-15.jpeg)
+![Doctor Robert — 2026-04-08 — The First New Leaf](/images/plants/doctor-robert/photo-15.jpeg?v=357fc83da92c)
 
 ### What Happened
 
@@ -316,7 +316,7 @@ Healthy new growth is a much better indicator of an orchid's condition than the 
 
 ### Photos
 
-![Doctor Robert — 2026-04-10 — Looking Healthier](/images/plants/doctor-robert/photo-16.jpeg)
+![Doctor Robert — 2026-04-10 — Looking Healthier](/images/plants/doctor-robert/photo-16.jpeg?v=9df6d28a6d94)
 
 ### What Happened
 
@@ -406,7 +406,7 @@ Plants don't exist in isolation from our lives. Sometimes a gap in the journal t
 
 ### Photos
 
-![Doctor Robert — 2026-06-13 — A New Beginning in Texas](/images/plants/doctor-robert/photo-17.png)
+![Doctor Robert — 2026-06-13 — A New Beginning in Texas](/images/plants/doctor-robert/photo-17.png?v=2d99b3782fdb)
 
 ### What Happened
 
@@ -441,7 +441,7 @@ Losing damaged leaves isn't always a setback—it can be an important part of th
 
 ### Photos
 
-![Doctor Robert — 2026-06-21 — Quiet Progress](/images/plants/doctor-robert/photo-18.png)
+![Doctor Robert — 2026-06-21 — Quiet Progress](/images/plants/doctor-robert/photo-18.png?v=fc05f2130f89)
 
 ### What Happened
 
@@ -473,7 +473,7 @@ For a recovering orchid, a week without decline can be just as meaningful as a w
 
 ### Photos
 
-![Doctor Robert — 2026-06-28 — The Lonely Leaf](/images/plants/doctor-robert/photo-19.png)
+![Doctor Robert — 2026-06-28 — The Lonely Leaf](/images/plants/doctor-robert/photo-19.png?v=43aa50e10bd1)
 
 ### What Happened
 
@@ -506,7 +506,7 @@ Healthy growth matters far more than hanging onto damaged leaves.
 
 ### Photos
 
-![Doctor Robert — 2026-07-05 — Ready for the Next Chapter](/images/plants/doctor-robert/photo-20.png)
+![Doctor Robert — 2026-07-05 — Ready for the Next Chapter](/images/plants/doctor-robert/photo-20.png?v=678fb24674ae)
 
 ### What Happened
 
@@ -563,7 +563,7 @@ The story isn't finished—it's simply entered a quieter chapter.
 
 ### Photos
 
-![Doctor Robert — 2026-07-12 — Weekly Update](/images/plants/doctor-robert/photo-21.jpg)
+![Doctor Robert — 2026-07-12 — Weekly Update](/images/plants/doctor-robert/photo-21.jpg?v=ee53077238b3)
 
 ### Observations
 
@@ -579,8 +579,8 @@ Fertilized
 
 ### Photos
 
-![Doctor Robert — 2026-08-02 — Weekly Update](/images/plants/doctor-robert/photo-22.jpg)
-![Doctor Robert — 2026-08-02 — Weekly Update](/images/plants/doctor-robert/photo-23.jpg)
+![Doctor Robert — 2026-08-02 — Weekly Update](/images/plants/doctor-robert/photo-22.jpg?v=63465983731e)
+![Doctor Robert — 2026-08-02 — Weekly Update](/images/plants/doctor-robert/photo-23.jpg?v=669bb964ca4d)
 
 ### Observations
 
@@ -592,7 +592,7 @@ Doctor Robert appears to have reached an important turning point. The suspected 
 
 ### Photos
 
-![Doctor Robert — 2026-08-09 — Weekly Update](/images/plants/doctor-robert/photo-24.jpg)
+![Doctor Robert — 2026-08-09 — Weekly Update](/images/plants/doctor-robert/photo-24.jpg?v=d241bd4c2792)
 
 ### Observations
 

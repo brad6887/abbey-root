@@ -156,6 +156,31 @@ require_command() {
     fail "Required command not found: $required_command"
 }
 
+ensure_npm_on_path() {
+  if command -v npm >/dev/null 2>&1; then
+    return 0
+  fi
+
+  local npm_path=""
+
+  if [[ -n "${HOME:-}" && -d "$HOME/.nvm/versions/node" ]]; then
+    npm_path="$(
+      find "$HOME/.nvm/versions/node" \
+        -mindepth 3 -maxdepth 3 \
+        \( -type f -o -type l \) \
+        -path '*/bin/npm' 2>/dev/null |
+        sort -V |
+        tail -n 1
+    )"
+  fi
+
+  if [[ -n "$npm_path" && -x "$npm_path" ]]; then
+    PATH="$(dirname "$npm_path"):$PATH"
+    export PATH
+    echo "INFO Using npm from NVM: $npm_path"
+  fi
+}
+
 require_site_directory() {
   [[ -d "$SITE_DIR" ]] ||
     fail "Site directory not found: $SITE_DIR"
@@ -288,6 +313,7 @@ site_build() {
   require_site_directory
   case "$BUILD_METHOD" in
     npm)
+      ensure_npm_on_path
       require_command npm
       (cd "$SITE_DIR" && npm run build) || fail "Site build failed"
       ;;
@@ -397,6 +423,7 @@ HELP
   validate_cname
 
   if [[ "$BUILD_METHOD" == "npm" ]]; then
+    ensure_npm_on_path
     require_command npm
     echo "Building configured site..."
     (cd "$SITE_DIR" && npm run build) || fail "Site build failed"
@@ -495,6 +522,8 @@ site_start() {
   mkdir -p "$LOG_DIR"
 
   cd "$SITE_DIR" || exit 1
+  ensure_npm_on_path
+  require_command npm
   nohup npm run dev -- --host 0.0.0.0 > "$LOG_FILE" 2>&1 &
 
   sleep 2
