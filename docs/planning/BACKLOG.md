@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 161 complete · 258 pending · 419 total
+> **Backlog Status:** 161 complete · 273 pending · 434 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -65,6 +65,32 @@ Ongoing practices, design principles, and general areas of improvement belong in
   - Display the resolved project, source directory, target, domain, and deployment method before making changes.
   - Add regression coverage proving Bread Pitt cannot invoke the BradCooke.com publishing path.
   - Validate both Abbey Root and Bread Pitt publishing workflows independently.
+
+## Publishing Workflow Evolution
+
+### Required Before Bake002
+
+- [ ] Define and document the canonical Bread Pitt bake content contract, including authoritative ownership of bake metadata, narrative, photo metadata, hero selection, recipe relationships, generated artifacts, and published derivatives.
+- [ ] Generate `media-intake.json` deterministically from canonical `photos.yml` data, mark it as generated, detect stale output, and add focused regression coverage.
+- [ ] Render Bread Pitt bake routes from canonical `bake.yml` and `story.md` content through a shared Astro template instead of maintaining hand-written per-bake narrative markup.
+- [ ] Add a Bread Pitt bake validation command that checks schemas, intake and publication manifests, source and derivative images, hero selection, recipe linkage, route uniqueness, representative images, and generated-artifact consistency.
+- [ ] Prototype a safe, idempotent Bread Pitt bake scaffold that creates only canonical inputs and required directories, refuses to overwrite an existing bake, and reports every created path.
+- [ ] Add and document an explicit `abbey site restart` command with regression coverage and project-aware process handling.
+- [ ] Capture the validated Bake001 source-to-publication workflow as a Bread Pitt runbook and record the canonical, generated, and published ownership decisions before authoring Bake002.
+
+### Reusable Abbey Follow-up
+
+- [ ] Add guided media workflow management with `abbey media workflow create`, `list`, `show`, and `validate`, including safe handling of existing configuration.
+- [ ] Improve unknown media-workflow diagnostics to name the missing workflow, list configured workflows or explain that none exist, suggest close matches, identify the configuration file, and show the corrective command.
+- [ ] Add layered `abbey media validate` support for schema, references, source assets, derivatives, manifests, fingerprints, privacy requirements, and publication readiness.
+- [ ] Preserve and document canonical working media, published derivatives, and manifests as separate pipeline layers, with manifests treated as versioned contracts rather than authoring surfaces.
+- [ ] Expand publication validation monotonically through composable schema, reference, asset, publication, and presentation checks.
+
+### Defer Until Multiple Publishing Cycles
+
+- [ ] Evaluate a generic project-defined content command or extension contract only after bake and at least one additional domain establish a reusable abstraction.
+- [ ] Evaluate one-command content publication orchestration only after scaffold, generation, validation, media publication, site build, and preview commands are stable independently.
+- [ ] Evaluate development-server freshness fingerprints and configurable visual-publication policies after repeated publishing cycles establish reliable stale-state and presentation requirements.
 
 ## External Project Portability
 
