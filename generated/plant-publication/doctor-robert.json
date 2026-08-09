@@ -39,7 +39,7 @@
         "format": "jpg",
         "height": 2400,
         "path": "site/public/images/plants/doctor-robert/current.jpg",
-        "sha256": "63465983731e6336292a21e6b3def34498be9d2f8523cc45d047d5424b248d50",
+        "sha256": "d241bd4c27926b5a7003c36626d1762f5aaa8c44af201ca285d1331af2ffaf20",
         "width": 1800
       },
       "publication": {
@@ -49,8 +49,8 @@
       },
       "source": {
         "canonical_original_preserved": true,
-        "path": "working/plants/doctor-robert/photos/doctor-robert-2026-08-02.jpg",
-        "sha256": "836b90185581e735c6a468584db47ebf9fc84e0db0f4cf7cd85917958ac5c24a"
+        "path": "working/plants/doctor-robert/photos/doctor-robert-2026-08-09.jpg",
+        "sha256": "514116471bd5d09c2f28e7202e915558a6c80ae204c79ebe2637d37a61e33f3f"
       },
       "tools": {
         "exiftool": "12.76",
@@ -833,6 +833,40 @@
         "canonical_original_preserved": true,
         "path": "working/plants/doctor-robert/photos/doctor-robert-2026-08-02-02.jpg",
         "sha256": "e37eda7aa7e65ca3ebdcbeae789d5b8f951f7ce63cfdee6494fd56a705c2d379"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/doctor-robert/photo-24.jpg",
+        "sha256": "d241bd4c27926b5a7003c36626d1762f5aaa8c44af201ca285d1331af2ffaf20",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-24",
+        "source_filename": "doctor-robert-2026-08-09.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/doctor-robert/photos/doctor-robert-2026-08-09.jpg",
+        "sha256": "514116471bd5d09c2f28e7202e915558a6c80ae204c79ebe2637d37a61e33f3f"
       },
       "tools": {
         "exiftool": "12.76",

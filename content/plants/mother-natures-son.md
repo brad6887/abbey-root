@@ -8,7 +8,7 @@ species: Cattleya
 acquired: 2026-02-01
 featured: true
 draft: false
-updatedDate: 2026-08-02
+updatedDate: 2026-08-09
 heroImage: /images/plants/mother-natures-son/hero.jpg
 currentImage: /images/plants/mother-natures-son/current.jpg
 tags:
@@ -436,3 +436,19 @@ Quiet and steady recovery. The newest leaf continues to develop.
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Mother Nature's Son — 2026-08-09 — Weekly Update](/images/plants/mother-natures-son/photo-36.jpg)
+
+### Observations
+
+Mother Nature's Son continues steady growth. The newest growth remains active, and a fresh root tip is visible near the edge of the pot.
+
+### Care
+
+Fertilized.

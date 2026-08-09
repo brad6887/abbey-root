@@ -275,3 +275,20 @@ Bill continues to recover. His leaves are hydrated and firm. I am hoping to see 
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+- bungalow-bill-2026-08-09-01.jpg
+- bungalow-bill-2026-08-09-02.jpg
+
+### Observations
+
+Bill remains stable in recovery. His leaves are firm and hydrated, and several visible roots remain active.
+
+### Care
+
+Fertilized.

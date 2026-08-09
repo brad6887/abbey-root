@@ -39,7 +39,7 @@
         "format": "jpg",
         "height": 2400,
         "path": "site/public/images/plants/revolution/current.jpg",
-        "sha256": "fc8937939392beb0d1fa69a58d066da65dbe53d1a66113accdb2c16a3b78e6d4",
+        "sha256": "f369794e43b1087212d2ebace4e5c8b549facd4df7c038af4e570c28a17e2f25",
         "width": 1800
       },
       "publication": {
@@ -49,8 +49,8 @@
       },
       "source": {
         "canonical_original_preserved": true,
-        "path": "working/plants/revolution/photos/revolution-2026-08-02-01.jpg",
-        "sha256": "58e70565e95e100459d7d9938516a04e127be2a099d38a010f38dfb501b9c230"
+        "path": "working/plants/revolution/photos/revolution-2026-08-09.jpg",
+        "sha256": "d3196d1597594bd53ab9b0ba44a2f4821ee24c384660e1547091d532ab2dee79"
       },
       "tools": {
         "exiftool": "12.76",
@@ -1037,6 +1037,40 @@
         "canonical_original_preserved": true,
         "path": "working/plants/revolution/photos/revolution-2026-08-02-02.jpg",
         "sha256": "7577ec1c1468e228df0a208e7011880e125e892a1a49735112e60b39905d8fd5"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/revolution/photo-29.jpg",
+        "sha256": "f369794e43b1087212d2ebace4e5c8b549facd4df7c038af4e570c28a17e2f25",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-29",
+        "source_filename": "revolution-2026-08-09.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/revolution/photos/revolution-2026-08-09.jpg",
+        "sha256": "d3196d1597594bd53ab9b0ba44a2f4821ee24c384660e1547091d532ab2dee79"
       },
       "tools": {
         "exiftool": "12.76",

@@ -8,7 +8,7 @@ species: Phalaenopsis
 acquired: 2026-01-05
 featured: true
 draft: false
-updatedDate: 2026-08-02
+updatedDate: 2026-08-09
 heroImage: /images/plants/something/hero.jpeg
 currentImage: /images/plants/something/current.jpg
 indexImage: /images/plants/something/index.jpg
@@ -299,3 +299,19 @@ country, and more dehydration, she was finally looking established.
 ### Observations
 
 Something continues her steady recovery this week, with noticeable growth in both the newest leaf and the active root. The older leaves remain firm and stable, and she has clearly shifted from simply surviving to actively rebuilding her root system and foliage.
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Something — 2026-08-09 — Weekly Update](/images/plants/something/photo-23.jpg)
+
+### Observations
+
+Something continues active growth. The newest leaf is extending, and a healthy green root tip is growing over the edge of the pot.
+
+### Care
+
+Fertilized.

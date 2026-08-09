@@ -244,3 +244,23 @@ Phal continues his steady vegetative growth. New leaf expanded a little.
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+- phal-mccartney-2026-08-09-01.jpg
+- phal-mccartney-2026-08-09-02.jpg
+- phal-mccartney-2026-08-09-03.jpg
+- phal-mccartney-2026-08-09-04.jpg
+- phal-mccartney-2026-08-09-05.jpg
+
+### Observations
+
+Phal McCartney was repotted after the old medium was removed and the root system was inspected and cleaned. He is now settled into fresh, open media with many healthy roots retained.
+
+### Care
+
+Repotted and fertilized.

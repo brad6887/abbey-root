@@ -8,7 +8,7 @@ species: Phalaenopsis
 acquired: 2026-06-14
 featured: true
 draft: false
-updatedDate: 2026-08-02
+updatedDate: 2026-08-09
 heroImage: /images/plants/honey-pie/hero.jpeg
 currentImage: /images/plants/honey-pie/current.jpg
 tags:
@@ -256,3 +256,19 @@ Blooms still doing well but fading a little
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Honey Pie — 2026-08-09 — Weekly Update](/images/plants/honey-pie/photo-15.jpg)
+
+### Observations
+
+Honey Pie remains in bloom, although the older flowers are beginning to fade. The foliage remains firm and healthy.
+
+### Care
+
+Fertilized.

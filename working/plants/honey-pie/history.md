@@ -208,3 +208,19 @@ Blooms still doing well but fading a little
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+- honey-pie-2026-08-09.jpg
+
+### Observations
+
+Honey Pie remains in bloom, although the older flowers are beginning to fade. The foliage remains firm and healthy.
+
+### Care
+
+Fertilized.

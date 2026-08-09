@@ -384,3 +384,19 @@ Quiet and steady recovery. The newest leaf continues to develop.
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+- mother-natures-son-2026-08-09.jpg
+
+### Observations
+
+Mother Nature's Son continues steady growth. The newest growth remains active, and a fresh root tip is visible near the edge of the pot.
+
+### Care
+
+Fertilized.

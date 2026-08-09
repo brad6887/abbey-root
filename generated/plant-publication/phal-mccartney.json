@@ -39,7 +39,7 @@
         "format": "jpg",
         "height": 2400,
         "path": "site/public/images/plants/phal-mccartney/current.jpg",
-        "sha256": "722800c0f1ff32f152b3d3d5085c8660197359dc55ce7e8a6e2438cb8d90c4b0",
+        "sha256": "8f41a4964aeeb5de1ae7b8ba755b0ddb0739c787dd14e48384594dd4f0da197a",
         "width": 1800
       },
       "publication": {
@@ -49,8 +49,8 @@
       },
       "source": {
         "canonical_original_preserved": true,
-        "path": "working/plants/phal-mccartney/photos/phal-mccartney-2026-08-02.jpg",
-        "sha256": "d0ebfb2a398590d8919b987be3d79ffb5b0ab418dc16119c07fbb2632b586132"
+        "path": "working/plants/phal-mccartney/photos/phal-mccartney-2026-08-09-05.jpg",
+        "sha256": "bddd21ba0c7cef7706385a0b79fce0476f3856b2839078c1e01147126fce7e07"
       },
       "tools": {
         "exiftool": "12.76",
@@ -901,6 +901,176 @@
         "canonical_original_preserved": true,
         "path": "working/plants/phal-mccartney/photos/phal-mccartney-2026-08-02.jpg",
         "sha256": "d0ebfb2a398590d8919b987be3d79ffb5b0ab418dc16119c07fbb2632b586132"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-25.jpg",
+        "sha256": "10bab866eeaaa64b9bce83b0f1a1c6e8ec120c9dbb6ff35b45e9b8b2b4e48bba",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-25",
+        "source_filename": "phal-mccartney-2026-08-09-01.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/phal-mccartney-2026-08-09-01.jpg",
+        "sha256": "97dc3bdfed62ae3d08b6949e49bb9087864c75f17d21c379ef92f74ef1f14c34"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-26.jpg",
+        "sha256": "75a4a9553c8d9ff280a8f3b8969902d6fc156816d77c7e890529541d4d2c3250",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-26",
+        "source_filename": "phal-mccartney-2026-08-09-02.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/phal-mccartney-2026-08-09-02.jpg",
+        "sha256": "40240aff7e2b3f3ce9ac2f59a47a8c9bbf8edd7df29e457460bb8443028ca3d1"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-27.jpg",
+        "sha256": "23c4d98e824d3bd107516996f9b294c31a2f44eb7bcc55e36b43cc5d2800b256",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-27",
+        "source_filename": "phal-mccartney-2026-08-09-03.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/phal-mccartney-2026-08-09-03.jpg",
+        "sha256": "da8e04c2c7852b8f65ed1133f1b2d64eeb3c18d8ca7ea7a927a960e8562a4ef2"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-28.jpg",
+        "sha256": "887726bc9c1b82c1048ab0c9a5128c9235da4b4c2792fbf03c631333e09a27cb",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-28",
+        "source_filename": "phal-mccartney-2026-08-09-04.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/phal-mccartney-2026-08-09-04.jpg",
+        "sha256": "f171e1d293fd554db5cb59832523832e71753ccd5cd83554e2091654cc4b8889"
+      },
+      "tools": {
+        "exiftool": "12.76",
+        "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+      },
+      "transformation": {
+        "auto_orient": true,
+        "colorspace": "sRGB",
+        "maximum_edge": 2400,
+        "metadata_removed": true,
+        "quality": 85
+      },
+      "validation": {
+        "private_metadata_detected": false,
+        "source_hash_unchanged": true
+      }
+    },
+    {
+      "derivative": {
+        "format": "jpg",
+        "height": 2400,
+        "path": "site/public/images/plants/phal-mccartney/photo-29.jpg",
+        "sha256": "8f41a4964aeeb5de1ae7b8ba755b0ddb0739c787dd14e48384594dd4f0da197a",
+        "width": 1800
+      },
+      "publication": {
+        "name": "photo-29",
+        "source_filename": "phal-mccartney-2026-08-09-05.jpg",
+        "type": "history"
+      },
+      "source": {
+        "canonical_original_preserved": true,
+        "path": "working/plants/phal-mccartney/photos/phal-mccartney-2026-08-09-05.jpg",
+        "sha256": "bddd21ba0c7cef7706385a0b79fce0476f3856b2839078c1e01147126fce7e07"
       },
       "tools": {
         "exiftool": "12.76",

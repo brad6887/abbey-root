@@ -7,7 +7,7 @@ status: thriving
 species: Phalaenopsis
 featured: true
 draft: false
-updatedDate: 2026-08-02
+updatedDate: 2026-08-09
 heroImage: /images/plants/phal-mccartney/hero.jpeg
 currentImage: /images/plants/phal-mccartney/current.jpg
 indexImage: /images/plants/phal-mccartney/index.jpeg
@@ -318,3 +318,23 @@ Phal continues his steady vegetative growth. New leaf expanded a little.
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-25.jpg)
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-26.jpg)
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-27.jpg)
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-28.jpg)
+![Phal McCartney — 2026-08-09 — Weekly Update](/images/plants/phal-mccartney/photo-29.jpg)
+
+### Observations
+
+Phal McCartney was repotted after the old medium was removed and the root system was inspected and cleaned. He is now settled into fresh, open media with many healthy roots retained.
+
+### Care
+
+Repotted and fertilized.

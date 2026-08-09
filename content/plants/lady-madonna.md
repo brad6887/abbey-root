@@ -7,7 +7,7 @@ status: recovering
 species: Phalaenopsis
 featured: true
 draft: false
-updatedDate: 2026-08-02
+updatedDate: 2026-08-09
 heroImage: /images/plants/lady-madonna/hero.jpeg
 currentImage: /images/plants/lady-madonna/current.jpg
 tags:
@@ -419,3 +419,19 @@ Lady remains stable
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Lady Madonna — 2026-08-09 — Weekly Update](/images/plants/lady-madonna/photo-22.jpg)
+
+### Observations
+
+Lady Madonna remains stable in recovery. The leaves continue to hold their shape, with no obvious decline since the previous update.
+
+### Care
+
+Fertilized.

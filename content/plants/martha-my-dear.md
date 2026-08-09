@@ -8,7 +8,7 @@ species: Phalaenopsis
 acquired: 2026-07-19
 featured: true
 draft: false
-updatedDate: 2026-08-01
+updatedDate: 2026-08-09
 heroImage: /images/plants/martha-my-dear/hero.jpg
 currentImage: /images/plants/martha-my-dear/current.jpg
 indexImage: /images/plants/martha-my-dear/index.jpg
@@ -146,3 +146,19 @@ Martha continues to settle in nicely after coming home from Sam's Club. She natu
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Martha My Dear — 2026-08-09 — Weekly Update](/images/plants/martha-my-dear/photo-08.jpg)
+
+### Observations
+
+Martha dropped a yellow leaf mid-week. Her bloom display is winding down, but several flowers remain, and the rest of her leaves are firm and healthy.
+
+### Care
+
+Fertilized.

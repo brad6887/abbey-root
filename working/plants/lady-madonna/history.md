@@ -369,3 +369,19 @@ Lady remains stable
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+- lady-madonna-2026-08-09.jpg
+
+### Observations
+
+Lady Madonna remains stable in recovery. The leaves continue to hold their shape, with no obvious decline since the previous update.
+
+### Care
+
+Fertilized.

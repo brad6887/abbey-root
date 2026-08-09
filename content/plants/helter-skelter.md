@@ -8,7 +8,7 @@ species: Dendrobium
 acquired: 2026-03-01
 featured: true
 draft: false
-updatedDate: 2026-08-02
+updatedDate: 2026-08-09
 heroImage: /images/plants/helter-skelter/hero.jpeg
 currentImage: /images/plants/helter-skelter/current.jpg
 tags:
@@ -465,3 +465,19 @@ Continuing growth. The newest cane is making progress.
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Helter Skelter — 2026-08-09 — Weekly Update](/images/plants/helter-skelter/photo-14.jpg)
+
+### Observations
+
+Helter Skelter continues steady vegetative growth. The newest cane is developing well, and the established growths remain green and stable.
+
+### Care
+
+Fertilized.

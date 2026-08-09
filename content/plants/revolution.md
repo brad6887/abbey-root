@@ -8,7 +8,7 @@ species: Phalaenopsis
 acquired: 2019-01-01
 featured: true
 draft: false
-updatedDate: 2026-08-02
+updatedDate: 2026-08-09
 heroImage: /images/plants/revolution/hero.jpeg
 currentImage: /images/plants/revolution/current.jpg
 indexImage: /images/plants/revolution/index.jpg
@@ -398,3 +398,19 @@ Steady recovery. The new leaf continues to grow.
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Revolution — 2026-08-09 — Weekly Update](/images/plants/revolution/photo-29.jpg)
+
+### Observations
+
+Revolution dropped a yellow leaf mid-week but otherwise remains stable and continues active vegetative growth. The newest leaf is still extending, while the remaining mature leaves are firm.
+
+### Care
+
+Fertilized.

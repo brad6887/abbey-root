@@ -420,3 +420,19 @@ Continuing growth. The newest cane is making progress.
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+- helter-skelter-2026-08-09.jpg
+
+### Observations
+
+Helter Skelter continues steady vegetative growth. The newest cane is developing well, and the established growths remain green and stable.
+
+### Care
+
+Fertilized.

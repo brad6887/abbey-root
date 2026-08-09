@@ -8,7 +8,7 @@ species: Phalaenopsis
 acquired: 2026-03-01
 featured: true
 draft: false
-updatedDate: 2026-08-02
+updatedDate: 2026-08-09
 heroImage: /images/plants/doctor-robert/hero.jpeg
 currentImage: /images/plants/doctor-robert/current.jpg
 tags:
@@ -585,3 +585,19 @@ Fertilized
 ### Observations
 
 Doctor Robert appears to have reached an important turning point. The suspected new leaf is now clearly visible as folded leaf tissue emerging from the crown, while the remaining mature leaf stays firm and glossy. With a healthy root system still supporting him, he seems to be shifting from rebuilding roots to producing new foliage for the first time since the rescue.
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Doctor Robert — 2026-08-09 — Weekly Update](/images/plants/doctor-robert/photo-24.jpg)
+
+### Observations
+
+Doctor Robert's remaining leaf stays firm and glossy. The root system was cleaned up by removing dead roots while preserving the healthy roots supporting his recovery.
+
+### Care
+
+Removed dead roots and fertilized.

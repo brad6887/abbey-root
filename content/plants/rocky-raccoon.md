@@ -8,7 +8,7 @@ species: Phalaenopsis
 acquired: 2026-08-02
 featured: true
 draft: false
-updatedDate: 2026-08-03
+updatedDate: 2026-08-09
 heroImage: /images/plants/rocky-raccoon/hero.jpg
 currentImage: /images/plants/rocky-raccoon/current.jpg
 tags:
@@ -92,3 +92,19 @@ Rocky Raccoon — Day 2
 Rocky’s leaves are still pretty floppy today, but that isn’t a surprise. He was extremely dry when I brought him home, and one good soak wasn’t going to undo all of that overnight.
 I repotted him yesterday and found the nursery plug we suspected, but the good news is that most of the roots were still in decent shape. For now, I’m leaving him alone to settle into the fresh bark and watching for the leaves to slowly firm up or for new root growth to start.
 I’m documenting the whole process as I go, and a complete orchid rescue guide is coming soon.
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Rocky Raccoon — 2026-08-09 — Weekly Update](/images/plants/rocky-raccoon/photo-03.jpg)
+
+### Observations
+
+Rocky remains in early recovery after repotting. The leaves are still somewhat relaxed, but the plant appears stable while it acclimates to the fresh media.
+
+### Care
+
+Fertilized.

@@ -97,3 +97,19 @@ Martha continues to settle in nicely after coming home from Sam's Club. She natu
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+- martha-my-dear-2026-08-09.jpg
+
+### Observations
+
+Martha dropped a yellow leaf mid-week. Her bloom display is winding down, but several flowers remain, and the rest of her leaves are firm and healthy.
+
+### Care
+
+Fertilized.

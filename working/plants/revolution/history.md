@@ -308,3 +308,19 @@ Steady recovery. The new leaf continues to grow.
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+- revolution-2026-08-09.jpg
+
+### Observations
+
+Revolution dropped a yellow leaf mid-week but otherwise remains stable and continues active vegetative growth. The newest leaf is still extending, while the remaining mature leaves are firm.
+
+### Care
+
+Fertilized.

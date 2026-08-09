@@ -8,7 +8,7 @@ species: Phalaenopsis
 acquired: 2026-03-29
 featured: true
 draft: false
-updatedDate: 2026-08-02
+updatedDate: 2026-08-09
 heroImage: /images/plants/bungalow-bill/hero.png
 currentImage: /images/plants/bungalow-bill/current.jpg
 tags:
@@ -305,3 +305,20 @@ Bill continues to recover. His leaves are hydrated and firm. I am hoping to see 
 ### Care
 
 Watered
+
+---
+
+## 2026-08-09 — Weekly Update
+
+### Photos
+
+![Bungalow Bill — 2026-08-09 — Weekly Update](/images/plants/bungalow-bill/photo-24.jpg)
+![Bungalow Bill — 2026-08-09 — Weekly Update](/images/plants/bungalow-bill/photo-25.jpg)
+
+### Observations
+
+Bill remains stable in recovery. His leaves are firm and hydrated, and several visible roots remain active.
+
+### Care
+
+Fertilized.
