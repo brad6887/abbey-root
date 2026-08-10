@@ -458,6 +458,7 @@ ai_decide() {
     "$override_model" \
     "$ABBEY_ROOT/.abbey/ai/history" <<'PYJSON'
 import json
+import re
 import sys
 import time
 import urllib.error
@@ -640,6 +641,39 @@ if missing:
     )
     sys.exit(1)
 
+if decision_id == "ai-worker-candidate":
+    candidate_type = result.get("candidate_type")
+    proposed_command = result.get("proposed_command")
+
+    if candidate_type not in {"research", "implementation", "none"}:
+        print(
+            "AI Worker candidate type must be research, implementation, or none.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    if not isinstance(proposed_command, str):
+        print("AI Worker proposed command must be a string.", file=sys.stderr)
+        sys.exit(1)
+
+    if candidate_type == "none":
+        valid_command = proposed_command == ""
+    else:
+        command_kind = (
+            "research" if candidate_type == "research" else "implement"
+        )
+        valid_command = re.fullmatch(
+            rf"abbey ai work {command_kind}( .*)?",
+            proposed_command,
+        ) is not None
+
+    if not valid_command:
+        print(
+            "AI Worker proposed command does not match its candidate type.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
 generated_at = datetime.now().astimezone()
 generated_iso = generated_at.isoformat(timespec="seconds")
 
@@ -713,6 +747,10 @@ if "failure_mode" in result:
     print(result["failure_mode"])
 
 detail_sections = [
+    ("Candidate Type", "candidate_type"),
+    ("Proposed Command", "proposed_command"),
+    ("Worker Objective", "worker_objective"),
+    ("Why AI Worker", "why_ai_worker"),
     ("Shared Outcome", "shared_outcome"),
     ("Primary Backlog Item", "primary_backlog_item"),
     ("Recurring Workflow", "recurring_workflow"),
@@ -771,6 +809,9 @@ if available_benefit_fields:
         print(f"{label + ':':<28} {value}")
 
 list_sections = [
+    ("Inputs", "inputs"),
+    ("Deliverables", "deliverables"),
+    ("Validation", "validation"),
     ("Recurrence Evidence", "recurrence_evidence"),
     ("Cumulative Cost", "cumulative_cost"),
     ("Recurring Work Eliminated", "recurring_work_eliminated"),

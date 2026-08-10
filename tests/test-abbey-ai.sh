@@ -298,6 +298,94 @@ assert_contains \
   "blocker"
 
 assert_contains \
+  "--help discovers AI Worker candidate metadata" \
+  "$output" \
+  "ai-worker-candidate"
+
+assert_contains \
+  "--help describes AI Worker delegation boundary" \
+  "$output" \
+  "delegated AI-worker research or implementation"
+
+ai_worker_prompt="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/ai-worker-candidate/prompt.md"
+)"
+
+assert_contains \
+  "AI Worker prompt distinguishes research candidates" \
+  "$ai_worker_prompt" \
+  '`research`: investigate a documented question'
+
+assert_contains \
+  "AI Worker prompt distinguishes implementation candidates" \
+  "$ai_worker_prompt" \
+  '`implementation`: complete a bounded, already-defined repository change'
+
+assert_contains \
+  "AI Worker prompt prohibits automatic operational work" \
+  "$ai_worker_prompt" \
+  "Reject work requiring live deployment, destructive changes"
+
+assert_contains \
+  "AI Worker prompt labels the proposed command as future work" \
+  "$ai_worker_prompt" \
+  "not an executable command in the current toolkit"
+
+assert_contains \
+  "AI Worker prompt assigns the command to the correct field" \
+  "$ai_worker_prompt" \
+  'Put that command concept in `proposed_command`.'
+
+ai_worker_schema="$(
+  cat "$ABBEY_ROOT/config/ai/decisions/ai-worker-candidate/schema.json"
+)"
+
+assert_contains \
+  "AI Worker schema requires candidate classification" \
+  "$ai_worker_schema" \
+  '"candidate_type"'
+
+assert_contains \
+  "AI Worker schema permits no-candidate results" \
+  "$ai_worker_schema" \
+  '"none"'
+
+assert_contains \
+  "AI Worker schema requires a proposed command field" \
+  "$ai_worker_schema" \
+  '"proposed_command"'
+
+assert_contains \
+  "AI Worker schema rejects extra output fields" \
+  "$ai_worker_schema" \
+  '"additionalProperties": false'
+
+assert_contains \
+  "shared report presents AI Worker candidate type" \
+  "$(cat "$ABBEY_AI")" \
+  '("Candidate Type", "candidate_type")'
+
+assert_contains \
+  "shared report presents proposed AI Worker command" \
+  "$(cat "$ABBEY_AI")" \
+  '("Proposed Command", "proposed_command")'
+
+assert_contains \
+  "shared report presents AI Worker inputs" \
+  "$(cat "$ABBEY_AI")" \
+  '("Inputs", "inputs")'
+
+assert_contains \
+  "shared report presents AI Worker deliverables" \
+  "$(cat "$ABBEY_AI")" \
+  '("Deliverables", "deliverables")'
+
+assert_contains \
+  "AI Worker result validates candidate and command agreement" \
+  "$(cat "$ABBEY_AI")" \
+  "AI Worker proposed command does not match its candidate type."
+
+assert_contains \
   "--help describes blocker dependency boundary" \
   "$output" \
   "not independently actionable because prerequisite work remains unfinished"

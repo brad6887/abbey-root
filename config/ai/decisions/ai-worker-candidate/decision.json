@@ -1,0 +1,16 @@
+{
+  "name": "AI Worker Candidate",
+  "description": "Identify one bounded planning item that is a strong candidate for delegated AI-worker research or implementation.",
+  "category": "planning",
+  "model": "gpt-oss:20b",
+  "documents": [
+    "docs/planning/PROJECT_STATUS.md",
+    "docs/planning/NEXT.md",
+    "docs/planning/BACKLOG.md",
+    "docs/planning/ROADMAP.md"
+  ],
+  "options": {
+    "temperature": 0,
+    "num_ctx": 32768
+  }
+}

@@ -198,6 +198,11 @@ Completed
 - `abbey ai decide` resolves shared libraries and decision definitions from the
   toolkit while preserving active-project configuration, knowledge, additions,
   and overrides
+- `abbey ai decide ai-worker-candidate` reviews authoritative planning
+  documents and recommends one bounded AI Worker research or implementation
+  candidate, including a proposed future worker-command concept, inputs,
+  deliverables, validation, evidence, and the remaining human boundary; it
+  does not dispatch work or imply that the proposed command already exists
 - Core Abbey workflows distinguish toolkit implementation from active-project
   data and are validated for external projects and macOS system Bash 3.2
 - `abbey session update` generation from the standard repository template
