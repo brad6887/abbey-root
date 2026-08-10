@@ -3,7 +3,7 @@ title: "Implement recurring review occurrence storage"
 description: "Defined recurring review occurrence storage and connected completed occurrences to recurring review definitions."
 date: 2026-08-06
 status: complete
-reviewed: false
+reviewed: true
 session: implement-recurring-review-occurrence-storage
 tags:
   - Abbey Root

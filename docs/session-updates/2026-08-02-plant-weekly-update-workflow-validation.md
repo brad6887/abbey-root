@@ -3,7 +3,7 @@ title: "Plant Weekly Update Workflow Validation"
 description: "Validated the single-plant weekly update workflow through historical, status-changing, and multi-photo plant updates and documented requirements for a future multi-plant process."
 date: 2026-08-02
 status: completed
-reviewed: false
+reviewed: true
 session: plant-weekly-update-workflow-validation
 tags:
   - Abbey Root

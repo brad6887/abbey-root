@@ -3,7 +3,7 @@ title: "August 2 Multi-Plant Updates"
 description: "Completed and published seven plant observations while validating the new batch update workflow through real use."
 date: 2026-08-02
 status: complete
-reviewed: false
+reviewed: true
 session: august-2-multi-plant-updates
 tags:
   - Abbey Root

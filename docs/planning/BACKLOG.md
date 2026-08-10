@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 161 complete · 273 pending · 434 total
+> **Backlog Status:** 167 complete · 277 pending · 444 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -81,6 +81,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 ### Reusable Abbey Follow-up
 
 - [ ] Add guided media workflow management with `abbey media workflow create`, `list`, `show`, and `validate`, including safe handling of existing configuration.
+- [ ] Remove the plant command's legacy partial-install fallback after normal installations and external projects have adopted `abbey media`.
 - [ ] Improve unknown media-workflow diagnostics to name the missing workflow, list configured workflows or explain that none exist, suggest close matches, identify the configuration file, and show the corrective command.
 - [ ] Add layered `abbey media validate` support for schema, references, source assets, derivatives, manifests, fingerprints, privacy requirements, and publication readiness.
 - [ ] Preserve and document canonical working media, published derivatives, and manifests as separate pipeline layers, with manifests treated as versioned contracts rather than authoring surfaces.
@@ -143,6 +144,11 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Expand infrastructure monitoring dashboards.
 - [ ] Add infrastructure backup failure alerting.
 - [ ] Investigate and document Nginx Proxy Manager configuration.
+- [ ] Configure the existing Nginx Proxy Manager instance to proxy `abbeyroot.com` to `sites01`.
+- [ ] Evaluate moving public ingress from `ubuntu-dev01` to `edge01`.
+- [ ] Reserve `192.168.1.84` for the `sites01` MAC address `BC:24:11:02:02:84`.
+- [ ] Rotate the Ansible credentials and Umami secrets exposed during the `sites01` provisioning session before public exposure.
+- [ ] Deploy the real `abbeyroot.com` build to the validated release structure on `sites01`.
 - [ ] Automate deployment of ai-worker01 shell environment through Ansible.
 - [ ] Document apartment network wall jack locations.
 - [ ] Label structured wiring cabinet.
@@ -207,6 +213,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Standardize tool output formatting and colors.
 - [ ] Standardize artifact-creation command output so commands report the path of every generated file.
 - [ ] Add automated toolkit regression testing.
+- [ ] Run the real public-image derivative helper suite with ExifTool and ImageMagick for final certification.
 - [x] Add regression tests for `abbey plant validate`.
 - [ ] Expand `abbey site` commands.
 - [ ] Implement fail-closed internal static-site release deployment
@@ -257,13 +264,14 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Create `abbey plant validate`.
 - [x] Publish Doctor Robert through the Plant Model as its first reference profile.
 - [x] Create `abbey plant new`.
+- [x] Complete Rocky Raccoon's canonical workspace with real photographs and verified plant-specific story, history, inventory, and photo metadata before publication.
 - [ ] Create `abbey plant inventory`.
 - [ ] Add configured plant photo inbox discovery that filters AppleDouble, XMP, temporary, and unsupported files.
 - [ ] Create plant photo metadata workflow.
 - [ ] Reject repeated `--photo` options in `abbey plant update` until multi-photo updates are supported.
 - [ ] Add multi-photo `abbey plant update` support with explicit current-photo selection.
 - [ ] Add a supported plant revision workflow for existing dated observations.
-- [ ] Design a reviewable multi-plant prepare, review, apply, and publish workflow.
+- [x] Design a reviewable multi-plant prepare, review, apply, and publish workflow.
 - [ ] Add regression coverage for UTC-safe Orchid Rescue date formatting.
 - [ ] Add historical backfill support to `abbey plant update` so older observations are inserted chronologically without replacing the current photo, changing the current status, or moving the plant's latest-updated date backward, with regression coverage for each behavior.
 - [x] Create plant publishing workflow.
@@ -425,7 +433,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 
 ### Content
 
-- [ ] Flesh out the Contact page.
+- [x] Flesh out the Contact page.
 - [x] Create the Power Infrastructure project page.
 - [ ] Add additional project pages.
 - [ ] Begin writing technical articles.
@@ -438,7 +446,9 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Create reusable plant profile and timeline components.
 - [x] Prototype the publishing path from `working/plants/` to Astro.
 - [x] Validate the plant publishing workflow before creating additional profiles.
-- [ ] Publish the next named Orchid Rescue profile.
+- [ ] Update the remaining orchids using the validated single-plant `abbey plant update` workflow.
+- [ ] After Martha My Dear's bloom cycle, repot her and check for a hidden nursery plug.
+- [x] Publish the next named Orchid Rescue profile.
 - [x] Add Phal McCartney to the documented orchid collection.
 - [ ] Create a separate future section for bromeliads.
 - [ ] After the remaining plant profiles are published, review selected plant narratives, photograph order and placement, and the relationship between photographs and timeline text.
@@ -575,9 +585,9 @@ is the supporting evidence for the Orchid Rescue items below.
 - [x] Select staged GitHub-hosted Actions over self-hosted automation for
   BradCooke.com builds and deployment.
 - [x] Automate plant workspace validation before publishing.
-- [ ] Automate plant image metadata checks, including rejection of GPS and other
+- [x] Automate plant image metadata checks, including rejection of GPS and other
   private location metadata in public outputs.
-- [ ] Automate creation of optimized, privacy-safe published image copies while
+- [x] Automate creation of optimized, privacy-safe published image copies while
   preserving canonical originals.
 - [x] Automate generation of plant profile pages from canonical source material.
 

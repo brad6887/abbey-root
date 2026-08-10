@@ -3,7 +3,7 @@ title: "Martha My Dear Weekly Update"
 description: "Published Martha My Dear's August 1 observation with a new current photo, care note, and thriving status."
 date: 2026-08-01
 status: complete
-reviewed: false
+reviewed: true
 session: martha-my-dear-weekly-update
 tags:
   - Abbey Root

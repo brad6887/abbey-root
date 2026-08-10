@@ -3,7 +3,7 @@ title: "Public Plant Image Metadata Proof"
 description: "Proved that one canonical plant photo can retain its original metadata while a public derivative is orientation-normalized, re-encoded, stripped, and verified."
 date: 2026-08-01
 status: completed
-reviewed: false
+reviewed: true
 session: public-plant-image-metadata-proof
 tags:
   - Abbey Root

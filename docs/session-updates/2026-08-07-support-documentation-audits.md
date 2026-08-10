@@ -3,7 +3,7 @@ title: "Support documentation audits"
 description: "Implemented the first executable recurring review type for Abbey documentation audits."
 date: 2026-08-07
 status: complete
-reviewed: false
+reviewed: true
 session: support-documentation-audits
 tags:
   - Abbey Root

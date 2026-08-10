@@ -3,7 +3,7 @@ title: "Something Orchid Publication"
 description: "Published Something's canonical orchid rescue workspace, timeline, photos, and generated site page."
 date: 2026-08-01
 status: completed
-reviewed: false
+reviewed: true
 session: something-orchid-publication
 tags:
   - Abbey Root

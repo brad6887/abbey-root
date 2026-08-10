@@ -3,7 +3,7 @@ title: "Single-Plant Weekly Update Workflow"
 description: "Added and proved a safe single-plant weekly observation workflow with dry-run support."
 date: 2026-08-01
 status: complete
-reviewed: false
+reviewed: true
 session: single-plant-weekly-update-workflow
 tags:
   - Abbey Root

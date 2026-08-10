@@ -3,7 +3,7 @@ title: "New Plant Onboarding Runbook"
 description: "Added the Rocky Raccoon-proven new-plant onboarding and publication verification process to the authoritative plant runbook."
 date: 2026-08-03
 status: complete
-reviewed: false
+reviewed: true
 session: new-plant-onboarding-runbook
 tags:
   - Abbey Root

@@ -3,7 +3,7 @@ title: "Surface due recurring reviews during abbey session"
 description: "Added recurring review due-state evaluation and surfaced due reviews during Abbey session startup."
 date: 2026-08-07
 status: complete
-reviewed: false
+reviewed: true
 session: surface-due-recurring-reviews-during-session
 tags:
   - Abbey Root

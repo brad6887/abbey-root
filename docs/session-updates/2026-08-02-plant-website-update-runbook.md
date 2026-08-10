@@ -3,7 +3,7 @@ title: "Plant Website Update Runbook"
 description: "Documented the proven individual, batch, and manual plant website update procedures in one operational runbook."
 date: 2026-08-02
 status: complete
-reviewed: false
+reviewed: true
 session: plant-website-update-runbook
 tags:
   - Abbey Root

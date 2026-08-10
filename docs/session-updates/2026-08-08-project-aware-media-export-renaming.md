@@ -3,7 +3,7 @@ title: "Project-Aware Media Export Renaming"
 description: "Generalized plant export renaming into project-aware Abbey media tooling with transactional manifests."
 date: 2026-08-08
 status: complete
-reviewed: false
+reviewed: true
 session: project-aware-media-export-renaming
 tags:
   - Abbey Root

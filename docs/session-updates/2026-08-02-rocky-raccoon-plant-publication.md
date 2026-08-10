@@ -3,7 +3,7 @@ title: "Rocky Raccoon Plant Publication"
 description: "Created, validated, and published Rocky Raccoon's canonical plant profile through the new Abbey onboarding workflow."
 date: 2026-08-02
 status: complete
-reviewed: false
+reviewed: true
 session: rocky-raccoon-plant-publication
 tags:
   - Abbey Root

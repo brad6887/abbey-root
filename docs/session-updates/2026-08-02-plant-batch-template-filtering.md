@@ -3,7 +3,7 @@ title: "Plant Batch Template Filtering"
 description: "Excluded the reusable plant template from batch update missing-photo warnings after real workflow validation."
 date: 2026-08-02
 status: complete
-reviewed: false
+reviewed: true
 session: plant-batch-template-filtering
 tags:
   - Abbey Root

@@ -3,7 +3,7 @@ title: "Reviewable Multi-Plant Update Workflow"
 description: "Added a safe prepare, review, and apply workflow for date-scoped updates across multiple plant workspaces."
 date: 2026-08-02
 status: complete
-reviewed: false
+reviewed: true
 session: reviewable-multi-plant-update-workflow
 tags:
   - Abbey Root

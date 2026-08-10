@@ -3,7 +3,7 @@ title: "Plant Workspace Onboarding Command"
 description: "Implemented and validated a safe, template-backed abbey plant new workflow through a Rocky Raccoon trial onboarding."
 date: 2026-08-02
 status: complete
-reviewed: false
+reviewed: true
 session: plant-workspace-onboarding-command
 tags:
   - Abbey Root

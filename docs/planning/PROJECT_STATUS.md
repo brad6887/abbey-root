@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-08-08
+Last Updated: 2026-08-09
 
 ---
 
@@ -98,6 +98,12 @@ Completed
 - 2.5 Gb networking deployed.
 - Passwordless SSH configured.
 - Ansible Vault configured.
+- `sites01` is the Ansible-managed static-hosting platform, using native nginx
+  and release-based `/srv/www` directories with atomic active-release links;
+  focused provisioning is validated as idempotent.
+- Bread Pitt has a validated, isolated internal staging site on `sites01`,
+  using dedicated release-based nginx hosting and internal DNS while its
+  production deployment remains unchanged.
 - Proxmox backup storage recovered and successful VM backups validated.
 - Nightly automated Open WebUI backups implemented and validated for the AI Worker, including remote verification.
 - Infrastructure health and Ansible connectivity validated across managed hosts.
@@ -106,7 +112,7 @@ Completed
 - `abbey lab check` refined and validated across managed hosts with expanded host, NVIDIA, and Ollama reporting while retaining read-only, timeout-protected, failure-tolerant operation.
 - Platform-role architecture established around stable responsibilities, with `edge01` designated as the Infrastructure Services Platform.
 - Tailscale-based remote access through `ubuntu-dev01` is documented in the remote-access architecture, validated by Abbey Doctor, and supported by inventory-driven reachability checks for managed hosts.
-- Technitium DNS on `edge01` is the authoritative `home.arpa` service; Ansible configures all five managed Linux hosts to use it, forward and reverse records are complete, short-name search-domain resolution is validated lab-wide, and external forwarding remains operational.
+- Technitium DNS on `edge01` is the authoritative `home.arpa` service; Ansible configures all six managed Linux hosts to use it, forward and reverse records are complete, short-name search-domain resolution is validated lab-wide, and external forwarding remains operational.
 - Homepage recovery is managed through the authoritative Ansible role, with `edge01` integrated into managed inventory and the operational dashboard.
 - Umami and PostgreSQL are deployed on `ubuntu-dev01` through a dedicated Ansible role with encrypted secrets, private database networking, health checks, check-mode safety, idempotency validation, and documented backup and recovery procedures.
 - Ansible reproducibly manages a bounded Abbey shell configuration across managed Linux hosts while preserving distribution- and host-specific `.bashrc` content and optional `~/.bashrc.local` customization.
@@ -168,8 +174,8 @@ Completed
   identity, fast-forward-only pull policy, automatic pruning, GitHub SSH
   transport and published host-key trust, and normalized remotes for existing
   Abbey Root and Bread Pitt checkouts without cloning, pulling, pushing, or
-  changing working files; the workflow is deployed and audit-clean across all
-  five Linux hosts and the separately inventoried macOS workstation
+  changing working files; the workflow is deployed and audit-clean across five
+  Linux hosts and the separately inventoried macOS workstation
 - `abbey session`
 - `abbey end` follows the active project's required, event-driven, or optional
   journal policy and recognizes completed, reviewed reconciliation-only commits
@@ -202,6 +208,15 @@ Completed
   event-driven, or optional policy
 - `abbey review` strictly validates changed session metadata and reports
   untouched historical metadata debt without blocking unrelated work
+- Recurring review definitions and completed occurrence artifacts are stored
+  separately, and recurring review discovery reports the latest occurrence
+  matching each definition; the public recurring-review workflow executes the
+  read-only Documentation Audit by reusing documentation validation and reports
+  findings separately from execution failure; the implemented Infrastructure
+  Review reuses `abbey doctor` and separates actionable findings from expected
+  operational warnings
+- Recurring review due dates are evaluated centrally, and `abbey session`
+  surfaces due reviews informationally without blocking normal session work
 - `abbey lab`
 - `abbey ssh audit` and `abbey ssh sync` provide validated, idempotent SSH key auditing and managed synchronization while preserving unrelated authorized keys
 - `abbey research status` deterministically discovers formal research artifacts, resolves their relationships, and reports complete chains and legacy provenance without modifying repository state
@@ -212,7 +227,11 @@ Completed
 - `abbey backlog refresh` maintains deterministic complete, pending, and total
   statistics in a bounded generated block for Abbey Root and external Abbey
   projects, with read-only freshness checks in `abbey review` and `abbey end`
-- `abbey site publish [--dry-run]` performs bounded post-push live-site verification that follows redirects and requires a final HTTP 2xx response
+- `abbey site build` and `abbey site publish [--dry-run]` resolve explicit
+  active-project site configuration, support npm-generated and direct-static
+  artifacts, and fail closed without safe publishing configuration; publishing
+  performs bounded post-push live-site verification that follows redirects and
+  requires a final HTTP 2xx response
 - Metadata-driven CLI help
 - Generated CLI reference
 - `abbey docs generate` and `abbey docs check` deterministically manage the
@@ -220,6 +239,20 @@ Completed
   during freshness checks
 - `abbey plant validate <slug>` with focused regression coverage for every
   current validation rule
+- `abbey plant new <slug> --name NAME --type TYPE` atomically creates a
+  template-backed canonical workspace, imports initial photographs and adjacent
+  XMP sidecars, refuses overwrites, and validates the resulting scaffold
+- The single-plant `abbey plant update <slug>` workflow has been validated
+  end-to-end through real use, including dry-run preview, canonical history and
+  status updates, image selection, validation, publishing, and site generation
+- The worksheet-driven multi-plant update workflow has been validated through
+  real use, with reviewable preparation and dry-run stages followed by
+  canonical updates, Plant Model validation, and publication; preparation
+  warns and skips plant/date groups already present in history while apply
+  retains duplicate-date validation as a final safety boundary
+- The complete new-plant onboarding and publication-verification lifecycle,
+  together with proven individual, batch, and manual plant-maintenance
+  procedures, is consolidated in one operational Plant Website Updates runbook
 - `abbey plant publish <slug>`
 - `abbey image select <entity> <item> --role <role>` provides portable,
   project-configured image-role selection with active-project validation,
@@ -230,9 +263,10 @@ Completed
 - `abbey media rename-exports <directory> [--dry-run]` provides
   project-configured caption and capture-date naming for image/XMP pairs,
   validates complete batches before staged renames, records deterministic
-  original-to-published mappings in a generated manifest, and supports plant
-  and Bread Pitt-style workflows; `abbey plant rename-exports` remains a
-  compatibility wrapper
+  original-to-published mappings in a generated manifest, ignores macOS
+  AppleDouble files while genuine missing-caption validation remains
+  fail-closed, and supports plant and Bread Pitt-style workflows; `abbey plant
+  rename-exports` remains a compatibility wrapper
 - `abbey media publish <workflow> [--dry-run]` generates project-configured,
   privacy-safe public derivatives from prepared intake manifests, verifies
   derivative provenance and source integrity, installs outputs and a
@@ -285,6 +319,8 @@ Completed
 - Dynamic routing.
 - Previous/next navigation.
 - Documentation publishing workflow.
+- The content-driven Contact page publishes `hello@bradcooke.com` for project,
+  plant, and website correspondence without exposing private contact details.
 - Production Astro site published to GitHub Pages at bradcooke.com through `abbey site publish`.
 - BradCooke.com publishes production-domain-restricted analytics to the self-hosted Umami service, with the live tracker, public script, HTTPS path, and a real external pageview validated.
 - Museum of Dumb Ideas established with OmeletYouFinish.com as its first completed exhibit.
@@ -292,10 +328,21 @@ Completed
   exhibit and a reusable photographic artifact gallery.
 - Canonical plant source-to-publication workflow.
 - Orchid Rescue routes complete profiles by collection ID, directs draft entries to a shared Coming Soon page, and excludes drafts from generated profile routes.
+- The completed Orchid Rescue search, indexing, image-metadata, and navigation
+  audit verified 10 published profiles, 216 referenced public images, and zero
+  broken internal links; it also documented missing discovery output, weak
+  image semantics, shallow cross-profile navigation, and GPS EXIF in 44 public
+  images as evidence-backed follow-up work.
 - Doctor Robert generated into the Astro site as the Plant Model reference implementation.
 - Helter Skelter generated into the Astro site as the second validated Plant Model profile.
 - Bungalow Bill generated into the Astro site as the third Orchid Rescue profile.
 - Honey Pie generated into the Astro site as the fourth complete Orchid Rescue profile from a canonical Plant Model workspace.
+- Something's canonical plant workspace and generated Orchid Rescue profile,
+  including its 21-photo recovery timeline, are complete; live deployment of
+  the generated site changes remains pending.
+- Rocky Raccoon's canonical workspace and generated Orchid Rescue profile are
+  complete, including verified plant-specific content and sanitized public
+  image derivatives produced through the `abbey plant new` onboarding workflow.
 
 ## Current Work
 

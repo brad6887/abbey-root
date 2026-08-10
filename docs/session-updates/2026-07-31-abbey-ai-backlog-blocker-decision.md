@@ -3,7 +3,7 @@ title: "Abbey AI Backlog Blocker Decision"
 description: "Added a structured Abbey AI decision that detects pending backlog items blocked by unfinished prerequisite work."
 date: 2026-07-31
 status: complete
-reviewed: false
+reviewed: true
 session: abbey-ai-backlog-blocker-decision
 tags:
   - abbey-root

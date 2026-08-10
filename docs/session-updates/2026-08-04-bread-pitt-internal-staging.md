@@ -3,7 +3,7 @@ title: "Bread Pitt Internal Staging"
 description: "Provisioned and validated an internal Bread Pitt staging site on sites01 with isolated nginx hosting, release activation, and internal DNS."
 date: 2026-08-04
 status: pending
-reviewed: false
+reviewed: true
 session: bread-pitt-internal-staging
 tags:
   - Abbey Root

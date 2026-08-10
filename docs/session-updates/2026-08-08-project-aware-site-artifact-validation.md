@@ -3,7 +3,7 @@ title: "Project-Aware Site Artifact Validation"
 description: "Added a read-only site gate for publication manifests, public derivatives, and generated routes."
 date: 2026-08-08
 status: complete
-reviewed: false
+reviewed: true
 session: project-aware-site-artifact-validation
 tags:
   - Abbey Root

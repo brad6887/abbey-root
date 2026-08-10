@@ -3,7 +3,7 @@ title: "Plant Batch Existing Update Detection"
 description: "Made worksheet preparation warn and skip plants that already have an update for the selected date."
 date: 2026-08-02
 status: complete
-reviewed: false
+reviewed: true
 session: plant-batch-existing-update-detection
 tags:
   - Abbey Root

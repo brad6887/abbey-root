@@ -3,7 +3,7 @@ title: "Sanitized Public Plant Image Publishing"
 description: "Added a reusable public-image derivative workflow that removes private metadata while preserving canonical plant photographs and publication provenance."
 date: 2026-08-01
 status: completed
-reviewed: false
+reviewed: true
 session: sanitized-public-plant-image-publishing
 tags:
   - abbey

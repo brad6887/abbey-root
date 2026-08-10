@@ -4,7 +4,7 @@ description: Provisioned a reproducible Rocky Linux static website host using na
 date: 2026-08-03
 status: complete
 session: sites01-static-website-hosting
-reviewed: false
+reviewed: true
 tags:
   - infrastructure
   - ansible

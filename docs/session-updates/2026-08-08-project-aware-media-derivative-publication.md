@@ -3,7 +3,7 @@ title: "Project-Aware Media Derivative Publication"
 description: "Added project-aware, transactional publication of privacy-safe media derivatives and deterministic manifests."
 date: 2026-08-08
 status: complete
-reviewed: false
+reviewed: true
 session: project-aware-media-derivative-publication
 tags:
   - Abbey Root

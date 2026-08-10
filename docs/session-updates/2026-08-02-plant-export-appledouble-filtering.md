@@ -3,7 +3,7 @@ title: "Plant Export AppleDouble Filtering"
 description: "Excluded macOS AppleDouble files from plant export photo discovery after real workflow testing."
 date: 2026-08-02
 status: complete
-reviewed: false
+reviewed: true
 session: plant-export-appledouble-filtering
 tags:
   - Abbey Root

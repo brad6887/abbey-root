@@ -3,7 +3,7 @@ title: "Project-Aware Command Context Foundation"
 description: "Established one fail-closed project-context contract and diagnostic command for reusable Abbey workflows."
 date: 2026-08-08
 status: complete
-reviewed: false
+reviewed: true
 session: project-aware-command-context-foundation
 tags:
   - Abbey Root

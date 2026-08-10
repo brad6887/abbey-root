@@ -3,7 +3,7 @@ title: "Project-Aware Site Publishing"
 description: "Made Abbey site builds and publishing resolve explicit active-project configuration and fail closed."
 date: 2026-08-04
 status: complete
-reviewed: false
+reviewed: true
 session: project-aware-site-publishing
 tags:
   - Abbey Root

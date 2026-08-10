@@ -3,7 +3,7 @@ title: "Plant Export Photo Renaming"
 description: "Added a safe Abbey command that names bulk-exported plant photos from iPhone captions and capture dates."
 date: 2026-08-02
 status: complete
-reviewed: false
+reviewed: true
 session: plant-export-photo-renaming
 tags:
   - Abbey Root

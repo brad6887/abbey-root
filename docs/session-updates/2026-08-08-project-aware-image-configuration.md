@@ -3,7 +3,7 @@ title: "Project-Aware Image Configuration"
 description: "Migrated Abbey image selection to validated, fail-closed active-project configuration with explicit toolkit fallback."
 date: 2026-08-08
 status: complete
-reviewed: false
+reviewed: true
 session: project-aware-image-configuration
 tags:
   - Abbey Root

@@ -3,7 +3,7 @@ title: "Support infrastructure reviews"
 description: "Implemented and validated the recurring Infrastructure Review workflow using Abbey Doctor as the primary health check."
 date: 2026-08-07
 status: complete
-reviewed: false
+reviewed: true
 session: support-infrastructure-reviews
 tags:
   - Abbey Root

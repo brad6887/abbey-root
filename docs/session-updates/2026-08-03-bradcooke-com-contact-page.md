@@ -3,7 +3,7 @@ title: "BradCooke.com Contact Page"
 description: "Added a simple, conversational Contact page centered on the new hello@bradcooke.com address."
 date: 2026-08-03
 status: complete
-reviewed: false
+reviewed: true
 session: bradcooke-com-contact-page
 tags:
   - Abbey Root
