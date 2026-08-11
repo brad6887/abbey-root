@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-08-09
+Last Updated: 2026-08-10
 
 ---
 
@@ -167,6 +167,11 @@ Completed
   backup, and remote-access checks only when the active project declares the
   infrastructure capability, while internal-DNS checks independently require
   the internal-DNS capability
+- `abbey validate` provides canonical, read-only, project-aware repository
+  validation for metadata, configured paths, planning structure, Git, and
+  whitespace; when Abbey Root is active, it additionally checks consistency
+  among CLI metadata, dispatcher routes, command implementations, and generated
+  command documentation
 - `abbey status` reports deterministic local counts for toolkit commands,
   website pages, journal entries, and documentation files; an absent open task
   in `NEXT.md` is informational and does not prevent later checks from running
@@ -255,6 +260,14 @@ Completed
   canonical updates, Plant Model validation, and publication; preparation
   warns and skips plant/date groups already present in history while apply
   retains duplicate-date validation as a final safety boundary
+- The August 9 workflow processed sixteen photographs into reviewed updates and
+  generated profiles for eleven Orchid Rescue plants; subsequent toolkit work
+  replaced separate serialized publication invocations with the supported
+  `abbey plant publish-batch` command, which serializes plants and stops on
+  failure; individual publication uses isolated transactional staging,
+  per-plant locking, and manifest-owned cleanup, generates deterministic
+  content-versioned image URLs, and discovers NVM-managed npm for reliable
+  non-interactive site workflows
 - The complete new-plant onboarding and publication-verification lifecycle,
   together with proven individual, batch, and manual plant-maintenance
   procedures, is consolidated in one operational Plant Website Updates runbook

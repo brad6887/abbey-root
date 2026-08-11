@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 169 complete · 275 pending · 444 total
+> **Backlog Status:** 169 complete · 276 pending · 445 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -265,6 +265,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Publish Doctor Robert through the Plant Model as its first reference profile.
 - [x] Create `abbey plant new`.
 - [x] Complete Rocky Raccoon's canonical workspace with real photographs and verified plant-specific story, history, inventory, and photo metadata before publication.
+- [ ] Onboard All Together Now and Sun King as separate plant projects from their preserved photo and XMP pairs.
 - [ ] Create `abbey plant inventory`.
 - [ ] Add configured plant photo inbox discovery that filters AppleDouble, XMP, temporary, and unsupported files.
 - [ ] Create plant photo metadata workflow.

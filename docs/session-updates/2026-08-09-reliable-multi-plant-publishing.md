@@ -3,7 +3,7 @@ title: "Reliable Multi-Plant Publishing"
 description: "Made multi-plant publication serialized, transactional, cache-aware, and reliable in non-interactive Abbey sessions."
 date: 2026-08-09
 status: complete
-reviewed: false
+reviewed: true
 session: reliable-multi-plant-publishing
 tags:
   - Abbey Root

@@ -3,7 +3,7 @@ title: "AI Worker Candidate Decision"
 description: "Added a structured Abbey AI decision for finding bounded AI Worker research and implementation candidates in planning documents."
 date: 2026-08-10
 status: complete
-reviewed: false
+reviewed: true
 session: ai-worker-candidate-decision
 tags:
   - Abbey Root

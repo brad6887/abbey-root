@@ -3,7 +3,7 @@ title: "Canonical Repository Validation"
 description: "Added a canonical, project-aware repository consistency validation workflow with focused regression coverage."
 date: 2026-08-10
 status: complete
-reviewed: false
+reviewed: true
 session: canonical-repository-validation
 tags:
   - Abbey Root

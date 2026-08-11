@@ -3,7 +3,7 @@ title: "August 9 Multi-Plant Updates"
 description: "Completed and published eleven orchid observations from sixteen photographs while identifying a serialization requirement in the multi-plant publishing workflow."
 date: 2026-08-09
 status: complete
-reviewed: false
+reviewed: true
 session: august-9-multi-plant-updates
 tags:
   - Abbey Root
