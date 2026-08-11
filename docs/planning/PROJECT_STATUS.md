@@ -146,6 +146,9 @@ Completed
 - Safe default `abbey init PATH` project bootstrap with dry-run support,
   optional Git initialization, generated metadata and workflow documents,
   destination protection, result validation, and no automatic commit or remote.
+- Evidence-based framework adoption guidance defines a bounded adoption and
+  certification path for new and established repositories using validated
+  Abbey Root, Power Infrastructure, and Bread Pitt workflows.
 
 ## Current Focus
 

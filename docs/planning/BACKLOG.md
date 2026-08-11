@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 174 complete · 235 pending · 409 total
+> **Backlog Status:** 175 complete · 234 pending · 409 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -40,7 +40,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Extract additional shared CLI behavior only when repeated implementations establish a stable reusable contract.
 - [x] Define the standard universal CLI commands and their expected behavior.
 - [x] Implement and document a canonical framework-level project validation workflow.
-- [ ] Create a framework adoption guide based on the validated Abbey Root, Power Infrastructure, and Bread Pitt workflows.
+- [x] Create a framework adoption guide based on the validated Abbey Root, Power Infrastructure, and Bread Pitt workflows.
 - [x] Create the first safe default Abbey project template through `abbey init`.
 - [ ] Define whether Abbey needs multiple selectable project templates after additional project types validate the requirement.
 - [ ] Define and document the Abbey Framework versioning and compatibility policy.

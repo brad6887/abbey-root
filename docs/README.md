@@ -40,6 +40,7 @@ Typical guide documents include:
 
 - Start Here
 - Using the CLI
+- [Framework Adoption](guide/FRAMEWORK_ADOPTION.md)
 - Workflow
 - Philosophy
 
