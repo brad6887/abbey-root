@@ -121,6 +121,21 @@ assert_contains \
   "$(cat "$session_file")" \
   "session: guided-session-capture-workflow"
 
+assert_contains \
+  "session update links to journal entry" \
+  "$(cat "$session_file")" \
+  "journal: \"content/journal/${year_value}/${date_value}-guided-session-capture-workflow.md\""
+
+assert_contains \
+  "journal entry links to session update" \
+  "$(cat "$journal_file")" \
+  "session_update: \"docs/session-updates/${date_value}-guided-session-capture-workflow.md\""
+
+assert_contains \
+  "capture reports reciprocal association" \
+  "$output" \
+  "Associated session update and journal entry:"
+
 session_before="$(cat "$session_file")"
 journal_before="$(cat "$journal_file")"
 
@@ -165,6 +180,22 @@ assert_status \
 assert_file_exists \
   "missing journal entry is recreated" \
   "$journal_file"
+
+sed -i.bak '/^journal:/d' "$session_file"
+rm "$session_file.bak"
+sed -i.bak '/^session_update:/d' "$journal_file"
+rm "$journal_file.bak"
+
+run_capture guided-session-capture-workflow
+assert_status "capture repairs missing reciprocal metadata" "$status" 0
+assert_contains \
+  "capture repairs missing session journal link" \
+  "$(cat "$session_file")" \
+  "journal: \"content/journal/${year_value}/${date_value}-guided-session-capture-workflow.md\""
+assert_contains \
+  "capture repairs missing journal session link" \
+  "$(cat "$journal_file")" \
+  "session_update: \"docs/session-updates/${date_value}-guided-session-capture-workflow.md\""
 
 run_capture \
   --title "Different Title" \
@@ -258,11 +289,46 @@ assert_contains \
   "$output" \
   "Journal entry not created (policy: event-driven)"
 
+if grep -Fq '^journal:' "$event_session"; then
+  fail "event-driven capture without journal omits journal metadata"
+else
+  pass "event-driven capture without journal omits journal metadata"
+fi
+
 run_capture --journal --title "Explicit External Journal"
 
 explicit_journal="$fixture_root/content/journal/${year_value}/${date_value}-explicit-external-journal.md"
 assert_status "event-driven capture accepts --journal" "$status" 0
 assert_file_exists "event-driven --journal uses toolkit journal command" "$explicit_journal"
+
+explicit_session="$fixture_root/docs/session-updates/${date_value}-explicit-external-journal.md"
+assert_contains \
+  "event-driven --journal links session to journal" \
+  "$(cat "$explicit_session")" \
+  "journal: \"content/journal/${year_value}/${date_value}-explicit-external-journal.md\""
+assert_contains \
+  "event-driven --journal links journal to session" \
+  "$(cat "$explicit_journal")" \
+  "session_update: \"docs/session-updates/${date_value}-explicit-external-journal.md\""
+
+run_capture --journal --title "Conflicting Association"
+conflict_session="$fixture_root/docs/session-updates/${date_value}-conflicting-association.md"
+conflict_journal="$fixture_root/content/journal/${year_value}/${date_value}-conflicting-association.md"
+sed -i.bak 's#^journal:.*#journal: "content/journal/wrong.md"#' "$conflict_session"
+rm "$conflict_session.bak"
+conflict_journal_before="$(cat "$conflict_journal")"
+
+run_capture --journal --title "Conflicting Association"
+assert_status "conflicting association fails closed" "$status" 1
+assert_contains \
+  "conflicting association is explained" \
+  "$output" \
+  "Conflicting journal metadata"
+if [[ "$(cat "$conflict_journal")" == "$conflict_journal_before" ]]; then
+  pass "conflicting association preserves journal entry"
+else
+  fail "conflicting association preserves journal entry"
+fi
 
 echo
 echo "Passed: $passed"

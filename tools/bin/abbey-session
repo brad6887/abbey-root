@@ -814,6 +814,8 @@ session_capture() {
   local existing_title
   local journal_override=""
   local journal_policy
+  local journal_file
+  local relative_journal
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -932,10 +934,28 @@ session_capture() {
   journal_policy="$(abbey_project_value "$ABBEY_ROOT" "workflow.journal.policy" "required")"
 
   if [[ "$journal_override" == "create" || ( "$journal_policy" == "required" && "$journal_override" != "skip" ) ]]; then
-    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-journal" \
+    journal_file="$ABBEY_ROOT/content/journal/$(date '+%Y')/${date_value}-${slug}.md"
+    relative_journal="${journal_file#$ABBEY_ROOT/}"
+
+    python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_session_journal_link.py" \
+      --check \
+      --session "$update_file" \
+      --journal "$journal_file" \
+      --session-relative "$relative_update" \
+      --journal-relative "$relative_journal" || return 1
+
+    if ! "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-journal" \
       --no-edit \
       --title "$title" \
-      --slug "$slug"
+      --slug "$slug"; then
+      return 1
+    fi
+
+    python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_session_journal_link.py" \
+      --session "$update_file" \
+      --journal "$journal_file" \
+      --session-relative "$relative_update" \
+      --journal-relative "$relative_journal" || return 1
   else
     echo "Journal entry not created (policy: $journal_policy)."
     if [[ "$journal_policy" == "event-driven" ]]; then

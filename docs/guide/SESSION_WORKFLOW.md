@@ -133,8 +133,10 @@ abbey session capture --title "Session-Aware Slug Workflow"
 ```
 
 Abbey derives one deterministic slug, stores it in the session update's
-`session:` metadata, and uses it for both artifact filenames. Use `--slug` only
-when the derived value needs an explicit human override:
+`session:` metadata, and uses it for both artifact filenames. When capture
+creates a journal, it also records reciprocal `journal:` and `session_update:`
+paths in the two artifacts. Use `--slug` only when the derived value needs an
+explicit human override:
 
 ```bash
 abbey session capture \
@@ -148,7 +150,8 @@ Initialized projects declare their journal policy in `.abbey/project.yml`.
 `required` creates a journal entry for every capture. `event-driven` (the
 default for new projects) and `optional` create the session update without a
 journal unless `--journal` is supplied. `--no-journal` provides an explicit
-one-session override when a required journal is not appropriate.
+one-session override when a required journal is not appropriate. Capture omits
+journal-link metadata whenever policy or an override skips journal creation.
 
 ---
 

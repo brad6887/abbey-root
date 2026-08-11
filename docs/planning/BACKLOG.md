@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 171 complete · 275 pending · 446 total
+> **Backlog Status:** 172 complete · 274 pending · 446 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -302,7 +302,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Default reusable Abbey artifacts, including Codex prompts, session updates, journals, and planning documents, to raw Markdown in fenced code blocks unless another format is requested.
 - [x] Normalize canonical metadata for historical session updates so they are discoverable by the reconciliation workflow.
 - [x] Implement `abbey session update`.
-- [ ] Associate journal entries with active Abbey sessions.
+- [x] Associate journal entries with active Abbey sessions through reciprocal capture metadata while preserving project journal policies.
 
 ### AI Integration
 

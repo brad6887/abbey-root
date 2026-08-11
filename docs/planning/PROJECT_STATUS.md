@@ -219,7 +219,8 @@ Completed
   stores it as session metadata, reuses it for the session update and journal
   filenames, supports explicit overrides, and remains backward-compatible with
   positional slugs; journal creation follows the active project's required,
-  event-driven, or optional policy
+  event-driven, or optional policy, and created journal/session pairs record
+  reciprocal relative paths with conflict-safe, idempotent repair on rerun
 - `abbey review` strictly validates changed session metadata and reports
   untouched historical metadata debt without blocking unrelated work
 - Recurring review definitions and completed occurrence artifacts are stored
