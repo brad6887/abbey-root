@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 175 complete · 271 pending · 446 total
+> **Backlog Status:** 174 complete · 235 pending · 409 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -85,7 +85,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Improve unknown media-workflow diagnostics to name the missing workflow, list configured workflows or explain that none exist, suggest close matches, identify the configuration file, and show the corrective command.
 - [ ] Add layered `abbey media validate` support for schema, references, source assets, derivatives, manifests, fingerprints, privacy requirements, and publication readiness.
 - [ ] Preserve and document canonical working media, published derivatives, and manifests as separate pipeline layers, with manifests treated as versioned contracts rather than authoring surfaces.
-- [ ] Expand publication validation monotonically through composable schema, reference, asset, publication, and presentation checks.
 
 ### Defer Until Multiple Publishing Cycles
 
@@ -141,7 +140,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Validate the documented Umami restore procedure in a safe non-production recovery test before formalizing database backup automation.
 - [ ] Implement infrastructure patch management workflow.
 - [ ] Define recurring infrastructure maintenance windows.
-- [ ] Expand infrastructure monitoring dashboards.
 - [ ] Add infrastructure backup failure alerting.
 - [ ] Investigate and document Nginx Proxy Manager configuration.
 - [ ] Configure the existing Nginx Proxy Manager instance to proxy `abbeyroot.com` to `sites01`.
@@ -161,7 +159,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Validate remote access from an external network.
 - [ ] Design `abbey operator add`.
 - [ ] Evaluate consolidating the Ansible Control Node onto `ubuntu-dev01`.
-- [ ] Expand `abbey lab` with additional infrastructure diagnostics.
 - [ ] Resolve and document the `ai-worker01` NVIDIA/Ollama reboot hang.
 - [ ] Evaluate running `abbey lab` remotely from development workstations.
 - [ ] Investigate the persistent `systemd-networkd-wait-online.service` warning reported by `abbey lab check`.
@@ -203,7 +200,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Create `abbey-journal`.
 - [x] Create `abbey-version`.
 - [x] Create `abbey site publish` with guarded preview and `--dry-run` support.
-- [x] Create `abbey plant validate`.
 
 ### Toolkit Evolution
 
@@ -215,7 +211,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Add automated toolkit regression testing.
 - [ ] Run the real public-image derivative helper suite with ExifTool and ImageMagick for final certification.
 - [x] Add regression tests for `abbey plant validate`.
-- [ ] Expand `abbey site` commands.
 - [ ] Implement fail-closed internal static-site release deployment
   - Load the source directory, build output, staging hostname, target host,
     remote release root, and deployment method from the active project's
@@ -246,12 +241,11 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Make `abbey site publish` fail immediately when `git push` fails and verify the expected deployed source and production revisions instead of accepting any HTTP 2xx response.
 - [x] Add project metrics to `abbey-status`.
 - [ ] Add documentation validation to `abbey-doctor`.
-- [ ] Add network health checks to `abbey-doctor`.
 - [x] Add Git author identity checks to `abbey-doctor`.
-- [ ] Verify bridge-ports references an existing interface.
-- [ ] Report negotiated Ethernet link speed.
-- [ ] Verify gateway connectivity.
-- [ ] Verify Internet connectivity.
+- [ ] Make `abbey lab check` verify that every configured bridge port references an observed interface.
+- [ ] Make `abbey lab check` report negotiated Ethernet link speed for inventory-declared physical interfaces.
+- [ ] Make `abbey lab check` verify each managed host can reach its inventory-declared gateway.
+- [ ] Make `abbey lab check` verify Internet connectivity without failing the remaining managed-host checks.
 - [x] Add inventory-driven missing or replaced network interface detection to `abbey lab check`.
 - [ ] Verify and inventory the authoritative physical network-interface MAC and role for each remaining managed host, excluding loopback, container, bridge, virtual Ethernet, and Tailscale interfaces.
 - [ ] Evaluate shared validation helpers after additional model validators exist.
@@ -287,10 +281,8 @@ Ongoing practices, design principles, and general areas of improvement belong in
 
 ### Workflow
 
-- [ ] Expand `abbey-session` with project-aware recommendations.
 - [ ] Display planning summaries during `abbey session`.
 - [x] Create `abbey end`.
-- [ ] Evaluate future `abbey end` enhancements through practical usage.
 - [x] Implement `abbey review`.
 - [x] Add generated backlog completion statistics with workflow freshness checks.
 - [ ] Evaluate generated backlog status and workflow messages through normal Abbey sessions before broader planning-refresh automation.
@@ -332,7 +324,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Evaluate `abbey ai decide risk-reducer` through normal use before expanding its rubric.
 - [x] Re-run the complete Abbey AI regression suite on the Linux development host.
 - [x] Fix the documented macOS portability failures in the Abbey AI test suite.
-- [ ] Expand the AI decision library with additional engineering workflows.
 
 ### Abbey Research
 
@@ -382,16 +373,12 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Generate service inventory.
 - [x] Generate Ansible inventory documentation.
 - [ ] Generate Architecture Decision Record index.
-- [ ] Eliminate manually maintained generated documentation.
-- [ ] Expand metadata-driven documentation generation.
-- [ ] Build metadata-driven documentation generation using planning schemas.
 - [ ] Generate planning summaries from session updates.
 - [x] Generate project-aware AI context from planning documents.
 - [x] Build bounded deterministic `abbey docs generate` and `abbey docs check`
   orchestration for the CLI and command references.
 - [ ] Isolate Ansible-derived document rendering and add deterministic freshness checks before expanding `abbey docs`.
 - [ ] Make planning documents the primary interface for Abbey toolkit commands.
-- [ ] Expand stable machine-readable planning document schemas.
 - [ ] Build project metadata APIs.
 - [ ] Define reusable content models for personal projects.
 - [ ] Build source-to-publication transformation workflows.
@@ -404,10 +391,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Complete the onboarding guide series.
 - [ ] Create `WORKFLOW.md`.
 - [ ] Create `PHILOSOPHY.md`.
-- [ ] Expand the lab architecture documentation.
-- [ ] Create framework documentation index.
-- [ ] Build document update workflow.
-- [ ] Design automated document review workflow.
 - [ ] Document the canonical `working/` workspace purpose and conventions.
 - [ ] Document the principle: model information before building tools.
 - [ ] Document the principle: humans record observations; automation manages state.
@@ -437,8 +420,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 
 - [x] Flesh out the Contact page.
 - [x] Create the Power Infrastructure project page.
-- [ ] Add additional project pages.
-- [ ] Begin writing technical articles.
 - [x] Publish Abbey Root journal entries.
 - [ ] Create JournalCard component.
 - [ ] Create JournalHeader component.
@@ -448,7 +429,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Create reusable plant profile and timeline components.
 - [x] Prototype the publishing path from `working/plants/` to Astro.
 - [x] Validate the plant publishing workflow before creating additional profiles.
-- [ ] Update the remaining orchids using the validated single-plant `abbey plant update` workflow.
 - [ ] After Martha My Dear's bloom cycle, repot her and check for a hidden nursery plug.
 - [x] Publish the next named Orchid Rescue profile.
 - [x] Add Phal McCartney to the documented orchid collection.
@@ -457,7 +437,6 @@ Ongoing practices, design principles, and general areas of improvement belong in
 
 ### Components
 
-- [ ] Improve `ProjectHeader`.
 - [ ] Refactor `ProjectHeader` to accept explicit props.
 - [ ] Create Technology Badge component.
 - [ ] Create Timeline component.
@@ -474,7 +453,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Create `navigation.css`.
 - [x] Create `layout.css`.
 - [x] Create `project.css`.
-- [ ] Improve mobile responsiveness.
+- [ ] Audit BradCooke.com at 320 px, 768 px, and 1280 px viewport widths and correct documented horizontal overflow, navigation, typography, and image-layout defects.
 - [ ] Add light/dark mode.
 - [x] Create reusable presentation styles for Markdown-generated plant timeline images, including consistent sizing, containment, centering, spacing, aspect-ratio preservation, maximum height, and border radius.
 - [ ] Extract the next repeated plant-profile or timeline style into a named reusable stylesheet or component.
@@ -536,15 +515,6 @@ is the supporting evidence for the Orchid Rescue items below.
 
 ### Platform
 
-- [ ] Expand ai-worker01 into the AI experimentation platform.
-- [ ] AI-assisted metadata generation.
-- [ ] AI-assisted documentation generation.
-- [ ] AI-generated summaries.
-- [ ] AI-generated internal links.
-- [ ] AI-assisted image alt text.
-- [ ] AI-assisted publishing.
-- [ ] AI-generated session summaries.
-- [ ] AI-assisted project history.
 - [x] Establish project-aware AI context and recommendations.
 - [x] Implement AI-powered "What should I work on next?" recommendations through `abbey next`.
 - [ ] AI documentation review.
@@ -555,11 +525,6 @@ is the supporting evidence for the Orchid Rescue items below.
 - [x] Generate project-aware AI context.
 - [x] Automate AI knowledge rebuilds.
 - [ ] Complete the next scheduled AI technology review and capture its accepted findings.
-- [ ] AI-assisted Plant Model validation.
-- [ ] AI-assisted plant history consistency review.
-- [ ] AI-assisted plant inventory summaries.
-- [ ] AI-assisted selection of milestone photographs.
-- [ ] AI-assisted assembly of draft plant pages from verified source material.
 
 ### Evaluation
 
@@ -601,8 +566,6 @@ is the supporting evidence for the Orchid Rescue items below.
 - [ ] Create `brad@bradcooke.com`.
 - [ ] Create `contact@bradcooke.com`.
 - [ ] Design AI-assisted email workflows.
-- [ ] Generate weekly project summaries.
-- [ ] Investigate automated status reports.
 - [ ] Design end-of-session AI summary email.
 
 ---
