@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 172 complete · 274 pending · 446 total
+> **Backlog Status:** 175 complete · 271 pending · 446 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -279,9 +279,9 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Create plant publishing workflow.
 - [ ] Update the Doctor Robert inventory checklist.
 - [ ] Add AI-assisted plant workspace review.
-- [ ] Add plant workspace consistency checks.
-- [ ] Validate referenced photographs against the plant workspace.
-- [ ] Detect undocumented and orphaned plant photographs.
+- [x] Add plant workspace consistency checks for canonical photograph relationships.
+- [x] Validate referenced photographs against the plant workspace.
+- [x] Detect undocumented and orphaned plant photographs.
 - [ ] Generate current inventory summaries from verified observations.
 - [ ] Evaluate command refactoring after additional `abbey plant` subcommands are implemented.
 

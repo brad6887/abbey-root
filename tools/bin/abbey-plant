@@ -152,8 +152,8 @@ rename_exports() {
     python3 - "$directory" "$dry_run" <<'PY'
 import datetime
 import os
-import re
 import subprocess
+import re
 import sys
 import uuid
 from collections import defaultdict
@@ -902,6 +902,7 @@ validate_plant() {
     local facts_output
     if ! facts_output="$(
         python3 - "$facts_file" "$plant_dir" <<'PY'
+import re
 import sys
 from pathlib import Path
 
@@ -996,6 +997,98 @@ if index_value:
         print(f"OK|photos.index exists: {index_value}")
     else:
         print(f"FAIL|photos.index does not exist: {index_value}")
+
+photos_dir = plant_dir / "photos"
+
+if photos_dir.is_dir():
+    supported_extensions = {".jpg", ".jpeg", ".png", ".webp"}
+    workspace_photos = {
+        path.name: path
+        for path in photos_dir.iterdir()
+        if path.is_file()
+        and not path.name.startswith("._")
+        and path.suffix.lower() in supported_extensions
+    }
+    references = {}
+
+    def add_reference(value, source):
+        if not isinstance(value, str) or not value.strip():
+            return
+        name = Path(value.strip()).name
+        if name.lower() == "example.jpg":
+            return
+        if Path(name).suffix.lower() not in supported_extensions:
+            return
+        references.setdefault(name, set()).add(source)
+
+    for field in ("photos.hero", "photos.current", "photos.index"):
+        value = get_value(field)
+        if not value:
+            continue
+        relative = Path(value)
+        if relative.is_absolute() or relative.parent != Path("photos"):
+            print(
+                f"FAIL|{field} must reference a direct child of photos/: {value}"
+            )
+        add_reference(value, f"facts.yaml {field}")
+
+    markdown_tick = chr(96)
+    photo_line_pattern = re.compile(
+        rf"^\s*(?:-\s+|####\s+){markdown_tick}?"
+        rf"([^{markdown_tick}]+\.(?:jpe?g|png|webp)){markdown_tick}?\s*$",
+        re.IGNORECASE,
+    )
+    markdown_image_pattern = re.compile(
+        r"!\[[^\]]*\]\(([^)]+\.(?:jpe?g|png|webp))\)",
+        re.IGNORECASE,
+    )
+
+    for document in sorted(plant_dir.glob("*.md")):
+        try:
+            lines = document.read_text(encoding="utf-8").splitlines()
+        except OSError as exc:
+            print(f"FAIL|Unable to inspect photo references in {document.name}: {exc}")
+            continue
+
+        for line_number, line in enumerate(lines, start=1):
+            line_match = photo_line_pattern.match(line)
+            if line_match:
+                add_reference(
+                    line_match.group(1),
+                    f"{document.name}:{line_number}",
+                )
+
+            for image_match in markdown_image_pattern.finditer(line):
+                add_reference(
+                    image_match.group(1),
+                    f"{document.name}:{line_number}",
+                )
+
+            if line.lstrip().startswith("|"):
+                cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+                if cells:
+                    add_reference(
+                        cells[0].strip(markdown_tick),
+                        f"{document.name}:{line_number}",
+                    )
+
+    print(f"OK|Supported workspace photos indexed: {len(workspace_photos)}")
+
+    missing_references = sorted(set(references) - set(workspace_photos))
+    for name in missing_references:
+        sources = ", ".join(sorted(references[name]))
+        print(
+            f"FAIL|Referenced photo does not exist in photos/: {name} "
+            f"(referenced by {sources})"
+        )
+    if not missing_references:
+        print("OK|All canonical photo references resolve")
+
+    orphaned_photos = sorted(set(workspace_photos) - set(references))
+    for name in orphaned_photos:
+        print(f"WARN|Undocumented or orphaned photo: photos/{name}")
+    if not orphaned_photos:
+        print("OK|No undocumented or orphaned supported photos")
 
 placeholder_markers = {
     "story.md": ("\nTODO\n",),

@@ -425,6 +425,15 @@ Astro website
 
 Validation confirms that the canonical workspace satisfies the Plant Model before publication. Publishing derives the website-facing Markdown and selected public images from that workspace. Astro consumes those generated outputs to build the website.
 
+Photo consistency validation covers supported `.jpg`, `.jpeg`, `.png`, and
+`.webp` files directly under `photos/`. Canonical references include photo-role
+paths in `facts.yaml`, history photo list or heading entries, Markdown image
+links, and the first filename column in photo-metadata tables. Missing
+referenced files fail validation. Supported photographs with no canonical
+reference are reported as warnings because preserved source material may be
+intentionally retained. XMP sidecars, AppleDouble files, and unsupported file
+types are not treated as photographs.
+
 Files under `content/plants/` and `site/public/images/plants/` are generated outputs for migrated plant profiles. Correct canonical source material or the publishing workflow rather than editing generated output directly.
 
 Public plant images are generated derivatives rather than direct copies. Publishing:

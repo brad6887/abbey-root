@@ -57,8 +57,7 @@ create_plant() {
     "$plant_dir/inventory.md" \
     "$plant_dir/photo-metadata.md" \
     "$plant_dir/photos/hero.jpg" \
-    "$plant_dir/photos/current.jpg" \
-    "$plant_dir/photos/index.jpg"
+    "$plant_dir/photos/current.jpg"
 
   cat > "$plant_dir/facts.yaml" <<'YAML'
 name: Test Plant
@@ -303,7 +302,7 @@ run_validate "$test_root/valid" test-plant
 assert_status "complete plant workspace passes" 0
 assert_contains \
   "complete plant workspace has no warnings or failures" \
-  "OK: 20  WARN: 0  FAIL: 0"
+  "OK: 23  WARN: 0  FAIL: 0"
 assert_contains \
   "complete plant workspace reports success" \
   "PASS Plant model validation completed successfully."
@@ -423,6 +422,7 @@ for photo_field in photos.hero photos.current; do
 done
 
 plant_dir="$(create_plant valid-index-photo)"
+touch "$plant_dir/photos/index.jpg"
 awk '
   /^  index:/ { print "  index: photos/index.jpg"; next }
   { print }
@@ -443,6 +443,53 @@ mv "$plant_dir/facts.yaml.tmp" "$plant_dir/facts.yaml"
 run_validate "$test_root/missing-index-photo" test-plant
 assert_status "missing configured index photo fails" 1
 assert_contains   "missing configured index photo is reported"   "FAIL photos.index does not exist: photos/missing-index.jpg"
+
+plant_dir="$(create_plant missing-history-photo)"
+cat > "$plant_dir/history.md" <<'MARKDOWN'
+# Test Plant History
+
+## 2026-08-10 — Observation
+
+### Photos
+
+- missing-history.jpg
+MARKDOWN
+run_validate "$test_root/missing-history-photo" test-plant
+assert_status "missing history photo fails validation" 1
+assert_contains \
+  "missing history photo identifies its reference" \
+  "FAIL Referenced photo does not exist in photos/: missing-history.jpg (referenced by history.md:7)"
+
+plant_dir="$(create_plant orphaned-photo)"
+touch "$plant_dir/photos/orphaned.webp"
+run_validate "$test_root/orphaned-photo" test-plant
+assert_status "orphaned photo remains a warning" 0
+assert_contains \
+  "orphaned photo is reported" \
+  "WARN Undocumented or orphaned photo: photos/orphaned.webp"
+
+plant_dir="$(create_plant documented-metadata-photo)"
+touch "$plant_dir/photos/documented.png"
+cat > "$plant_dir/photo-metadata.md" <<'MARKDOWN'
+# Test Plant Photo Metadata
+
+| File | Date | Description |
+| --- | --- | --- |
+| documented.png | 2026-08-10 | Documented fixture. |
+MARKDOWN
+run_validate "$test_root/documented-metadata-photo" test-plant
+assert_status "photo metadata table documents a workspace photo" 0
+assert_contains \
+  "documented workspace reports no orphans" \
+  "OK   No undocumented or orphaned supported photos"
+
+plant_dir="$(create_plant ignored-sidecars)"
+touch "$plant_dir/photos/current.xmp" "$plant_dir/photos/._appledouble.jpg"
+run_validate "$test_root/ignored-sidecars" test-plant
+assert_status "sidecars and AppleDouble files are ignored" 0
+assert_contains \
+  "ignored artifacts do not become workspace photos" \
+  "OK   Supported workspace photos indexed: 2"
 
 plant_dir="$(create_plant publish-index-photo)"
 awk '

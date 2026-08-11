@@ -254,8 +254,11 @@ Completed
   documentation index without mutating files during freshness checks; the
   index uses stable categories, titles, and relative links while excluding
   session updates and research collections with dedicated discovery workflows
-- `abbey plant validate <slug>` with focused regression coverage for every
-  current validation rule
+- `abbey plant validate <slug>` checks Plant Model structure, metadata,
+  canonical role and documentation photo references, and undocumented or
+  orphaned supported photographs; missing references fail, preserved but
+  undocumented photographs warn, XMP and AppleDouble artifacts are excluded,
+  and focused regression coverage protects every current validation rule
 - `abbey plant new <slug> --name NAME --type TYPE` atomically creates a
   template-backed canonical workspace, imports initial photographs and adjacent
   XMP sidecars, refuses overwrites, and validates the resulting scaffold

@@ -3,7 +3,7 @@ title: "Reciprocal Session Journal Metadata"
 description: "Added explicit, conflict-safe reciprocal metadata links between session updates and journals created by Abbey session capture."
 date: 2026-08-10
 status: complete
-reviewed: false
+reviewed: true
 session: reciprocal-session-journal-metadata
 journal: "content/journal/2026/2026-08-10-reciprocal-session-journal-metadata.md"
 tags:
