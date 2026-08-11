@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 167 complete · 277 pending · 444 total
+> **Backlog Status:** 169 complete · 275 pending · 444 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -39,7 +39,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Establish shared Abbey project and configuration libraries for portable core commands.
 - [x] Extract additional shared CLI behavior only when repeated implementations establish a stable reusable contract.
 - [x] Define the standard universal CLI commands and their expected behavior.
-- [ ] Implement and document a canonical framework-level project validation workflow.
+- [x] Implement and document a canonical framework-level project validation workflow.
 - [ ] Create a framework adoption guide based on the validated Abbey Root, Power Infrastructure, and Bread Pitt workflows.
 - [x] Create the first safe default Abbey project template through `abbey init`.
 - [ ] Define whether Abbey needs multiple selectable project templates after additional project types validate the requirement.
@@ -208,7 +208,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 ### Toolkit Evolution
 
 - [x] Retire the legacy `tools/abbey-build` workflow and remove stale `abbey build` references from current documentation.
-- [ ] Add repository consistency checks.
+- [x] Add repository consistency checks.
 - [ ] Create `abbey-tree`.
 - [ ] Standardize tool output formatting and colors.
 - [ ] Standardize artifact-creation command output so commands report the path of every generated file.

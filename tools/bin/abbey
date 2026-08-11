@@ -32,6 +32,11 @@ case "$command" in
     shift
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-doctor" "$@"
     ;;
+
+  validate)
+    shift
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-validate" "$@"
+    ;;
   git)
     shift
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-git" "$@"

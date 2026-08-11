@@ -75,6 +75,14 @@ commands:
     examples:
       - abbey doctor
 
+  validate:
+    category: core
+    description: Validate active-project and toolkit repository consistency.
+    usage: abbey validate
+    hidden: false
+    examples:
+      - abbey validate
+
   status:
     category: core
     description: Show local system, repository, and project metrics.

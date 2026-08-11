@@ -208,6 +208,13 @@ Examples:
 
 Validates project structure and required files.
 
+The canonical `abbey validate` workflow is deterministic and read-only. It
+validates project metadata, configured project directories, required planning
+documents, the `NEXT.md` section contract, and Git whitespace consistency.
+When the active project is Abbey Root, it also checks that CLI metadata,
+dispatcher routes, command implementations, and generated CLI documentation
+remain synchronized.
+
 ### `publish`
 
 Publishes project outputs.

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# COMMAND: validate
+# DESCRIPTION: Validate active-project and toolkit repository consistency
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
+
+case "${1:-}" in
+  help|-h|--help)
+    cat <<'HELP'
+Abbey Validate
+
+Usage:
+  abbey validate
+
+Runs deterministic, read-only consistency checks for the active Abbey project.
+Abbey Root additionally validates the shared CLI registry, dispatcher, command
+implementations, and generated command documentation.
+HELP
+    exit 0
+    ;;
+  "") ;;
+  *)
+    echo "ERROR validate does not accept arguments."
+    exit 1
+    ;;
+esac
+
+python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_validate.py" \
+  --toolkit-root "$ABBEY_TOOLKIT_ROOT" \
+  --project-root "$ABBEY_ROOT"

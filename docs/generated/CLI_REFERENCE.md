@@ -101,6 +101,22 @@ abbey status
 abbey status
 ```
 
+### `abbey validate`
+
+Validate active-project and toolkit repository consistency.
+
+**Usage**
+
+```text
+abbey validate
+```
+
+**Examples**
+
+```text
+abbey validate
+```
+
 ### `abbey version`
 
 Show project version and framework information.
