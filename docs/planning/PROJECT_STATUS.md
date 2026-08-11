@@ -109,7 +109,11 @@ Completed
 - Infrastructure health and Ansible connectivity validated across managed hosts.
 - Read-only Ansible infrastructure health review completed across managed hosts; the detected AI Worker issue remains under investigation.
 - Operational issue tracking established under `docs/issues/`.
-- `abbey lab check` refined and validated across managed hosts with expanded host, NVIDIA, and Ollama reporting while retaining read-only, timeout-protected, failure-tolerant operation.
+- `abbey lab check` reports host, NVIDIA, Ollama, and inventory-driven expected
+  network-interface health across managed hosts while retaining read-only,
+  timeout-protected, failure-tolerant operation; interface expectations are
+  opt-in per host and use stable MAC identities, with `sites01` as the first
+  declared host.
 - Platform-role architecture established around stable responsibilities, with `edge01` designated as the Infrastructure Services Platform.
 - Tailscale-based remote access through `ubuntu-dev01` is documented in the remote-access architecture, validated by Abbey Doctor, and supported by inventory-driven reachability checks for managed hosts.
 - Technitium DNS on `edge01` is the authoritative `home.arpa` service; Ansible configures all six managed Linux hosts to use it, forward and reverse records are complete, short-name search-domain resolution is validated lab-wide, and external forwarding remains operational.

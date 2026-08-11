@@ -1,0 +1,51 @@
+---
+- name: Initialize observed network interface facts
+  ansible.builtin.set_fact:
+    lab_observed_network_interfaces: []
+
+- name: Collect observed network interface identities
+  ansible.builtin.set_fact:
+    lab_observed_network_interfaces: >-
+      {{
+        lab_observed_network_interfaces
+        + [
+          {
+            'name': item,
+            'mac_address': ansible_facts[item].macaddress | default('') | lower
+          }
+        ]
+      }}
+  loop: "{{ ansible_facts.interfaces | default([]) }}"
+
+- name: Report undeclared network interface expectations
+  ansible.builtin.debug:
+    msg: "SKIP No expected network interfaces declared for {{ inventory_hostname }}"
+  when: expected_network_interfaces | default([]) | length == 0
+
+- name: Report expected network interface status
+  ansible.builtin.debug:
+    msg: >-
+      {{
+        'OK   Expected network interface present:'
+        if expected_interface.mac_address | lower
+           in (lab_observed_network_interfaces | map(attribute='mac_address') | list)
+        else 'WARN Expected network interface missing or replaced:'
+      }}
+      {{ expected_interface.role | default('unspecified role') }}
+      (MAC {{ expected_interface.mac_address | lower }})
+  loop: "{{ expected_network_interfaces | default([]) }}"
+  loop_control:
+    loop_var: expected_interface
+    label: "{{ expected_interface.role | default(expected_interface.mac_address) }}"
+
+- name: Display observed interfaces when an expectation is not met
+  ansible.builtin.debug:
+    msg: >-
+      WARN Observed network interfaces on {{ inventory_hostname }}:
+      {{ lab_observed_network_interfaces | to_json }}
+  loop: "{{ expected_network_interfaces | default([]) }}"
+  loop_control:
+    loop_var: expected_interface
+    label: "{{ expected_interface.role | default(expected_interface.mac_address) }}"
+  when:
+    - expected_interface.mac_address | lower not in (lab_observed_network_interfaces | map(attribute='mac_address') | list)

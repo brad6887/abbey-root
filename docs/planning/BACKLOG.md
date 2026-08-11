@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 169 complete · 276 pending · 445 total
+> **Backlog Status:** 170 complete · 275 pending · 445 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -252,7 +252,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Report negotiated Ethernet link speed.
 - [ ] Verify gateway connectivity.
 - [ ] Verify Internet connectivity.
-- [ ] Detect missing or replaced network interfaces.
+- [x] Add inventory-driven missing or replaced network interface detection to `abbey lab check`.
 - [ ] Evaluate shared validation helpers after additional model validators exist.
 - [x] Design `abbey review` as a deterministic, read-only pre-commit reviewer that summarizes current-session work and recommends the next workflow step.
 

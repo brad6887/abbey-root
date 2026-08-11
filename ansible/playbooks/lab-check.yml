@@ -43,6 +43,9 @@
       changed_when: false
       failed_when: false
 
+    - name: Validate expected network interfaces
+      ansible.builtin.include_tasks: ../tasks/validate-network-interfaces.yml
+
     - name: Display host health summary
       ansible.builtin.debug:
         msg:
