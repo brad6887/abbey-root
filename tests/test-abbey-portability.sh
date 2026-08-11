@@ -187,6 +187,10 @@ assert_file \
   "command reference is generated inside project" \
   "$project/docs/generated/abbey-commands.md"
 
+assert_file \
+  "documentation index is generated inside project" \
+  "$project/docs/generated/DOCUMENTATION_INDEX.md"
+
 mkdir -p \
   "$project/.abbey/ai" \
   "$project/.abbey/context" \

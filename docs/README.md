@@ -150,9 +150,14 @@ If generated documentation is incorrect, update the automation that produces it 
 
 Examples include:
 
+- Documentation Index
 - CLI Reference
 - Environment Summaries
 - Generated Reports
+
+The generated documentation index covers durable Markdown under `docs/` while
+excluding session updates and research collections, which have dedicated
+discovery workflows. Regenerate it through `abbey docs generate`.
 
 ---
 

@@ -249,8 +249,10 @@ Completed
 - Metadata-driven CLI help
 - Generated CLI reference
 - `abbey docs generate` and `abbey docs check` deterministically manage the
-  CLI reference and legacy command-header reference without mutating files
-  during freshness checks
+  CLI reference, legacy command-header reference, and canonical durable
+  documentation index without mutating files during freshness checks; the
+  index uses stable categories, titles, and relative links while excluding
+  session updates and research collections with dedicated discovery workflows
 - `abbey plant validate <slug>` with focused regression coverage for every
   current validation rule
 - `abbey plant new <slug> --name NAME --type TYPE` atomically creates a

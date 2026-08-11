@@ -10,6 +10,7 @@ ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 
 cli_reference="$ABBEY_ROOT/docs/generated/CLI_REFERENCE.md"
 command_reference="$ABBEY_ROOT/docs/generated/abbey-commands.md"
+documentation_index="$ABBEY_ROOT/docs/generated/DOCUMENTATION_INDEX.md"
 
 usage() {
   cat <<'HELP'
@@ -31,6 +32,9 @@ Managed outputs:
   docs/generated/abbey-commands.md
     Source: executable tools/abbey-* command headers
 
+  docs/generated/DOCUMENTATION_INDEX.md
+    Source: durable Markdown documents under docs/
+
 Ansible-derived infrastructure documents remain managed by the existing
 abbey-docs workflow and are intentionally outside this deterministic command.
 HELP
@@ -50,9 +54,25 @@ generate_command_reference() {
     "$ABBEY_TOOLKIT_ROOT/tools/generate-command-docs.sh"
 }
 
+generate_documentation_index() {
+  local output="$1"
+  local cli_source="$2"
+  local command_source="$3"
+
+  python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_docs_index.py" \
+    --project-root "$ABBEY_ROOT" \
+    --output "$output" \
+    --overlay "docs/generated/CLI_REFERENCE.md=$cli_source" \
+    --overlay "docs/generated/abbey-commands.md=$command_source"
+}
+
 generate_docs() {
   generate_cli_reference "$cli_reference"
   generate_command_reference "$command_reference"
+  generate_documentation_index \
+    "$documentation_index" \
+    "$cli_reference" \
+    "$command_reference"
 
   echo
   echo "PASS Deterministic documentation generated."
@@ -86,6 +106,10 @@ check_docs() {
 
   generate_cli_reference "$temporary_dir/CLI_REFERENCE.md" >/dev/null
   generate_command_reference "$temporary_dir/abbey-commands.md" >/dev/null
+  generate_documentation_index \
+    "$temporary_dir/DOCUMENTATION_INDEX.md" \
+    "$temporary_dir/CLI_REFERENCE.md" \
+    "$temporary_dir/abbey-commands.md" >/dev/null
 
   check_output \
     "CLI reference" \
@@ -96,6 +120,11 @@ check_docs() {
     "Command reference" \
     "$command_reference" \
     "$temporary_dir/abbey-commands.md" || check_status=1
+
+  check_output \
+    "Documentation index" \
+    "$documentation_index" \
+    "$temporary_dir/DOCUMENTATION_INDEX.md" || check_status=1
 
   if ((check_status > 0)); then
     echo

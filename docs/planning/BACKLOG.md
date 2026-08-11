@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 170 complete · 276 pending · 446 total
+> **Backlog Status:** 171 complete · 275 pending · 446 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -376,7 +376,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 
 - [x] Generate toolkit command reference.
 - [x] Generate project metrics.
-- [ ] Generate documentation index.
+- [x] Generate documentation index.
 - [x] Generate host inventory.
 - [x] Generate Docker inventory.
 - [x] Generate service inventory.
