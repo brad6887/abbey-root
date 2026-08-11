@@ -3,7 +3,7 @@ title: "Inventory-Driven Network Interface Validation"
 description: "Added opt-in, inventory-driven missing or replaced network-interface detection to the read-only Abbey lab health check."
 date: 2026-08-10
 status: complete
-reviewed: false
+reviewed: true
 session: inventory-driven-network-interface-validation
 tags:
   - Abbey Root
@@ -60,7 +60,11 @@ without authoritative hardware identities have been validated.
 - `tests/test-abbey-lab.sh`: 5 passed, 0 failed with temporary Ansible Core.
 - YAML parsing passed for the playbook, task set, and `sites01` host variables.
 - Shell syntax passed for the lab command and regression suite.
-- No managed host was changed or contacted during validation.
+- A normal live `abbey lab check` from the Ansible control node gathered all
+  six managed hosts, skipped the five without declared expectations, and
+  certified the `sites01` primary interface on `ens18` with the expected
+  `bc:24:11:02:02:84` MAC address.
+- The live check remained read-only and did not change managed hosts.
 
 ## Lessons Learned
 
@@ -79,12 +83,11 @@ can diagnose hardware that it cannot reach.
 
 - Add interface expectations for additional managed hosts only after their
   stable MAC identities and intended roles are verified.
-- Run the normal live `abbey lab check` from the Ansible control node to certify
-  the first real `sites01` expectation.
 
 ## Notes
 
 Local validation used an isolated Ansible Core installation under `/tmp`
 because the macOS workstation does not have Ansible installed. No system Python
-packages, remote inventory state, or managed hosts were modified. No commit was
-created.
+packages were modified. The later control-node run certified `sites01` without
+changing remote inventory state or managed hosts. No commit was created during
+implementation.
