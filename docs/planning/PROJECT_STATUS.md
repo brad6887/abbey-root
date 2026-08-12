@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-08-10
+Last Updated: 2026-08-12
 
 ---
 
@@ -250,6 +250,11 @@ Completed
   artifacts, and fail closed without safe publishing configuration; publishing
   performs bounded post-push live-site verification that follows redirects and
   requires a final HTTP 2xx response
+- `abbey site publish` supports a project-configured `ssh-release` backend that
+  builds and validates locally, verifies the uploaded artifact, atomically
+  activates timestamped remote releases, verifies the active nginx site, and
+  automatically rolls back when post-activation verification fails; the
+  transactional workflow is validated through Bread Pitt on `sites01`
 - Metadata-driven CLI help
 - Generated CLI reference
 - `abbey docs generate` and `abbey docs check` deterministically manage the

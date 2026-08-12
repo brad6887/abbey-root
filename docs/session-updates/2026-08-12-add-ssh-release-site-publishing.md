@@ -3,7 +3,7 @@ title: "Add SSH Release Site Publishing"
 description: "Add a project-defined SSH release deployment backend for Abbey static site publishing."
 date: 2026-08-12
 status: complete
-reviewed: false
+reviewed: true
 session: add-ssh-release-site-publishing
 tags:
   - Abbey Root

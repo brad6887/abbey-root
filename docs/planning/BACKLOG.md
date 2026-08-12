@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 175 complete · 234 pending · 409 total
+> **Backlog Status:** 176 complete · 238 pending · 414 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -211,7 +211,8 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Add automated toolkit regression testing.
 - [ ] Run the real public-image derivative helper suite with ExifTool and ImageMagick for final certification.
 - [x] Add regression tests for `abbey plant validate`.
-- [ ] Implement fail-closed internal static-site release deployment
+- [x] Add the project-configured `ssh-release` publishing backend with validated artifact transfer, transactional activation, site verification, and automatic rollback.
+- [ ] Complete the remaining fail-closed internal static-site release deployment capability
   - Load the source directory, build output, staging hostname, target host,
     remote release root, and deployment method from the active project's
     explicit configuration.
@@ -230,9 +231,9 @@ Ongoing practices, design principles, and general areas of improvement belong in
   - Apply correct ownership and SELinux contexts to deployed content.
   - Validate the staging health endpoint, home page, representative nested
     route, and static assets after activation.
-  - Add regression coverage proving a failed release cannot replace the active
-    site and one project cannot deploy into another project's release tree.
   - Validate independent staging deployments for Abbey Root and Bread Pitt.
+- [ ] Add regression coverage for both `git-rsync` and `ssh-release` publishing methods, including failed-release safety and proof that one project cannot use another project's publishing configuration or release tree.
+- [ ] Review tracked `logs/abbey-site.log` behavior so routine development-server activity does not dirty project repositories.
 - [ ] Add `abbey site preview`.
 - [ ] Add `abbey site deploy-check`.
 - [ ] Reduce noise in `abbey site publish` previews.
@@ -276,6 +277,8 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Add plant workspace consistency checks for canonical photograph relationships.
 - [x] Validate referenced photographs against the plant workspace.
 - [x] Detect undocumented and orphaned plant photographs.
+- [ ] Review and either document or intentionally classify Doctor Robert's two orphaned photographs.
+- [ ] Reconcile the missing `sources/` directories for Phal McCartney and Something.
 - [ ] Generate current inventory summaries from verified observations.
 - [ ] Evaluate command refactoring after additional `abbey plant` subcommands are implemented.
 

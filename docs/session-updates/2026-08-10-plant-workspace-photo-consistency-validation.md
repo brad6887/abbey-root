@@ -3,7 +3,7 @@ title: "Plant Workspace Photo Consistency Validation"
 description: "Expanded Plant Model validation with canonical photo-reference checks and orphaned-photo detection across real workspaces."
 date: 2026-08-10
 status: complete
-reviewed: false
+reviewed: true
 session: plant-workspace-photo-consistency-validation
 journal: "content/journal/2026/2026-08-10-plant-workspace-photo-consistency-validation.md"
 tags:
