@@ -12,14 +12,14 @@
 #   status        Show development server status.
 #   build         Build the website.
 #   validate      Validate configured media manifests and generated routes.
-#   publish       Build and publish the site to GitHub Pages.
+#   publish       Build and publish the site using project configuration.
 #   start         Start the development server.
 #   stop          Stop the development server.
 #   restart       Restart the development server.
 #
 # Publish options:
 #   --dry-run     Build and show what would be published without changing
-#                 the production repository.
+#                 the configured production target.
 #
 set -u
 
@@ -50,6 +50,8 @@ LOG_DIR="$ABBEY_ROOT/logs"
 LOG_FILE="$LOG_DIR/abbey-site.log"
 LIVE_SITE_VERIFY_ATTEMPTS="${ABBEY_SITE_VERIFY_ATTEMPTS:-10}"
 LIVE_SITE_VERIFY_DELAY="${ABBEY_SITE_VERIFY_DELAY:-10}"
+SSH_RELEASE_HOST=""
+SSH_RELEASE_ROOT=""
 
 command="${1:-status}"
 shift || true
@@ -85,6 +87,22 @@ print(Path(sys.argv[1]).expanduser().resolve())
 PY
 }
 
+parse_ssh_release_target() {
+  local target="$1"
+
+  [[ "$target" == *:* ]] ||
+    fail "ssh-release target must use user@host:path or host:path format"
+
+  SSH_RELEASE_HOST="${target%%:*}"
+  SSH_RELEASE_ROOT="${target#*:}"
+
+  [[ -n "$SSH_RELEASE_HOST" ]] ||
+    fail "ssh-release host is required"
+
+  [[ -n "$SSH_RELEASE_ROOT" ]] ||
+    fail "ssh-release path is required"
+}
+
 load_build_configuration() {
   [[ -f "$ABBEY_ROOT/.abbey/project.yml" ]] ||
     fail "Active project has no metadata: $ABBEY_ROOT/.abbey/project.yml"
@@ -106,14 +124,34 @@ load_build_configuration() {
   esac
 }
 
+validate_publish_method() {
+  case "$PUBLISH_METHOD" in
+    git-rsync|ssh-release)
+      ;;
+    *)
+      fail "Unsupported site publishing method: $PUBLISH_METHOD"
+      ;;
+  esac
+}
+
 load_publish_configuration() {
   [[ -n "$PUBLISH_METHOD" ]] ||
     fail "Publishing refused: $PROJECT_NAME has no explicit site.publish configuration."
-  [[ "$PUBLISH_METHOD" == "git-rsync" ]] ||
-    fail "Unsupported site publishing method: $PUBLISH_METHOD"
+
+  validate_publish_method
+
   [[ -n "$PUBLISH_TARGET" ]] || fail "site.publish.target is required."
   [[ -n "$PUBLISH_DOMAIN" ]] || fail "site.publish.domain is required."
-  PRODUCTION_REPO="$(resolve_target_path "$PUBLISH_TARGET")"
+
+  case "$PUBLISH_METHOD" in
+    git-rsync)
+      PRODUCTION_REPO="$(resolve_target_path "$PUBLISH_TARGET")"
+      ;;
+    ssh-release)
+      parse_ssh_release_target "$PUBLISH_TARGET"
+      ;;
+  esac
+
   LIVE_SITE_URL="https://$PUBLISH_DOMAIN/"
 }
 
@@ -122,9 +160,21 @@ print_resolution() {
   echo "---------------------------"
   echo "Project:           $PROJECT_NAME ($ABBEY_ROOT)"
   echo "Source directory:  $SITE_DIR"
-  echo "Target:            ${PRODUCTION_REPO:-$DIST_DIR}"
+
+  if [[ "$PUBLISH_METHOD" == "ssh-release" && -n "$SSH_RELEASE_HOST" ]]; then
+    echo "Target:            $PUBLISH_TARGET"
+  else
+    echo "Target:            ${PRODUCTION_REPO:-$DIST_DIR}"
+  fi
+
   echo "Domain:            ${PUBLISH_DOMAIN:-not configured}"
   echo "Deployment method: ${PUBLISH_METHOD:-none}"
+
+  if [[ "$PUBLISH_METHOD" == "ssh-release" && -n "$SSH_RELEASE_HOST" ]]; then
+    echo "SSH target:        $SSH_RELEASE_HOST"
+    echo "Remote root:       $SSH_RELEASE_ROOT"
+  fi
+
   echo
 }
 
@@ -358,6 +408,196 @@ publish_rsync() {
   rsync "${args[@]}" "$DIST_DIR/" "$PRODUCTION_REPO/"
 }
 
+site_publish_ssh_release() {
+  local dry_run="${1:-false}"
+  local release_id
+  local release_path
+  local releases_dir
+  local current_link
+  local temp_link
+  local previous_target
+  local validation_output
+
+  release_id="$(date -u +%Y%m%dT%H%M%SZ)"
+  releases_dir="$SSH_RELEASE_ROOT/releases"
+  current_link="$SSH_RELEASE_ROOT/current"
+  release_path="$releases_dir/$release_id"
+  temp_link="$SSH_RELEASE_ROOT/.current.$release_id"
+
+  require_command git
+  require_command rsync
+  require_command ssh
+  require_site_directory
+
+  if [[ "$dry_run" == "true" ]]; then
+    if [[ -n "$(git -C "$ABBEY_ROOT" status --porcelain)" ]]; then
+      echo "WARN Source repository has uncommitted changes."
+      echo "INFO A real publish will require a clean repository."
+      echo
+    fi
+  else
+    require_clean_source_repo
+  fi
+
+  if [[ "$BUILD_METHOD" == "npm" ]]; then
+    ensure_npm_on_path
+    require_command npm
+    echo "Building configured site..."
+    (cd "$SITE_DIR" && npm run build) || fail "Site build failed"
+  else
+    echo "Validating configured static artifact..."
+  fi
+
+  [[ -f "$DIST_DIR/index.html" ]] ||
+    fail "Generated index.html not found"
+
+  run_site_validation
+
+  echo
+  echo "SSH release publish"
+  echo "-------------------"
+  echo "SSH target:    $SSH_RELEASE_HOST"
+  echo "Remote root:   $SSH_RELEASE_ROOT"
+  echo "Release:       $release_id"
+  echo "Release path:  $release_path"
+  echo "Source:        $DIST_DIR"
+
+  echo
+  echo "Remote preflight"
+  echo "----------------"
+
+  ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+    "test -d '$releases_dir' &&
+     test -w '$releases_dir' &&
+     test -w '$SSH_RELEASE_ROOT' &&
+     test -e '$current_link'" ||
+    fail "Remote publishing preflight failed"
+
+  echo "OK   Remote publishing target is ready."
+
+  if [[ "$dry_run" == "true" ]]; then
+    echo
+    echo "Publish preview"
+    echo "---------------"
+
+    rsync \
+      -av \
+      --delete \
+      --dry-run \
+      "$DIST_DIR/" \
+      "$SSH_RELEASE_HOST:$current_link/" ||
+      fail "SSH release preview failed"
+
+    echo
+    echo "DRY RUN complete. No remote files changed."
+    return 0
+  fi
+
+  echo
+  echo "Preparing release"
+  echo "-----------------"
+
+  ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+    "mkdir '$release_path'" ||
+    fail "Unable to create remote release directory"
+
+  echo "OK   Created $release_path"
+
+  echo
+  echo "Uploading release"
+  echo "-----------------"
+
+  if ! rsync \
+    -av \
+    --delete \
+    "$DIST_DIR/" \
+    "$SSH_RELEASE_HOST:$release_path/"
+  then
+    ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+      "rm -rf '$release_path'" || true
+    fail "Release upload failed; incomplete release removed"
+  fi
+
+  echo
+  echo "Validating uploaded release"
+  echo "---------------------------"
+
+  validation_output="$(
+    rsync \
+      -acn \
+      --delete \
+      --itemize-changes \
+      "$DIST_DIR/" \
+      "$SSH_RELEASE_HOST:$release_path/"
+  )" || {
+    ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+      "rm -rf '$release_path'" || true
+    fail "Unable to validate uploaded release"
+  }
+
+  if [[ -n "$validation_output" ]]; then
+    echo "$validation_output"
+    ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+      "rm -rf '$release_path'" || true
+    fail "Uploaded release differs from validated local artifact"
+  fi
+
+  ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+    "test -f '$release_path/index.html'" || {
+      ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+        "rm -rf '$release_path'" || true
+      fail "Uploaded release is missing index.html"
+    }
+
+  echo "OK   Uploaded release matches validated local artifact."
+
+  previous_target="$(
+    ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+      "readlink '$current_link'"
+  )" || fail "Unable to determine current release"
+
+  echo
+  echo "Activating release"
+  echo "------------------"
+  echo "Previous: $previous_target"
+
+  ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+    "rm -f '$temp_link' &&
+     ln -s '$release_path' '$temp_link' &&
+     mv -Tf '$temp_link' '$current_link'" ||
+    fail "Atomic release activation failed"
+
+  echo "OK   current -> $release_path"
+
+  echo
+  echo "Verifying activated site"
+  echo "------------------------"
+
+  if ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+    "command -v curl >/dev/null &&
+     curl -fsS -H 'Host: $PUBLISH_DOMAIN' http://127.0.0.1/ >/dev/null"
+  then
+    echo "OK   $PUBLISH_DOMAIN served successfully."
+    echo
+    echo "Publish complete."
+    echo "Previous: $previous_target"
+    echo "Current:  $release_path"
+    return 0
+  fi
+
+  echo "WARN Activated site verification failed."
+  echo "INFO Rolling back to: $previous_target"
+
+  ssh -o BatchMode=yes "$SSH_RELEASE_HOST" \
+    "rm -f '$temp_link' &&
+     ln -s '$previous_target' '$temp_link' &&
+     mv -Tf '$temp_link' '$current_link'" ||
+    fail "Verification failed and automatic rollback also failed"
+
+  echo "OK   Previous release restored."
+  fail "Activated site verification failed; deployment rolled back"
+}
+
 site_publish() {
   local dry_run=false
   local commit_message
@@ -414,6 +654,11 @@ HELP
   load_build_configuration
   load_publish_configuration
   print_resolution
+
+  if [[ "$PUBLISH_METHOD" == "ssh-release" ]]; then
+    site_publish_ssh_release "$dry_run"
+    return
+  fi
 
   require_command git
   require_command rsync
