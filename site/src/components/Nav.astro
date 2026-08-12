@@ -1,26 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
-
-const pages = await getCollection('pages', ({ data }) => {
-  return data.nav === true && data.draft !== true;
-});
-
-const navPages = pages.sort((a, b) => {
-  return a.data.nav_order - b.data.nav_order;
-});
 ---
 
 <header class="site-header">
   <nav class="site-nav">
-    <a class="site-brand" href="/">Brad Cooke</a>
+    <a class="site-brand" href="/">Abbey Root</a>
 
     <div class="site-links">
-      {navPages.map((page) => (
-        <a href={`/${page.id}/`}>{page.data.title}</a>
-      ))}
-
-      <a href="/orchid-rescue/">Orchid Rescue</a>
-      <a href="/museum/">Museum</a>
+      <a href="/#what-abbey-does">What Abbey does</a>
+      <a href="https://bradcooke.com/projects/">Projects</a>
+      <a href="/#lab">The lab</a>
+      <a href="/journal/">Journal</a>
+      <a href="https://bradcooke.com/about/">Brad Cooke</a>
     </div>
   </nav>
 </header>

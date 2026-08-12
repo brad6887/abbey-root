@@ -1,66 +1,186 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import { formatDate } from "../lib/date";
 
-const projects = await getCollection("projects", ({ data }) => {
+const journalEntries = await getCollection("journal", ({ data }) => {
   return data.draft !== true;
 });
 
-const featuredProject =
-  projects.find((project) => project.data.featured === true) ?? projects[0];
+journalEntries.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const recentEntries = journalEntries.slice(0, 3);
+
+const capabilities = [
+  {
+    title: "Project-aware tooling",
+    description:
+      "One command-line interface, with behavior resolved from each active project's own configuration.",
+  },
+  {
+    title: "Self-documenting development",
+    description:
+      "Planning, sessions, generated documentation, validation, and project state stay connected.",
+  },
+  {
+    title: "Publishing",
+    description:
+      "Build, validate, prepare media, and safely publish static sites through project-owned workflows.",
+  },
+  {
+    title: "Infrastructure automation",
+    description:
+      "Manage hosts, DNS, services, health checks, and release infrastructure as reviewable code.",
+  },
+  {
+    title: "Structured research",
+    description:
+      "Turn source material into traceable observations, evidence, hypotheses, and validation.",
+  },
+  {
+    title: "AI-assisted workflows",
+    description:
+      "Use AI inside explicit, inspectable processes while keeping judgment and approval with people.",
+  },
+];
 ---
 
 <Layout
-  title="Brad Cooke"
-  description="Linux infrastructure, automation, Infrastructure-as-Code, and AI-assisted development."
+  title="Abbey Root"
+  description="A project-aware engineering platform for building, documenting, automating, and operating real projects."
+  homepage
 >
-  <section>
-    <h1>Brad Cooke</h1>
-
-    <p>
-      Linux • Automation • Infrastructure as Code • AI
+  <section class="hero" id="top">
+    <p class="eyebrow">Abbey Root</p>
+    <h1>A project-aware engineering platform for real projects.</h1>
+    <p class="hero-summary">
+      Abbey brings infrastructure, developer tooling, publishing, structured
+      research, and AI-assisted workflows together around a common source of
+      truth.
     </p>
-
-    <p>
-      I build Linux infrastructure, automation, and AI-assisted development
-      environments while documenting what I learn along the way.
-    </p>
-
-    <p>
-      <a href="/about/">About</a> ·
-      <a href="/projects/">Projects</a> ·
-      <a href="/orchid-rescue/">Orchid Rescue</a> ·
-      <a href="/museum/">Museum of Dumb Ideas</a> ·
-      <a href="/contact/">Contact</a>
-    </p>
+    <div class="actions">
+      <a class="button button-primary" href="#what-abbey-does">Explore Abbey</a>
+      <a class="button button-secondary" href="#built-with-abbey">View projects</a>
+    </div>
   </section>
 
-  {featuredProject && (
-    <section>
-      <p class="section-label">Featured Project</p>
-      <ProjectCard project={featuredProject} />
-    </section>
-  )}
-
-  <section>
-    <h2>Current Focus</h2>
-
-    <ul>
-      <li>Building BradCooke.com as a technical portfolio and project journal.</li>
-      <li>Expanding Abbey Root as a reproducible Linux lab.</li>
-      <li>Using Ansible, Git, templates, and generated documentation to reduce manual work.</li>
-      <li>Developing ai-worker01 into a dedicated AI experimentation node.</li>
-    </ul>
+  <section id="built-with-abbey">
+    <div class="section-heading">
+      <p class="eyebrow">Proof in practice</p>
+      <h2>Built with Abbey</h2>
+      <p>Working projects are where the framework earns its keep.</p>
+    </div>
+    <div class="card-grid project-grid">
+      <article class="card project-card-home">
+        <p class="card-kicker">Publishing platform</p>
+        <h3>Bread Pitt</h3>
+        <p>Sourdough recipes, bake records, photography, and publishing workflows.</p>
+        <a href="https://breadpitt.net">Visit BreadPitt.net →</a>
+      </article>
+      <article class="card project-card-home">
+        <p class="card-kicker">Personal site</p>
+        <h3>BradCooke.com</h3>
+        <p>Personal publishing, technical projects, Orchid Rescue, and the journal.</p>
+        <a href="https://bradcooke.com">Visit BradCooke.com →</a>
+      </article>
+      <article class="card project-card-home">
+        <p class="card-kicker">Reference implementation</p>
+        <h3>AbbeyRoot.com</h3>
+        <p>The framework's own site: built, documented, validated, and operated with Abbey.</p>
+        <a href="#top">You are here ↑</a>
+      </article>
+    </div>
   </section>
 
-  <section>
-    <h2>What I’m Working Toward</h2>
+  <section id="what-abbey-does">
+    <div class="section-heading">
+      <p class="eyebrow">Capabilities</p>
+      <h2>What Abbey Does</h2>
+      <p>A connected toolkit for the work around building and operating a project.</p>
+    </div>
+    <div class="card-grid capability-grid">
+      {capabilities.map((capability) => (
+        <article class="card compact-card">
+          <h3>{capability.title}</h3>
+          <p>{capability.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
 
+  <section class="split-section" id="currently-building">
+    <div>
+      <p class="eyebrow">In progress</p>
+      <h2>Currently Building</h2>
+    </div>
+    <div class="feature-panel">
+      <h3>Abbey Research</h3>
+      <p>
+        A provenance-first workflow for moving from source material to reviewable
+        observations, evidence, hypotheses, and validation—without confusing AI
+        output with approved knowledge.
+      </p>
+      <p class="status-line"><span>Current focus</span> Validating the observation-candidate workflow through real use.</p>
+    </div>
+  </section>
+
+  <section id="how-abbey-works">
+    <div class="section-heading">
+      <p class="eyebrow">The operating model</p>
+      <h2>How Abbey Works</h2>
+      <p>Each project owns its facts. Abbey connects them to a repeatable engineering loop.</p>
+    </div>
+    <ol class="workflow" aria-label="Abbey engineering workflow">
+      <li><span>01</span><strong>Review</strong><small>Understand the project state.</small></li>
+      <li><span>02</span><strong>Define</strong><small>Choose one clear objective.</small></li>
+      <li><span>03</span><strong>Build</strong><small>Make the smallest coherent change.</small></li>
+      <li><span>04</span><strong>Validate</strong><small>Test the result and its risks.</small></li>
+      <li><span>05</span><strong>Capture</strong><small>Preserve decisions and learning.</small></li>
+    </ol>
+  </section>
+
+  <section class="lab-section" id="lab">
+    <div class="section-heading">
+      <p class="eyebrow">Where ideas get tested</p>
+      <h2>The Abbey Lab</h2>
+      <p>
+        Abbey Root is also a working Linux home lab: a small fleet of purpose-built
+        systems for automation, hosting, infrastructure services, AI experiments,
+        backups, and safe technical learning.
+      </p>
+    </div>
+    <div class="lab-facts" aria-label="Abbey Lab areas">
+      <span>Proxmox</span><span>Linux</span><span>Ansible</span><span>Static hosting</span><span>Local AI</span><span>Observability</span>
+    </div>
+  </section>
+
+  <section id="journal">
+    <div class="section-heading heading-with-link">
+      <div>
+        <p class="eyebrow">Notes from the work</p>
+        <h2>From the Journal</h2>
+      </div>
+      <a href="/journal/">View all entries →</a>
+    </div>
+    <div class="journal-list">
+      {recentEntries.map((entry) => (
+        <article>
+          <time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time>
+          <h3><a href={`/journal/${entry.id}/`}>{entry.data.title}</a></h3>
+          {entry.data.description && <p>{entry.data.description}</p>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="working-on" id="now">
+    <p class="eyebrow">Now</p>
+    <h2>What I’m Working On</h2>
     <p>
-      My goal is to build useful systems, break them safely, understand how they
-      work, automate what repeats, and share the lessons through this site.
+      I’m proving Abbey through the projects it supports: strengthening the
+      framework, validating its research workflow, expanding project-aware
+      automation, and continuing to build the sites and infrastructure that use it.
     </p>
+    <a href="https://bradcooke.com/projects/">Explore the projects →</a>
   </section>
 </Layout>
-

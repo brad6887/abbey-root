@@ -3,10 +3,10 @@ import Nav from '../components/Nav.astro';
 import '../styles/global.css';
 import '../styles/navigation.css';
 import '../styles/layout.css';
-import '../styles/project.css';
+import '../styles/home.css';
 
-const { title, description } = Astro.props;
-const siteTitle = title === 'Brad Cooke' ? title : `${title} | Brad Cooke`;
+const { title, description, homepage = false } = Astro.props;
+const siteTitle = title === 'Abbey Root' ? title : `${title} | Abbey Root`;
 ---
 
 <html lang="en">
@@ -16,15 +16,26 @@ const siteTitle = title === 'Brad Cooke' ? title : `${title} | Brad Cooke`;
     <link rel="icon" type="image/png" href="/favicon.png" />
     <title>{siteTitle}</title>
     {description && <meta name="description" content={description} />}
-    <script defer src="https://analytics.bradcooke.com/script.js" data-website-id="285ce86c-dfd8-41d9-8f8b-3b718027334a" data-domains="bradcooke.com,www.bradcooke.com"></script>
   </head>
 
-  <body>
+  <body class:list={{ 'home-page': homepage }}>
     <Nav />
 
     <main>
       <slot />
     </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="site-brand" href="/">Abbey Root</a>
+        <p>Building useful systems, documenting the work, and improving the process.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="/#what-abbey-does">What Abbey does</a>
+        <a href="/#lab">The lab</a>
+        <a href="/journal/">Journal</a>
+        <a href="https://bradcooke.com/about/">Brad Cooke</a>
+      </nav>
+    </footer>
   </body>
 </html>
-

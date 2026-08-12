@@ -8,7 +8,7 @@ It is both:
 
 - A working Linux home lab and development platform.
 - A reusable engineering framework for self-documenting, automation-friendly, AI-assisted projects.
-- The source platform for BradCooke.com.
+- The source platform for AbbeyRoot.com.
 - A research and development environment for practices that may later be adopted by other Abbey-style repositories, including Power Infrastructure.
 
 The project combines infrastructure-as-code, automation, documentation, publishing, developer tooling, structured content, and AI-assisted workflows.
@@ -187,7 +187,7 @@ The major repository areas are:
 .abbey/         Local generated context and knowledge artifacts
 ansible/        Infrastructure inventory, playbooks, roles, and automation
 config/         Project and CLI metadata
-content/        Canonical publishable Markdown content
+content/        Canonical Abbey Root journal content
 docs/           Project documentation and planning
 homepage/       Homepage dashboard configuration
 logs/           Local runtime logs
@@ -261,7 +261,7 @@ When historical facts, dates, identity, or provenance are uncertain:
 
 ### Website
 
-The website implementation lives under:
+The AbbeyRoot.com website implementation lives under:
 
 ```text
 site/
@@ -495,7 +495,7 @@ Canonical sources include, depending on the subject:
 - Infrastructure metadata and automation under `ansible/`.
 - Project and CLI metadata under `config/`.
 - Human-maintained documentation outside generated locations.
-- Publishable source content under `content/`.
+- Abbey Root journal content under `content/`.
 - Rich working source material under `working/`.
 
 The exact authority depends on the documented model for the feature being changed.

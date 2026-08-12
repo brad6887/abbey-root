@@ -8,18 +8,19 @@ production deployment without weakening the safeguards already provided by
 
 ## Status
 
-Accepted. Stage 1 build validation is implemented; Stage 2 production
-deployment remains pending.
+Superseded on 2026-08-12 by the independent `bradcooke-com` source repository.
+This document remains as the historical record of the original two-repository
+publishing design.
 
-## Current Architecture
+## Historical Architecture
 
-BradCooke.com intentionally uses two repositories:
+Before the source separation, BradCooke.com used two repositories:
 
-- Abbey Root contains the Astro source, content, and publishing tooling.
+- Abbey Root contained the Astro source, content, and publishing tooling.
 - `brad6887.github.io` contains only the generated static production site
   served by GitHub Pages.
 
-The existing `abbey site publish` workflow:
+The former Abbey Root `abbey site publish` workflow:
 
 1. Requires clean source and production repositories.
 2. Verifies the production `CNAME`.

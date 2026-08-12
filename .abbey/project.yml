@@ -31,7 +31,4 @@ site:
     media_manifests: []
     required_routes:
       - /
-  publish:
-    method: git-rsync
-    target: ~/git/brad6887.github.io
-    domain: bradcooke.com
+      - /journal/

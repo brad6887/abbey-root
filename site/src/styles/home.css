@@ -1,0 +1,268 @@
+.home-page main {
+  overflow: hidden;
+}
+
+.home-page main > section {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hero h1 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 6.8rem);
+  font-weight: 650;
+}
+
+.hero-summary {
+  max-width: 760px;
+  margin: 2rem 0 0;
+  color: var(--color-muted);
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+}
+
+.eyebrow,
+.card-kicker {
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.35rem;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.button-primary {
+  color: #0b0f0d;
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+}
+
+.button-secondary {
+  color: var(--color-text);
+}
+
+.section-heading {
+  max-width: 720px;
+  margin-bottom: 2rem;
+}
+
+.section-heading h2,
+.split-section h2,
+.working-on h2 {
+  margin: 0.35rem 0 0.8rem;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+.section-heading > p:last-child,
+.working-on > p:not(.eyebrow) {
+  color: var(--color-muted);
+  font-size: 1.15rem;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.project-grid,
+.capability-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card {
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.65rem;
+  background: var(--color-surface);
+}
+
+.card h3 {
+  margin: 0.4rem 0 0.65rem;
+  font-size: 1.35rem;
+}
+
+.card p {
+  color: var(--color-muted);
+}
+
+.project-card-home {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card-home a {
+  margin-top: auto;
+}
+
+.compact-card {
+  min-height: 150px;
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.feature-panel {
+  padding: 2rem;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-surface);
+}
+
+.feature-panel h3 {
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
+.status-line {
+  margin-bottom: 0;
+  color: var(--color-muted);
+}
+
+.status-line span {
+  display: block;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.workflow {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--color-border);
+}
+
+.workflow li {
+  padding: 1.25rem 1rem 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.workflow span,
+.workflow small,
+.journal-list time {
+  color: var(--color-muted);
+}
+
+.lab-section {
+  background: linear-gradient(135deg, var(--color-surface), var(--color-accent-dark));
+  box-shadow: 0 0 0 100vmax var(--color-surface);
+  clip-path: inset(0 -100vmax);
+}
+
+.lab-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.lab-facts span {
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-muted);
+  background: color-mix(in srgb, var(--color-background) 40%, transparent);
+}
+
+.heading-with-link {
+  max-width: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+}
+
+.journal-list article {
+  display: grid;
+  grid-template-columns: 150px 1fr 1.5fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.journal-list h3,
+.journal-list p {
+  margin: 0;
+}
+
+.journal-list h3 a {
+  color: var(--color-text);
+}
+
+.journal-list p {
+  color: var(--color-muted);
+}
+
+.working-on {
+  max-width: 820px;
+}
+
+@media (max-width: 800px) {
+  .project-grid,
+  .capability-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split-section,
+  .journal-list article {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .workflow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-page main > section {
+    padding: 3.5rem 0;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .project-grid,
+  .capability-grid,
+  .workflow {
+    grid-template-columns: 1fr;
+  }
+
+  .heading-with-link {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
