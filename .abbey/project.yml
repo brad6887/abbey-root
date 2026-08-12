@@ -32,3 +32,7 @@ site:
     required_routes:
       - /
       - /journal/
+  publish:
+    method: ssh-release
+    target: abbey-deploy@sites01:/srv/www/abbeyroot.com
+    domain: abbeyroot.com

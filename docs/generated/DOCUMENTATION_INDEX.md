@@ -53,6 +53,7 @@ domain-specific collections with dedicated discovery workflows.
 - [Abbey Root Engineering Framework](../architecture/ENGINEERING_FRAMEWORK.md)
 - [Abbey Root Lab Architecture](../architecture/LAB_ARCHITECTURE.md)
 - [Abbey Root Remote Access](../architecture/REMOTE_ACCESS.md)
+- [AbbeyRoot.com Hosting Architecture](../architecture/ABBEYROOT_COM_HOSTING.md)
 - [Architecture Principles](../architecture/ARCHITECTURE_PRINCIPLES.md)
 - [BradCooke.com Automation Architecture](../architecture/BRADCOOKE_COM_AUTOMATION.md)
 - [CLI Framework](../architecture/CLI_FRAMEWORK.md)
