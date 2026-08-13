@@ -52,25 +52,28 @@ the previous release if activation validation fails.
 
 ## Public Domain Cutover
 
-The `abbeyroot.com` domain is not yet configured for this service. Public
-cutover is a separate future operation and should include:
+AbbeyRoot.com is publicly exposed through the existing ingress path:
 
-1. Confirm the desired public network path to `sites01`.
-2. Configure public DNS for `abbeyroot.com` and `www.abbeyroot.com`.
-3. Add an HTTPS termination point and certificate management.
-4. Validate HTTP-to-HTTPS behavior and both host names externally.
-5. Add production analytics only after the final domain is live.
-6. Record rollback and availability expectations before announcing the site.
+- Hostinger DNS points `abbeyroot.com` to the home public address, and
+  `www.abbeyroot.com` is a CNAME to the apex.
+- The router forwards only TCP ports 80 and 443 to Nginx Proxy Manager on
+  `ubuntu-dev01`.
+- Nginx Proxy Manager terminates HTTPS with a Let's Encrypt certificate,
+  redirects HTTP to HTTPS, and proxies both host names to `sites01` at
+  `192.168.1.84:80`.
+- Native nginx on `sites01` serves the active AbbeyRoot.com release.
 
-Public DNS or TLS work does not need to block internal release publishing and
-validation on `sites01`.
+The site was validated through the proxy for both HTTPS host names and the
+HTTP-to-HTTPS redirect. Direct access through the public address may fail from
+inside the home network because NAT loopback is not reliable; internal access
+continues to use `sites01.home.arpa`.
 
 ## Safety Boundaries
 
 - A successful GitHub Actions build does not publish the site.
 - An Astro build does not authorize a release upload.
 - Ansible validation does not authorize applying infrastructure changes.
-- Public DNS and TLS remain intentionally deferred until explicitly requested.
+- Public DNS and TLS are managed outside Ansible through Hostinger and Nginx
+  Proxy Manager.
 - `brad6887.github.io` is exclusively the BradCooke.com production target and
   must never be used by AbbeyRoot.com.
-

@@ -142,11 +142,11 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [ ] Define recurring infrastructure maintenance windows.
 - [ ] Add infrastructure backup failure alerting.
 - [ ] Investigate and document Nginx Proxy Manager configuration.
-- [ ] Configure the existing Nginx Proxy Manager instance to proxy `abbeyroot.com` to `sites01`.
+- [x] Configure the existing Nginx Proxy Manager instance to proxy `abbeyroot.com` to `sites01`.
 - [ ] Evaluate moving public ingress from `ubuntu-dev01` to `edge01`.
 - [ ] Reserve `192.168.1.84` for the `sites01` MAC address `BC:24:11:02:02:84`.
 - [ ] Rotate the Ansible credentials and Umami secrets exposed during the `sites01` provisioning session before public exposure.
-- [ ] Deploy the real `abbeyroot.com` build to the validated release structure on `sites01`.
+- [x] Deploy the real `abbeyroot.com` build to the validated release structure on `sites01`.
 - [ ] Automate deployment of ai-worker01 shell environment through Ansible.
 - [ ] Document apartment network wall jack locations.
 - [ ] Label structured wiring cabinet.
