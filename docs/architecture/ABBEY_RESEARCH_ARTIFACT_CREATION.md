@@ -2,8 +2,8 @@
 artifact_id: ARCH-ABBEY-RESEARCH-ARTIFACT-CREATION
 artifact_type: architecture
 title: Abbey Research Artifact Creation
-version: 1
-status: draft
+version: 2
+status: active
 
 created:
   date: 2026-07-23
@@ -22,6 +22,7 @@ The completed Voice Analysis chains are reference fixtures for this workflow:
 - OBS-001 → EVID-001 → HYP-001 → VAL-001
 - OBS-002 → EVID-002 → HYP-002 → VAL-002
 - OBS-003 → EVID-003 → HYP-003 → VAL-003
+- OBS-004 → EVID-004 → HYP-004 → VAL-004
 
 They demonstrate the expected artifact shape. They are not a queue that requires additional manual migrations.
 
@@ -144,6 +145,11 @@ Failure states are retained:
 
 A failed run remains inspectable. Abbey must not overwrite or discard the raw model response.
 
+The run manifest remains `review-ready` while human decisions are recorded in
+the separate review record. It changes to `promoted` only after a confirmed
+canonical write succeeds. Review rejection remains explicit in the retained
+review record and never mutates canonical research.
+
 ## Run Workspace
 
 Each creation attempt receives an immutable run identifier and a dedicated workspace:
@@ -158,7 +164,7 @@ Minimum contents:
     normalized.md
     candidate.md
     validation.txt
-    review.md
+    review.json
 
 ### Run Identifier
 
@@ -203,6 +209,41 @@ created:
 ```
 
 State changes append execution records rather than replacing the original provenance.
+
+### Observation Review Record
+
+`review.json` is created only after the observation run reaches
+`review-ready`. It is bound to the candidate SHA-256 fingerprint and begins
+with no implicit human decision:
+
+```json
+{
+  "schema_version": 1,
+  "run_id": "RUN-20260723-120000-a1b2",
+  "artifact_type": "observation",
+  "candidate_sha256": "<fingerprint>",
+  "created_at": "2026-07-23T12:15:00+00:00",
+  "decision": "undecided",
+  "reviewer": "",
+  "reviewed_at": "",
+  "canonical_title": "",
+  "checks": {
+    "finding_wording_is_proportional": "undecided",
+    "citations_are_representative": "undecided",
+    "interpretation_is_distinguished": "undecided"
+  },
+  "notes": ""
+}
+```
+
+Approval requires every checklist value to be `approved`, an explicit
+reviewer, a timezone-aware review timestamp, and a human-selected canonical
+title. Rejection requires complete checklist decisions and explanatory notes.
+Neither state is inferred from deterministic validation.
+
+The run manifest independently anchors the review path, candidate fingerprint,
+and creation timestamp. Validation rejects a review whose immutable origin
+fields no longer match that anchor.
 
 ## Canonical Artifact Identity
 
@@ -423,10 +464,15 @@ This reports:
 ### Review a Candidate
 
 ```text
-abbey research review RUN-20260723-120000-a1b2
+abbey research review-init RUN-20260723-120000-a1b2
 ```
 
-The initial implementation may generate a review checklist rather than launching an interactive reviewer.
+This creates the undecided, hash-bound `review.json` scaffold without approving
+the candidate. After a human completes the record, validate it with:
+
+```text
+abbey research review-validate RUN-20260723-120000-a1b2
+```
 
 The checklist records:
 
@@ -440,6 +486,13 @@ The checklist records:
 
 ```text
 abbey research promote RUN-20260723-120000-a1b2
+```
+
+The default command is a read-only preview. A reviewed promotion is written
+only through a second explicit invocation:
+
+```text
+abbey research promote RUN-20260723-120000-a1b2 --confirm
 ```
 
 Promotion requires:
@@ -459,6 +512,13 @@ Before writing, Abbey prints:
 - Input fingerprints.
 
 Promotion is the only command in this workflow allowed to write beneath canonical research directories.
+
+Confirmed observation promotion revalidates the candidate and every stored
+prompt and input fingerprint, resolves the canonical project, corpus, and
+experiment, validates existing `OBS-###` names, allocates above the highest
+identifier, and installs the artifact without overwriting an existing target.
+The canonical artifact and review record become read-only after the run
+manifest records successful promotion.
 
 ## Relationship Rules
 
@@ -536,6 +596,8 @@ Only Layers 1–4 are deterministic.
 
 ### Phase 1 — Observation Candidate Orchestration
 
+Status: implemented and validated through real non-canonical use.
+
 - Add `abbey research create --type observation`.
 - Reuse existing run, normalize, sanitize, and observation validation capabilities.
 - Add run manifests and immutable raw output.
@@ -543,6 +605,9 @@ Only Layers 1–4 are deterministic.
 - Add regression tests using existing observation artifacts as fixtures.
 
 ### Phase 2 — Canonical Promotion
+
+Status: implemented with synthetic promotion fixtures and an undecided review
+record created for the first real Phase 1 run.
 
 - Add deterministic identifier allocation.
 - Add review records.
@@ -581,13 +646,13 @@ The implementation is ready for real research when tests prove:
 - Missing or invalid parents block promotion.
 - Canonical identifier collisions block promotion.
 - A promoted artifact includes model, prompt, source fingerprint, and parent provenance.
-- The three existing chains pass as reference fixtures.
+- The four existing chains pass as reference fixtures.
 - No test requires Voice Analysis conclusions to be hard-coded into Abbey.
 
-## Initial Implementation Target
+## Current Validation Target
 
-Implement Phase 1 only:
-
-    abbey research create --type observation
-
-This is the smallest useful vertical slice because the existing tooling has already validated its component steps. It will prove orchestration, provenance, workspace safety, and review-ready output before canonical promotion or downstream research stages are automated.
+Phase 1 and Phase 2 are implemented for observations. Before evidence creation
+expands the workflow, complete an explicit human review of a real observation
+candidate, inspect the promotion preview, and decide whether that candidate
+warrants canonical promotion. The implementation must not turn workflow
+validation into approval of the research conclusion.

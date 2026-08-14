@@ -74,8 +74,8 @@ Completed
 
 # Immediate Priorities
 
-- Implement explicit Abbey Research review records and safe canonical
-  observation promotion.
+- Complete one real human Abbey Research observation review and decide whether
+  its candidate warrants canonical promotion.
 - Rerun the hardened `abbey ai decide backlog-leverage` workflow from the
   canonical Ubuntu environment.
 - Expand onboarding documentation.
@@ -248,6 +248,11 @@ Completed
   non-canonical run with matched prompt and input fingerprints, immutable raw
   output, preserved source citations, passing structural checks, and no
   canonical research mutation
+- `abbey research review-init`, `review-validate`, and `promote` provide
+  manifest-anchored, initially undecided human review records; validated
+  approval and rejection; preview-only promotion by default; explicit confirmed
+  canonical writes; exclusive identifier allocation; path and fingerprint
+  safety; read-only authoritative outputs; and complete observation provenance
 - `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, reports conflicts between recent session evidence and planning documents, and generates Definitions of Done from the selected recommendation using tailored criteria where available and a deterministic fallback otherwise
 - `abbey next` validates the canonical six-section `NEXT.md` contract, while
   `abbey next init` safely creates a valid project-aware template without
@@ -447,6 +452,11 @@ Completed
   manifests, immutable raw output, retained failure states, staged
   normalization and sanitization, structural validation, and review-ready
   output outside canonical research directories.
+- `abbey research review-init` creates an all-undecided review record whose
+  candidate fingerprint is independently anchored in the run manifest;
+  `review-validate` accepts only complete explicit human decisions, and
+  `promote` is read-only until a separately confirmed invocation revalidates
+  provenance and safely installs one canonical observation without overwrite.
 - Deterministic corpus filtering excludes anchored `Mobile uploads Place:` location metadata while preserving authored content and the existing Voice Analysis evidence conclusions.
 - The full-corpus observation-discovery workflow reviews deterministic corpus batches without automatic promotion and validates each machine-readable manifest’s corpus identity, batch membership, source identifiers, and exact citation text.
 - `abbey research discover` provides repository-owned, resumable batch discovery with raw-output preservation, deterministic validation, validated-result reuse, candidate aggregation, and a pending human-review scaffold.
@@ -533,8 +543,8 @@ Completed
 
 ## Near Term
 
-- Validate the completed Abbey Research observation-candidate workflow through
-  a real non-canonical research run.
+- Complete one real human observation review and promotion decision through the
+  implemented Abbey Research Phase 2 workflow.
 - Expand onboarding documentation.
 - Improve `abbey-doctor`.
 - Continue metadata-driven documentation.

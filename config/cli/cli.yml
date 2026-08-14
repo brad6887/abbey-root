@@ -337,6 +337,15 @@ commands:
       create:
         description: Create a controlled, review-ready research candidate.
         usage: abbey research create --project PROJECT --type observation --corpus CORPUS --experiment EXPERIMENT --model MODEL --prompt FILE [--input FILE ...]
+      review-init:
+        description: Create an undecided, hash-bound observation review record.
+        usage: abbey research review-init RUN-ID
+      review-validate:
+        description: Validate a completed human observation review record.
+        usage: abbey research review-validate RUN-ID
+      promote:
+        description: Preview or confirm safe canonical observation promotion.
+        usage: abbey research promote RUN-ID [--confirm]
       status:
         description: Report formal research artifact relationships and chain status.
         usage: abbey research status
@@ -355,6 +364,9 @@ commands:
     examples:
       - abbey research --help
       - abbey research create --project voice-analysis --type observation --corpus CORPUS-001 --experiment EXP-001 --model gpt-oss:20b --prompt FILE --input FILE
+      - abbey research review-init RUN-20260814-063002-0dab
+      - abbey research review-validate RUN-20260814-063002-0dab
+      - abbey research promote RUN-20260814-063002-0dab
       - abbey research run --help
       - abbey research validate-review --manifest FILE --corpus FILE
       - abbey research validate-discovery --manifest FILE --corpus FILE --batch FILE
