@@ -69,6 +69,22 @@ SCRIPT
 chmod +x "$BIN_DIR/tailscale" "$BIN_DIR/ssh"
 export PATH="$BIN_DIR:$PATH"
 
+output="$("$ROOT_DIR/tools/bin/abbey" remote help 2>&1)"
+assert_contains "$output" "abbey remote connect --name ubuntu-dev01" \
+  "canonical remote help shows a connection example"
+assert_contains "$output" "--name NAME" \
+  "canonical remote help documents the required host option"
+assert_contains "$output" "--user USER" \
+  "canonical remote help documents the SSH user override"
+
+output="$("$ROOT_DIR/tools/bin/abbey" remote connect help 2>&1)"
+assert_contains "$output" "usage: abbey remote connect" \
+  "canonical connect help routes to command-specific help"
+assert_contains "$output" "Required Tailscale and Abbey inventory host name" \
+  "command-specific help explains the name option"
+assert_contains "$output" "Override the SSH user from the Abbey inventory" \
+  "command-specific help explains the user option"
+
 output="$("$ROOT_DIR/tools/bin/abbey" remote connect --name ubuntu-dev01 2>&1)"
 assert_contains "$output" "Tailscale IPv4: 100.100.10.20" \
   "connect resolves the peer IPv4 address"

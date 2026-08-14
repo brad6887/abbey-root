@@ -447,6 +447,8 @@ abbey remote <command>
 
 - `connect` - Resolve a Tailscale peer IPv4 address and connect with SSH.
   - `abbey remote connect --name NAME [--user USER]`
+  - `--name NAME` - Required Tailscale and Abbey inventory host name.
+  - `--user USER` - Override the SSH user from the Abbey inventory.
 
 **Examples**
 

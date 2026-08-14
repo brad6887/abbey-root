@@ -258,6 +258,12 @@ def render_markdown():
                     sub_usage = subcommand_data.get("usage", f"abbey {command_name} {subcommand_name}")
                     lines.append(f"- `{subcommand_name}` - {sub_desc}")
                     lines.append(f"  - `{sub_usage}`")
+                    options = subcommand_data.get("options", {})
+                    if isinstance(options, dict):
+                        for option, option_description in options.items():
+                            lines.append(
+                                f"  - `{option}` - {option_description}"
+                            )
                 lines.append("")
 
             if examples:

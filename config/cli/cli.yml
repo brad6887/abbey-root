@@ -394,6 +394,9 @@ commands:
       connect:
         description: Resolve a Tailscale peer IPv4 address and connect with SSH.
         usage: abbey remote connect --name NAME [--user USER]
+        options:
+          --name NAME: Required Tailscale and Abbey inventory host name.
+          --user USER: Override the SSH user from the Abbey inventory.
     examples:
       - abbey remote connect --name ubuntu-dev01
       - abbey remote connect --name ubuntu-dev01 --user bcooke

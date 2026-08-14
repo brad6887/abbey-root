@@ -11,7 +11,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 import yaml
 
@@ -180,32 +180,62 @@ def connect(args: argparse.Namespace, toolkit_root: Path) -> None:
     os.execvp("ssh", ["ssh", target])
 
 
-def parser() -> argparse.ArgumentParser:
+def parsers() -> Tuple[argparse.ArgumentParser, argparse.ArgumentParser]:
     top_level = argparse.ArgumentParser(
         prog="abbey remote",
         description="Connect to named Abbey hosts through Tailscale.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""connection options:
+  --name NAME   Required Tailscale and Abbey inventory host name.
+  --user USER   Override the SSH user from the Abbey inventory.
+
+examples:
+  abbey remote connect --name ubuntu-dev01
+  abbey remote connect --name ubuntu-dev01 --user bcooke
+
+Run 'abbey remote connect help' for command-specific help.""",
     )
     subcommands = top_level.add_subparsers(dest="command")
     connect_parser = subcommands.add_parser(
         "connect",
         help="Resolve a Tailscale peer and connect with SSH.",
+        description=(
+            "Resolve a named online Tailscale peer, read its SSH user from "
+            "Abbey inventory, and start an interactive SSH session."
+        ),
+        epilog="""examples:
+  abbey remote connect --name ubuntu-dev01
+  abbey remote connect --name ubuntu-dev01 --user bcooke""",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     connect_parser.add_argument(
         "--name",
         required=True,
-        help="Tailscale and Abbey inventory host name.",
+        help="Required Tailscale and Abbey inventory host name.",
     )
     connect_parser.add_argument(
         "--user",
         help="Override the SSH user from the Abbey inventory.",
     )
-    return top_level
+    subcommands.add_parser("help", help="Show remote command help.")
+    return top_level, connect_parser
 
 
 def main(argv: Optional[List[str]] = None) -> int:
-    args = parser().parse_args(argv)
-    if args.command != "connect":
-        parser().print_help()
+    arguments = list(argv) if argv is not None else sys.argv[1:]
+    top_level, connect_parser = parsers()
+
+    if not arguments or arguments == ["help"]:
+        top_level.print_help()
+        return 0
+
+    if arguments == ["connect", "help"]:
+        connect_parser.print_help()
+        return 0
+
+    args = top_level.parse_args(arguments)
+    if args.command == "help":
+        top_level.print_help()
         return 0
 
     toolkit_root = Path(__file__).resolve().parent.parent
