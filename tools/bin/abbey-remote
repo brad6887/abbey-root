@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -u
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
+exec python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_remote.py" "$@"

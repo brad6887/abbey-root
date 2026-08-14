@@ -242,6 +242,11 @@ Completed
 - Recurring review due dates are evaluated centrally, and `abbey session`
   surfaces due reviews informationally without blocking normal session work
 - `abbey lab`
+- `abbey remote connect --name NAME` resolves an exact online Tailscale peer,
+  selects its current IPv4 address, reads the managed SSH user from Ansible
+  inventory, and starts the normal interactive SSH client; explicit user
+  overrides and fail-closed disconnected, unknown, offline, ambiguous, and
+  missing-address handling preserve a clear operator boundary
 - `abbey ssh audit` and `abbey ssh sync` provide validated, idempotent SSH key auditing and managed synchronization while preserving unrelated authorized keys
 - `abbey research status` deterministically discovers formal research artifacts, resolves their relationships, and reports complete chains and legacy provenance without modifying repository state
 - `abbey research create --type observation` is validated through a real

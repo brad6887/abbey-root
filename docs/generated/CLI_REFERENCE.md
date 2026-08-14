@@ -433,6 +433,28 @@ abbey lab <command>
 abbey lab check
 ```
 
+### `abbey remote`
+
+Connect to named Abbey hosts through Tailscale.
+
+**Usage**
+
+```text
+abbey remote <command>
+```
+
+**Subcommands**
+
+- `connect` - Resolve a Tailscale peer IPv4 address and connect with SSH.
+  - `abbey remote connect --name NAME [--user USER]`
+
+**Examples**
+
+```text
+abbey remote connect --name ubuntu-dev01
+abbey remote connect --name ubuntu-dev01 --user bcooke
+```
+
 ### `abbey ssh`
 
 Audit and synchronize SSH public keys across managed Abbey nodes.
