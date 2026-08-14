@@ -140,6 +140,11 @@ echo "Abbey Next Regression Tests"
 echo "==========================="
 echo
 
+assert_not_contains \
+  "candidate extraction avoids Python 3.9-only str.removeprefix" \
+  "$(cat "$ABBEY_ROOT/scripts/abbey_next_candidates.py")" \
+  ".removeprefix("
+
 fixture_root="$(create_fixture)"
 trap 'rm -rf "${fixture_root:-}"' EXIT
 

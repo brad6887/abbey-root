@@ -1,14 +1,17 @@
 {
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "recommendation",
     "summary",
     "priority_reason",
     "shared_outcome",
+    "session_boundary",
     "primary_backlog_item",
     "session_fit",
     "confirmed_coverage_count",
     "coverage_map",
+    "optional_work_excluded",
     "blocking_items",
     "evidence",
     "confidence",
@@ -26,6 +29,9 @@
       "type": "string"
     },
     "shared_outcome": {
+      "type": "string"
+    },
+    "session_boundary": {
       "type": "string"
     },
     "primary_backlog_item": {
@@ -68,6 +74,12 @@
             "type": "string"
           }
         }
+      }
+    },
+    "optional_work_excluded": {
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "blocking_items": {

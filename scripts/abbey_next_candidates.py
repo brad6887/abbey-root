@@ -129,11 +129,11 @@ def extract_incomplete_backlog(path: Path) -> list[BacklogItem]:
 
     for line in path.read_text(encoding="utf-8").splitlines():
         if line.startswith("### "):
-            current_section = line.removeprefix("### ").strip()
+            current_section = line[len("### ") :].strip()
             continue
 
         if line.startswith("## "):
-            current_section = line.removeprefix("## ").strip()
+            current_section = line[len("## ") :].strip()
             continue
 
         if not line.startswith("- [ ] "):

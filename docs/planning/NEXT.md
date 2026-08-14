@@ -1,48 +1,54 @@
 # Abbey Root Next
 
-Last Reviewed: 2026-07-28
+Last Reviewed: 2026-08-14
 
 # Current Theme
 
-## Build with the Framework
+## Preserve Human Authority at Promotion
 
 # Primary Objective
 
-Validate the completed Abbey Research observation-candidate workflow through a
-real non-canonical research run.
+Implement explicit review records and safe canonical promotion for Abbey
+Research observation candidates.
 
 # Success Criteria
 
-The workflow-validation session is complete when:
+The canonical-promotion session is complete when:
 
-- One real observation-candidate run completes outside canonical research
-  directories.
-- Its manifest accurately records model, prompt, corpus, experiment, inputs,
-  fingerprints, commands, timestamps, artifacts, and stage results.
-- Raw output remains immutable and inspectable.
-- Source citations survive normalization and sanitization.
-- The candidate passes structural validation and is review-ready.
-- Any workflow defects discovered through real use are fixed and
-  regression-tested.
-- No candidate is promoted into canonical research.
-- The session records whether Phase 2 review-record and promotion design is
-  ready to begin.
+- A review record is explicitly bound to one review-ready observation run and
+  its candidate fingerprint.
+- A newly created review record contains no implicit approval.
+- Rejected, incomplete, stale, or invalid review records cannot authorize
+  promotion.
+- Promotion requires explicit human approval and passing deterministic checks.
+- The next available `OBS-###` identifier and target path are determined
+  without collisions or identifier reuse.
+- Only the promotion workflow can write an observation candidate beneath the
+  canonical research hierarchy.
+- The promoted artifact preserves run, model, prompt, corpus, experiment,
+  input-fingerprint, and review provenance.
+- Focused regression coverage proves approval, rejection, collision, stale
+  candidate, and canonical-path safety behavior.
 
 ## Current Objective
 
-Exercise `abbey research create --type observation` with a real,
-non-canonical input.
+Implement Phase 2 of the staged Abbey Research artifact-creation workflow for
+observation review and promotion.
 
 ## Definition of Done
 
-The validation is complete when:
+The implementation is complete when:
 
-- A real run reaches `review-ready` or exposes a documented workflow defect.
-- Provenance and output immutability are verified directly from the run
-  workspace.
-- Candidate citations and required observation sections are verified.
-- Any blocking defect is corrected with focused regression coverage.
-- Canonical promotion remains explicitly out of scope.
+- Review records begin undecided and are hash-bound to the candidate under
+  review.
+- Promotion fails closed unless the candidate is review-ready, unchanged,
+  structurally valid, and explicitly approved.
+- Promotion previews and then writes exactly one available canonical
+  observation identifier and path.
+- The promoted artifact contains the required research and generation
+  provenance.
+- No evidence, hypothesis, or validation candidate workflow is added in this
+  phase.
 
 ---
 
@@ -111,68 +117,71 @@ Hypothesis
 
 Validation
 
+## Observation Candidate Orchestration
+
+Completed:
+
+- `abbey research create --type observation` creates a controlled run
+  workspace with input snapshots, provenance, immutable raw output, and a
+  review-ready candidate.
+- Real run `RUN-20260814-063002-0dab` validated generation, normalization,
+  sanitization, structural checks, fingerprints, citation preservation, and
+  canonical-path isolation with `gpt-oss:20b`.
+- No Phase 1 workflow blocker was discovered through real use.
+
 ---
 
 # Current Priorities
 
-## Current Phase — Observation Workflow Validation
+## Current Phase — Canonical Observation Promotion
 
 ## Objective
 
-Validate the completed observation-candidate workflow through normal Abbey
-Research use before designing canonical promotion or downstream research
-stages.
+Add the explicit human-review and promotion boundary required to move an
+approved observation candidate from its run workspace into canonical research.
 
 ## Implementation Scope
 
-### Real Candidate Run
+### Review Records
 
-Run `abbey research create --type observation` with:
+- Create one explicit review record for one review-ready run.
+- Bind the record to the run identifier and candidate fingerprint.
+- Begin with human decisions unresolved rather than approved by default.
+- Preserve the review record with the run for inspection and later promotion.
 
-- A real non-canonical research prompt.
-- Declared project, corpus, and experiment context.
-- At least one source input containing traceable citations.
-- A configured local model.
+### Canonical Promotion
 
-### Workspace Inspection
-
-Verify:
-
-- Prompt and input snapshots match their recorded fingerprints.
-- Stage commands, timestamps, results, and artifact paths are inspectable.
-- Raw output is read-only.
-- The normalized and sanitized candidate preserves citations.
-- Structural validation produces a review-ready result.
+- Require a review-ready run, unchanged candidate, passing validation, and an
+  explicit approval record.
+- Discover existing canonical observation identifiers and select the next
+  available identifier without reuse.
+- Preview the identifier, target, relationships, and provenance before writing.
+- Write one canonical observation artifact and retain its source-run and review
+  traceability.
 
 ### Safety Boundary
 
-The validation session must:
+The implementation must:
 
-- Keep every generated artifact outside canonical research directories.
-- Avoid assigning an OBS identifier.
-- Avoid creating review approval or promotion records.
-- Retain the run workspace if a stage fails.
+- Support observation artifacts only.
+- Keep candidate generation outside canonical research directories.
+- Permit canonical writes only through the promotion command.
+- Never infer, manufacture, or default a human approval decision.
+- Refuse stale candidates, missing or rejected reviews, unresolved project
+  context, identifier collisions, and existing targets without mutation.
 
 ### Tests
 
-If normal use exposes a defect:
-
-- Fix only the demonstrated workflow blocker.
-- Add focused regression coverage.
+- Add focused coverage for review initialization and candidate hash binding.
+- Prove incomplete and rejected reviews block promotion.
+- Prove candidate changes after review block promotion.
+- Prove identifier and target collisions fail without overwriting.
+- Prove candidate creation cannot write to canonical paths.
 - Rerun the Abbey Research suite and `abbey review`.
 
 ---
 
 # Future Direction
-
-## Canonical Promotion
-
-After observation candidate orchestration is stable:
-
-- Add explicit human review records.
-- Allocate canonical identifiers at promotion time.
-- Add `abbey research promote`.
-- Protect canonical directories from every other creation command.
 
 ## Evidence Creation
 
