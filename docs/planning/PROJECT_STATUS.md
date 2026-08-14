@@ -1,6 +1,6 @@
 # Abbey Root Project Status
 
-Last Updated: 2026-08-12
+Last Updated: 2026-08-14
 
 ---
 
@@ -74,8 +74,10 @@ Completed
 
 # Immediate Priorities
 
-- Validate the completed Abbey Research observation-candidate workflow through
-  a real non-canonical research run.
+- Implement explicit Abbey Research review records and safe canonical
+  observation promotion.
+- Rerun the hardened `abbey ai decide backlog-leverage` workflow from the
+  canonical Ubuntu environment.
 - Expand onboarding documentation.
 - Continue CLI standardization.
 - Evaluate shared CLI libraries.
@@ -210,6 +212,10 @@ Completed
 - `abbey ai decide` resolves shared libraries and decision definitions from the
   toolkit while preserving active-project configuration, knowledge, additions,
   and overrides
+- `abbey ai decide backlog-leverage` treats explicit `NEXT.md` scope and safety
+  exclusions as controlling session boundaries, refuses to count sequential
+  phases or prerequisites as coverage, and reports the bounded session and
+  excluded later work explicitly
 - `abbey ai decide ai-worker-candidate` reviews authoritative planning
   documents and recommends one bounded AI Worker research or implementation
   candidate, including a proposed future worker-command concept, inputs,
@@ -238,10 +244,15 @@ Completed
 - `abbey lab`
 - `abbey ssh audit` and `abbey ssh sync` provide validated, idempotent SSH key auditing and managed synchronization while preserving unrelated authorized keys
 - `abbey research status` deterministically discovers formal research artifacts, resolves their relationships, and reports complete chains and legacy provenance without modifying repository state
+- `abbey research create --type observation` is validated through a real
+  non-canonical run with matched prompt and input fingerprints, immutable raw
+  output, preserved source citations, passing structural checks, and no
+  canonical research mutation
 - `abbey next` with a deterministic, explainable recommendation engine that uses unreconciled session updates as freshness evidence, suppresses backlog work recently completed in unreconciled sessions, strengthens candidates matching explicit session-update Next Steps, reports conflicts between recent session evidence and planning documents, and generates Definitions of Done from the selected recommendation using tailored criteria where available and a deterministic fallback otherwise
 - `abbey next` validates the canonical six-section `NEXT.md` contract, while
   `abbey next init` safely creates a valid project-aware template without
-  overwriting an existing file
+  overwriting an existing file; backlog candidate extraction remains compatible
+  with the macOS system Python 3.8 runtime
 - `abbey backlog refresh` maintains deterministic complete, pending, and total
   statistics in a bounded generated block for Abbey Root and external Abbey
   projects, with read-only freshness checks in `abbey review` and `abbey end`

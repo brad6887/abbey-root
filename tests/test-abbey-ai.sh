@@ -766,6 +766,26 @@ assert_contains \
   "$backlog_leverage_prompt" \
   "confirmed coverage count equals the number"
 
+assert_contains \
+  "backlog-leverage prompt treats NEXT as the session boundary" \
+  "$backlog_leverage_prompt" \
+  'explicit exclusions in `NEXT.md` as controlling session'
+
+assert_contains \
+  "backlog-leverage prompt rejects sequential phase bundling" \
+  "$backlog_leverage_prompt" \
+  "Do not combine sequential implementation phases"
+
+assert_contains \
+  "backlog-leverage prompt does not count prerequisites as advancement" \
+  "$backlog_leverage_prompt" \
+  "Completing a prerequisite does not by itself complete or materially advance"
+
+assert_contains \
+  "backlog-leverage prompt excludes later-phase work" \
+  "$backlog_leverage_prompt" \
+  '`optional_work_excluded`; do not include it in the coverage map'
+
 backlog_leverage_schema="$(
   cat "$ABBEY_ROOT/config/ai/decisions/backlog-leverage/schema.json"
 )"
@@ -779,6 +799,16 @@ assert_contains \
   "backlog-leverage schema requires coverage map" \
   "$backlog_leverage_schema" \
   '"coverage_map"'
+
+assert_contains \
+  "backlog-leverage schema requires a session boundary" \
+  "$backlog_leverage_schema" \
+  '"session_boundary"'
+
+assert_contains \
+  "backlog-leverage schema requires excluded work" \
+  "$backlog_leverage_schema" \
+  '"optional_work_excluded"'
 
 assert_contains \
   "backlog-leverage schema classifies completion" \
@@ -799,6 +829,11 @@ assert_contains \
   "shared report presents backlog shared outcome" \
   "$(cat "$ABBEY_AI")" \
   '("Shared Outcome", "shared_outcome")'
+
+assert_contains \
+  "shared report presents backlog session boundary" \
+  "$(cat "$ABBEY_AI")" \
+  '("Session Boundary", "session_boundary")'
 
 assert_contains \
   "shared report presents primary backlog item" \
