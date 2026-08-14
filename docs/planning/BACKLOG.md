@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 179 complete · 235 pending · 414 total
+> **Backlog Status:** 180 complete · 235 pending · 415 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -345,7 +345,8 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Design a staged canonical research artifact-creation workflow with explicit human review and promotion boundaries.
 - [x] Implement `abbey research create --type observation` with run manifests, immutable raw output, and review-ready candidates.
 - [x] Exercise `abbey research create --type observation` with a real non-canonical research input and verify the resulting run workspace and candidate.
-- [ ] Implement explicit review records and canonical artifact promotion.
+- [x] Implement explicit review records and canonical artifact promotion.
+- [ ] Exercise observation review and promotion with a real candidate after explicit human review, verifying the decision record, preview, canonical provenance when approved, and no canonical mutation when rejected.
 - [ ] Add a separate interactive discovery-review command that consumes the generated scaffold and requires complete human decisions.
 - [x] Design and evaluate a read-only `abbey research fact-lock review` experience before exposing approval.
 - [x] Implement `abbey research fact-lock review-init` to create an empty, hash-bound review-manifest scaffold without pre-approval.

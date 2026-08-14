@@ -355,6 +355,12 @@ abbey research <command>
   - `abbey research create --project PROJECT --type observation --corpus CORPUS --experiment EXPERIMENT --model MODEL --prompt FILE [--input FILE ...]`
 - `discover` - Run resumable observation discovery across deterministic corpus batches.
   - `abbey research discover --model MODEL --prompt FILE --corpus FILE --batch-manifest FILE --output-dir DIR [--resume]`
+- `promote` - Preview or confirm safe canonical observation promotion.
+  - `abbey research promote RUN-ID [--confirm]`
+- `review-init` - Create an undecided, hash-bound observation review record.
+  - `abbey research review-init RUN-ID`
+- `review-validate` - Validate a completed human observation review record.
+  - `abbey research review-validate RUN-ID`
 - `status` - Report formal research artifact relationships and chain status.
   - `abbey research status`
 - `validate-discovery` - Validate a batch discovery manifest and exact corpus citations.
@@ -369,6 +375,9 @@ abbey research <command>
 ```text
 abbey research --help
 abbey research create --project voice-analysis --type observation --corpus CORPUS-001 --experiment EXP-001 --model gpt-oss:20b --prompt FILE --input FILE
+abbey research review-init RUN-20260814-063002-0dab
+abbey research review-validate RUN-20260814-063002-0dab
+abbey research promote RUN-20260814-063002-0dab
 abbey research run --help
 abbey research validate-review --manifest FILE --corpus FILE
 abbey research validate-discovery --manifest FILE --corpus FILE --batch FILE

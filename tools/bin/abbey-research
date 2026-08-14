@@ -31,6 +31,12 @@ Usage:
     [--input FILE ...] \
     [--max-tokens N]
 
+  abbey research review-init RUN-ID
+
+  abbey research review-validate RUN-ID
+
+  abbey research promote RUN-ID [--confirm]
+
   abbey research run \
     --model MODEL \
     --prompt FILE \
@@ -114,6 +120,12 @@ Usage:
     --output FILE
 
   abbey research status
+
+Review and promotion:
+  review-init creates an undecided, candidate-hash-bound review.json record.
+  review-validate requires complete explicit human decisions.
+  promote previews a validated canonical observation promotion.
+  promote --confirm is the only workflow that writes a canonical candidate.
 
 Options:
   --project NAME  Research project name
@@ -1937,6 +1949,13 @@ case "$command" in
   create)
     shift
     python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_research_create.py" "$@"
+    ;;
+
+  review-init|review-validate|promote)
+    promotion_command="$command"
+    shift
+    python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_research_promotion.py" \
+      "$promotion_command" "$@"
     ;;
 
   run)

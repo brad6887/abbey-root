@@ -4,51 +4,47 @@ Last Reviewed: 2026-08-14
 
 # Current Theme
 
-## Preserve Human Authority at Promotion
+## Validate Human Authority at Promotion
 
 # Primary Objective
 
-Implement explicit review records and safe canonical promotion for Abbey
-Research observation candidates.
+Complete one real human observation review and decide whether its candidate
+warrants canonical promotion.
 
 # Success Criteria
 
-The canonical-promotion session is complete when:
+The real-use review session is complete when:
 
-- A review record is explicitly bound to one review-ready observation run and
-  its candidate fingerprint.
-- A newly created review record contains no implicit approval.
-- Rejected, incomplete, stale, or invalid review records cannot authorize
-  promotion.
-- Promotion requires explicit human approval and passing deterministic checks.
-- The next available `OBS-###` identifier and target path are determined
-  without collisions or identifier reuse.
-- Only the promotion workflow can write an observation candidate beneath the
-  canonical research hierarchy.
-- The promoted artifact preserves run, model, prompt, corpus, experiment,
-  input-fingerprint, and review provenance.
-- Focused regression coverage proves approval, rejection, collision, stale
-  candidate, and canonical-path safety behavior.
+- A human reads the candidate and its bounded source input.
+- The human explicitly approves or rejects every research-review check.
+- The review record names the reviewer, records a timezone-aware timestamp,
+  and explains the decision.
+- `abbey research review-validate` accepts the completed record.
+- A rejected candidate creates no canonical artifact.
+- An approved candidate receives a read-only promotion preview before any
+  canonical write is considered.
+- The human explicitly decides whether to stop after preview or rerun promotion
+  with `--confirm`.
+- Any confirmed artifact has the previewed identifier, target, relationships,
+  and provenance and passes `abbey research status` inspection.
+- The session records whether evidence candidate generation is ready to begin.
 
 ## Current Objective
 
-Implement Phase 2 of the staged Abbey Research artifact-creation workflow for
-observation review and promotion.
+Exercise the completed Phase 2 review and promotion workflow with a real
+observation candidate while preserving the human approval boundary.
 
 ## Definition of Done
 
-The implementation is complete when:
+The validation is complete when:
 
-- Review records begin undecided and are hash-bound to the candidate under
-  review.
-- Promotion fails closed unless the candidate is review-ready, unchanged,
-  structurally valid, and explicitly approved.
-- Promotion previews and then writes exactly one available canonical
-  observation identifier and path.
-- The promoted artifact contains the required research and generation
-  provenance.
-- No evidence, hypothesis, or validation candidate workflow is added in this
-  phase.
+- One manifest-anchored review record moves from `undecided` to an explicit
+  human decision.
+- The completed record passes deterministic review validation.
+- The decision produces either a documented rejection with no canonical change
+  or an inspected promotion preview and separate human confirmation decision.
+- No command or AI process fills in or changes the human review decision.
+- No evidence, hypothesis, or validation candidate workflow is added.
 
 ---
 
@@ -129,55 +125,67 @@ Completed:
   canonical-path isolation with `gpt-oss:20b`.
 - No Phase 1 workflow blocker was discovered through real use.
 
+## Observation Review and Promotion
+
+Completed:
+
+- `abbey research review-init` creates an undecided review record anchored to
+  the run manifest and candidate fingerprint.
+- `abbey research review-validate` requires complete explicit human decisions.
+- `abbey research promote` previews a validated canonical promotion without
+  writing.
+- `abbey research promote --confirm` exclusively installs one reviewed
+  observation, preserves provenance, freezes authoritative outputs, and records
+  the promotion in the run manifest.
+- Fail-closed fixtures cover rejection, stale content, unsafe paths, malformed
+  canonical identity, collisions, duplicate promotion, and provenance.
+
 ---
 
 # Current Priorities
 
-## Current Phase — Canonical Observation Promotion
+## Current Phase — Real Observation Promotion Validation
 
 ## Objective
 
-Add the explicit human-review and promotion boundary required to move an
-approved observation candidate from its run workspace into canonical research.
+Validate the completed review and promotion boundary without treating workflow
+testing as approval of the research conclusion.
 
 ## Implementation Scope
 
-### Review Records
+### Human Review
 
-- Create one explicit review record for one review-ready run.
-- Bind the record to the run identifier and candidate fingerprint.
-- Begin with human decisions unresolved rather than approved by default.
-- Preserve the review record with the run for inspection and later promotion.
+- Select a real review-ready observation run and inspect its candidate and
+  bounded source material.
+- Record the reviewer, timestamp, canonical title when applicable, checklist
+  decisions, overall decision, and explanatory notes.
+- Leave the record untouched until a human supplies those judgments.
 
-### Canonical Promotion
+### Promotion Decision
 
-- Require a review-ready run, unchanged candidate, passing validation, and an
-  explicit approval record.
-- Discover existing canonical observation identifiers and select the next
-  available identifier without reuse.
-- Preview the identifier, target, relationships, and provenance before writing.
-- Write one canonical observation artifact and retain its source-run and review
-  traceability.
+- Validate the completed review record.
+- If rejected, retain the run and stop without canonical mutation.
+- If approved, inspect the read-only promotion preview.
+- Require a separate human decision before invoking `--confirm`.
+- Inspect any confirmed canonical artifact and its run-manifest provenance.
 
 ### Safety Boundary
 
-The implementation must:
+The validation must:
 
 - Support observation artifacts only.
-- Keep candidate generation outside canonical research directories.
-- Permit canonical writes only through the promotion command.
-- Never infer, manufacture, or default a human approval decision.
-- Refuse stale candidates, missing or rejected reviews, unresolved project
-  context, identifier collisions, and existing targets without mutation.
+- Never infer, manufacture, or default a human review decision.
+- Keep the current real review record undecided until a human acts.
+- Treat preview as read-only and confirmation as a separate authority boundary.
+- Keep evidence, hypothesis, validation, and interactive discovery-review
+  implementation outside this session.
 
 ### Tests
 
-- Add focused coverage for review initialization and candidate hash binding.
-- Prove incomplete and rejected reviews block promotion.
-- Prove candidate changes after review block promotion.
-- Prove identifier and target collisions fail without overwriting.
-- Prove candidate creation cannot write to canonical paths.
-- Rerun the Abbey Research suite and `abbey review`.
+- Run review validation after the human decision.
+- If promotion is confirmed, run `abbey research status` and inspect the new
+  incomplete observation chain without treating incompleteness as failure.
+- Run `abbey review` before capture.
 
 ---
 
@@ -185,7 +193,7 @@ The implementation must:
 
 ## Evidence Creation
 
-After promotion is safe:
+After one real review and promotion decision validates Phase 2:
 
 - Add evidence-specific candidate structure.
 - Verify corpus identifiers, dates, and exact quotations.

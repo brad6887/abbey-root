@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import secrets
 import shlex
 import shutil
@@ -23,6 +24,16 @@ STATES = {
     "sanitization": ("sanitized", "sanitization-failed"),
     "validation": ("review-ready", "validation-failed"),
 }
+
+RUN_ID_PATTERN = re.compile(r"^RUN-[A-Za-z0-9][A-Za-z0-9-]*$")
+
+
+def is_within(path: Path, parent: Path) -> bool:
+    try:
+        path.relative_to(parent)
+    except ValueError:
+        return False
+    return True
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -148,6 +159,17 @@ def main() -> int:
         datetime.now().strftime("RUN-%Y%m%d-%H%M%S-")
         + secrets.token_hex(2)
     )
+    if not RUN_ID_PATTERN.fullmatch(run_id):
+        print(f"Invalid research run identifier: {run_id}", file=sys.stderr)
+        return 1
+
+    canonical_root = (repo_root / "docs/research").resolve()
+    if is_within(runs_root, canonical_root):
+        print(
+            "Research candidate runs cannot use canonical research paths.",
+            file=sys.stderr,
+        )
+        return 1
     run_dir = runs_root / run_id
 
     try:

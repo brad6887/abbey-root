@@ -74,6 +74,21 @@ assert_contains \
   "abbey research create"
 
 assert_contains \
+  "--help shows review initialization usage" \
+  "$output" \
+  "abbey research review-init RUN-ID"
+
+assert_contains \
+  "--help shows review record validation usage" \
+  "$output" \
+  "abbey research review-validate RUN-ID"
+
+assert_contains \
+  "--help shows safe promotion usage" \
+  "$output" \
+  "abbey research promote RUN-ID [--confirm]"
+
+assert_contains \
   "--help shows generation budget option" \
   "$output" \
   "--max-tokens N"
@@ -847,6 +862,9 @@ cp "$ROOT/scripts/abbey_research_status.py" \
 cp "$ROOT/scripts/abbey_research_create.py" \
   "$fixture_root/scripts/abbey_research_create.py"
 
+cp "$ROOT/scripts/abbey_research_promotion.py" \
+  "$fixture_root/scripts/abbey_research_promotion.py"
+
 cp "$ROOT/tools/research/validate_discovery_manifest.py" \
   "$fixture_root/tools/research/validate_discovery_manifest.py"
 
@@ -1200,6 +1218,671 @@ assert_contains \
   "observation create reports supported type" \
   "$output" \
   "Supported types: observation"
+
+canonical_project="$fixture_root/docs/research/test-project"
+mkdir -p \
+  "$canonical_project/corpus" \
+  "$canonical_project/experiments" \
+  "$canonical_project/observations"
+
+cat > "$canonical_project/corpus/CORPUS-TEST.md" <<'MARKDOWN_CORPUS_TEST'
+---
+artifact_id: CORPUS-TEST
+artifact_type: corpus
+title: Test Corpus
+version: 1
+status: draft
+---
+
+# Test Corpus
+MARKDOWN_CORPUS_TEST
+
+cat > "$canonical_project/experiments/EXP-TEST.md" <<'MARKDOWN_EXPERIMENT_TEST'
+---
+artifact_id: EXP-TEST
+artifact_type: experiment
+title: Test Experiment
+version: 1
+status: draft
+
+source:
+  corpus: CORPUS-TEST
+---
+
+# Test Experiment
+MARKDOWN_EXPERIMENT_TEST
+cat > "$canonical_project/observations/OBS-001.md" <<'MARKDOWN_OBS_001'
+---
+artifact_id: OBS-001
+artifact_type: observation
+title: Existing Observation 1
+version: 1
+status: draft
+---
+
+# Existing Observation 1
+MARKDOWN_OBS_001
+
+cat > "$canonical_project/observations/OBS-003.md" <<'MARKDOWN_OBS_003'
+---
+artifact_id: OBS-003
+artifact_type: observation
+title: Existing Observation 3
+version: 1
+status: draft
+---
+
+# Existing Observation 3
+MARKDOWN_OBS_003
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$canonical_project/observations" \
+  ABBEY_RESEARCH_RUN_ID="RUN-TEST-CANONICAL-PATH" \
+  ABBEY_RESEARCH_STAGE_TOOL="$create_fixture/stage-tool" \
+  REAL_RESEARCH_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" create \
+    --project test-project \
+    --type observation \
+    --corpus CORPUS-TEST \
+    --experiment EXP-TEST \
+    --model test-model \
+    --prompt "$create_fixture/prompt.md" \
+    --input "$create_fixture/input.md" \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation create rejects canonical run paths" \
+  "$status" \
+  1
+
+assert_contains \
+  "observation create reports canonical path protection" \
+  "$output" \
+  "Research candidate runs cannot use canonical research paths."
+
+if [[ ! -e "$canonical_project/observations/RUN-TEST-CANONICAL-PATH" ]]; then
+  pass "canonical path rejection does not create a run workspace"
+else
+  fail "canonical path rejection does not create a run workspace"
+fi
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+    "$fixture_root/tools/bin/abbey-research" review-init \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation review initialization succeeds" \
+  "$status" \
+  0
+
+assert_contains \
+  "observation review starts undecided" \
+  "$output" \
+  "Decision: undecided"
+
+review_path="$create_runs/RUN-TEST-SUCCESS/review.json"
+review_scaffold_check="$(
+  python3 - \
+    "$review_path" \
+    "$create_runs/RUN-TEST-SUCCESS/candidate.md" <<'PYTHON_REVIEW_SCAFFOLD'
+import hashlib
+import json
+import sys
+
+review_path, candidate_path = sys.argv[1:]
+review = json.load(open(review_path, encoding="utf-8"))
+manifest = json.load(
+    open(review_path.replace("review.json", "manifest.yaml"), encoding="utf-8")
+)
+candidate_hash = hashlib.sha256(open(candidate_path, "rb").read()).hexdigest()
+valid = (
+    review["decision"] == "undecided"
+    and review["candidate_sha256"] == candidate_hash
+    and review["created_at"] == manifest["review"]["created_at"]
+    and review["reviewer"] == ""
+    and review["canonical_title"] == ""
+    and set(review["checks"].values()) == {"undecided"}
+    and manifest["review"]["candidate_sha256"] == candidate_hash
+)
+print("VALID" if valid else "BROKEN")
+PYTHON_REVIEW_SCAFFOLD
+)"
+
+assert_contains \
+  "observation review is hash-bound without implicit approval" \
+  "$review_scaffold_check" \
+  "VALID"
+
+python3 - "$review_path" <<'PYTHON_TAMPER_REVIEW_ORIGIN'
+import json
+import sys
+
+path = sys.argv[1]
+review = json.load(open(path, encoding="utf-8"))
+review["created_at"] = "2026-08-14T00:00:00+00:00"
+with open(path, "w", encoding="utf-8") as stream:
+    json.dump(review, stream, indent=2)
+    stream.write("\n")
+PYTHON_TAMPER_REVIEW_ORIGIN
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+    "$fixture_root/tools/bin/abbey-research" review-validate \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation review rejects a changed creation anchor" \
+  "$status" \
+  1
+
+assert_contains \
+  "observation review reports a changed creation anchor" \
+  "$output" \
+  "Review creation timestamp does not match the run manifest anchor."
+
+python3 - "$review_path" <<'PYTHON_RESTORE_REVIEW_ORIGIN'
+import json
+import sys
+
+path = sys.argv[1]
+review = json.load(open(path, encoding="utf-8"))
+manifest = json.load(
+    open(path.replace("review.json", "manifest.yaml"), encoding="utf-8")
+)
+review["created_at"] = manifest["review"]["created_at"]
+with open(path, "w", encoding="utf-8") as stream:
+    json.dump(review, stream, indent=2)
+    stream.write("\n")
+PYTHON_RESTORE_REVIEW_ORIGIN
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+    "$fixture_root/tools/bin/abbey-research" review-init \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation review initialization protects an existing record" \
+  "$status" \
+  1
+
+assert_contains \
+  "observation review reports overwrite protection" \
+  "$output" \
+  "Review record already exists"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+    "$fixture_root/tools/bin/abbey-research" review-validate \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation review validation rejects undecided records" \
+  "$status" \
+  1
+
+assert_contains \
+  "observation review reports undecided human decisions" \
+  "$output" \
+  "still contains undecided human decisions"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_STAGE_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" promote \
+    RUN-TEST-SUCCESS --confirm \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation promotion rejects undecided reviews" \
+  "$status" \
+  1
+
+if [[ ! -e "$canonical_project/observations/OBS-004.md" ]]; then
+  pass "undecided review creates no canonical artifact"
+else
+  fail "undecided review creates no canonical artifact"
+fi
+
+python3 - "$review_path" <<'PYTHON_REJECT_REVIEW'
+import json
+import sys
+
+path = sys.argv[1]
+review = json.load(open(path, encoding="utf-8"))
+review.update(
+    {
+        "decision": "rejected",
+        "reviewer": "Test Reviewer",
+        "reviewed_at": "2026-08-14T12:00:00+00:00",
+        "notes": "The interpretation needs revision.",
+    }
+)
+review["checks"] = {
+    "finding_wording_is_proportional": "rejected",
+    "citations_are_representative": "approved",
+    "interpretation_is_distinguished": "approved",
+}
+with open(path, "w", encoding="utf-8") as stream:
+    json.dump(review, stream, indent=2)
+    stream.write("\n")
+PYTHON_REJECT_REVIEW
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+    "$fixture_root/tools/bin/abbey-research" review-validate \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation review validation accepts explicit rejection" \
+  "$status" \
+  0
+
+assert_contains \
+  "observation review validation reports rejection" \
+  "$output" \
+  "Decision: rejected"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_STAGE_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" promote \
+    RUN-TEST-SUCCESS --confirm \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation promotion rejects a human rejection" \
+  "$status" \
+  1
+
+assert_contains \
+  "observation promotion requires explicit approval" \
+  "$output" \
+  "does not approve canonical promotion"
+
+if [[ ! -e "$canonical_project/observations/OBS-004.md" ]]; then
+  pass "rejected review creates no canonical artifact"
+else
+  fail "rejected review creates no canonical artifact"
+fi
+
+python3 - "$review_path" <<'PYTHON_APPROVE_REVIEW'
+import json
+import sys
+
+path = sys.argv[1]
+review = json.load(open(path, encoding="utf-8"))
+review.update(
+    {
+        "decision": "approved",
+        "reviewer": "Test Reviewer",
+        "reviewed_at": "2026-08-14T12:15:00+00:00",
+        "canonical_title": "Test Observation",
+        "notes": "Approved after direct human review.",
+    }
+)
+review["checks"] = {
+    name: "approved" for name in review["checks"]
+}
+with open(path, "w", encoding="utf-8") as stream:
+    json.dump(review, stream, indent=2)
+    stream.write("\n")
+PYTHON_APPROVE_REVIEW
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+    "$fixture_root/tools/bin/abbey-research" review-validate \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation review validation accepts explicit approval" \
+  "$status" \
+  0
+
+candidate_path="$create_runs/RUN-TEST-SUCCESS/candidate.md"
+cp "$candidate_path" "$candidate_path.before-stale-test"
+printf '%s\n' 'Changed after review.' >> "$candidate_path"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+    "$fixture_root/tools/bin/abbey-research" review-validate \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation review validation rejects stale candidates" \
+  "$status" \
+  1
+
+assert_contains \
+  "stale candidate reports changed hash" \
+  "$output" \
+  "Candidate changed after the review record was created."
+
+mv "$candidate_path.before-stale-test" "$candidate_path"
+
+mv "$candidate_path" "$candidate_path.real"
+ln -s "$(basename "$candidate_path.real")" "$candidate_path"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+    "$fixture_root/tools/bin/abbey-research" review-validate \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation review validation rejects a symlinked candidate" \
+  "$status" \
+  1
+
+assert_contains \
+  "symlinked candidate reports unsafe run contract" \
+  "$output" \
+  "Candidate path is unavailable or outside the run contract."
+
+rm "$candidate_path"
+mv "$candidate_path.real" "$candidate_path"
+
+cp \
+  "$canonical_project/corpus/CORPUS-TEST.md" \
+  "$canonical_project/corpus/CORPUS-TEST.md.before-metadata-test"
+sed -i.bak \
+  's/artifact_id: CORPUS-TEST/artifact_id: CORPUS-OTHER/' \
+  "$canonical_project/corpus/CORPUS-TEST.md"
+rm "$canonical_project/corpus/CORPUS-TEST.md.bak"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_STAGE_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" promote \
+    RUN-TEST-SUCCESS --confirm \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation promotion rejects mismatched canonical source metadata" \
+  "$status" \
+  1
+
+assert_contains \
+  "mismatched canonical source metadata is reported" \
+  "$output" \
+  "Canonical corpus metadata does not match: CORPUS-TEST.md"
+
+mv \
+  "$canonical_project/corpus/CORPUS-TEST.md.before-metadata-test" \
+  "$canonical_project/corpus/CORPUS-TEST.md"
+
+printf '%s\n' '# Invalid Identifier' \
+  > "$canonical_project/observations/OBS-invalid.md"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_STAGE_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" promote \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation promotion rejects invalid canonical identifiers" \
+  "$status" \
+  1
+
+assert_contains \
+  "invalid canonical identifier is reported" \
+  "$output" \
+  "Invalid canonical observation identifier: OBS-invalid.md"
+
+rm "$canonical_project/observations/OBS-invalid.md"
+
+mv \
+  "$canonical_project/observations" \
+  "$canonical_project/observations-real"
+mkdir "$fixture_root/working/redirected-observations"
+ln -s \
+  "$fixture_root/working/redirected-observations" \
+  "$canonical_project/observations"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_STAGE_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" promote \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation promotion rejects a redirected canonical directory" \
+  "$status" \
+  1
+
+assert_contains \
+  "redirected canonical directory is reported as unsafe" \
+  "$output" \
+  "Canonical observations directory is unsafe."
+
+rm "$canonical_project/observations"
+mv \
+  "$canonical_project/observations-real" \
+  "$canonical_project/observations"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_STAGE_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" promote \
+    RUN-TEST-SUCCESS \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation promotion preview succeeds" \
+  "$status" \
+  0
+
+assert_contains \
+  "observation promotion allocates above the highest identifier" \
+  "$output" \
+  "Artifact:   OBS-004"
+
+assert_contains \
+  "observation promotion preview requires confirmation" \
+  "$output" \
+  "Preview only. No canonical artifact was written."
+
+if [[ ! -e "$canonical_project/observations/OBS-004.md" ]]; then
+  pass "promotion preview creates no canonical artifact"
+else
+  fail "promotion preview creates no canonical artifact"
+fi
+
+collision_check="$(
+  python3 - \
+    "$fixture_root/scripts/abbey_research_promotion.py" \
+    "$fixture_root/working/collision-test" <<'PYTHON_COLLISION'
+import importlib.util
+import pathlib
+import sys
+
+script, root_value = sys.argv[1:]
+spec = importlib.util.spec_from_file_location("promotion", script)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+root = pathlib.Path(root_value)
+root.mkdir()
+target = root / "OBS-004.md"
+target.write_text("original\n", encoding="utf-8")
+try:
+    module.install_exclusive(target, "replacement\n")
+except module.PromotionError:
+    print("BLOCKED" if target.read_text() == "original\n" else "OVERWROTE")
+else:
+    print("NOT_BLOCKED")
+PYTHON_COLLISION
+)"
+
+assert_contains \
+  "canonical installation blocks a target collision without overwrite" \
+  "$collision_check" \
+  "BLOCKED"
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_STAGE_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" promote \
+    RUN-TEST-SUCCESS --confirm \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "confirmed observation promotion succeeds" \
+  "$status" \
+  0
+
+assert_contains \
+  "confirmed observation promotion reports canonical target" \
+  "$output" \
+  "Canonical artifact:"
+
+promoted_path="$canonical_project/observations/OBS-004.md"
+promoted_check="$(
+  python3 - \
+    "$promoted_path" \
+    "$create_runs/RUN-TEST-SUCCESS/manifest.yaml" <<'PYTHON_PROMOTED'
+import json
+import sys
+
+artifact_path, manifest_path = sys.argv[1:]
+artifact = open(artifact_path, encoding="utf-8").read()
+manifest = json.load(open(manifest_path, encoding="utf-8"))
+valid = (
+    "artifact_id: OBS-004" in artifact
+    and 'title: "Test Observation"' in artifact
+    and "run_id: \"RUN-TEST-SUCCESS\"" in artifact
+    and 'model: "test-model"' in artifact
+    and "prompt_sha256:" in artifact
+    and "input_sha256:" in artifact
+    and manifest["state"] == "promoted"
+    and manifest["promotion"]["artifact_id"] == "OBS-004"
+)
+print("VALID" if valid else "BROKEN")
+PYTHON_PROMOTED
+)"
+
+assert_contains \
+  "promoted observation preserves identity and provenance" \
+  "$promoted_check" \
+  "VALID"
+
+if [[ ! -w "$promoted_path" && ! -w "$review_path" ]]; then
+  pass "promotion freezes the canonical artifact and review record"
+else
+  fail "promotion freezes the canonical artifact and review record"
+fi
+
+set +e
+output="$(
+  ABBEY_ROOT="$fixture_root" \
+  ABBEY_RESEARCH_RUNS_DIR="$create_runs" \
+  ABBEY_RESEARCH_STAGE_TOOL="$fixture_root/tools/bin/abbey-research" \
+    "$fixture_root/tools/bin/abbey-research" promote \
+    RUN-TEST-SUCCESS --confirm \
+    2>&1
+)"
+status=$?
+set -e
+
+assert_status \
+  "observation promotion refuses an already promoted run" \
+  "$status" \
+  1
+
+if [[ ! -e "$canonical_project/observations/OBS-005.md" ]]; then
+  pass "duplicate promotion creates no second canonical artifact"
+else
+  fail "duplicate promotion creates no second canonical artifact"
+fi
 
 set +e
 output="$(
