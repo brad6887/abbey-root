@@ -385,6 +385,19 @@ commands:
     examples:
       - abbey lab check
 
+  remote:
+    category: lab
+    description: Connect to named Abbey hosts through Tailscale.
+    usage: abbey remote <command>
+    hidden: false
+    subcommands:
+      connect:
+        description: Resolve a Tailscale peer IPv4 address and connect with SSH.
+        usage: abbey remote connect --name NAME [--user USER]
+    examples:
+      - abbey remote connect --name ubuntu-dev01
+      - abbey remote connect --name ubuntu-dev01 --user bcooke
+
   git:
     category: lab
     description: Audit and synchronize Git configuration across managed hosts.

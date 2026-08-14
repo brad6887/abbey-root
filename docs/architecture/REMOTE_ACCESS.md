@@ -114,7 +114,17 @@ Password authentication should be avoided whenever practical.
 Typical remote workflow:
 
 1. Connect to the Tailscale network.
-2. SSH to `ubuntu-dev01`.
+2. Connect to the named remote operations node. Abbey resolves the current
+   Tailscale IPv4 address and the inventory-owned SSH user before starting SSH.
+
+```bash
+abbey remote connect --name ubuntu-dev01
+```
+
+Use `--user USER` only when connecting to a Tailscale peer that does not have
+an `ansible_user` in the Abbey inventory or when an explicit override is
+required.
+
 3. Verify lab health.
 
 ```bash
@@ -166,3 +176,4 @@ Remote administration should occur through Tailscale using the Remote Access & O
 |------|--------|
 | 2026-07-14 | Initial remote access architecture defined using Tailscale. |
 | 2026-07-14 | Distinguished the Remote Access & Operations Node from the Ansible Control Node. |
+| 2026-08-14 | Added inventory-aware Tailscale peer resolution through `abbey remote connect`. |

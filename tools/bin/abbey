@@ -122,6 +122,11 @@ case "$command" in
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-lab" "$@"
     ;;
 
+  remote)
+    shift
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-remote" "$@"
+    ;;
+
   ssh)
     shift
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-ssh" "$@"
