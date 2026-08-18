@@ -1,7 +1,7 @@
 # Abbey Root Backlog
 
 <!-- BEGIN GENERATED BACKLOG STATUS -->
-> **Backlog Status:** 180 complete · 235 pending · 415 total
+> **Backlog Status:** 181 complete · 236 pending · 417 total
 <!-- END GENERATED BACKLOG STATUS -->
 
 This document contains work that has been identified but is not necessarily scheduled.
@@ -42,6 +42,8 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Implement and document a canonical framework-level project validation workflow.
 - [x] Create a framework adoption guide based on the validated Abbey Root, Power Infrastructure, and Bread Pitt workflows.
 - [x] Create the first safe default Abbey project template through `abbey init`.
+- [ ] Fix `abbey init help` so command help is displayed rather than treating `help` as a project destination.
+- [ ] Make `abbey review` suggested commit wording project-aware instead of referring to Abbey Root for external projects.
 - [ ] Define whether Abbey needs multiple selectable project templates after additional project types validate the requirement.
 - [ ] Define and document the Abbey Framework versioning and compatibility policy.
 - [x] Establish the initial Abbey Framework documentation foundation.
@@ -50,7 +52,7 @@ Ongoing practices, design principles, and general areas of improvement belong in
 - [x] Add repository-defined AI session guidance to Abbey Root.
 - [x] Include repository-defined AI session guidance in newly initialized Abbey projects.
 - [ ] Adopt repository-defined AI session guidance in Power Infrastructure.
-- [ ] Create a framework migration guide based on at least one completed migration of an existing repository.
+- [x] Create a framework migration guide based on at least one completed migration of an existing repository.
 - [x] Improve `abbey next` NEXT.md parsing and validation.
 - [x] Document the required NEXT.md structure.
 - [x] Support normal Markdown headings and body content in NEXT.md.

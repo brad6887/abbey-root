@@ -14,6 +14,7 @@ domain-specific collections with dedicated discovery workflows.
 
 - [Abbey CLI](../guide/ABBEY_CLI.md)
 - [Abbey Framework Adoption Guide](../guide/FRAMEWORK_ADOPTION.md)
+- [Abbey Framework Migration Guide](../guide/FRAMEWORK_MIGRATION.md)
 - [Architecture](../guide/ARCHITECTURE.md)
 - [BradCooke.com Content Philosophy](../guide/BRADCOOKE_COM/content-philosophy.md)
 - [BradCooke.com Content Pipeline](../guide/BRADCOOKE_COM/content-pipeline.md)

@@ -265,6 +265,7 @@ Those decisions require their own evidence and bounded objectives.
 
 ## Authoritative References
 
+- [Framework Migration Guide](FRAMEWORK_MIGRATION.md)
 - [Project Standard](../framework/PROJECT_STANDARD.md)
 - [CLI Standard](../framework/CLI_STANDARD.md)
 - [Session Workflow](SESSION_WORKFLOW.md)

@@ -151,6 +151,11 @@ Completed
 - Evidence-based framework adoption guidance defines a bounded adoption and
   certification path for new and established repositories using validated
   Abbey Root, Power Infrastructure, and Bread Pitt workflows.
+- The existing-project migration workflow is validated through the real
+  Artificial Ignorance migration, with a canonical framework migration guide
+  covering baseline preservation, disposable initializer references,
+  project-owned metadata and planning, capability isolation, validation,
+  session certification, and post-migration review.
 
 ## Current Focus
 
