@@ -977,6 +977,13 @@ session_review() {
   local session_file
   local relative_session
 
+  case "$requested_session" in
+    help|-h|--help)
+      usage
+      return 0
+      ;;
+  esac
+
   if ! command -v codex >/dev/null 2>&1; then
     echo "ERROR Codex CLI is not available."
     exit 1

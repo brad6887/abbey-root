@@ -20,8 +20,72 @@ check() {
   fi
 }
 
-printf 'Abbey Session Review Prompt Tests\n'
-printf '=================================\n\n'
+check_review_help_without_codex() {
+  local flag="$1"
+  local description="$2"
+  local output
+  local status
+
+  output="$(
+    bash -c '
+      source "$1" help >/dev/null
+
+      command() {
+        if [[ "${1:-}" == "-v" && "${2:-}" == "codex" ]]; then
+          return 1
+        fi
+        builtin command "$@"
+      }
+
+      session_review "$2"
+    ' _ "$SESSION" "$flag" 2>&1
+  )"
+  status=$?
+
+  if (( status == 0 )) &&
+    grep -Fq -- "abbey session review [file]" <<<"$output"; then
+    printf 'PASS %s\n' "$description"
+    passed=$((passed + 1))
+  else
+    printf 'FAIL %s\n' "$description"
+    printf '%s\n' "$output"
+    failed=$((failed + 1))
+  fi
+}
+
+check_review_requires_codex() {
+  local output
+  local status
+
+  output="$(
+    bash -c '
+      source "$1" help >/dev/null
+
+      command() {
+        if [[ "${1:-}" == "-v" && "${2:-}" == "codex" ]]; then
+          return 1
+        fi
+        builtin command "$@"
+      }
+
+      session_review
+    ' _ "$SESSION" 2>&1
+  )"
+  status=$?
+
+  if (( status != 0 )) &&
+    grep -Fq -- "ERROR Codex CLI is not available." <<<"$output"; then
+    printf 'PASS review still requires Codex\n'
+    passed=$((passed + 1))
+  else
+    printf 'FAIL review still requires Codex\n'
+    printf '%s\n' "$output"
+    failed=$((failed + 1))
+  fi
+}
+
+printf 'Abbey Session Review Tests\n'
+printf '==========================\n\n'
 
 check "requires decisive result" \
   "State exactly one of:"
@@ -49,6 +113,20 @@ check "maintains dates for changed planning documents" \
 
 check "requires single file classification" \
   "Each supplied authoritative file must appear exactly once"
+
+check_review_help_without_codex \
+  "help" \
+  "review help works without Codex"
+
+check_review_help_without_codex \
+  "-h" \
+  "review -h works without Codex"
+
+check_review_help_without_codex \
+  "--help" \
+  "review --help works without Codex"
+
+check_review_requires_codex
 
 printf '\nPassed: %d\n' "$passed"
 printf 'Failed: %d\n' "$failed"
