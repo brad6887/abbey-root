@@ -9,6 +9,7 @@ fi
 alias cda='cd ~/git/abbey-root'
 alias ans='cd ~/git/abbey-root/ansible'
 alias cdb='cd ~/git/bread-pitt'
+alias cai='cd ~/git/artificial-ignorance'
 alias abbey-site='cd ~/git/abbey-root/site'
 alias abbey-content='cd ~/git/abbey-root/content'
 alias abbey-pages='cd ~/git/abbey-root/content/pages'

@@ -14,6 +14,9 @@ server_purpose:
 docker_host: false
 homepage_show_server: true
 
+static_site_host_deploy_key_hosts:
+  - ubuntu-dev01
+
 static_site_host_sites:
   - domain: abbeyroot.com
     default_server: true
@@ -22,6 +25,15 @@ static_site_host_sites:
       - www.abbeyroot.com
       - sites01
       - sites01.home.arpa
+
+  - domain: breadpitt.sites01.home.arpa
+    server_names:
+      - breadpitt.sites01.home.arpa
+
+  - domain: breadpitt.net
+    server_names:
+      - breadpitt.net
+      - www.breadpitt.net
 
   - domain: breadpitt.sites01.home.arpa
     server_names:

@@ -4,3 +4,9 @@ static_site_host_deploy_user: abbey-deploy
 static_site_host_deploy_group: abbey-deploy
 static_site_host_initial_release: bootstrap
 static_site_host_sites: []
+
+# Hosts whose admin-user ED25519 public keys are authorized to deploy
+# static-site releases as static_site_host_deploy_user.
+static_site_host_deploy_key_hosts: []
+static_site_host_deploy_source_user: "{{ admin_user }}"
+static_site_host_deploy_public_key_path: .ssh/id_ed25519.pub

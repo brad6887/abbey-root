@@ -32,6 +32,46 @@
     name: "{{ static_site_host_deploy_group }}"
     state: present
 
+- name: Collect static site deployment public keys
+  ansible.builtin.slurp:
+    src: >-
+      /home/{{ static_site_host_deploy_source_user }}/{{
+      static_site_host_deploy_public_key_path }}
+  delegate_to: "{{ item }}"
+  become: false
+  loop: "{{ static_site_host_deploy_key_hosts }}"
+  register: static_site_host_deploy_public_keys
+  when: static_site_host_deploy_key_hosts | length > 0
+
+- name: Inspect static site deployment SSH directory
+  ansible.builtin.stat:
+    path: "/home/{{ static_site_host_deploy_user }}/.ssh"
+  register: static_site_host_deploy_ssh_directory
+
+- name: Create static site deployment SSH directory
+  ansible.builtin.file:
+    path: "/home/{{ static_site_host_deploy_user }}/.ssh"
+    state: directory
+    owner: "{{ static_site_host_deploy_user }}"
+    group: "{{ static_site_host_deploy_group }}"
+    mode: "0700"
+
+- name: Install Abbey-managed static site deployment keys
+  ansible.builtin.blockinfile:
+    path: "/home/{{ static_site_host_deploy_user }}/.ssh/authorized_keys"
+    create: true
+    owner: "{{ static_site_host_deploy_user }}"
+    group: "{{ static_site_host_deploy_group }}"
+    mode: "0600"
+    marker: "# {mark} ABBEY MANAGED STATIC SITE DEPLOY KEYS"
+    block: |
+      {% for deploy_key in static_site_host_deploy_public_keys.results %}
+      {{ deploy_key.content | b64decode | trim }}
+      {% endfor %}
+  when:
+    - static_site_host_deploy_key_hosts | length > 0
+    - not ansible_check_mode or static_site_host_deploy_ssh_directory.stat.exists
+
 - name: Create static site deployment user
   ansible.builtin.user:
     name: "{{ static_site_host_deploy_user }}"
