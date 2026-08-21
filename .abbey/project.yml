@@ -21,6 +21,11 @@ paths:
   planning: docs/planning
   session_updates: docs/session-updates
   journal: content/journal
+exports:
+  plants:
+    target_project: ../brad6887.github.io
+    target_project_slug: bradcooke
+    target_domain: bradcooke.com
 site:
   source: site
   build:

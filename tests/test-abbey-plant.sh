@@ -31,6 +31,7 @@ assert_status() {
     fail "$name"
     echo "     Expected status: $expected"
     echo "     Actual status:   $status"
+    echo "     Output: $output"
   fi
 }
 
@@ -48,9 +49,38 @@ assert_contains() {
 
 create_plant() {
   local fixture="$1"
-  local plant_dir="$test_root/$fixture/working/plants/test-plant"
+  local fixture_root="$test_root/$fixture"
+  local plant_dir="$fixture_root/working/plants/test-plant"
+  local target_root="$fixture_root/bradcooke"
 
-  mkdir -p "$plant_dir/photos" "$plant_dir/sources"
+  mkdir -p "$plant_dir/photos" "$plant_dir/sources" "$fixture_root/.abbey" "$target_root/.abbey"
+  cat > "$fixture_root/.abbey/project.yml" <<'YAML'
+schema_version: 1
+project:
+  name: Abbey Root Fixture
+  slug: abbey-root
+exports:
+  plants:
+    target_project: bradcooke
+    target_project_slug: bradcooke
+    target_domain: bradcooke.com
+YAML
+  cat > "$target_root/.abbey/project.yml" <<'YAML'
+schema_version: 1
+project:
+  name: BradCooke.com
+  slug: bradcooke
+imports:
+  plants:
+    content: content/plants
+    public_images: site/public/images/plants
+    manifests: generated/plant-publication
+site:
+  publish:
+    method: github-pages
+    target: origin:main
+    domain: bradcooke.com
+YAML
   touch \
     "$plant_dir/history.md" \
     "$plant_dir/story.md" \
@@ -491,6 +521,30 @@ assert_contains \
   "ignored artifacts do not become workspace photos" \
   "OK   Supported workspace photos indexed: 2"
 
+wrong_target_plant="$(create_plant publish-wrong-target)"
+python3 - "$test_root/publish-wrong-target/bradcooke/.abbey/project.yml" <<'PY'
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+path.write_text(
+    path.read_text(encoding="utf-8").replace(
+        "domain: bradcooke.com", "domain: example.invalid"
+    ),
+    encoding="utf-8",
+)
+PY
+run_publish "$test_root/publish-wrong-target" test-plant
+assert_status "plant publishing rejects the wrong target domain" 1
+assert_contains \
+  "plant publishing explains the target ownership mismatch" \
+  "expected 'bradcooke.com'"
+if [[ ! -e "$test_root/publish-wrong-target/bradcooke/content/plants/test-plant.md" ]]; then
+  pass "wrong plant publishing target receives no generated content"
+else
+  fail "wrong plant publishing target receives no generated content"
+fi
+
 plant_dir="$(create_plant publish-index-photo)"
 awk '
   /^  index:/ { print "  index: photos/index.jpg"; next }
@@ -525,8 +579,8 @@ run_publish "$test_root/publish-index-photo" test-plant
 assert_status "plant publishing with index photo succeeds" 0
 assert_contains   "plant publishing reports the public index image"   "Published index image: /images/plants/test-plant/index.jpg"
 
-published_index="$test_root/publish-index-photo/site/public/images/plants/test-plant/index.jpg"
-generated_content="$test_root/publish-index-photo/content/plants/test-plant.md"
+published_index="$test_root/publish-index-photo/bradcooke/site/public/images/plants/test-plant/index.jpg"
+generated_content="$test_root/publish-index-photo/bradcooke/content/plants/test-plant.md"
 
 if [[ -f "$published_index" ]]; then
   pass "plant publishing creates the stable public index image"
@@ -575,7 +629,7 @@ else
   printf '     Actual:   %s\n' "$published_dimensions"
 fi
 
-publication_manifest="$test_root/publish-index-photo/generated/plant-publication/test-plant.json"
+publication_manifest="$test_root/publish-index-photo/bradcooke/generated/plant-publication/test-plant.json"
 
 if [[ -f "$publication_manifest" ]]; then
   pass "plant publishing creates a non-public publication manifest"
@@ -608,6 +662,11 @@ index_records = [
 ]
 
 assert data["schema_version"] == 1
+assert data["source_project"]["slug"] == "abbey-root"
+assert data["target_project"] == {
+    "slug": "bradcooke",
+    "domain": "bradcooke.com",
+}
 assert data["plant"]["slug"] == "test-plant"
 assert data["profile"]["maximum_edge"] == 2400
 assert data["profile"]["colorspace"] == "sRGB"
@@ -653,7 +712,7 @@ else
   fail "generated frontmatter cache-busts the current image"
 fi
 
-proof_file="$test_root/publish-index-photo/site/public/images/plants/test-plant/proof/reference.txt"
+proof_file="$test_root/publish-index-photo/bradcooke/site/public/images/plants/test-plant/proof/reference.txt"
 mkdir -p "$(dirname "$proof_file")"
 printf 'preserve me\n' > "$proof_file"
 run_publish "$test_root/publish-index-photo" test-plant
@@ -664,7 +723,7 @@ else
   fail "plant publishing preserves unmanaged public artifacts"
 fi
 
-lock_dir="$test_root/publish-index-photo/site/public/images/plants/.test-plant.publish.lock"
+lock_dir="$test_root/publish-index-photo/bradcooke/site/public/images/plants/.test-plant.publish.lock"
 mkdir "$lock_dir"
 run_publish "$test_root/publish-index-photo" test-plant
 assert_status "plant publishing rejects an overlapping publication" 1
@@ -681,7 +740,7 @@ if [[ "$published_content_hash_before" == "$published_content_hash_after" ]]; th
 else
   fail "failed publication preserves the previous generated page"
 fi
-if find "$test_root/publish-index-photo/site/public/images/plants" \
+if find "$test_root/publish-index-photo/bradcooke/site/public/images/plants" \
   -maxdepth 1 -type d -name '.test-plant.publish.*' | grep -q .
 then
   fail "failed publication removes its staging directory"
@@ -708,7 +767,7 @@ run_publish_batch "$batch_root" test-plant second-plant
 assert_status "batch publishing succeeds" 0
 assert_contains "batch publishing reports serialized mode" "Mode: serialized"
 assert_contains "batch publishing reports completion" "PASS Published 2 plant(s) serially."
-if [[ -f "$batch_root/content/plants/test-plant.md" && -f "$batch_root/content/plants/second-plant.md" ]]; then
+if [[ -f "$batch_root/bradcooke/content/plants/test-plant.md" && -f "$batch_root/bradcooke/content/plants/second-plant.md" ]]; then
   pass "batch publishing generates every requested plant"
 else
   fail "batch publishing generates every requested plant"

@@ -24,9 +24,11 @@ SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 REPO_DIR="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
 PLANTS_DIR="$REPO_DIR/working/plants"
-CONTENT_DIR="$REPO_DIR/content/plants"
-PUBLIC_PLANTS_DIR="$REPO_DIR/site/public/images/plants"
-PUBLICATION_MANIFEST_DIR="$REPO_DIR/generated/plant-publication"
+PROJECT_LIB="$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+CONTENT_DIR=""
+PUBLIC_PLANTS_DIR=""
+PUBLICATION_MANIFEST_DIR=""
+PUBLISH_TARGET_ROOT=""
 IMAGE_DERIVATIVE_HELPER="$ABBEY_TOOLKIT_ROOT/tools/image/create_public_derivative.py"
 BATCH_UPDATE_HELPER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_plant_update_batch.py"
 PLANT_TEMPLATE_DIR="$PLANTS_DIR/_template"
@@ -34,6 +36,9 @@ PLANT_TEMPLATE_DIR="$PLANTS_DIR/_template"
 ok_count=0
 warn_count=0
 fail_count=0
+
+# shellcheck source=../lib/project.sh
+source "$PROJECT_LIB"
 
 ok() {
     printf 'OK   %s\n' "$1"
@@ -100,6 +105,115 @@ Update-batch workflow:
   prepare            Group renamed photos and create an editable worksheet
   apply              Validate and apply every completed worksheet update
 USAGE
+}
+
+load_publish_target() {
+    local target_project
+    local expected_slug
+    local expected_domain
+
+    target_project="$(
+        abbey_project_value "$REPO_DIR" exports.plants.target_project ""
+    )"
+    expected_slug="$(
+        abbey_project_value "$REPO_DIR" exports.plants.target_project_slug ""
+    )"
+    expected_domain="$(
+        abbey_project_value "$REPO_DIR" exports.plants.target_domain ""
+    )"
+
+    if [[ -z "$target_project" || -z "$expected_slug" || -z "$expected_domain" ]]; then
+        echo "ERROR: Plant publishing requires explicit exports.plants target configuration."
+        return 1
+    fi
+
+    IFS=$'\t' read -r PUBLISH_TARGET_ROOT CONTENT_DIR PUBLIC_PLANTS_DIR PUBLICATION_MANIFEST_DIR < <(
+        python3 - "$REPO_DIR" "$target_project" "$expected_slug" "$expected_domain" <<'PY_TARGET'
+import sys
+from pathlib import Path
+
+import yaml
+
+source_root = Path(sys.argv[1]).resolve()
+target_value = Path(sys.argv[2]).expanduser()
+expected_slug = sys.argv[3]
+expected_domain = sys.argv[4]
+target_root = (
+    (source_root / target_value).resolve()
+    if not target_value.is_absolute()
+    else target_value.resolve()
+)
+config_path = target_root / ".abbey" / "project.yml"
+
+
+def error(message):
+    print(f"ERROR: {message}", file=sys.stderr)
+    raise SystemExit(1)
+
+
+if not config_path.is_file():
+    error(f"Plant publishing target is not an Abbey project: {target_root}")
+
+if target_root == source_root:
+    error("Plant publishing target must be a separate Abbey project")
+
+try:
+    config = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
+except (OSError, yaml.YAMLError) as exc:
+    error(f"Unable to load plant publishing target: {exc}")
+
+project = config.get("project")
+if not isinstance(project, dict) or project.get("slug") != expected_slug:
+    actual = project.get("slug") if isinstance(project, dict) else None
+    error(
+        f"Plant publishing target slug is {actual!r}; expected {expected_slug!r}"
+    )
+
+publish = config.get("site", {}).get("publish", {})
+if not isinstance(publish, dict) or publish.get("domain") != expected_domain:
+    actual = publish.get("domain") if isinstance(publish, dict) else None
+    error(
+        f"Plant publishing target domain is {actual!r}; expected {expected_domain!r}"
+    )
+
+imports = config.get("imports", {}).get("plants", {})
+if not isinstance(imports, dict):
+    error("Target project must declare imports.plants")
+
+
+def target_path(key):
+    value = imports.get(key)
+    if not isinstance(value, str) or not value.strip():
+        error(f"Target project must declare imports.plants.{key}")
+    path = Path(value)
+    if path.is_absolute():
+        error(f"imports.plants.{key} must be project-relative")
+    resolved = (target_root / path).resolve()
+    try:
+        resolved.relative_to(target_root)
+    except ValueError:
+        error(f"imports.plants.{key} escapes the target project")
+    return resolved
+
+
+print(
+    "\t".join(
+        str(path)
+        for path in (
+            target_root,
+            target_path("content"),
+            target_path("public_images"),
+            target_path("manifests"),
+        )
+    )
+)
+PY_TARGET
+    ) || return 1
+
+    if [[ -z "$PUBLISH_TARGET_ROOT" ]]; then
+        echo "ERROR: Unable to resolve the plant publishing target."
+        return 1
+    fi
 }
 
 update_batch() {
@@ -1146,15 +1260,15 @@ publish_plant() {
 
     local plant_dir="$PLANTS_DIR/$slug"
     local facts_file="$plant_dir/facts.yaml"
-    local output_file="$CONTENT_DIR/$slug.md"
-    local public_dir="$PUBLIC_PLANTS_DIR/$slug"
-    local manifest_file="$PUBLICATION_MANIFEST_DIR/$slug.json"
+    local output_file
+    local public_dir
+    local manifest_file
     local staging_dir
     local staged_output
     local staged_public_dir
     local staged_manifest
     local publish_status
-    local lock_dir="$PUBLIC_PLANTS_DIR/.${slug}.publish.lock"
+    local lock_dir
     local lock_cleanup
 
     echo "Plant Publishing"
@@ -1164,9 +1278,16 @@ publish_plant() {
 
     validate_plant "$slug"
 
+    load_publish_target
+    output_file="$CONTENT_DIR/$slug.md"
+    public_dir="$PUBLIC_PLANTS_DIR/$slug"
+    manifest_file="$PUBLICATION_MANIFEST_DIR/$slug.json"
+    lock_dir="$PUBLIC_PLANTS_DIR/.${slug}.publish.lock"
+
     echo
     echo "Publishing"
     echo "----------"
+    echo "Target project: $PUBLISH_TARGET_ROOT"
 
     if [[ ! -x "$IMAGE_DERIVATIVE_HELPER" ]]; then
         echo "ERROR: Public image helper is missing or not executable:"
@@ -1209,6 +1330,7 @@ publish_plant() {
         "$staged_public_dir" \
         "$IMAGE_DERIVATIVE_HELPER" \
         "$REPO_DIR" \
+        "$PUBLISH_TARGET_ROOT" \
         "$staged_manifest" \
         "$public_dir" <<'PY'
 import json
@@ -1224,9 +1346,16 @@ plant_dir = Path(sys.argv[2])
 output_path = Path(sys.argv[3])
 public_dir = Path(sys.argv[4])
 image_helper = Path(sys.argv[5])
-project_root = Path(sys.argv[6]).resolve()
-manifest_path = Path(sys.argv[7])
-final_public_dir = Path(sys.argv[8])
+source_root = Path(sys.argv[6]).resolve()
+target_root = Path(sys.argv[7]).resolve()
+manifest_path = Path(sys.argv[8])
+final_public_dir = Path(sys.argv[9])
+source_config = yaml.safe_load(
+    (source_root / ".abbey/project.yml").read_text(encoding="utf-8")
+)
+target_config = yaml.safe_load(
+    (target_root / ".abbey/project.yml").read_text(encoding="utf-8")
+)
 
 publication_records = []
 
@@ -1260,14 +1389,14 @@ def read_document(relative_path):
     return "\n".join(lines).strip()
 
 
-def project_relative(path):
+def project_relative(path, root, label):
     resolved = Path(path).resolve()
 
     try:
-        return str(resolved.relative_to(project_root))
+        return str(resolved.relative_to(root))
     except ValueError as error:
         raise SystemExit(
-            f"ERROR Publication path is outside the active project: {resolved}"
+            f"ERROR Publication {label} is outside its project: {resolved}"
         ) from error
 
 
@@ -1305,9 +1434,11 @@ def create_public_derivative(source, destination, publication):
             f"ERROR Invalid provenance returned for image: {source}"
         ) from error
 
-    record["source"]["path"] = project_relative(record["source"]["path"])
+    record["source"]["path"] = project_relative(
+        record["source"]["path"], source_root, "source"
+    )
     record["derivative"]["path"] = project_relative(
-        final_public_dir / destination.name
+        final_public_dir / destination.name, target_root, "derivative"
     )
     record["publication"] = publication
     publication_records.append(record)
@@ -1472,6 +1603,13 @@ output_path.write_text(body, encoding="utf-8")
 
 publication_manifest = {
     "schema_version": 1,
+    "source_project": {
+        "slug": source_config["project"]["slug"],
+    },
+    "target_project": {
+        "slug": target_config["project"]["slug"],
+        "domain": target_config["site"]["publish"]["domain"],
+    },
     "plant": {
         "slug": slug,
     },
@@ -1512,7 +1650,7 @@ PY
     fi
 
     python3 - \
-        "$REPO_DIR" \
+        "$PUBLISH_TARGET_ROOT" \
         "$public_dir" \
         "$manifest_file" \
         "$output_file" \

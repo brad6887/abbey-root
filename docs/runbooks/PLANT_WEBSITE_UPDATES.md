@@ -7,10 +7,10 @@ covers new-plant onboarding, individual observations, multi-plant batches,
 manual fact or history corrections, validation, publishing, and session
 completion.
 
-Canonical plant material lives under `working/plants/<slug>/`. Files under
-`content/plants/`, `generated/plant-publication/`, and
-`site/public/images/plants/` are derived by `abbey plant publish`; do not edit
-those generated outputs directly.
+Canonical plant material lives under `working/plants/<slug>/` in Abbey Root.
+Files under BradCooke.com's `content/plants/`,
+`generated/plant-publication/`, and `site/public/images/plants/` are derived
+by `abbey plant publish`; do not edit those generated outputs directly.
 
 ---
 
@@ -426,9 +426,14 @@ Published image URLs include a short content hash. The stable filenames remain
 human-readable while browsers and the CDN request a fresh image whenever its
 contents change.
 
-Build the complete site:
+Plant publication writes to the explicit BradCooke.com Abbey project configured
+under `exports.plants`. It fails closed if that project, slug, domain, or its
+project-owned import paths do not match.
+
+Build the complete BradCooke.com site from its repository:
 
 ```bash
+cd ../brad6887.github.io
 abbey site build
 ```
 
@@ -439,8 +444,9 @@ Inspect the generated page and publication manifest:
 
 ```bash
 slug="<slug>"
-sed -n '1,160p' "content/plants/$slug.md"
-python3 -m json.tool "generated/plant-publication/$slug.json"
+target="../brad6887.github.io"
+sed -n '1,160p' "$target/content/plants/$slug.md"
+python3 -m json.tool "$target/generated/plant-publication/$slug.json"
 ```
 
 For a new import, compare the canonical photograph and XMP sidecar with their
@@ -464,7 +470,7 @@ The publication manifest must report `canonical_original_preserved: true`,
 derivative. Confirm directly that each public image exposes no private fields:
 
 ```bash
-for image in "site/public/images/plants/$slug"/*.{jpg,jpeg,png,webp}
+for image in "../brad6887.github.io/site/public/images/plants/$slug"/*.{jpg,jpeg,png,webp}
 do
   [[ -e "$image" ]] || continue
   metadata="$(
@@ -507,8 +513,9 @@ Complete the generated session update and journal entry. Include the plants and
 observation date, validation and publication results, site build result, and
 any warnings or workflow lessons.
 
-Commit canonical plant sources and their generated website outputs together.
-Run the normal Abbey review and end-of-session checks before pushing.
+Commit canonical plant sources in Abbey Root and generated website outputs in
+BradCooke.com as two reviewable repository changes. Run the normal Abbey review
+and end-of-session checks in each project before pushing.
 
 ---
 

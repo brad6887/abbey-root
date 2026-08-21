@@ -2,15 +2,53 @@
 
 ## Purpose
 
-Define how Abbey Root should automate BradCooke.com build validation and
-production deployment without weakening the safeguards already provided by
-`abbey site publish`.
+Define the publishing ownership boundary between AbbeyRoot.com and
+BradCooke.com.
 
 ## Status
 
-Superseded on 2026-08-12 by the independent `bradcooke-com` source repository.
-This document remains as the historical record of the original two-repository
-publishing design.
+Implemented on 2026-08-21.
+
+## Current Architecture
+
+Abbey Root and BradCooke.com are independent Abbey projects:
+
+- Abbey Root owns the shared Abbey toolkit, framework and infrastructure
+  documentation, canonical plant workspaces, and the AbbeyRoot.com Astro site.
+- `brad6887.github.io` owns the BradCooke.com Astro site, personal content,
+  museum exhibits, Orchid Rescue output, and GitHub Pages deployment workflow.
+- Abbey Root's project configuration names only
+  `abbey-deploy@sites01:/srv/www/abbeyroot.com` as its site target.
+- BradCooke.com's project configuration names only `origin:main` and
+  `bradcooke.com` as its Pages publishing target.
+
+Canonical plant data remains under `working/plants/` in Abbey Root because
+the Plant Model and its maintenance tools are platform capabilities. Public
+plant output crosses the repository boundary through one explicit export:
+
+```text
+Abbey Root working/plants/
+        |
+        | abbey plant publish
+        v
+BradCooke.com content/plants/
+BradCooke.com site/public/images/plants/
+BradCooke.com generated/plant-publication/
+```
+
+The exporter reads its target project from Abbey Root's
+`exports.plants` configuration. It refuses to write unless the destination
+has Abbey project metadata with the configured slug, declares BradCooke.com as
+its site domain, and owns safe project-relative plant import paths.
+
+BradCooke.com builds from its own repository. Pull requests build without
+deployment; pushes to `main` build and deploy the validated `site/dist`
+artifact through the project-owned GitHub Pages workflow. The local
+`abbey site publish` command builds and validates first, then explicitly
+pushes the configured source branch after confirmation.
+
+The Pages repository must be configured to use GitHub Actions as its publishing
+source before the first production handoff.
 
 ## Historical Architecture
 

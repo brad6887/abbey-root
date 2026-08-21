@@ -417,10 +417,10 @@ abbey plant validate <slug>
         ↓
 abbey plant publish <slug>
         ↓
-content/plants/<slug>.md
-site/public/images/plants/<slug>/
+../brad6887.github.io/content/plants/<slug>.md
+../brad6887.github.io/site/public/images/plants/<slug>/
         ↓
-Astro website
+BradCooke.com Astro website
 ```
 
 Validation confirms that the canonical workspace satisfies the Plant Model before publication. Publishing derives the website-facing Markdown and selected public images from that workspace. Astro consumes those generated outputs to build the website.
@@ -434,7 +434,10 @@ reference are reported as warnings because preserved source material may be
 intentionally retained. XMP sidecars, AppleDouble files, and unsupported file
 types are not treated as photographs.
 
-Files under `content/plants/` and `site/public/images/plants/` are generated outputs for migrated plant profiles. Correct canonical source material or the publishing workflow rather than editing generated output directly.
+Files under BradCooke.com's `content/plants/` and
+`site/public/images/plants/` are generated outputs for migrated plant
+profiles. Correct canonical source material or the publishing workflow rather
+than editing generated output directly.
 
 Public plant images are generated derivatives rather than direct copies. Publishing:
 
@@ -444,7 +447,9 @@ Public plant images are generated derivatives rather than direct copies. Publish
 - removes embedded camera, location, thumbnail, and other metadata
 - verifies the canonical source hash remains unchanged
 - rejects a derivative if potentially private metadata remains
-- records source and derivative hashes in `generated/plant-publication/<slug>.json`
+- records source and derivative hashes, plus source- and target-project
+  identity, in BradCooke.com's
+  `generated/plant-publication/<slug>.json`
 
 The publication manifest is a machine-generated validation record. It supplements rather than replaces the human-maintained provenance in `photo-metadata.md`.
 

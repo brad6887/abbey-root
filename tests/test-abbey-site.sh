@@ -164,6 +164,7 @@ esac
 SCRIPT
 
   chmod +x "$fake_bin/npm" "$fake_bin/curl"
+  printf 'dist/\n' > "$source_repo/site/.gitignore"
 
   git -C "$source_repo" init -q
   git -C "$source_repo" config user.name "Abbey Test"
@@ -399,6 +400,52 @@ assert_contains \
 assert_file_absent \
   "already-current publish does not verify the live site" \
   "$case_dir/curl-count"
+
+case_dir="$(create_fixture github-pages)"
+pages_remote="$case_dir/pages.git"
+git init -q --bare "$pages_remote"
+git -C "$case_dir/source" remote add pages "$pages_remote"
+python3 - "$case_dir/source/.abbey/project.yml" <<'PY'
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+text = path.read_text(encoding="utf-8")
+text = text.replace("method: git-rsync", "method: github-pages")
+lines = []
+for line in text.splitlines():
+    if line.strip().startswith("target:"):
+        lines.append("    target: pages:main")
+    else:
+        lines.append(line)
+path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+PY
+git -C "$case_dir/source" add .abbey/project.yml
+git -C "$case_dir/source" commit -qm "Configure GitHub Pages fixture"
+
+run_publish "$case_dir" success '' --dry-run
+assert_status \
+  "GitHub Pages dry run succeeds" \
+  "$last_status" \
+  0
+assert_contains \
+  "GitHub Pages publish resolves its project-owned target" \
+  "$last_output" \
+  "Target:            pages:main"
+assert_contains \
+  "GitHub Pages dry run starts no deployment" \
+  "$last_output" \
+  "DRY RUN complete. No Git push or Pages deployment was started."
+
+run_publish "$case_dir" success 'n\n'
+assert_status \
+  "cancelled GitHub Pages publish exits successfully" \
+  "$last_status" \
+  0
+assert_contains \
+  "cancelled GitHub Pages publish reports cancellation" \
+  "$last_output" \
+  "Publish cancelled."
 
 bread_root="$test_root/bread-pitt"
 mkdir -p \

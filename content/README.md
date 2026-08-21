@@ -1,6 +1,7 @@
-# BradCooke.com Content
+# AbbeyRoot.com Content
 
-This directory contains source content intended for BradCooke.com.
+This directory contains source content owned by Abbey Root and published only
+through AbbeyRoot.com.
 
 The content here is Markdown-first and should remain readable in GitHub, text editors, AI tools, and future website generators.
 
@@ -20,7 +21,6 @@ It is separate from generated documentation under `docs/generated`.
 | `aix/` | AIX notes, procedures, and articles |
 | `journal/` | Chronological updates |
 | `music/` | Music, songwriting, recording, and gear |
-| `plants/` | Plant notes, care logs, and updates |
 | `cooking/` | Recipes, meal ideas, and cooking experiments |
 | `interests/` | Other personal interests and hobbies |
 | `notes/` | Scratch notes and rough drafts |
@@ -34,8 +34,6 @@ It is separate from generated documentation under `docs/generated`.
 - Use AI to assist, not replace understanding.
 - Generated files should not be edited manually.
 
-## Current Focus
-
-The first publishing target is Abbey Root.
-
-Start by turning lab sessions, project milestones, and lessons learned into reusable Markdown content.
+Generated BradCooke.com plant pages no longer live here. Canonical plant
+workspaces remain under `working/plants/`, and their public output is exported
+to the explicitly configured BradCooke.com Abbey project.

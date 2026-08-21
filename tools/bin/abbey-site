@@ -126,7 +126,7 @@ load_build_configuration() {
 
 validate_publish_method() {
   case "$PUBLISH_METHOD" in
-    git-rsync|ssh-release)
+    git-rsync|github-pages|ssh-release)
       ;;
     *)
       fail "Unsupported site publishing method: $PUBLISH_METHOD"
@@ -150,6 +150,10 @@ load_publish_configuration() {
     ssh-release)
       parse_ssh_release_target "$PUBLISH_TARGET"
       ;;
+    github-pages)
+      [[ "$PUBLISH_TARGET" == *:* ]] ||
+        fail "github-pages target must use remote:branch format"
+      ;;
   esac
 
   LIVE_SITE_URL="https://$PUBLISH_DOMAIN/"
@@ -162,6 +166,8 @@ print_resolution() {
   echo "Source directory:  $SITE_DIR"
 
   if [[ "$PUBLISH_METHOD" == "ssh-release" && -n "$SSH_RELEASE_HOST" ]]; then
+    echo "Target:            $PUBLISH_TARGET"
+  elif [[ "$PUBLISH_METHOD" == "github-pages" ]]; then
     echo "Target:            $PUBLISH_TARGET"
   else
     echo "Target:            ${PRODUCTION_REPO:-$DIST_DIR}"
@@ -598,6 +604,71 @@ site_publish_ssh_release() {
   fail "Activated site verification failed; deployment rolled back"
 }
 
+site_publish_github_pages() {
+  local dry_run="${1:-false}"
+  local remote="${PUBLISH_TARGET%%:*}"
+  local branch="${PUBLISH_TARGET#*:}"
+
+  [[ -n "$remote" && -n "$branch" && "$remote" != "$branch" ]] ||
+    fail "github-pages target must use remote:branch format"
+
+  require_command git
+  require_site_directory
+
+  if [[ "$dry_run" == "true" ]]; then
+    if [[ -n "$(git -C "$ABBEY_ROOT" status --porcelain)" ]]; then
+      echo "WARN Source repository has uncommitted changes."
+      echo "INFO A real publish will require a clean repository."
+      echo
+    fi
+  else
+    require_clean_source_repo
+  fi
+
+  git -C "$ABBEY_ROOT" remote get-url "$remote" >/dev/null 2>&1 ||
+    fail "Configured Git remote does not exist: $remote"
+
+  if [[ "$BUILD_METHOD" == "npm" ]]; then
+    ensure_npm_on_path
+    require_command npm
+    echo "Building configured site..."
+    (cd "$SITE_DIR" && npm run build) || fail "Site build failed"
+  else
+    echo "Validating configured static artifact..."
+  fi
+
+  [[ -f "$DIST_DIR/index.html" ]] ||
+    fail "Generated index.html not found"
+
+  run_site_validation
+
+  echo
+  echo "GitHub Pages publish"
+  echo "--------------------"
+  echo "Source repository: $ABBEY_ROOT"
+  echo "Push target:       $remote:$branch"
+  echo "Artifact:          $DIST_DIR"
+  echo "Deployment:        project-owned GitHub Pages workflow"
+
+  if [[ "$dry_run" == "true" ]]; then
+    echo
+    echo "DRY RUN complete. No Git push or Pages deployment was started."
+    return 0
+  fi
+
+  echo
+  if ! confirm "Push HEAD to $remote:$branch and start the Pages deployment?"; then
+    echo "Publish cancelled."
+    return 0
+  fi
+
+  git -C "$ABBEY_ROOT" push "$remote" "HEAD:$branch" ||
+    fail "Unable to push the configured GitHub Pages source branch"
+
+  echo
+  echo "OK   Source pushed. The BradCooke.com workflow now owns deployment."
+}
+
 site_publish() {
   local dry_run=false
   local commit_message
@@ -657,6 +728,11 @@ HELP
 
   if [[ "$PUBLISH_METHOD" == "ssh-release" ]]; then
     site_publish_ssh_release "$dry_run"
+    return
+  fi
+
+  if [[ "$PUBLISH_METHOD" == "github-pages" ]]; then
+    site_publish_github_pages "$dry_run"
     return
   fi
 
