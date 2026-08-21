@@ -113,3 +113,19 @@ Martha dropped a yellow leaf mid-week. Her bloom display is winding down, but se
 ### Care
 
 Fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- martha-my-dear-2026-08-18.jpg
+
+### Observations
+
+Martha has settled in well after dropping two older basal leaves; her remaining foliage is firm and green, the roots are plump and healthy, and she’s still holding several blooms a month after coming home.
+
+### Care
+
+Watered

@@ -224,3 +224,19 @@ Honey Pie remains in bloom, although the older flowers are beginning to fade. Th
 ### Care
 
 Fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- honey-pie-2026-08-18.jpg
+
+### Observations
+
+Honey Pie remains healthy with firm green leaves and a strong root system while her long bloom cycle is finally winding down. Several flowers have faded, but the plant looks well positioned to transition into new root and leaf growth.
+
+### Care
+
+Watered

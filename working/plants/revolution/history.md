@@ -324,3 +324,19 @@ Revolution dropped a yellow leaf mid-week but otherwise remains stable and conti
 ### Care
 
 Fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- revolution-2026-08-18.jpg
+
+### Observations
+
+New leaf continues strong growth and expansion. Lowest leaf remains slightly yellow-green; monitoring for normal age-related decline. Overall status: healthy / actively growing.
+
+### Care
+
+Watered

@@ -264,3 +264,19 @@ Phal McCartney was repotted after the old medium was removed and the root system
 ### Care
 
 Repotted and fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- phal-mccartney-2026-08-18.jpg
+
+### Observations
+
+Phal McCartney is doing well after her 8/9 repot, with firm healthy leaves and no signs of transplant stress. Her active root growth and fresh airy mix have her well positioned for the next growth cycle.
+
+### Care
+
+Watered

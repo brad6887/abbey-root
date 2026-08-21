@@ -436,3 +436,19 @@ Helter Skelter continues steady vegetative growth. The newest cane is developing
 ### Care
 
 Fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- helter-skelter-2026-08-18.jpg
+
+### Observations
+
+Helter Skelter continues strong active growth, with the newest cane gaining height and its upper leaves continuing to open. The developing cane remains firm and healthy, while the older growth and previous cosmetic leaf damage remain stable.
+
+### Care
+
+Watered

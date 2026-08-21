@@ -268,3 +268,19 @@ Something continues active growth. The newest leaf is extending, and a healthy g
 ### Care
 
 Fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- something-2026-08-18.jpg
+
+### Observations
+
+Something is still moving along nicely. The newest leaf continues to grow and the prominent new root has lengthened considerably since 8/9, while the older foliage remains stable; the lowest leaf is showing its age, but with this much active new growth I’m not concerned about it.
+
+### Care
+
+Watered

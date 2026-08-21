@@ -292,3 +292,19 @@ Bill remains stable in recovery. His leaves are firm and hydrated, and several v
 ### Care
 
 Fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- bungalow-bill-2026-08-18.jpg
+
+### Observations
+
+The upper leaves remain firm, dark green, and nicely hydrated, while the older lower leaves are still hanging low without any obvious further decline.
+
+### Care
+
+Watered

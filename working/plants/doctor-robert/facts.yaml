@@ -16,12 +16,12 @@ rescue:
     country: United States
 
 status:
-  current: recovering
+  current: thriving
   current_location:
     city: Fort Worth
     state: Texas
     country: United States
-  updated: 2026-08-09
+  updated: 2026-08-18
 
 care:
   potting_medium: orchid bark
@@ -29,7 +29,7 @@ care:
 
 photos:
   hero: photos/IMG_C52D2813-DCED-40FD-BBF7-605ACE5D9306.jpeg
-  current: photos/doctor-robert-2026-08-09.jpg
+  current: photos/doctor-robert-2026-08-18.jpg
   index: null
   metadata: photo-metadata.md
 

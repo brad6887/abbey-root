@@ -385,3 +385,19 @@ Lady Madonna remains stable in recovery. The leaves continue to hold their shape
 ### Care
 
 Fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- lady-madonna-2026-08-18.jpg
+
+### Observations
+
+Lady Madonna remains stable with firm green foliage and a clean crown. No confirmed new leaf yet, but she continues to hold well while recovering from the move, with no obvious signs of decline.
+
+### Care
+
+Watered

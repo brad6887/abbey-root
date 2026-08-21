@@ -76,3 +76,19 @@ Rocky remains in early recovery after repotting. The leaves are still somewhat r
 ### Care
 
 Fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- rocky-raccoon-2026-08-18.jpg
+
+### Observations
+
+Rocky remains stable and is still recovering from the severe dehydration he came home with. His leaves are still floppy, but the plant is holding steady while we wait for new root or leaf growth.
+
+### Care
+
+Watered

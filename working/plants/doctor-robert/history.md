@@ -563,3 +563,19 @@ Doctor Robert's remaining leaf stays firm and glossy. The root system was cleane
 ### Care
 
 Removed dead roots and fertilized.
+
+---
+
+## 2026-08-18 — Weekly Update
+
+### Photos
+
+- doctor-robert-2026-08-18.jpg
+
+### Observations
+
+Doctor Robert continues to look good. That new leaf has grown considerably since 8/9 and is standing up nicely, while the mature leaf remains firm and dark green; the exposed roots also still look solid.
+
+### Care
+
+Watered
