@@ -263,6 +263,24 @@ commands:
       - abbey media publish starter_gallery --dry-run
       - abbey media publish starter_gallery
 
+  newsroom:
+    category: content
+    description: Run project-configured newsroom workflows.
+    usage: abbey newsroom <command>
+    hidden: false
+    subcommands:
+      assign:
+        description: Run the active project's configured assignment engine.
+        usage: abbey newsroom assign [--date DATE] [--writer WRITER] [--category CATEGORY] [--entity ENTITY] [--count COUNT]
+      generate:
+        description: Generate one article or batch all assignments using the active project's configured generator; batch mode skips existing drafts and reports all failures.
+        usage: abbey newsroom generate (<assignment-file> | --all) [--output PATH] [--model MODEL] [--repair-model MODEL] [--attempts COUNT] [--repair-temperature VALUE] [--repair-context COUNT]
+    examples:
+      - abbey newsroom assign
+      - abbey newsroom assign --date 2008-01 --writer martin-quist --category culture --count 3
+      - abbey newsroom generate newsroom/assignments/2008-01-martin-quist-6259.yml
+      - abbey newsroom generate --all
+
   plant:
     category: content
     description: Manage, validate, and publish plant workspaces.

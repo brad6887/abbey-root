@@ -1,0 +1,307 @@
+#!/usr/bin/env bash
+#
+# Purpose:
+#   Run project-configured newsroom workflows.
+#
+set -euo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+ABBEY_TOOLKIT_ROOT="${ABBEY_TOOLKIT_ROOT:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ABBEY_ROOT="${ABBEY_ROOT:-$ABBEY_TOOLKIT_ROOT}"
+PROJECT_LIB="$ABBEY_TOOLKIT_ROOT/tools/lib/project.sh"
+
+# shellcheck source=../lib/project.sh
+source "$PROJECT_LIB"
+
+usage() {
+  cat <<'HELP'
+Abbey Newsroom
+
+Usage:
+  abbey newsroom assign [options]
+  abbey newsroom generate <assignment-file> [generator-options]
+  abbey newsroom generate --all [generator-options]
+
+Commands:
+  assign      Run the active project's configured assignment engine
+  generate    Generate articles using the configured generator
+
+Assignment options:
+  --date DATE          Override the assignment date
+  --writer WRITER      Force a specific writer
+  --category CATEGORY  Force a specific category
+  --entity ENTITY      Force a specific entity
+  --count COUNT        Force the number of assignments
+
+Generator options:
+  --all                Generate every assignment in the configured directory
+  --output PATH        Override the configured default draft path
+  --model MODEL        Override the article generation model
+  --repair-model MODEL Override the safeguard repair model
+  --attempts COUNT     Set the maximum generation attempts
+  --repair-temperature VALUE
+                       Override the safeguard repair temperature
+  --repair-context COUNT
+                       Override the safeguard repair context size
+
+By default, generate writes <assignment-basename>.md beneath the active
+project's newsroom.generate.output_dir. Batch generation skips assignments
+whose default draft already exists, continues after failures, and exits nonzero
+after the batch if any assignment failed.
+HELP
+}
+
+fail() {
+  echo "ERROR: $*" >&2
+  exit 1
+}
+
+resolve_configured_path() {
+  local key="$1"
+  local configured_path
+
+  configured_path="$(abbey_project_value "$ABBEY_ROOT" "$key" "")"
+  [[ -n "$configured_path" ]] || return 1
+  abbey_project_path "$ABBEY_ROOT" "$configured_path"
+}
+
+resolve_configured_interpreter() {
+  local key="$1"
+  local configured_path
+  local interpreter_dir
+
+  configured_path="$(abbey_project_value "$ABBEY_ROOT" "$key" "")"
+  [[ -n "$configured_path" ]] || return 1
+  interpreter_dir="$(
+    abbey_project_path "$ABBEY_ROOT" "$(dirname "$configured_path")"
+  )" || return 1
+  printf '%s/%s\n' "$interpreter_dir" "$(basename "$configured_path")"
+}
+
+run_configured_workflow() {
+  local workflow="$1"
+  local workflow_label="$2"
+  shift 2
+
+  local entrypoint
+  local interpreter=""
+  local interpreter_key="newsroom.$workflow.interpreter"
+
+  entrypoint="$(resolve_configured_path "newsroom.$workflow.entrypoint")" ||
+    fail "Active project has no newsroom.$workflow.entrypoint configuration."
+
+  [[ -f "$entrypoint" ]] ||
+    fail "Configured newsroom $workflow_label entry point is not executable: $entrypoint"
+
+  if [[ -n "$(abbey_project_value "$ABBEY_ROOT" "$interpreter_key" "")" ]]; then
+    interpreter="$(resolve_configured_interpreter "$interpreter_key")" || exit 1
+    [[ -x "$interpreter" ]] ||
+      fail "Configured newsroom $workflow_label interpreter is not executable: $interpreter"
+    "$interpreter" "$entrypoint" "$@"
+    return
+  fi
+
+  [[ -x "$entrypoint" ]] ||
+    fail "Configured newsroom $workflow_label entry point is not executable: $entrypoint"
+  "$entrypoint" "$@"
+}
+
+assign() {
+  run_configured_workflow assign "assignment" "$@"
+}
+
+configure_generation_defaults() {
+  local configured_value
+
+  configured_value="$(abbey_project_value "$ABBEY_ROOT" "newsroom.generate.repair_model" "")"
+  if [[ -z "${ARTICLE_AI_REPAIR_MODEL:-}" && -n "$configured_value" ]]; then
+    export ARTICLE_AI_REPAIR_MODEL="$configured_value"
+  fi
+
+  configured_value="$(abbey_project_value "$ABBEY_ROOT" "newsroom.generate.repair_temperature" "")"
+  if [[ -z "${ARTICLE_AI_REPAIR_TEMPERATURE:-}" && -n "$configured_value" ]]; then
+    export ARTICLE_AI_REPAIR_TEMPERATURE="$configured_value"
+  fi
+
+  configured_value="$(abbey_project_value "$ABBEY_ROOT" "newsroom.generate.repair_context" "")"
+  if [[ -z "${ARTICLE_AI_REPAIR_CONTEXT:-}" && -n "$configured_value" ]]; then
+    export ARTICLE_AI_REPAIR_CONTEXT="$configured_value"
+  fi
+}
+
+generate_all() {
+  local assignments_dir
+  local configured_output_dir="$1"
+  shift
+
+  local assignment
+  local assignment_name
+  local default_output
+  local command_output
+  local failure_reason
+  local status
+  local total=0
+  local generated=0
+  local skipped=0
+  local failed=0
+  local -a assignment_files=()
+  local -a failed_details=()
+
+  assignments_dir="$(abbey_project_value "$ABBEY_ROOT" "newsroom.assignments_dir" "newsroom/assignments")"
+  assignments_dir="$(abbey_project_path "$ABBEY_ROOT" "$assignments_dir")" || exit 1
+  [[ -d "$assignments_dir" ]] ||
+    fail "Configured newsroom assignments directory not found: $assignments_dir"
+
+  mapfile -d '' assignment_files < <(
+    find "$assignments_dir" -maxdepth 1 -type f \
+      \( -name '*.yml' -o -name '*.yaml' \) -print0 | sort -z
+  )
+
+  for assignment in "${assignment_files[@]}"; do
+    total=$((total + 1))
+    assignment_name="$(basename "$assignment")"
+    default_output="$configured_output_dir/${assignment_name%.*}.md"
+
+    if [[ -f "$default_output" ]]; then
+      printf 'SKIP %s (draft exists: %s)\n' "$assignment_name" "$default_output"
+      skipped=$((skipped + 1))
+      continue
+    fi
+
+    printf 'GENERATE %s\n' "$assignment_name"
+    if command_output="$(
+      run_configured_workflow \
+        generate \
+        "article generator" \
+        --assignment "$assignment" --generate \
+        --output "$default_output" "$@" 2>&1
+    )"; then
+      [[ -z "$command_output" ]] || printf '%s\n' "$command_output"
+      generated=$((generated + 1))
+    else
+      status=$?
+      [[ -z "$command_output" ]] || printf '%s\n' "$command_output"
+      failure_reason="$(printf '%s\n' "$command_output" | awk 'NF { line=$0 } END { print line }')"
+      [[ -n "$failure_reason" ]] || failure_reason="exit status $status"
+      failed_details+=("$assignment_name: $failure_reason")
+      failed=$((failed + 1))
+    fi
+  done
+
+  printf 'Batch summary: total=%d generated=%d skipped=%d failed=%d\n' \
+    "$total" "$generated" "$skipped" "$failed"
+  if (( failed > 0 )); then
+    printf 'Failed assignments:\n'
+    printf '  %s\n' "${failed_details[@]}"
+    return 1
+  fi
+}
+
+validate_all_options() {
+  while (( $# > 0 )); do
+    case "$1" in
+      --model|--repair-model|--attempts|--repair-temperature|--repair-context|--writer|--topic)
+        (( $# >= 2 )) || fail "Option $1 requires a value."
+        shift 2
+        ;;
+      --model=*|--repair-model=*|--attempts=*|--repair-temperature=*|--repair-context=*|--writer=*|--topic=*)
+        shift
+        ;;
+      --*)
+        shift
+        ;;
+      *)
+        fail "--all and an assignment file are mutually exclusive."
+        ;;
+    esac
+  done
+}
+
+generate() {
+  local assignment="${1:-}"
+  local assignment_name
+  local configured_output_dir
+  local default_output
+  local option
+  local output_is_explicit=false
+  local all=false
+
+  case "$assignment" in
+    help|-h|--help)
+      usage
+      return
+      ;;
+    --all)
+      all=true
+      assignment=""
+      shift
+      ;;
+  esac
+
+  if [[ "$all" == false && -z "$assignment" ]]; then
+    fail "Assignment file is required."
+  fi
+  if [[ "$all" == false ]]; then
+    shift
+  fi
+
+  for option in "$@"; do
+    case "$option" in
+      --all)
+        fail "--all and an assignment file are mutually exclusive."
+        ;;
+      --output|--output=*)
+        output_is_explicit=true
+        ;;
+    esac
+  done
+
+  if [[ "$all" == true && "$output_is_explicit" == true ]]; then
+    fail "--output cannot be used with --all; batch output names come from assignment filenames."
+  fi
+
+  if [[ "$all" == true ]]; then
+    validate_all_options "$@"
+  fi
+
+  configure_generation_defaults
+
+  if [[ "$all" == true ]]; then
+    configured_output_dir="$(resolve_configured_path "newsroom.generate.output_dir")" ||
+      fail "Active project has no newsroom.generate.output_dir configuration."
+    generate_all "$configured_output_dir" "$@"
+    return
+  fi
+
+  if [[ "$output_is_explicit" == false ]]; then
+    configured_output_dir="$(resolve_configured_path "newsroom.generate.output_dir")" ||
+      fail "Active project has no newsroom.generate.output_dir configuration."
+    assignment_name="$(basename "$assignment")"
+    default_output="$configured_output_dir/${assignment_name%.*}.md"
+    set -- --output "$default_output" "$@"
+  fi
+
+  run_configured_workflow \
+    generate \
+    "article generator" \
+    --assignment "$assignment" --generate "$@"
+}
+
+command="${1:-help}"
+shift || true
+
+case "$command" in
+  assign)
+    assign "$@"
+    ;;
+  generate)
+    generate "$@"
+    ;;
+  help|-h|--help)
+    usage
+    ;;
+  *)
+    fail "Unknown newsroom command: $command"
+    ;;
+esac
