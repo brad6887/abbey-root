@@ -579,3 +579,19 @@ Doctor Robert continues to look good. That new leaf has grown considerably since
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- doctor-robert-2026-08-23.jpg
+
+### Observations
+
+Doctor Robert continues to look excellent. The new leaf has made very noticeable progress even since 8/18—larger, thicker, and opening nicely—while the mature leaf remains firm and glossy and the exposed roots look substantial.
+
+### Care
+
+Watered.

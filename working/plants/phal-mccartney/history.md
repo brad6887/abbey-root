@@ -280,3 +280,19 @@ Phal McCartney is doing well after her 8/9 repot, with firm healthy leaves and n
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- phal-mccartney-2026-08-23.jpg
+
+### Observations
+
+She continues to look good after the 8/9 repot—leaves are firm and healthy, and the exposed roots look stable with no obvious signs of repot stress.
+
+### Care
+
+Watered.

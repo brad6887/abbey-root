@@ -14,7 +14,7 @@
 #   abbey plant index <slug>
 #   abbey plant update <slug>
 #   abbey plant rename-exports <directory>
-#   abbey plant update-batch <prepare|apply>
+#   abbey plant update-batch <prepare|validate|slugs|apply>
 #
 
 set -euo pipefail
@@ -67,6 +67,8 @@ Usage:
   abbey plant update <slug> --photo FILE --narrative TEXT [options]
   abbey plant rename-exports <directory> [--dry-run]
   abbey plant update-batch prepare <directory> --date YYYY-MM-DD [--output FILE]
+  abbey plant update-batch validate <worksheet>
+  abbey plant update-batch slugs <worksheet>
   abbey plant update-batch apply <worksheet> [--dry-run]
 
 Commands:
@@ -81,7 +83,7 @@ Commands:
   rename-exports
               Rename exported photos from XMP captions and capture dates
   update-batch
-              Prepare or apply a reviewable multi-plant update worksheet
+              Prepare, inspect, validate, or apply a multi-plant worksheet
 
 New options:
   --name NAME        Human-readable plant name (required)
@@ -103,6 +105,8 @@ Rename-exports options:
 
 Update-batch workflow:
   prepare            Group renamed photos and create an editable worksheet
+  validate           Validate worksheet YAML and structure without applying it
+  slugs              Print worksheet plant slugs, one per line
   apply              Validate and apply every completed worksheet update
 USAGE
 }

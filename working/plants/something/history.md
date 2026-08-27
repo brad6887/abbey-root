@@ -284,3 +284,19 @@ Something is still moving along nicely. The newest leaf continues to grow and th
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- something-2026-08-23.jpg
+
+### Observations
+
+Something continues to look good. That new root is really taking off with a bright green active tip, and the newer leaves continue to develop while the older foliage remains stable.
+
+### Care
+
+Watered.

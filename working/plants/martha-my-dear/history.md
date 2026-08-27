@@ -129,3 +129,19 @@ Martha has settled in well after dropping two older basal leaves; her remaining 
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- martha-my-dear-2026-08-23.jpg
+
+### Observations
+
+Martha continues to look healthy and established. Her remaining leaves are firm and green, and she’s still holding four good-looking blooms more than a month after coming home.
+
+### Care
+
+Watered.

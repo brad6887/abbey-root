@@ -621,8 +621,8 @@ abbey plant <command>
   - `abbey plant rename-exports <directory> [--dry-run]`
 - `update` - Add a dated observation and select its current photograph.
   - `abbey plant update <slug> --photo FILE --narrative TEXT [--care TEXT] [--status STATUS] [--date YYYY-MM-DD] [--dry-run]`
-- `update-batch` - Prepare or apply a reviewable multi-plant update worksheet.
-  - `abbey plant update-batch <prepare|apply> [options]`
+- `update-batch` - Prepare, inspect, validate, or apply a reviewable multi-plant update worksheet.
+  - `abbey plant update-batch <prepare|validate|slugs|apply> [options]`
 - `validate` - Validate a plant workspace against the Plant Model.
   - `abbey plant validate <slug>`
 
@@ -637,6 +637,8 @@ abbey plant index doctor-robert
 abbey plant update doctor-robert --photo incoming.jpg --narrative "Firm leaves and active roots." --care "Watered."
 abbey plant rename-exports ~/incoming/photos --dry-run
 abbey plant update-batch prepare ~/incoming/photos --date 2026-08-02
+abbey plant update-batch validate working/plant-updates/2026-08-02.yml
+abbey plant update-batch slugs working/plant-updates/2026-08-02.yml
 abbey plant update-batch apply working/plant-updates/2026-08-02.yml --dry-run
 ```
 

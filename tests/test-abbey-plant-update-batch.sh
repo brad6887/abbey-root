@@ -80,8 +80,15 @@ assert_contains "prepare reports ignored older photo" "INFO Ignored 1 photo(s) f
 [[ -f "$worksheet" ]] && pass "prepare creates default worksheet" || fail "prepare creates default worksheet"
 grep -Fq 'current: something-2026-08-02.jpg' "$worksheet" && pass "single photo becomes current" || fail "single photo becomes current"
 grep -Fq 'current: null' "$worksheet" && pass "multiple photos require current selection" || fail "multiple photos require current selection"
+grep -Fq '      - doctor-robert-2026-08-02-01.jpg' "$worksheet" && pass "worksheet indents nested photo lists" || fail "worksheet indents nested photo lists"
+grep -Fq 'narrative: >-' "$worksheet" && pass "worksheet uses folded narrative placeholders" || fail "worksheet uses folded narrative placeholders"
+grep -Fq 'REQUIRED: replace with observation narrative.' "$worksheet" && pass "worksheet explains required narrative" || fail "worksheet explains required narrative"
 if grep -Fq 'plant: no-update' "$worksheet"; then fail "skipped plant is omitted"; else pass "skipped plant is omitted"; fi
 if grep -Fq 'plant: already-updated' "$worksheet"; then fail "existing update is omitted"; else pass "existing update is omitted"; fi
+
+run_batch validate "$worksheet"
+[[ "$status" -eq 1 ]] && pass "worksheet validation rejects placeholders" || fail "worksheet validation rejects placeholders"
+assert_contains "worksheet validation explains placeholder" "narrative is required" "$output"
 
 run_batch apply "$worksheet" --dry-run
 [[ "$status" -eq 1 ]] && pass "incomplete worksheet fails" || fail "incomplete worksheet fails"
@@ -98,7 +105,8 @@ updates:
       - doctor-robert-2026-08-02-01.jpg
       - doctor-robert-2026-08-02-02.jpg
     current: doctor-robert-2026-08-02-02.jpg
-    narrative: Firm leaves and two active root tips.
+    narrative: >-
+      Doctor Robert's leaves remain firm, with two active root tips.
     care: Watered.
     status: thriving
   - plant: something
@@ -110,10 +118,18 @@ updates:
     status: null
 YAML
 
+run_batch validate "$worksheet"
+[[ "$status" -eq 0 ]] && pass "completed worksheet validates" || fail "completed worksheet validates"
+assert_contains "worksheet validation reports update count" "2 plant update(s) structurally valid" "$output"
+
+run_batch slugs "$worksheet"
+[[ "$status" -eq 0 ]] && pass "worksheet slugs succeeds" || fail "worksheet slugs succeeds"
+[[ "$output" == $'doctor-robert\nsomething' ]] && pass "worksheet slugs prints review order" || fail "worksheet slugs prints review order"
+
 facts_before="$(shasum -a 256 "$test_root/working/plants/doctor-robert/facts.yaml")"
 run_batch apply "$worksheet" --dry-run
 [[ "$status" -eq 0 ]] && pass "complete worksheet dry run succeeds" || fail "complete worksheet dry run succeeds"
-assert_contains "dry run reports both updates" "2 plant update(s) validated" "$output"
+assert_contains "dry run reports both updates" "2 ready to apply; 0 already applied" "$output"
 [[ "$facts_before" == "$(shasum -a 256 "$test_root/working/plants/doctor-robert/facts.yaml")" ]] && pass "dry run preserves facts" || fail "dry run preserves facts"
 
 run_batch apply "$worksheet"
@@ -129,9 +145,17 @@ grep -Fq 'current: photos/something-2026-08-02.jpg' "$test_root/working/plants/s
 grep -Fq 'current: thriving' "$test_root/working/plants/doctor-robert/facts.yaml" && pass "updates requested status" || fail "updates requested status"
 grep -Fq '### Care' "$test_root/working/plants/doctor-robert/history.md" && pass "records care" || fail "records care"
 
+mv "$test_root/incoming" "$test_root/incoming-archived"
 run_batch apply "$worksheet"
-[[ "$status" -eq 1 ]] && pass "repeat apply fails" || fail "repeat apply fails"
-assert_contains "repeat apply reports existing history" "a dated history entry already exists" "$output"
+[[ "$status" -eq 0 ]] && pass "repeat apply succeeds idempotently" || fail "repeat apply succeeds idempotently"
+assert_contains "repeat apply reports completed plant" "DONE doctor-robert: update already applied" "$output"
+assert_contains "repeat apply changes nothing" "2 plant update(s) already applied; no files changed" "$output"
+
+rm "$test_root/working/plants/something/photos/something-2026-08-02.jpg"
+run_batch apply "$worksheet" --dry-run
+[[ "$status" -eq 1 ]] && pass "partial existing update fails" || fail "partial existing update fails"
+assert_contains "partial update explains inconsistency" "existing update is incomplete or inconsistent" "$output"
+assert_contains "partial update names missing photo" "one or more canonical photos are missing" "$output"
 
 echo
 echo "Result: $passed passed, $failed failed"

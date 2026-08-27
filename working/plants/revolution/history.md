@@ -340,3 +340,19 @@ New leaf continues strong growth and expansion. Lowest leaf remains slightly yel
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- revolution-2026-08-23.jpg
+
+### Observations
+
+Revolution continues to look good, with the new leaf growing strongly and the mature leaves remaining firm. The older bottom leaf still has that lighter yellow-green tone we have been watching, but the change remains gradual and consistent with normal leaf turnover.
+
+### Care
+
+Watered.

@@ -401,3 +401,19 @@ Lady Madonna remains stable with firm green foliage and a clean crown. No confir
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- lady-madonna-2026-08-23.jpg
+
+### Observations
+
+She still looks stable. Foliage is maintaining good color with no new yellowing, and I do not see any obvious deterioration around the crown. Still no definite new leaf.
+
+### Care
+
+Watered.

@@ -416,3 +416,19 @@ Mother Nature’s Son continues to recover well, with healthy new growth and an 
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- mother-natures-son-2026-08-23.jpg
+
+### Observations
+
+The newer growth remains firm and healthy, and that white root with the green tip is still actively extending—recovery continues to look very solid.
+
+### Care
+
+Watered.

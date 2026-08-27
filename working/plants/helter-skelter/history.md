@@ -452,3 +452,19 @@ Helter Skelter continues strong active growth, with the newest cane gaining heig
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- helter-skelter-2026-08-23.jpg
+
+### Observations
+
+Helter Skelter continues strong growth, with the newest cane gaining size and beginning to look increasingly mature. Foliage remains firm and healthy throughout, with no new problems visible.
+
+### Care
+
+Watered.

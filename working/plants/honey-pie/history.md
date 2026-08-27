@@ -240,3 +240,19 @@ Honey Pie remains healthy with firm green leaves and a strong root system while 
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- honey-pie-2026-08-23.jpg
+
+### Observations
+
+She's still looking healthy underneath, with firm green foliage and substantial roots. The bloom decline has accelerated quite a bit this week—several flowers are now spent or close to it, although a few are stubbornly hanging on.
+
+### Care
+
+Watered.

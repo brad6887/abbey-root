@@ -92,3 +92,19 @@ Rocky remains stable and is still recovering from the severe dehydration he came
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- rocky-raccoon-2026-08-23.jpg
+
+### Observations
+
+Rocky continues to look stable; the leaves are still floppy from his rough start, but they’re staying green and the crown looks healthy. Still recovering, with no signs that he’s moving backward.
+
+### Care
+
+Watered.

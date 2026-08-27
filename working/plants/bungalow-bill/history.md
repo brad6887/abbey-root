@@ -308,3 +308,19 @@ The upper leaves remain firm, dark green, and nicely hydrated, while the older l
 ### Care
 
 Watered
+
+---
+
+## 2026-08-23 — Weekly Update
+
+### Photos
+
+- bungalow-bill-2026-08-23.jpg
+
+### Observations
+
+Bungalow Bill remains stable and continues his slow recovery. The upper leaves still look firm and healthy, the older floppy leaves haven't noticeably declined, and the exposed roots look solid.
+
+### Care
+
+Watered.

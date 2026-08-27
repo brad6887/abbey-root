@@ -14,6 +14,25 @@ import yaml
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".heic", ".png", ".tif", ".tiff"}
 VALID_STATUSES = {"recovering", "thriving", "blooming", "dormant", "deceased"}
+NARRATIVE_PLACEHOLDER = "REQUIRED: replace with observation narrative."
+
+
+class IndentedDumper(yaml.SafeDumper):
+    """Emit nested lists with indentation that is easier to edit by hand."""
+
+    def increase_indent(self, flow=False, indentless=False):
+        return super().increase_indent(flow, False)
+
+
+class FoldedString(str):
+    """Mark editable prose for YAML folded-block output."""
+
+
+def represent_folded_string(dumper, value):
+    return dumper.represent_scalar("tag:yaml.org,2002:str", value, style=">")
+
+
+IndentedDumper.add_representer(FoldedString, represent_folded_string)
 
 
 def error(message, status=1):
@@ -26,6 +45,61 @@ def parse_date(value):
         return datetime.date.fromisoformat(value).isoformat()
     except (TypeError, ValueError):
         error(f"Date must use YYYY-MM-DD: {value}", 2)
+
+
+def load_worksheet(path_value):
+    worksheet_path = path_value.expanduser().resolve()
+    if not worksheet_path.is_file():
+        error(f"Worksheet does not exist: {worksheet_path}")
+    try:
+        worksheet = yaml.safe_load(worksheet_path.read_text(encoding="utf-8"))
+    except yaml.YAMLError as exc:
+        error(f"Worksheet contains invalid YAML: {exc}")
+    if not isinstance(worksheet, dict):
+        error("Worksheet must contain a YAML mapping")
+    return worksheet_path, worksheet
+
+
+def worksheet_context(worksheet):
+    date = parse_date(worksheet.get("date"))
+    source_value = worksheet.get("source")
+    source = Path(str(source_value)).expanduser().resolve() if source_value else None
+    updates = worksheet.get("updates")
+    if not isinstance(updates, list) or not updates:
+        error("Worksheet must contain at least one update")
+    return date, source, updates
+
+
+def collect_slugs(updates):
+    slugs = []
+    problems = []
+    seen = set()
+    for number, update in enumerate(updates, start=1):
+        label = f"update {number}"
+        if not isinstance(update, dict):
+            problems.append(f"{label}: must be a YAML mapping")
+            continue
+        slug = str(update.get("plant") or "").strip()
+        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+            problems.append(f"{label}: plant slug is missing or invalid")
+            continue
+        if slug in seen:
+            problems.append(f"{slug}: plant is duplicated")
+            continue
+        seen.add(slug)
+        slugs.append(slug)
+    return slugs, problems
+
+
+def report_problems(title, problems):
+    if not problems:
+        return
+    print(title)
+    print("=" * len(title))
+    for problem in problems:
+        print(f"FAIL {problem}")
+    print(f"Result: validation failed; {len(problems)} problem(s); no files changed")
+    raise SystemExit(1)
 
 
 def photo_match(name, date):
@@ -115,8 +189,8 @@ def prepare(args):
             "plant": slug,
             "photos": photos,
             "current": photos[0] if len(photos) == 1 else None,
-            "narrative": "",
-            "care": "",
+            "narrative": FoldedString(NARRATIVE_PLACEHOLDER),
+            "care": None,
             "status": None,
         })
 
@@ -136,10 +210,14 @@ def prepare(args):
         "source": str(source),
         "updates": updates,
     }
-    output.write_text(
-        yaml.safe_dump(worksheet, sort_keys=False, allow_unicode=True),
-        encoding="utf-8",
+    rendered = yaml.dump(
+        worksheet,
+        Dumper=IndentedDumper,
+        sort_keys=False,
+        allow_unicode=True,
+        width=1000,
     )
+    output.write_text(rendered, encoding="utf-8")
     if ignored_other_dates:
         print(f"INFO Ignored {ignored_other_dates} photo(s) from other dates")
     print(f"Worksheet: {output}")
@@ -186,28 +264,70 @@ def replace_status_tag(text, old_status, new_status):
     return "".join(lines)
 
 
+def validate(args):
+    worksheet_path, worksheet = load_worksheet(args.worksheet)
+    date, source, updates = worksheet_context(worksheet)
+    slugs, problems = collect_slugs(updates)
+    if source is None:
+        problems.append("worksheet source is required")
+
+    for number, update in enumerate(updates, start=1):
+        if not isinstance(update, dict):
+            continue
+        slug = str(update.get("plant") or "").strip()
+        label = slug or f"update {number}"
+        photos = update.get("photos")
+        if not isinstance(photos, list) or not photos:
+            problems.append(f"{label}: photos must contain at least one filename")
+            continue
+        if len(photos) != len(set(photos)):
+            problems.append(f"{label}: photos contains duplicate filenames")
+        for name_value in photos:
+            name = str(name_value)
+            match = photo_match(name, date)
+            if Path(name).name != name or not match or match.group("slug") != slug:
+                problems.append(f"{label}: invalid photo filename for plant/date: {name}")
+        current = update.get("current") or (photos[0] if len(photos) == 1 else None)
+        if not current:
+            problems.append(f"{label}: current is required when multiple photos are listed")
+        elif current not in photos:
+            problems.append(f"{label}: current must name one of the listed photos")
+        narrative = str(update.get("narrative") or "").strip()
+        if not narrative or narrative == NARRATIVE_PLACEHOLDER:
+            problems.append(f"{label}: narrative is required")
+        requested_status = str(update.get("status") or "").strip().lower()
+        if requested_status and requested_status not in VALID_STATUSES:
+            problems.append(f"{label}: invalid status: {requested_status}")
+
+    report_problems("Plant Batch Worksheet Validation", problems)
+    print("Plant Batch Worksheet Validation")
+    print("================================")
+    print(f"Date: {date}")
+    print(f"Source: {source}")
+    print(f"Worksheet: {worksheet_path}")
+    print(f"Result: PASS; {len(slugs)} plant update(s) structurally valid")
+
+
+def slugs(args):
+    _, worksheet = load_worksheet(args.worksheet)
+    _, _, updates = worksheet_context(worksheet)
+    values, problems = collect_slugs(updates)
+    if problems:
+        for problem in problems:
+            print(f"ERROR: {problem}", file=sys.stderr)
+        raise SystemExit(1)
+    print("\n".join(values))
+
+
 def apply(args):
     root = args.root.resolve()
-    worksheet_path = args.worksheet.expanduser().resolve()
-    if not worksheet_path.is_file():
-        error(f"Worksheet does not exist: {worksheet_path}")
-    try:
-        worksheet = yaml.safe_load(worksheet_path.read_text(encoding="utf-8"))
-    except yaml.YAMLError as exc:
-        error(f"Worksheet contains invalid YAML: {exc}")
-    if not isinstance(worksheet, dict):
-        error("Worksheet must contain a YAML mapping")
-
-    date = parse_date(worksheet.get("date"))
-    source_value = worksheet.get("source")
-    source = Path(str(source_value)).expanduser().resolve() if source_value else None
-    if source is None or not source.is_dir():
-        error(f"Worksheet source directory does not exist: {source}")
-    updates = worksheet.get("updates")
-    if not isinstance(updates, list) or not updates:
-        error("Worksheet must contain at least one update")
+    worksheet_path, worksheet = load_worksheet(args.worksheet)
+    date, source, updates = worksheet_context(worksheet)
+    if source is None:
+        error("Worksheet source is required")
 
     plans = []
+    already_applied = []
     problems = []
     seen_slugs = set()
     for number, update in enumerate(updates, start=1):
@@ -236,7 +356,7 @@ def apply(args):
         if len(photo_names) != len(set(photo_names)):
             problems.append(f"{label}: photos contains duplicate filenames")
             continue
-        valid_photos = []
+        photo_paths = []
         for name_value in photo_names:
             name = str(name_value)
             match = photo_match(name, date)
@@ -244,17 +364,8 @@ def apply(args):
                 problems.append(f"{label}: invalid photo filename for plant/date: {name}")
                 continue
             photo = source / name
-            if not photo.is_file():
-                problems.append(f"{label}: source photo does not exist: {name}")
-                continue
-            if not photo.with_suffix(".xmp").is_file():
-                problems.append(f"{label}: source XMP sidecar does not exist: {photo.with_suffix('.xmp').name}")
-                continue
             destination = photos_dir / name
-            if destination.exists():
-                problems.append(f"{label}: destination photo already exists: {name}")
-                continue
-            valid_photos.append((photo, destination))
+            photo_paths.append((photo, destination))
 
         current = update.get("current")
         if len(photo_names) == 1 and not current:
@@ -265,7 +376,7 @@ def apply(args):
             problems.append(f"{label}: current must name one of the listed photos")
 
         narrative = str(update.get("narrative") or "").strip()
-        if not narrative:
+        if not narrative or narrative == NARRATIVE_PLACEHOLDER:
             problems.append(f"{label}: narrative is required")
         care = str(update.get("care") or "").strip()
         requested_status = str(update.get("status") or "").strip().lower()
@@ -274,8 +385,6 @@ def apply(args):
 
         facts_text = facts_path.read_text(encoding="utf-8")
         history = history_path.read_text(encoding="utf-8")
-        if re.search(rf"^## {re.escape(date)} —", history, re.MULTILINE):
-            problems.append(f"{label}: a dated history entry already exists for {date}")
         try:
             facts = yaml.safe_load(facts_text)
             if not isinstance(facts, dict):
@@ -297,6 +406,70 @@ def apply(args):
         except (ValueError, yaml.YAMLError) as exc:
             problems.append(f"{label}: {exc}")
             continue
+
+        history_exists = bool(
+            re.search(rf"^## {re.escape(date)} —", history, re.MULTILINE)
+        )
+        destination_states = [destination.exists() for _, destination in photo_paths]
+        if history_exists or any(destination_states):
+            inconsistencies = []
+            if not history_exists:
+                inconsistencies.append("dated history entry is missing")
+            if not destination_states or not all(destination_states):
+                inconsistencies.append("one or more canonical photos are missing")
+            expected_current = f"photos/{current}"
+            actual_current = str(facts.get("photos", {}).get("current") or "")
+            if actual_current != expected_current:
+                inconsistencies.append(
+                    f"photos.current is {actual_current or 'unset'}, expected {expected_current}"
+                )
+            actual_date = str(facts.get("status", {}).get("updated") or "")
+            if actual_date != date:
+                inconsistencies.append(
+                    f"status.updated is {actual_date or 'unset'}, expected {date}"
+                )
+            actual_status = str(facts.get("status", {}).get("current") or "").lower()
+            if requested_status and actual_status != requested_status:
+                inconsistencies.append(
+                    f"status.current is {actual_status or 'unset'}, "
+                    f"expected {requested_status}"
+                )
+            missing_history_photos = [
+                name for name in photo_names if f"- {name}" not in history
+            ]
+            if missing_history_photos:
+                inconsistencies.append(
+                    "history does not reference: " + ", ".join(missing_history_photos)
+                )
+            if narrative not in history:
+                inconsistencies.append("history does not contain the worksheet narrative")
+            if care and care not in history:
+                inconsistencies.append("history does not contain the worksheet care note")
+            if inconsistencies:
+                problems.append(
+                    f"{label}: existing update is incomplete or inconsistent: "
+                    + "; ".join(inconsistencies)
+                )
+            else:
+                already_applied.append({
+                    "slug": slug,
+                    "photo_names": photo_names,
+                    "current": current,
+                })
+            continue
+
+        valid_photos = []
+        for photo, destination in photo_paths:
+            if not photo.is_file():
+                problems.append(f"{label}: source photo does not exist: {photo.name}")
+                continue
+            if not photo.with_suffix(".xmp").is_file():
+                problems.append(
+                    f"{label}: source XMP sidecar does not exist: "
+                    f"{photo.with_suffix('.xmp').name}"
+                )
+                continue
+            valid_photos.append((photo, destination))
 
         entry = [
             f"## {date} — Weekly Update",
@@ -325,25 +498,33 @@ def apply(args):
             "photo_names": photo_names,
         })
 
-    if problems:
-        print("Plant Batch Update Validation")
-        print("=============================")
-        for problem in problems:
-            print(f"FAIL {problem}")
-        print(f"Result: validation failed; {len(problems)} problem(s); no files changed")
-        raise SystemExit(1)
+    report_problems("Plant Batch Update Validation", problems)
 
     print("Plant Batch Update")
     print("==================")
     print(f"Date: {date}")
     print(f"Worksheet: {worksheet_path}")
+    for item in already_applied:
+        print(
+            f'DONE {item["slug"]}: update already applied; '
+            f'current={item["current"]}'
+        )
     for plan in plans:
         print(
             f'OK   {plan["slug"]}: {len(plan["photos"])} photo(s); '
             f'current={plan["current"]}'
         )
     if args.dry_run:
-        print(f"Result: DRY RUN; {len(plans)} plant update(s) validated; no files changed")
+        print(
+            f"Result: DRY RUN; {len(plans)} ready to apply; "
+            f"{len(already_applied)} already applied; no files changed"
+        )
+        return
+    if not plans:
+        print(
+            f"Result: {len(already_applied)} plant update(s) already applied; "
+            "no files changed"
+        )
         return
 
     created = []
@@ -374,7 +555,10 @@ def apply(args):
                 destination.unlink(missing_ok=True)
             raise
 
-    print(f"Result: applied {len(plans)} plant update(s)")
+    print(
+        f"Result: applied {len(plans)} plant update(s); "
+        f"{len(already_applied)} already applied"
+    )
 
 
 def build_parser():
@@ -386,6 +570,16 @@ def build_parser():
     prepare_parser.add_argument("--date", required=True)
     prepare_parser.add_argument("--output", type=Path)
     prepare_parser.set_defaults(handler=prepare)
+    validate_parser = subparsers.add_parser(
+        "validate", help="validate worksheet YAML and structure"
+    )
+    validate_parser.add_argument("worksheet", type=Path)
+    validate_parser.set_defaults(handler=validate)
+    slugs_parser = subparsers.add_parser(
+        "slugs", help="print plant slugs from a worksheet"
+    )
+    slugs_parser.add_argument("worksheet", type=Path)
+    slugs_parser.set_defaults(handler=slugs)
     apply_parser = subparsers.add_parser("apply", help="apply a completed worksheet")
     apply_parser.add_argument("worksheet", type=Path)
     apply_parser.add_argument("--dry-run", action="store_true")

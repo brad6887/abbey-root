@@ -309,8 +309,8 @@ commands:
         description: Compatibility wrapper for project-aware media export renaming.
         usage: abbey plant rename-exports <directory> [--dry-run]
       update-batch:
-        description: Prepare or apply a reviewable multi-plant update worksheet.
-        usage: abbey plant update-batch <prepare|apply> [options]
+        description: Prepare, inspect, validate, or apply a reviewable multi-plant update worksheet.
+        usage: abbey plant update-batch <prepare|validate|slugs|apply> [options]
     examples:
       - abbey plant new rocky-raccoon --name "Rocky Raccoon" --type orchid --photo incoming.jpg
       - abbey plant validate doctor-robert
@@ -320,6 +320,8 @@ commands:
       - abbey plant update doctor-robert --photo incoming.jpg --narrative "Firm leaves and active roots." --care "Watered."
       - abbey plant rename-exports ~/incoming/photos --dry-run
       - abbey plant update-batch prepare ~/incoming/photos --date 2026-08-02
+      - abbey plant update-batch validate working/plant-updates/2026-08-02.yml
+      - abbey plant update-batch slugs working/plant-updates/2026-08-02.yml
       - abbey plant update-batch apply working/plant-updates/2026-08-02.yml --dry-run
 
   knowledge:

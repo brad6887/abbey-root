@@ -492,6 +492,24 @@ single photo is automatically selected as current. When an update contains
 multiple photos, select one explicitly in the worksheet's `current` field.
 Optional care and status values may also be supplied.
 
+Generated worksheets use visibly indented photo lists and a folded-block
+placeholder for each required narrative. Replace the complete placeholder with
+the observation prose while preserving its indentation. This permits ordinary
+apostrophes and quotation marks without additional YAML escaping.
+
+Validate the completed worksheet's YAML and structure independently of
+canonical workspace state:
+
+```bash
+abbey plant update-batch validate working/plant-updates/2026-08-02.yml
+```
+
+Print its reviewed plant slugs for reuse by validation and publication loops:
+
+```bash
+abbey plant update-batch slugs working/plant-updates/2026-08-02.yml
+```
+
 Preview and apply the completed worksheet with:
 
 ```bash
@@ -505,6 +523,11 @@ history entry's `Photos` section, records the observation and optional care,
 and updates the current photo and status metadata. XMP sidecars remain in the
 incoming directory and publish-time derivative sanitization remains a separate
 workflow.
+
+Apply is recovery-aware. An update whose canonical photos, dated history entry,
+current-photo reference, and status date already agree is reported as already
+applied and left unchanged. A partially applied or inconsistent update remains
+a validation failure and must be reviewed before proceeding.
 
 ---
 
