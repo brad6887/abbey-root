@@ -459,6 +459,50 @@ Existing lightweight public profiles may remain under `content/plants/` until a 
 
 ---
 
+# Single-Plant Update Workflow
+
+The normal one-photo workflow is interactive:
+
+```bash
+abbey plant update
+```
+
+The command scans `~/incoming/photos` for supported images with adjacent XMP
+sidecars. It reads the plant display name from `XMP-dc:Description`, reads the
+capture date from the image, and matches the resulting slug to an existing
+canonical plant workspace. The operator selects a photo, confirms the match,
+and supplies the status, update title, observation, and optional care note.
+
+Before writing, Abbey shows the metadata-derived incoming rename and runs the
+complete plant update as a dry-run preview. A separate confirmation applies
+the rename, preserves the paired XMP sidecar in the incoming directory, copies
+the photo into the canonical workspace, appends the titled history entry,
+updates current-photo and status metadata, and validates the plant.
+
+Use `--incoming DIR` when the intake directory is not the default:
+
+```bash
+abbey plant update --incoming /path/to/photos
+```
+
+Explicit options remain available for scripting and recovery:
+
+```bash
+abbey plant update <slug> \
+  --photo /path/to/photo.jpg \
+  --title "New Flower Spike" \
+  --narrative "A new spike is visible." \
+  --care "Watered." \
+  --status thriving \
+  --date YYYY-MM-DD \
+  --dry-run
+```
+
+`--title` defaults to `Weekly Update`. An observation date may have only one
+update regardless of its title.
+
+---
+
 # Batch Update Workflow
 
 Renamed photo exports can be prepared as a reviewable, date-scoped worksheet:

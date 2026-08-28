@@ -303,8 +303,8 @@ commands:
         description: Select the photograph used on plant index pages.
         usage: abbey plant index <slug>
       update:
-        description: Add a dated observation and select its current photograph.
-        usage: abbey plant update <slug> --photo FILE --narrative TEXT [--care TEXT] [--status STATUS] [--date YYYY-MM-DD] [--dry-run]
+        description: Interactively add a metadata-driven observation or apply an explicit scripted update.
+        usage: abbey plant update [--incoming DIR | <slug> --photo FILE --narrative TEXT [--title TITLE] [--care TEXT] [--status STATUS] [--date YYYY-MM-DD] [--dry-run]]
       rename-exports:
         description: Compatibility wrapper for project-aware media export renaming.
         usage: abbey plant rename-exports <directory> [--dry-run]
@@ -317,6 +317,7 @@ commands:
       - abbey plant publish doctor-robert
       - abbey plant hero doctor-robert
       - abbey plant index doctor-robert
+      - abbey plant update
       - abbey plant update doctor-robert --photo incoming.jpg --narrative "Firm leaves and active roots." --care "Watered."
       - abbey plant rename-exports ~/incoming/photos --dry-run
       - abbey plant update-batch prepare ~/incoming/photos --date 2026-08-02

@@ -619,8 +619,8 @@ abbey plant <command>
   - `abbey plant publish <slug>`
 - `rename-exports` - Compatibility wrapper for project-aware media export renaming.
   - `abbey plant rename-exports <directory> [--dry-run]`
-- `update` - Add a dated observation and select its current photograph.
-  - `abbey plant update <slug> --photo FILE --narrative TEXT [--care TEXT] [--status STATUS] [--date YYYY-MM-DD] [--dry-run]`
+- `update` - Interactively add a metadata-driven observation or apply an explicit scripted update.
+  - `abbey plant update [--incoming DIR | <slug> --photo FILE --narrative TEXT [--title TITLE] [--care TEXT] [--status STATUS] [--date YYYY-MM-DD] [--dry-run]]`
 - `update-batch` - Prepare, inspect, validate, or apply a reviewable multi-plant update worksheet.
   - `abbey plant update-batch <prepare|validate|slugs|apply> [options]`
 - `validate` - Validate a plant workspace against the Plant Model.
@@ -634,6 +634,7 @@ abbey plant validate doctor-robert
 abbey plant publish doctor-robert
 abbey plant hero doctor-robert
 abbey plant index doctor-robert
+abbey plant update
 abbey plant update doctor-robert --photo incoming.jpg --narrative "Firm leaves and active roots." --care "Watered."
 abbey plant rename-exports ~/incoming/photos --dry-run
 abbey plant update-batch prepare ~/incoming/photos --date 2026-08-02

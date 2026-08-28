@@ -166,11 +166,26 @@ preservation and public derivative sanitization have both been verified.
 
 ## Individual Plant Update
 
-Use the individual workflow for one plant observation with one photograph:
+Use the metadata-driven interactive workflow for one plant observation with
+one photograph:
+
+```bash
+abbey plant update
+```
+
+Abbey scans `~/incoming/photos`, reads the adjacent XMP caption and capture
+date, matches the canonical plant workspace, and asks for the status, update
+title, observation, and optional care note. It shows the proposed incoming
+rename and a complete dry-run preview before asking whether to apply the
+update. Applying renames the selected image/XMP pair, updates the canonical
+workspace, and validates the plant.
+
+Use the explicit form for scripting, recovery, or a non-default photo source:
 
 ```bash
 abbey plant update <slug> \
   --photo /path/to/photo.jpg \
+  --title "New Flower Spike" \
   --narrative "Current condition and visible changes." \
   --care "Watered." \
   --status thriving \
@@ -178,12 +193,13 @@ abbey plant update <slug> \
   --dry-run
 ```
 
-`--care` and `--status` are optional. Review the preview, then repeat the
-command without `--dry-run`.
+`--title` defaults to `Weekly Update`; `--care` and `--status` are optional.
+Review the preview, then repeat the command without `--dry-run`.
 
 The command copies the photograph into the plant workspace, appends the dated
 history entry, selects the new current photograph, and updates structured
-status metadata. It rejects an existing observation for the same date.
+status metadata. It rejects an existing observation for the same date,
+regardless of the update title.
 
 Validate and publish the plant as described under **Publish and Verify**.
 

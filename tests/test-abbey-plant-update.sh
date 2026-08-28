@@ -74,6 +74,7 @@ assert_contains "dry run previews care" "Watered." "$output"
 
 output="$(ABBEY_ROOT="$test_root" "$ABBEY_PLANT" update test-plant \
   --photo "$test_root/candidate.jpg" \
+  --title "New Flower Spike" \
   --narrative "The plant has firm leaves and active roots." \
   --care "Watered and fertilized." \
   --status thriving \
@@ -87,7 +88,7 @@ grep -Fq "current: thriving" "$plant_dir/facts.yaml" && pass "optional status ch
 grep -Fq 'description: "Keep this exact formatting."' "$plant_dir/facts.yaml" && pass "unrelated facts formatting is preserved" || fail "unrelated facts formatting is preserved"
 grep -Fq "  - thriving" "$plant_dir/facts.yaml" && pass "status tag changes with status" || fail "status tag changes with status"
 if grep -Fq "  - recovering" "$plant_dir/facts.yaml"; then fail "old status tag is removed"; else pass "old status tag is removed"; fi
-grep -Fq "## 2026-08-01 — Weekly Update" "$plant_dir/history.md" && pass "history entry is appended" || fail "history entry is appended"
+grep -Fq "## 2026-08-01 — New Flower Spike" "$plant_dir/history.md" && pass "custom update title is appended" || fail "custom update title is appended"
 grep -Fq "### Care" "$plant_dir/history.md" && pass "care note is appended" || fail "care note is appended"
 grep -Fq "## 2026-07-26 — Baseline" "$plant_dir/history.md" && pass "existing history is preserved" || fail "existing history is preserved"
 
@@ -99,7 +100,7 @@ output="$(ABBEY_ROOT="$test_root" "$ABBEY_PLANT" update test-plant \
 status=$?
 set -e
 [[ "$status" -eq 1 ]] && pass "duplicate date fails" || fail "duplicate date fails"
-assert_contains "duplicate date is explained" "A weekly update already exists" "$output"
+assert_contains "duplicate date is explained" "An update already exists" "$output"
 
 echo
 echo "Result: $passed passed, $failed failed"

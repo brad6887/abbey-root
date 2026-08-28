@@ -31,6 +31,7 @@ PUBLICATION_MANIFEST_DIR=""
 PUBLISH_TARGET_ROOT=""
 IMAGE_DERIVATIVE_HELPER="$ABBEY_TOOLKIT_ROOT/tools/image/create_public_derivative.py"
 BATCH_UPDATE_HELPER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_plant_update_batch.py"
+INTERACTIVE_UPDATE_HELPER="$ABBEY_TOOLKIT_ROOT/scripts/abbey_plant_update_interactive.py"
 PLANT_TEMPLATE_DIR="$PLANTS_DIR/_template"
 
 ok_count=0
@@ -64,7 +65,7 @@ Usage:
   abbey plant publish-batch <slug> [slug ...]
   abbey plant hero <slug> [--select NUMBER] [--yes]
   abbey plant index <slug> [--select NUMBER] [--yes]
-  abbey plant update <slug> --photo FILE --narrative TEXT [options]
+  abbey plant update [<slug> --photo FILE --narrative TEXT [options]]
   abbey plant rename-exports <directory> [--dry-run]
   abbey plant update-batch prepare <directory> --date YYYY-MM-DD [--output FILE]
   abbey plant update-batch validate <worksheet>
@@ -93,7 +94,10 @@ New options:
   --photo FILE       Import an initial photograph (repeatable)
 
 Update options:
+  no arguments       Start a metadata-driven interactive update
+  --incoming DIR     Interactive incoming directory (default: ~/incoming/photos)
   --photo FILE       Photograph to copy into the plant workspace
+  --title TITLE      History heading title (default: Weekly Update)
   --narrative TEXT   Short condition narrative
   --care TEXT        Optional care note
   --status STATUS    Optional new status
@@ -668,15 +672,28 @@ update_plant() {
     local slug="${1:-}"
 
     if [[ -z "$slug" ]]; then
-        echo "ERROR: Plant slug is required."
-        echo
-        usage
-        return 2
+        python3 "$INTERACTIVE_UPDATE_HELPER" \
+            --root "$REPO_DIR" \
+            --plant-command "$SCRIPT_PATH"
+        return $?
+    fi
+
+    if [[ "$slug" == "--incoming" ]]; then
+        if [[ $# -lt 2 ]]; then
+            echo "ERROR: --incoming requires a value."
+            return 2
+        fi
+        python3 "$INTERACTIVE_UPDATE_HELPER" \
+            --root "$REPO_DIR" \
+            --plant-command "$SCRIPT_PATH" \
+            --incoming "$2"
+        return $?
     fi
 
     shift
 
     local photo=""
+    local title="Weekly Update"
     local narrative=""
     local care=""
     local status=""
@@ -685,13 +702,14 @@ update_plant() {
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --photo|--narrative|--care|--status|--date)
+            --photo|--title|--narrative|--care|--status|--date)
                 if [[ $# -lt 2 ]]; then
                     echo "ERROR: $1 requires a value."
                     return 2
                 fi
                 case "$1" in
                     --photo) photo="$2" ;;
+                    --title) title="$2" ;;
                     --narrative) narrative="$2" ;;
                     --care) care="$2" ;;
                     --status) status="$2" ;;
@@ -716,7 +734,7 @@ update_plant() {
     fi
 
     python3 - \
-        "$REPO_DIR" "$slug" "$photo" "$narrative" "$care" \
+        "$REPO_DIR" "$slug" "$photo" "$title" "$narrative" "$care" \
         "$status" "$update_date" "$dry_run" <<'PY'
 import datetime
 import os
@@ -731,11 +749,12 @@ import yaml
 root = Path(sys.argv[1]).resolve()
 slug = sys.argv[2]
 photo = Path(sys.argv[3]).expanduser().resolve()
-narrative = sys.argv[4].strip()
-care = sys.argv[5].strip()
-requested_status = sys.argv[6].strip().lower()
-date_text = sys.argv[7]
-dry_run = sys.argv[8] == "true"
+title = sys.argv[4].strip()
+narrative = sys.argv[5].strip()
+care = sys.argv[6].strip()
+requested_status = sys.argv[7].strip().lower()
+date_text = sys.argv[8]
+dry_run = sys.argv[9] == "true"
 plant_dir = root / "working" / "plants" / slug
 facts_path = plant_dir / "facts.yaml"
 history_path = plant_dir / "history.md"
@@ -752,6 +771,9 @@ if not plant_dir.is_dir() or not facts_path.is_file() or not history_path.is_fil
 
 if not photo.is_file():
     error(f"Photo does not exist: {photo}")
+
+if not title or "\n" in title or "\r" in title or title.startswith("#"):
+    error("Title must be one non-heading line", 2)
 
 if photo.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
     error("Photo must be a JPG, PNG, or WebP image")
@@ -776,9 +798,9 @@ if new_status not in valid_statuses:
     )
 
 history = history_path.read_text(encoding="utf-8")
-heading = f"## {update_date.isoformat()} — Weekly Update"
-if re.search(rf"^{re.escape(heading)}$", history, re.MULTILINE):
-    error(f"A weekly update already exists for {update_date.isoformat()}")
+heading = f"## {update_date.isoformat()} — {title}"
+if re.search(rf"^## {re.escape(update_date.isoformat())} — ", history, re.MULTILINE):
+    error(f"An update already exists for {update_date.isoformat()}")
 
 safe_stem = re.sub(r"[^a-z0-9]+", "-", slug.lower()).strip("-")
 destination_name = f"{safe_stem}-{update_date.isoformat()}{photo.suffix.lower()}"
@@ -802,10 +824,11 @@ if care:
     entry.extend(["", "### Care", "", care])
 entry_text = "\n".join(entry) + "\n"
 
-print("Plant Weekly Update")
-print("===================")
+print("Plant Update")
+print("============")
 print(f"Plant: {facts.get('name', slug)} ({slug})")
 print(f"Date: {update_date.isoformat()}")
+print(f"Title: {title}")
 print(f"Photo: {photo}")
 print(f"Current photo: {facts.get('photos', {}).get('current')} -> {relative_photo}")
 print(f"Hero photo: {facts.get('photos', {}).get('hero')} (preserved)")
