@@ -64,6 +64,7 @@ Usage:
   abbey plant publish <slug>
   abbey plant publish-batch <slug> [slug ...]
   abbey plant hero <slug> [--select NUMBER] [--yes]
+  abbey plant image-review [slug ...] [--candidates] [--output .abbey/DIR]
   abbey plant index <slug> [--select NUMBER] [--yes]
   abbey plant update [<slug> --photo FILE --narrative TEXT [options]]
   abbey plant rename-exports <directory> [--dry-run]
@@ -79,6 +80,7 @@ Commands:
   publish-batch
               Publish several plants serially in one validated workflow
   hero        Select the plant photograph assigned to the hero role
+  image-review Generate a private batch photo review without changing selections
   index       Select the photograph used on plant index pages
   update      Add a dated observation and select its current photograph
   rename-exports
@@ -1129,15 +1131,15 @@ for field in ("photos.hero", "photos.current"):
     else:
         print(f"FAIL|{field} does not exist: {value}")
 
-index_value = get_value("photos.index")
-
-if index_value:
-    index_path = plant_dir / index_value
-
-    if index_path.is_file():
-        print(f"OK|photos.index exists: {index_value}")
-    else:
-        print(f"FAIL|photos.index does not exist: {index_value}")
+for field in ("photos.index", "photos.original"):
+    value = get_value(field)
+    if value:
+        if not isinstance(value, str):
+            print(f"FAIL|{field} must be a relative photo path")
+        elif (plant_dir / value).is_file():
+            print(f"OK|{field} exists: {value}")
+        else:
+            print(f"FAIL|{field} does not exist: {value}")
 
 photos_dir = plant_dir / "photos"
 
@@ -1162,9 +1164,12 @@ if photos_dir.is_dir():
             return
         references.setdefault(name, set()).add(source)
 
-    for field in ("photos.hero", "photos.current", "photos.index"):
+    for field in ("photos.hero", "photos.current", "photos.index", "photos.original"):
         value = get_value(field)
         if not value:
+            continue
+        if not isinstance(value, str):
+            print(f"FAIL|{field} must be a relative photo path")
             continue
         relative = Path(value)
         if relative.is_absolute() or relative.parent != Path("photos"):
@@ -1576,6 +1581,7 @@ history_path = get("documents.history")
 story = read_document(story_path)
 history = read_document(history_path)
 
+original_image = copy_public_image("photos.original", "original")
 hero_image = copy_public_image("photos.hero", "hero")
 current_image = copy_public_image("photos.current", "current")
 index_image = copy_public_image("photos.index", "index")
@@ -1605,6 +1611,7 @@ frontmatter = {
     "featured": True,
     "draft": False,
     "updatedDate": updated,
+    "originalImage": original_image,
     "heroImage": hero_image,
     "currentImage": current_image,
     "indexImage": index_image,
@@ -1661,6 +1668,8 @@ manifest_path.write_text(
 
 print(f"Generated content: {output_path}")
 print(f"Generated publication manifest: {manifest_path}")
+if original_image:
+    print(f"Published original image: {original_image}")
 if hero_image:
     print(f"Published hero image: {hero_image}")
 if current_image:
@@ -1803,6 +1812,10 @@ case "$command" in
     publish-batch)
         shift
         publish_batch "$@"
+        ;;
+    image-review)
+        shift
+        python3 "$ABBEY_TOOLKIT_ROOT/scripts/abbey_plant_image_review.py" --root "$REPO_DIR" "$@"
         ;;
     hero)
         shift

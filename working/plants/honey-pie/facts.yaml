@@ -28,7 +28,8 @@ care:
   container: ventilated ceramic orchid pot
 
 photos:
-  hero: photos/Honey_Pie - 1.jpeg
+  original: photos/Honey_Pie - 1.jpeg
+  hero: "photos/Honey_Pie - 7.JPG"
   current: photos/honey-pie-2026-08-30.jpg
   index: null
   metadata: photo-metadata.md

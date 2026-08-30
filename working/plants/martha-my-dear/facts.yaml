@@ -29,7 +29,8 @@ care:
   container: clear nursery pot
 
 photos:
-  hero: photos/Martha - 1.JPG
+  original: photos/Martha - 1.JPG
+  hero: "photos/martha-my-dear-2026-08-01.jpg"
   current: photos/martha-my-dear-2026-08-30.jpg
   index: "photos/Martha - 5.JPG"
   metadata: photo-metadata.md

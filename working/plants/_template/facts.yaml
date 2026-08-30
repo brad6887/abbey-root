@@ -28,6 +28,7 @@ care:
   container: null
 
 photos:
+  original: null
   hero: null
   current: null
   index: null

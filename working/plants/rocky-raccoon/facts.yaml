@@ -23,7 +23,8 @@ care:
   potting_medium: orchid bark
   container: clear plastic pot inside decorative white outer container
 photos:
-  hero: photos/rocky-raccoon-2026-08-02.jpg
+  original: photos/rocky-raccoon-2026-08-02.jpg
+  hero: "photos/rocky-raccoon-2026-08-03.jpg"
   current: photos/rocky-raccoon-2026-08-30.jpg
   index: null
   metadata: photo-metadata.md

@@ -265,10 +265,12 @@ Examples of future additions:
 
 ## photos
 
-References to important photographs.
+References to important photographs. Role selections belong here; websites
+consume their generated metadata rather than inferring roles from filenames.
 
 ```yaml
 photos:
+  original: null
   hero: photos/example.jpg
   current: photos/current.jpg
   metadata: photo-metadata.md
@@ -277,9 +279,46 @@ photos:
 ### Rules
 
 - Use relative paths.
-- Hero image represents the plant.
+- Optional `original` selects the earliest/first documented photograph. Keep it
+  omitted or `null` until provenance establishes that selection; neither the
+  filename nor the hero role establishes chronology. New workspaces leave it
+  unset for review, even when the first import initializes hero/current.
+- Hero is the curated best overall visual and may equal Original or Current.
 - Current image reflects the most recent overall condition.
 - Additional photos belong in `history.md`.
+- `abbey plant publish` exports a populated `photos.original` as `originalImage`
+  through the same sanitized derivative and provenance-manifest pipeline as
+  hero/current. An absent role is omitted from generated frontmatter. Consumers
+  should label missing Original/Current selections honestly; a Hero may fall
+  back to Current, then Original, without changing canonical selections.
+
+---
+
+## Image Curation Review
+
+Generate a private batch contact sheet from canonical role selections:
+
+```bash
+abbey plant image-review
+abbey plant image-review --candidates
+abbey plant image-review honey-pie rocky-raccoon --output .abbey/photo-review
+```
+
+The default output is `.abbey/plant-image-review/index.html`, accompanied by
+`review.json` and metadata-stripped, auto-oriented thumbnails. Each plant shows
+Original, Current, and Featured (the internal `hero` role), source paths,
+missing selections, and explicit fallback behavior. `--candidates` adds
+galleries of existing supported photographs, excluding sidecars and AppleDouble
+files. The report is private working material, not website output; do not
+publish it or serve the canonical workspace itself.
+
+Review historical provenance before assigning Original. The report does not
+infer chronology or change selections. Keep Current as the latest representative
+view, and use `abbey plant hero <slug>` for a deliberate Featured selection.
+Canonical `facts.yaml` remains the authority; do not edit generated imports.
+Thumbnails show source framing, not proof of the exported derivative. Validate
+the selected workspaces and regenerate local plant imports through the configured
+publishing workflow, then verify the actual BradCooke.com build.
 
 ---
 

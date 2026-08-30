@@ -28,7 +28,8 @@ care:
   container: clear orchid pot
 
 photos:
-  hero: photos/Lady_Madonna - 17.jpeg
+  original: photos/Lady_Madonna - 1.jpeg
+  hero: "photos/Lady_Madonna - 18.jpeg"
   current: photos/lady-madonna-2026-08-30.jpg
   index: null
   metadata: photo-metadata.md

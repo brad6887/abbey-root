@@ -28,7 +28,8 @@ care:
   container: ventilated orchid pot inside a ceramic cachepot
 
 photos:
-  hero: photos/Mother_natures_son - 1.jpg
+  original: photos/Mother_natures_son - 1.jpg
+  hero: "photos/Mother_natures_son - 14.jpeg"
   current: photos/mother-natures-son-2026-08-30.jpg
   index: null
   metadata: photo-metadata.md

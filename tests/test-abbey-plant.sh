@@ -830,6 +830,51 @@ assert_contains \
   "FAIL Unable to execute facts.yaml validation"
 
 echo
+# Original is optional, but an explicit selection must be valid and sanitized.
+plant_dir="$(create_plant original-role)"
+"$image_command" -size 80x40 xc:white "$plant_dir/photos/hero.jpg"
+cp "$plant_dir/photos/hero.jpg" "$plant_dir/photos/current.jpg"
+run_publish "$test_root/original-role" test-plant
+assert_status "legacy publication without Original still succeeds" 0
+if ! grep -q '^originalImage:' "$test_root/original-role/bradcooke/content/plants/test-plant.md"; then
+  pass "missing Original is not inferred from Hero or filenames"
+else
+  fail "missing Original is not inferred from Hero or filenames"
+fi
+sed -i '/^photos:/a\  original: photos/first.jpg' "$plant_dir/facts.yaml"
+run_validate "$test_root/original-role" test-plant
+assert_status "missing explicit Original fails validation" 1
+assert_contains "missing Original is identified" "photos.original does not exist"
+cp "$plant_dir/photos/hero.jpg" "$plant_dir/photos/first.jpg"
+exiftool -overwrite_original -Make="Apple" -GPSLatitude="32.9" -GPSLatitudeRef="N" "$plant_dir/photos/first.jpg" >/dev/null
+run_publish "$test_root/original-role" test-plant
+assert_status "explicit Original exports successfully" 0
+if python3 - "$test_root/original-role" <<'PY_ORIGINAL'
+import hashlib, json, sys, yaml
+from pathlib import Path
+root = Path(sys.argv[1])
+target = root / "bradcooke"
+data = yaml.safe_load((target / "content/plants/test-plant.md").read_text().split("---", 2)[1])
+manifest = json.loads((target / "generated/plant-publication/test-plant.json").read_text())
+record, = [item for item in manifest["images"] if item["publication"].get("field") == "photos.original"]
+assert record["publication"] == {"type": "role", "name": "original", "field": "photos.original"}
+source = root / record["source"]["path"]
+derivative = target / record["derivative"]["path"]
+assert record["source"]["sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
+assert record["source"]["canonical_original_preserved"] is True
+assert record["validation"] == {"private_metadata_detected": False, "source_hash_unchanged": True}
+assert data["originalImage"] == "/images/plants/test-plant/original.jpg?v=" + hashlib.sha256(derivative.read_bytes()).hexdigest()[:12]
+PY_ORIGINAL
+then
+  pass "Original uses versioned sanitized output with source provenance"
+else
+  fail "Original uses versioned sanitized output with source provenance"
+fi
+sed -i 's@original: photos/first.jpg@original: ../outside.jpg@' "$plant_dir/facts.yaml"
+run_validate "$test_root/original-role" test-plant
+assert_status "Original outside photos is rejected" 1
+assert_contains "Original path boundary is explained" "photos.original must reference a direct child of photos/"
+
 echo "Passed: $passed"
 echo "Failed: $failed"
 

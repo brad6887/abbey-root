@@ -611,6 +611,8 @@ abbey plant <command>
 
 - `hero` - Select the photograph assigned to a plant's hero role.
   - `abbey plant hero <slug>`
+- `image-review` - Generate a private batch photo review without changing selections.
+  - `abbey plant image-review [slug ...] [--candidates] [--output .abbey/DIR]`
 - `index` - Select the photograph used on plant index pages.
   - `abbey plant index <slug>`
 - `new` - Create a plant workspace from the canonical template.

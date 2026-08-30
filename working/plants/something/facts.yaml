@@ -29,7 +29,8 @@ care:
   container: ventilated orchid pot inside a decorative container
 
 photos:
-  hero: photos/Something - 1.jpeg
+  original: photos/Something - 1.jpeg
+  hero: "photos/Something - 6.jpeg"
   current: photos/something-2026-08-30.jpg
   index: photos/Something - 21.JPG
   metadata: photo-metadata.md

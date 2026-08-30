@@ -28,7 +28,8 @@ care:
   container: clear orchid pot
 
 photos:
-  hero: photos/IMG_C52D2813-DCED-40FD-BBF7-605ACE5D9306.jpeg
+  original: photos/IMG_C52D2813-DCED-40FD-BBF7-605ACE5D9306.jpeg
+  hero: "photos/IMG_1481C7B6-2459-4C3F-826D-752A88C735DC.jpeg"
   current: photos/doctor-robert-2026-08-30.jpg
   index: null
   metadata: photo-metadata.md

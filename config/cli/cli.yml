@@ -299,6 +299,9 @@ commands:
       hero:
         description: Select the photograph assigned to a plant's hero role.
         usage: abbey plant hero <slug>
+      image-review:
+        description: Generate a private batch photo review without changing selections.
+        usage: abbey plant image-review [slug ...] [--candidates] [--output .abbey/DIR]
       index:
         description: Select the photograph used on plant index pages.
         usage: abbey plant index <slug>

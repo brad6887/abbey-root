@@ -28,7 +28,8 @@ care:
   container: null
 
 photos:
-  hero: photos/HelterSkelter - 1 of 12.jpeg
+  original: photos/HelterSkelter - 1 of 12.jpeg
+  hero: "photos/helter-skelter-2026-08-23.jpg"
   current: photos/helter-skelter-2026-08-30.jpg
   index: null
   metadata: photo-metadata.md
