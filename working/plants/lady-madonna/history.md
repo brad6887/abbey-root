@@ -417,3 +417,31 @@ She still looks stable. Foliage is maintaining good color with no new yellowing,
 ### Care
 
 Watered.
+
+---
+
+## 2026-08-28 — Weekly Update
+
+### Photos
+
+- lady-madonna-2026-08-28.jpg
+
+### Observations
+
+Lady Madonna had a nice surprise this week: a new flower spike, first noticed on 8/28 and already visible in the 8/23 photo. After spending the summer recovering from the move, she appears ready to bloom again. Her roots remain strong, the foliage is stable, and the new spike is developing cleanly from a leaf axil. For now, care will stay the same while we let the spike gain some length before staking.
+
+---
+
+## 2026-08-30 — Weekly Update
+
+### Photos
+
+- lady-madonna-2026-08-30.jpg
+
+### Observations
+
+REQUIRED: Lady Madonna’s new flower spike is already showing noticeable growth just two days after it was first documented. The spike remains healthy, upright, and actively extending as she heads into another bloom cycle.
+
+### Care
+
+watered

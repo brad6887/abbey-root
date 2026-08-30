@@ -300,3 +300,19 @@ Something continues to look good. That new root is really taking off with a brig
 ### Care
 
 Watered.
+
+---
+
+## 2026-08-30 — Weekly Update
+
+### Photos
+
+- something-2026-08-30.jpg
+
+### Observations
+
+REQUIRED: The newest leaves are firm and healthy, and that prominent root is still actively growing with a bright green tip; the older lower leaf continues its gradual decline, but nothing about it is concerning given all the active growth./do
+
+### Care
+
+watered

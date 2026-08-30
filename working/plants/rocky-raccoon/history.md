@@ -108,3 +108,19 @@ Rocky continues to look stable; the leaves are still floppy from his rough start
 ### Care
 
 Watered.
+
+---
+
+## 2026-08-30 — Weekly Update
+
+### Photos
+
+- rocky-raccoon-2026-08-30.jpg
+
+### Observations
+
+REQUIRED: Rocky is still very much in recovery mode, with those original leaves remaining floppy, but they’re staying green and the crown looks solid. About a month into the rescue, he continues to hold steady while we wait for that first clear sign of new growth.
+
+### Care
+
+watered

@@ -16,12 +16,12 @@ rescue:
     country: USA
 
 status:
-  current: recovering
+  current: thriving
   current_location:
     city: Fort Worth
     state: Florida
     country: USA
-  updated: 2026-08-23
+  updated: 2026-08-30
 
 care:
   potting_medium: orchid bark
@@ -29,7 +29,7 @@ care:
 
 photos:
   hero: photos/Lady_Madonna - 17.jpeg
-  current: photos/lady-madonna-2026-08-23.jpg
+  current: photos/lady-madonna-2026-08-30.jpg
   index: null
   metadata: photo-metadata.md
 
@@ -41,4 +41,4 @@ tags:
   - orchid
   - orchid-rescue
   - phalaenopsis
-  - recovering
+  - thriving

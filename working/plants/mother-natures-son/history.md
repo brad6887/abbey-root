@@ -432,3 +432,19 @@ The newer growth remains firm and healthy, and that white root with the green ti
 ### Care
 
 Watered.
+
+---
+
+## 2026-08-30 — Weekly Update
+
+### Photos
+
+- mother-natures-son-2026-08-30.jpg
+
+### Observations
+
+REQUIRED: That newest upright growth has made very noticeable progress since the 8/23 photo—it’s elongating quickly and looks plump and healthy, while the established leaves remain firm.
+
+### Care
+
+watered

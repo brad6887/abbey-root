@@ -256,3 +256,19 @@ She's still looking healthy underneath, with firm green foliage and substantial 
 ### Care
 
 Watered.
+
+---
+
+## 2026-08-30 — Weekly Update
+
+### Photos
+
+- honey-pie-2026-08-30.jpg
+
+### Observations
+
+REQUIRED: She still looks very healthy vegetatively: the leaves are firm and green, and the exposed roots remain substantial. The bloom cycle is now clearly in its final stretch, with only a handful of flowers remaining, but the flower spike itself is still green—so I'd continue leaving it alone and see what Honey Pie does with it once the last blooms drop.
+
+### Care
+
+watered

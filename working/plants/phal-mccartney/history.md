@@ -296,3 +296,19 @@ She continues to look good after the 8/9 repot—leaves are firm and healthy, an
 ### Care
 
 Watered.
+
+---
+
+## 2026-08-30 — Weekly Update
+
+### Photos
+
+- phal-mccartney-2026-08-30.jpg
+
+### Observations
+
+REQUIRED: She continues to look excellent three weeks after the repot—leaves are firm and dark green, the crown looks healthy, and the exposed roots remain plump and stable. The repot appears to have gone very smoothly.
+
+### Care
+
+watered

@@ -324,3 +324,19 @@ Bungalow Bill remains stable and continues his slow recovery. The upper leaves s
 ### Care
 
 Watered.
+
+---
+
+## 2026-08-30 — Weekly Update
+
+### Photos
+
+- bungalow-bill-2026-08-30.jpg
+
+### Observations
+
+REQUIRED: Bungalow Bill continues to look stable. The upper leaves remain firm, glossy, and a healthy dark green, and the exposed roots still look substantial.
+
+### Care
+
+watered
