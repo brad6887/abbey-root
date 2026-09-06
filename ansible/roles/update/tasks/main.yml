@@ -1,12 +1,33 @@
 ---
-- name: Update packages on Debian/Ubuntu systems
+- name: Initialize package update result
+  ansible.builtin.set_fact:
+    update_packages_changed: false
+
+- name: Refresh APT package metadata
   ansible.builtin.apt:
     update_cache: true
+    cache_valid_time: 0
+  when: ansible_os_family == "Debian"
+
+- name: Upgrade packages on Debian/Ubuntu systems
+  ansible.builtin.apt:
     upgrade: dist
+  register: update_apt_packages
+  when: ansible_os_family == "Debian"
+
+- name: Record Debian/Ubuntu package changes
+  ansible.builtin.set_fact:
+    update_packages_changed: "{{ update_apt_packages.changed | default(false) }}"
   when: ansible_os_family == "Debian"
 
 - name: Update packages on Rocky/RHEL systems
   ansible.builtin.dnf:
     name: "*"
     state: latest
+  register: update_dnf_packages
+  when: ansible_os_family == "RedHat"
+
+- name: Record Rocky/RHEL package changes
+  ansible.builtin.set_fact:
+    update_packages_changed: "{{ update_dnf_packages.changed | default(false) }}"
   when: ansible_os_family == "RedHat"

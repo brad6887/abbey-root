@@ -1,0 +1,12 @@
+---
+- name: Preflight Abbey Root patch targets
+  hosts: patch_targets
+  gather_facts: true
+  become: true
+  any_errors_fatal: true
+  tags:
+    - preflight
+
+  tasks:
+    - name: Run patch health gate
+      ansible.builtin.include_tasks: ../tasks/patch-health-gate.yml

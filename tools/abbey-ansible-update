@@ -3,35 +3,27 @@
 # Abbey Root Tool: abbey-ansible-update
 #
 # Purpose:
-#   Update packages on all managed Abbey Root hosts.
+# Deprecated compatibility command. Linux patching is performed with
+# abbey lab patch.
 #
 # Usage:
-#   abbey-ansible-update
+# abbey-ansible-update
 #
 
-set -e
+cat <<'MESSAGE'
+abbey-ansible-update is deprecated.
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$REPO_ROOT/ansible" || exit 1
+The supported Abbey Root Linux patch workflow is:
 
-if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-cat <<EOF
-abbey-ansible-update
+  abbey lab patch
 
-Update packages on all managed Abbey Root hosts.
+To validate patch readiness without installing updates or rebooting:
 
-Usage:
-    abbey-ansible-update
+  abbey lab patch --preflight-only
 
-This command:
+The old update command has been disabled because it bypassed the patch
+workflow's preflight checks, deterministic host ordering, reboot validation,
+failure handling, reporting, and controller exclusion.
+MESSAGE
 
-  • Updates package repositories
-  • Installs available package updates
-  • Supports Debian/Ubuntu and Rocky/RHEL hosts
-  • Applies operating system updates across the lab
-
-EOF
-exit 0
-fi
-
-ansible-playbook playbooks/update.yml
+exit 2

@@ -85,6 +85,7 @@ domain-specific collections with dedicated discovery workflows.
 ## Runbooks
 
 - [Fact-Locked Voice Application](../runbooks/VOICE_APPLICATION.md)
+- [Monthly Linux Patching](../runbooks/linux-monthly-patching.md)
 - [Network Interface Migration](../runbooks/network-interface-migration.md)
 - [Plant Website Updates](../runbooks/PLANT_WEBSITE_UPDATES.md)
 

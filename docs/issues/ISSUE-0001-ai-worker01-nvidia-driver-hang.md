@@ -113,6 +113,100 @@ Results:
 
 The original failure was not reproduced.
 
+### 2026-09-05 - Second Observed Failure
+
+The NVIDIA driver hang recurred following a second reboot of ai-worker01
+during validation of the new monthly Linux patch workflow.
+
+Earlier in the morning, ai-worker01 had completed a normal package update,
+reboot, and post-reboot validation successfully.
+
+An accidental second invocation of abbey lab patch later caused the host to
+reboot again approximately 20 to 30 minutes after the first reboot.
+
+The second patch run reported the host as successful, but the NVIDIA stack had
+not yet completed initialization.
+
+Observed timing:
+
+- nvidia-persistenced started at approximately 11:11:33 CDT.
+- The patch workflow completed and reported remote success at 11:12:58 CDT.
+- nvidia-persistenced reached its initial startup timeout at 11:13:03 CDT.
+- systemd attempted SIGTERM and later SIGKILL without successfully terminating
+  the process.
+- The service was formally marked failed at 11:16:03 CDT.
+- NVIDIA-related processes remained blocked in uninterruptible sleep.
+
+The failure signature closely matched the original July incident.
+
+Observed D-state processes included:
+
+- udev-worker
+- nv_open_q
+- nvidia-persistenced
+- Multiple llama-server processes
+- nvidia-smi
+
+Kernel messages showed tasks blocked inside the NVIDIA kernel driver, including
+os_acquire_rwlock_write, NVIDIA device initialization, and deferred NVIDIA open
+operations.
+
+nvidia-smi hung indefinitely and itself entered D state.
+
+The host remained reachable through SSH, but the NVIDIA stack could not recover
+and the blocked processes could not be terminated normally.
+
+### 2026-09-05 - Recovery
+
+A physical power cycle was performed.
+
+After the power cycle:
+
+- SSH returned normally.
+- Kernel was 6.8.0-139-generic.
+- No failed systemd units were present.
+- No D-state processes were present.
+- nvidia-smi returned normally.
+- NVIDIA driver 595.84 initialized successfully.
+- GPU temperature was approximately 38 C.
+- Ollama was active.
+- No llama-server processes were stuck.
+- Docker was healthy.
+- A complete abbey lab check passed across all six Linux hosts.
+
+The physical power cycle therefore remains the known recovery procedure for
+this failure mode.
+
+### 2026-09-05 - Findings
+
+This recurrence substantially strengthens the theory that the failure is
+associated with NVIDIA driver initialization during boot.
+
+The fact that the host completed one successful reboot and then failed during a
+second reboot shortly afterward makes repeated or closely spaced reboot cycles
+a stronger suspected trigger.
+
+The incident also exposed a timing issue in the new patch workflow. The patch
+workflow declared ai-worker01 successful approximately five seconds before
+nvidia-persistenced reached its first startup timeout and more than three
+minutes before systemd formally marked the service failed.
+
+The current post-reboot health check can therefore run before all systemd
+services have finished settling.
+
+Planned patch-workflow improvements resulting from this incident include:
+
+- Require explicit confirmation before a disruptive abbey lab patch run.
+- Wait for systemd startup to settle before post-reboot health validation.
+- Treat D-state processes as a hard failure during patch validation.
+- Prevent a host from being declared successfully patched while critical
+  services are still starting or timing out.
+
+The underlying NVIDIA issue remains unresolved.
+
+The failure is now best described as intermittent rather than a one-time event.
+The exact conditions required to reproduce it deliberately are still unknown.
+
 ## Evidence
 
 ### Initial Failure
@@ -256,9 +350,9 @@ Future investigation should focus on reproducing the original failure and identi
 
 ```yaml
 Current State:
-  Reproducible: no
+  Reproducible: intermittent
   Workaround: Physical reboot
   Baseline Established: true
-  Last Verified: 2026-07-13
+  Last Verified: 2026-09-05
   Next Review: 2026-08-01
 ```

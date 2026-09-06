@@ -1,0 +1,85 @@
+---
+- name: Verify supported operating system family
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family in ["Debian", "RedHat"]
+    fail_msg: >-
+      Unsupported operating system family on {{ inventory_hostname }}:
+      {{ ansible_os_family }}
+
+- name: Verify privilege escalation
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/true
+  changed_when: false
+
+- name: Read root filesystem free space
+  ansible.builtin.shell: |
+    df -Pk / | awk 'NR == 2 {print $4}'
+  register: patch_root_free_kb
+  changed_when: false
+
+- name: Verify root filesystem has at least 2 GiB free
+  ansible.builtin.assert:
+    that:
+      - patch_root_free_kb.stdout | int >= 2097152
+    fail_msg: >-
+      Insufficient free space on {{ inventory_hostname }} root filesystem:
+      {{ patch_root_free_kb.stdout | int }} KiB available
+
+- name: Read processes in uninterruptible sleep
+  ansible.builtin.shell: |
+    ps -eo state,pid,ppid,comm,args | awk '$1 ~ /^D/ {print}'
+  register: patch_d_state_processes
+  changed_when: false
+
+- name: Verify no processes are stuck in uninterruptible sleep
+  ansible.builtin.assert:
+    that:
+      - patch_d_state_processes.stdout_lines | length == 0
+    fail_msg: >-
+      Processes are stuck in uninterruptible sleep on
+      {{ inventory_hostname }}:
+      {{ patch_d_state_processes.stdout_lines | join(', ') }}
+
+- name: Read failed systemd units
+  ansible.builtin.command:
+    argv:
+      - systemctl
+      - --failed
+      - --no-legend
+      - --plain
+  register: patch_failed_systemd_units
+  changed_when: false
+
+- name: Verify no failed systemd units exist
+  ansible.builtin.assert:
+    that:
+      - patch_failed_systemd_units.stdout_lines | length == 0
+    fail_msg: >-
+      Failed systemd units exist on {{ inventory_hostname }}:
+      {{ patch_failed_systemd_units.stdout_lines | join(', ') }}
+
+- name: Refresh APT package metadata
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 0
+  when: ansible_os_family == "Debian"
+
+- name: Refresh DNF package metadata
+  ansible.builtin.command:
+    argv:
+      - dnf
+      - -q
+      - makecache
+  changed_when: false
+  when: ansible_os_family == "RedHat"
+
+- name: Report successful patch health gate
+  ansible.builtin.debug:
+    msg: >-
+      OK {{ inventory_hostname }} passed patch health validation:
+      {{ patch_root_free_kb.stdout | int }} KiB free on /,
+      no D-state processes,
+      no failed systemd units,
+      package repositories available

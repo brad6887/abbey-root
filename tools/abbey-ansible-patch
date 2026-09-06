@@ -1,0 +1,273 @@
+#!/bin/bash
+#
+# Abbey Root Tool: abbey-ansible-patch
+#
+# Purpose:
+# Safely patch managed Abbey Root Linux hosts in a deterministic order.
+#
+
+set -uo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ANSIBLE_DIR="$REPO_ROOT/ansible"
+
+PATCH_HOSTS=(
+    sensor01
+    sites01
+    ai-worker01
+    ubuntu-dev01
+    edge01
+)
+
+RECIPIENTS=(
+    brad6887@gmail.com
+    alerts@abbeyroot.com
+)
+
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/abbey/patch"
+
+usage() {
+    cat <<USAGE
+abbey lab patch
+
+Safely patch Abbey Root Linux systems.
+
+Usage:
+  abbey lab patch
+  abbey lab patch --preflight-only
+  abbey lab patch --yes
+  abbey lab patch --help
+
+Patch order:
+  sensor01
+  sites01
+  ai-worker01
+  ubuntu-dev01
+  edge01
+
+rocky-ansible01 is intentionally excluded and must be patched separately.
+
+The workflow:
+  - Preflights all patch targets before making changes
+  - Patches one host at a time in explicit order
+  - Reboots and validates each host before continuing
+  - Stops immediately when a host fails
+  - Retains a timestamped run log
+  - Emails failure or final status to configured recipients
+
+Options:
+  --preflight-only  Run validation only; do not patch or reboot
+  --yes             Skip interactive confirmation
+  --help            Show this help
+USAGE
+}
+
+MODE="patch"
+ASSUME_YES=false
+
+case "${1:-}" in
+    "")
+        ;;
+    --preflight-only)
+        MODE="preflight"
+        ;;
+    --yes)
+        ASSUME_YES=true
+        ;;
+    --help|-h)
+        usage
+        exit 0
+        ;;
+    *)
+        echo "ERROR Unknown option: $1" >&2
+        usage >&2
+        exit 2
+        ;;
+esac
+
+if [[ "$MODE" == "patch" && "$ASSUME_YES" != "true" ]]; then
+    echo "WARNING: This will install updates and reboot these systems:"
+    echo
+
+    for host in "${PATCH_HOSTS[@]}"; do
+        echo "  $host"
+    done
+
+    echo
+
+    if [[ ! -t 0 ]]; then
+        echo "ERROR Interactive confirmation required." >&2
+        echo "Use --yes only for intentional noninteractive execution." >&2
+        exit 2
+    fi
+
+    read -r -p "Type PATCH to continue: " confirmation
+
+    if [[ "$confirmation" != "PATCH" ]]; then
+        echo
+        echo "Patch cancelled."
+        echo "No packages were installed and no systems were rebooted."
+        exit 1
+    fi
+
+    echo
+fi
+
+mkdir -p "$STATE_DIR"
+
+RUN_ID="$(date +%Y%m%d_%H%M%S)"
+START_TIME="$(date)"
+LOG_FILE="$STATE_DIR/patch-$RUN_ID.log"
+REPORT_FILE="$STATE_DIR/patch-$RUN_ID-report.txt"
+
+COMPLETED_HOSTS=()
+FAILED_HOST=""
+FAILURE_PHASE=""
+
+send_mail() {
+    local subject="$1"
+    local body_file="$2"
+
+    if [[ $EUID -eq 0 ]]; then
+        /usr/bin/mail \
+            -s "$subject" \
+            "${RECIPIENTS[@]}" \
+            < "$body_file"
+    else
+        sudo /usr/bin/mail \
+            -s "$subject" \
+            "${RECIPIENTS[@]}" \
+            < "$body_file"
+    fi
+}
+
+run_playbook() {
+    ansible-playbook "$@" 2>&1 | tee -a "$LOG_FILE"
+    local rc=${PIPESTATUS[0]}
+    return "$rc"
+}
+
+write_report() {
+    local overall_status="$1"
+
+    {
+        echo "Abbey Root Linux Patch Report"
+        echo
+        echo "Run ID: $RUN_ID"
+        echo "Started: $START_TIME"
+        echo "Finished: $(date)"
+        echo "Status: $overall_status"
+        echo
+
+        if [[ -n "$FAILURE_PHASE" ]]; then
+            echo "Failure phase: $FAILURE_PHASE"
+        fi
+
+        if [[ -n "$FAILED_HOST" ]]; then
+            echo "Failed host: $FAILED_HOST"
+        fi
+
+        echo
+        echo "Remote patch targets:"
+
+        for host in "${PATCH_HOSTS[@]}"; do
+            if [[ " ${COMPLETED_HOSTS[*]} " == *" $host "* ]]; then
+                echo "  $host: SUCCESS"
+            elif [[ "$host" == "$FAILED_HOST" ]]; then
+                echo "  $host: FAILED"
+            else
+                echo "  $host: SKIPPED"
+            fi
+        done
+
+        echo
+        echo "Controller:"
+        echo "  rocky-ansible01: NOT PATCHED - manual final step"
+        echo
+        echo "Log: $LOG_FILE"
+    } > "$REPORT_FILE"
+}
+
+cd "$ANSIBLE_DIR" || exit 1
+
+{
+    echo "Abbey Root Linux Patch Run"
+    echo "Run ID: $RUN_ID"
+    echo "Started: $START_TIME"
+    echo "Mode: $MODE"
+    echo
+} | tee -a "$LOG_FILE"
+
+echo "Running global preflight..." | tee -a "$LOG_FILE"
+
+if ! run_playbook playbooks/patch-preflight.yml; then
+    FAILURE_PHASE="global preflight"
+    write_report "FAILED"
+
+    if ! send_mail \
+        "[Abbey] PATCH FAILURE - global preflight" \
+        "$REPORT_FILE"; then
+        echo "ERROR Failure notification email could not be sent." |
+            tee -a "$LOG_FILE" >&2
+    fi
+
+    cat "$REPORT_FILE"
+    exit 1
+fi
+
+if [[ "$MODE" == "preflight" ]]; then
+    echo
+    echo "Preflight passed for all patch targets."
+    echo "No packages were installed and no systems were rebooted."
+    echo "Log: $LOG_FILE"
+    exit 0
+fi
+
+for host in "${PATCH_HOSTS[@]}"; do
+    echo | tee -a "$LOG_FILE"
+    echo "============================================================" |
+        tee -a "$LOG_FILE"
+    echo "Patching $host" |
+        tee -a "$LOG_FILE"
+    echo "============================================================" |
+        tee -a "$LOG_FILE"
+
+    if run_playbook \
+        playbooks/patch-host.yml \
+        -e "patch_host=$host"; then
+
+        COMPLETED_HOSTS+=("$host")
+    else
+        FAILED_HOST="$host"
+        FAILURE_PHASE="patch/reboot/post-patch validation"
+
+        write_report "FAILED"
+
+        if ! send_mail \
+            "[Abbey] PATCH FAILURE - $host" \
+            "$REPORT_FILE"; then
+            echo "ERROR Failure notification email could not be sent." |
+                tee -a "$LOG_FILE" >&2
+        fi
+
+        cat "$REPORT_FILE"
+        exit 1
+    fi
+done
+
+write_report "REMOTE PATCH SUCCESS"
+
+if ! send_mail \
+    "[Abbey] REMOTE PATCH SUCCESS - rocky-ansible01 pending" \
+    "$REPORT_FILE"; then
+
+    echo "ERROR Remote patching succeeded, but the final report email could not be sent." |
+        tee -a "$LOG_FILE" >&2
+
+    cat "$REPORT_FILE"
+    exit 1
+fi
+
+cat "$REPORT_FILE"
+
+exit 0

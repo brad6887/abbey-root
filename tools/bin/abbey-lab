@@ -7,6 +7,7 @@
 #
 # Usage:
 #   abbey lab check
+#   abbey lab patch [--preflight-only|--yes]
 #
 
 set -u
@@ -18,16 +19,24 @@ ABBEY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 ANSIBLE_DIR="$ABBEY_ROOT/ansible"
 INVENTORY_FILE="$ANSIBLE_DIR/inventory/hosts.yml"
 CHECK_PLAYBOOK="$ANSIBLE_DIR/playbooks/lab-check.yml"
+PATCH_TOOL="$ABBEY_ROOT/tools/abbey-ansible-patch"
 
 usage() {
   cat <<'USAGE'
 Usage:
   abbey lab check
+  abbey lab patch [--preflight-only|--yes]
   abbey lab help
 
 Commands:
   check    Run read-only health checks against managed lab hosts
+  patch    Safely patch managed lab hosts
   help     Show this help
+
+Patch options:
+  --preflight-only    Run patch preflight without installing updates or rebooting
+  --yes               Skip interactive confirmation for an intentional patch run
+  --help              Show patch workflow help
 USAGE
 }
 
@@ -68,12 +77,23 @@ lab_check() {
   )
 }
 
+lab_patch() {
+  [[ -x "$PATCH_TOOL" ]] ||
+    fail "Patch tool not found or not executable: $PATCH_TOOL"
+
+  exec "$PATCH_TOOL" "$@"
+}
+
 command="${1:-help}"
 shift || true
 
 case "$command" in
   check)
     lab_check "$@"
+    ;;
+
+  patch)
+    lab_patch "$@"
     ;;
 
   help|-h|--help)

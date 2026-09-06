@@ -406,8 +406,16 @@ commands:
       check:
         description: Run read-only health checks against managed lab hosts.
         usage: abbey lab check
+      patch:
+        description: Safely patch managed lab hosts with preflight, reboot, validation, logging, and notifications.
+        usage: abbey lab patch [--preflight-only|--yes]
+        options:
+          --preflight-only: Run the global patch preflight without installing updates or rebooting hosts.
+          --yes: Skip interactive confirmation for an intentional noninteractive patch run.
     examples:
       - abbey lab check
+      - abbey lab patch --preflight-only
+      - abbey lab patch
 
   remote:
     category: lab

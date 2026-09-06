@@ -1,0 +1,119 @@
+---
+- name: Patch one Abbey Root system
+  hosts: "{{ patch_host }}"
+  gather_facts: true
+  become: true
+  any_errors_fatal: true
+
+  tasks:
+    - name: Verify host is an approved patch target
+      ansible.builtin.assert:
+        that:
+          - inventory_hostname in groups["patch_targets"]
+        fail_msg: >-
+          {{ inventory_hostname }} is not in the approved patch_targets group
+
+    - name: Run immediate pre-patch health gate
+      ansible.builtin.include_tasks: ../tasks/patch-health-gate.yml
+
+    - name: Record kernel before patching
+      ansible.builtin.set_fact:
+        patch_kernel_before: "{{ ansible_kernel }}"
+
+    - name: Apply operating system updates
+      ansible.builtin.include_role:
+        name: update
+
+    - name: Initialize reboot decision
+      ansible.builtin.set_fact:
+        patch_reboot_required: false
+
+    - name: Check Debian/Ubuntu reboot requirement
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: patch_debian_reboot_check
+      when:
+        - update_packages_changed | bool
+        - ansible_os_family == "Debian"
+
+    - name: Check Rocky/RHEL reboot requirement
+      ansible.builtin.command:
+        argv:
+          - dnf
+          - needs-restarting
+          - -r
+      register: patch_redhat_reboot_check
+      changed_when: false
+      failed_when: patch_redhat_reboot_check.rc not in [0, 1]
+      when:
+        - update_packages_changed | bool
+        - ansible_os_family == "RedHat"
+
+    - name: Record Debian/Ubuntu reboot decision
+      ansible.builtin.set_fact:
+        patch_reboot_required: >-
+          {{ patch_debian_reboot_check.stat.exists | default(false) }}
+      when:
+        - update_packages_changed | bool
+        - ansible_os_family == "Debian"
+
+    - name: Record Rocky/RHEL reboot decision
+      ansible.builtin.set_fact:
+        patch_reboot_required: >-
+          {{ (patch_redhat_reboot_check.rc | default(0) | int) == 1 }}
+      when:
+        - update_packages_changed | bool
+        - ansible_os_family == "RedHat"
+
+    - name: Report patch reboot decision
+      ansible.builtin.debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "Packages changed: {{ update_packages_changed | bool }}"
+          - "Reboot required: {{ patch_reboot_required | bool }}"
+
+    - name: Reboot patched system when required
+      ansible.builtin.reboot:
+        reboot_timeout: 900
+        connect_timeout: 10
+        post_reboot_delay: 15
+      when: patch_reboot_required | bool
+
+    - name: Gather fresh facts after patching
+      ansible.builtin.setup:
+
+    - name: Wait for systemd startup to settle after reboot
+      ansible.builtin.command:
+        argv:
+          - /usr/bin/timeout
+          - "360"
+          - systemctl
+          - is-system-running
+          - --wait
+      register: patch_systemd_state
+      changed_when: false
+      failed_when: patch_systemd_state.rc not in [0, 1]
+      when: patch_reboot_required | bool
+
+    - name: Verify systemd reached a stable startup state
+      ansible.builtin.assert:
+        that:
+          - patch_systemd_state.stdout | trim in ["running", "degraded"]
+        fail_msg: >-
+          systemd did not reach a stable startup state on
+          {{ inventory_hostname }}:
+          {{ patch_systemd_state.stdout | trim }}
+      when: patch_reboot_required | bool
+
+    - name: Run post-patch health gate
+      ansible.builtin.include_tasks: ../tasks/patch-health-gate.yml
+
+    - name: Report successful host patch
+      ansible.builtin.debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "Status: SUCCESS"
+          - "Packages changed: {{ update_packages_changed | bool }}"
+          - "Reboot performed: {{ patch_reboot_required | bool }}"
+          - "Kernel before: {{ patch_kernel_before }}"
+          - "Kernel after: {{ ansible_kernel }}"

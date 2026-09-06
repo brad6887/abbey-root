@@ -38,6 +38,10 @@ Usage:
 abbey-ansible-facts
 ```
 
+## abbey-ansible-patch
+
+Safely patch managed Abbey Root Linux hosts in a deterministic order.
+
 ## abbey-ansible-site
 
 Run the main Abbey Root Ansible site playbook.
@@ -51,7 +55,8 @@ abbey-ansible-site --help
 
 ## abbey-ansible-update
 
-Update packages on all managed Abbey Root hosts.
+Deprecated compatibility command. Linux patching is performed with
+abbey lab patch.
 
 Usage:
 

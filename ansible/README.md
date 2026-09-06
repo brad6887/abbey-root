@@ -9,9 +9,12 @@ cd ~/git/abbey-root/ansible
 Run from the repository root.
 
 abbey-ansible-site
-abbey-ansible-update
 abbey-ansible-facts
 abbey-ansible-docker
+
+Linux patching is performed through:
+
+    abbey lab patch
 
 ## Network Interface Expectations
 
