@@ -417,6 +417,39 @@ commands:
       - abbey lab patch --preflight-only
       - abbey lab patch
 
+  contributor:
+    category: lab
+    description: Plan, provision, inspect, revoke, and purge contributor accounts.
+    usage: abbey contributor <command> <username>
+    hidden: false
+    subcommands:
+      plan:
+        description: Preview desired account state and Ansible changes without writes.
+        usage: abbey contributor plan <username> [--action apply|revoke|purge] [--remove-home] [-K]
+      apply:
+        description: Save active intent and create or restore explicitly entitled accounts.
+        usage: abbey contributor apply <username> [--check] [-K]
+      status:
+        description: Report desired versus actual account, SSH, groups, and Abbey sudo policy.
+        usage: abbey contributor status <username> [-K]
+      revoke:
+        description: Save revoked intent and disable access while preserving accounts and homes.
+        usage: abbey contributor revoke <username> [--check] [-K]
+      purge:
+        description: Save absent intent and delete accounts with explicit confirmation.
+        usage: abbey contributor purge <username> --confirm <username> [--remove-home] [--check] [-K]
+        options:
+          --confirm USERNAME: Required exact username confirmation.
+          --remove-home: Delete home and mailbox together with the managed account.
+          --check: Preview only without saving state or changing hosts.
+    examples:
+      - abbey contributor plan contributor-example
+      - abbey contributor plan contributor-example --action revoke
+      - abbey contributor apply contributor-example
+      - abbey contributor status contributor-example
+      - abbey contributor revoke contributor-example
+      - abbey contributor purge contributor-example --confirm contributor-example
+
   remote:
     category: lab
     description: Connect to named Abbey hosts through Tailscale.

@@ -1,0 +1,26 @@
+---
+# Deliberately has no all-host default. The Abbey CLI supplies a validated snapshot.
+- name: Preflight every configured contributor host before any changes
+  hosts: "{{ abbey_contributor_targets | default([]) }}"
+  gather_facts: true
+  become: true
+  any_errors_fatal: true
+
+  tasks:
+    - name: Inspect and validate contributor targets
+      ansible.builtin.import_role:
+        name: contributor
+        tasks_from: preflight
+
+- name: Converge the selected contributor
+  hosts: "{{ abbey_contributor_targets | default([]) }}"
+  gather_facts: false
+  become: true
+  any_errors_fatal: true
+  serial: 1
+
+  tasks:
+    - name: Apply the contributor policy
+      ansible.builtin.include_role:
+        name: contributor
+      when: not (abbey_contributor_status_only | default(false) | bool)

@@ -1,0 +1,131 @@
+---
+# Recheck immediately before convergence as another operator may have changed a target.
+- name: Revalidate this host before account changes
+  ansible.builtin.include_tasks: preflight.yml
+
+- name: Create the contributor's primary group
+  ansible.builtin.group:
+    name: "{{ abbey_contributor.username }}"
+    state: present
+  when: contributor_policy.state == "active"
+
+- name: Create or restore the contributor account
+  ansible.builtin.user:
+    name: "{{ abbey_contributor.username }}"
+    comment: "Abbey contributor {{ abbey_contributor.username }}"
+    group: "{{ abbey_contributor.username }}"
+    groups: "{{ contributor_policy.groups | join(',') }}"
+    append: false
+    home: "{{ contributor_home }}"
+    shell: /bin/bash
+    create_home: true
+    password: "*"
+    update_password: on_create
+    password_lock: false
+    expires: -1
+    generate_ssh_key: false
+    state: present
+  when: contributor_policy.state == "active"
+
+# Check mode cannot create the user/group that the following ownership operations require.
+# The preflight report still lists every dependent change for a new account.
+- name: Configure the active contributor's home and SSH authorization
+  when:
+    - contributor_policy.state == "active"
+    - not ansible_check_mode or contributor_before.exists
+  block:
+    - name: Set contributor home permissions
+      ansible.builtin.file:
+        path: "{{ contributor_home }}"
+        state: directory
+        owner: "{{ abbey_contributor.username }}"
+        group: "{{ abbey_contributor.username }}"
+        mode: "0750"
+
+    - name: Create contributor SSH directory
+      ansible.builtin.file:
+        path: "{{ contributor_home }}/.ssh"
+        state: directory
+        owner: "{{ abbey_contributor.username }}"
+        group: "{{ abbey_contributor.username }}"
+        mode: "0700"
+
+    - name: Install the exclusive Abbey contributor public key
+      ansible.builtin.copy:
+        dest: "{{ contributor_home }}/.ssh/authorized_keys"
+        content: |
+          # Managed by Abbey contributor
+          {{ abbey_contributor.public_key }}
+        owner: "{{ abbey_contributor.username }}"
+        group: "{{ abbey_contributor.username }}"
+        mode: "0600"
+      when: not ansible_check_mode or contributor_before.ssh_directory_exists
+
+- name: Install explicit password-required sudo
+  ansible.builtin.copy:
+    dest: "{{ contributor_sudo_path }}"
+    content: |
+      # Managed by Abbey contributor
+      {{ abbey_contributor.username }} ALL=(ALL:ALL) PASSWD: ALL
+    owner: root
+    group: root
+    mode: "0440"
+    validate: "/usr/sbin/visudo -cf %s"
+  when:
+    - contributor_policy.state == "active"
+    - contributor_policy.sudo == "full"
+
+- name: Remove Abbey-managed sudo when it is not granted
+  ansible.builtin.file:
+    path: "{{ contributor_sudo_path }}"
+    state: absent
+  when: contributor_policy.state != "active" or contributor_policy.sudo == "none"
+
+- name: Lock, expire, and disable an existing revoked contributor
+  ansible.builtin.user:
+    name: "{{ abbey_contributor.username }}"
+    groups: ""
+    append: false
+    shell: /usr/sbin/nologin
+    password_lock: true
+    expires: 86400
+    create_home: false
+    state: present
+  when:
+    - contributor_policy.state == "revoked"
+    - contributor_before.exists
+
+- name: Remove contributor SSH authorization when access is disabled
+  ansible.builtin.file:
+    path: "{{ contributor_home }}/.ssh/authorized_keys"
+    state: absent
+  when:
+    - contributor_policy.state != "active"
+    - contributor_before.exists
+
+- name: Purge the account with explicit home removal policy
+  ansible.builtin.user:
+    name: "{{ abbey_contributor.username }}"
+    state: absent
+    remove: "{{ abbey_contributor_remove_home | default(false) | bool }}"
+    force: false
+  when:
+    - contributor_policy.state == "absent"
+    - contributor_before.exists
+
+- name: Verify converged account state
+  abbey_contributor_info:
+    username: "{{ abbey_contributor.username }}"
+    desired_state: "{{ contributor_policy.state }}"
+    public_key: "{{ abbey_contributor.public_key }}"
+    groups: "{{ contributor_policy.groups }}"
+    sudo: "{{ contributor_policy.sudo }}"
+  register: contributor_after
+  when: not ansible_check_mode
+
+- name: Require no remaining managed account drift
+  ansible.builtin.assert:
+    that:
+      - contributor_after.drift | length == 0
+    fail_msg: "{{ contributor_after.drift | join('; ') }}"
+  when: not ansible_check_mode

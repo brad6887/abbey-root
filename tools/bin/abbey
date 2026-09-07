@@ -122,6 +122,11 @@ case "$command" in
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-plant" "$@"
     ;;
 
+  contributor)
+    shift
+    "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-contributor" "$@"
+    ;;
+
   lab)
     shift
     "$ABBEY_TOOLKIT_ROOT/tools/bin/abbey-lab" "$@"

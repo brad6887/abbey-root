@@ -1,0 +1,4 @@
+# Only public key files belong here. Never copy private keys into the repository.
+*
+!.gitignore
+!*.pub

@@ -32,3 +32,9 @@ check compares normalized MAC addresses with gathered Ansible facts, reports a
 missing or replaced interface as a warning, includes the interfaces it did
 observe for diagnosis, and continues reporting health for every reachable
 host. Hosts without authoritative expectations are reported as skipped.
+
+## Contributor Accounts
+
+Use `abbey contributor` for dedicated, host-specific contributor account policy.
+See [Contributor Workflow](../docs/runbooks/CONTRIBUTOR_WORKFLOW.md) for the data
+format, public-key handoff, plan/apply/status/revoke/purge lifecycle, and validation.

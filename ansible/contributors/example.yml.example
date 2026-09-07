@@ -1,0 +1,18 @@
+# Copy to <username>.yml and replace the username, key path, and host policy.
+# This template is intentionally not a loadable contributor definition.
+username: contributor-example
+state: active
+ssh_public_key: keys/contributor-example.pub
+access:
+  ubuntu-dev01:
+    login: true
+    groups: []
+    sudo: none
+  ai-worker01:
+    login: false
+  sites01:
+    login: false
+  edge01:
+    login: false
+  rocky-ansible01:
+    login: false

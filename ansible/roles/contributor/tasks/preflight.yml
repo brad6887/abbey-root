@@ -1,0 +1,92 @@
+---
+- name: Validate contributor invocation
+  ansible.builtin.assert:
+    that:
+      - ansible_system == "Linux"
+      - ansible_os_family in ["Debian", "RedHat"]
+      - abbey_contributor is mapping
+      - inventory_hostname in abbey_contributor.access
+      - abbey_contributor.username is match("^[a-z_][a-z0-9_-]{0,30}$")
+      - abbey_contributor.username not in ["root", "bcooke", "bradcooke", "nobody", "ansible", "abbey-deploy"]
+      - abbey_contributor.username != (admin_user | default("root"))
+      - abbey_contributor.username != (ansible_user | default("root"))
+      - abbey_contributor.state in ["active", "revoked", "absent"]
+    fail_msg: "Use abbey contributor with a validated contributor definition on Linux."
+
+- name: Select this host's explicit entitlement
+  ansible.builtin.set_fact:
+    contributor_policy: "{{ abbey_contributor.access[inventory_hostname] }}"
+    contributor_home: "/home/{{ abbey_contributor.username }}"
+    contributor_sudo_path: "/etc/sudoers.d/abbey-{{ abbey_contributor.username }}"
+
+- name: Validate host policy and deletion confirmation
+  ansible.builtin.assert:
+    that:
+      - contributor_policy.state in ["active", "revoked", "absent"]
+      - contributor_policy.sudo in ["none", "full"]
+      - contributor_policy.groups is sequence and contributor_policy.groups is not string
+      - contributor_policy.groups | intersect(["sudo", "wheel", "admin", "root", abbey_contributor.username]) | length == 0
+      - contributor_policy.state != "active" or contributor_policy.login | bool
+      - contributor_policy.state != "active" or abbey_contributor.state == "active"
+      - contributor_policy.state != "active" or abbey_contributor.public_key is match("^ssh-ed25519 [A-Za-z0-9+/]+=*$")
+      - contributor_policy.state != "absent" or ansible_check_mode or (abbey_contributor_purge_confirm | default("")) == abbey_contributor.username
+      - not (abbey_contributor_remove_home | default(false) | bool) or contributor_policy.state == "absent"
+    fail_msg: "Invalid entitlement or missing explicit purge confirmation."
+
+- name: Inspect the account and report drift without exposing password material
+  abbey_contributor_info:
+    username: "{{ abbey_contributor.username }}"
+    desired_state: "{{ contributor_policy.state }}"
+    public_key: "{{ abbey_contributor.public_key }}"
+    groups: "{{ contributor_policy.groups }}"
+    sudo: "{{ contributor_policy.sudo }}"
+  register: contributor_before
+
+- name: Report desired versus actual account state and planned changes
+  ansible.builtin.debug:
+    msg:
+      host: "{{ inventory_hostname }}"
+      status: "{{ contributor_before.summary }}"
+      planned_changes: "{{ contributor_before.drift }}"
+      note: "SSH and sudo report Abbey-managed files; existing sessions and independent sudoers rules are outside v1."
+
+- name: Refuse unsafe account adoption or unavailable entitlements
+  ansible.builtin.assert:
+    that:
+      - contributor_before.safe
+    fail_msg: "{{ contributor_before.problems | join('; ') }}"
+  when: not (abbey_contributor_status_only | default(false) | bool)
+
+- name: Refuse deleting previously retained home data without its account
+  ansible.builtin.assert:
+    that:
+      - contributor_before.exists or not contributor_before.home_exists
+    fail_msg: "An earlier purge retained this home. Archive/recover it manually; --remove-home only deletes homes together with their managed account."
+  when:
+    - abbey_contributor_remove_home | default(false) | bool
+    - not (abbey_contributor_status_only | default(false) | bool)
+
+- name: Check existing sudoers before granting full sudo
+  ansible.builtin.command:
+    argv:
+      - /usr/sbin/visudo
+      - -cf
+      - /etc/sudoers
+  changed_when: false
+  check_mode: false
+  when:
+    - contributor_policy.state == "active"
+    - contributor_policy.sudo == "full"
+    - not (abbey_contributor_status_only | default(false) | bool)
+
+- name: Verify the non-login shell is available
+  ansible.builtin.stat:
+    path: /usr/sbin/nologin
+  register: contributor_nologin
+  when: contributor_policy.state == "revoked" and contributor_before.exists
+
+- name: Require a working non-login shell before revocation
+  ansible.builtin.assert:
+    that:
+      - contributor_nologin.stat.executable
+  when: contributor_policy.state == "revoked" and contributor_before.exists

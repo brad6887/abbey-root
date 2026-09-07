@@ -387,6 +387,43 @@ abbey research status
 
 ## Lab infrastructure
 
+### `abbey contributor`
+
+Plan, provision, inspect, revoke, and purge contributor accounts.
+
+**Usage**
+
+```text
+abbey contributor <command> <username>
+```
+
+**Subcommands**
+
+- `apply` - Save active intent and create or restore explicitly entitled accounts.
+  - `abbey contributor apply <username> [--check] [-K]`
+- `plan` - Preview desired account state and Ansible changes without writes.
+  - `abbey contributor plan <username> [--action apply|revoke|purge] [--remove-home] [-K]`
+- `purge` - Save absent intent and delete accounts with explicit confirmation.
+  - `abbey contributor purge <username> --confirm <username> [--remove-home] [--check] [-K]`
+  - `--confirm USERNAME` - Required exact username confirmation.
+  - `--remove-home` - Delete home and mailbox together with the managed account.
+  - `--check` - Preview only without saving state or changing hosts.
+- `revoke` - Save revoked intent and disable access while preserving accounts and homes.
+  - `abbey contributor revoke <username> [--check] [-K]`
+- `status` - Report desired versus actual account, SSH, groups, and Abbey sudo policy.
+  - `abbey contributor status <username> [-K]`
+
+**Examples**
+
+```text
+abbey contributor plan contributor-example
+abbey contributor plan contributor-example --action revoke
+abbey contributor apply contributor-example
+abbey contributor status contributor-example
+abbey contributor revoke contributor-example
+abbey contributor purge contributor-example --confirm contributor-example
+```
+
 ### `abbey git`
 
 Audit and synchronize Git configuration across managed hosts.
