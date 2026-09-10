@@ -119,8 +119,24 @@ Watered.
 
 ### Observations
 
-REQUIRED: Rocky is still very much in recovery mode, with those original leaves remaining floppy, but they’re staying green and the crown looks solid. About a month into the rescue, he continues to hold steady while we wait for that first clear sign of new growth.
+Rocky is still very much in recovery mode, with those original leaves remaining floppy, but they’re staying green and the crown looks solid. About a month into the rescue, he continues to hold steady while we wait for that first clear sign of new growth.
 
 ### Care
 
 watered
+
+---
+
+## 2026-09-07 — Weekly Update
+
+### Photos
+
+- rocky-raccoon-2026-09-07.jpg
+
+### Observations
+
+Watered today. And we finally have the sign we've been waiting for: that bright green tip at the front is active new root growth. Rocky’s old leaves are still floppy, but after five weeks of recovery, he's now actively growing.
+
+### Care
+
+Watered

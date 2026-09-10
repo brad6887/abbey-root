@@ -440,8 +440,25 @@ Lady Madonna had a nice surprise this week: a new flower spike, first noticed on
 
 ### Observations
 
-REQUIRED: Lady Madonna’s new flower spike is already showing noticeable growth just two days after it was first documented. The spike remains healthy, upright, and actively extending as she heads into another bloom cycle.
+Lady Madonna’s new flower spike is already showing noticeable growth just two days after it was first documented. The spike remains healthy, upright, and actively extending as she heads into another bloom cycle.
 
 ### Care
 
 watered
+
+---
+
+## 2026-09-07 — Weekly Update
+
+### Photos
+
+- lady-madonna-2026-09-07.jpg
+
+### Observations
+
+That spike has made excellent progress over the past week—it's noticeably longer than on 8/30, the tip looks healthy and active, and staking it now was good timing.
+          Her foliage continues to look stable and well hydrated, so she seems to be supporting the new bloom cycle without sacrificing leaves so far.
+
+### Care
+
+Watered

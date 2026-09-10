@@ -21,7 +21,7 @@ status:
     city: Fort Worth
     state: Texas
     country: USA
-  updated: 2026-08-30
+  updated: 2026-09-07
 
 care:
   potting_medium: orchid bark
@@ -30,7 +30,7 @@ care:
 photos:
   original: photos/Honey_Pie - 1.jpeg
   hero: "photos/Honey_Pie - 7.JPG"
-  current: photos/honey-pie-2026-08-30.jpg
+  current: photos/honey-pie-2026-09-07-01.jpg
   index: null
   metadata: photo-metadata.md
 

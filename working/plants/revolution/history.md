@@ -367,8 +367,24 @@ Watered.
 
 ### Observations
 
-REQUIRED: Revolution is looking strong after her June repot, with the newest leaf now broad, glossy, and nearly caught up to the older growth. She’s settled into the fresh medium well and is clearly back in active growth mode, building strength for whatever comes next.
+Revolution is looking strong after her June repot, with the newest leaf now broad, glossy, and nearly caught up to the older growth. She’s settled into the fresh medium well and is clearly back in active growth mode, building strength for whatever comes next.
 
 ### Care
 
 watered
+
+---
+
+## 2026-09-07 — Weekly Update
+
+### Photos
+
+- revolution-2026-09-07.jpg
+
+### Observations
+
+Revolution continues to look excellent. The new leaf has filled out considerably and is now a substantial, thick, glossy leaf; compared with July, the amount of growth is pretty impressive. The older leaves remain firm and well hydrated, and I don't see any concerning changes around the crown.
+
+### Care
+
+Watered

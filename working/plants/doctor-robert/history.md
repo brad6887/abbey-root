@@ -606,8 +606,24 @@ Watered.
 
 ### Observations
 
-REQUIRED: Doctor Robert continues to look very good. The new leaf has grown substantially over the past few weeks and is now clearly developing into a proper second leaf, while the older leaf remains dark, firm, and glossy.
+Doctor Robert continues to look very good. The new leaf has grown substantially over the past few weeks and is now clearly developing into a proper second leaf, while the older leaf remains dark, firm, and glossy.
 
 ### Care
 
 watered
+
+---
+
+## 2026-09-07 — Weekly Update
+
+### Photos
+
+- doctor-robert-2026-09-07.jpg
+
+### Observations
+
+Doctor Robert continues his steady comeback. The new leaf has grown considerably and is now a substantial, healthy second leaf, while the original survivor leaf remains dark green, glossy, and firm; his exposed roots also continue to look plump and healthy.
+
+### Care
+
+Watered

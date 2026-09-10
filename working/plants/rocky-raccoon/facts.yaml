@@ -18,14 +18,14 @@ status:
     city: Fort Worth
     state: Texas
     country: United States
-  updated: 2026-08-30
+  updated: 2026-09-07
 care:
   potting_medium: orchid bark
   container: clear plastic pot inside decorative white outer container
 photos:
   original: photos/rocky-raccoon-2026-08-02.jpg
   hero: "photos/rocky-raccoon-2026-08-03.jpg"
-  current: photos/rocky-raccoon-2026-08-30.jpg
+  current: photos/rocky-raccoon-2026-09-07.jpg
   index: null
   metadata: photo-metadata.md
 documents:

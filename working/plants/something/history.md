@@ -311,8 +311,24 @@ Watered.
 
 ### Observations
 
-REQUIRED: The newest leaves are firm and healthy, and that prominent root is still actively growing with a bright green tip; the older lower leaf continues its gradual decline, but nothing about it is concerning given all the active growth./do
+The newest leaves are firm and healthy, and that prominent root is still actively growing with a bright green tip; the older lower leaf continues its gradual decline, but nothing about it is concerning given all the active growth./do
 
 ### Care
 
 watered
+
+---
+
+## 2026-09-07 — Weekly Update
+
+### Photos
+
+- something-2026-09-07.jpg
+
+### Observations
+
+Something continues to look very healthy. The big new root has grown substantially and still has a bright active tip, while the newer foliage is firm and glossy; the oldest lower leaf continues to fade gradually, which is perfectly reasonable given how much new growth she’s supporting.
+
+### Care
+
+Watered

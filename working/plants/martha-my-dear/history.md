@@ -156,7 +156,7 @@ Watered.
 
 ### Observations
 
-REQUIRED: Martha continues to look very healthy. Her leaves remain firm and green with no further yellowing, and remarkably she’s still holding four blooms about six weeks after you brought her home. The flowers are showing some age now, but the plant itself looks nicely established.
+Martha continues to look very healthy. Her leaves remain firm and green with no further yellowing, and remarkably she’s still holding four blooms about six weeks after you brought her home. The flowers are showing some age now, but the plant itself looks nicely established.
 
 ### Care
 

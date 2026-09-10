@@ -21,7 +21,7 @@ status:
     city: Fort Worth
     state: Florida
     country: USA
-  updated: 2026-08-30
+  updated: 2026-09-07
 
 care:
   potting_medium: orchid bark
@@ -30,7 +30,7 @@ care:
 photos:
   original: photos/Lady_Madonna - 1.jpeg
   hero: "photos/Lady_Madonna - 18.jpeg"
-  current: photos/lady-madonna-2026-08-30.jpg
+  current: photos/lady-madonna-2026-09-07.jpg
   index: null
   metadata: photo-metadata.md
 

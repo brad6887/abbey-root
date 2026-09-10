@@ -267,8 +267,25 @@ Watered.
 
 ### Observations
 
-REQUIRED: She still looks very healthy vegetatively: the leaves are firm and green, and the exposed roots remain substantial. The bloom cycle is now clearly in its final stretch, with only a handful of flowers remaining, but the flower spike itself is still green—so I'd continue leaving it alone and see what Honey Pie does with it once the last blooms drop.
+She still looks very healthy vegetatively: the leaves are firm and green, and the exposed roots remain substantial. The bloom cycle is now clearly in its final stretch, with only a handful of flowers remaining, but the flower spike itself is still green—so I'd continue leaving it alone and see what Honey Pie does with it once the last blooms drop.
 
 ### Care
 
 watered
+
+---
+
+## 2026-09-07 — Weekly Update
+
+### Photos
+
+- honey-pie-2026-09-07-01.jpg
+- honey-pie-2026-09-07-02.jpg
+
+### Observations
+
+Her marathon bloom is finally coming to an end. The upper branch of the spike is now yellowing and dying back, along with its spent flowers, while the lower branches remain green and still have a few decent blooms. The plant itself continues to look healthy—firm green leaves and substantial roots—so this looks like normal end-of-bloom behavior.
+
+### Care
+
+Watered

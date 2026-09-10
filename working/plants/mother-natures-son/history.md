@@ -443,8 +443,24 @@ Watered.
 
 ### Observations
 
-REQUIRED: That newest upright growth has made very noticeable progress since the 8/23 photo—it’s elongating quickly and looks plump and healthy, while the established leaves remain firm.
+That newest upright growth has made very noticeable progress since the 8/23 photo—it’s elongating quickly and looks plump and healthy, while the established leaves remain firm.
 
 ### Care
 
 watered
+
+---
+
+## 2026-09-07 — Weekly Update
+
+### Photos
+
+- mother-natures-son-2026-09-07.jpg
+
+### Observations
+
+The newest growth continues to stretch upward and is looking noticeably more substantial than it did just a couple weeks ago, while the older leaves remain firm and healthy.
+
+### Care
+
+Watered

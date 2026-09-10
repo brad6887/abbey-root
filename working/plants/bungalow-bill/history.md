@@ -335,8 +335,26 @@ Watered.
 
 ### Observations
 
-REQUIRED: Bungalow Bill continues to look stable. The upper leaves remain firm, glossy, and a healthy dark green, and the exposed roots still look substantial.
+Bungalow Bill continues to look stable. The upper leaves remain firm, glossy, and a healthy dark green, and the exposed roots still look substantial.
 
 ### Care
 
 watered
+
+---
+
+## 2026-09-07 — Weekly Update
+
+### Photos
+
+- bungalow-bill-2026-09-07.jpg
+
+### Observations
+
+Bungalow Bill continues to hold steady. The upper leaves remain dark green, firm, and substantial, while those original droopy lower leaves still aren't showing meaningful deterioration.
+          The exposed roots also continue to look good, and I don't see anything in today's photo suggesting he's slipping backward. Recovering remains accurate, though at this point he's been remarkably stable for months.
+          We're still waiting for Bill to quit screwing around and give us that new leaf.
+
+### Care
+
+Watered

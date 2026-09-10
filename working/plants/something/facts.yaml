@@ -22,7 +22,7 @@ status:
     city: Fort Worth
     state: Texas
     country: USA
-  updated: 2026-08-30
+  updated: 2026-09-07
 
 care:
   potting_medium: orchid bark
@@ -31,7 +31,7 @@ care:
 photos:
   original: photos/Something - 1.jpeg
   hero: "photos/Something - 6.jpeg"
-  current: photos/something-2026-08-30.jpg
+  current: photos/something-2026-09-07.jpg
   index: photos/Something - 21.JPG
   metadata: photo-metadata.md
 
