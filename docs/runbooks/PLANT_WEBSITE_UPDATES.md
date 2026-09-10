@@ -269,6 +269,9 @@ Preparation reports:
 - `FAIL` when a photo slug does not match a plant workspace, because that can
   indicate a caption error or a missing workspace
 
+Plants skipped because they have no photos are omitted from the worksheet. Do
+not add a placeholder entry or narrative for a skipped plant.
+
 Unknown plant photos should be moved aside or given a plant workspace; do not
 delete source material merely to make preparation pass.
 
@@ -279,7 +282,8 @@ existing worksheet, or move it to a backup filename before regenerating it.
 
 For each included plant:
 
-- write a non-empty `narrative`
+- replace the generated placeholder with a non-empty `narrative`, removing the
+  `REQUIRED:` prefix as well
 - add `care` when applicable
 - set `status` only when it changed
 - select `current` when more than one photo is listed
@@ -302,6 +306,19 @@ Example:
 ```
 
 ### 5. Preview and Apply
+
+Validate the completed worksheet before previewing:
+
+```bash
+abbey plant update-batch validate \
+  working/plant-updates/YYYY-MM-DD.yml
+```
+
+Validation rejects an included narrative that still starts with the exact
+`REQUIRED:` prefix after surrounding whitespace is trimmed, even when actual
+prose follows it. Remove the prefix and provide the observation narrative.
+Ordinary uses of `required` or `REQUIRED` later in the prose remain valid.
+Dry-run apply and apply enforce the same narrative rule before changing files.
 
 ```bash
 abbey plant update-batch apply \

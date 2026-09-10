@@ -88,11 +88,11 @@ if grep -Fq 'plant: already-updated' "$worksheet"; then fail "existing update is
 
 run_batch validate "$worksheet"
 [[ "$status" -eq 1 ]] && pass "worksheet validation rejects placeholders" || fail "worksheet validation rejects placeholders"
-assert_contains "worksheet validation explains placeholder" "narrative is required" "$output"
+assert_contains "worksheet validation explains placeholder" "narrative starts with REQUIRED:; remove the prefix and provide an observation narrative" "$output"
 
 run_batch apply "$worksheet" --dry-run
 [[ "$status" -eq 1 ]] && pass "incomplete worksheet fails" || fail "incomplete worksheet fails"
-assert_contains "missing narrative is explained" "narrative is required" "$output"
+assert_contains "placeholder narrative is explained" "narrative starts with REQUIRED:; remove the prefix and provide an observation narrative" "$output"
 assert_contains "missing multi-photo current is explained" "current is required when multiple photos are listed" "$output"
 [[ ! -e "$test_root/working/plants/something/photos/something-2026-08-02.jpg" ]] && pass "failed validation changes nothing" || fail "failed validation changes nothing"
 
@@ -121,6 +121,69 @@ YAML
 run_batch validate "$worksheet"
 [[ "$status" -eq 0 ]] && pass "completed worksheet validates" || fail "completed worksheet validates"
 assert_contains "worksheet validation reports update count" "2 plant update(s) structurally valid" "$output"
+
+# Change only the last included plant so rejection must protect earlier plants too.
+narrative_worksheet="$test_root/narrative.yml"
+write_narrative_worksheet() {
+  python3 - "$worksheet" "$narrative_worksheet" "$1" <<'PYAML'
+import sys
+from pathlib import Path
+
+import yaml
+
+worksheet = yaml.safe_load(Path(sys.argv[1]).read_text())
+worksheet["updates"][-1]["narrative"] = sys.argv[3]
+Path(sys.argv[2]).write_text(yaml.safe_dump(worksheet, sort_keys=False))
+PYAML
+}
+
+plant_snapshot() {
+  find "$test_root/working/plants" -type f -exec shasum -a 256 {} + | sort
+}
+
+plants_before="$(plant_snapshot)"
+for narrative in \
+  'REQUIRED: replace with observation narrative.' \
+  'REQUIRED:' \
+  'REQUIRED:actual narrative' \
+  '  REQUIRED: actual narrative  ' \
+  'REQUIRED: actual narrative'
+do
+  write_narrative_worksheet "$narrative"
+  run_batch validate "$narrative_worksheet"
+  [[ "$status" -eq 1 ]] && pass "validate rejects $narrative" || fail "validate rejects $narrative"
+  assert_contains "validate identifies plant and prefix" "FAIL something: narrative starts with REQUIRED:; remove the prefix and provide an observation narrative" "$output"
+
+  run_batch apply "$narrative_worksheet" --dry-run
+  [[ "$status" -eq 1 ]] && pass "dry run rejects $narrative" || fail "dry run rejects $narrative"
+  assert_contains "dry run explains prefix" "FAIL something: narrative starts with REQUIRED:; remove the prefix and provide an observation narrative" "$output"
+
+  run_batch apply "$narrative_worksheet"
+  [[ "$status" -eq 1 ]] && pass "apply rejects $narrative" || fail "apply rejects $narrative"
+  assert_contains "apply explains prefix" "FAIL something: narrative starts with REQUIRED:; remove the prefix and provide an observation narrative" "$output"
+  [[ "$plants_before" == "$(plant_snapshot)" ]] && pass "rejected batch preserves all plants" || fail "rejected batch preserves all plants"
+done
+
+write_narrative_worksheet ''
+run_batch validate "$narrative_worksheet"
+[[ "$status" -eq 1 ]] && pass "empty narrative still fails" || fail "empty narrative still fails"
+assert_contains "empty narrative retains required error" "FAIL something: narrative is required" "$output"
+
+for narrative in \
+  'New leaf remains firm.' \
+  'New leaf remains firm; no care is required today.' \
+  'New leaf remains firm; no care is REQUIRED today.' \
+  'New leaf remains firm. REQUIRED: monitor root growth.' \
+  'required: monitor root growth.' \
+  'REQUIRED care was completed; the new leaf remains firm.'
+do
+  write_narrative_worksheet "$narrative"
+  run_batch validate "$narrative_worksheet"
+  [[ "$status" -eq 0 ]] && pass "validate accepts $narrative" || fail "validate accepts $narrative"
+  run_batch apply "$narrative_worksheet" --dry-run
+  [[ "$status" -eq 0 ]] && pass "dry run accepts $narrative" || fail "dry run accepts $narrative"
+done
+[[ "$plants_before" == "$(plant_snapshot)" ]] && pass "narrative previews preserve all plants" || fail "narrative previews preserve all plants"
 
 run_batch slugs "$worksheet"
 [[ "$status" -eq 0 ]] && pass "worksheet slugs succeeds" || fail "worksheet slugs succeeds"

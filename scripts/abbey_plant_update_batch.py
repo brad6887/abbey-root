@@ -14,7 +14,8 @@ import yaml
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".heic", ".png", ".tif", ".tiff"}
 VALID_STATUSES = {"recovering", "thriving", "blooming", "dormant", "deceased"}
-NARRATIVE_PLACEHOLDER = "REQUIRED: replace with observation narrative."
+NARRATIVE_PLACEHOLDER_PREFIX = "REQUIRED:"
+NARRATIVE_PLACEHOLDER = f"{NARRATIVE_PLACEHOLDER_PREFIX} replace with observation narrative."
 
 
 class IndentedDumper(yaml.SafeDumper):
@@ -264,6 +265,18 @@ def replace_status_tag(text, old_status, new_status):
     return "".join(lines)
 
 
+def validate_narrative(update, label, problems):
+    narrative = str(update.get("narrative") or "").strip()
+    if not narrative:
+        problems.append(f"{label}: narrative is required")
+    elif narrative.startswith(NARRATIVE_PLACEHOLDER_PREFIX):
+        problems.append(
+            f"{label}: narrative starts with {NARRATIVE_PLACEHOLDER_PREFIX}; "
+            "remove the prefix and provide an observation narrative"
+        )
+    return narrative
+
+
 def validate(args):
     worksheet_path, worksheet = load_worksheet(args.worksheet)
     date, source, updates = worksheet_context(worksheet)
@@ -292,9 +305,7 @@ def validate(args):
             problems.append(f"{label}: current is required when multiple photos are listed")
         elif current not in photos:
             problems.append(f"{label}: current must name one of the listed photos")
-        narrative = str(update.get("narrative") or "").strip()
-        if not narrative or narrative == NARRATIVE_PLACEHOLDER:
-            problems.append(f"{label}: narrative is required")
+        validate_narrative(update, label, problems)
         requested_status = str(update.get("status") or "").strip().lower()
         if requested_status and requested_status not in VALID_STATUSES:
             problems.append(f"{label}: invalid status: {requested_status}")
@@ -375,9 +386,7 @@ def apply(args):
         elif current not in photo_names:
             problems.append(f"{label}: current must name one of the listed photos")
 
-        narrative = str(update.get("narrative") or "").strip()
-        if not narrative or narrative == NARRATIVE_PLACEHOLDER:
-            problems.append(f"{label}: narrative is required")
+        narrative = validate_narrative(update, label, problems)
         care = str(update.get("care") or "").strip()
         requested_status = str(update.get("status") or "").strip().lower()
         if requested_status and requested_status not in VALID_STATUSES:
